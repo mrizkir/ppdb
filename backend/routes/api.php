@@ -1,6 +1,6 @@
 <?php
 $router->get('/', function () use ($router) {
-    return 'PortalEkampus API';
+    return 'PPDB API';
 });
 
 $router->group(['prefix'=>'v3'], function () use ($router)

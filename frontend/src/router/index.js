@@ -14,12 +14,28 @@ const routes = [
 		component: () => import('../views/pages/front/Home.vue')
 	},
 	{
-		path: '/psb',
-		name: 'FrontPSB',
+		path: '/psbtk',
+		name: 'FrontPSBtk',
 		meta:{
-			title: "PENDAFTARAN CALON PESERTA DIDIK"
+			title: "PENDAFTARAN CALON PESERTA DIDIK TK"
 		},
-		component: () => import('../views/pages/front/PSB.vue')
+		component: () => import('../views/pages/front/PSBTK.vue')
+	},
+	{
+		path: '/psbsd',
+		name: 'FrontPSBsd',
+		meta:{
+			title: "PENDAFTARAN CALON PESERTA DIDIK SD"
+		},
+		component: () => import('../views/pages/front/PSBSD.vue')
+	},
+	{
+		path: '/psbsmp',
+		name: 'FrontPSBsmp',
+		meta:{
+			title: "PENDAFTARAN CALON PESERTA DIDIK SMP"
+		},
+		component: () => import('../views/pages/front/PSBSMP.vue')
 	},
 	{
 		path: '/konfirmasipembayaran',

@@ -13,10 +13,7 @@
                 </v-btn>
                 <v-btn to="/videotutorial" class="mr-2" color="primary" text large>
                     VIDEO TUTORIAL
-                </v-btn>
-                <v-btn to="/psb" class="mr-2" color="primary" text large v-if="bukaPPDB">
-                    PRA-PENDAFTARAN
-                </v-btn>
+                </v-btn>                
                 <v-btn to="/konfirmasipembayaran" class="mr-2" color="primary" text large v-if="bukaPPDB">
                     KONFIRMASI PEMBAYARAN
                 </v-btn>

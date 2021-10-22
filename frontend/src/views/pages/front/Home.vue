@@ -11,6 +11,76 @@
             </v-carousel-item>
         </v-carousel>
         <v-container fluid>
+            <v-row dense justify="center" align="center">
+                <v-col xs="12" sm="6" md="3">
+					<v-card color="#099773" dark>
+						<v-card-title class="headline">
+							PRA-PENDAFTARAN TK
+						</v-card-title>
+						<v-card-subtitle>
+							
+						</v-card-subtitle>
+						<v-card-text>
+							
+						</v-card-text>
+						<v-card-actions>
+							<v-btn
+                                color="info"
+                                block
+                                to="/psbtk"
+                            >
+                                DAFTAR
+                            </v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-col>
+                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
+                <v-col xs="12" sm="6" md="3">
+					<v-card color="#D53820" dark>
+						<v-card-title class="headline">
+							PRA-PENDAFTARAN SD
+						</v-card-title>
+						<v-card-subtitle>
+							
+						</v-card-subtitle>
+						<v-card-text>
+							
+						</v-card-text>
+						<v-card-actions>
+							<v-btn
+                                color="info"
+                                block
+                                to="/psbsd"
+                            >
+                                DAFTAR
+                            </v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-col>
+                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
+                <v-col xs="12" sm="6" md="3">
+					<v-card color="#207FA2" dark>
+						<v-card-title class="headline">
+							PRA-PENDAFTARAN SMP
+						</v-card-title>
+						<v-card-subtitle>
+							
+						</v-card-subtitle>
+						<v-card-text>
+							
+						</v-card-text>
+						<v-card-actions>
+							<v-btn
+                                color="info"
+                                block
+                                to="/psbsmp"
+                            >
+                                DAFTAR
+                            </v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-col>
+            </v-row>
             <v-row>
                 <v-col xs="12" md="12" sm="12">
                     <v-card>
