@@ -10,10 +10,7 @@
             <v-toolbar-items class="hidden-sm-and-down">
                 <v-btn to="/" class="mr-2" color="primary" text large>
                     BERANDA
-                </v-btn>
-                <v-btn to="/videotutorial" class="mr-2" color="primary" text large>
-                    VIDEO TUTORIAL
-                </v-btn>                
+                </v-btn>                             
                 <v-btn to="/konfirmasipembayaran" class="mr-2" color="primary" text large v-if="bukaPPDB">
                     KONFIRMASI PEMBAYARAN
                 </v-btn>
@@ -30,10 +27,7 @@
                 <v-list>
                     <v-list-item to="/">
                         <v-list-item-title>BERANDA</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item to="/videotutorial">
-                        <v-list-item-title>VIDEO TUTORIAL</v-list-item-title>
-                    </v-list-item>
+                    </v-list-item>                    
                     <v-list-item to="/psb">
                         <v-list-item-title>PRA-PENDAFTARAN</v-list-item-title>
                     </v-list-item>
