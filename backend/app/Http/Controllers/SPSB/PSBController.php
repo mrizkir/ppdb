@@ -277,7 +277,7 @@ class PSBController extends Controller {
             switch($kode_jenjang)
             {
                 case 1:
-                    $code=149000+mt_rand(1,999);
+                    $code=349000+mt_rand(1,999);
                 break;
                 case 2:
                 case 3:                

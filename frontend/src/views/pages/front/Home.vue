@@ -145,8 +145,7 @@
 											<v-alert type="tkinfo">
 												BANK RIAU KEPRI SYARIAH <br>
 												NOMOR REKENING : 821-21-28255 <br>
-												A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br>
-												(UNTUK PENDAFTARAN SD,SMP)<br>                                        
+												A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br>												
 											</v-alert> 
 										</div>
 									</div>
@@ -227,8 +226,7 @@
 										<div>
 											Setelah pengisian formulir selesai, Panitia akan menghubungi nomor kontak WA pendaftar.  Pada tahap ini, Panitia akan memberikan jadwal interview bagi orang tua/wali calon Peserta Didik Baru (PDB)  dan observasi bagi calon PDB.  
 											Jadwal interview dan observasi berlangsung bersamaan bagi setiap keluarga dengan durasi 60 menit bagi jenjang SD dan 90 menit bagi jenjang SMP.  
-											Jadwal yang telah difiksasi (disepakati melalui pesan WA) tidak dapat diubah, kecuali jika ada udzur syar’i.  
-											Rentang waktu jadwal interview dan observasi adalah 09—30 November 2020 dengan hari tentatif Senin—Ahad pada kisaran waktu 07.30—17.00 WIB.
+											Jadwal yang telah difiksasi (disepakati melalui pesan WA) tidak dapat diubah, kecuali jika ada udzur syar’i.
 										</div>
 										<v-alert type="warning">
 											<div class="title">
@@ -276,7 +274,7 @@
 										<div>
 											Pendaftar yang tidak  menghadiri jadwal interview maupun observasi  tanpa  melakukan  konfirmasi  H-1 kepada Panitia  akan  dianggap  mengundurkan  diri.
 											Saat menghadiri kegiatan ini, perndaftar  harus membawa berkas asli akta kelahiran, KTP kedua orang tua/wali,d an KK yang sesuai dengan berkas unggah saat melakukan pendaftaran daring.  Apabila berkas asli tidak dibawa, maka proses interview dan observasi dibatalkan atau tidak dapat dilaksanakan.
-											Orang tua/wali juga akan diminta untuk menandatangani berkas bermaterai (materai 10000 telah disiapkan oleh panitia).                                            
+											Orang tua/wali juga akan diminta untuk menandatangani berkas bermaterai (materai 10.000 telah disiapkan oleh panitia).                                            
 										</div>                                        
 									</div>
 								</v-timeline-item>

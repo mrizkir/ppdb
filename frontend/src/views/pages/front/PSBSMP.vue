@@ -96,8 +96,8 @@
                                     Transfer ke Rekening berikut : 
                                     <v-alert type="info">
                                         BANK RIAU KEPRI SYARIAH <br>
-                                        NOMOR REKENING : 821-31-02956 <br>
-                                        A.N : SEKOLAH DASAR ISLAM DE GREEN CAMP<br>                                        
+                                        NOMOR REKENING : 821-21-28255 <br>
+                                        A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br>
                                     </v-alert>                                     
                                     <strong>SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.</strong>                            
                                 </v-card-text>
