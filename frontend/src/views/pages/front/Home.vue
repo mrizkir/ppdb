@@ -12,7 +12,7 @@
 		</v-carousel>
 		<v-container fluid>
 			<v-row dense justify="center" align="center">
-				<v-col xs="12" sm="6" md="3">
+				<v-col xs="12" sm="6" md="3" v-if="registerTK">
 					<v-card color="#099773" dark>
 						<v-card-title class="headline">
 							PRA-PENDAFTARAN TK
@@ -34,8 +34,8 @@
 						</v-card-actions>
 					</v-card>
 				</v-col>
-				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-				<v-col xs="12" sm="6" md="3">
+				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly && registerTK" />
+				<v-col xs="12" sm="6" md="3" v-if="registerSD">
 					<v-card color="#D53820" dark>
 						<v-card-title class="headline">
 							PRA-PENDAFTARAN SD
@@ -57,8 +57,8 @@
 						</v-card-actions>
 					</v-card>
 				</v-col>
-				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-				<v-col xs="12" sm="6" md="3">
+				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly && registerSD" />
+				<v-col xs="12" sm="6" md="3" v-if="registerSMP">
 					<v-card color="#207FA2" dark>
 						<v-card-title class="headline">
 							PRA-PENDAFTARAN SMP
@@ -80,6 +80,7 @@
 						</v-card-actions>
 					</v-card>
 				</v-col>
+				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly && registerSMP" />	
 			</v-row>
 			<v-row>
 				<v-col xs="12" md="12" sm="12">
@@ -306,8 +307,16 @@
 <script>
 import FrontLayout from '@/views/layouts/FrontLayout';
 export default {
-	name: 'Home',
+	name: "Home",
+	created() {
+		this.registerTK = true;
+		this.registerSD = false;
+		this.registerSMP = true;
+	},
 	data:()=>({
+		registerTK: null,
+		registerSD: null,
+		registerSMP: null,
 		slides: [
 			{
 				src:'storage/images/sliders/slider1.jpg',

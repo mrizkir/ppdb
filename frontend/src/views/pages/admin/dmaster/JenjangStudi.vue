@@ -34,8 +34,8 @@
                     <v-data-table
                         :headers="headers"
                         :items="datatable"                        
-                        item-key="id"
-                        sort-by="id"
+                        item-key="kode_jenjang"
+                        sort-by="kode_jenjang"
                         show-expand
                         :disable-pagination="true"
                         :hide-default-footer="true"
