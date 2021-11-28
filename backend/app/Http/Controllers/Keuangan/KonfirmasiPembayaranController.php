@@ -44,9 +44,9 @@ class KonfirmasiPembayaranController extends Controller
         if (is_null($konfirmasi))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
-                                    'message'=>["Fetch data transaksi dengan ID ($id) gagal diperoleh"]
+                                    'message'=>["Fetch data transaksi dengan ID ($id) gagal diperoleh di KONFIRMASI PEMBAYARAN"]
                                 ],422); 
         }
         else
@@ -70,9 +70,9 @@ class KonfirmasiPembayaranController extends Controller
         if (is_null($konfirmasi))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'update',                
-                                    'message'=>["Update data transaksi dengan ID ($id) gagal diperoleh"]
+                                    'message'=>["Update data transaksi dengan ID ($id) gagal diperoleh di KONFIRMASI PEMBAYARAN"]
                                 ],422); 
         }
         else

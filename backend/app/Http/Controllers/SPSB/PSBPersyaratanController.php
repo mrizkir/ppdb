@@ -294,7 +294,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($user))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'update',                
                                     'message'=>["User ID ($id) gagal diupdate"]
                                 ],422); 
@@ -397,10 +397,10 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                                ],422); 
+                                ], 422); 
         }
         else
         {
@@ -434,7 +434,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran Situasi Keluarga dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -491,7 +491,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran Biodata Ayah dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -548,7 +548,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -576,7 +576,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -615,7 +615,7 @@ class PSBPersyaratanController extends Controller {
             if (is_null($konfirmasi))
             {  
                 return Response()->json([
-                                            'status'=>1,
+                                            'status'=>0,
                                             'pid'=>'fetchdata',                                                                                                                                        
                                             'user'=>$user,                                                                                                                                        
                                             'message'=>'Peserta Didik berhasil diperoleh.'
@@ -719,7 +719,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'update',                
                                     'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -835,7 +835,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'update',                
                                     'message'=>["Formulir Situasi Keluarga dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -877,7 +877,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'update',                
                                     'message'=>["Formulir Biodata Ayah dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -964,7 +964,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'update',                
                                     'message'=>["Formulir Biodata Ibu dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -1039,7 +1039,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -1088,7 +1088,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -1137,7 +1137,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -1186,7 +1186,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -1235,7 +1235,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($formulir))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
                                 ],422); 
@@ -1294,7 +1294,7 @@ class PSBPersyaratanController extends Controller {
         if (is_null($user))
         {
             return Response()->json([
-                                    'status'=>1,
+                                    'status'=>0,
                                     'pid'=>'destroy',                
                                     'message'=>["Calon Peserta Didik Baru dengan ID ($id) gagal dihapus"]
                                 ],422); 
