@@ -15,7 +15,7 @@
                 </v-col>
             </v-row>
         </v-container>
-        <v-container class="fill-height" fluid v-if="bukaPPDB">            
+        <v-container class="fill-height" fluid v-if="bukaPPDB && registerTK">            
             <v-row align="center" justify="center" no-gutters>
                 <v-col xs="12" md="7" sm="12">
                     <v-form ref="frmpendaftaran" v-model="form_valid" lazy-validation>
@@ -128,9 +128,11 @@ export default {
     created()
     {
         this.initialize();
+        this.registerTK = false;
     },
     data: () => ({            
-        btnLoading:false,        
+        btnLoading:false, 
+        registerTK: null,        
         //form
         form_valid:true,                 
         dialogkonfirmasipendaftaran:false,          

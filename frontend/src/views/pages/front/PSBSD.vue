@@ -128,7 +128,7 @@ export default {
     created()
     {
         this.initialize();
-        this.registerSD = false;
+        this.registerSD = true;
     },
     data: () => ({            
         btnLoading:false, 

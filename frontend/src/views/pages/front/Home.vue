@@ -191,7 +191,7 @@
 										PANITIA VERIFIKASI PEMBAYARAN
 										</h2>
 										<div>
-											Panitia akan melakukan verifikasi bukti bayar/transfer dan mengirimkan pesan teks kepada pendaftar melalui kontak WA.  Apabila belum mendapatkan  pesan verifikasi dari panitia (1x24 jam), pendaftar dapat menghubungi  <strong>nomor kontak WA +62 812-1848-9293 (narahubung Evi Sulistyawati)</strong>.
+											Panitia akan melakukan verifikasi bukti bayar/transfer dan mengirimkan pesan teks kepada pendaftar melalui kontak WA.  Apabila belum mendapatkan  pesan verifikasi dari panitia (1x24 jam), pendaftar dapat menghubungi  <strong>nomor kontak WA +62 812-7709-4838 (narahubung Evi Sulistyawati)</strong>.
 										</div>
 									</div>
 								</v-timeline-item>
@@ -309,8 +309,8 @@ import FrontLayout from '@/views/layouts/FrontLayout';
 export default {
 	name: "Home",
 	created() {
-		this.registerTK = true;
-		this.registerSD = false;
+		this.registerTK = false;
+		this.registerSD = true;
 		this.registerSMP = true;
 	},
 	data:()=>({
