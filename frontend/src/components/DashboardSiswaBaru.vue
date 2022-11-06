@@ -103,7 +103,7 @@
 								color="purple darken-1"
 								class="mx-0"
 								outlined
-								href="https://forms.gle/BVY2Muk6VHJazEpS6"
+								href="https://docs.google.com/forms/d/e/1FAIpQLSdX5qT2IlAfscPZVLMBlznZ4bfhK5bG_gVQ8BM-NsmRVzRbvQ/viewform?usp=sharing"
 								target="_blank"
 							>
 								Isi Kuesioner
