@@ -308,8 +308,8 @@ export default {
 	name: "Home",
 	created() {
 		this.registerTK = false;
-		this.registerSD = false;
-		this.registerSMP = false;
+		this.registerSD = true;
+		this.registerSMP = true;
 		this.registerSMA = false;
 	},
 	data:()=>({
