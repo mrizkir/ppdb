@@ -307,7 +307,7 @@ import FrontLayout from '@/views/layouts/FrontLayout';
 export default {
 	name: "Home",
 	created() {
-		this.registerTK = false;
+		this.registerTK = true;
 		this.registerSD = true;
 		this.registerSMP = true;
 		this.registerSMA = false;

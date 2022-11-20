@@ -49,6 +49,7 @@ $app->configure('permission');
 $app->configure('jwt');
 $app->configure('mail');
 $app->configure('logging');
+$app->configure('service');
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,8 @@ $app->register(Fruitcake\Cors\CorsServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class);
+$app->register(Illuminate\Notifications\NotificationServiceProvider::class);
+$app->register(NotificationChannels\Telegram\TelegramServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | alias
