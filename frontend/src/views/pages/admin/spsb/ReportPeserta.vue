@@ -20,7 +20,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -76,16 +76,16 @@
                             </v-badge>
                         </template>
                         <template v-slot:item.file_fotoselfi="{ item }">                            
-                            {{item.file_fotoselfi==null ?'BELUM DIUNGGAH':'TELAH DIUNGGAH'}}<br>                            
+                            {{item.file_fotoselfi==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>                            
                         </template>
                         <template v-slot:item.file_ktp_ayah="{ item }">                            
-                            {{item.file_ktp_ayah==null || item.file_ktp_ibu==null ?'BELUM DIUNGGAH':'TELAH DIUNGGAH'}} <br >                            
+                            {{item.file_ktp_ayah==null || item.file_ktp_ibu==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}} <br >                            
                         </template>
                         <template v-slot:item.file_kk="{ item }">                            
-                            {{item.file_kk==null ?'BELUM DIUNGGAH':'TELAH DIUNGGAH'}}<br>                             
+                            {{item.file_kk==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>                             
                         </template>
                         <template v-slot:item.file_aktalahir="{ item }">                            
-                            {{item.file_aktalahir==null ?'BELUM DIUNGGAH':'TELAH DIUNGGAH'}}<br>                            
+                            {{item.file_aktalahir==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>                            
                         </template>
                         <template v-slot:expanded-item="{ headers, item }">
                             <td :colspan="headers.length" class="text-center">
@@ -150,22 +150,22 @@ export default {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];      
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
-                text:'SPSB',
+                text: 'SPSB',
                 disabled: false,
-                href:'/spsb'
+                href: '/spsb'
             },
             {
-                text:'LAPORAN CALON PESERTA DIDIK',
-                disabled:true,
-                href:'#'
+                text: 'LAPORAN CALON PESERTA DIDIK',
+                disabled: true,
+                href: '#'
             }
         ];   
-        this.breadcrumbs[1].disabled=(this.dashboard=='siswabaru'||this.dashboard=='mahasiswa');
+        this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
 
         let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
         this.kode_jenjang=kode_jenjang;
@@ -174,12 +174,12 @@ export default {
         this.initialize();
     },
     data: () => ({ 
-        firstloading:true,
+        firstloading: true,
         kode_jenjang:null,
         tahun_pendaftaran:null,
         nama_jenjang:null,
         
-        breadcrumbs:[],
+        breadcrumbs: [],
         dashboard:null,
         datatableLoading: false,
         btnLoading: false,
@@ -187,17 +187,17 @@ export default {
         //tables
         headers: [                        
             { text: '', value: 'foto', width:70 }, 
-            { text: 'NAMA PESERTA DIDIK', value: 'name',width:350,sortable:true },
-            { text: 'NOMOR HP', value: 'nomor_hp',sortable:true },
+            { text: 'NAMA PESERTA DIDIK', value: 'name',width:350,sortable: true },
+            { text: 'NOMOR HP', value: 'nomor_hp',sortable: true },
             { text: 'FOTO SELFIE', value: 'file_fotoselfi',sortable: false}, 
             { text: 'KTP', value: 'file_ktp_ayah',sortable: false},  
-            { text: 'KK', value: 'file_kk',sortable:true},  
-            { text: 'AKTA LAHIR', value: 'file_aktalahir',sortable:true}, 
+            { text: 'KK', value: 'file_kk',sortable: true},  
+            { text: 'AKTA LAHIR', value: 'file_aktalahir',sortable: true}, 
             { text: 'BIODATA', value: 'biodata', sortable: false,width:100 },
         ],
-        expanded:[],
+        expanded: [],
         search: "",
-        datatable:[],
+        datatable: [],
 
         dialogprintpdf: false,
         file_pdf:null
@@ -212,7 +212,7 @@ export default {
         {
             this.kode_jenjang=id;
         },
-        initialize:async function() 
+        initialize: async function() 
         {
             this.datatableLoading=true;            
             await this.$ajax.post('/spsb/psbpersyaratan',
@@ -224,7 +224,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({data})=>{               
+            }).then(({ data })=>{               
                 this.datatable = data.psb;                
                 this.datatableLoading=false;
             });          
@@ -233,11 +233,11 @@ export default {
         },
         badgeColor(item)
         {
-            return item.active == 1 ? 'success':'error'
+            return item.active == 1 ? 'success': 'error'
         },
         badgeIcon(item)
         {
-            return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
+            return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
         },   
         dataTableRowClicked(item)
         {
@@ -261,8 +261,8 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({data})=>{               
-                this.file_pdf=data.pdf_file;
+            }).then(({ data })=>{               
+                this.file_pdf = data.pdf_file;
                 this.dialogprintpdf=true;
                 this.datatableLoading=false;
             }).catch(()=>{

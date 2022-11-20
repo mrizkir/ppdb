@@ -20,7 +20,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -33,7 +33,7 @@
                 <v-col cols="12">
                     <v-data-table
                         :headers="headers"
-                        :items="datatable"                        
+                        :items="datatable"               
                         item-key="kode_jenjang"
                         sort-by="kode_jenjang"
                         show-expand
@@ -71,37 +71,37 @@ export default {
     {
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
-                text:'DATA MASTER',
+                text: 'DATA MASTER',
                 disabled: false,
-                href:'/dmaster'
+                href: '/dmaster'
             },
             {
-                text:'JENJANG STUDI',
-                disabled:true,
-                href:'#'
+                text: 'JENJANG STUDI',
+                disabled: true,
+                href: '#'
             }
         ];
         this.initialize();
     },
     data: () => ({
-        breadcrumbs:[],  
+        breadcrumbs: [],  
 
         btnLoading: false,
         datatableLoading: false,
-        expanded:[],
-        datatable:[],
+        expanded: [],
+        datatable: [],
         headers: [                                            
             { text: 'ID', value: 'kode_jenjang',width:10,sortable: false },
             { text: 'NAMA JENJANG', value: 'nama_jenjang',sortable: false},
         ],
     }),
     methods : {
-        initialize:async function()
+        initialize: async function()
 		{
             this.datatableLoading=true;            
             await this.$ajax.get('/datamaster/jenjangstudi', 
@@ -109,7 +109,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({data})=>{               
+            }).then(({ data })=>{               
                 this.datatable = data.jenjang_studi;                
                 this.datatableLoading=false;
             });                     

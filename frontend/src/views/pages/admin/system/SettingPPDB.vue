@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -33,7 +33,7 @@
                             <v-card-text>
                                 <v-select
                                     v-model="formdata.tahun_pendaftaran"
-                                    :items="daftar_ta"                
+                                    :items="daftar_ta"       
                                     label="TAHUN PENDAFTARAN"
                                     item-text="tahun_ajaran"
                                     item-value="tahun"
@@ -51,7 +51,7 @@
                                     text 
                                     @click.stop="save" 
                                     :loading="btnLoading"
-                                    :disabled="!form_valid||btnLoading">SIMPAN</v-btn>
+                                    :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-form>
@@ -70,49 +70,49 @@ export default {
     {
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/'+this.ACCESS_TOKEN
             },
             {
-                text:'KONFIGURASI SISTEM',
+                text: 'KONFIGURASI SISTEM',
                 disabled: false,
-                href:'/system-setting'
+                href: '/system-setting'
             },  
             {
-                text:'SEKOLAH',
+                text: 'SEKOLAH',
                 disabled: false,
-                href:'#'
+                href: '#'
             },
             {
-                text:'PPDB',
-                disabled:true,
-                href:'#'
+                text: 'PPDB',
+                disabled: true,
+                href: '#'
             }
         ];
         this.initialize();
     },
     data: () => ({
-        breadcrumbs:[],
+        breadcrumbs: [],
         datatableLoading: false,
         btnLoading: false,
         //form
-        form_valid:true, 
-        daftar_ta:[],  
+        form_valid: true, 
+        daftar_ta: [],  
         formdata: {
             tahun_pendaftaran: "",  
             buka_ppdb: false,  
         },
         //form rules        
-        rule_tahun_pendaftaran:[
+        rule_tahun_pendaftaran: [
             value => !!value||"Mohon untuk di pilih tahun pendaftaran!!!",  
         ], 
     }),
     methods: {
-        initialize:async function() 
+        initialize: async function() 
         {
-            this.$ajax.get('/datamaster/tahunajaran').then(({data})=>{                
-                this.daftar_ta=data.ta;                               
+            this.$ajax.get('/datamaster/tahunajaran').then(({ data })=>{                
+                this.daftar_ta = data.ta;                               
             }); 
 
             this.datatableLoading=true;
@@ -121,10 +121,10 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data})=>{  
+            }).then(({ data })=>{  
                 let setting = data.setting;                                           
                 this.formdata.tahun_pendaftaran=parseInt(setting.DEFAULT_TAHUN_PENDAFTARAN);                
-                this.formdata.buka_ppdb=setting.DEFAULT_BUKA_PPDB == '0'?false:true;
+                this.formdata.buka_ppdb=setting.DEFAULT_BUKA_PPDB == '0'?false: true;
                 this.datatableLoading=false
             });          
             
@@ -135,8 +135,8 @@ export default {
                 this.btnLoading = true;
                 this.$ajax.post('/system/setting/variables',
                     {
-                        '_method':'PUT', 
-                        'pid':'PPDB',
+                        '_method': 'PUT', 
+                        'pid': 'PPDB',
                         setting:JSON.stringify({
                             203: this.formdata.tahun_pendaftaran, 
                             206: this.formdata.buka_ppdb, 
@@ -157,8 +157,8 @@ export default {
     },
     computed:{ 
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',  
-            TOKEN:'Token',       
+            ACCESS_TOKEN: 'AccessToken',  
+            TOKEN: 'Token',       
         }),
     },
     components:{

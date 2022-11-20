@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -65,7 +65,7 @@
                                     text 
                                     @click.stop="save" 
                                     :loading="btnLoading"
-                                    :disabled="!form_valid||btnLoading">SIMPAN</v-btn>
+                                    :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-form>
@@ -84,34 +84,34 @@ export default {
     {
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/'+this.ACCESS_TOKEN
             },
             {
-                text:'KONFIGURASI SISTEM',
+                text: 'KONFIGURASI SISTEM',
                 disabled: false,
-                href:'/system-setting'
+                href: '/system-setting'
             },  
             {
-                text:'SEKOLAH',
+                text: 'SEKOLAH',
                 disabled: false,
-                href:'#'
+                href: '#'
             },
             {
-                text:'HEADER LAPORAN',
-                disabled:true,
-                href:'#'
+                text: 'HEADER LAPORAN',
+                disabled: true,
+                href: '#'
             }
         ];
         this.initialize();
     },
     data: () => ({
-        breadcrumbs:[],
+        breadcrumbs: [],
         datatableLoading: false,
         btnLoading: false,
         //form
-        form_valid:true,
+        form_valid: true,
         formdata: {
             header_1:null,
             header_2:null,
@@ -121,7 +121,7 @@ export default {
         },
     }),
     methods: {
-        initialize:async function() 
+        initialize: async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/setting/variables',
@@ -129,7 +129,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data})=>{  
+            }).then(({ data })=>{  
                 let setting = data.setting;                           
                 this.formdata.header_1=setting.HEADER_1;
                 this.formdata.header_2=setting.HEADER_2;
@@ -145,8 +145,8 @@ export default {
                 this.btnLoading = true;
                 this.$ajax.post('/system/setting/variables',
                     {
-                        '_method':'PUT', 
-                        'pid':'Header Laporan',
+                        '_method': 'PUT', 
+                        'pid': 'Header Laporan',
                         setting:JSON.stringify({
                             701: this.formdata.header_1,
                             702: this.formdata.header_2,
@@ -170,8 +170,8 @@ export default {
     },
     computed:{ 
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',  
-            TOKEN:'Token',       
+            ACCESS_TOKEN: 'AccessToken',  
+            TOKEN: 'Token',       
         }),
     },
     components:{

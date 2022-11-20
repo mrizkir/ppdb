@@ -25,8 +25,8 @@
                                 <v-text-field 
                                     v-model="formlogin.password"
                                     label="Password" 
-                                    type="password"         
-                                    :rules="rule_password"                
+                                    type="password"
+                                    :rules="rule_password"       
                                     outlined 
                                     dense />  
                             </v-card-text>
@@ -66,10 +66,10 @@ export default {
             username: "",
             password: ""
         },
-        rule_username:[
+        rule_username: [
             value => !!value||"Kolom Username mohon untuk diisi !!!"
         ], 
-        rule_password:[
+        rule_password: [
             value => !!value||"Kolom Password mohon untuk diisi !!!"
         ], 
         
@@ -83,7 +83,7 @@ export default {
                 await this.$ajax.post('/auth/login', {
                     username: this.formlogin.username,
                     password: this.formlogin.password
-                }).then(({data})=>{  
+                }).then(({ data })=>{  
                     this.$ajax.get('/auth/me',{
                         headers:{
                             'Authorization': data.token_type+' '+data.access_token,

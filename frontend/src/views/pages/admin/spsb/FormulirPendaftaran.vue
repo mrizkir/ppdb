@@ -20,7 +20,7 @@
       <template v-slot:desc>
         <v-alert                                        
           color="cyan"
-          border="left"                    
+          border="left"           
           colored-border
           type="info"
           >
@@ -28,7 +28,7 @@
         </v-alert>
       </template>
     </ModuleHeader> 
-    <v-container fluid v-if="dashboard=='siswabaru' || datapesertadidik!=null">
+    <v-container fluid v-if="dashboard== 'siswabaru' || datapesertadidik!=null">
       <FormBiodataAnanda :user_id="user_id"/>
     </v-container>
     <v-container fluid v-else>
@@ -126,22 +126,22 @@
       this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
       this.breadcrumbs = [
         {
-          text:'HOME',
+          text: 'HOME',
           disabled: false,
-          href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+          href: '/dashboard/'+this.$store.getters['auth/AccessToken']
         },
         {
-          text:'SPSB',
+          text: 'SPSB',
           disabled: false,
-          href:'/spsb'
+          href: '/spsb'
         },
         {
-          text:'BIODATA ANANDA',
-          disabled:true,
-          href:'#'
+          text: 'BIODATA ANANDA',
+          disabled: true,
+          href: '#'
         }
       ];
-      this.breadcrumbs[1].disabled=(this.dashboard=='siswabaru'||this.dashboard=='mahasiswa');
+      this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
       
       let kode_jenjang = this.$store.getters['uiadmin/getKodeJenjang'];
       this.kode_jenjang=kode_jenjang;
@@ -151,24 +151,24 @@
     },  
     data: () => ({
       user_id:null,
-      firstloading:true,
+      firstloading: true,
       kode_jenjang:null,
       tahun_pendaftaran:null,
       nama_jenjang:null,
 
-      breadcrumbs:[],
+      breadcrumbs: [],
       dashboard:null,
 
       btnLoading: false,
       datatableLoading: false,
-      expanded:[],
-      datatable:[],
+      expanded: [],
+      datatable: [],
       headers: [                        
         { text: '', value: 'foto', width:70 },    
-        { text: 'NAMA PESERTA DIDIK', value: 'name',width:350,sortable:true },
+        { text: 'NAMA PESERTA DIDIK', value: 'name',width:350,sortable: true },
         { text: 'JK', value: 'jk',sortable: false,width:50 },
         { text: 'NOMOR HP', value: 'nomor_hp',sortable: false,width:100},
-        { text: 'ASAL SEKOLAH', value: 'asal_sekolah',width:100,sortable:true },
+        { text: 'ASAL SEKOLAH', value: 'asal_sekolah',width:100,sortable: true },
         { text: 'AKSI', value: 'actions', sortable: false,width:100 },
       ],
       search: "",  
@@ -184,7 +184,7 @@
       {
         this.kode_jenjang=id;
       },
-      initialize:async function() {	
+      initialize: async function() {	
         switch(this.dashboard)
         {
           case 'siswabaru':
@@ -201,7 +201,7 @@
               headers: {
                 Authorization: this.$store.getters["auth/Token"]
               }
-            }).then(({data})=>{                                     
+            }).then(({ data })=>{     
               this.datatable = data.psb;                
               this.datatableLoading=false;
             });         
@@ -219,11 +219,11 @@
       },
       badgeColor(item)
       {
-        return item.active == 1 ? 'success':'error'
+        return item.active == 1 ? 'success': 'error'
       },
       badgeIcon(item)
       {
-        return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
+        return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
       },  
       editItem(item)
       {

@@ -83,7 +83,7 @@ const routes = [
     name: "DMaster",
     meta:{
       title: "DATA MASTER",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/dmaster/DMaster.vue"),		
   },
@@ -92,7 +92,7 @@ const routes = [
     name: "DMasterJenjangStudi",
     meta:{
       title: "DATA MASTER - JENJANG STUDI",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/dmaster/JenjangStudi.vue"),		
   },		
@@ -101,7 +101,7 @@ const routes = [
     name: "DMasterTahunAjaran",
     meta:{
       title: "DATA MASTER - TAHUN AJARAN",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/dmaster/TahunAjaran.vue"),		
   },	
@@ -111,7 +111,7 @@ const routes = [
     name: "SPSB",
     meta:{
       title: "SPSB",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/SPSB.vue"),		
   },		
@@ -120,7 +120,7 @@ const routes = [
     name: "SPSBPendaftaranBaru",
     meta:{
       title: "SPSB - PENDAFTARAN BARU",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/PendaftaranBaru.vue"),		
   },	
@@ -129,7 +129,7 @@ const routes = [
     name: "SPSBFormulirPendaftaran",
     meta:{
       title: "SPSB - BIODATA ANANDA",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/FormulirPendaftaran.vue"),		
   },
@@ -138,7 +138,7 @@ const routes = [
     name: "SPSBFormSituasiKeluarga",
     meta:{
       title: "SPSB - SITUASI KELUARGA",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/SituasiKeluarga.vue"),		
   },
@@ -147,7 +147,7 @@ const routes = [
     name: "SPSBFormulirBiodataAyah",
     meta:{
       title: "SPSB - BIOADATA AYAH",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/BiodataAyah.vue"),		
   },
@@ -156,7 +156,7 @@ const routes = [
     name: "SPSBFormulirBiodataIbu",
     meta:{
       title: "SPSB - BIOADATA IBU",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/BiodataIbu.vue"),		
   },
@@ -165,7 +165,7 @@ const routes = [
     name: "SPSBPersyaratan",
     meta:{
       title: "SPSB - PERSYARATAN",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/PersyaratanPSB.vue"),		
   },		
@@ -174,7 +174,7 @@ const routes = [
     name: "SPSBPersyaratanTambah",
     meta:{
       title: "SPSB - PERSYARATAN",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/PersyaratanPPDBTambah.vue"),		
   },		
@@ -183,7 +183,7 @@ const routes = [
     name: "SPSBReportPeserta",
     meta:{
       title: "SPSB - LAPORAN CALON PESERTA DIDIK",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/ReportPeserta.vue"),		
   },
@@ -192,7 +192,7 @@ const routes = [
     name: "SPSBReportJenjang",
     meta:{
       title: "SPSB - LAPORAN JENJANG STUDI",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/ReportJenjang.vue"),		
   },
@@ -201,7 +201,7 @@ const routes = [
     name: "SPSBReportKelulusan",
     meta:{
       title: "SPSB - LAPORAN KELULUSAN",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/spsb/ReportKelulusan.vue"),		
   },	
@@ -211,7 +211,7 @@ const routes = [
     name: "SystemSetting",
     meta:{
       title: "SETTING - SISTEM",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/SystemSetting.vue"),		
   },	
@@ -220,7 +220,7 @@ const routes = [
     name: "SettingIdentitasDiri",
     meta:{
       title: "SETTING - IDENTITAS DIRI",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/IdentitasDiri.vue"),		
   },	
@@ -229,7 +229,7 @@ const routes = [
     name: "SettingPPDB",
     meta:{
       title: "SETTING - PPDB",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/SettingPPDB.vue"),		
   },	
@@ -238,7 +238,7 @@ const routes = [
     name: "HeaderLaporan",
     meta:{
       title: "SETTING - HEADER LAPORAN",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/HeaderLaporan.vue"),		
   },	
@@ -247,7 +247,7 @@ const routes = [
     name: "SettingCaptcha",
     meta:{
       title: "SETTING - CAPTCHA",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/Captcha.vue"),		
   },
@@ -256,7 +256,7 @@ const routes = [
     name: "SettingEmail",
     meta:{
       title: "SETTING - EMAIL",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/Email.vue"),		
   },
@@ -265,7 +265,7 @@ const routes = [
     name: "SystemUsers",
     meta:{
       title: "SYSTEM - USERS",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/SystemUsers.vue"),		
   },
@@ -274,7 +274,7 @@ const routes = [
     name: "UsersPermissions",
     meta:{
       title: "USERS - PERMISSIONS",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/Permissions.vue"),		
   },
@@ -283,7 +283,7 @@ const routes = [
     name: "UsersRoles",
     meta:{
       title: "USERS - ROLES",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/Roles.vue"),		
   },
@@ -292,7 +292,7 @@ const routes = [
     name: "UsersSuperadmin",
     meta:{
       title: "USERS - SUPER ADMIN",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/UsersSuperadmin.vue"),		
   },
@@ -301,7 +301,7 @@ const routes = [
     name: "UsersPSB",
     meta:{
       title: "USERS - PSB",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/UsersPSB.vue"),		
   },	
@@ -310,7 +310,7 @@ const routes = [
     name: "UsersJenjang",
     meta:{
       title: "USERS - JENJANG STUDI",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/UsersJenjang.vue"),		
   },
@@ -319,7 +319,7 @@ const routes = [
     name: "UsersDosen",
     meta:{
       title: "USERS - DOSEN",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/UsersDosen.vue"),		
   },
@@ -328,7 +328,7 @@ const routes = [
     name: "UsersKeuangan",
     meta:{
       title: "USERS - KEUANGAN",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/UsersKeuangan.vue"),		
   },
@@ -337,7 +337,7 @@ const routes = [
     name: "UsersProfil",
     meta:{
       title: "USERS - PROFILE",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/UsersProfile.vue"),		
   },
@@ -346,7 +346,7 @@ const routes = [
     name: "SystemMigration",
     meta:{
       title: "MIGRASI SISTEM",
-      requiresAuth:true,
+      requiresAuth: true,
         },
     component: () => import("../views/pages/admin/system/SystemMigration.vue"),		
   },

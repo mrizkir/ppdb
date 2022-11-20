@@ -87,7 +87,7 @@
                         <v-data-table 
                             :loading="datatableLoading"
                             loading-text="Loading... Please wait"
-                            :dense="true"                                                  
+                            :dense="true"                                              
                             :disable-pagination="true"
                             :hide-default-footer="true"
                             :headers="headers"
@@ -120,8 +120,8 @@
                     <v-card-text>
                         <v-data-table       
                             :loading="datatableLoading"
-                            loading-text="Loading... Please wait"      
-                            :dense="true"                   
+                            loading-text="Loading... Please wait"  
+                            :dense="true"               
                             :disable-pagination="true"
                             :hide-default-footer="true"
                             :headers="headers"
@@ -157,18 +157,18 @@ export default {
         datatableLoading: false,
 
         //daftar komponen biaya
-        kombi_ganjil_unpaid:[],    
-        kombi_genap_unpaid:[],    
+        kombi_ganjil_unpaid: [],    
+        kombi_genap_unpaid: [],    
 
-        kombi_ganjil_paid:[],    
-        kombi_genap_paid:[],    
+        kombi_ganjil_paid: [],    
+        kombi_genap_paid: [],    
 
-        kombi_ganjil_cancelled:[],    
-        kombi_genap_cancelled:[],    
+        kombi_ganjil_cancelled: [],    
+        kombi_genap_cancelled: [],    
 
         headers: [                        
             { text: 'NAMA KOMPONEN', value: 'nama_kombi', sortable: false},    
-            { text: 'JUMLAH', align:'end',value: 'jumlah',width:250, sortable: false},
+            { text: 'JUMLAH', align: 'end',value: 'jumlah',width:250, sortable: false},
         ], 
         //statistik
         total_transaction:0,
@@ -183,7 +183,7 @@ export default {
         }
     },
     methods:{
-        initialize:async function()
+        initialize: async function()
 		{	
             this.datatableLoading=true;            
             await this.$ajax.post('/dashboard/keuangan',
@@ -194,20 +194,20 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({data})=>{                 
-                this.total_transaction=data.total_transaction;
-                this.total_transaction_paid=data.total_transaction_paid;          
-                this.total_transaction_unpaid=data.total_transaction_unpaid;          
-                this.total_transaction_cancelled=data.total_transaction_cancelled;          
+            }).then(({ data })=>{                 
+                this.total_transaction = data.total_transaction;
+                this.total_transaction_paid = data.total_transaction_paid;          
+                this.total_transaction_unpaid = data.total_transaction_unpaid;          
+                this.total_transaction_cancelled = data.total_transaction_cancelled;          
 
-                this.kombi_ganjil_unpaid=data.kombi_ganjil_unpaid;
-                this.kombi_genap_unpaid=data.kombi_genap_unpaid;
+                this.kombi_ganjil_unpaid = data.kombi_ganjil_unpaid;
+                this.kombi_genap_unpaid = data.kombi_genap_unpaid;
 
-                this.kombi_ganjil_paid=data.kombi_ganjil_paid;
-                this.kombi_genap_paid=data.kombi_genap_paid;
+                this.kombi_ganjil_paid = data.kombi_ganjil_paid;
+                this.kombi_genap_paid = data.kombi_genap_paid;
 
-                this.kombi_ganjil_cancelled=data.kombi_ganjil_cancelled;
-                this.kombi_genap_cancelled=data.kombi_genap_cancelled;
+                this.kombi_ganjil_cancelled = data.kombi_ganjil_cancelled;
+                this.kombi_genap_cancelled = data.kombi_genap_cancelled;
                 
                 this.datatableLoading=false;
             }).catch(()=>{

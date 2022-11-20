@@ -20,7 +20,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -295,22 +295,22 @@ export default {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];      
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
-                text:'SPSB',
+                text: 'SPSB',
                 disabled: false,
-                href:'/spsb'
+                href: '/spsb'
             },
             {
-                text:'PERSYARATAN PPDB',
-                disabled:true,
-                href:'#'
+                text: 'PERSYARATAN PPDB',
+                disabled: true,
+                href: '#'
             }
         ];   
-        this.breadcrumbs[1].disabled=(this.dashboard=='siswabaru'||this.dashboard=='mahasiswa');
+        this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
 
         let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
         this.kode_jenjang=kode_jenjang;
@@ -319,12 +319,12 @@ export default {
         this.initialize();
     },
     data: () => ({ 
-        firstloading:true,
+        firstloading: true,
         kode_jenjang:null,
         tahun_pendaftaran:null,
         nama_jenjang:null,
         
-        breadcrumbs:[],
+        breadcrumbs: [],
         dashboard:null,
         datatableLoading: false,
         btnLoading: false,
@@ -332,17 +332,17 @@ export default {
         //tables
         headers: [                        
             { text: '', value: 'foto', width:70 }, 
-            { text: 'NAMA PESERTA DIDIK', value: 'name',width:350,sortable:true },
-            { text: 'NOMOR HP', value: 'nomor_hp',sortable:true },
+            { text: 'NAMA PESERTA DIDIK', value: 'name',width:350,sortable: true },
+            { text: 'NOMOR HP', value: 'nomor_hp',sortable: true },
             { text: 'FOTO SELFIE', value: 'file_fotoselfi',sortable: false}, 
             { text: 'KTP', value: 'file_ktp_ayah',sortable: false},  
-            { text: 'KK', value: 'file_kk',sortable:true},  
-            { text: 'AKTA LAHIR', value: 'file_aktalahir',sortable:true}, 
+            { text: 'KK', value: 'file_kk',sortable: true},  
+            { text: 'AKTA LAHIR', value: 'file_aktalahir',sortable: true}, 
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
         ],
-        expanded:[],
+        expanded: [],
         search: "",
-        datatable:[],
+        datatable: [],
 
         //dialog
         dialogfrm: false,
@@ -350,9 +350,9 @@ export default {
         data_konfirmasi:{},
 
         //form data   
-        form_valid:true,  
-        daftar_jenjang:[],
-        daftar_ta:[], 
+        form_valid: true,  
+        daftar_jenjang: [],
+        daftar_ta: [], 
         formdata: {
             name: "",
             email: "", 
@@ -377,28 +377,28 @@ export default {
         }, 
         editedIndex: -1,
 
-        rule_name:[
+        rule_name: [
             value => !!value||"Nama Siswa mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Siswa hanya boleh string dan spasi',
         ], 
-        rule_nomorhp:[
+        rule_nomorhp: [
             value => !!value||"Nomor HP mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
         ], 
-        rule_email:[
+        rule_email: [
             value => !!value||"Email mohon untuk diisi !!!",
             v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
         ],
-        rule_fakultas:[
+        rule_fakultas: [
             value => !!value||"Fakultas mohon untuk dipilih !!!"
         ], 
-        rule_jenjang:[
+        rule_jenjang: [
             value => !!value||"Program studi mohon untuk dipilih !!!"
         ],   
-        rule_username:[
+        rule_username: [
             value => !!value||"Username mohon untuk diisi !!!"
         ], 
-        rule_password:[
+        rule_password: [
             value => !!value||"Password mohon untuk diisi !!!"
         ], 
     }),
@@ -411,7 +411,7 @@ export default {
         {
             this.kode_jenjang=id;
         },
-        initialize:async function() 
+        initialize: async function() 
         {
             this.datatableLoading=true;            
             await this.$ajax.post('/spsb/psbpersyaratan',
@@ -423,7 +423,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({data})=>{               
+            }).then(({ data })=>{               
                 this.datatable = data.psb;                
                 this.datatableLoading=false;
             });          
@@ -432,11 +432,11 @@ export default {
         },
         badgeColor(item)
         {
-            return item.active == 1 ? 'success':'error'
+            return item.active == 1 ? 'success': 'error'
         },
         badgeIcon(item)
         {
-            return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
+            return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
         },   
         dataTableRowClicked(item)
         {
@@ -469,7 +469,7 @@ export default {
             });
             this.$ajax.post('/keuangan/konfirmasipembayaran/'+id,
                 {
-                    '_method':'put',
+                    '_method': 'put',
                     'verified':1,
                 },
                 {
@@ -477,14 +477,14 @@ export default {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 }
-            ).then(({data})=>{   
-                this.data_konfirmasi=data.konfirmasi;
+            ).then(({ data })=>{   
+                this.data_konfirmasi = data.konfirmasi;
                 this.btnLoading = false;
             }).catch(()=>{
                 this.btnLoading = false;
             });
         },
-        syncPermission:async function()
+        syncPermission: async function()
         {
             this.btnLoading=true;
             await this.$ajax.post('/system/users/syncallpermissions',
@@ -510,13 +510,13 @@ export default {
             this.formdata.ta=this.tahun_pendaftaran;
             this.formdata.kode_jenjang=this.kode_jenjang;
 
-            await this.$ajax.get('/datamaster/jenjangstudi').then(({data})=>{
-                this.daftar_jenjang=data.jenjang_studi;
+            await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
+                this.daftar_jenjang = data.jenjang_studi;
             });
 
             this.dialogfrm = true;                       
         },
-        save:async function() {
+        save: async function() {
             if (this.$refs.frmdata.validate())
             {
                 this.btnLoading=true;
@@ -524,7 +524,7 @@ export default {
                 {
                     await this.$ajax.post('/spsb/psb/updatependaftar/'+this.formdata.id,
                         {
-                            '_method':'PUT',
+                            '_method': 'PUT',
                             name: this.formdata.name,
                             email: this.formdata.email, 
                             nomor_hp: this.formdata.nomor_hp,
@@ -562,7 +562,7 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(({data})=>{                           
+                    ).then(({ data })=>{                           
                         this.datatable.push(data.pendaftar);
                         this.closedialogfrm();
                         this.btnLoading = false;                        
@@ -584,7 +584,7 @@ export default {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 }
-            ).then(()=>{                                           
+            ).then(()=>{           
                 this.closedialogdetailitem();
                 this.btnLoading = false;
             }).catch(()=>{
@@ -597,9 +597,9 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({data})=>{               
+            }).then(({ data })=>{               
                 this.formdata=item;  
-                this.data_konfirmasi=data.konfirmasi;    
+                this.data_konfirmasi = data.konfirmasi;    
                 this.dialogdetailitem=true;
             });          
         },
@@ -608,8 +608,8 @@ export default {
             this.formdata = Object.assign({}, item);
             this.formdata.nomor_hp='+'+this.formdata.nomor_hp;
             this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];              
-            await this.$ajax.get('/datamaster/jenjangstudi').then(({data})=>{
-                this.daftar_jenjang=data.jenjang_studi;
+            await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
+                this.daftar_jenjang = data.jenjang_studi;
             });                
             this.dialogfrm = true;
         },
@@ -620,7 +620,7 @@ export default {
                     this.btnLoading=true;
                     this.$ajax.post('/spsb/psb/'+item.id,
                         {
-                            '_method':'DELETE',
+                            '_method': 'DELETE',
                         },
                         {
                             headers:{

@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -101,7 +101,7 @@
                                                     text 
                                                     @click.stop="save" 
                                                     :loading="btnLoading"
-                                                    :disabled="!form_valid||btnLoading">
+                                                    :disabled="!form_valid || btnLoading">
                                                         SIMPAN
                                                 </v-btn>
                                             </v-card-actions>
@@ -207,7 +207,7 @@
                                             :headers="headersdetail"
                                             :items="permissions_selected"
                                             item-key="name"
-                                            sort-by="name"                                            
+                                            sort-by="name"                                   
                                             class="elevation-1"
                                         >
                                         </v-data-table>
@@ -235,28 +235,28 @@ export default {
     {
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/'+this.ACCESS_TOKEN
             },
             {
-                text:'USER SISTEM',
+                text: 'USER SISTEM',
                 disabled: false,
-                href:'/system-users'
+                href: '/system-users'
             },
             {
-                text:'ROLES',
-                disabled:true,
-                href:'#'
+                text: 'ROLES',
+                disabled: true,
+                href: '#'
             }
         ];
         this.initialize()
     }, 
     data: () => ({
-        breadcrumbs:[],
+        breadcrumbs: [],
         datatableLoading: false,
         btnLoading: false,  
-        expanded:[],
+        expanded: [],
         datatable: [],
         daftar_permissions: [],
         permissions_selected: [],
@@ -273,7 +273,7 @@ export default {
         ],
         search: "",
         //form
-        form_valid:true,
+        form_valid: true,
         dialog: false,
         dialogdetail: false,
         dialogRolePermission: false,
@@ -293,7 +293,7 @@ export default {
             updated_at: '',
         },
         //form rules        
-        rule_role_name:[
+        rule_role_name: [
             value => !!value||"Mohon untuk di isi nama Role !!!",  
             value => /^[A-Za-z]*$/.test(value) || 'Nama Role hanya boleh string',
         ], 
@@ -400,7 +400,7 @@ export default {
                 {
                     this.$ajax.post('/system/setting/roles/'+this.editedItem.id,
                         {
-                            '_method':'PUT',
+                            '_method': 'PUT',
                             name: this.editedItem.name.toLowerCase(),
                         },
                         {
@@ -408,7 +408,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({data})=>{   
+                    ).then(({ data })=>{   
                         Object.assign(this.datatable[this.editedIndex], data.roles);
                         this.close();
                     }).catch(()=>{
@@ -425,7 +425,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({data})=>{   
+                    ).then(({ data })=>{   
                         this.datatable.push(data.roles);
                         this.close();
                     }).catch(()=>{
@@ -440,8 +440,8 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH ROLE' : 'EDIT ROLE'
         },
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',  
-            TOKEN:'Token',       
+            ACCESS_TOKEN: 'AccessToken',  
+            TOKEN: 'Token',       
         }),
     },
     watch: {

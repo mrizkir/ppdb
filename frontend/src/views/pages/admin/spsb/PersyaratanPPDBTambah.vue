@@ -3,7 +3,7 @@
         <ModuleHeader v-if="dashboard!='siswabaru'">
 
         </ModuleHeader>
-        <v-container fluid v-if="dashboard=='siswabaru'">
+        <v-container fluid v-if="dashboard== 'siswabaru'">
             <v-row align="center" justify="center" class="mb-4" no-gutters>
                 <v-col xs="12" sm="12" md="7">
                     <v-alert type="info">
@@ -43,7 +43,7 @@
                                     color="orange"
                                     text
                                     @click="uploadFotoSelfi"
-                                    :loading="btnLoadingFotoSelfi"                                
+                                    :loading="btnLoadingFotoSelfi"                       
                                     :disabled="!form_valid_foto_selfi||btnLoadingFotoSelfi">                                   
                                     UNGGAH
                                 </v-btn>
@@ -82,7 +82,7 @@
                                     color="orange"
                                     text
                                     @click="uploadKTPAyah"
-                                    :loading="btnLoadingKTPAyah"                                
+                                    :loading="btnLoadingKTPAyah"                       
                                     :disabled="!form_valid_ktp_ayah||btnLoadingKTPAyah">                                   
                                     UNGGAH
                                 </v-btn>
@@ -121,7 +121,7 @@
                                     color="orange"
                                     text
                                     @click="uploadKTPIbu"
-                                    :loading="btnLoadingKTPIbu"                                
+                                    :loading="btnLoadingKTPIbu"                       
                                     :disabled="!form_valid_ktp_ibu||btnLoadingKTPIbu">                                   
                                     UNGGAH
                                 </v-btn>
@@ -160,7 +160,7 @@
                                     color="orange"
                                     text
                                     @click="uploadKK"
-                                    :loading="btnLoadingKK"                                
+                                    :loading="btnLoadingKK"                       
                                     :disabled="!form_valid_kk||btnLoadingKK">                                   
                                     UNGGAH
                                 </v-btn>
@@ -199,7 +199,7 @@
                                     color="orange"
                                     text
                                     @click="uploadAktaLahir"
-                                    :loading="btnLoadingAktaLahir"                                
+                                    :loading="btnLoadingAktaLahir"                       
                                     :disabled="!form_valid_aktalahir||btnLoadingAktaLahir">                                   
                                     UNGGAH
                                 </v-btn>
@@ -220,7 +220,7 @@ export default {
     created()
     {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
-        if (this.dashboard =='siswabaru')
+        if (this.dashboard == 'siswabaru')
         {
             this.pesertadidik_id=this.$store.getters['auth/AttributeUser']('id');            
         }
@@ -230,11 +230,11 @@ export default {
         dashboard:null,
         peryaratanppdb:{},
         //formdata
-        form_valid_foto_selfi:true,
-        form_valid_ktp_ayah:true,
-        form_valid_ktp_ibu:true,
-        form_valid_kk:true,
-        form_valid_aktalahir:true,
+        form_valid_foto_selfi: true,
+        form_valid_ktp_ayah: true,
+        form_valid_ktp_ibu: true,
+        form_valid_kk: true,
+        form_valid_aktalahir: true,
         pesertadidik_id:null,
 
         btnLoadingFotoSelfi: false,
@@ -248,29 +248,29 @@ export default {
         filekk:null,
         fileaktalahir:null,
 
-        rule_filefotoselfi:[
+        rule_filefotoselfi: [
             value => !!value||"Mohon pilih file foto selfi !!!",  
             value =>  !value || value.size < 2000000 || 'File foto selfi harus kurang dari 2MB.'                
         ],
-        rule_file_ktp_ayah:[
+        rule_file_ktp_ayah: [
             value => !!value||"Mohon pilih file ktp !!!",  
             value =>  !value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
         ],
-        rule_file_ktp_ibu:[
+        rule_file_ktp_ibu: [
             value => !!value||"Mohon pilih file ktp !!!",  
             value =>  !value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
         ],
-        rule_filekk:[
+        rule_filekk: [
             value => !!value||"Mohon pilih file Kartu Keluarga !!!",  
             value =>  !value || value.size < 2000000 || 'File kartu keluarga harus kurang dari 2MB.'                
         ],
-        rule_fileaktalahir:[
+        rule_fileaktalahir: [
             value => !!value||"Mohon pilih file Akta Lahir !!!",  
             value =>  !value || value.size < 2000000 || 'File akta lahir harus kurang dari 2MB.'                
         ],
     }),
     methods : {
-        initialize:async function()
+        initialize: async function()
 		{	
             await this.$ajax.get('/spsb/formulirpendaftaran/persyaratanppdb/'+this.$store.getters['auth/AttributeUser']('id'),  
                 {
@@ -279,8 +279,8 @@ export default {
                     }
                 },
                 
-            ).then(({data})=>{   
-                this.peryaratanppdb=data.formulir;
+            ).then(({ data })=>{   
+                this.peryaratanppdb = data.formulir;
                 this.$refs.frmuploadfotoselfi.resetValidation();  
             });
 
@@ -301,7 +301,7 @@ export default {
                                 'Content-Type': 'multipart/form-data'                      
                             }
                         }
-                    ).then(()=>{                                                                                            
+                    ).then(()=>{                                                            
                         this.btnLoadingFotoSelfi=false;                                                  
                         this.$router.go();                     
                     }).catch(()=>{
@@ -326,7 +326,7 @@ export default {
                                 'Content-Type': 'multipart/form-data'                      
                             }
                         }
-                    ).then(()=>{                                                                                            
+                    ).then(()=>{                                                            
                         this.btnLoadingKTPAyah=false;                                                  
                         this.$router.go();                     
                     }).catch(()=>{
@@ -351,7 +351,7 @@ export default {
                                 'Content-Type': 'multipart/form-data'                      
                             }
                         }
-                    ).then(()=>{                                                                                            
+                    ).then(()=>{                                                            
                         this.btnLoadingKTPIbu=false;                                                  
                         this.$router.go();                     
                     }).catch(()=>{
@@ -376,7 +376,7 @@ export default {
                                 'Content-Type': 'multipart/form-data'                      
                             }
                         }
-                    ).then(()=>{                                                                                            
+                    ).then(()=>{                                                            
                         this.btnLoadingKK=false;                                                  
                         this.$router.go();                     
                     }).catch(()=>{
@@ -401,7 +401,7 @@ export default {
                                 'Content-Type': 'multipart/form-data'                      
                             }
                         }
-                    ).then(()=>{                                                                                            
+                    ).then(()=>{                                                            
                         this.btnLoadingAktaLahir=false;                                                  
                         this.$router.go();                     
                     }).catch(()=>{

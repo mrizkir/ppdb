@@ -211,22 +211,23 @@ class PSBController extends Controller {
     $kode_jenjang=$request->input('kode_jenjang');
 
     $data = FormulirPendaftaranAModel::select(\DB::raw('
-            users.id,
-            users.name,
-            formulir_pendaftaran_b.tinggal_bersama,
-            formulir_pendaftaran_b.status_pernikahan,                        
-            users.active,
-            users.foto,
-            users.created_at,
-            users.updated_at
-          '))
-          ->join('users','formulir_pendaftaran_a.user_id','users.id')                                        
-          ->join('formulir_pendaftaran_b','formulir_pendaftaran_b.user_id','users.id')                                        
-          ->where('users.ta',$ta)
-          ->where('kode_jenjang',$kode_jenjang)                                
-          ->where('users.active',1)    
-          ->orderBy('users.name','ASC') 
-          ->get();
+      users.id,
+      users.name,
+      formulir_pendaftaran_b.tinggal_bersama,
+      formulir_pendaftaran_b.status_pernikahan,                        
+      formulir_pendaftaran_b.desc,                        
+      users.active,
+      users.foto,
+      users.created_at,
+      users.updated_at
+    '))
+    ->join('users','formulir_pendaftaran_a.user_id','users.id')                                        
+    ->join('formulir_pendaftaran_b','formulir_pendaftaran_b.user_id','users.id')                                        
+    ->where('users.ta',$ta)
+    ->where('kode_jenjang',$kode_jenjang)                                
+    ->where('users.active', 1)    
+    ->orderBy('users.name','ASC') 
+    ->get();
     
     return Response()->json([
                 'status'=>1,
@@ -441,7 +442,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'update',                
                   'message'=>["User ID ($id) gagal diupdate"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -547,7 +548,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -569,22 +570,22 @@ class PSBController extends Controller {
   public function showsituasikeluarga(Request $request,$id)
   {
     $formulir=FormulirPendaftaranBModel::select(\DB::raw('
-                                users.id,
-                                user_id,
-                                tinggal_bersama,
-                                status_pernikahan,                                                               
-                                
-                                `desc`                                                               
-                              '))
-                      ->join('users','users.id','formulir_pendaftaran_b.user_id')                                            
-                      ->find($id);
+      users.id,
+      user_id,
+      tinggal_bersama,
+      status_pernikahan,                                
+      `desc`                                                               
+    '))
+    ->join('users','users.id','formulir_pendaftaran_b.user_id')                                            
+    ->find($id);
+    
     if (is_null($formulir))
     {
       return Response()->json([
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran Situasi Keluarga dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -641,7 +642,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran Biodata Ayah dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -698,7 +699,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -726,7 +727,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -869,7 +870,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'update',                
                   'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -880,7 +881,7 @@ class PSBController extends Controller {
         'jk'=>'required',            
         'nik'=>'required|numeric',            
         'tempat_lahir'=>'required',            
-        'tanggal_lahir'=>'required',                                            
+        'tanggal_lahir'=>'required',
         'idagama'=>'required|numeric|exists:agama,idagama',
         'id_kebutuhan_khusus'=>'required|numeric|exists:kebutuhan_khusus,id_kebutuhan',
 
@@ -982,33 +983,31 @@ class PSBController extends Controller {
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'update',                
-                  'message'=>["Formulir Situasi Keluarga dengan ID ($id) gagal diperoleh"]
-                ],422); 
+        'status'=>1,
+        'pid'=>'update',                
+        'message'=>["Formulir Situasi Keluarga dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
-    {
-       
+    {       
       $this->validate($request, [
         'tinggal_bersama'=>'required',            
-        'status_pernikahan'=>'required',                                            
+        'status_pernikahan'=>'required',
       ]);
 
-      $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
+      $data_siswa = \DB::transaction(function () use ($request, $formulir){                            
         $formulir->tinggal_bersama=strtoupper($request->input('tinggal_bersama'));
         $formulir->status_pernikahan=$request->input('status_pernikahan');                
-        
+        $formulir->desc=$request->input('desc');     
         $formulir->save();
-
         return $formulir;
       });
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'store',
-                    'formulir'=>$formulir,          
-                    'message'=>'Formulir Situasi Keluarga baru berhasil diubah.'
-                  ], 200);
+        'status'=>1,
+        'pid'=>'store',
+        'formulir'=>$formulir,          
+        'message'=>'Formulir Situasi Keluarga baru berhasil diubah.'
+      ], 200);
     }
   }           
   /**
@@ -1027,7 +1026,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'update',                
                   'message'=>["Formulir Biodata Ayah dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -1036,7 +1035,7 @@ class PSBController extends Controller {
         'nama_ayah'=>'required',            
         'hubungan'=>'required',                            
         'tempat_lahir'=>'required',            
-        'tanggal_lahir'=>'required',                                            
+        'tanggal_lahir'=>'required',
         'idagama'=>'required|numeric|exists:agama,idagama',
 
         'address1_provinsi_id'=>'required',
@@ -1114,7 +1113,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'update',                
                   'message'=>["Formulir Biodata Ibu dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -1123,7 +1122,7 @@ class PSBController extends Controller {
         'nama_ibu'=>'required',            
         'hubungan'=>'required',                            
         'tempat_lahir'=>'required',            
-        'tanggal_lahir'=>'required',                                            
+        'tanggal_lahir'=>'required',
         'idagama'=>'required|numeric|exists:agama,idagama',
 
         'address1_provinsi_id'=>'required',
@@ -1189,7 +1188,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -1211,7 +1210,7 @@ class PSBController extends Controller {
         $filefotoselfi->move($folder,$file_name);
         return Response()->json([
                       'status'=>1,
-                      'pid'=>'store',                                            
+                      'pid'=>'store',
                       'formulir'=>$formulir,                
                       'message'=>"Foto Selfi berhasil diupload"
                     ], 200);   
@@ -1223,7 +1222,7 @@ class PSBController extends Controller {
                     'status'=>0,
                     'pid'=>'store',
                     'message'=>["Extensi file yang diupload bukan jpg atau png."]
-                  ],422); 
+                  ], 422);
         
 
       }            
@@ -1238,7 +1237,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -1260,7 +1259,7 @@ class PSBController extends Controller {
         $filektpayah->move($folder,$file_name);
         return Response()->json([
                       'status'=>1,
-                      'pid'=>'store',                                                   
+                      'pid'=>'store',       
                       'formulir'=>$formulir,                
                       'message'=>"File KTP Ayah Wali berhasil diupload"
                     ], 200);   
@@ -1272,7 +1271,7 @@ class PSBController extends Controller {
                     'status'=>0,
                     'pid'=>'store',
                     'message'=>["Extensi file yang diupload bukan jpg atau png."]
-                  ],422); 
+                  ], 422);
         
 
       }            
@@ -1287,7 +1286,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -1309,7 +1308,7 @@ class PSBController extends Controller {
         $filektpibu->move($folder,$file_name);
         return Response()->json([
                       'status'=>1,
-                      'pid'=>'store',                                                   
+                      'pid'=>'store',       
                       'formulir'=>$formulir,                
                       'message'=>"File KTP Ibu Wali berhasil diupload"
                     ], 200);   
@@ -1321,7 +1320,7 @@ class PSBController extends Controller {
                     'status'=>0,
                     'pid'=>'store',
                     'message'=>["Extensi file yang diupload bukan jpg atau png."]
-                  ],422); 
+                  ], 422);
         
 
       }            
@@ -1336,7 +1335,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -1358,7 +1357,7 @@ class PSBController extends Controller {
         $filekk->move($folder,$file_name);
         return Response()->json([
                       'status'=>1,
-                      'pid'=>'store',                                                   
+                      'pid'=>'store',       
                       'formulir'=>$formulir,                
                       'message'=>"File KK berhasil diupload"
                     ], 200);   
@@ -1370,7 +1369,7 @@ class PSBController extends Controller {
                     'status'=>0,
                     'pid'=>'store',
                     'message'=>["Extensi file yang diupload bukan jpg atau png."]
-                  ],422); 
+                  ], 422);
         
 
       }            
@@ -1385,7 +1384,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'fetchdata',                
                   'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ],422); 
+                ], 422);
     }
     else
     {
@@ -1407,7 +1406,7 @@ class PSBController extends Controller {
         $fileaktalahir->move($folder,$file_name);
         return Response()->json([
                       'status'=>1,
-                      'pid'=>'store',                                                   
+                      'pid'=>'store',       
                       'formulir'=>$formulir,                
                       'message'=>"File KK berhasil diupload"
                     ], 200);   
@@ -1419,7 +1418,7 @@ class PSBController extends Controller {
                     'status'=>0,
                     'pid'=>'store',
                     'message'=>["Extensi file yang diupload bukan jpg atau png."]
-                  ],422); 
+                  ], 422);
         
 
       }            
@@ -1444,7 +1443,7 @@ class PSBController extends Controller {
                   'status'=>1,
                   'pid'=>'destroy',                
                   'message'=>["Calon Peserta Didik Baru dengan ID ($id) gagal dihapus"]
-                ],422); 
+                ], 422);
     }
     else
     {

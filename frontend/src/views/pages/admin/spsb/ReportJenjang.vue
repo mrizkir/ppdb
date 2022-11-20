@@ -20,7 +20,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -124,19 +124,19 @@ export default {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
-                text:'SPSB',
+                text: 'SPSB',
                 disabled: false,
-                href:'/spsb'
+                href: '/spsb'
             },
             {
-                text:'LAPORAN PSB JENJANG STUDI',
-                disabled:true,
-                href:'#'
+                text: 'LAPORAN PSB JENJANG STUDI',
+                disabled: true,
+                href: '#'
             }
         ];
         let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
@@ -146,24 +146,24 @@ export default {
         this.initialize()   
     },  
     data: () => ({
-        firstloading:true,
+        firstloading: true,
         kode_jenjang:null,
         tahun_pendaftaran:null,
         nama_jenjang:null,
 
         dialogprofilmhsbaru: false,
-        breadcrumbs:[],
+        breadcrumbs: [],
         dashboard:null,
 
         btnLoading: false,
         datatableLoading: false,
-        expanded:[],
-        datatable:[],
+        expanded: [],
+        datatable: [],
         headers: [                        
             { text: '', value: 'foto', width:70 },    
-            { text: 'NAMA SISWA', value: 'name',width:350,sortable:true },
+            { text: 'NAMA SISWA', value: 'name',width:350,sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp',width:100},
-            { text: 'KELAS', value: 'nkelas',width:100,sortable:true }, 
+            { text: 'KELAS', value: 'nkelas',width:100,sortable: true }, 
         ],
         search: "",  
         
@@ -178,7 +178,7 @@ export default {
         {
             this.kode_jenjang=id;
         },
-		initialize:async function()
+		initialize: async function()
 		{	
             switch(this.dashboard)
             {
@@ -196,7 +196,7 @@ export default {
                         headers: {
                             Authorization: this.$store.getters["auth/Token"]
                         }
-                    }).then(({data})=>{               
+                    }).then(({ data })=>{               
                         this.datatable = data.psb;                
                         this.datatableLoading=false;
                     });         
@@ -217,13 +217,13 @@ export default {
         },
         badgeColor(item)
         {
-            return item.active == 1 ? 'success':'error'
+            return item.active == 1 ? 'success': 'error'
         },
         badgeIcon(item)
         {
-            return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
+            return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
         },
-        printtoexcel:async function()
+        printtoexcel: async function()
         {
             this.btnLoading=true;
             await this.$ajax.post('/spsb/reportspsbjenjang/printtoexcel',
@@ -236,9 +236,9 @@ export default {
                     headers:{
                         Authorization: this.$store.getters["auth/Token"]
                     },
-                    responseType:'arraybuffer'
+                    responseType: 'arraybuffer'
                 }
-            ).then(({data})=>{              
+            ).then(({ data })=>{              
                 const url = window.URL.createObjectURL(new Blob([data]));
                 const link = document.createElement('a');
                 link.href = url;

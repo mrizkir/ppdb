@@ -20,7 +20,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -28,7 +28,7 @@
                 </v-alert>
             </template>
         </ModuleHeader> 
-        <v-container fluid v-if="dashboard=='siswabaru' || datapesertadidik!=null">
+        <v-container fluid v-if="dashboard== 'siswabaru' || datapesertadidik!=null">
             <FormSituasiKeluarga :user_id="user_id"/>
         </v-container>
         <v-container fluid v-else>
@@ -126,22 +126,22 @@ export default {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
-                text:'SPSB',
+                text: 'SPSB',
                 disabled: false,
-                href:'/spsb'
+                href: '/spsb'
             },
             {
-                text:'SITUASI KELUARGA',
-                disabled:true,
-                href:'#'
+                text: 'SITUASI KELUARGA',
+                disabled: true,
+                href: '#'
             }
         ];
-        this.breadcrumbs[1].disabled=(this.dashboard=='siswabaru'||this.dashboard=='mahasiswa');
+        this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
         
         let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
         this.kode_jenjang=kode_jenjang;
@@ -151,23 +151,23 @@ export default {
     },  
     data: () => ({
         user_id:null,
-        firstloading:true,
+        firstloading: true,
         kode_jenjang:null,
         tahun_pendaftaran:null,
         nama_jenjang:null,
 
-        breadcrumbs:[],
+        breadcrumbs: [],
         dashboard:null,
 
         btnLoading: false,
         datatableLoading: false,
-        expanded:[],
-        datatable:[],
+        expanded: [],
+        datatable: [],
         headers: [                        
             { text: '', value: 'foto', width:70 },    
-            { text: 'NAMA SISWA', value: 'name',width:350,sortable:true },
+            { text: 'NAMA SISWA', value: 'name',width:350,sortable: true },
             { text: 'TINGGAL BERSAMA', value: 'tinggal_bersama',width:100},
-            { text: 'STATUS PERNIKAHAN ORTU', value: 'status_pernikahan',width:100,sortable:true },
+            { text: 'STATUS PERNIKAHAN ORTU', value: 'status_pernikahan',width:100,sortable: true },
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
         ],
         search: "",  
@@ -183,7 +183,7 @@ export default {
         {
             this.kode_jenjang=id;
         },
-		initialize:async function()
+		initialize: async function()
 		{	
             switch(this.dashboard)
             {
@@ -201,7 +201,7 @@ export default {
                         headers: {
                             Authorization: this.$store.getters["auth/Token"]
                         }
-                    }).then(({data})=>{               
+                    }).then(({ data })=>{               
                         this.datatable = data.psb;                
                         this.datatableLoading=false;
                     });         
@@ -223,11 +223,11 @@ export default {
         },
         badgeColor(item)
         {
-            return item.active == 1 ? 'success':'error'
+            return item.active == 1 ? 'success': 'error'
         },
         badgeIcon(item)
         {
-            return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
+            return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
         },
         editItem(item)
         {

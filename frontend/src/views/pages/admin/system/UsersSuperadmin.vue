@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -66,7 +66,7 @@
                                     vertical
                                 ></v-divider>
                                 <v-spacer></v-spacer>                                
-                                <v-btn color="primary"                                    
+                                <v-btn color="primary"                           
                                     class="mb-2" 
                                     :loading="btnLoading"
                                     :disabled="btnLoading"
@@ -114,7 +114,7 @@
                                                 <v-autocomplete 
                                                     :items="daftar_roles" 
                                                     v-model="editedItem.role_id"
-                                                    label="ROLES"                                                     
+                                                    label="ROLES"                                            
                                                     multiple 
                                                     small-chips
                                                     outlined>                                                                                
@@ -128,7 +128,7 @@
                                                     text 
                                                     @click.stop="save" 
                                                     :loading="btnLoading"
-                                                    :disabled="!form_valid||btnLoading">
+                                                    :disabled="!form_valid || btnLoading">
                                                         SIMPAN
                                                 </v-btn>
                                             </v-card-actions>
@@ -176,7 +176,7 @@
                                                 <v-autocomplete 
                                                     :items="daftar_roles" 
                                                     v-model="editedItem.role_id"
-                                                    label="ROLES"                                                     
+                                                    label="ROLES"                                            
                                                     multiple 
                                                     small-chips
                                                     outlined>                                                                                
@@ -190,7 +190,7 @@
                                                     text 
                                                     @click.stop="save" 
                                                     :loading="btnLoading"
-                                                    :disabled="!form_valid||btnLoading">SIMPAN</v-btn>
+                                                    :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
                                             </v-card-actions>
                                         </v-card>
                                     </v-form>
@@ -248,19 +248,19 @@ export default {
     created () {
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/'+this.ACCESS_TOKEN
             },
             {
-                text:'USER SISTEM',
+                text: 'USER SISTEM',
                 disabled: false,
-                href:'/system-users'
+                href: '/system-users'
             },
             {
-                text:'USERS SUPER ADMIN',
-                disabled:true,
-                href:'#'
+                text: 'USERS SUPER ADMIN',
+                disabled: true,
+                href: '#'
             }
         ];
         this.initialize()
@@ -273,19 +273,19 @@ export default {
         //tables
         headers: [                        
             { text: '', value: 'foto' },
-            { text: 'USERNAME', value: 'username',sortable:true },
-            { text: 'NAME', value: 'name',sortable:true },
-            { text: 'EMAIL', value: 'email',sortable:true },  
-            { text: 'NOMOR HP', value: 'nomor_hp',sortable:true },  
+            { text: 'USERNAME', value: 'username',sortable: true },
+            { text: 'NAME', value: 'name',sortable: true },
+            { text: 'EMAIL', value: 'email',sortable: true },  
+            { text: 'NOMOR HP', value: 'nomor_hp',sortable: true },  
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
         ],
-        expanded:[],
+        expanded: [],
         search: "",
         daftar_users: [],
 
         //form
-        form_valid:true,
-        daftar_roles:[],
+        form_valid: true,
+        daftar_roles: [],
         dialog: false,
         dialogEdit: false,
         editedIndex: -1,  
@@ -296,7 +296,7 @@ export default {
             name: '',
             email: '',
             nomor_hp: "",    
-            role_id:['superadmin'],
+            role_id: ['superadmin'],
             created_at: '',
             updated_at: '',
         },
@@ -307,28 +307,28 @@ export default {
             name: '',
             email: '',
             nomor_hp: '',
-            role_id:['superadmin'], 
+            role_id: ['superadmin'], 
             created_at: '',
             updated_at: '',
         },
         //form rules        
-        rule_user_name:[
+        rule_user_name: [
             value => !!value||"Mohon untuk di isi nama User !!!",  
             value => /^[A-Za-z\s]*$/.test(value) || 'Nama User hanya boleh string dan spasi',
         ], 
-        rule_user_email:[
+        rule_user_email: [
             value => !!value||"Mohon untuk di isi email User !!!",  
             value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',    
         ], 
-        rule_user_nomorhp:[
+        rule_user_nomorhp: [
             value => !!value||"Nomor HP mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
         ], 
-        rule_user_username:[
+        rule_user_username: [
             value => !!value||"Mohon untuk di isi username User !!!",  
             value => /^[A-Za-z_]*$/.test(value) || 'Username hanya boleh string dan underscore', 
         ], 
-        rule_user_password:[
+        rule_user_password: [
             value => !!value||"Mohon untuk di isi password User !!!",
             value => {
                 if (value && typeof value !== 'undefined' && value.length > 0){
@@ -340,7 +340,7 @@ export default {
                 }
             }
         ], 
-        rule_user_passwordEdit:[
+        rule_user_passwordEdit: [
             value => {
                 if (value && typeof value !== 'undefined' && value.length > 0){
                     return value.length >= 8 || 'Minimal Password 8 karaketer';
@@ -353,16 +353,16 @@ export default {
         ],
     }),
     methods: {
-        initialize:async function() 
+        initialize: async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/users',{
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data})=>{               
+            }).then(({ data })=>{               
                 this.daftar_users = data.users;
-                this.role_id=data.role.id;
+                this.role_id = data.role.id;
                 this.datatableLoading=false;
             });          
             
@@ -378,21 +378,21 @@ export default {
                 this.expanded=[item];
             }               
         },
-        showDialogTambahUserSuperAdmin:async function()
+        showDialogTambahUserSuperAdmin: async function()
         {
             await this.$ajax.get('/system/setting/roles',{
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data})=>{      
+            }).then(({ data })=>{      
                 let roles = data.roles;
                 var daftar_roles=[];
                 roles.forEach(element => {
-                    if (element.name=='superadmin')
+                    if (element.name== 'superadmin')
                     {                        
                         daftar_roles.push({
                             text:element.name,
-                            disabled:true,
+                            disabled: true,
                         });                        
                     }
                     else
@@ -408,7 +408,7 @@ export default {
             });     
             
         },
-        editItem:async function (item) {
+        editItem: async function (item) {
             this.editedIndex = this.daftar_users.indexOf(item)
             item.password='';            
             this.editedItem = Object.assign({}, item); 
@@ -417,15 +417,15 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data})=>{      
+            }).then(({ data })=>{      
                 let roles = data.roles;
                 var daftar_roles=[];
                 roles.forEach(element => {
-                    if (element.name=='superadmin')
+                    if (element.name== 'superadmin')
                     {                        
                         daftar_roles.push({
                             text:element.name,
-                            disabled:true,
+                            disabled: true,
                         });                        
                     }
                     else
@@ -445,8 +445,8 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data})=>{  
-                this.editedItem.role_id=data.roles;                   
+            }).then(({ data })=>{  
+                this.editedItem.role_id = data.roles;                   
                 this.btnLoading = false;
                 this.dialogEdit = true;
             });   
@@ -470,7 +470,7 @@ export default {
                 {
                     this.$ajax.post('/system/users/'+this.editedItem.id,
                         {
-                            '_method':'PUT',
+                            '_method': 'PUT',
                             name: this.editedItem.name,
                             email: this.editedItem.email,
                             nomor_hp: this.editedItem.nomor_hp,  
@@ -483,7 +483,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({data})=>{   
+                    ).then(({ data })=>{   
                         Object.assign(this.daftar_users[this.editedIndex], data.user);
                         this.close();
                     }).catch(()=>{
@@ -505,7 +505,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({data})=>{   
+                    ).then(({ data })=>{   
                         this.daftar_users.push(data.user);
                         this.close();
                     }).catch(()=>{
@@ -521,7 +521,7 @@ export default {
                     this.btnLoading=true;
                     this.$ajax.post('/system/users/'+item.id,
                         {
-                            '_method':'DELETE',
+                            '_method': 'DELETE',
                         },
                         {
                             headers:{
@@ -544,8 +544,8 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH USER SUPER ADMIN' : 'EDIT USER SUPER ADMIN'
         },
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',  
-            TOKEN:'Token',       
+            ACCESS_TOKEN: 'AccessToken',  
+            TOKEN: 'Token',       
         }),
     },
 

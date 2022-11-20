@@ -78,7 +78,7 @@
 			</v-list-item>
 			<v-divider></v-divider>
             <v-list expand v-if="dashboard !='siswabaru'">
-                <v-list-item :to="{path:'/spsb'}" link  class="yellow" color="green" v-if="CAN_ACCESS('SPSB-GROUP') && dashboard!='siswabaru' && dashboard!='mahasiswa'">
+                <v-list-item :to="{path: '/spsb'}" link  class="yellow" color="green" v-if="CAN_ACCESS('SPSB-GROUP') && dashboard!='siswabaru' && dashboard!='mahasiswa'">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-monitor-dashboard</v-icon>
                     </v-list-item-icon>
@@ -220,7 +220,7 @@ export default {
     props:{
         showrightsidebar:{
             type:Boolean,
-            default:true
+            default: true
         }
     },
     data:()=>({
@@ -257,12 +257,12 @@ export default {
 	},
     computed:{
         ...mapGetters('auth',{
-            AUTHENTICATED:'Authenticated',  
-            ACCESS_TOKEN:'AccessToken',  
-            TOKEN:'Token',  
-            ROLE:'Role',
-            CAN_ACCESS:'can', 
-            ATTRIBUTE_USER:'AttributeUser',    
+            AUTHENTICATED: 'Authenticated',  
+            ACCESS_TOKEN: 'AccessToken',  
+            TOKEN: 'Token',  
+            ROLE: 'Role',
+            CAN_ACCESS: 'can', 
+            ATTRIBUTE_USER: 'AttributeUser',    
         }),
         APP_NAME ()
         {
@@ -304,7 +304,7 @@ export default {
                     this.$router.replace('/login');
                 }
             },
-            immediate:true
+            immediate: true
         },
     }
 }

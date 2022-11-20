@@ -5,17 +5,17 @@ const getDefaultState = () =>
         loaded: false, 
         //page
         default_dashboard:null,
-        pages:[],
+        pages: [],
 
-        daftar_ta:[],
+        daftar_ta: [],
         tahun_pendaftaran:null,
         tahun_ajaran:null,
 
-        daftar_semester:[],
+        daftar_semester: [],
         semester_pendaftaran:null,
         semester_akademik:null,
 
-        daftar_jenjang:[],
+        daftar_jenjang: [],
         kode_jenjang:null,
         
         theme:null
@@ -148,7 +148,7 @@ const getters= {
     {   
         var nama_semester='';
         let found = state.daftar_semester.find(semester => semester.id==key);                                 
-        if (typeof found !=='undefined')
+        if (typeof found !== 'undefined')
         {
             nama_semester=found.text;
         }               
@@ -198,7 +198,7 @@ const actions = {
                         Authorization:token
                     }
                 }
-            ).then(({data})=>{                   
+            ).then(({ data })=>{                   
                 commit('setDaftarTA',data.daftar_ta); 
                 commit('setTahunPendaftaran',data.tahun_pendaftaran);   
                 commit('setTahunAkademik',data.tahun_ajaran);           

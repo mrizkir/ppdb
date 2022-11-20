@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -103,7 +103,7 @@
                                                     text 
                                                     @click.stop="save" 
                                                     :loading="btnLoading"
-                                                    :disabled="!form_valid||btnLoading">
+                                                    :disabled="!form_valid || btnLoading">
                                                         SIMPAN
                                                 </v-btn>
                                             </v-card-actions>
@@ -215,19 +215,19 @@ export default {
     created () {
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
-                text:'PAGE_GROUP',
+                text: 'PAGE_GROUP',
                 disabled: false,
-                href:'#'
+                href: '#'
             },
             {
-                text:'PAGE',
-                disabled:true,
-                href:'#'
+                text: 'PAGE',
+                disabled: true,
+                href: '#'
             }
         ];
         this.initialize()
@@ -235,8 +235,8 @@ export default {
     data: () => ({ 
         btnLoading: false,
         datatableLoading: false,
-        expanded:[],
-        datatable:[],
+        expanded: [],
+        datatable: [],
         headers: [                        
             { text: 'ID', value: 'id' },
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
@@ -248,7 +248,7 @@ export default {
         dialogdetailitem: false,
 
         //form data   
-        form_valid:true, 
+        form_valid: true, 
         formdata: {
             id:0,
             name: "",
@@ -265,24 +265,24 @@ export default {
         editedIndex: -1,
 
         //form rules  
-        rule_user_nomorhp:[
+        rule_user_nomorhp: [
             value => !!value||"Kode mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Kode hanya boleh angka',
         ], 
-        rule_name:[
+        rule_name: [
             value => !!value||"Mohon untuk di isi name !!!",  
             value => /^[A-Za-z\s]*$/.test(value) || 'Name hanya boleh string dan spasi',
         ], 
     }),
     methods: {
-        initialize:async function() 
+        initialize: async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/path',{
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({data})=>{               
+            }).then(({ data })=>{               
                 this.datatable = data.object;
                 this.datatableLoading=false;
             }).catch(()=>{
@@ -307,7 +307,7 @@ export default {
             //     headers: {
             //         Authorization: this.$store.getters["auth/Token"]
             //     }
-            // }).then(({data})=>{               
+            // }).then(({ data })=>{               
                                            
             // });                      
         }, 
@@ -316,7 +316,7 @@ export default {
             this.formdata = Object.assign({}, item);
             this.dialogfrm = true;
         }, 
-        save:async function() {
+        save: async function() {
             if (this.$refs.frmdata.validate())
             {
                 this.btnLoading=true;
@@ -324,7 +324,7 @@ export default {
                 {
                     await this.$ajax.post('/path/'+this.formdata.id,
                         {
-                            '_method':'PUT',
+                            '_method': 'PUT',
                             name: this.formdata.name,    
                         },
                         {
@@ -332,7 +332,7 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(({data})=>{   
+                    ).then(({ data })=>{   
                         Object.assign(this.datatable[this.editedIndex], data.object);
                         this.closedialogfrm();
                         this.btnLoading = false;
@@ -350,7 +350,7 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(({data})=>{   
+                    ).then(({ data })=>{   
                         this.datatable.push(data.object);
                         this.closedialogfrm();
                         this.btnLoading = false;
@@ -367,7 +367,7 @@ export default {
                     this.btnLoading=true;
                     this.$ajax.post('/path/'+item.id,
                         {
-                            '_method':'DELETE',
+                            '_method': 'DELETE',
                         },
                         {
                             headers:{

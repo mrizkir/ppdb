@@ -19,7 +19,7 @@ export default {
         
     }),
     methods : {        
-		initialize:async function()
+		initialize: async function()
 		{	
             
         }

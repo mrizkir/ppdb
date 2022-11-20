@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -96,7 +96,7 @@
                                                     text 
                                                     @click.stop="save" 
                                                     :loading="btnLoading"
-                                                    :disabled="!form_valid||btnLoading">
+                                                    :disabled="!form_valid || btnLoading">
                                                         SIMPAN
                                                 </v-btn>
                                             </v-card-actions>
@@ -141,28 +141,28 @@ export default {
     {
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/'+this.ACCESS_TOKEN
             },
             {
-                text:'USER SISTEM',
+                text: 'USER SISTEM',
                 disabled: false,
-                href:'/system-users'
+                href: '/system-users'
             },
             {
-                text:'PERMISSIONS',
-                disabled:true,
-                href:'#'
+                text: 'PERMISSIONS',
+                disabled: true,
+                href: '#'
             }
         ];
         this.initialize();
     },
     data: () => ({
-        breadcrumbs:[],
+        breadcrumbs: [],
         datatableLoading: false,
         btnLoading: false,  
-        expanded:[],
+        expanded: [],
         daftar_permissions: [],
         //tables
         headers: [                        
@@ -172,7 +172,7 @@ export default {
         ],
         search: "",
         //form
-        form_valid:true,
+        form_valid: true,
         dialog: false,
         editedIndex: -1,
         editedItem: {
@@ -190,7 +190,7 @@ export default {
             updated_at: '',
         },
         //form rules        
-        rule_permission_name:[
+        rule_permission_name: [
             value => !!value||"Mohon untuk di isi nama Permission !!!",  
             value => /^[a-zA-Z\\-]+$/.test(value) || 'Nama Permission hanya boleh string',
         ], 
@@ -203,7 +203,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data})=>{                
+            }).then(({ data })=>{                
                 this.daftar_permissions = data.permissions;
                 this.datatableLoading=false;
             });          
@@ -266,7 +266,7 @@ export default {
                     this.btnLoading=true;
                     this.$ajax.post('/system/setting/permissions/'+item.id,
                     {
-                        '_method':'DELETE',
+                        '_method': 'DELETE',
                     },
                     {
                         headers:{
@@ -289,10 +289,10 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH PERMISSION' : 'EDIT PERMISSION'
         },
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',  
-            TOKEN:'Token',  
-            CAN_ACCESS:'can', 
-            ATTRIBUTE_USER:'AttributeUser',  
+            ACCESS_TOKEN: 'AccessToken',  
+            TOKEN: 'Token',  
+            CAN_ACCESS: 'can', 
+            ATTRIBUTE_USER: 'AttributeUser',  
         }),
     },
     watch: {

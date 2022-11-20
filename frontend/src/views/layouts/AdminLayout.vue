@@ -70,7 +70,7 @@ export default {
     props:{
         showrightsidebar:{
             type:Boolean,
-            default:true
+            default: true
         }
     },   
     data:()=>({
@@ -109,12 +109,12 @@ export default {
 	},
     computed:{
         ...mapGetters('auth',{
-            AUTHENTICATED:'Authenticated',  
-            ACCESS_TOKEN:'AccessToken',  
-            TOKEN:'Token',  
-            ROLE:'Role',
-            CAN_ACCESS:'can', 
-            ATTRIBUTE_USER:'AttributeUser',    
+            AUTHENTICATED: 'Authenticated',  
+            ACCESS_TOKEN: 'AccessToken',  
+            TOKEN: 'Token',  
+            ROLE: 'Role',
+            CAN_ACCESS: 'can', 
+            ATTRIBUTE_USER: 'AttributeUser',    
         }),
         APP_NAME ()
         {
@@ -136,7 +136,7 @@ export default {
         },
         hideleftnav ()
 		{
-			if (this.$route.name=='ReportFormBMurni')
+			if (this.$route.name== 'ReportFormBMurni')
 			{
 				return true;
 			}
@@ -163,7 +163,7 @@ export default {
                     this.$router.replace('/login');
                 }
             },
-            immediate:true
+            immediate: true
         },
     }
 }

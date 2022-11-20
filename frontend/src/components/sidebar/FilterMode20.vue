@@ -3,14 +3,14 @@
         <v-list-item-content>
             <v-select
                 v-model="fakultas_id"
-                :items="daftar_fakultas"                
+                :items="daftar_fakultas"            
                 item-text="text"
                 item-value="id"
                 label="FAKULTAS"
                 outlined/>            
             <v-select
                 v-model="tahun_pendaftaran"
-                :items="daftar_ta"                
+                :items="daftar_ta"            
                 label="TAHUN PENDAFTARAN"
                 outlined/>            
         </v-list-item-content>
@@ -28,11 +28,11 @@ export default {
         this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran']; 
     },
     data:()=>({
-        firstloading:true,
-        daftar_fakultas:[],
+        firstloading: true,
+        daftar_fakultas: [],
         fakultas_id:null,
 
-        daftar_ta:[],
+        daftar_ta: [],
         tahun_pendaftaran:null
     }),
     methods:{

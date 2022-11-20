@@ -1,6 +1,6 @@
 <template>
     <AdminLayout>		
-        <v-container v-if="dashboard=='siswabaru'">
+        <v-container v-if="dashboard== 'siswabaru'">
             <DashboardMB />
         </v-container>        
         <v-container fluid v-else>
@@ -83,34 +83,34 @@ export default {
         this.TOKEN = this.$route.params.token;        
 		this.breadcrumbs = [
 			{
-				text:'HOME',
+				text: 'HOME',
 				disabled: false,
-				href:'/dashboard/'+this.TOKEN
+				href: '/dashboard/'+this.TOKEN
 			},
 			{
-				text:'DASHBOARD',
-				disabled:true,
-				href:'#'
+				text: 'DASHBOARD',
+				disabled: true,
+				href: '#'
 			}
 		];		
 		this.initialize();
 	},
 	data: () => ({
-        breadcrumbs:[],
+        breadcrumbs: [],
         TOKEN:null,
         dashboard:null,
 
         tahun_pendaftaran: ""
 	}),
 	methods : {
-		initialize:async function()
+		initialize: async function()
 		{	            
             await this.$ajax.get('/auth/me',
             {
                 headers: {
-                    Authorization:'Bearer '+this.TOKEN
+                    Authorization: 'Bearer '+this.TOKEN
                 }
-            }).then(({data})=>{          
+            }).then(({ data })=>{          
                 this.dashboard = data.role[0];    
                 this.$store.dispatch('uiadmin/changeDashboard',this.dashboard);                                       
             });                 

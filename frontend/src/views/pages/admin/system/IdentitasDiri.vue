@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -60,7 +60,7 @@
                                     text 
                                     @click.stop="save" 
                                     :loading="btnLoading"
-                                    :disabled="!form_valid||btnLoading">SIMPAN</v-btn>
+                                    :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-form>
@@ -79,34 +79,34 @@ export default {
     {
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/'+this.ACCESS_TOKEN
             },
             {
-                text:'KONFIGURASI SISTEM',
+                text: 'KONFIGURASI SISTEM',
                 disabled: false,
-                href:'/system-setting'
+                href: '/system-setting'
             },  
             {
-                text:'SEKOLAH',
+                text: 'SEKOLAH',
                 disabled: false,
-                href:'#'
+                href: '#'
             },
             {
-                text:'IDENTITAS DIRI',
-                disabled:true,
-                href:'#'
+                text: 'IDENTITAS DIRI',
+                disabled: true,
+                href: '#'
             }
         ];
         this.initialize();
     },
     data: () => ({
-        breadcrumbs:[],
+        breadcrumbs: [],
         datatableLoading: false,
         btnLoading: false,
         //form
-        form_valid:true,
+        form_valid: true,
         formdata: {
             nama_sekolah: "",
             nama_alias_pt: "",
@@ -114,19 +114,19 @@ export default {
             kode_sekolah:0,
         },
         //form rules        
-        rule_nama_sekolah:[
+        rule_nama_sekolah: [
             value => !!value||"Mohon untuk di isi Nama Sekolah !!!",  
         ], 
-        rule_nama_singkatan_pt:[
+        rule_nama_singkatan_pt: [
             value => !!value||"Mohon untuk di isi Nama Alias Sekolah !!!",  
         ],
-        rule_kode_sekolah:[
+        rule_kode_sekolah: [
             value => !!value||"Mohon untuk di isi Kode Sekolah !!!",  
             value => /^[0-9]+$/.test(value) || 'Kode Sekolah hanya boleh angka',
         ]
     }),
     methods: {
-        initialize:async function() 
+        initialize: async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/setting/variables',
@@ -134,7 +134,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data})=>{  
+            }).then(({ data })=>{  
                 let setting = data.setting;                           
                 this.formdata.nama_sekolah=setting.NAMA_SEKOLAH;
                 this.formdata.nama_alias_pt=setting.NAMA_SEKOLAH_ALIAS;
@@ -149,8 +149,8 @@ export default {
                 this.btnLoading = true;
                 this.$ajax.post('/system/setting/variables',
                     {
-                        '_method':'PUT', 
-                        'pid':'Identitas Sekolah',
+                        '_method': 'PUT', 
+                        'pid': 'Identitas Sekolah',
                         setting:JSON.stringify({
                             101: this.formdata.nama_sekolah,
                             102: this.formdata.nama_alias_pt, 
@@ -172,8 +172,8 @@ export default {
     },
     computed:{ 
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',  
-            TOKEN:'Token',       
+            ACCESS_TOKEN: 'AccessToken',  
+            TOKEN: 'Token',       
         }),
     },
     components:{

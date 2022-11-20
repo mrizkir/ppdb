@@ -75,7 +75,7 @@
 			</v-list-item>
 			<v-divider></v-divider>
 			<v-list expand>
-				<v-list-item :to="{path:'/system-users'}" v-if="CAN_ACCESS('SYSTEM-USERS-GROUP')" link class="yellow" color="green" >
+				<v-list-item :to="{path: '/system-users'}" v-if="CAN_ACCESS('SYSTEM-USERS-GROUP')" link class="yellow" color="green" >
 					<v-list-item-icon class="mr-2">
 						<v-icon>mdi-account</v-icon>
 					</v-list-item-icon>
@@ -148,7 +148,7 @@ export default {
 	props:{
 		showrightsidebar:{
 			type:Boolean,
-			default:true
+			default: true
 		}
 	}, 
 	data:()=>({
@@ -186,12 +186,12 @@ export default {
 	},
 	computed:{
 		...mapGetters('auth',{
-			AUTHENTICATED:'Authenticated',  
-			ACCESS_TOKEN:'AccessToken',  
-			TOKEN:'Token',  
-			ROLE:'Role',
-			CAN_ACCESS:'can', 
-			ATTRIBUTE_USER:'AttributeUser',    
+			AUTHENTICATED: 'Authenticated',  
+			ACCESS_TOKEN: 'AccessToken',  
+			TOKEN: 'Token',  
+			ROLE: 'Role',
+			CAN_ACCESS: 'can', 
+			ATTRIBUTE_USER: 'AttributeUser',    
 		}),
 		APP_NAME ()
 		{
@@ -213,7 +213,7 @@ export default {
 		},
 		hideleftnav ()
 		{
-			if (this.$route.name=='UsersProfil')
+			if (this.$route.name== 'UsersProfil')
 			{
 				return true;
 			}
@@ -240,7 +240,7 @@ export default {
 					this.$router.replace('/login');
 				}
 			},
-			immediate:true
+			immediate: true
 		},
 	}
 }

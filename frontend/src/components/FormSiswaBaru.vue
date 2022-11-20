@@ -26,7 +26,7 @@
               label="NISN"
               :rules="rule_nisn"
               filled
-              v-if="formdata.kode_jenjang == 4 || formdata.kode_jenjang == 3 || formdata.kode_jenjang == 2"
+              v-if="formdata.kode_jenjang == 4 || formdata.kode_jenjang == 3"
             />
           </v-card-text>
         </v-card>
@@ -36,14 +36,14 @@
           </v-card-title>
           <v-card-text>
             <v-text-field
-              label="NAMA LENGKAP"    
-              v-model="formdata.nama_siswa"    
+              label="NAMA LENGKAP"
+              v-model="formdata.nama_siswa"
               :rules="rule_nama_siswa"
               filled
             />
             <v-text-field
-              label="NAMA PANGGILAN"    
-              v-model="formdata.nama_panggilan"    
+              label="NAMA PANGGILAN"
+              v-model="formdata.nama_panggilan"
               :rules="rule_nama_panggilan"
               filled
             />
@@ -53,8 +53,8 @@
               <v-radio label="PEREMPUAN" value="P"></v-radio>
             </v-radio-group>
             <v-text-field
-              label="NIK"    
-              v-model="formdata.nik"    
+              label="NIK"
+              v-model="formdata.nik"
               :rules="rule_nik"
               filled
             />
@@ -78,8 +78,8 @@
             </v-row>
             <v-text-field
               label="TEMPAT LAHIR"
-              v-model="formdata.tempat_lahir"     
-              :rules="rule_tempat_lahir"                   
+              v-model="formdata.tempat_lahir" 
+              :rules="rule_tempat_lahir"          
               filled
             />
             <v-menu
@@ -95,7 +95,7 @@
               <template v-slot:activator="{ on }">
                 <v-text-field
                   v-model="formdata.tanggal_lahir"
-                  label="TANGGAL LAHIR"                
+                  label="TANGGAL LAHIR"       
                   readonly
                   filled
                   v-on="on"
@@ -103,7 +103,7 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="formdata.tanggal_lahir"            
+                v-model="formdata.tanggal_lahir"   
                 no-title                                
                 scrollable
                 >
@@ -136,14 +136,14 @@
             />    
             <v-text-field
               label="TINGGI (CM)"
-              v-model="formdata.tinggi"     
-              :rules="rule_tinggi"                   
+              v-model="formdata.tinggi" 
+              :rules="rule_tinggi"          
               filled
             />
             <v-text-field
               label="BERAT BADAN (KG)"
-              v-model="formdata.berat_badan"     
-              :rules="rule_berat_badan"                   
+              v-model="formdata.berat_badan" 
+              :rules="rule_berat_badan"          
               filled
             />  
             <v-select
@@ -154,12 +154,12 @@
             />           
             <v-text-field
               label="PENYAKIT"
-              v-model="formdata.penyakit"                      
+              v-model="formdata.penyakit"             
               filled
             />
             <v-text-field
               label="MAKANAN YANG DIHINDARI ?"
-              v-model="formdata.avoid_food"     
+              v-model="formdata.avoid_food" 
               filled
             />
             <v-select 
@@ -245,8 +245,8 @@
               :items="daftar_negara"
               v-model="formdata.kewarganegaraan"
               item-text="country_name"
-              item-value="id"     
-              :rules="rule_negara"                     
+              item-value="id" 
+              :rules="rule_negara"            
               filled
             />        
           </v-card-text>
@@ -293,7 +293,7 @@
               text 
               @click.stop="save" 
               :loading="btnLoading"
-              :disabled="!form_valid||btnLoading">SIMPAN</v-btn>
+              :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
           </v-card-actions>
         </v-card>
       </v-form>
@@ -303,14 +303,14 @@
 </template>
 <script>
   export default {
-    name: 'FormSiswaBaru',
+    name: "FormSiswaBaru",
     created()
     {
       this.initialize();
     },
-    props:{          
+    props: {    
       user_id:{            
-        type:String, 
+        type: String,
         required: true
       }
     },
@@ -322,8 +322,8 @@
       btnLoadingFakultas: false,
 
       //form
-      kode_billing:'N.A',
-      form_valid:true,
+      kode_billing:"N.A",
+      form_valid: true,
 
       menuTanggalLahir: false,
       
@@ -331,26 +331,26 @@
 
       daftar_moda_transportasi: [],
 
-      daftar_golongan_darah:[
+      daftar_golongan_darah: [
         {
-          value:'-',
-          text:'TIDAK TAHU'
+          value:"-",
+          text:"TIDAK TAHU"
         },
         {
-          value:'A',
-          text:'A'
+          value:"A",
+          text:"A"
         },
         {
-          value:'B',
-          text:'B'
+          value:"B",
+          text:"B"
         },
         {
-          value:'AB',
-          text:'AB'
+          value:"AB",
+          text:"AB"
         },
         {
-          value:'O',
-          text:'O'
+          value:"O",
+          text:"O"
         },
       ],
 
@@ -376,7 +376,7 @@
         nama_siswa: "",
         nisn: null,
         nama_panggilan: "", 
-        jk:'L',
+        jk:"L",
         nik: "", 
         tempat_lahir: "",
         tanggal_lahir: "",
@@ -392,12 +392,12 @@
         asal_sekolah: "",
         anak_ke:1,
         jumlah_saudara:0,
-        golongan_darah:'-',
+        golongan_darah:"-",
         penyakit: "",
         avoid_food: "",
         tinggi: "",
         berat_badan: "",
-        ukuran_seragam:'S',
+        ukuran_seragam:"S",
         id_moda: "",
         jarak_ke_sekolah: "",
         waktu_tempuh: "",
@@ -407,56 +407,56 @@
 
         desc: "",
       },
-      rule_nama_siswa:[
+      rule_nama_siswa: [
         value => !!value||"Nama Peserta Didik mohon untuk diisi !!!",
-        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Peserta Didik hanya boleh string dan spasi',
+        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Peserta Didik hanya boleh string dan spasi",
       ], 
-      rule_nama_panggilan:[
+      rule_nama_panggilan: [
         value => !!value||"Nama Panggilan Panggilan Peserta mohon untuk diisi !!!",
-        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Panggilan Peserta Didik hanya boleh string dan spasi',
+        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Panggilan Peserta Didik hanya boleh string dan spasi",
       ],
-      rule_nik:[
+      rule_nik: [
         value => !!value||"Mohon NIK Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
-        value => /^[0-9]+$/.test(value) || 'NIk Peserta Didik hanya boleh angka',
+        value => /^[0-9]+$/.test(value) || "NIk Peserta Didik hanya boleh angka",
       ], 
-      rule_tempat_lahir:[
+      rule_tempat_lahir: [
         value => !!value||"Tempat Lahir mohon untuk diisi !!!"
       ], 
-      rule_tanggal_lahir:[
+      rule_tanggal_lahir: [
         value => !!value||"Tanggal Lahir mohon untuk dipilih !!!"
       ], 
-      rule_agama:[
+      rule_agama: [
         value => !!value||"Mohon agama Peserta Didik mohon untuk diisi !!!"
       ], 
-      rule_tinggi:[
+      rule_tinggi: [
         value => !!value||"Tinggi badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
-        value => /^[0-9]+$/.test(value) || 'Tinggi badan Peserta Didik hanya boleh angka',
+        value => /^[0-9]+$/.test(value) || "Tinggi badan Peserta Didik hanya boleh angka",
       ], 
-      rule_berat_badan:[
+      rule_berat_badan: [
         value => !!value||"Berat badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
-        value => /^[0-9]+$/.test(value) || 'Berat badan Peserta Didik hanya boleh angka',
+        value => /^[0-9]+$/.test(value) || "Berat badan Peserta Didik hanya boleh angka",
       ], 
-      rule_desa:[
+      rule_desa: [
         value => !!value||"Mohon Desa untuk dipilih !!!"
       ], 
-      rule_address1_rt:[
+      rule_address1_rt: [
         value => !!value||"Mohon RT untuk di isi !!!"
       ], 
-      rule_address1_rw:[
+      rule_address1_rw: [
         value => !!value||"Mohon RW untuk di isi !!!"
       ], 
-      rule_negara:[
+      rule_negara: [
         value => !!value||"Mohon Kewarganegaraan  untuk dipilih !!!"
       ], 
-      rule_alamat_rumah:[
+      rule_alamat_rumah: [
         value => !!value||"Alamat Rumah mohon untuk diisi !!!"
       ], 
-      rule_kode_pos:[
+      rule_kode_pos: [
         value => !!value||"Kode POS mohon untuk diisi !!!",
-        value => /^[0-9]+$/.test(value) || 'Kode pos hanya boleh angka', 
+        value => /^[0-9]+$/.test(value) || "Kode pos hanya boleh angka", 
         value => {
-          if (value && typeof value !== 'undefined' && value.length > 0){
-            return value.length == 5 || 'Panjang karakter kode pos harus sama dengan 5';
+          if (value && typeof value !== "undefined" && value.length > 0){
+            return value.length == 5 || "Panjang karakter kode pos harus sama dengan 5";
           }
           else
           {
@@ -464,59 +464,59 @@
           }
         }               
       ], 
-      rule_moda_transportasi:[
+      rule_moda_transportasi: [
         value => !!value||"Mohon moda transportasi untuk dipilih !!!"
       ], 
-      rule_jarak_ke_sekolah:[
+      rule_jarak_ke_sekolah: [
         value => !!value||"Jarak ke sekolah mohon untuk diisi !!!",
-        value => /^[0-9]+$/.test(value) || 'Jarak ke sekolah hanya boleh angka',
+        value => /^[0-9]+$/.test(value) || "Jarak ke sekolah hanya boleh angka",
       ], 
-      rule_waktu_tempuh:[
+      rule_waktu_tempuh: [
         value => !!value||"Waktu tempuh ke sekolah mohon untuk diisi !!!",
-        value => /^[0-9]+$/.test(value) || 'Waktu sekolah ke sekolah hanya boleh angka',
+        value => /^[0-9]+$/.test(value) || "Waktu sekolah ke sekolah hanya boleh angka",
       ], 
-      rule_jenjang:[
+      rule_jenjang: [
         value => !!value||"Jenjang Studi mohon untuk dipilih !!!"
       ], 
-      rule_nisn:[
+      rule_nisn: [
         value => !!value||"NISN mohon untuk diisi !!!",
-        value => /^[0-9]+$/.test(value) || 'NISN hanya boleh angka',
+        value => /^[0-9]+$/.test(value) || "NISN hanya boleh angka",
       ], 
     }),
     methods: {
-      initialize:async function()
+      initialize: async function()
       {
-        this.$ajax.get('/datamaster/negara').then(({data})=>{                
+        this.$ajax.get("/datamaster/negara").then(({ data })=>{                
           this.daftar_negara = data.negara;                
         });            
-        this.$ajax.get('/datamaster/provinsi').then(({data})=>{                
+        this.$ajax.get("/datamaster/provinsi").then(({ data })=>{                
           this.daftar_provinsi = data.provinsi;                
         });            
         
-        await this.$ajax.get('/datamaster/agama').then(({data})=>{                  
+        await this.$ajax.get("/datamaster/agama").then(({ data })=>{                  
           this.daftar_agama = data.agama;
         });
 
-        await this.$ajax.get('/datamaster/modatransportasi').then(({data})=>{                  
+        await this.$ajax.get("/datamaster/modatransportasi").then(({ data })=>{                  
           this.daftar_moda_transportasi = data.moda_transportasi;
         });
         
-        await this.$ajax.get('/datamaster/kebutuhankhusus').then(({data})=>{                  
+        await this.$ajax.get("/datamaster/kebutuhankhusus").then(({ data })=>{                  
           this.daftar_kebutuhan_khusus = data.kebutuhan_khusus;
         });
 
-        await this.$ajax.get('/datamaster/jenjangstudi').then(({data})=>{                  
+        await this.$ajax.get("/datamaster/jenjangstudi").then(({ data })=>{                  
           this.daftar_jenjang = data.jenjang_studi;
         });
             
-        await this.$ajax.get('/spsb/formulirpendaftaran/' + this.user_id,  
+        await this.$ajax.get("/spsb/formulirpendaftaran/" + this.user_id,  
           {
             headers:{
               Authorization: this.$store.getters["auth/Token"]
             }
           },
           
-        ).then(({data})=>{   
+        ).then(({ data })=>{   
           this.formdata.nama_siswa = data.formulir.nama_siswa;           
           this.formdata.nisn = data.formulir.nisn;           
           this.formdata.nama_panggilan = data.formulir.nama_panggilan;           
@@ -571,7 +571,7 @@
       save: async function() {
         if (this.$refs.frmdata.validate()) {
           this.btnLoading = true;
-          await this.$ajax.post('/spsb/formulirpendaftaran/'+this.user_id, {
+          await this.$ajax.post("/spsb/formulirpendaftaran/"+this.user_id, {
             _method: "put",
             nama_siswa: this.formdata.nama_siswa,
             nisn: this.formdata.nisn,
@@ -617,10 +617,10 @@
               Authorization: this.$store.getters["auth/Token"]
             }
           }
-          ).then(()=>{                                   
+          ).then(()=>{   
             this.btnLoading = false;     
             this.$router.go();                   
-          }).catch(() => {                                   
+          }).catch(() => {   
             this.btnLoading = false;
           });                                    
           this.form_valid=true;                                                                                        
@@ -629,9 +629,9 @@
       },
       kembali()
       {
-        if (this.$store.getters['uiadmin/getDefaultDashboard'] =='siswabaru')
+        if (this.$store.getters["uiadmin/getDefaultDashboard"] =="siswabaru")
         {
-          this.$router.push('/dashboard/'+this.$store.getters['auth/AccessToken']);
+          this.$router.push("/dashboard/"+this.$store.getters["auth/AccessToken"]);
         }
         else
         {
@@ -641,10 +641,10 @@
     },
     watch:{
       provinsi_id(val) {
-        if (val.id != null && val.id != '')
+        if (val.id != null && val.id != "")
         {
           this.btnLoadingProv=true;
-          this.$ajax.get('/datamaster/provinsi/'+val.id+'/kabupaten').then(({data})=>{                
+          this.$ajax.get("/datamaster/provinsi/"+val.id+"/kabupaten").then(({ data })=>{                
             this.daftar_kabupaten = data.kabupaten;
             this.btnLoadingProv=false;
           });
@@ -652,25 +652,25 @@
         }
       },
       kabupaten_id(val) {
-        if (val.id != null && val.id != '')
+        if (val.id != null && val.id != "")
         {
           this.btnLoadingKab=true;
-          this.$ajax.get('/datamaster/kabupaten/'+val.id+'/kecamatan').then(({data})=>{                                
+          this.$ajax.get("/datamaster/kabupaten/"+val.id+"/kecamatan").then(({ data })=>{
             this.daftar_kecamatan = data.kecamatan;
             this.btnLoadingKab=false;
           });
         }
       },
       kecamatan_id(val) {
-        if (val.id != null && val.id != '')
-        {
+        if (val.id != null && val.id != "") {
           this.btnLoadingKec=true;
-          this.$ajax.get('/datamaster/kecamatan/'+val.id+'/desa').then(({data})=>{                                
-            this.daftar_desa = data.desa;
-            this.btnLoadingKec=false;
-          });
+          this.$ajax.get("/datamaster/kecamatan/" + val.id + "/desa")
+            .then(({ data })=>{
+              this.daftar_desa = data.desa;
+              this.btnLoadingKec=false;
+            });
         }
       },
-    }
-  }
+    },
+  };
 </script>

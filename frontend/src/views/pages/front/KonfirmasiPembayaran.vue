@@ -107,7 +107,7 @@
                                     <template v-slot:activator="{ on }">
                                         <v-text-field
                                             v-model="formdata.tanggal_bayar"
-                                            label="TANGGAL BAYAR/TRANSFER"                                            
+                                            label="TANGGAL BAYAR/TRANSFER"                                   
                                             readonly
                                             outlined
                                             v-on="on"
@@ -115,7 +115,7 @@
                                         ></v-text-field>
                                     </template>
                                     <v-date-picker
-                                        v-model="formdata.tanggal_bayar"                                        
+                                        v-model="formdata.tanggal_bayar"                               
                                         no-title                                
                                         scrollable
                                         >
@@ -126,7 +126,7 @@
                                 </v-menu>
                                 <v-textarea 
                                     v-model="formdata.desc"
-                                    label="CATATAN:"                                                                    
+                                    label="CATATAN:"                                                           
                                     outlined />
                                 <v-file-input 
                                     accept="image/jpeg,image/png" 
@@ -146,7 +146,7 @@
                                     text 
                                     @click.stop="save" 
                                     :loading="btnLoading"
-                                    :disabled="!form_valid||btnLoading">
+                                    :disabled="!form_valid || btnLoading">
                                         SIMPAN
                                 </v-btn>
                             </v-card-actions>
@@ -165,27 +165,27 @@ export default {
     data: () => ({     
         btnLoading: false,
         //form
-        form_valid:true,
+        form_valid: true,
         data_pd:null,
 
         menuTanggalBayar: false,
         image_prev:null,
-        daftar_channel:[
+        daftar_channel: [
             {
                 id_channel:1,
-                nama_channel:'TELLER BANK'
+                nama_channel: 'TELLER BANK'
             },
             {
                 id_channel:2,
-                nama_channel:'TRANSFER BANK'
+                nama_channel: 'TRANSFER BANK'
             },
             {
                 id_channel:3,
-                nama_channel:'INTERNET BANKING'
+                nama_channel: 'INTERNET BANKING'
             },
             {
                 id_channel:4,
-                nama_channel:'MOBILE BANKING'
+                nama_channel: 'MOBILE BANKING'
             },
         ],
         formdata: {
@@ -198,33 +198,33 @@ export default {
             nama_bank_pengirim: "",
             desc: "",
             tanggal_bayar: "",
-            bukti_bayar:[],
+            bukti_bayar: [],
         },
-        rule_username:[
+        rule_username: [
             value => !!value||"Kolom Username mohon untuk diisi !!!"
         ], 
         //form rules  
-        rule_channel_pembayaran:[
+        rule_channel_pembayaran: [
             value => !!value||"Mohon dipilih Channel Pembayaran mohon untuk dipilih !!!"
         ], 
-        rule_nama_pengirim:[
+        rule_nama_pengirim: [
             value => !!value||"Mohon diisi nama pengirim !!!"
         ],
-        rule_nomor_rekening:[
+        rule_nomor_rekening: [
             value => !!value||"Mohon diisi nomor rekening pengirim !!!",
             value => /^[0-9]+$/.test(value) || 'Nomor Rekening hanya boleh angka',
         ],
-        rule_nama_bank:[
+        rule_nama_bank: [
             value => !!value||"Mohon diisi nama bank !!!"
         ],
-        rule_tanggal_bayar:[
+        rule_tanggal_bayar: [
             value => !!value||"Tanggal Bayar mohon untuk diisi !!!"
         ], 
-        rule_bukti_bayar:[
+        rule_bukti_bayar: [
             value => !!value||"Mohon pilih foto !!!",  
             value =>  !value || value.size < 2000000 || 'File Bukti Bayar harus kurang dari 2MB.'                
         ],
-        rule_total_bayar:[
+        rule_total_bayar: [
             value => !!value||"Dana yang  ditransfer mohon untuk untuk di isi !!!",
             value => /^[0-9]+$/.test(value) || 'Dana yang  ditransfer hanya boleh angka',  
         ], 
@@ -237,12 +237,12 @@ export default {
                 this.btnLoading = true;
                 await this.$ajax.post('/spsb/psb/konfirmasi', {
                     username: this.formdata.username, 
-                }).then(({data})=>{  
-                    this.data_pd=data.user;
-                    this.formdata.id=data.user.id;
-                    this.formdata.username=data.user.username;
+                }).then(({ data })=>{  
+                    this.data_pd = data.user;
+                    this.formdata.id = data.user.id;
+                    this.formdata.username = data.user.username;
                     this.btnLoading = false;
-                }).catch(() => {                                        
+                }).catch(() => {        
                     this.btnLoading = false;
                 });                                
             }

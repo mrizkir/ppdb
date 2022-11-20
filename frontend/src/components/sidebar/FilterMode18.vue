@@ -3,14 +3,14 @@
         <v-list-item-content>
             <v-select
                 v-model="kode_jenjang"
-                :items="daftar_jenjang"                
+                :items="daftar_jenjang"       
                 item-text="text"
                 item-value="id"
                 label="JENJANG STUDI"
                 outlined/>            
             <v-select
                 v-model="tahun_ajaran"
-                :items="daftar_ta"                
+                :items="daftar_ta"       
                 label="TAHUN AJARAN"
                 outlined/>            
         </v-list-item-content>
@@ -28,11 +28,11 @@ export default {
         this.tahun_ajaran=this.$store.getters['uiadmin/getTahunAkademik'];  
     },
     data:()=>({
-        firstloading:true,
-        daftar_jenjang:[],
+        firstloading: true,
+        daftar_jenjang: [],
         kode_jenjang:null,
 
-        daftar_ta:[],
+        daftar_ta: [],
         tahun_ajaran:null
     }),
     methods:{

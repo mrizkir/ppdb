@@ -17,28 +17,28 @@ use App\Mail\VerifyEmailAddress;
 use Ramsey\Uuid\Uuid;
 
 class ReportSPSBJenjangController extends Controller {         
-    /**
-     * cetak ke excel
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function printtoexcel(Request $request)
-    {   
-        $this->hasPermissionTo('SPSB-PSB-LAPORAN-PRODI_BROWSE');
+  /**
+   * cetak ke excel
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function printtoexcel(Request $request)
+  {   
+    $this->hasPermissionTo('SPSB-PSB-LAPORAN-PRODI_BROWSE');
 
-        $this->validate($request, [           
-            'TA'=>'required',
-            'kode_jenjang'=>'required',
-            'nama_prodi'=>'required',
-        ]);
-        
-        $data_report=[
-            'TA'=>$request->input('TA'),
-            'kode_jenjang'=>$request->input('kode_jenjang'),            
-            'nama_prodi'=>$request->input('nama_prodi'),            
-        ];
+    $this->validate($request, [           
+      'TA'=>'required',
+      'kode_jenjang'=>'required',
+      'nama_prodi'=>'required',
+    ]);
+    
+    $data_report=[
+      'TA'=>$request->input('TA'),
+      'kode_jenjang'=>$request->input('kode_jenjang'),            
+      'nama_prodi'=>$request->input('nama_prodi'),            
+    ];
 
-        $report= new \App\Models\Report\ReportSPSBModel ($data_report);          
-        return $report->prodi();
-    }
+    $report= new \App\Models\Report\ReportSPSBModel ($data_report);          
+    return $report->prodi();
+  }
 }

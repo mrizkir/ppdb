@@ -25,7 +25,7 @@
                 <v-btn
                     icon
                     :href="this.$api.url+'/'+this.item.path"
-                    target="_blank"                    
+                    target="_blank"           
                     v-if="verified == 1">
                     <v-icon>
                         mdi-download
@@ -35,7 +35,7 @@
                     color="orange"
                     text
                     @click="upload(index,item)"
-                    :loading="btnLoading"                                
+                    :loading="btnLoading"                       
                     :disabled="btnLoading||btnSimpan"
                     v-if="verified == 0">                                   
                     Simpan
@@ -44,7 +44,7 @@
                     color="orange"
                     text
                     @click="hapusfilepersysaratan(item)"
-                    :loading="btnLoading"                                
+                    :loading="btnLoading"                       
                     :disabled="btnLoading||btnHapus"
                     v-if="verified == 0">                   
                     Hapus
@@ -53,7 +53,7 @@
                     color="orange"
                     text
                     @click="verifikasipersyaratan(item)"
-                    :loading="btnLoading"                                
+                    :loading="btnLoading"                       
                     :disabled="btnLoading||btnVerifikasi" 
                     v-if="dashboard != 'siswabaru' && dashboard != 'mahasiswa' && verified == 0">                
                     Verifikasi
@@ -97,18 +97,18 @@ export default {
     data: () => ({     
         dashboard:null,
 
-        btnSimpan:true,  
-        btnHapus:true,  
-        btnVerifikasi:true,    
+        btnSimpan: true,  
+        btnHapus: true,  
+        btnVerifikasi: true,    
         btnLoading: false,
         image_prev:null,
 
         //form
         verified:0,
-        form_valid:true,
-        filepersyaratan:[],
+        form_valid: true,
+        filepersyaratan: [],
         //form rules  
-        rule_foto:[
+        rule_foto: [
             value => !!value||"Mohon pilih foto !!!",  
             value =>  !value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
         ],
@@ -131,7 +131,7 @@ export default {
                 this.btnSimpan=false;
             }          
         },
-        upload:async function (index,item)
+        upload: async function (index,item)
         {
             let data = item;   
             if (this.$refs.frmpersyaratan.validate())
@@ -151,7 +151,7 @@ export default {
                                 'Content-Type': 'multipart/form-data'                      
                             }
                         }
-                    ).then(()=>{                                                   
+                    ).then(()=>{                   
                         this.btnHapus=false;
                         this.btnSimpan=true;
                         this.btnLoading = false;                        
@@ -168,7 +168,7 @@ export default {
                 {
                     this.$ajax.post('/spsb/psbpersyaratan/hapusfilepersyaratan/'+item.persyaratan_psb_id,
                         {
-                            _method:'DELETE'
+                            _method: 'DELETE'
                         }, 
                         {
                             headers:{
@@ -213,13 +213,13 @@ export default {
                     Authorization: this.$store.getters["auth/Token"]
                 }
             }
-            ).then(({data})=>{   
-                this.badgeColor=data.persyaratan.verified;              
-                this.badgeIcon=data.persyaratan.verified;              
+            ).then(({ data })=>{   
+                this.badgeColor = data.persyaratan.verified;              
+                this.badgeIcon = data.persyaratan.verified;              
                 this.btnHapus=true;          
                 this.btnVerifikasi=true;     
                 this.btnLoading = false;                        
-            }).catch(() => {                                                   
+            }).catch(() => {                   
                 this.btnLoading = false;
             });                             
         }
@@ -246,7 +246,7 @@ export default {
         badgeColor:{
             get()
             {
-                return this.verified == 1 ? 'success':'error'
+                return this.verified == 1 ? 'success': 'error'
             },
             set(val)
             {
@@ -257,7 +257,7 @@ export default {
         badgeIcon:{
             get()
             {
-                return this.verified == 1 ? 'mdi-check-bold':'mdi-close-thick';
+                return this.verified == 1 ? 'mdi-check-bold': 'mdi-close-thick';
             },
             set(val)
             {

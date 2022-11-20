@@ -3,7 +3,7 @@
         <v-list-item-content>            
             <v-select
                 v-model="tahun_ajaran"
-                :items="daftar_ta"                
+                :items="daftar_ta"       
                 label="TAHUN AJARAN"
                 outlined/>            
             <v-select
@@ -28,12 +28,12 @@ export default {
         this.semester_akademik=this.$store.getters['uiadmin/getSemesterAkademik'];  
     },
     data:()=>({
-        firstloading:true,
+        firstloading: true,
         
-        daftar_ta:[],
+        daftar_ta: [],
         tahun_ajaran:null,
 
-        daftar_semester:[],
+        daftar_semester: [],
         semester_akademik:null
     }),
     methods:{

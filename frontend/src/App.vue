@@ -94,7 +94,7 @@ export default {
 						{
 							error_messages.push({
 								field:p,
-								error:[{
+								error: [{
 									'message':data[p]
 								}]
 							});							
@@ -121,7 +121,7 @@ export default {
 		return {
 			snackbar_success: false,
 			snackbar_error: false,
-			snackbar_color:'error',
+			snackbar_color: 'error',
 			page_message: "",
 			page_form_error_message:{}
 		}

@@ -63,7 +63,7 @@ const getters= {
     },
     getBukaPPDB(state)
     {
-        return state.buka_ppdb == '0'?false:true;
+        return state.buka_ppdb == '0'?false: true;
     }, 
     getNamaSekolah: state => 
     {             
@@ -85,7 +85,7 @@ const actions = {
         commit('setLoaded',false);              
         if (!state.loaded)
         {            
-            await ajax.get('/system/setting/uifront').then(({data})=>{                  
+            await ajax.get('/system/setting/uifront').then(({ data })=>{                  
                 commit('setCaptchaSiteKey',data.captcha_site_key);                                         
                 commit('setTahunPendaftaran',data.tahun_pendaftaran);                                         
                 commit('setSemesterPendaftaran',data.semester_pendaftaran);                                    

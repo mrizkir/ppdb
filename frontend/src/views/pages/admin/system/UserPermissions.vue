@@ -163,8 +163,8 @@ export default {
             { text: 'AKSI', value: 'actions', sortable: false,width:100 }, 
         ],
         search: "",
-        perm_selected:[],
-        perm_revoked:[]
+        perm_selected: [],
+        perm_revoked: []
     }),
     methods: {        
         save()
@@ -219,7 +219,7 @@ export default {
     },
     computed: {
         ...mapGetters('auth', {    
-            TOKEN:'Token',       
+            TOKEN: 'Token',       
         }),
         daftar_permissions()
         {

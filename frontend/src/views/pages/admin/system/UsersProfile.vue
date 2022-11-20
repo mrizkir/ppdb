@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -40,25 +40,25 @@
                                             <v-img :src="$api.url+'/'+formdata.foto" />
                                         </v-card-text>
                                     </v-card>
-                                    <v-card flat v-if="dashboard=='mahasiswa'">
+                                    <v-card flat v-if="dashboard== 'mahasiswa'">
                                         <v-card-title>NIS / NIRM</v-card-title>  
                                         <v-card-subtitle>
                                             {{data_mhs.nis}} / {{data_mhs.nirm}}
                                         </v-card-subtitle>
                                     </v-card>
-                                    <v-card flat v-if="dashboard=='mahasiswa'">
+                                    <v-card flat v-if="dashboard== 'mahasiswa'">
                                         <v-card-title>JENJANG STUDI</v-card-title>  
                                         <v-card-subtitle>
                                             {{data_mhs.nama_jenjang}}
                                         </v-card-subtitle>
                                     </v-card>
-                                    <v-card flat v-if="dashboard=='mahasiswa'">
+                                    <v-card flat v-if="dashboard== 'mahasiswa'">
                                         <v-card-title>KELAS</v-card-title>  
                                         <v-card-subtitle>
                                             {{data_mhs.nama_kelas}}
                                         </v-card-subtitle>
                                     </v-card>
-                                    <v-card flat v-if="dashboard=='mahasiswa'">
+                                    <v-card flat v-if="dashboard== 'mahasiswa'">
                                         <v-card-title>DOSEN WALI</v-card-title>  
                                         <v-card-subtitle>
                                             {{data_mhs.dosen_wali}}
@@ -125,7 +125,7 @@
                                                         :color="userstatus"
                                                         label
                                                         outlined>
-                                                        {{formdata.active==1?'AKTIF':'TIDAK AKTIF'}}
+                                                        {{formdata.active==1?'AKTIF': 'TIDAK AKTIF'}}
                                                     </v-chip>
                                                 </v-card-subtitle>
                                             </v-card>
@@ -160,7 +160,7 @@
                 </v-col>
             </v-row>
             <v-row> 
-                <v-col xs="12" sm="6" md="6" v-if="dashboard=='mahasiswa'">
+                <v-col xs="12" sm="6" md="6" v-if="dashboard== 'mahasiswa'">
                     
                 </v-col>
                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
@@ -186,7 +186,7 @@
                                     text 
                                     @click.stop="save" 
                                     :loading="btnLoading"
-                                    :disabled="!form_valid||btnLoading">SIMPAN</v-btn>
+                                    :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-form>
@@ -206,22 +206,22 @@ export default {
         this.formdata=this.$store.getters['auth/User'];
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
-                text:'SYSTEM',
+                text: 'SYSTEM',
                 disabled: false,
-                href:'#'
+                href: '#'
             },
             {
-                text:'PROFILE USER',
-                disabled:true,
-                href:'#'
+                text: 'PROFILE USER',
+                disabled: true,
+                href: '#'
             }
         ];
-        if (this.dashboard=='mahasiswa')
+        if (this.dashboard== 'mahasiswa')
         {
             this.fetchSiswa();
         }
@@ -232,18 +232,18 @@ export default {
             dashboard:null,
 
             btnLoading: false,
-            datatable:[],
+            datatable: [],
             avatar : null,
 
             //form data        
             data_mhs:{
-                nis:'N.A',
-                nirm:'N.A',
-                nama_jenjang:'N.A',
-                nama_kelas:'N.A',
-                dosen_wali:'N.A',
+                nis: 'N.A',
+                nirm: 'N.A',
+                nama_jenjang: 'N.A',
+                nama_kelas: 'N.A',
+                dosen_wali: 'N.A',
             },    
-            form_valid:true, 
+            form_valid: true, 
             formdata: {
                 id:0,
                 username: "", 
@@ -275,11 +275,11 @@ export default {
                 updated_at: '',
             },
             //form rules  
-            rule_foto:[
+            rule_foto: [
                 value => !!value||"Mohon pilih gambar !!!",  
                 value =>  !value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
             ], 
-            rule_user_password:[
+            rule_user_password: [
                 value => !!value||"Mohon untuk di isi password User !!!",
                 value => {
                     if (value && typeof value !== 'undefined' && value.length > 0){
@@ -301,7 +301,7 @@ export default {
                 this.btnLoading=true;
                 this.$ajax.post('/system/users/updatepassword/'+this.$store.getters['auth/AttributeUser']('id'),
                     {
-                        '_method':'PUT',
+                        '_method': 'PUT',
                         password: this.formdata.password,
                     },
                     {
@@ -309,9 +309,9 @@ export default {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }
-                ).then(({data})=>{                                                                            
+                ).then(({ data })=>{                                            
                     this.$refs.frmdata.reset(); 
-                    this.formdata.foto=data.foto;       
+                    this.formdata.foto = data.foto;       
                     this.formdata=this.formdefault; 
                     this.btnLoading = false;
                 }).catch(()=>{
@@ -335,7 +335,7 @@ export default {
             }            
             
         },
-        uploadFoto:async function() 
+        uploadFoto: async function() 
         {
             if (this.$refs.frmuploadfoto.validate())
             {
@@ -351,7 +351,7 @@ export default {
                                 'Content-Type': 'multipart/form-data'                      
                             }
                         }
-                    ).then(({data})=>{                           
+                    ).then(({ data })=>{                           
                         this.btnLoading = false;
                         this.$store.dispatch('updateFoto',data.user.foto);                        
                     }).catch(()=>{
@@ -361,7 +361,7 @@ export default {
                 }   
             }
         },
-        resetFoto:async function() 
+        resetFoto: async function() 
         {
             this.btnLoading=true;
             await this.$ajax.post('/setting/users/resetfoto/'+this.$store.getters.User.id,{}, 
@@ -370,7 +370,7 @@ export default {
                         Authorization: this.$store.getters["auth/Token"],   
                     }
                 }
-            ).then(({data})=>{                           
+            ).then(({ data })=>{                           
                 this.btnLoading = false;
                 this.$store.dispatch('updateFoto',data.user.foto);
             }).catch(()=>{
@@ -385,8 +385,8 @@ export default {
                         Authorization: this.$store.getters["auth/Token"],   
                     }
                 }
-            ).then(({data})=>{                           
-                this.data_mhs=data.mahasiswa;            
+            ).then(({ data })=>{                           
+                this.data_mhs = data.mahasiswa;            
             })
         }
         
@@ -413,7 +413,7 @@ export default {
         },
         userstatus()
         {
-            return this.formdata.active == 1 ?'green':'red';
+            return this.formdata.active == 1 ?'green': 'red';
         }
     },
     components:{

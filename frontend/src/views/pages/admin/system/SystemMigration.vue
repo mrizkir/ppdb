@@ -20,7 +20,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -47,16 +47,16 @@
                                 <v-text-field 
                                     v-model="formdata.nis"
                                     label="NIS"   
-                                    :rules="rule_nis"                                                               
+                                    :rules="rule_nis"                                                      
                                     outlined /> 
                                 <v-text-field 
                                     v-model="formdata.nirm"
                                     label="NIRM" 
-                                    :rules="rule_nirm"                                                                    
+                                    :rules="rule_nirm"                                                           
                                     outlined /> 
                                 <v-text-field
-                                    label="NAMA LENGKAP"    
-                                    v-model="formdata.nama_mhs"    
+                                    label="NAMA LENGKAP"
+                                    v-model="formdata.nama_mhs"
                                     :rules="rule_nama_mhs"
                                     outlined/>
                                  <v-select
@@ -93,7 +93,7 @@
                             <v-card-text>
                                 <v-data-table 
                                     :loading="datatableLoading"
-                                    loading-text="Loading... Please wait"                                                                                      
+                                    loading-text="Loading... Please wait"                                                                             
                                     :disable-pagination="true"
                                     :hide-default-footer="true"
                                     :headers="headers"
@@ -102,7 +102,7 @@
                                     dense> 
                                     <template v-slot:item.k_status="{ item }">                                                                    
                                         <v-select       
-                                            v-model="formdata.status_mhs[daftar_tasmt.indexOf(item)]"                                                                                
+                                            v-model="formdata.status_mhs[daftar_tasmt.indexOf(item)]"                                                                       
                                             :items="daftar_status_mhs"
                                             item-text="text"
                                             item-value="id" />
@@ -121,7 +121,7 @@
                                     text                                     
                                     @click.stop="save" 
                                     :loading="btnLoading"
-                                    :disabled="!form_valid||btnLoading">SIMPAN</v-btn>
+                                    :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-form>
@@ -140,14 +140,14 @@ export default {
 	{
 		this.breadcrumbs = [
 			{
-				text:'HOME',
+				text: 'HOME',
 				disabled: false,
-				href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+				href: '/dashboard/'+this.$store.getters['auth/AccessToken']
 			},
 			{
-				text:'MIGRASI SISTEM',
-				disabled:true,
-				href:'#'
+				text: 'MIGRASI SISTEM',
+				disabled: true,
+				href: '#'
 			}
         ];				
         this.tahun_pendaftaran = this.$store.getters['uiadmin/getTahunPendaftaran']; 
@@ -157,20 +157,20 @@ export default {
         this.initialize();
     },
     data: () => ({        
-        firstloading:true,
-        breadcrumbs:[],
+        firstloading: true,
+        breadcrumbs: [],
         tahun_pendaftaran:0,  
         
         //form
-        form_valid:true, 
+        form_valid: true, 
         btnLoading: false,
 
-        daftar_jenjang:[],
-        daftar_kelas:[],
-        daftar_dw:[],  
+        daftar_jenjang: [],
+        daftar_kelas: [],
+        daftar_dw: [],  
 
-        daftar_tasmt:[],
-        daftar_status_mhs:[],
+        daftar_tasmt: [],
+        daftar_status_mhs: [],
         formdata: {
             nis: "",
             nirm: "",
@@ -178,27 +178,27 @@ export default {
             dosen_id: "",
             kode_jenjang: "",
             idkelas: "",
-            status_mhs:[],
+            status_mhs: [],
         },
-        rule_nis:[
+        rule_nis: [
             value => !!value||"Nomor Induk Siswa (NIS) mohon untuk diisi !!!",
             value => /^[0-9]+$/.test(value) || 'Nomor Induk Siswa (NIS) hanya boleh angka',
         ], 
-        rule_nirm:[
+        rule_nirm: [
             value => !!value||"Nomor Induk Registrasi Masuk (NIRM) mohon untuk diisi !!!",
             value => /^[0-9]+$/.test(value) || 'Nomor Induk Registrasi Masuk (NIRM) hanya boleh angka',
         ], 
-        rule_nama_mhs:[
+        rule_nama_mhs: [
             value => !!value||"Nama Siswa mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Siswa hanya boleh string dan spasi',
         ], 
-        rule_jenjang:[
+        rule_jenjang: [
             value => !!value||"Program studi mohon untuk dipilih !!!"
         ], 
-        rule_kelas:[
+        rule_kelas: [
             value => !!value||"Kelas mohon untuk dipilih !!!"
         ],
-        rule_dw:[
+        rule_dw: [
             value => !!value||"Mohon dipilih Dosen Wali untuk Siswa ini !!!"
         ], 
         
@@ -214,7 +214,7 @@ export default {
         {
             this.tahun_pendaftaran=tahun;
         },
-		initialize:async function()
+		initialize: async function()
 		{	
             this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];  
             this.daftar_kelas=this.$store.getters['uiadmin/getDaftarKelas'];                      
@@ -223,7 +223,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({data})=>{                              
+            }).then(({ data })=>{                              
                 this.daftar_dw = data.users; 
             });
 
@@ -236,7 +236,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({data})=>{                              
+            }).then(({ data })=>{                              
                 this.daftar_tasmt = data.daftar_tasmt; 
                 var dt = this.daftar_tasmt;
                 var i=0;
@@ -272,7 +272,7 @@ export default {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }
-                ).then(({data})=>{    
+                ).then(({ data })=>{    
                     console.log(data);                   
                     setTimeout(() => {
                         this.$router.go();    

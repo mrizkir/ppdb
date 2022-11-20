@@ -126,7 +126,7 @@ export default {
 		btnLoading: false, 
 	}),
 	methods: {
-		initialize:async function()
+		initialize: async function()
 		{
 			
 		},

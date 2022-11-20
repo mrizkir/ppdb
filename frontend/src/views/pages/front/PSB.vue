@@ -54,8 +54,8 @@
                                 <v-text-field 
                                     v-model="formdata.password"
                                     label="PASSWORD" 
-                                    type="password"         
-                                    :rules="rule_password"                
+                                    type="password"
+                                    :rules="rule_password"       
                                     outlined 
                                     dense />                                  
                                 <v-alert color="error" class="mb-0" text v-if="formdata.captcha_response.length<=0">
@@ -138,9 +138,9 @@ export default {
     data: () => ({            
         btnLoading: false,
         //form
-        form_valid:true, 
+        form_valid: true, 
         dialogkonfirmasipendaftaran: false,  
-        daftar_jenjang:[],
+        daftar_jenjang: [],
         kode_jenjang: "",
         formdata: {
             name: "",
@@ -156,39 +156,39 @@ export default {
             nomor_hp: "",
             username: "",
             password: "",
-            captcha_response: ""       
+            captcha_response: ""   
         }, 
         formkonfirmasi:{
             email: "",
             code: ""
         },
-        rule_name:[
+        rule_name: [
             value => !!value||"Nama Calon Peserta Didik mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Calon Peserta Didik hanya boleh string dan spasi',
         ], 
-        rule_nomorhp:[
+        rule_nomorhp: [
             value => !!value||"Nomor Kontak WA mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor Kontak WA hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
         ], 
-        rule_email:[
+        rule_email: [
             value => !!value||"Email mohon untuk diisi !!!",
             v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
         ],
-        rule_jenjang:[
+        rule_jenjang: [
             value => !!value||"Program studi mohon untuk dipilih !!!"
         ], 
-        rule_username:[
+        rule_username: [
             value => !!value||"Username mohon untuk diisi dengan nama depan anak !!!"
         ], 
-        rule_password:[
+        rule_password: [
             value => !!value||"Password mohon untuk diisi !!!"
         ], 
     }),
     methods: {
-        initialize:async function()
+        initialize: async function()
         {
-            await this.$ajax.get('/datamaster/jenjangstudi').then(({data})=>{
-                this.daftar_jenjang=data.jenjang_studi;
+            await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
+                this.daftar_jenjang = data.jenjang_studi;
             });                                
         }, 
         save: async function()
@@ -204,16 +204,16 @@ export default {
                     kode_jenjang: this.kode_jenjang,
                     password: this.formdata.password,
                     captcha_response: this.formdata.captcha_response,
-                }).then(({data})=>{
-                    this.formkonfirmasi.email=data.email;
-                    this.formkonfirmasi.code=data.code;
+                }).then(({ data })=>{
+                    this.formkonfirmasi.email = data.email;
+                    this.formkonfirmasi.code = data.code;
                     this.btnLoading = false;    
                     this.dialogkonfirmasipendaftaran=true;  
                     
                     this.form_valid=true;                                                                                        
                     this.$refs.frmpendaftaran.reset(); 
                     this.formdata = Object.assign({}, this.formdefault)
-                }).catch(() => {                                   
+                }).catch(() => {   
                     this.btnLoading = false;
                 });     
             }

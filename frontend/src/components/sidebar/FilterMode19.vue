@@ -3,12 +3,12 @@
         <v-list-item-content>                     
             <v-select
                 v-model="tahun_pendaftaran"
-                :items="daftar_ta"                
+                :items="daftar_ta"            
                 label="TAHUN PENDAFTARAN"
                 outlined/>   
             <v-select
                 v-model="semester_pendaftaran"
-                :items="daftar_semester"                
+                :items="daftar_semester"            
                 item-text="text"
                 item-value="id"
                 label="SEMESTER PENDAFTARAN"
@@ -28,12 +28,12 @@ export default {
         this.semester_pendaftaran=this.$store.getters['uiadmin/getSemesterPendaftaran'];                                            
     },
     data:()=>({
-        firstloading:true,
+        firstloading: true,
         
-        daftar_semester:[],
+        daftar_semester: [],
         semester_pendaftaran:null,
 
-        daftar_ta:[],
+        daftar_ta: [],
         tahun_pendaftaran:null
     }),
     methods:{

@@ -20,7 +20,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -136,22 +136,22 @@ export default {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
-                text:'SPSB',
+                text: 'SPSB',
                 disabled: false,
-                href:'/spsb'
+                href: '/spsb'
             },
             {
-                text:'NILAI UJIAN',
-                disabled:true,
-                href:'#'
+                text: 'NILAI UJIAN',
+                disabled: true,
+                href: '#'
             }
         ];
-        this.breadcrumbs[1].disabled=(this.dashboard=='siswabaru'||this.dashboard=='mahasiswa');
+        this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
         
         let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
         this.kode_jenjang=kode_jenjang;
@@ -160,28 +160,28 @@ export default {
         this.initialize()   
     },  
     data: () => ({
-        firstloading:true,
+        firstloading: true,
         kode_jenjang:null,
         tahun_pendaftaran:null,
         nama_jenjang:null,
 
         dialogprofilmhsbaru: false,
 
-        breadcrumbs:[],
+        breadcrumbs: [],
         dashboard:null,
 
         btnLoading: false,
         datatableLoading: false,
-        expanded:[],
-        datatable:[],
+        expanded: [],
+        datatable: [],
         headers: [                        
             { text: '', value: 'foto', width:70 },    
-            { text: 'NO.FORMULIR', value: 'no_formulir',width:120,sortable:true },
-            { text: 'NAMA SISWA', value: 'name',width:350,sortable:true },
+            { text: 'NO.FORMULIR', value: 'no_formulir',width:120,sortable: true },
+            { text: 'NAMA SISWA', value: 'name',width:350,sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp',width:100},
-            { text: 'KELAS', value: 'nkelas',width:100,sortable:true },
-            { text: 'NILAI', value: 'nilai',width:100,sortable:true },
-            { text: 'STATUS', value: 'status',width:100,sortable:true },
+            { text: 'KELAS', value: 'nkelas',width:100,sortable: true },
+            { text: 'NILAI', value: 'nilai',width:100,sortable: true },
+            { text: 'STATUS', value: 'status',width:100,sortable: true },
             { text: 'AKSI', value: 'actions', sortable: false,width:50 },
         ],
         search: "",  
@@ -190,10 +190,10 @@ export default {
 
         //form data 
         filter_status:1,  
-        form_valid:true,
+        form_valid: true,
 
         data_mhs:{},
-        daftar_jenjang:[],
+        daftar_jenjang: [],
         
     }),
     methods : {
@@ -205,7 +205,7 @@ export default {
         {
             this.kode_jenjang=id;
         },
-		initialize:async function()
+		initialize: async function()
 		{	
             switch(this.dashboard)
             {
@@ -224,7 +224,7 @@ export default {
                         headers: {
                             Authorization: this.$store.getters["auth/Token"]
                         }
-                    }).then(({data})=>{               
+                    }).then(({ data })=>{               
                         this.datatable = data.psb;                
                         this.datatableLoading=false;
                     });         
@@ -246,18 +246,18 @@ export default {
         },
         badgeColor(item)
         {
-            return item.active == 1 ? 'success':'error'
+            return item.active == 1 ? 'success': 'error'
         },
         badgeIcon(item)
         {
-            return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
+            return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
         },  
         viewItem(item)
         {
             this.datamhsbaru = item;
             this.dialogprofilmhsbaru = true;
         },
-        printtoexcel:async function()
+        printtoexcel: async function()
         {
             this.btnLoading=true;
             await this.$ajax.post('/spsb/reportspsbkelulusan/printtoexcel',
@@ -271,9 +271,9 @@ export default {
                     headers:{
                         Authorization: this.$store.getters["auth/Token"]
                     },
-                    responseType:'arraybuffer'
+                    responseType: 'arraybuffer'
                 }
-            ).then(({data})=>{              
+            ).then(({ data })=>{              
                 const url = window.URL.createObjectURL(new Blob([data]));
                 const link = document.createElement('a');
                 link.href = url;

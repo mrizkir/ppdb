@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"                    
+                    border="left"           
                     colored-border
                     type="info"
                     >
@@ -48,7 +48,7 @@
                                     text 
                                     @click.stop="save" 
                                     :loading="btnLoading"
-                                    :disabled="!form_valid||btnLoading">SIMPAN</v-btn>
+                                    :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-form>
@@ -67,28 +67,28 @@ export default {
     {
         this.breadcrumbs = [
             {
-                text:'HOME',
+                text: 'HOME',
                 disabled: false,
-                href:'/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/'+this.ACCESS_TOKEN
             },
             {
-                text:'KONFIGURASI SISTEM',
+                text: 'KONFIGURASI SISTEM',
                 disabled: false,
-                href:'/system-setting'
+                href: '/system-setting'
             },  
             {
-                text:'SERVER - EMAIL',
-                disabled:true,
-                href:'#'
+                text: 'SERVER - EMAIL',
+                disabled: true,
+                href: '#'
             }
         ];
         this.initialize();
     },
     data: () => ({
-        breadcrumbs:[],
+        breadcrumbs: [],
         btnLoading: false,
         //form
-        form_valid:true,
+        form_valid: true,
         formdata: {
             email_mhs_isvalid:null, 
         },
@@ -96,7 +96,7 @@ export default {
         
     }),
     methods: {
-        initialize:async function() 
+        initialize: async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/setting/variables',
@@ -104,7 +104,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data})=>{                  
+            }).then(({ data })=>{                  
                 let setting = data.setting;             
                 this.formdata.email_mhs_isvalid=parseInt(setting.EMAIL_SISWA_ISVALID);                
             });          
@@ -116,8 +116,8 @@ export default {
                 this.btnLoading=true;
                 this.$ajax.post('/system/setting/variables',
                     {
-                        '_method':'PUT', 
-                        'pid':'email',
+                        '_method': 'PUT', 
+                        'pid': 'email',
                         setting:JSON.stringify({
                             910: this.formdata.email_mhs_isvalid, 
                         }),                                                                                                 
@@ -137,8 +137,8 @@ export default {
     },
     computed:{ 
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',  
-            TOKEN:'Token',       
+            ACCESS_TOKEN: 'AccessToken',  
+            TOKEN: 'Token',       
         }),
     },
     components:{
