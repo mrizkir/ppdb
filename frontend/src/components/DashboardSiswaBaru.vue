@@ -97,7 +97,7 @@
 						<v-card-title class="title">KUESIONER</v-card-title>
 						<v-card-text class="white text--primary">
 							<p>
-								Isilah kuesioner berikut (WAJIB) melalui Google Form.
+								Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>TK/SD/SMP</strong>
 							</p>                                                        
 							<v-btn
 								color="purple darken-1"
@@ -108,9 +108,21 @@
 							>
 								Isi Kuesioner
 							</v-btn>
+							<p>
+								Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>SMA</strong>
+							</p>                                                        
+							<v-btn
+								color="purple darken-1"
+								class="mx-0"
+								outlined
+								href="https://forms.gle/bzMH6xvWM1pMeNSGA"
+								target="_blank"
+							>
+								Isi Kuesioner
+							</v-btn>
 						</v-card-text>                    
 					</v-card>     
-				</v-timeline-item>
+				</v-timeline-item>				
 			</v-timeline>
 		</v-col>        
 	</v-row>
