@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-    name:'FilterMode7',
+    name: 'FilterMode7',
     created()
     {
         this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];  

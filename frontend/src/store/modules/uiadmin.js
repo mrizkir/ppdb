@@ -2,7 +2,7 @@
 const getDefaultState = () => 
 {
     return {      
-        loaded:false, 
+        loaded: false, 
         //page
         default_dashboard:null,
         pages:[],
@@ -87,7 +87,7 @@ const mutations = {
     setKodeJenjang(state,id)
     {
         state.kode_jenjang=id;
-    },    
+    }, 
 
     setTheme(state,theme)
     {
@@ -108,7 +108,7 @@ const getters= {
     {
         let page = state.pages.find(halaman => halaman.name==name);            
         return page[key];
-    },   
+    },
     
     getDefaultDashboard: state => 
     {   
@@ -192,7 +192,7 @@ const actions = {
         {   
             commit('setSemesterPendaftaran',rootGetters['uifront/getSemesterPendaftaran']);   
             let token=rootGetters['auth/Token'];                                                     
-            await ajax.get('/system/setting/uiadmin',               
+            await ajax.get('/system/setting/uiadmin',    
                 {
                     headers:{
                         Authorization:token
@@ -222,7 +222,7 @@ const actions = {
         {
             commit('setNewPage',page);
         }
-    },    
+    }, 
     updatePage ({commit,state},page)
     {
         var i;
@@ -275,7 +275,7 @@ const actions = {
 }
 export default {
     namespaced: true,
-    state,        
+    state,
     mutations,
     getters,
     actions

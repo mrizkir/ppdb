@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-    name:'FilterMode6',
+    name: 'FilterMode6',
     created()
     {
         this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];  
@@ -50,7 +50,7 @@ export default {
                 this.$store.dispatch('uiadmin/updateTahunAkademik',val);  
                 this.$emit('changeTahunAkademik',val);          
             }            
-        },        
+        },
         semester_akademik(val)
         {
             if (!this.firstloading)

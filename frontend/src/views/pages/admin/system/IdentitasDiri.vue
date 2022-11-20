@@ -80,17 +80,17 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.ACCESS_TOKEN
             },
             {
                 text:'KONFIGURASI SISTEM',
-                disabled:false,
+                disabled: false,
                 href:'/system-setting'
             },  
             {
                 text:'SEKOLAH',
-                disabled:false,
+                disabled: false,
                 href:'#'
             },
             {
@@ -103,36 +103,36 @@ export default {
     },
     data: () => ({
         breadcrumbs:[],
-        datatableLoading:false,
-        btnLoading:false,   
+        datatableLoading: false,
+        btnLoading: false,
         //form
-        form_valid:true,   
+        form_valid:true,
         formdata: {
-            nama_sekolah:'',
-            nama_alias_pt:'',
-            bentuk_sekolah:'',
+            nama_sekolah: "",
+            nama_alias_pt: "",
+            bentuk_sekolah: "",
             kode_sekolah:0,
         },
         //form rules        
         rule_nama_sekolah:[
-            value => !!value||"Mohon untuk di isi Nama Sekolah !!!",             
+            value => !!value||"Mohon untuk di isi Nama Sekolah !!!",  
         ], 
         rule_nama_singkatan_pt:[
-            value => !!value||"Mohon untuk di isi Nama Alias Sekolah !!!",             
+            value => !!value||"Mohon untuk di isi Nama Alias Sekolah !!!",  
         ],
         rule_kode_sekolah:[
-            value => !!value||"Mohon untuk di isi Kode Sekolah !!!",                     
+            value => !!value||"Mohon untuk di isi Kode Sekolah !!!",  
             value => /^[0-9]+$/.test(value) || 'Kode Sekolah hanya boleh angka',
         ]
     }),
     methods: {
-        initialize:async function () 
+        initialize:async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/setting/variables',
             {
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{  
                 let setting = data.setting;                           
@@ -146,39 +146,39 @@ export default {
         save () {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;                
+                this.btnLoading = true;
                 this.$ajax.post('/system/setting/variables',
                     {
                         '_method':'PUT', 
                         'pid':'Identitas Sekolah',
                         setting:JSON.stringify({
-                            101:this.formdata.nama_sekolah,
-                            102:this.formdata.nama_alias_pt,                            
-                            104:this.formdata.kode_sekolah,
-                        }),                                                                                                                            
+                            101: this.formdata.nama_sekolah,
+                            102: this.formdata.nama_alias_pt, 
+                            104: this.formdata.kode_sekolah,
+                        }),                                                                                                 
                     },
                     {
                         headers:{
-                            Authorization:this.TOKEN
+                            Authorization: this.TOKEN
                         }
                     }
                 ).then(()=>{                       
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 }).catch(()=>{
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });        
             }
         }
     },
     computed:{ 
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',          
-            TOKEN:'Token',                                  
+            ACCESS_TOKEN:'AccessToken',  
+            TOKEN:'Token',       
         }),
     },
     components:{
 		SystemConfigLayout,
-        ModuleHeader,        
+        ModuleHeader,
 	}
 }
 </script>

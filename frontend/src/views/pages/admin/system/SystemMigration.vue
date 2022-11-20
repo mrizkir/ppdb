@@ -141,7 +141,7 @@ export default {
 		this.breadcrumbs = [
 			{
 				text:'HOME',
-				disabled:false,
+				disabled: false,
 				href:'/dashboard/'+this.$store.getters['auth/AccessToken']
 			},
 			{
@@ -158,26 +158,26 @@ export default {
     },
     data: () => ({        
         firstloading:true,
-        breadcrumbs:[],        
+        breadcrumbs:[],
         tahun_pendaftaran:0,  
         
         //form
         form_valid:true, 
-        btnLoading:false,
+        btnLoading: false,
 
         daftar_jenjang:[],
-        daftar_kelas:[],                
-        daftar_dw:[],     
+        daftar_kelas:[],
+        daftar_dw:[],  
 
         daftar_tasmt:[],
-        daftar_status_mhs:[],        
+        daftar_status_mhs:[],
         formdata: {
-            nis:'',
-            nirm:'',
-            nama_mhs:'',            
-            dosen_id:'',           
-            kode_jenjang:'',
-            idkelas:'',
+            nis: "",
+            nirm: "",
+            nama_mhs: "", 
+            dosen_id: "",
+            kode_jenjang: "",
+            idkelas: "",
             status_mhs:[],
         },
         rule_nis:[
@@ -191,7 +191,7 @@ export default {
         rule_nama_mhs:[
             value => !!value||"Nama Siswa mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Siswa hanya boleh string dan spasi',
-        ],         
+        ], 
         rule_jenjang:[
             value => !!value||"Program studi mohon untuk dipilih !!!"
         ], 
@@ -200,13 +200,13 @@ export default {
         ],
         rule_dw:[
             value => !!value||"Mohon dipilih Dosen Wali untuk Siswa ini !!!"
-        ],         
+        ], 
         
-        datatableLoading:false,
+        datatableLoading: false,
         headers: [                                                
-            { text: 'TAHUN AJARAN', value: 'ta',sortable:false },
-            { text: 'SEMESTER', value: 'semester',sortable:false },
-            { text: 'STATUS', value: 'k_status',sortable:false, width:250 },                 
+            { text: 'TAHUN AJARAN', value: 'ta',sortable: false },
+            { text: 'SEMESTER', value: 'semester',sortable: false },
+            { text: 'STATUS', value: 'k_status',sortable: false, width:250 }, 
         ],
     }),
     methods : {
@@ -221,7 +221,7 @@ export default {
 
             await this.$ajax.get('/akademik/dosenwali',{
                 headers: {
-                    Authorization:this.$store.getters['auth/Token']
+                    Authorization: this.$store.getters["auth/Token"]
                 }
             }).then(({data})=>{                              
                 this.daftar_dw = data.users; 
@@ -230,11 +230,11 @@ export default {
             this.datatableLoading=true;
             await this.$ajax.post('/system/migration',
             {
-                TA:this.tahun_pendaftaran
+                TA: this.tahun_pendaftaran
             },
             {
                 headers: {
-                    Authorization:this.$store.getters['auth/Token']
+                    Authorization: this.$store.getters["auth/Token"]
                 }
             }).then(({data})=>{                              
                 this.daftar_tasmt = data.daftar_tasmt; 
@@ -258,29 +258,29 @@ export default {
                 
                 this.$ajax.post('/system/migration/store',
                     {
-                        nis:this.formdata.nis,
-                        nirm:this.formdata.nirm,
-                        nama_mhs:this.formdata.nama_mhs,
-                        dosen_id:this.formdata.dosen_id,
-                        kode_jenjang:this.formdata.kode_jenjang,     
-                        idkelas:this.formdata.idkelas,       
-                        tahun_pendaftaran:this.tahun_pendaftaran,                 
-                        status_mhs:JSON.stringify(Object.assign({},this.formdata.status_mhs)),                                                                                                          
+                        nis: this.formdata.nis,
+                        nirm: this.formdata.nirm,
+                        nama_mhs: this.formdata.nama_mhs,
+                        dosen_id: this.formdata.dosen_id,
+                        kode_jenjang: this.formdata.kode_jenjang,  
+                        idkelas: this.formdata.idkelas,    
+                        tahun_pendaftaran: this.tahun_pendaftaran, 
+                        status_mhs:JSON.stringify(Object.assign({},this.formdata.status_mhs)),                                                                               
                     },
                     {
                         headers:{
-                            Authorization:this.$store.getters['auth/Token']
+                            Authorization: this.$store.getters["auth/Token"]
                         }
                     }
                 ).then(({data})=>{    
                     console.log(data);                   
                     setTimeout(() => {
                         this.$router.go();    
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                         }, 300
                     );                                  
                 }).catch(()=>{
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });                                   
                  
             }
@@ -297,8 +297,8 @@ export default {
     },
     components:{
         SystemMigrationLayout,
-        ModuleHeader,           
-        Filter9,        
+        ModuleHeader,
+        Filter9,
     },
 }
 </script>

@@ -120,7 +120,7 @@
 <script>
 import {mapGetters} from 'vuex';
 export default {
-    name:'SystemMigrationLayout',    
+    name: 'SystemMigrationLayout', 
     props:{
         showrightsidebar:{
             type:Boolean,
@@ -137,7 +137,7 @@ export default {
         drawerRight:null, 
         
         dashboard:null,
-    }),       
+    }),    
     methods: {        
         logout ()
         {
@@ -164,17 +164,17 @@ export default {
         },
         isBentukPT (bentuk_sekolah)
         {
-            return this.$store.getters['uifront/getBentukPT']==bentuk_sekolah?true:false;
+            return this.$store.getters['uifront/getBentukPT']==bentuk_sekolah?true: false;
         }
 	},
     computed:{
         ...mapGetters('auth',{
             AUTHENTICATED:'Authenticated',  
-            ACCESS_TOKEN:'AccessToken',          
-            TOKEN:'Token',          
+            ACCESS_TOKEN:'AccessToken',  
+            TOKEN:'Token',  
             ROLE:'Role',
-            CAN_ACCESS:'can',         
-            ATTRIBUTE_USER:'AttributeUser',               
+            CAN_ACCESS:'can', 
+            ATTRIBUTE_USER:'AttributeUser',    
         }),
         APP_NAME ()
         {
@@ -193,7 +193,7 @@ export default {
 				photo = this.$api.url+'/'+img;	
 			}
 			return photo;
-        },     
+        },  
     },
     watch: {
         loginTime:{
@@ -213,7 +213,7 @@ export default {
                 }
             },
             immediate:true
-        },        
+        },
     }
 }
 </script>

@@ -78,27 +78,27 @@
 </template>
 <script>
 export default {
-    name:'DashboardKeuanganSiswa',
+    name: 'DashboardKeuanganSiswa',
     created()
     {
         this.initialize();
     },
     data: () => ({
-        datatableLoading:false,
+        datatableLoading: false,
 
         //daftar komponen biaya
-        kombi_ganjil_unpaid:[],       
-        kombi_genap_unpaid:[],       
+        kombi_ganjil_unpaid:[],    
+        kombi_genap_unpaid:[],    
 
-        kombi_ganjil_paid:[],       
-        kombi_genap_paid:[],       
+        kombi_ganjil_paid:[],    
+        kombi_genap_paid:[],    
 
-        kombi_ganjil_cancelled:[],       
-        kombi_genap_cancelled:[],       
+        kombi_ganjil_cancelled:[],    
+        kombi_genap_cancelled:[],    
 
         headers: [                        
-            { text: 'NAMA KOMPONEN', value: 'nama_kombi', sortable:false},               
-            { text: 'JUMLAH', align:'end',value: 'jumlah',width:250, sortable:false},                
+            { text: 'NAMA KOMPONEN', value: 'nama_kombi', sortable: false},    
+            { text: 'JUMLAH', align:'end',value: 'jumlah',width:250, sortable: false},
         ], 
         //statistik
         total_transaction:0,
@@ -109,7 +109,7 @@ export default {
     props:{
         ta:{
             type:Number,
-            required:true
+            required: true
         }
     },
     methods:{
@@ -118,11 +118,11 @@ export default {
             this.datatableLoading=true;            
             await this.$ajax.post('/dashboard/keuangan',
             {
-                TA:this.ta,                
+                TA: this.ta,
             },
             {
                 headers: {
-                    Authorization:this.$store.getters['auth/Token']
+                    Authorization: this.$store.getters["auth/Token"]
                 }
             }).then(({data})=>{                 
                 this.total_transaction=data.total_transaction;
@@ -167,7 +167,7 @@ export default {
             }
             return total;
         }
-    },    
+    }, 
     watch:{
         ta ()
         {

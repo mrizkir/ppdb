@@ -64,7 +64,7 @@
 </template>
 <script>
 export default {
-    name:'FileUploadPersyaratan',
+    name: 'FileUploadPersyaratan',
     created ()
     {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];   
@@ -83,24 +83,24 @@ export default {
     props:{
         user_id:{
             type:String,
-            required:true
+            required: true
         },
         index:{
             type:Number,
-            required:true
+            required: true
         },
         item:{
             type:Object,
-            required:true
+            required: true
         }
     },
-    data:()=>({     
+    data: () => ({     
         dashboard:null,
 
         btnSimpan:true,  
         btnHapus:true,  
-        btnVerifikasi:true,       
-        btnLoading:false,
+        btnVerifikasi:true,    
+        btnLoading: false,
         image_prev:null,
 
         //form
@@ -144,19 +144,19 @@ export default {
                     formdata.append('persyaratan_id',data.persyaratan_id);
                     formdata.append('persyaratan_psb_id',data.persyaratan_psb_id);
                     formdata.append('foto',this.filepersyaratan[index]);
-                    await this.$ajax.post('/spsb/psbpersyaratan/upload/'+this.user_id,formdata,                    
+                    await this.$ajax.post('/spsb/psbpersyaratan/upload/'+this.user_id,formdata, 
                         {
                             headers:{
-                                Authorization:this.$store.getters['auth/Token'],
+                                Authorization: this.$store.getters["auth/Token"],
                                 'Content-Type': 'multipart/form-data'                      
                             }
                         }
                     ).then(()=>{                                                   
                         this.btnHapus=false;
                         this.btnSimpan=true;
-                        this.btnLoading=false;                        
+                        this.btnLoading = false;                        
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });                    
                 }               
             }            
@@ -169,18 +169,18 @@ export default {
                     this.$ajax.post('/spsb/psbpersyaratan/hapusfilepersyaratan/'+item.persyaratan_psb_id,
                         {
                             _method:'DELETE'
-                        },                    
+                        }, 
                         {
                             headers:{
-                                Authorization:this.$store.getters['auth/Token']                
+                                Authorization: this.$store.getters["auth/Token"]                
                             }
                         }
                     ).then(()=>{                   
                         this.btnHapus=true;
                         this.photoPersyaratan=require('@/assets/no-image.png');        
-                        this.btnLoading=false;                        
+                        this.btnLoading = false;                        
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });  
                 }
             });
@@ -203,14 +203,14 @@ export default {
         },
         verifikasipersyaratan: async function (item)
         {
-            this.btnLoading=true;                    
+            this.btnLoading = true;    
             await this.$ajax.post('/spsb/psbpersyaratan/verifikasipersyaratan/'+item.persyaratan_psb_id,
             {                    
                 
             },
             {
                 headers:{
-                    Authorization:this.$store.getters['auth/Token']
+                    Authorization: this.$store.getters["auth/Token"]
                 }
             }
             ).then(({data})=>{   
@@ -218,9 +218,9 @@ export default {
                 this.badgeIcon=data.persyaratan.verified;              
                 this.btnHapus=true;          
                 this.btnVerifikasi=true;     
-                this.btnLoading=false;                        
+                this.btnLoading = false;                        
             }).catch(() => {                                                   
-                this.btnLoading=false;
+                this.btnLoading = false;
             });                             
         }
     },

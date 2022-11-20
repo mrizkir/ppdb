@@ -6,9 +6,9 @@
 <script>
 import DataMasterLayout from '@/views/layouts/DataMasterLayout';
 export default {
-    name:'DMaster',
+    name: 'DMaster',
     components:{
-        DataMasterLayout,      
+        DataMasterLayout,   
     },
 }
 </script>

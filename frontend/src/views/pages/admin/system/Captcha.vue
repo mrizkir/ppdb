@@ -74,12 +74,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.ACCESS_TOKEN
             },
             {
                 text:'KONFIGURASI SISTEM',
-                disabled:false,
+                disabled: false,
                 href:'/system-setting'
             },  
             {
@@ -92,13 +92,13 @@ export default {
     },
     data: () => ({
         breadcrumbs:[],
-        datatableLoading:false,
-        btnLoading:false,
+        datatableLoading: false,
+        btnLoading: false,
         //form
         form_valid:true,
         formdata: {
-            siteKey:'',
-            privateKey:''
+            siteKey: "",
+            privateKey: ""
         },
         //form rules
         rule_site_key:[
@@ -109,13 +109,13 @@ export default {
         ],
     }),
     methods: {
-        initialize:async function ()
+        initialize:async function()
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/setting/variables',
             {
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 let setting = data.setting;
@@ -133,19 +133,19 @@ export default {
                         '_method':'PUT',
                         'pid':'captcha google',
                         setting:JSON.stringify({
-                            901:this.formdata.siteKey,
-                            902:this.formdata.privateKey,
+                            901: this.formdata.siteKey,
+                            902: this.formdata.privateKey,
                         }),
                     },
                     {
                         headers:{
-                            Authorization:this.TOKEN
+                            Authorization: this.TOKEN
                         }
                     }
                 ).then(()=>{
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 }).catch(()=>{
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });
             }
         }

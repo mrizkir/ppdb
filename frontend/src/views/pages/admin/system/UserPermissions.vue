@@ -155,14 +155,14 @@ import {mapGetters} from 'vuex';
 export default {
     name: 'UserPermissions',
     data: () => ({
-        btnLoading:false,
+        btnLoading: false,
         //tables
         headers: [                        
             { text: 'NAMA PERMISSION', value: 'name' },
-            { text: 'GUARD', value: 'guard_name' },   
-            { text: 'AKSI', value: 'actions', sortable: false,width:100 },         
+            { text: 'GUARD', value: 'guard_name' },
+            { text: 'AKSI', value: 'actions', sortable: false,width:100 }, 
         ],
-        search:'',        
+        search: "",
         perm_selected:[],
         perm_revoked:[]
     }),
@@ -172,18 +172,18 @@ export default {
             this.btnLoading=true;
             this.$ajax.post('/system/users/storeuserpermissions',
                 {
-                    user_id:this.user.id,
-                    chkpermission:this.permissions_selected
+                    user_id: this.user.id,
+                    chkpermission: this.permissions_selected
                 },
                 {
                     headers:{
-                        Authorization:this.TOKEN
+                        Authorization: this.TOKEN
                     }
                 }
             ).then(()=>{   
                 this.close();                
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });
         },
         revoke(item)
@@ -191,23 +191,23 @@ export default {
             this.btnLoading=true;         
             this.$ajax.post('/system/users/revokeuserpermissions',
                 {
-                    user_id:this.user.id,
+                    user_id: this.user.id,
                     name:item.name
                 },
                 {
                     headers:{
-                        Authorization:this.TOKEN
+                        Authorization: this.TOKEN
                     }
                 }
             ).then(()=>{   
                 this.close();                
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });
         },
         close()
         {            
-            this.btnLoading=false;
+            this.btnLoading = false;
             this.permissions_selected=[];     
             this.$emit('closeUserPermissions');
         }
@@ -218,8 +218,8 @@ export default {
         permissionsselected:Array,
     },
     computed: {
-        ...mapGetters('auth',{                        
-            TOKEN:'Token',                                  
+        ...mapGetters('auth', {    
+            TOKEN:'Token',       
         }),
         daftar_permissions()
         {

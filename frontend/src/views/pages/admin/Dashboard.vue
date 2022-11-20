@@ -84,7 +84,7 @@ export default {
 		this.breadcrumbs = [
 			{
 				text:'HOME',
-				disabled:false,
+				disabled: false,
 				href:'/dashboard/'+this.TOKEN
 			},
 			{
@@ -100,12 +100,12 @@ export default {
         TOKEN:null,
         dashboard:null,
 
-        tahun_pendaftaran:''
+        tahun_pendaftaran: ""
 	}),
 	methods : {
 		initialize:async function()
 		{	            
-            await this.$ajax.get('/auth/me',                
+            await this.$ajax.get('/auth/me',
             {
                 headers: {
                     Authorization:'Bearer '+this.TOKEN
@@ -122,8 +122,8 @@ export default {
         
 	},
     components:{
-		AdminLayout,        
-        DashboardMB,        
+		AdminLayout,
+        DashboardMB,
 	}
 }
 </script>

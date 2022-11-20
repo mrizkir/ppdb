@@ -2,15 +2,15 @@
 const getDefaultState = () => 
 {
     return {      
-        loaded:false,  
-        captcha_site_key:'',
+        loaded: false,  
+        captcha_site_key: "",
         tahun_pendaftaran:new Date().getFullYear(),
         semester_pendaftaran:1,
-        buka_ppdb:false,
+        buka_ppdb: false,
         identitas:{
-            nama_sekolah:'',
-            nama_sekolah_alias:''
-        },        
+            nama_sekolah: "",
+            nama_sekolah_alias: ""
+        },
     }
 }
 const state = getDefaultState();
@@ -24,23 +24,23 @@ const mutations = {
     setCaptchaSiteKey(state,key)
     {
         state.captcha_site_key = key;
-    },    
+    }, 
     setTahunPendaftaran(state,tahun)
     {
         state.tahun_pendaftaran = tahun;
-    },    
+    }, 
     setSemesterPendaftaran(state,semester)
     {
         state.semester_pendaftaran = semester;
-    },    
+    }, 
     setBukaPPDB(state,buka)
     {
         state.buka_ppdb = buka;
-    },    
+    }, 
     setIdentitas(state,identitas)
     {
         state.identitas = identitas;
-    },    
+    }, 
     resetState (state) {
         Object.assign(state, getDefaultState())
     }
@@ -68,7 +68,7 @@ const getters= {
     getNamaSekolah: state => 
     {             
         return state.identitas.nama_sekolah;
-    },    
+    }, 
     getNamaSekolahAlias: state => 
     {
         return state.identitas.nama_sekolah_alias;
@@ -102,7 +102,7 @@ const actions = {
 }
 export default {
     namespaced: true,
-    state,        
+    state,
     mutations,
     getters,
     actions

@@ -151,12 +151,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
                 text:'SPSB',
-                disabled:false,
+                disabled: false,
                 href:'/spsb'
             },
             {
@@ -181,25 +181,25 @@ export default {
         
         breadcrumbs:[],
         dashboard:null,
-        datatableLoading:false,
-        btnLoading:false,           
+        datatableLoading: false,
+        btnLoading: false,
                   
         //tables
         headers: [                        
-            { text: '', value: 'foto', width:70 },            
+            { text: '', value: 'foto', width:70 }, 
             { text: 'NAMA PESERTA DIDIK', value: 'name',width:350,sortable:true },
             { text: 'NOMOR HP', value: 'nomor_hp',sortable:true },
-            { text: 'FOTO SELFIE', value: 'file_fotoselfi',sortable:false},                            
-            { text: 'KTP', value: 'file_ktp_ayah',sortable:false},     
-            { text: 'KK', value: 'file_kk',sortable:true},     
-            { text: 'AKTA LAHIR', value: 'file_aktalahir',sortable:true},                 
+            { text: 'FOTO SELFIE', value: 'file_fotoselfi',sortable: false}, 
+            { text: 'KTP', value: 'file_ktp_ayah',sortable: false},  
+            { text: 'KK', value: 'file_kk',sortable:true},  
+            { text: 'AKTA LAHIR', value: 'file_aktalahir',sortable:true}, 
             { text: 'BIODATA', value: 'biodata', sortable: false,width:100 },
         ],
         expanded:[],
-        search:'',
+        search: "",
         datatable:[],
 
-        dialogprintpdf:false,
+        dialogprintpdf: false,
         file_pdf:null
         
     }),
@@ -212,17 +212,17 @@ export default {
         {
             this.kode_jenjang=id;
         },
-        initialize:async function () 
+        initialize:async function() 
         {
             this.datatableLoading=true;            
             await this.$ajax.post('/spsb/psbpersyaratan',
             {
-                TA:this.tahun_pendaftaran,
-                kode_jenjang:this.kode_jenjang,
+                TA: this.tahun_pendaftaran,
+                kode_jenjang: this.kode_jenjang,
             },
             {
                 headers: {
-                    Authorization:this.$store.getters['auth/Token']
+                    Authorization: this.$store.getters["auth/Token"]
                 }
             }).then(({data})=>{               
                 this.datatable = data.psb;                
@@ -238,7 +238,7 @@ export default {
         badgeIcon(item)
         {
             return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
-        },      
+        },   
         dataTableRowClicked(item)
         {
             if ( item === this.expanded[0])
@@ -249,17 +249,17 @@ export default {
             {
                 this.expanded=[item];
             }               
-        },       
+        },    
         async printBiodata(item)
         {
             this.datatableLoading=true;            
             await this.$ajax.post('/report/calonpesertadidik/printpdf',
             {
-                user_id:item.id,                
+                user_id:item.id,
             },
             {
                 headers: {
-                    Authorization:this.$store.getters['auth/Token']
+                    Authorization: this.$store.getters["auth/Token"]
                 }
             }).then(({data})=>{               
                 this.file_pdf=data.pdf_file;
@@ -275,7 +275,7 @@ export default {
                 this.dialogprintpdf = false;      
                 }, 300
             );
-        },   
+        },
     },
     watch:{
         tahun_pendaftaran()
@@ -284,7 +284,7 @@ export default {
             {
                 this.initialize();
             }            
-        },        
+        },
         kode_jenjang(val)
         {
             if (!this.firstloading)
@@ -292,17 +292,17 @@ export default {
                 this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](val);
                 this.initialize();
             }            
-        },        
+        },
     },
     computed: {        
         formTitle () {
             return this.editedIndex === -1 ? 'TAMBAH DATA' : 'UBAH DATA'
-        },        
+        },
     },
     
     components:{
         SPSBLayout,
-        ModuleHeader,    
+        ModuleHeader, 
         Filter7    
     },
 }

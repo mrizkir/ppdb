@@ -127,12 +127,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
                 text:'SPSB',
-                disabled:false,
+                disabled: false,
                 href:'/spsb'
             },
             {
@@ -150,27 +150,27 @@ export default {
         this.initialize()   
     },  
     data: () => ({
-        user_id:null,        
+        user_id:null,
         firstloading:true,
         kode_jenjang:null,
         tahun_pendaftaran:null,
         nama_jenjang:null,
 
-        breadcrumbs:[],        
+        breadcrumbs:[],
         dashboard:null,
 
-        btnLoading:false,
-        datatableLoading:false,
+        btnLoading: false,
+        datatableLoading: false,
         expanded:[],
         datatable:[],
         headers: [                        
-            { text: '', value: 'foto', width:70 },               
+            { text: '', value: 'foto', width:70 },    
             { text: 'NAMA SISWA', value: 'name',width:350,sortable:true },
-            { text: 'NAMA IBU', value: 'nama_ibu'},            
-            { text: 'NOMOR HP', value: 'nomor_hp',width:100},            
+            { text: 'NAMA IBU', value: 'nama_ibu'}, 
+            { text: 'NOMOR HP', value: 'nomor_hp',width:100}, 
             { text: 'AKSI', value: 'actions', sortable: false,width:50 },
         ],
-        search:'',  
+        search: "",  
         
         datapesertadidik:null
     }),
@@ -194,12 +194,12 @@ export default {
                     this.datatableLoading=true;            
                     await this.$ajax.post('/spsb/biodataibu',
                     {
-                        TA:this.tahun_pendaftaran,
-                        kode_jenjang:this.kode_jenjang,
+                        TA: this.tahun_pendaftaran,
+                        kode_jenjang: this.kode_jenjang,
                     },
                     {
                         headers: {
-                            Authorization:this.$store.getters['auth/Token']
+                            Authorization: this.$store.getters["auth/Token"]
                         }
                     }).then(({data})=>{               
                         this.datatable = data.psb;                
@@ -228,12 +228,12 @@ export default {
         badgeIcon(item)
         {
             return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
-        },             
+        },  
         editItem(item)
         {
             this.user_id=item.id;
             this.datapesertadidik = item;  
-        },           
+        },
     },
     watch:{
         tahun_pendaftaran()
@@ -254,8 +254,8 @@ export default {
     },
     components:{
         SPSBLayout,
-        ModuleHeader,        
-        FormBiodataIbu,        
+        ModuleHeader,
+        FormBiodataIbu,
         Filter7    
     },
 }

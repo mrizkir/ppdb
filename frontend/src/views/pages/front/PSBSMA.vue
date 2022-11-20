@@ -5,17 +5,17 @@
         <v-col cols="12">
           <h1 class="text-center display-1 font-weight-black primary--text">
             PRA-PENDAFTARAN CALON PESERTA DIDIK
-          </h1>    
+          </h1>   
           <h3 class="text-center display-1 font-weight-black primary--text">
-            JENJANG PENDIDIKAN DASAR
-          </h3>
+            JENJANG PENDIDIKAN MENENGAH ATAS
+          </h3> 
           <h4 class="text-center title font-weight-black primary--text">
             TAHUN PELAJARAN {{tahunPendaftaran|formatTA}}
           </h4>
         </v-col>
       </v-row>
     </v-container>
-    <v-container class="fill-height" fluid v-if="bukaPPDB && registerSD">            
+    <v-container class="fill-height" fluid v-if="bukaPPDB && registerSMA">            
       <v-row align="center" justify="center" no-gutters>
         <v-col xs="12" md="7" sm="12">
           <v-form ref="frmpendaftaran" v-model="form_valid" lazy-validation>
@@ -38,7 +38,7 @@
                   label="SURAT ELEKTRONIK" 
                   :rules="rule_email"
                   outlined 
-                  dense /> 
+                  dense />
                 <v-text-field 
                   v-model="formdata.username"
                   label="USERNAME" 
@@ -124,23 +124,23 @@ import { mapGetters } from 'vuex';
 import VueRecaptcha from 'vue-recaptcha';
 import FrontLayout from '@/views/layouts/FrontLayout';
 export default {
-  name: 'PSBSD',
+  name: 'PSBSMA',
   created()
   {
     this.initialize();
-    this.registerSD = true;
+    this.registerSMA = true;
   },
-  data: () => ({            
+  data: () => ({     
+    registerSMA: null,
     btnLoading: false, 
-    registerSD:null,    
     //form
-    form_valid:true, 
-    dialogkonfirmasipendaftaran: false,  
+    form_valid:true,
+    dialogkonfirmasipendaftaran: false,
     daftar_jenjang:[],
-    kode_jenjang: "",
+    kode_jenjang: "",  
     formdata: {
       name: "",
-      email: "", 
+      email: "",  
       nomor_hp: "",
       username: "",
       password: "",
@@ -148,7 +148,7 @@ export default {
     },  
     formdefault: {
       name: "",
-      email: "", 
+      email: "",  
       nomor_hp: "",
       username: "",
       password: "",
@@ -169,7 +169,7 @@ export default {
     rule_email:[
       value => !!value||"Email mohon untuk diisi !!!",
       v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
-    ],
+    ], 
     rule_jenjang:[
       value => !!value||"Program studi mohon untuk dipilih !!!"
     ], 
@@ -186,7 +186,7 @@ export default {
       await this.$ajax.get('/datamaster/jenjangstudi').then(({data})=>{
         this.daftar_jenjang=data.jenjang_studi;
       });                                
-    }, 
+    },  
     save: async function()
     {
       if (this.$refs.frmpendaftaran.validate())
@@ -194,10 +194,10 @@ export default {
         this.btnLoading = true;
         await this.$ajax.post('/spsb/psb/store', {
           name: this.formdata.name,
-          email: this.formdata.email, 
+          email: this.formdata.email,   
           nomor_hp: this.formdata.nomor_hp,
-          username: this.formdata.username,           
-          kode_jenjang:2,
+          username: this.formdata.username,
+          kode_jenjang: 4,
           password: this.formdata.password,
           captcha_response: this.formdata.captcha_response,
         }).then(({data})=>{
@@ -214,17 +214,17 @@ export default {
         });     
       }
       this.resetRecaptcha();                        
-    },
+    }, 
     onVerify: function (response) {
       this.formdata.captcha_response=response;            
     },
     onExpired: function() {
-      this.formdata.captcha_response='';
+      this.formdata.captcha_response = '';
     },
     resetRecaptcha()
     {
       this.$refs.recaptcha.reset();  
-      this.formdata.captcha_response='';
+      this.formdata.captcha_response = '';
     },
     closedialogfrm () {
       this.dialogkonfirmasipendaftaran = false;            
@@ -232,8 +232,7 @@ export default {
         this.frmpendaftaran = Object.assign({}, this.formdefault);                                
         this.$refs.frmpendaftaran.reset(); 
         this.$router.push('/konfirmasipembayaran');
-        }, 300
-      );
+      }, 300);
     },
   },
   computed :{
@@ -241,7 +240,7 @@ export default {
       sitekey: 'getCaptchaKey',
       tahunPendaftaran: 'getTahunPendaftaran',
       bukaPPDB: 'getBukaPPDB',
-    }),
+    }), 
   }, 
   components: {
     FrontLayout,

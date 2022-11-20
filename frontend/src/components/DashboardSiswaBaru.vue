@@ -123,13 +123,13 @@ export default {
 		this.initialize();                  
 	},
 	data:()=>({
-		btnLoading:false, 
+		btnLoading: false, 
 	}),
 	methods: {
-		initialize:async function ()
+		initialize:async function()
 		{
 			
-		},        
+		},
 	}
 }
 </script>

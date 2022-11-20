@@ -163,12 +163,12 @@ import FrontLayout from '@/views/layouts/FrontLayout';
 export default {
     name: 'KonfirmasiPembayaran',
     data: () => ({     
-        btnLoading:false,
+        btnLoading: false,
         //form
         form_valid:true,
         data_pd:null,
 
-        menuTanggalBayar:false,
+        menuTanggalBayar: false,
         image_prev:null,
         daftar_channel:[
             {
@@ -189,15 +189,15 @@ export default {
             },
         ],
         formdata: {
-            id:'',   
-            username:'',   
-            id_channel:2,    
+            id: "",
+            username: "",
+            id_channel:2, 
             total_bayar:0,
-            nomor_rekening_pengirim:'',
-            nama_rekening_pengirim:'',
-            nama_bank_pengirim:'',
-            desc:'',
-            tanggal_bayar:'',
+            nomor_rekening_pengirim: "",
+            nama_rekening_pengirim: "",
+            nama_bank_pengirim: "",
+            desc: "",
+            tanggal_bayar: "",
             bukti_bayar:[],
         },
         rule_username:[
@@ -209,7 +209,7 @@ export default {
         ], 
         rule_nama_pengirim:[
             value => !!value||"Mohon diisi nama pengirim !!!"
-        ],        
+        ],
         rule_nomor_rekening:[
             value => !!value||"Mohon diisi nomor rekening pengirim !!!",
             value => /^[0-9]+$/.test(value) || 'Nomor Rekening hanya boleh angka',
@@ -225,25 +225,25 @@ export default {
             value =>  !value || value.size < 2000000 || 'File Bukti Bayar harus kurang dari 2MB.'                
         ],
         rule_total_bayar:[
-            value => !!value||"Dana yang  ditransfer mohon untuk untuk di isi !!!",   
-            value => /^[0-9]+$/.test(value) || 'Dana yang  ditransfer hanya boleh angka',          
-        ],         
+            value => !!value||"Dana yang  ditransfer mohon untuk untuk di isi !!!",
+            value => /^[0-9]+$/.test(value) || 'Dana yang  ditransfer hanya boleh angka',  
+        ], 
     }),
     methods:{
         async checkUsername ()
         {
             if (this.$refs.frmkonfirmasi.validate())
             {
-                this.btnLoading=true;                
-                await this.$ajax.post('/spsb/psb/konfirmasi',{                    
-                    username:this.formdata.username,                    
+                this.btnLoading = true;
+                await this.$ajax.post('/spsb/psb/konfirmasi', {
+                    username: this.formdata.username, 
                 }).then(({data})=>{  
                     this.data_pd=data.user;
                     this.formdata.id=data.user.id;
                     this.formdata.username=data.user.username;
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 }).catch(() => {                                        
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });                                
             }
         },
@@ -278,17 +278,17 @@ export default {
                 data.append('tanggal_bayar',this.formdata.tanggal_bayar);
                 data.append('bukti_bayar',this.formdata.bukti_bayar);
 
-                this.$ajax.post('/spsb/psb/konfirmasipembayaran',data,                    
+                this.$ajax.post('/spsb/psb/konfirmasipembayaran',data, 
                     {
                         headers:{                            
                             'Content-Type': 'multipart/form-data'
                         }
                     }
                 ).then(()=>{               
-                    this.btnLoading=false;                              
+                    this.btnLoading = false;                              
                     this.$router.go();
                 }).catch(()=>{
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });
             
             }
@@ -312,13 +312,13 @@ export default {
                 this.image_prev=val;
             }
             
-        },        
+        },
         ...mapGetters('uifront',{            
             bukaPPDB: 'getBukaPPDB',
-        }),              
+        }),   
     },
     components: {
-        FrontLayout,        
-    },    
+        FrontLayout,
+    }, 
 }
 </script>

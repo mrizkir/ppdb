@@ -189,27 +189,27 @@
 </template>
 <script>
 export default {
-    name:'FormBiodataIbu',
+    name: 'FormBiodataIbu',
     created()
     {
         this.initialize();
     },
     props:{             
         user_id:{            
-            type:String,            
-            required:true
+            type:String, 
+            required: true
         }
     },
     data:()=>({
-        btnLoading:false,
-        btnLoadingProv:false,
-        btnLoadingKab:false,
-        btnLoadingKec:false,
+        btnLoading: false,
+        btnLoadingProv: false,
+        btnLoadingKab: false,
+        btnLoadingKec: false,
         
         //form
         form_valid:true,
 
-        menuTanggalLahir:false,
+        menuTanggalLahir: false,
         
         daftar_agama:[],
 
@@ -221,11 +221,11 @@ export default {
             {
                 value:'IBU_SAMBUNG',
                 text:'IBU SAMBUNG'
-            },            
+            }, 
             {
                 value:'IBU_WALI',
                 text:'IBU WALI'
-            },       
+            },    
         ],
 
         daftar_negara:[],
@@ -243,68 +243,68 @@ export default {
         desa_id:0,
 
         formdata:{
-            nama_ibu:'',           
-            hubungan:'',                        
-            tempat_lahir:'',
-            tanggal_lahir:'',
+            nama_ibu: "",
+            hubungan: "",
+            tempat_lahir: "",
+            tanggal_lahir: "",
             idagama:1,
             
-            alamat_tempat_tinggal:'',            
-            kewarganegaraan:'',
-            nomor_hp:'',
-            email:'',
-            pendidikan:'',
-            pekerjaan_instansi:'',
-            penghasilan_bulanan:'',
+            alamat_tempat_tinggal: "", 
+            kewarganegaraan: "",
+            nomor_hp: "",
+            email: "",
+            pendidikan: "",
+            pekerjaan_instansi: "",
+            penghasilan_bulanan: "",
             
-            desc:'',
-        },          
+            desc: "",
+        },  
         rule_hubungan:[
             value => !!value||"Mohon hubungan dengan Peserta Didik untuk dipilih !!!"
         ], 
         rule_nama_ibu:[
             value => !!value||"Nama Peserta Didik mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Peserta Didik hanya boleh string dan spasi',
-        ],                 
+        ], 
         rule_tempat_lahir:[
             value => !!value||"Tempat Lahir mohon untuk diisi !!!"
         ], 
         rule_tanggal_lahir:[
             value => !!value||"Tanggal Lahir mohon untuk dipilih !!!"
-        ],         
+        ], 
         rule_agama:[
             value => !!value||"Mohon agama Peserta Didik mohon untuk diisi !!!"
-        ],         
+        ], 
         rule_desa:[
             value => !!value||"Mohon Desa untuk dipilih !!!"
         ], 
         rule_alamat_rumah:[
             value => !!value||"Alamat Rumah mohon untuk diisi !!!"
-        ],         
+        ], 
         rule_negara:[
             value => !!value||"Mohon Kewarganegaraan  untuk dipilih !!!"
         ], 
         rule_nomorhp:[
             value => !!value||"Nomor HP mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
-        ],    
+        ], 
         rule_email:[
             value => !!value||"Email mohon untuk diisi !!!",
             v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
-        ],     
+        ],  
         rule_pendidikan:[
-            value => !!value||"Jenjang pendidikan mohon untuk diisi !!!",            
+            value => !!value||"Jenjang pendidikan mohon untuk diisi !!!", 
         ], 
         rule_pekerjaan_instansi:[
-            value => !!value||"Pekerjaan beserta Instansi mohon untuk di isi !!!",            
-        ],         
+            value => !!value||"Pekerjaan beserta Instansi mohon untuk di isi !!!", 
+        ], 
         rule_penghasilan:[
             value => !!value||"Penghasilan mohon untuk untuk di isi !!!",
-            value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',                      
-        ],         
+            value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',   
+        ], 
     }),
     methods: {
-        initialize:async function ()
+        initialize:async function()
         {
             this.$ajax.get('/datamaster/negara').then(({data})=>{                
                 this.daftar_negara=data.negara;                
@@ -317,10 +317,10 @@ export default {
                 this.daftar_agama=data.agama;
             });
                     
-            await this.$ajax.get('/spsb/formulirpendaftaran/biodataibu/'+this.user_id,             
+            await this.$ajax.get('/spsb/formulirpendaftaran/biodataibu/'+this.user_id,  
                 {
                     headers:{
-                        Authorization:this.$store.getters['auth/Token']
+                        Authorization: this.$store.getters["auth/Token"]
                     }
                 },
                 
@@ -360,47 +360,47 @@ export default {
                 
                 this.$refs.frmdata.resetValidation();       
             });
-        },        
-        save: async function ()
+        },
+        save: async function()
         {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;                
-                await this.$ajax.post('/spsb/formulirpendaftaran/biodataibu/'+this.user_id,{                    
-                    _method:'put',
-                    nama_ibu:this.formdata.nama_ibu,           
-                    hubungan:this.formdata.hubungan,                               
-                    tempat_lahir:this.formdata.tempat_lahir,           
-                    tanggal_lahir:this.formdata.tanggal_lahir,           
-                    idagama:this.formdata.idagama,                               
+                this.btnLoading = true;
+                await this.$ajax.post('/spsb/formulirpendaftaran/biodataibu/'+this.user_id, {
+                    _method: "put",
+                    nama_ibu: this.formdata.nama_ibu,
+                    hubungan: this.formdata.hubungan,    
+                    tempat_lahir: this.formdata.tempat_lahir,
+                    tanggal_lahir: this.formdata.tanggal_lahir,
+                    idagama: this.formdata.idagama,    
 
-                    address1_provinsi_id:this.provinsi_id.id,
-                    address1_provinsi:this.provinsi_id.nama,
-                    address1_kabupaten_id:this.kabupaten_id.id,
-                    address1_kabupaten:this.kabupaten_id.nama,
-                    address1_kecamatan_id:this.kecamatan_id.id,
-                    address1_kecamatan:this.kecamatan_id.nama,
-                    address1_desa_id:this.desa_id.id,
-                    address1_kelurahan:this.desa_id.nama,                    
-                    alamat_tempat_tinggal:this.formdata.alamat_tempat_tinggal,                        
-                    kewarganegaraan:this.formdata.kewarganegaraan,    
+                    address1_provinsi_id: this.provinsi_id.id,
+                    address1_provinsi: this.provinsi_id.nama,
+                    address1_kabupaten_id: this.kabupaten_id.id,
+                    address1_kabupaten: this.kabupaten_id.nama,
+                    address1_kecamatan_id: this.kecamatan_id.id,
+                    address1_kecamatan: this.kecamatan_id.nama,
+                    address1_desa_id: this.desa_id.id,
+                    address1_kelurahan: this.desa_id.nama, 
+                    alamat_tempat_tinggal: this.formdata.alamat_tempat_tinggal,
+                    kewarganegaraan: this.formdata.kewarganegaraan, 
 
-                    nomor_hp:this.formdata.nomor_hp,    
-                    email:this.formdata.email,           
-                    pendidikan:this.formdata.pendidikan,           
-                    pekerjaan_instansi:this.formdata.pekerjaan_instansi,           
-                    penghasilan_bulanan:this.formdata.penghasilan_bulanan,                               
+                    nomor_hp: this.formdata.nomor_hp, 
+                    email: this.formdata.email,
+                    pendidikan: this.formdata.pendidikan,
+                    pekerjaan_instansi: this.formdata.pekerjaan_instansi,
+                    penghasilan_bulanan: this.formdata.penghasilan_bulanan,    
                 },
                 {
                     headers:{
-                        Authorization:this.$store.getters['auth/Token']
+                        Authorization: this.$store.getters["auth/Token"]
                     }
                 }
                 ).then(()=>{                                   
-                    this.btnLoading=false;     
+                    this.btnLoading = false;     
                     this.$router.go();                   
                 }).catch(() => {                                   
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });                                    
                 this.form_valid=true;                                                                                        
                 this.$refs.frmdata.resetValidation();                 

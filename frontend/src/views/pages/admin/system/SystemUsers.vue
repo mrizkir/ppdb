@@ -6,9 +6,9 @@
 <script>
 import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 export default {
-    name:'SystemUsers',
+    name: 'SystemUsers',
     components:{
-        SystemUserLayout,        
+        SystemUserLayout,
     },
 }
 </script>

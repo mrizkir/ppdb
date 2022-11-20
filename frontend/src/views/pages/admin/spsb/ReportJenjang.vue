@@ -125,12 +125,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
                 text:'SPSB',
-                disabled:false,
+                disabled: false,
                 href:'/spsb'
             },
             {
@@ -151,21 +151,21 @@ export default {
         tahun_pendaftaran:null,
         nama_jenjang:null,
 
-        dialogprofilmhsbaru:false,
-        breadcrumbs:[],        
+        dialogprofilmhsbaru: false,
+        breadcrumbs:[],
         dashboard:null,
 
-        btnLoading:false,
-        datatableLoading:false,
+        btnLoading: false,
+        datatableLoading: false,
         expanded:[],
         datatable:[],
         headers: [                        
-            { text: '', value: 'foto', width:70 },               
+            { text: '', value: 'foto', width:70 },    
             { text: 'NAMA SISWA', value: 'name',width:350,sortable:true },
             { text: 'NOMOR HP', value: 'nomor_hp',width:100},
-            { text: 'KELAS', value: 'nkelas',width:100,sortable:true },            
+            { text: 'KELAS', value: 'nkelas',width:100,sortable:true }, 
         ],
-        search:'',  
+        search: "",  
         
         datamhsbaru:{}
     }),
@@ -189,12 +189,12 @@ export default {
                     this.datatableLoading=true;            
                     await this.$ajax.post('/spsb/formulirpendaftaran',
                     {
-                        TA:this.tahun_pendaftaran,
-                        kode_jenjang:this.kode_jenjang,
+                        TA: this.tahun_pendaftaran,
+                        kode_jenjang: this.kode_jenjang,
                     },
                     {
                         headers: {
-                            Authorization:this.$store.getters['auth/Token']
+                            Authorization: this.$store.getters["auth/Token"]
                         }
                     }).then(({data})=>{               
                         this.datatable = data.psb;                
@@ -223,18 +223,18 @@ export default {
         {
             return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
         },
-        printtoexcel:async function ()
+        printtoexcel:async function()
         {
             this.btnLoading=true;
             await this.$ajax.post('/spsb/reportspsbjenjang/printtoexcel',
                 {
-                    TA:this.tahun_pendaftaran,                                                                
-                    kode_jenjang:this.kode_jenjang,    
-                    nama_jenjang:this.nama_jenjang,                 
+                    TA: this.tahun_pendaftaran,                                     
+                    kode_jenjang: this.kode_jenjang, 
+                    nama_jenjang: this.nama_jenjang, 
                 },
                 {
                     headers:{
-                        Authorization:this.$store.getters['auth/Token']
+                        Authorization: this.$store.getters["auth/Token"]
                     },
                     responseType:'arraybuffer'
                 }
@@ -247,9 +247,9 @@ export default {
                 document.body.appendChild(link);
                 link.click();                     
                 document.body.removeChild(link);
-                this.btnLoading=false;
+                this.btnLoading = false;
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });     
         }     
     },
@@ -272,7 +272,7 @@ export default {
     },
     components:{
         SPSBLayout,
-        ModuleHeader,                
+        ModuleHeader,
         Filter7    
     },
 }

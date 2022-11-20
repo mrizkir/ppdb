@@ -59,12 +59,12 @@ export default {
 		}
 	},
     data: () => ({     
-        btnLoading:false,
+        btnLoading: false,
         //form
-        form_error:false,
+        form_error: false,
         formlogin: {
-            username:'',
-            password:''
+            username: "",
+            password: ""
         },
         rule_username:[
             value => !!value||"Kolom Username mohon untuk diisi !!!"
@@ -75,14 +75,14 @@ export default {
         
     }),
     methods: {
-        doLogin: async function ()
+        doLogin: async function()
         {
             if (this.$refs.frmlogin.validate())
             {
-                this.btnLoading=true;                
-                await this.$ajax.post('/auth/login',{                    
-                    username:this.formlogin.username,
-                    password:this.formlogin.password
+                this.btnLoading = true;
+                await this.$ajax.post('/auth/login', {
+                    username: this.formlogin.username,
+                    password: this.formlogin.password
                 }).then(({data})=>{  
                     this.$ajax.get('/auth/me',{
                         headers:{
@@ -96,12 +96,12 @@ export default {
                         }
                         this.$store.dispatch('auth/afterLoginSuccess',data_user);                          
                     });
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                     this.form_error=false;
                     this.$router.push('/dashboard/'+data.access_token);
                 }).catch(() => {                    
                     this.form_error=true;
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });                                
             }
         }

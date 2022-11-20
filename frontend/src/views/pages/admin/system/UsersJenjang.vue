@@ -296,12 +296,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.ACCESS_TOKEN
             },
             {
                 text:'USER SISTEM',
-                disabled:false,
+                disabled: false,
                 href:'/system-users'
             },
             {
@@ -315,8 +315,8 @@ export default {
 
     data: () => ({
         role_id:0,
-        datatableLoading:false,
-        btnLoading:false,
+        datatableLoading: false,
+        btnLoading: false,
         //tables
         headers: [
             { text: '', value: 'foto' },
@@ -327,7 +327,7 @@ export default {
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
         ],
         expanded:[],
-        search:'',
+        search: "",
         daftar_users: [],
         daftar_permissions: [],
         permissions_selected: [],
@@ -346,7 +346,7 @@ export default {
             password: '',
             name: '',
             email: '',
-            nomor_hp:'',
+            nomor_hp: "",
             kode_jenjang:[],
             role_id:['programstudi'],
             created_at: '',
@@ -406,12 +406,12 @@ export default {
         ],
     }),
     methods: {
-        initialize:async function ()
+        initialize:async function()
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/usersjenjang',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 this.daftar_users = data.users;
@@ -431,29 +431,29 @@ export default {
                 this.expanded=[item];
             }
         },
-        syncPermission:async function ()
+        syncPermission:async function()
         {
             this.btnLoading=true;
             await this.$ajax.post('/system/users/syncallpermissions',
                 {
-                    role_name:'programstudi',
+                    role_name: 'programstudi',
                 },
                 {
                     headers:{
-                        Authorization:this.$store.getters['auth/Token']
+                        Authorization: this.$store.getters["auth/Token"]
                     }
                 }
             ).then(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });
         },
-        showDialogTambahUserProgramStudi:async function ()
+        showDialogTambahUserProgramStudi:async function()
         {
             await this.$ajax.get('/system/setting/roles',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 let roles = data.roles;
@@ -470,7 +470,7 @@ export default {
                     {
                         daftar_roles.push({
                             text:element.name,
-                            disabled:false,
+                            disabled: false,
                         });
                     }
                 });
@@ -488,7 +488,7 @@ export default {
             await this.$ajax.get('/system/users/'+item.id+'/jenjang',
                 {
                     headers:{
-                        Authorization:this.TOKEN
+                        Authorization: this.TOKEN
                     }
                 }
             ).then(({data})=>{
@@ -501,7 +501,7 @@ export default {
             });
             await this.$ajax.get('/system/setting/roles',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 let roles = data.roles;
@@ -518,7 +518,7 @@ export default {
                     {
                         daftar_roles.push({
                             text:element.name,
-                            disabled:false,
+                            disabled: false,
                         });
                     }
                 });
@@ -529,11 +529,11 @@ export default {
             await this.$ajax.get('/system/users/'+item.id+'/roles',
             {
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 this.editedItem.role_id=data.roles;
-                this.btnLoading=false;
+                this.btnLoading = false;
                 this.dialogEdit = true;
             });
         },
@@ -541,31 +541,31 @@ export default {
             this.btnLoading=true;
             this.$ajax.get('/system/setting/roles/'+this.role_id+'/permission',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 this.daftar_permissions = data.permissions;
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });
 
             await this.$ajax.get('/system/users/'+item.id+'/permission',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 this.permissions_selected = data.permissions;
-                this.btnLoading=false;
+                this.btnLoading = false;
 
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });
             this.dialogUserPermission = true;
             this.editedItem=item;
 
         },
         close () {
-            this.btnLoading=false;
+            this.btnLoading = false;
             this.dialog = false;
             this.dialogEdit = false;
             setTimeout(() => {
@@ -576,7 +576,7 @@ export default {
             );
         },
         closeUserPermissions () {
-            this.btnLoading=false;
+            this.btnLoading = false;
             this.permissions_selected=[];
             this.dialogUserPermission = false;
         },
@@ -589,47 +589,47 @@ export default {
                     this.$ajax.post('/system/usersjenjang/'+this.editedItem.id,
                         {
                             '_method':'PUT',
-                            name:this.editedItem.name,
-                            email:this.editedItem.email,
-                            nomor_hp:this.editedItem.nomor_hp,
-                            username:this.editedItem.username,
-                            password:this.editedItem.password,
+                            name: this.editedItem.name,
+                            email: this.editedItem.email,
+                            nomor_hp: this.editedItem.nomor_hp,
+                            username: this.editedItem.username,
+                            password: this.editedItem.password,
                             kode_jenjang:JSON.stringify(Object.assign({},this.editedItem.kode_jenjang)),
                             role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{
                         Object.assign(this.daftar_users[this.editedIndex], data.user);
                         this.close();
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
 
                 } else {
                     this.$ajax.post('/system/usersjenjang/store',
                         {
-                            name:this.editedItem.name,
-                            email:this.editedItem.email,
-                            nomor_hp:this.editedItem.nomor_hp,
-                            username:this.editedItem.username,
-                            password:this.editedItem.password,
+                            name: this.editedItem.name,
+                            email: this.editedItem.email,
+                            nomor_hp: this.editedItem.nomor_hp,
+                            username: this.editedItem.username,
+                            password: this.editedItem.password,
                             kode_jenjang:JSON.stringify(Object.assign({},this.editedItem.kode_jenjang)),
                             role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{
                         this.daftar_users.push(data.user);
                         this.close();
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             }
@@ -645,15 +645,15 @@ export default {
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(()=>{
                         const index = this.daftar_users.indexOf(item);
                         this.daftar_users.splice(index, 1);
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             });

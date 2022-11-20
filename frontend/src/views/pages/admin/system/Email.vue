@@ -68,12 +68,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.ACCESS_TOKEN
             },
             {
                 text:'KONFIGURASI SISTEM',
-                disabled:false,
+                disabled: false,
                 href:'/system-setting'
             },  
             {
@@ -85,24 +85,24 @@ export default {
         this.initialize();
     },
     data: () => ({
-        breadcrumbs:[],        
-        btnLoading:false,   
+        breadcrumbs:[],
+        btnLoading: false,
         //form
-        form_valid:true,   
+        form_valid:true,
         formdata: {
-            email_mhs_isvalid:null,            
+            email_mhs_isvalid:null, 
         },
         //form rules        
         
     }),
     methods: {
-        initialize:async function () 
+        initialize:async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/setting/variables',
             {
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{                  
                 let setting = data.setting;             
@@ -119,31 +119,31 @@ export default {
                         '_method':'PUT', 
                         'pid':'email',
                         setting:JSON.stringify({
-                            910:this.formdata.email_mhs_isvalid,                            
-                        }),                                                                                                                            
+                            910: this.formdata.email_mhs_isvalid, 
+                        }),                                                                                                 
                     },
                     {
                         headers:{
-                            Authorization:this.TOKEN
+                            Authorization: this.TOKEN
                         }
                     }
                 ).then(()=>{                       
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 }).catch(()=>{
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });        
             }
         }
     },
     computed:{ 
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',          
-            TOKEN:'Token',                                  
+            ACCESS_TOKEN:'AccessToken',  
+            TOKEN:'Token',       
         }),
     },
     components:{
 		SystemConfigLayout,
-        ModuleHeader,        
+        ModuleHeader,
 	}
 }
 </script>

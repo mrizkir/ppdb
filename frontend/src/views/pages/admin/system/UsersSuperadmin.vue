@@ -249,12 +249,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.ACCESS_TOKEN
             },
             {
                 text:'USER SISTEM',
-                disabled:false,
+                disabled: false,
                 href:'/system-users'
             },
             {
@@ -268,57 +268,57 @@ export default {
    
     data: () => ({ 
         role_id:0,
-        datatableLoading:false,
-        btnLoading:false,      
+        datatableLoading: false,
+        btnLoading: false,   
         //tables
         headers: [                        
             { text: '', value: 'foto' },
             { text: 'USERNAME', value: 'username',sortable:true },
             { text: 'NAME', value: 'name',sortable:true },
-            { text: 'EMAIL', value: 'email',sortable:true },     
-            { text: 'NOMOR HP', value: 'nomor_hp',sortable:true },     
+            { text: 'EMAIL', value: 'email',sortable:true },  
+            { text: 'NOMOR HP', value: 'nomor_hp',sortable:true },  
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
         ],
         expanded:[],
-        search:'',
-        daftar_users: [],        
+        search: "",
+        daftar_users: [],
 
         //form
         form_valid:true,
         daftar_roles:[],
         dialog: false,
-        dialogEdit: false,        
-        editedIndex: -1,          
+        dialogEdit: false,
+        editedIndex: -1,  
         editedItem: {
             id:0,
-            username: '',           
-            password: '',           
-            name: '',           
-            email: '',           
-            nomor_hp:'',       
+            username: '',
+            password: '',
+            name: '',
+            email: '',
+            nomor_hp: "",    
             role_id:['superadmin'],
-            created_at: '',           
-            updated_at: '',   
+            created_at: '',
+            updated_at: '',
         },
         defaultItem: {
             id:0,
-            username: '',           
-            password: '',           
-            name: '',           
-            email: '',           
-            nomor_hp: '',   
-            role_id:['superadmin'],    
-            created_at: '',           
-            updated_at: '',        
+            username: '',
+            password: '',
+            name: '',
+            email: '',
+            nomor_hp: '',
+            role_id:['superadmin'], 
+            created_at: '',
+            updated_at: '',
         },
         //form rules        
         rule_user_name:[
             value => !!value||"Mohon untuk di isi nama User !!!",  
-            value => /^[A-Za-z\s]*$/.test(value) || 'Nama User hanya boleh string dan spasi',                
+            value => /^[A-Za-z\s]*$/.test(value) || 'Nama User hanya boleh string dan spasi',
         ], 
         rule_user_email:[
             value => !!value||"Mohon untuk di isi email User !!!",  
-            value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',       
+            value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',    
         ], 
         rule_user_nomorhp:[
             value => !!value||"Nomor HP mohon untuk diisi !!!",
@@ -326,7 +326,7 @@ export default {
         ], 
         rule_user_username:[
             value => !!value||"Mohon untuk di isi username User !!!",  
-            value => /^[A-Za-z_]*$/.test(value) || 'Username hanya boleh string dan underscore',                    
+            value => /^[A-Za-z_]*$/.test(value) || 'Username hanya boleh string dan underscore', 
         ], 
         rule_user_password:[
             value => !!value||"Mohon untuk di isi password User !!!",
@@ -353,12 +353,12 @@ export default {
         ],
     }),
     methods: {
-        initialize:async function () 
+        initialize:async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/users',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{               
                 this.daftar_users = data.users;
@@ -377,12 +377,12 @@ export default {
             {
                 this.expanded=[item];
             }               
-        },        
-        showDialogTambahUserSuperAdmin:async function ()
+        },
+        showDialogTambahUserSuperAdmin:async function()
         {
             await this.$ajax.get('/system/setting/roles',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{      
                 let roles = data.roles;
@@ -399,7 +399,7 @@ export default {
                     {
                         daftar_roles.push({
                             text:element.name,
-                            disabled:false,                            
+                            disabled: false, 
                         });                        
                     }                    
                 });        
@@ -415,7 +415,7 @@ export default {
 
             await this.$ajax.get('/system/setting/roles',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{      
                 let roles = data.roles;
@@ -432,7 +432,7 @@ export default {
                     {
                         daftar_roles.push({
                             text:element.name,
-                            disabled:false,                            
+                            disabled: false, 
                         });                        
                     }                    
                 });        
@@ -443,16 +443,16 @@ export default {
             await this.$ajax.get('/system/users/'+item.id+'/roles',
             {
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{  
                 this.editedItem.role_id=data.roles;                   
-                this.btnLoading=false;
+                this.btnLoading = false;
                 this.dialogEdit = true;
             });   
-        },        
+        },
         close () {            
-            this.btnLoading=false;
+            this.btnLoading = false;
             this.dialog = false;
             this.dialogEdit = false;            
             setTimeout(() => {
@@ -461,7 +461,7 @@ export default {
                 this.$refs.frmdata.reset(); 
                 }, 300
             );
-        },        
+        },
         save () {
             if (this.$refs.frmdata.validate())
             {
@@ -471,45 +471,45 @@ export default {
                     this.$ajax.post('/system/users/'+this.editedItem.id,
                         {
                             '_method':'PUT',
-                            name:this.editedItem.name,
-                            email:this.editedItem.email,
-                            nomor_hp:this.editedItem.nomor_hp,     
-                            username:this.editedItem.username,
-                            password:this.editedItem.password,
+                            name: this.editedItem.name,
+                            email: this.editedItem.email,
+                            nomor_hp: this.editedItem.nomor_hp,  
+                            username: this.editedItem.username,
+                            password: this.editedItem.password,
                             role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{   
                         Object.assign(this.daftar_users[this.editedIndex], data.user);
                         this.close();
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });                    
                     
                 } else {
                     this.$ajax.post('/system/users/store',
                         {
-                            name:this.editedItem.name,
-                            email:this.editedItem.email,
-                            nomor_hp:this.editedItem.nomor_hp,     
-                            username:this.editedItem.username,
-                            password:this.editedItem.password, 
+                            name: this.editedItem.name,
+                            email: this.editedItem.email,
+                            nomor_hp: this.editedItem.nomor_hp,  
+                            username: this.editedItem.username,
+                            password: this.editedItem.password, 
                             role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{   
                         this.daftar_users.push(data.user);
                         this.close();
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             }
@@ -525,15 +525,15 @@ export default {
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(()=>{   
                         const index = this.daftar_users.indexOf(item);
                         this.daftar_users.splice(index, 1);
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             });
@@ -544,8 +544,8 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH USER SUPER ADMIN' : 'EDIT USER SUPER ADMIN'
         },
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',          
-            TOKEN:'Token',                                  
+            ACCESS_TOKEN:'AccessToken',  
+            TOKEN:'Token',       
         }),
     },
 
@@ -555,11 +555,11 @@ export default {
         },
         dialogEdit (val) {
             val || this.close()
-        },        
-    },    
+        },
+    }, 
     components:{
         SystemUserLayout,
-        ModuleHeader,        
+        ModuleHeader,
     },
 }
 </script>

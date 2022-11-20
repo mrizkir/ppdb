@@ -296,12 +296,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.ACCESS_TOKEN
             },
             {
                 text:'USER SISTEM',
-                disabled:false,
+                disabled: false,
                 href:'/system-users'
             },
             {
@@ -315,19 +315,19 @@ export default {
    
     data: () => ({ 
         role_id:0,
-        datatableLoading:false,
-        btnLoading:false,      
+        datatableLoading: false,
+        btnLoading: false,   
         //tables
         headers: [                        
             { text: '', value: 'foto' },
             { text: 'USERNAME', value: 'username',sortable:true },
             { text: 'NAME', value: 'name',sortable:true },
-            { text: 'EMAIL', value: 'email',sortable:true },     
-            { text: 'NOMOR HP', value: 'nomor_hp',sortable:true },     
+            { text: 'EMAIL', value: 'email',sortable:true },  
+            { text: 'NOMOR HP', value: 'nomor_hp',sortable:true },  
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
         ],
         expanded:[],
-        search:'',
+        search: "",
         daftar_users: [],
         daftar_permissions: [],
         permissions_selected: [],
@@ -342,36 +342,36 @@ export default {
         daftar_jenjang:[],
         editedItem: {
             id:0,
-            username: '',           
-            password: '',           
-            name: '',           
-            email: '',           
-            nomor_hp:'',           
-            kode_jenjang:[],    
-            role_id:['psb'],                 
-            created_at: '',           
-            updated_at: '',   
+            username: '',
+            password: '',
+            name: '',
+            email: '',
+            nomor_hp: "",
+            kode_jenjang:[], 
+            role_id:['psb'], 
+            created_at: '',
+            updated_at: '',
         },
         defaultItem: {
             id:0,
-            username: '',           
-            password: '',           
-            name: '',           
-            email: '',           
+            username: '',
+            password: '',
+            name: '',
+            email: '',
             nomor_hp: '',  
-            kode_jenjang:[],   
-            role_id:['psb'],                       
-            created_at: '',           
-            updated_at: '',        
+            kode_jenjang:[],
+            role_id:['psb'],    
+            created_at: '',
+            updated_at: '',
         },
         //form rules        
         rule_user_name:[
             value => !!value||"Mohon untuk di isi nama User !!!",  
-            value => /^[A-Za-z\s]*$/.test(value) || 'Nama User hanya boleh string dan spasi',                
+            value => /^[A-Za-z\s]*$/.test(value) || 'Nama User hanya boleh string dan spasi',
         ], 
         rule_user_email:[
             value => !!value||"Mohon untuk di isi email User !!!",  
-            value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',       
+            value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',    
         ], 
         rule_user_nomorhp:[
             value => !!value||"Nomor HP mohon untuk diisi !!!",
@@ -379,7 +379,7 @@ export default {
         ], 
         rule_user_username:[
             value => !!value||"Mohon untuk di isi username User !!!",  
-            value => /^[A-Za-z_]*$/.test(value) || 'Username hanya boleh string dan underscore',                    
+            value => /^[A-Za-z_]*$/.test(value) || 'Username hanya boleh string dan underscore', 
         ], 
         rule_user_password:[
             value => !!value||"Mohon untuk di isi password User !!!",
@@ -406,12 +406,12 @@ export default {
         ],
     }),
     methods: {
-        initialize:async function () 
+        initialize:async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/system/userspsb',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{               
                 this.daftar_users = data.users;
@@ -431,29 +431,29 @@ export default {
                 this.expanded=[item];
             }               
         },
-        syncPermission:async function ()
+        syncPermission:async function()
         {
             this.btnLoading=true;
             await this.$ajax.post('/system/users/syncallpermissions',
                 {
-                    role_name:'psb',                    
+                    role_name: 'psb', 
                 },
                 {
                     headers:{
-                        Authorization:this.$store.getters['auth/Token']
+                        Authorization: this.$store.getters["auth/Token"]
                     }
                 }
             ).then(()=>{                   
-                this.btnLoading=false;
+                this.btnLoading = false;
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });     
         },
-        showDialogTambahUserPSB:async function ()
+        showDialogTambahUserPSB:async function()
         {
             await this.$ajax.get('/system/setting/roles',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{      
                 let roles = data.roles;
@@ -470,7 +470,7 @@ export default {
                     {
                         daftar_roles.push({
                             text:element.name,
-                            disabled:false,                            
+                            disabled: false, 
                         });                        
                     }                    
                 });        
@@ -484,10 +484,10 @@ export default {
             item.password='';            
             this.editedItem = Object.assign({}, item);      
             this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];  
-            await this.$ajax.get('/system/users/'+item.id+'/jenjang',               
+            await this.$ajax.get('/system/users/'+item.id+'/jenjang',    
                 {
                     headers:{
-                        Authorization:this.TOKEN
+                        Authorization: this.TOKEN
                     }
                 }
             ).then(({data})=>{                                   
@@ -501,7 +501,7 @@ export default {
 
             await this.$ajax.get('/system/setting/roles',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{      
                 let roles = data.roles;
@@ -518,7 +518,7 @@ export default {
                     {
                         daftar_roles.push({
                             text:element.name,
-                            disabled:false,                            
+                            disabled: false, 
                         });                        
                     }                    
                 });        
@@ -529,11 +529,11 @@ export default {
             await this.$ajax.get('/system/users/'+item.id+'/roles',
             {
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{  
                 this.editedItem.role_id=data.roles;                   
-                this.btnLoading=false;
+                this.btnLoading = false;
                 this.dialogEdit = true;
             });
         },
@@ -541,31 +541,31 @@ export default {
             this.btnLoading=true;  
             this.$ajax.get('/system/setting/roles/'+this.role_id+'/permission',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 this.daftar_permissions = data.permissions;                           
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });          
         
             await this.$ajax.get('/system/users/'+item.id+'/permission',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 this.permissions_selected = data.permissions;
-                this.btnLoading=false;
+                this.btnLoading = false;
                    
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });  
             this.dialogUserPermission = true;
             this.editedItem=item;
         
         },
         close () {            
-            this.btnLoading=false;
+            this.btnLoading = false;
             this.dialog = false;
             this.dialogEdit = false;            
             setTimeout(() => {
@@ -576,7 +576,7 @@ export default {
             );
         },
         closeUserPermissions () {
-            this.btnLoading=false;
+            this.btnLoading = false;
             this.permissions_selected=[];
             this.dialogUserPermission = false;  
         },
@@ -589,47 +589,47 @@ export default {
                     this.$ajax.post('/system/userspsb/'+this.editedItem.id,
                         {
                             '_method':'PUT',
-                            name:this.editedItem.name,
-                            email:this.editedItem.email,
-                            nomor_hp:this.editedItem.nomor_hp,     
-                            username:this.editedItem.username,
-                            password:this.editedItem.password,   
+                            name: this.editedItem.name,
+                            email: this.editedItem.email,
+                            nomor_hp: this.editedItem.nomor_hp,  
+                            username: this.editedItem.username,
+                            password: this.editedItem.password,
                             kode_jenjang:JSON.stringify(Object.assign({},this.editedItem.kode_jenjang)),  
                             role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{   
                         Object.assign(this.daftar_users[this.editedIndex], data.user);
                         this.close();
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });                    
                     
                 } else {
                     this.$ajax.post('/system/userspsb/store',
                         {
-                            name:this.editedItem.name,
-                            email:this.editedItem.email,
-                            nomor_hp:this.editedItem.nomor_hp,     
-                            username:this.editedItem.username,
-                            password:this.editedItem.password,            
+                            name: this.editedItem.name,
+                            email: this.editedItem.email,
+                            nomor_hp: this.editedItem.nomor_hp,  
+                            username: this.editedItem.username,
+                            password: this.editedItem.password, 
                             kode_jenjang:JSON.stringify(Object.assign({},this.editedItem.kode_jenjang)), 
-                            role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),                          
+                            role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),  
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{   
                         this.daftar_users.push(data.user);
                         this.close();
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             }
@@ -645,15 +645,15 @@ export default {
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(()=>{   
                         const index = this.daftar_users.indexOf(item);
                         this.daftar_users.splice(index, 1);
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             });
@@ -664,8 +664,8 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH USER PSB' : 'EDIT USER PSB'
         },
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',          
-            TOKEN:'Token',                                  
+            ACCESS_TOKEN:'AccessToken',  
+            TOKEN:'Token',       
         }),
     },
 
@@ -675,8 +675,8 @@ export default {
         },
         dialogEdit (val) {
             val || this.close()
-        },        
-    },    
+        },
+    }, 
     components:{
         SystemUserLayout,
         ModuleHeader,

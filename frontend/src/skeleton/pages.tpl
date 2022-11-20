@@ -211,17 +211,17 @@
 import AdminLayout from '@/views/layouts/AdminLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
-    name:'PAGE',
+    name: 'PAGE',
     created () {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
                 text:'PAGE_GROUP',
-                disabled:false,
+                disabled: false,
                 href:'#'
             },
             {
@@ -233,34 +233,34 @@ export default {
         this.initialize()
     },  
     data: () => ({ 
-        btnLoading:false,
-        datatableLoading:false,
+        btnLoading: false,
+        datatableLoading: false,
         expanded:[],
         datatable:[],
         headers: [                        
-            { text: 'ID', value: 'id' },   
+            { text: 'ID', value: 'id' },
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
         ],
-        search:'',    
+        search: "", 
 
         //dialog
-        dialogfrm:false,
-        dialogdetailitem:false,
+        dialogfrm: false,
+        dialogdetailitem: false,
 
         //form data   
-        form_valid:true,         
+        form_valid:true, 
         formdata: {
-            id:0,                        
-            name:'',                        
-            created_at: '',           
-            updated_at: '',           
+            id:0,
+            name: "",
+            created_at: '',
+            updated_at: '',
 
         },
         formdefault: {
-            id:0,           
-            name:'',                                     
-            created_at: '',           
-            updated_at: '',       
+            id:0,
+            name: "",          
+            created_at: '',
+            updated_at: '',    
         },
         editedIndex: -1,
 
@@ -271,16 +271,16 @@ export default {
         ], 
         rule_name:[
             value => !!value||"Mohon untuk di isi name !!!",  
-            value => /^[A-Za-z\s]*$/.test(value) || 'Name hanya boleh string dan spasi',                
+            value => /^[A-Za-z\s]*$/.test(value) || 'Name hanya boleh string dan spasi',
         ], 
     }),
     methods: {
-        initialize:async function () 
+        initialize:async function() 
         {
             this.datatableLoading=true;
             await this.$ajax.get('/path',{
                 headers: {
-                    Authorization:this.$store.getters['auth/Token']
+                    Authorization: this.$store.getters["auth/Token"]
                 }
             }).then(({data})=>{               
                 this.datatable = data.object;
@@ -305,18 +305,18 @@ export default {
             this.dialogdetailitem=true;              
             // this.$ajax.get('/path/'+item.id,{
             //     headers: {
-            //         Authorization:this.$store.getters['auth/Token']
+            //         Authorization: this.$store.getters["auth/Token"]
             //     }
             // }).then(({data})=>{               
                                            
             // });                      
-        },    
+        }, 
         editItem (item) {
             this.editedIndex = this.datatable.indexOf(item);
             this.formdata = Object.assign({}, item);
             this.dialogfrm = true;
-        },    
-        save:async function () {
+        }, 
+        save:async function() {
             if (this.$refs.frmdata.validate())
             {
                 this.btnLoading=true;
@@ -325,37 +325,37 @@ export default {
                     await this.$ajax.post('/path/'+this.formdata.id,
                         {
                             '_method':'PUT',
-                            name:this.formdata.name,                       
+                            name: this.formdata.name,    
                         },
                         {
                             headers:{
-                                Authorization:this.$store.getters['auth/Token']
+                                Authorization: this.$store.getters["auth/Token"]
                             }
                         }
                     ).then(({data})=>{   
                         Object.assign(this.datatable[this.editedIndex], data.object);
                         this.closedialogfrm();
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });                 
                     
                 } else {
                     await this.$ajax.post('/path/store',
                         {
-                            name:this.formdata.name,                            
+                            name: this.formdata.name, 
                         },
                         {
                             headers:{
-                                Authorization:this.$store.getters['auth/Token']
+                                Authorization: this.$store.getters["auth/Token"]
                             }
                         }
                     ).then(({data})=>{   
                         this.datatable.push(data.object);
                         this.closedialogfrm();
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             }
@@ -371,15 +371,15 @@ export default {
                         },
                         {
                             headers:{
-                                Authorization:this.$store.getters['auth/Token']
+                                Authorization: this.$store.getters["auth/Token"]
                             }
                         }
                     ).then(()=>{   
                         const index = this.datatable.indexOf(item);
                         this.datatable.splice(index, 1);
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }                
             });
@@ -405,11 +405,11 @@ export default {
     computed: {        
         formTitle () {
             return this.editedIndex === -1 ? 'TAMBAH DATA' : 'UBAH DATA'
-        },        
+        },
     },
     components:{
         AdminLayout,
-        ModuleHeader,        
+        ModuleHeader,
     },
 
 }

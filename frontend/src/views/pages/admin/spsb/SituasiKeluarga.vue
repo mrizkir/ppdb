@@ -127,12 +127,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
                 text:'SPSB',
-                disabled:false,
+                disabled: false,
                 href:'/spsb'
             },
             {
@@ -150,27 +150,27 @@ export default {
         this.initialize()   
     },  
     data: () => ({
-        user_id:null,        
+        user_id:null,
         firstloading:true,
         kode_jenjang:null,
         tahun_pendaftaran:null,
         nama_jenjang:null,
 
-        breadcrumbs:[],        
+        breadcrumbs:[],
         dashboard:null,
 
-        btnLoading:false,
-        datatableLoading:false,
+        btnLoading: false,
+        datatableLoading: false,
         expanded:[],
         datatable:[],
         headers: [                        
-            { text: '', value: 'foto', width:70 },               
+            { text: '', value: 'foto', width:70 },    
             { text: 'NAMA SISWA', value: 'name',width:350,sortable:true },
             { text: 'TINGGAL BERSAMA', value: 'tinggal_bersama',width:100},
             { text: 'STATUS PERNIKAHAN ORTU', value: 'status_pernikahan',width:100,sortable:true },
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
         ],
-        search:'',  
+        search: "",  
         
         datapesertadidik:null
     }),
@@ -194,12 +194,12 @@ export default {
                     this.datatableLoading=true;            
                     await this.$ajax.post('/spsb/situasikeluarga',
                     {
-                        TA:this.tahun_pendaftaran,
-                        kode_jenjang:this.kode_jenjang,
+                        TA: this.tahun_pendaftaran,
+                        kode_jenjang: this.kode_jenjang,
                     },
                     {
                         headers: {
-                            Authorization:this.$store.getters['auth/Token']
+                            Authorization: this.$store.getters["auth/Token"]
                         }
                     }).then(({data})=>{               
                         this.datatable = data.psb;                
@@ -233,7 +233,7 @@ export default {
         {
             this.user_id=item.id;
             this.datapesertadidik = item;              
-        },        
+        },
     },
     watch:{
         tahun_pendaftaran()
@@ -254,8 +254,8 @@ export default {
     },
     components:{
         SPSBLayout,
-        ModuleHeader,        
-        FormSituasiKeluarga,        
+        ModuleHeader,
+        FormSituasiKeluarga,
         Filter7    
     },
 }

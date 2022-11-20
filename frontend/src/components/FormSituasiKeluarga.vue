@@ -46,19 +46,19 @@
 </template>
 <script>
 export default {
-    name:'FormSituasiKeluarga',
+    name: 'FormSituasiKeluarga',
     created()
     {
         this.initialize();
     },
     props:{              
         user_id:{            
-            type:String,            
-            required:true
+            type:String, 
+            required: true
         }
     },
     data:()=>({
-        btnLoading:false,        
+        btnLoading: false,
         //form
         form_valid:true,
         daftar_status_penikahan:[
@@ -69,32 +69,32 @@ export default {
             {
                 value:'PISAH',
                 text:'BERPISAH'
-            },            
+            }, 
             {
                 value:'CERAI',
                 text:'CERAI'
-            },       
+            },    
         ],
         formdata:{
-            tinggal_bersama:'',           
+            tinggal_bersama: "",
             status_pernikahan:'UTUH', 
-            desc:'',
+            desc: "",
         }, 
         rule_tinggal_bersama:[
             value => !!value||"Peserta Didik tinggal bersama siapa mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Tempat tinggal Peserta Didik hanya boleh string dan spasi',
-        ],                                          
+        ],               
         rule_status_pernikahan:[
             value => !!value||"Mohon Status Pernikahan untuk dipilih !!!"
         ], 
     }),
     methods: {
-        initialize:async function ()
+        initialize:async function()
         {        
-            await this.$ajax.get('/spsb/formulirpendaftaran/situasikeluarga/'+this.user_id,             
+            await this.$ajax.get('/spsb/formulirpendaftaran/situasikeluarga/'+this.user_id,  
                 {
                     headers:{
-                        Authorization:this.$store.getters['auth/Token']
+                        Authorization: this.$store.getters["auth/Token"]
                     }
                 },
                 
@@ -103,27 +103,27 @@ export default {
                 this.formdata.status_pernikahan=data.formulir.status_pernikahan;                                                           
                 this.$refs.frmdata.resetValidation();       
             });
-        },        
-        save: async function ()
+        },
+        save: async function()
         {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;                
-                await this.$ajax.post('/spsb/formulirpendaftaran/situasikeluarga/'+this.user_id,{                    
-                    _method:'put',
-                    tinggal_bersama:this.formdata.tinggal_bersama,           
-                    status_pernikahan:this.formdata.status_pernikahan, 
+                this.btnLoading = true;
+                await this.$ajax.post('/spsb/formulirpendaftaran/situasikeluarga/'+this.user_id, {
+                    _method: "put",
+                    tinggal_bersama: this.formdata.tinggal_bersama,
+                    status_pernikahan: this.formdata.status_pernikahan, 
                 },
                 {
                     headers:{
-                        Authorization:this.$store.getters['auth/Token']
+                        Authorization: this.$store.getters["auth/Token"]
                     }
                 }
                 ).then(()=>{                                   
-                    this.btnLoading=false;     
+                    this.btnLoading = false;     
                     this.$router.go();                   
                 }).catch(() => {                                   
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });                                    
                 this.form_valid=true;                                                                                        
                 this.$refs.frmdata.resetValidation();                 
@@ -140,6 +140,6 @@ export default {
                 this.$router.go();
             }
         }
-    },    
+    }, 
 }
 </script>

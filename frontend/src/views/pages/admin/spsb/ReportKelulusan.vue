@@ -137,12 +137,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
                 text:'SPSB',
-                disabled:false,
+                disabled: false,
                 href:'/spsb'
             },
             {
@@ -165,17 +165,17 @@ export default {
         tahun_pendaftaran:null,
         nama_jenjang:null,
 
-        dialogprofilmhsbaru:false,
+        dialogprofilmhsbaru: false,
 
-        breadcrumbs:[],        
+        breadcrumbs:[],
         dashboard:null,
 
-        btnLoading:false,
-        datatableLoading:false,
+        btnLoading: false,
+        datatableLoading: false,
         expanded:[],
         datatable:[],
         headers: [                        
-            { text: '', value: 'foto', width:70 },               
+            { text: '', value: 'foto', width:70 },    
             { text: 'NO.FORMULIR', value: 'no_formulir',width:120,sortable:true },
             { text: 'NAMA SISWA', value: 'name',width:350,sortable:true },
             { text: 'NOMOR HP', value: 'nomor_hp',width:100},
@@ -184,16 +184,16 @@ export default {
             { text: 'STATUS', value: 'status',width:100,sortable:true },
             { text: 'AKSI', value: 'actions', sortable: false,width:50 },
         ],
-        search:'',  
+        search: "",  
         
         datamhsbaru:{},
 
         //form data 
         filter_status:1,  
-        form_valid:true,   
+        form_valid:true,
 
-        data_mhs:{},        
-        daftar_jenjang:[],        
+        data_mhs:{},
+        daftar_jenjang:[],
         
     }),
     methods : {
@@ -216,13 +216,13 @@ export default {
                     this.datatableLoading=true;            
                     await this.$ajax.post('/spsb/reportspsbkelulusan',
                     {
-                        TA:this.tahun_pendaftaran,
-                        kode_jenjang:this.kode_jenjang,
-                        filter_status:this.filter_status
+                        TA: this.tahun_pendaftaran,
+                        kode_jenjang: this.kode_jenjang,
+                        filter_status: this.filter_status
                     },
                     {
                         headers: {
-                            Authorization:this.$store.getters['auth/Token']
+                            Authorization: this.$store.getters["auth/Token"]
                         }
                     }).then(({data})=>{               
                         this.datatable = data.psb;                
@@ -251,25 +251,25 @@ export default {
         badgeIcon(item)
         {
             return item.active == 1 ? 'mdi-check-bold':'mdi-close-thick'
-        },     
+        },  
         viewItem(item)
         {
             this.datamhsbaru = item;
             this.dialogprofilmhsbaru = true;
-        },                
-        printtoexcel:async function ()
+        },
+        printtoexcel:async function()
         {
             this.btnLoading=true;
             await this.$ajax.post('/spsb/reportspsbkelulusan/printtoexcel',
                 {
-                    TA:this.tahun_pendaftaran,                                                                
-                    kode_jenjang:this.kode_jenjang,    
-                    nama_jenjang:this.nama_jenjang,                 
-                    filter_status:this.filter_status,                 
+                    TA: this.tahun_pendaftaran,                                     
+                    kode_jenjang: this.kode_jenjang, 
+                    nama_jenjang: this.nama_jenjang, 
+                    filter_status: this.filter_status, 
                 },
                 {
                     headers:{
-                        Authorization:this.$store.getters['auth/Token']
+                        Authorization: this.$store.getters["auth/Token"]
                     },
                     responseType:'arraybuffer'
                 }
@@ -282,11 +282,11 @@ export default {
                 document.body.appendChild(link);
                 link.click();                     
                 document.body.removeChild(link);
-                this.btnLoading=false;
+                this.btnLoading = false;
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });     
-        },             
+        },  
         closeProfilSiswaBaru ()
         {
             this.dialogprofilmhsbaru = false;                     
@@ -311,7 +311,7 @@ export default {
     },
     components:{
         SPSBLayout,
-        ModuleHeader,                
+        ModuleHeader,
         ProfilSiswaBaru,
         Filter7    
     },

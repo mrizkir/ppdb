@@ -66,18 +66,18 @@
 import DataMasterLayout from '@/views/layouts/DataMasterLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
-    name:'JenjangStudi',
+    name: 'JenjangStudi',
     created()
     {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.$store.getters['auth/AccessToken']
             },
             {
                 text:'DATA MASTER',
-                disabled:false,
+                disabled: false,
                 href:'/dmaster'
             },
             {
@@ -91,23 +91,23 @@ export default {
     data: () => ({
         breadcrumbs:[],  
 
-        btnLoading:false,
-        datatableLoading:false,
+        btnLoading: false,
+        datatableLoading: false,
         expanded:[],
         datatable:[],
         headers: [                                            
-            { text: 'ID', value: 'kode_jenjang',width:10,sortable:false },
-            { text: 'NAMA JENJANG', value: 'nama_jenjang',sortable:false},                        
-        ],        
+            { text: 'ID', value: 'kode_jenjang',width:10,sortable: false },
+            { text: 'NAMA JENJANG', value: 'nama_jenjang',sortable: false},
+        ],
     }),
     methods : {
         initialize:async function()
 		{
             this.datatableLoading=true;            
-            await this.$ajax.get('/datamaster/jenjangstudi',            
+            await this.$ajax.get('/datamaster/jenjangstudi', 
             {
                 headers: {
-                    Authorization:this.$store.getters['auth/Token']
+                    Authorization: this.$store.getters["auth/Token"]
                 }
             }).then(({data})=>{               
                 this.datatable = data.jenjang_studi;                
@@ -128,7 +128,7 @@ export default {
     },
     components:{
         DataMasterLayout,
-        ModuleHeader,        
+        ModuleHeader,
     },
 }
 </script>

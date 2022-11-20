@@ -212,7 +212,7 @@
 <script>
 import {mapGetters} from 'vuex';
 export default {
-    name:'SPSBLayout',     
+    name: 'SPSBLayout',  
     created()
     {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];           
@@ -229,7 +229,7 @@ export default {
         drawerRight:null, 
         
         dashboard:null,
-    }),       
+    }),    
     methods: {        
         logout ()
         {
@@ -253,16 +253,16 @@ export default {
                 this.$store.dispatch('uiadmin/reinit');	
                 this.$router.push('/');
             });
-        },        
+        },
 	},
     computed:{
         ...mapGetters('auth',{
             AUTHENTICATED:'Authenticated',  
-            ACCESS_TOKEN:'AccessToken',          
-            TOKEN:'Token',          
+            ACCESS_TOKEN:'AccessToken',  
+            TOKEN:'Token',  
             ROLE:'Role',
-            CAN_ACCESS:'can',         
-            ATTRIBUTE_USER:'AttributeUser',               
+            CAN_ACCESS:'can', 
+            ATTRIBUTE_USER:'AttributeUser',    
         }),
         APP_NAME ()
         {
@@ -285,7 +285,7 @@ export default {
         hideleftnav ()
 		{
 			return this.dashboard == 'siswabaru';
-        },        
+        },
     },
     watch: {
         loginTime:{
@@ -305,7 +305,7 @@ export default {
                 }
             },
             immediate:true
-        },        
+        },
     }
 }
 </script>

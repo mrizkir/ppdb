@@ -71,17 +71,17 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.ACCESS_TOKEN
             },
             {
                 text:'KONFIGURASI SISTEM',
-                disabled:false,
+                disabled: false,
                 href:'/system-setting'
             },  
             {
                 text:'SEKOLAH',
-                disabled:false,
+                disabled: false,
                 href:'#'
             },
             {
@@ -94,22 +94,22 @@ export default {
     },
     data: () => ({
         breadcrumbs:[],
-        datatableLoading:false,
-        btnLoading:false,   
+        datatableLoading: false,
+        btnLoading: false,
         //form
         form_valid:true, 
         daftar_ta:[],  
         formdata: {
-            tahun_pendaftaran:'',  
-            buka_ppdb:false,          
+            tahun_pendaftaran: "",  
+            buka_ppdb: false,  
         },
         //form rules        
         rule_tahun_pendaftaran:[
-            value => !!value||"Mohon untuk di pilih tahun pendaftaran!!!",             
-        ],         
+            value => !!value||"Mohon untuk di pilih tahun pendaftaran!!!",  
+        ], 
     }),
     methods: {
-        initialize:async function () 
+        initialize:async function() 
         {
             this.$ajax.get('/datamaster/tahunajaran').then(({data})=>{                
                 this.daftar_ta=data.ta;                               
@@ -119,7 +119,7 @@ export default {
             await this.$ajax.get('/system/setting/variables',
             {
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{  
                 let setting = data.setting;                                           
@@ -132,38 +132,38 @@ export default {
         save () {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;                
+                this.btnLoading = true;
                 this.$ajax.post('/system/setting/variables',
                     {
                         '_method':'PUT', 
                         'pid':'PPDB',
                         setting:JSON.stringify({
-                            203:this.formdata.tahun_pendaftaran,                            
-                            206:this.formdata.buka_ppdb,                            
-                        }),                                                                                                                            
+                            203: this.formdata.tahun_pendaftaran, 
+                            206: this.formdata.buka_ppdb, 
+                        }),                                                                                                 
                     },
                     {
                         headers:{
-                            Authorization:this.TOKEN
+                            Authorization: this.TOKEN
                         }
                     }
                 ).then(()=>{                       
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 }).catch(()=>{
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });        
             }
         }
     },
     computed:{ 
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',          
-            TOKEN:'Token',                                  
+            ACCESS_TOKEN:'AccessToken',  
+            TOKEN:'Token',       
         }),
     },
     components:{
 		SystemConfigLayout,
-        ModuleHeader,        
+        ModuleHeader,
 	}
 }
 </script>

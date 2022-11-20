@@ -236,12 +236,12 @@ export default {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.ACCESS_TOKEN
             },
             {
                 text:'USER SISTEM',
-                disabled:false,
+                disabled: false,
                 href:'/system-users'
             },
             {
@@ -251,27 +251,27 @@ export default {
             }
         ];
         this.initialize()
-    },    
+    }, 
     data: () => ({
         breadcrumbs:[],
-        datatableLoading:false,
-        btnLoading:false,          
-        expanded:[],        
+        datatableLoading: false,
+        btnLoading: false,  
+        expanded:[],
         datatable: [],
         daftar_permissions: [],
         permissions_selected: [],
         //tables
         headers: [                        
             { text: 'NAMA ROLE', value: 'name' },
-            { text: 'GUARD', value: 'guard_name' },            
+            { text: 'GUARD', value: 'guard_name' }, 
             { text: 'AKSI', value: 'actions', sortable: false,width:130 },
         ],
         //tables
         headersdetail: [                        
             { text: 'NAMA PERMISSION', value: 'name' },
-            { text: 'GUARD', value: 'guard_name' },                          
+            { text: 'GUARD', value: 'guard_name' },  
         ],
-        search:'',
+        search: "",
         //form
         form_valid:true,
         dialog: false,
@@ -280,24 +280,24 @@ export default {
         editedIndex: -1,
         editedItem: {
             id:0,
-            name: '',           
-            guard: '',           
-            created_at: '',           
-            updated_at: '',           
+            name: '',
+            guard: '',
+            created_at: '',
+            updated_at: '',
         },
         defaultItem: {
             id:0,
-            name: '',           
-            guard: 'api',           
-            created_at: '',           
-            updated_at: '',           
+            name: '',
+            guard: 'api',
+            created_at: '',
+            updated_at: '',
         },
         //form rules        
         rule_role_name:[
             value => !!value||"Mohon untuk di isi nama Role !!!",  
-            value => /^[A-Za-z]*$/.test(value) || 'Nama Role hanya boleh string',                
+            value => /^[A-Za-z]*$/.test(value) || 'Nama Role hanya boleh string',
         ], 
-        form_error_message:''
+        form_error_message: ""
     }),
     methods: {
         initialize () 
@@ -305,7 +305,7 @@ export default {
             this.datatableLoading=true;
             this.$ajax.get('/system/setting/roles',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data,status})=>{
                 if (status==200)
@@ -334,7 +334,7 @@ export default {
 
             this.$ajax.get('/system/setting/roles/'+item.id+'/permission',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data,status})=>{
                 if (status==200)
@@ -353,7 +353,7 @@ export default {
         setPermission (item) {            
             this.$ajax.get('/system/setting/permissions',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data,status})=>{
                 if (status==200)
@@ -364,7 +364,7 @@ export default {
 
             this.$ajax.get('/system/setting/roles/'+item.id+'/permission',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data,status})=>{
                 if (status==200)
@@ -377,7 +377,7 @@ export default {
         
         },
         close () {
-            this.btnLoading=false;
+            this.btnLoading = false;
             this.dialog = false;
             this.$refs.frmdata.reset(); 
             this.form_error_message='';           
@@ -401,54 +401,54 @@ export default {
                     this.$ajax.post('/system/setting/roles/'+this.editedItem.id,
                         {
                             '_method':'PUT',
-                            name:this.editedItem.name.toLowerCase(),
+                            name: this.editedItem.name.toLowerCase(),
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{   
                         Object.assign(this.datatable[this.editedIndex], data.roles);
                         this.close();
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });                    
                     
                 } else {
                     this.$ajax.post('/system/setting/roles/store',
                         {
-                            name:this.editedItem.name.toLowerCase()
+                            name: this.editedItem.name.toLowerCase()
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{   
                         this.datatable.push(data.roles);
                         this.close();
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             }
-        },        
+        },
     },
     computed:{        
         formTitle () {
             return this.editedIndex === -1 ? 'TAMBAH ROLE' : 'EDIT ROLE'
         },
         ...mapGetters('auth',{            
-            ACCESS_TOKEN:'AccessToken',          
-            TOKEN:'Token',                                  
+            ACCESS_TOKEN:'AccessToken',  
+            TOKEN:'Token',       
         }),
     },
     watch: {
         dialog (val) {
             val || this.close()
         },
-    },   
+    },
     components:{
 		SystemUserLayout,
         ModuleHeader,

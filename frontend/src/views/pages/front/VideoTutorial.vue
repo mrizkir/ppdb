@@ -17,9 +17,9 @@
 <script>
 import FrontLayout from '@/views/layouts/FrontLayout';
 export default {
-    name: 'VideoTutorial',        
+    name: 'VideoTutorial',
     components: {
-        FrontLayout,         
-    },    
+        FrontLayout, 
+    }, 
 }
 </script>

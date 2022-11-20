@@ -136,31 +136,31 @@ export default {
         this.initialize();
     },
     data: () => ({            
-        btnLoading:false,        
+        btnLoading: false,
         //form
-        form_valid:true,                 
-        dialogkonfirmasipendaftaran:false,          
+        form_valid:true, 
+        dialogkonfirmasipendaftaran: false,  
         daftar_jenjang:[],
-        kode_jenjang:'',                   
+        kode_jenjang: "",
         formdata: {
-            name:'',
-            email:'',            
-            nomor_hp:'',
-            username:'',
-            password:'',
-            captcha_response:''
-        },     
+            name: "",
+            email: "", 
+            nomor_hp: "",
+            username: "",
+            password: "",
+            captcha_response: ""
+        },  
         formdefault: {
-            name:'',
-            email:'',            
-            nomor_hp:'',
-            username:'',
-            password:'',
-            captcha_response:''       
-        },    
+            name: "",
+            email: "", 
+            nomor_hp: "",
+            username: "",
+            password: "",
+            captcha_response: ""       
+        }, 
         formkonfirmasi:{
-            email:'',
-            code:''
+            email: "",
+            code: ""
         },
         rule_name:[
             value => !!value||"Nama Calon Peserta Didik mohon untuk diisi !!!",
@@ -173,7 +173,7 @@ export default {
         rule_email:[
             value => !!value||"Email mohon untuk diisi !!!",
             v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
-        ],        
+        ],
         rule_jenjang:[
             value => !!value||"Program studi mohon untuk dipilih !!!"
         ], 
@@ -185,44 +185,44 @@ export default {
         ], 
     }),
     methods: {
-        initialize:async function ()
+        initialize:async function()
         {
             await this.$ajax.get('/datamaster/jenjangstudi').then(({data})=>{
                 this.daftar_jenjang=data.jenjang_studi;
             });                                
-        },         
-        save: async function ()
+        }, 
+        save: async function()
         {
             if (this.$refs.frmpendaftaran.validate())
             {
-                this.btnLoading=true;                
-                await this.$ajax.post('/spsb/psb/store',{                    
-                    name:this.formdata.name,
-                    email:this.formdata.email,                    
-                    nomor_hp:this.formdata.nomor_hp,
-                    username:this.formdata.username,                                      
-                    kode_jenjang:this.kode_jenjang,
-                    password:this.formdata.password,
-                    captcha_response:this.formdata.captcha_response,
+                this.btnLoading = true;
+                await this.$ajax.post('/spsb/psb/store', {
+                    name: this.formdata.name,
+                    email: this.formdata.email, 
+                    nomor_hp: this.formdata.nomor_hp,
+                    username: this.formdata.username,           
+                    kode_jenjang: this.kode_jenjang,
+                    password: this.formdata.password,
+                    captcha_response: this.formdata.captcha_response,
                 }).then(({data})=>{
                     this.formkonfirmasi.email=data.email;
                     this.formkonfirmasi.code=data.code;
-                    this.btnLoading=false;    
+                    this.btnLoading = false;    
                     this.dialogkonfirmasipendaftaran=true;  
                     
                     this.form_valid=true;                                                                                        
                     this.$refs.frmpendaftaran.reset(); 
                     this.formdata = Object.assign({}, this.formdefault)
                 }).catch(() => {                                   
-                    this.btnLoading=false;
+                    this.btnLoading = false;
                 });     
             }
             this.resetRecaptcha();                        
-        },        
+        },
         onVerify: function (response) {
             this.formdata.captcha_response=response;            
         },
-        onExpired: function () {
+        onExpired: function() {
             this.formdata.captcha_response='';
         },
         resetRecaptcha()
@@ -245,8 +245,8 @@ export default {
             sitekey: 'getCaptchaKey',
             tahunPendaftaran: 'getTahunPendaftaran',
             bukaPPDB: 'getBukaPPDB',
-        }),        
-    },    
+        }),
+    }, 
     components: {
         FrontLayout,
         VueRecaptcha

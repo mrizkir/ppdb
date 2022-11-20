@@ -122,14 +122,14 @@ import {mapGetters} from 'vuex';
 export default {
     name: 'RolePermissions',
     data: () => ({
-        btnLoading:false,
+        btnLoading: false,
         //tables
         headers: [                        
             { text: 'NAMA PERMISSION', value: 'name' },
-            { text: 'GUARD', value: 'guard_name' },      
-            { text: 'AKSI', value: 'actions', sortable: false,width:100 },          
+            { text: 'GUARD', value: 'guard_name' },   
+            { text: 'AKSI', value: 'actions', sortable: false,width:100 },  
         ],
-        search:'',        
+        search: "",
         perm_selected:[]
     }),
     methods: {
@@ -138,19 +138,19 @@ export default {
             this.btnLoading=true;
             this.$ajax.post('/system/setting/roles/storerolepermissions',
                 {
-                    role_id:this.role.id,
-                    chkpermission:this.permissions_selected
+                    role_id: this.role.id,
+                    chkpermission: this.permissions_selected
                 },
                 {
                     headers:{
-                        Authorization:this.TOKEN
+                        Authorization: this.TOKEN
                     }
                 }
             ).then(()=>{   
-                this.btnLoading=false;
+                this.btnLoading = false;
                 this.close();                
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });
         },
         revoke(item)
@@ -158,24 +158,24 @@ export default {
             this.btnLoading=true;         
             this.$ajax.post('/system/setting/roles/revokerolepermissions',
                 {
-                    role_id:this.role.id,
+                    role_id: this.role.id,
                     name:item.name
                 },
                 {
                     headers:{
-                        Authorization:this.TOKEN
+                        Authorization: this.TOKEN
                     }
                 }
             ).then(()=>{   
-                this.btnLoading=false;
+                this.btnLoading = false;
                 this.close();                
             }).catch(()=>{
-                this.btnLoading=false;
+                this.btnLoading = false;
             });
         },
         close()
         {
-            this.btnLoading=false;
+            this.btnLoading = false;
             this.permissions_selected=[];
             this.$emit('closeRolePermissions',this.role.id);
         }
@@ -186,8 +186,8 @@ export default {
         permissionsselected:Array,
     },
     computed: {
-        ...mapGetters('auth',{                             
-            TOKEN:'Token',                                  
+        ...mapGetters('auth', {         
+            TOKEN:'Token',       
         }),
         daftar_permissions()
         {

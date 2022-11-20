@@ -181,17 +181,17 @@ import {mapGetters} from 'vuex';
 import DataMasterLayout from '@/views/layouts/DataMasterLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
-    name:'TahunAjaran',
+    name: 'TahunAjaran',
     created () {
         this.breadcrumbs = [
             {
                 text:'HOME',
-                disabled:false,
+                disabled: false,
                 href:'/dashboard/'+this.ACCESS_TOKEN
             },
             {
                 text:'DATA MASTER',
-                disabled:false,
+                disabled: false,
                 href:'#'
             },
             {
@@ -203,8 +203,8 @@ export default {
         this.initialize()
     },
     data: () => ({
-        btnLoading:false,
-        datatableLoading:false,
+        btnLoading: false,
+        datatableLoading: false,
         expanded:[],
         datatable:[],
         headers: [
@@ -212,22 +212,22 @@ export default {
             { text: 'TAHUN AJARAN', value: 'tahun_ajaran' },
             { text: 'AKSI', value: 'actions', sortable: false,width:100 },
         ],
-        search:'',
+        search: "",
 
         //dialog
-        dialogfrm:false,
-        dialogdetailitem:false,
+        dialogfrm: false,
+        dialogdetailitem: false,
 
         //form data
-        old_tahun:'',
+        old_tahun: "",
         form_valid:true,
         formdata: {
-            tahun:'',
-            tahun_ajaran:'',
+            tahun: "",
+            tahun_ajaran: "",
         },
         formdefault: {
-            tahun:'',
-            tahun_ajaran:'',
+            tahun: "",
+            tahun_ajaran: "",
         },
         editedIndex: -1,
 
@@ -242,12 +242,12 @@ export default {
         ],
     }),
     methods: {
-        initialize:async function ()
+        initialize:async function()
         {
             this.datatableLoading=true;
             await this.$ajax.get('/datamaster/tahunajaran',{
                 headers: {
-                    Authorization:this.TOKEN
+                    Authorization: this.TOKEN
                 }
             }).then(({data})=>{
                 this.datatable = data.ta;
@@ -277,7 +277,7 @@ export default {
             this.old_tahun=item.tahun;
             this.dialogfrm = true
         },
-        save:async function () {
+        save:async function() {
             if (this.$refs.frmdata.validate())
             {
                 this.btnLoading=true;
@@ -286,39 +286,39 @@ export default {
                     await this.$ajax.post('/datamaster/tahunajaran/'+this.old_tahun,
                         {
                             '_method':'PUT',
-                            tahun:this.formdata.tahun,
-                            tahun_ajaran:this.formdata.tahun_ajaran,
+                            tahun: this.formdata.tahun,
+                            tahun_ajaran: this.formdata.tahun_ajaran,
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{
                         Object.assign(this.datatable[this.editedIndex], data.ta);
                         this.closedialogfrm();
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
 
                 } else {
                     await this.$ajax.post('/datamaster/tahunajaran/store',
                         {
-                            tahun:this.formdata.tahun,
-                            tahun_ajaran:this.formdata.tahun_ajaran,
+                            tahun: this.formdata.tahun,
+                            tahun_ajaran: this.formdata.tahun_ajaran,
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(({data})=>{
                         this.datatable.push(data.ta);
                         this.closedialogfrm();
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             }
@@ -334,15 +334,15 @@ export default {
                         },
                         {
                             headers:{
-                                Authorization:this.TOKEN
+                                Authorization: this.TOKEN
                             }
                         }
                     ).then(()=>{
                         const index = this.datatable.indexOf(item);
                         this.datatable.splice(index, 1);
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     }).catch(()=>{
-                        this.btnLoading=false;
+                        this.btnLoading = false;
                     });
                 }
             });

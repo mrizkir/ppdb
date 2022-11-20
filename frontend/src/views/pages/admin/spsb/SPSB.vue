@@ -28,7 +28,7 @@ export default {
        
     },
     components:{
-        SPSBLayout,           
+        SPSBLayout,
     },
 }
 </script>
