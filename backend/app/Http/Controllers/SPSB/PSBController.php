@@ -41,31 +41,31 @@ class PSBController extends Controller {
     $kode_jenjang=$request->input('kode_jenjang');
 
     $data = User::where('default_role','siswabaru')
-          ->select(\DB::raw('
-                  users.id,
-                  users.username,
-                  users.name,
-                  users.email,
-                  users.nomor_hp,
-                  users.active,
-                  users.code,
-                  users.foto,
-                  formulir_pendaftaran_a.kode_jenjang,
-                  formulir_pendaftaran_a.ta,
-                  users.created_at,
-                  users.updated_at'
-                ))
-          ->join('formulir_pendaftaran_a','formulir_pendaftaran_a.user_id','users.id')
-          ->where('users.ta',$ta)
-          ->where('kode_jenjang',$kode_jenjang)
-          ->get();
+    ->select(\DB::raw('
+      users.id,
+      users.username,
+      users.name,
+      users.email,
+      users.nomor_hp,
+      users.active,
+      users.code,
+      users.foto,
+      formulir_pendaftaran_a.kode_jenjang,
+      formulir_pendaftaran_a.ta,
+      users.created_at,
+      users.updated_at'
+    ))
+    ->join('formulir_pendaftaran_a','formulir_pendaftaran_a.user_id','users.id')
+    ->where('users.ta',$ta)
+    ->where('kode_jenjang',$kode_jenjang)
+    ->get();
     
     return Response()->json([
-                'status'=>1,
-                'pid'=>'fetchdata',
-                'psb'=>$data,
-                'message'=>'Fetch data calon peserta didik berhasil diperoleh'
-              ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  
+      'status'=>1,
+      'pid'=>'fetchdata',
+      'psb'=>$data,
+      'message'=>'Fetch data calon peserta didik berhasil diperoleh'
+    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  
   }    
   /**
    * digunakan untuk mendapatkan calon peserta didik yang telah mengisi formulir pendaftaran
@@ -252,25 +252,25 @@ class PSBController extends Controller {
       'username'=>'required|string|unique:users',
       'password'=>'required',
       'captcha_response'=>[
-                'required',
-                function ($attribute, $value, $fail) 
-                {
-                  $client = new Client ();
-                  $response = $client->post(
-                    'https://www.google.com/recaptcha/api/siteverify',
-                    ['form_params'=>
-                      [
-                        'secret'=>ConfigurationModel::getCache('CAPTCHA_PRIVATE_KEY'),
-                        'response'=>$value
-                      ]
-                    ]);    
-                  $body = json_decode((string)$response->getBody());
-                  if (!$body->success)
-                  {
-                    $fail('Token Google Captcha, salah !!!.');
-                  }
-                }
+        'required',
+        function ($attribute, $value, $fail) 
+        {
+          $client = new Client ();
+          $response = $client->post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            ['form_params'=>
+              [
+                'secret'=>ConfigurationModel::getCache('CAPTCHA_PRIVATE_KEY'),
+                'response'=>$value
               ]
+            ]);    
+          $body = json_decode((string)$response->getBody());
+          if (!$body->success)
+          {
+            $fail('Token Google Captcha, salah !!!.');
+          }
+        }
+      ]
     ]);
     $user = \DB::transaction(function () use ($request){
       $now = \Carbon\Carbon::now()->toDateTimeString();   
@@ -278,11 +278,14 @@ class PSBController extends Controller {
       switch($kode_jenjang)
       {
         case 1:
-          $code=349000+mt_rand(1,999);
+          $code = 349000 + mt_rand(1,999);
         break;
         case 2:
         case 3:                
-          $code=349000+mt_rand(1,999);
+          $code = 349000 + mt_rand(1,999);
+        break;
+        case 4:                
+          $code = 349000 + mt_rand(1,999);
         break;
         default:
           $code=0;
@@ -344,13 +347,12 @@ class PSBController extends Controller {
     }       
 
     return Response()->json([
-                  'status'=>1,
-                  'pid'=>'store',
-                  'email'=>$user->email,                              
-                  'code'=>\App\Helpers\Helper::formatUang($code),    
-                  'message'=>'Data Peserta Didik baru berhasil disimpan.'
-                ], 200);
-
+      'status'=>1,
+      'pid'=>'store',
+      'email'=>$user->email,                              
+      'code'=>\App\Helpers\Helper::formatUang($code),    
+      'message'=>'Data Peserta Didik baru berhasil disimpan.'
+    ], 200);
   }      
   /**
    * Store a newly created resource in storage.
@@ -1451,12 +1453,12 @@ class PSBController extends Controller {
       $user->delete();
 
       \App\Models\System\ActivityLog::log($request,[
-                                'object' => $this->guard()->user(), 
-                                'object_id' => $this->guard()->user()->id, 
-                                'user_id' => $this->getUserid(), 
-                                'message' => 'Menghapus Peserta Didik Baru ('.$name.') berhasil'
-                              ]);
-    
+        'object' => $this->guard()->user(), 
+        'object_id' => $this->guard()->user()->id, 
+        'user_id' => $this->getUserid(), 
+        'message' => 'Menghapus Peserta Didik Baru ('.$name.') berhasil'
+      ]);
+
       return Response()->json([
                     'status'=>1,
                     'pid'=>'destroy',                
