@@ -441,10 +441,10 @@ class PSBController extends Controller {
     if (is_null($user))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'update',                
-                  'message'=>["User ID ($id) gagal diupdate"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'update',                
+        'message'=>["User ID ($id) gagal diupdate"]
+      ], 422);
     }
     else
     {
@@ -460,8 +460,7 @@ class PSBController extends Controller {
       ]);
       
       $user = \DB::transaction(function () use ($request,$user){
-        $user->name = strtoupper($request->input('name'));
-        $user->nisn = $request->input('nisn');
+        $user->name = strtoupper($request->input('name'));        
         $user->email = $request->input('email');
         $user->nomor_hp = $request->input('nomor_hp');
         $user->username = $request->input('username');        
