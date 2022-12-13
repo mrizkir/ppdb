@@ -138,7 +138,7 @@ export default {
                         }),
                     },
                     {
-                        headers:{
+                        headers: {
                             Authorization: this.TOKEN
                         }
                     }
@@ -150,13 +150,13 @@ export default {
             }
         }
     },
-    computed:{
+    computed: {
         ...mapGetters('auth',{
             ACCESS_TOKEN: 'AccessToken',
             TOKEN: 'Token',
         }),
     },
-    components:{
+    components: {
 		SystemConfigLayout,
         ModuleHeader,
 	}

@@ -175,7 +175,7 @@
       
       datapesertadidik:null
     }),
-    methods : {
+    methods: {
       changeTahunPendaftaran (tahun)
       {
         this.tahun_pendaftaran=tahun;
@@ -232,7 +232,7 @@
       },
       
     },
-    watch:{
+    watch: {
       tahun_pendaftaran() {
         if (!this.firstloading) {
           this.initialize();
@@ -246,7 +246,7 @@
         }            
       }
     },
-    components:{
+    components: {
       SPSBLayout,
       ModuleHeader,
       FormBiodataAnanda,

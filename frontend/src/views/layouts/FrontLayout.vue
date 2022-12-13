@@ -56,11 +56,11 @@ import { mapGetters } from 'vuex';
 
 export default {
 	name: 'FrontLayout',
-	created ()
+	created()
 	{
 		this.$store.dispatch('uifront/init',this.$ajax);
 	},
-	computed :{
+	computed : {
 		...mapGetters('uifront',{
 			namaSekolahAlias: 'getNamaSekolahAlias',
 			bukaPPDB: 'getBukaPPDB',

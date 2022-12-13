@@ -167,9 +167,9 @@ export default {
         ],
         search: "",  
         
-        datamhsbaru:{}
+        datamhsbaru: {}
     }),
-    methods : {
+    methods: {
         changeTahunPendaftaran (tahun)
         {
             this.tahun_pendaftaran=tahun;
@@ -233,7 +233,7 @@ export default {
                     nama_jenjang: this.nama_jenjang, 
                 },
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.$store.getters["auth/Token"]
                     },
                     responseType: 'arraybuffer'
@@ -253,7 +253,7 @@ export default {
             });     
         }     
     },
-    watch:{
+    watch: {
         tahun_pendaftaran()
         {
             if (!this.firstloading)
@@ -270,7 +270,7 @@ export default {
             }            
         }
     },
-    components:{
+    components: {
         SPSBLayout,
         ModuleHeader,
         Filter7    

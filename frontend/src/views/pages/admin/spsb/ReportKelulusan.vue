@@ -186,17 +186,17 @@ export default {
         ],
         search: "",  
         
-        datamhsbaru:{},
+        datamhsbaru: {},
 
         //form data 
         filter_status:1,  
         form_valid: true,
 
-        data_mhs:{},
+        data_mhs: {},
         daftar_jenjang: [],
         
     }),
-    methods : {
+    methods: {
         changeTahunPendaftaran (tahun)
         {
             this.tahun_pendaftaran=tahun;
@@ -268,7 +268,7 @@ export default {
                     filter_status: this.filter_status, 
                 },
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.$store.getters["auth/Token"]
                     },
                     responseType: 'arraybuffer'
@@ -292,7 +292,7 @@ export default {
             this.dialogprofilmhsbaru = false;                     
         }        
     },
-    watch:{
+    watch: {
         tahun_pendaftaran()
         {
             if (!this.firstloading)
@@ -309,7 +309,7 @@ export default {
             }            
         }
     },
-    components:{
+    components: {
         SPSBLayout,
         ModuleHeader,
         ProfilSiswaBaru,

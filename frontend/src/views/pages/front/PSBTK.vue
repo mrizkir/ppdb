@@ -127,7 +127,7 @@ export default {
   name: 'PSBTK',
   created() {
     this.initialize();
-    this.registerTK = true;
+    this.registerTK = false;
   },
   data: () => ({            
     btnLoading: false, 
@@ -153,7 +153,7 @@ export default {
       password: "",
       captcha_response: ""   
     }, 
-    formkonfirmasi:{
+    formkonfirmasi: {
       email: "",
       code: ""
     },
@@ -235,7 +235,7 @@ export default {
       );
     },
   },
-  computed :{
+  computed : {
     ...mapGetters('uifront',{
       sitekey: 'getCaptchaKey',
       tahunPendaftaran: 'getTahunPendaftaran',

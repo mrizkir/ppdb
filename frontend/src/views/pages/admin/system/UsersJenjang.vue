@@ -292,7 +292,7 @@ import ModuleHeader from '@/components/ModuleHeader';
 import UserPermissions from '@/views/pages/admin/system/UserPermissions';
 export default {
     name: 'UsersProgramStudi',
-    created () {
+    created() {
         this.breadcrumbs = [
             {
                 text: 'HOME',
@@ -439,7 +439,7 @@ export default {
                     role_name: 'programstudi',
                 },
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 }
@@ -487,7 +487,7 @@ export default {
 
             await this.$ajax.get('/system/users/'+item.id+'/jenjang',
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.TOKEN
                     }
                 }
@@ -598,7 +598,7 @@ export default {
                             role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -621,7 +621,7 @@ export default {
                             role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -644,7 +644,7 @@ export default {
                             '_method': 'DELETE',
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -677,7 +677,7 @@ export default {
             val || this.close()
         },
     },
-    components:{
+    components: {
         SystemUserLayout,
         ModuleHeader,
         UserPermissions

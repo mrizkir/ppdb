@@ -85,7 +85,7 @@ export default {
                     password: this.formlogin.password
                 }).then(({ data })=>{  
                     this.$ajax.get('/auth/me',{
-                        headers:{
+                        headers: {
                             'Authorization': data.token_type+' '+data.access_token,
                         }
                     })

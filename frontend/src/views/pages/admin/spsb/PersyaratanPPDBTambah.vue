@@ -228,7 +228,7 @@ export default {
     },
     data: () => ({ 
         dashboard:null,
-        peryaratanppdb:{},
+        peryaratanppdb: {},
         //formdata
         form_valid_foto_selfi: true,
         form_valid_ktp_ayah: true,
@@ -269,12 +269,12 @@ export default {
             value =>  !value || value.size < 2000000 || 'File akta lahir harus kurang dari 2MB.'                
         ],
     }),
-    methods : {
+    methods: {
         initialize: async function()
 		{	
             await this.$ajax.get('/spsb/formulirpendaftaran/persyaratanppdb/'+this.$store.getters['auth/AttributeUser']('id'),  
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 },
@@ -296,7 +296,7 @@ export default {
                     formdata.append('filefotoselfi',this.filefotoselfi);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileselfi/'+this.pesertadidik_id,formdata, 
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.$store.getters["auth/Token"],
                                 'Content-Type': 'multipart/form-data'                      
                             }
@@ -321,7 +321,7 @@ export default {
                     formdata.append('filektpayah',this.filektpayah);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpayah/'+this.pesertadidik_id,formdata, 
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.$store.getters["auth/Token"],
                                 'Content-Type': 'multipart/form-data'                      
                             }
@@ -346,7 +346,7 @@ export default {
                     formdata.append('filektpibu',this.filektpibu);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpibu/'+this.pesertadidik_id,formdata, 
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.$store.getters["auth/Token"],
                                 'Content-Type': 'multipart/form-data'                      
                             }
@@ -371,7 +371,7 @@ export default {
                     formdata.append('filekk',this.filekk);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilekk/'+this.pesertadidik_id,formdata, 
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.$store.getters["auth/Token"],
                                 'Content-Type': 'multipart/form-data'                      
                             }
@@ -396,7 +396,7 @@ export default {
                     formdata.append('fileaktalahir',this.fileaktalahir);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileaktalahir/'+this.pesertadidik_id,formdata, 
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.$store.getters["auth/Token"],
                                 'Content-Type': 'multipart/form-data'                      
                             }
@@ -411,7 +411,7 @@ export default {
             }
         }, 
     },
-    components:{
+    components: {
         SPSBLayout,
         ModuleHeader,
     },

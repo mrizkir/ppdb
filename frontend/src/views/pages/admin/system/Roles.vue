@@ -404,7 +404,7 @@ export default {
                             name: this.editedItem.name.toLowerCase(),
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -421,7 +421,7 @@ export default {
                             name: this.editedItem.name.toLowerCase()
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -435,7 +435,7 @@ export default {
             }
         },
     },
-    computed:{        
+    computed: {        
         formTitle () {
             return this.editedIndex === -1 ? 'TAMBAH ROLE' : 'EDIT ROLE'
         },
@@ -449,7 +449,7 @@ export default {
             val || this.close()
         },
     },
-    components:{
+    components: {
 		SystemUserLayout,
         ModuleHeader,
         RolePermissions

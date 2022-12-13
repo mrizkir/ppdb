@@ -489,7 +489,7 @@ export default {
     //dialog
     dialogfrm: false,
     dialogdetailitem: false,
-    data_konfirmasi:{},
+    data_konfirmasi: {},
 
     //form data   
     form_valid: true,
@@ -599,7 +599,7 @@ export default {
           'active':1
         },
         {
-          headers:{
+          headers: {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
@@ -615,7 +615,7 @@ export default {
           'verified':1,
         },
         {
-          headers:{
+          headers: {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
@@ -636,7 +636,7 @@ export default {
           kode_jenjang: this.kode_jenjang                     
         },
         {
-          headers:{
+          headers: {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
@@ -676,7 +676,7 @@ export default {
               password: this.formdata.password,  
             },
             {
-              headers:{
+              headers: {
                 Authorization: this.$store.getters["auth/Token"]
               }
             }
@@ -700,7 +700,7 @@ export default {
               password: this.formdata.password, 
             },
             {
-              headers:{
+              headers: {
                 Authorization: this.$store.getters["auth/Token"]
               }
             }
@@ -722,7 +722,7 @@ export default {
           id:id, 
         },
         {
-          headers:{
+          headers: {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
@@ -765,7 +765,7 @@ export default {
               '_method': 'DELETE',
             },
             {
-              headers:{
+              headers: {
                 Authorization: this.$store.getters["auth/Token"]
               }
             }
@@ -797,7 +797,7 @@ export default {
       );
     },
   },
-  watch:{
+  watch: {
     tahun_pendaftaran()
     {
       if (!this.firstloading)
@@ -820,7 +820,7 @@ export default {
     },
   },
   
-  components:{
+  components: {
     SPSBLayout,
     ModuleHeader, 
     Filter7    

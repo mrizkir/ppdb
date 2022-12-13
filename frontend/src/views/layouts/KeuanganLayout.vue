@@ -219,8 +219,8 @@ export default {
     {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];        
     },
-    props:{
-        showrightsidebar:{
+    props: {
+        showrightsidebar: {
             type:Boolean,
             default: true
         }
@@ -239,7 +239,7 @@ export default {
             this.$ajax.post('/auth/logout',
                 {},
                 {
-                    headers:{
+                    headers: {
                         'Authorization': this.TOKEN,
                     }
                 }
@@ -261,7 +261,7 @@ export default {
             return this.$store.getters['uifront/getBentukPT']==bentuk_sekolah?true: false;
         }
 	},
-    computed:{
+    computed: {
         ...mapGetters('auth',{
             AUTHENTICATED: 'Authenticated',  
             ACCESS_TOKEN: 'AccessToken',  
@@ -301,7 +301,7 @@ export default {
         },
     },
     watch: {
-        loginTime:{
+        loginTime: {
             handler(value)
             {
                 

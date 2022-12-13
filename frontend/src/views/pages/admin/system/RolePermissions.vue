@@ -142,7 +142,7 @@ export default {
                     chkpermission: this.permissions_selected
                 },
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.TOKEN
                     }
                 }
@@ -162,7 +162,7 @@ export default {
                     name:item.name
                 },
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.TOKEN
                     }
                 }
@@ -180,7 +180,7 @@ export default {
             this.$emit('closeRolePermissions',this.role.id);
         }
     },
-    props:{
+    props: {
         role:Object,
         daftarpermissions:Array,
         permissionsselected:Array,

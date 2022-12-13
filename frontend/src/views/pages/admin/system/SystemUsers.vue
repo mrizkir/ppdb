@@ -7,7 +7,7 @@
 import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 export default {
     name: 'SystemUsers',
-    components:{
+    components: {
         SystemUserLayout,
     },
 }

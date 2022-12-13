@@ -7,7 +7,7 @@
 import SPSBLayout from '@/views/layouts/SPSBLayout';
 export default {
     name: 'SPSB',
-    created ()
+    created()
 	{
 		
     },
@@ -18,16 +18,16 @@ export default {
     data: () => ({
         
     }),
-    methods : {        
+    methods: {        
 		initialize: async function()
 		{	
             
         }
     },
-    watch:{
+    watch: {
        
     },
-    components:{
+    components: {
         SPSBLayout,
     },
 }

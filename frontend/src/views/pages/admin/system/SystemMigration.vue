@@ -136,7 +136,7 @@ import ModuleHeader from '@/components/ModuleHeader';
 import Filter9 from '@/components/sidebar/FilterMode9';
 export default {
     name: 'SystemMigration',
-    created ()
+    created()
 	{
 		this.breadcrumbs = [
 			{
@@ -209,7 +209,7 @@ export default {
             { text: 'STATUS', value: 'k_status',sortable: false, width:250 }, 
         ],
     }),
-    methods : {
+    methods: {
         changeTahunPendaftaran (tahun)
         {
             this.tahun_pendaftaran=tahun;
@@ -268,7 +268,7 @@ export default {
                         status_mhs:JSON.stringify(Object.assign({},this.formdata.status_mhs)),                                                                               
                     },
                     {
-                        headers:{
+                        headers: {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }
@@ -286,7 +286,7 @@ export default {
             }
         },
     },
-    watch:{
+    watch: {
         tahun_pendaftaran()
         {
             if (!this.firstloading)
@@ -295,7 +295,7 @@ export default {
             }            
         },
     },
-    components:{
+    components: {
         SystemMigrationLayout,
         ModuleHeader,
         Filter9,

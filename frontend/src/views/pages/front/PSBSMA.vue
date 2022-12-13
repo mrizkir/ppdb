@@ -153,7 +153,7 @@ export default {
       password: "",
       captcha_response: ""   
     }, 
-    formkonfirmasi:{
+    formkonfirmasi: {
       email: "",
       code: ""
     },
@@ -234,7 +234,7 @@ export default {
       }, 300);
     },
   },
-  computed :{
+  computed : {
     ...mapGetters('uifront',{
       sitekey: 'getCaptchaKey',
       tahunPendaftaran: 'getTahunPendaftaran',

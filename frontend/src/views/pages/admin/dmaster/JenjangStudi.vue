@@ -100,7 +100,7 @@ export default {
             { text: 'NAMA JENJANG', value: 'nama_jenjang',sortable: false},
         ],
     }),
-    methods : {
+    methods: {
         initialize: async function()
 		{
             this.datatableLoading=true;            
@@ -126,7 +126,7 @@ export default {
             }               
         },
     },
-    components:{
+    components: {
         DataMasterLayout,
         ModuleHeader,
     },

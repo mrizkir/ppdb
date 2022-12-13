@@ -229,7 +229,7 @@ export default {
             value => /^[0-9]+$/.test(value) || 'Dana yang  ditransfer hanya boleh angka',  
         ], 
     }),
-    methods:{
+    methods: {
         async checkUsername ()
         {
             if (this.$refs.frmkonfirmasi.validate())
@@ -280,7 +280,7 @@ export default {
 
                 this.$ajax.post('/spsb/psb/konfirmasipembayaran',data, 
                     {
-                        headers:{                            
+                        headers: {                            
                             'Content-Type': 'multipart/form-data'
                         }
                     }
@@ -295,7 +295,7 @@ export default {
         },
     },
     computed: {
-        buktiBayar:{
+        buktiBayar: {
             get ()
             {   
                 if (this.image_prev==null)

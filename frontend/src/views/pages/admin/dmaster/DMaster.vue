@@ -7,7 +7,7 @@
 import DataMasterLayout from '@/views/layouts/DataMasterLayout';
 export default {
     name: 'DMaster',
-    components:{
+    components: {
         DataMasterLayout,   
     },
 }

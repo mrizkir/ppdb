@@ -269,7 +269,7 @@ import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
     name: 'UsersDosen',  
-    created () {
+    created() {
         this.breadcrumbs = [
             {
                 text: 'HOME',
@@ -451,7 +451,7 @@ export default {
                             is_dw: this.editedItem.is_dw,     
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -475,7 +475,7 @@ export default {
                             is_dw: this.editedItem.is_dw,             
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -498,7 +498,7 @@ export default {
                             '_method': 'DELETE',
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -531,7 +531,7 @@ export default {
             val || this.close()
         },
     }, 
-    components:{
+    components: {
         SystemUserLayout,
         ModuleHeader,
     },

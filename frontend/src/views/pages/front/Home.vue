@@ -303,7 +303,7 @@
   export default {
     name: "Home",
     created() {
-      this.registerTK = true;
+      this.registerTK = false;
       this.registerSD = true;
       this.registerSMP = true;
       this.registerSMA = true;

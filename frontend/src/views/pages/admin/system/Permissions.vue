@@ -246,7 +246,7 @@ export default {
                             name: this.editedItem.name.toLowerCase()
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -269,7 +269,7 @@ export default {
                         '_method': 'DELETE',
                     },
                     {
-                        headers:{
+                        headers: {
                             Authorization: this.TOKEN
                         }
                     }
@@ -284,7 +284,7 @@ export default {
             });      
         },
     },
-    computed:{
+    computed: {
         formTitle () {
             return this.editedIndex === -1 ? 'TAMBAH PERMISSION' : 'EDIT PERMISSION'
         },
@@ -300,7 +300,7 @@ export default {
             val || this.close()
         },
     },
-    components:{
+    components: {
 		SystemUserLayout,
 		ModuleHeader,
 	}

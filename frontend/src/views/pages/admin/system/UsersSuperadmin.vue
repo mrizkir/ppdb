@@ -245,7 +245,7 @@ import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
     name: 'UsersSuperAdmin',  
-    created () {
+    created() {
         this.breadcrumbs = [
             {
                 text: 'HOME',
@@ -479,7 +479,7 @@ export default {
                             role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -501,7 +501,7 @@ export default {
                             role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -524,7 +524,7 @@ export default {
                             '_method': 'DELETE',
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -557,7 +557,7 @@ export default {
             val || this.close()
         },
     }, 
-    components:{
+    components: {
         SystemUserLayout,
         ModuleHeader,
     },

@@ -182,7 +182,7 @@ import DataMasterLayout from '@/views/layouts/DataMasterLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
     name: 'TahunAjaran',
-    created () {
+    created() {
         this.breadcrumbs = [
             {
                 text: 'HOME',
@@ -290,7 +290,7 @@ export default {
                             tahun_ajaran: this.formdata.tahun_ajaran,
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -309,7 +309,7 @@ export default {
                             tahun_ajaran: this.formdata.tahun_ajaran,
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -333,7 +333,7 @@ export default {
                             '_method': 'DELETE',
                         },
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.TOKEN
                             }
                         }
@@ -374,7 +374,7 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH DATA' : 'UBAH DATA'
         },
     },
-    components:{
+    components: {
         DataMasterLayout,
         ModuleHeader,
     },

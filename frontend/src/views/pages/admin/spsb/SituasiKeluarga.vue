@@ -174,7 +174,7 @@ export default {
         
         datapesertadidik:null
     }),
-    methods : {
+    methods: {
         changeTahunPendaftaran (tahun)
         {
             this.tahun_pendaftaran=tahun;
@@ -235,7 +235,7 @@ export default {
             this.datapesertadidik = item;              
         },
     },
-    watch:{
+    watch: {
         tahun_pendaftaran()
         {
             if (!this.firstloading)
@@ -252,7 +252,7 @@ export default {
             }            
         }
     },
-    components:{
+    components: {
         SPSBLayout,
         ModuleHeader,
         FormSituasiKeluarga,

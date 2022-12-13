@@ -277,7 +277,7 @@ export default {
             );
         },
     },
-    watch:{
+    watch: {
         tahun_pendaftaran()
         {
             if (!this.firstloading)
@@ -300,7 +300,7 @@ export default {
         },
     },
     
-    components:{
+    components: {
         SPSBLayout,
         ModuleHeader, 
         Filter7    

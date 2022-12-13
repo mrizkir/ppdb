@@ -201,7 +201,7 @@ import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
     name: 'UsersProfile',
-    created () {
+    created() {
         this.dashboard=this.$store.getters['uiadmin/getDefaultDashboard'];
         this.formdata=this.$store.getters['auth/User'];
         this.breadcrumbs = [
@@ -236,7 +236,7 @@ export default {
             avatar : null,
 
             //form data        
-            data_mhs:{
+            data_mhs: {
                 nis: 'N.A',
                 nirm: 'N.A',
                 nama_jenjang: 'N.A',
@@ -305,7 +305,7 @@ export default {
                         password: this.formdata.password,
                     },
                     {
-                        headers:{
+                        headers: {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }
@@ -346,7 +346,7 @@ export default {
                     formdata.append('foto',this.formdata.foto);
                     await this.$ajax.post('/setting/users/uploadfoto/'+this.$store.getters.User.id,formdata, 
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.$store.getters["auth/Token"],  
                                 'Content-Type': 'multipart/form-data'                      
                             }
@@ -366,7 +366,7 @@ export default {
             this.btnLoading=true;
             await this.$ajax.post('/setting/users/resetfoto/'+this.$store.getters.User.id,{}, 
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.$store.getters["auth/Token"],   
                     }
                 }
@@ -381,7 +381,7 @@ export default {
         {
             await this.$ajax.get('/akademik/kemahasiswaan/biodatamhs1/'+this.$store.getters['auth/AttributeUser']('id'), 
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.$store.getters["auth/Token"],   
                     }
                 }
@@ -391,7 +391,7 @@ export default {
         }
         
     },
-    computed:{        
+    computed: {        
 		photoUser: {
             get()
             {
@@ -416,7 +416,7 @@ export default {
             return this.formdata.active == 1 ?'green': 'red';
         }
     },
-    components:{
+    components: {
         SystemUserLayout,
         ModuleHeader,
     },
