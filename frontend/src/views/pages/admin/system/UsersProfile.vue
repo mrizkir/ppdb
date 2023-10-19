@@ -229,7 +229,7 @@ export default {
     data ()
     {
         return {
-            dashboard:null,
+            dashboard: null,
 
             btnLoading: false,
             datatable: [],

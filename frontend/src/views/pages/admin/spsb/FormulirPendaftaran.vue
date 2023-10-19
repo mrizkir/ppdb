@@ -149,14 +149,14 @@
       this.initialize()   
     },  
     data: () => ({
-      user_id:null,
+      user_id: null,
       firstloading: true,
-      kode_jenjang:null,
-      tahun_pendaftaran:null,
-      nama_jenjang:null,
+      kode_jenjang: null,
+      tahun_pendaftaran: null,
+      nama_jenjang: null,
 
       breadcrumbs: [],
-      dashboard:null,
+      dashboard: null,
 
       btnLoading: false,
       datatableLoading: false,
@@ -172,7 +172,7 @@
       ],
       search: "",  
       
-      datapesertadidik:null
+      datapesertadidik: null
     }),
     methods: {
       changeTahunPendaftaran (tahun)

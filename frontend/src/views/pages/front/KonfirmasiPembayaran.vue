@@ -166,10 +166,10 @@ export default {
         btnLoading: false,
         //form
         form_valid: true,
-        data_pd:null,
+        data_pd: null,
 
         menuTanggalBayar: false,
-        image_prev:null,
+        image_prev: null,
         daftar_channel: [
             {
                 id_channel:1,

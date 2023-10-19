@@ -226,7 +226,7 @@ export default {
         this.initialize()   
     },
     data: () => ({ 
-        dashboard:null,
+        dashboard: null,
         peryaratanppdb: {},
         //formdata
         form_valid_foto_selfi: true,
@@ -234,18 +234,18 @@ export default {
         form_valid_ktp_ibu: true,
         form_valid_kk: true,
         form_valid_aktalahir: true,
-        pesertadidik_id:null,
+        pesertadidik_id: null,
 
         btnLoadingFotoSelfi: false,
         btnLoadingKTPAyah: false,
         btnLoadingKK: false,
         btnLoadingAktaLahir: false,
 
-        filefotoselfi:null,
-        filektpayah:null,
-        filektpibu:null,
-        filekk:null,
-        fileaktalahir:null,
+        filefotoselfi: null,
+        filektpayah: null,
+        filektpibu: null,
+        filekk: null,
+        fileaktalahir: null,
 
         rule_filefotoselfi: [
             value => !!value||"Mohon pilih file foto selfi !!!",  

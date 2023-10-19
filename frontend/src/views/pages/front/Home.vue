@@ -7,7 +7,7 @@
         v-for="(slide, i) in slides"
         :key="i"
         :src="$api.url+'/'+slide.src"
-        :contain="true">    
+        :contain="true">
       </v-carousel-item>
     </v-carousel>
     <v-container fluid>
@@ -52,7 +52,7 @@
           <v-card color="#207FA2" dark>
             <v-card-title class="headline">
               PRA-PENDAFTARAN SMP
-            </v-card-title>            
+            </v-card-title> 
             <v-card-actions>
               <v-btn color="info" block to="/psbsmp">
                 DAFTAR
@@ -119,9 +119,7 @@
                 </v-timeline-item>
                 <v-timeline-item small color="green">
                   <template v-slot:opposite>
-                    <span
-                    :class="`headline font-weight-bold green--text`"
-                    >
+                    <span :class="`headline font-weight-bold green--text`">
                       TAHAP KE - 2
                     </span>
                   </template>
@@ -145,15 +143,13 @@
                         BANK RIAU KEPRI SYARIAH <br>
                         NOMOR REKENING : 821-21-28255 <br>
                         A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br>												
-                      </v-alert> 
+                      </v-alert>
                     </div>
                   </div>
                 </v-timeline-item>
                 <v-timeline-item small color="green">
                   <template v-slot:opposite>
-                    <span
-                    :class="`headline font-weight-bold green--text`"
-                    >
+                    <span :class="`headline font-weight-bold green--text`">
                       TAHAP KE - 3
                     </span>
                   </template>
@@ -172,21 +168,19 @@
                         <li>Tanggal Bayar/Transer</li>
                         <li>Catatan</li>
                         <li>Unggah Foto/Scan/Screenshoot Bukti Bayar</li>
-                      </ol>    
+                      </ol>
                     </div>
                   </div>
                 </v-timeline-item>
                 <v-timeline-item small color="green">
                   <template v-slot:opposite>
-                    <span
-                    :class="`headline font-weight-bold green--text`"
-                    >
+                    <span :class="`headline font-weight-bold green--text`">
                       TAHAP KE - 4
                     </span>
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                    PANITIA VERIFIKASI PEMBAYARAN
+                      PANITIA VERIFIKASI PEMBAYARAN
                     </h2>
                     <div>
                       Panitia akan melakukan verifikasi bukti bayar/transfer dan mengirimkan pesan teks kepada pendaftar melalui kontak WA.  Apabila belum mendapatkan  pesan verifikasi dari panitia (1x24 jam), pendaftar dapat menghubungi  <strong>nomor kontak WA +62 813-7430-0986 (narahubung Evi Sulistyawati)</strong>.
@@ -195,15 +189,13 @@
                 </v-timeline-item>
                 <v-timeline-item small color="green">
                   <template v-slot:opposite>
-                    <span
-                    :class="`headline font-weight-bold green--text`"
-                    >
+                    <span :class="`headline font-weight-bold green--text`">
                       TAHAP KE - 5
                     </span>
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                    LOGIN FORMULIR
+                      LOGIN FORMULIR
                     </h2>
                     <div>
                       Setelah mendapatkan pesan teks verifikasi dari Panitia PPDB, maka pendaftar dapat melakukan LOGIN untuk pengisian formulir pendaftaran. Pastikanlah data yang diisikan ke formulir dapat dipertanggungjawabkan. Berkas cetak formulir akan ditandatangani di atas materai Rp 10.000,- oleh pendaftar pada saat menghadiri jadwal interview dan observasi. Hasil pindai (scan) Akta Kelahiran, KK dan KTP kedua orang tua/wali juga akan dicocokkan dengan dokumen asli yang dibawa oleh pendaftar pada saat menghadiri jadwal interview dan observasi.
@@ -243,7 +235,7 @@
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                    KESEPAKATAN KERJA SAMA (MoU) Pendidikan
+                      KESEPAKATAN KERJA SAMA (MoU) Pendidikan
                     </h2>
                     <div>
                       Pada waktu yang bersamaan, setelah jadwal interview dan observasi selesai dikomunikasikan, Panitia akan melanjutkan dengan memberikan informasi jadwal Zoom Meeting.  Kegiatan Zoom Meeting  dilaksanakan sebelum jadwal interview-observasi. Pelaksanaan kegiatan Zoom Meeting adalah pada hari Sabtu.  Tautan kegiatan ini akan dikirimkan oleh Panitia melalui nomor kontak WA pendaftar.  Zoom Meeting bersifat klasikal per jenjang TK/SD/SMP.  Topik pembahasan pada kegiatan tersebut, yaitu tentang konsep serta program sekolah pada masing-masing jenjang pendidikan di Sekolah Islam De Green Camp.  Kegiatan ini wajib diikuti oleh setiap orangtua/wali calon PDB.
@@ -258,9 +250,7 @@
                 </v-timeline-item>
                 <v-timeline-item small color="green">
                   <template v-slot:opposite>
-                    <span
-                    :class="`headline font-weight-bold green--text`"
-                    >
+                    <span :class="`headline font-weight-bold green--text`">
                       TAHAP KE - 8
                     </span>
                   </template>
@@ -303,22 +293,42 @@
   export default {
     name: "Home",
     created() {
-      this.registerTK = false;
-      this.registerSD = true;
-      this.registerSMP = false;
-      this.registerSMA = true;
+      this.initialize();
     },
     data: () => ({
-      registerTK: null,
-      registerSD: null,
-      registerSMP: null,
-      registerSMA: null,
+      registerTK: false,
+      registerSD: false,
+      registerSMP: false,
+      registerSMA: false,
       slides: [
         {
           src: "storage/images/sliders/slider1.png",
         },
       ],
     }),
+    methods: {
+      initialize: async function() {
+        await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
+          let jenjang_studi = data.jenjang_studi;
+          jenjang_studi.forEach(element => {
+            switch (element.kode_jenjang) {
+              case 1:
+                this.registerTK = element.status_pendaftaran == 1;
+                break;
+              case 2:
+                this.registerSD = element.status_pendaftaran == 1;
+                break;
+              case 3:
+                this.registerSMP = element.status_pendaftaran == 1;
+                break;
+              case 4:
+                this.registerSMA = element.status_pendaftaran == 1;
+                break;
+            }
+          });
+        });
+      },
+    },
     components: {
       FrontLayout,
     },

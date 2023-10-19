@@ -35,7 +35,6 @@ $router->group(['prefix'=>'v3'], function () use ($router)
 	
 	//data master - jenjang studi
 	$router->get('/datamaster/jenjangstudi',['uses'=>'DMaster\JenjangStudiController@index','as'=>'jenjangstudi.index']);
-	$router->put('/datamaster/jenjangstudi/{id}',['uses'=>'DMaster\JenjangStudiController@update','as'=>'jenjangstudi.update']);
 
 	//pendaftaran siswa baru
 	$router->post('/spsb/psb/store',['uses'=>'SPSB\PSBController@store','as'=>'psb.store']);
@@ -63,6 +62,9 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 	$router->post('/datamaster/tahunajaran/store',['middleware'=>['role:superadmin'],'uses'=>'DMaster\TahunAjaranController@store','as'=>'tahunajaran.store']);
 	$router->put('/datamaster/tahunajaran/{id}',['middleware'=>['role:superadmin'],'uses'=>'DMaster\TahunAjaranController@update','as'=>'tahunajaran.update']);
 	$router->delete('/datamaster/tahunajaran/{id}',['middleware'=>['role:superadmin'],'uses'=>'DMaster\TahunAjaranController@destroy','as'=>'`tahunajaran.destroy']);
+
+	//data master - jenjang studi	
+	$router->put('/datamaster/jenjangstudi/{id}',['uses'=>'DMaster\JenjangStudiController@update','as'=>'jenjangstudi.update']);
 
 	//spsb - pendaftaran siswa baru
 	$router->post('/spsb/psb',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'SPSB\PSBController@index','as'=>'psb.index']);

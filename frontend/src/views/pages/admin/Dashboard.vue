@@ -96,8 +96,8 @@
 		},
 		data: () => ({
 			breadcrumbs: [],
-			TOKEN:null,
-			dashboard:null,
+			TOKEN: null,
+			dashboard: null,
 
 			tahun_pendaftaran: ""
 		}),

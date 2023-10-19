@@ -1,6 +1,6 @@
 <template>
-  <FrontLayout>
-    <v-container fluid v-if="bukaPPDB">
+  <FrontLayout>   
+    <v-container class="fill-height" fluid v-if="bukaPPDB && registerSD"> 
       <v-row align="center" justify="center" no-gutters>
         <v-col cols="12">
           <h1 class="text-center display-1 font-weight-black primary--text">
@@ -13,9 +13,7 @@
             TAHUN PELAJARAN {{tahunPendaftaran|formatTA}}
           </h4>
         </v-col>
-      </v-row>
-    </v-container>
-    <v-container class="fill-height" fluid v-if="bukaPPDB && registerSD">            
+      </v-row>           
       <v-row align="center" justify="center" no-gutters>
         <v-col xs="12" md="7" sm="12">
           <v-form ref="frmpendaftaran" v-model="form_valid" lazy-validation>
@@ -117,6 +115,11 @@
         <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
       </v-row>
     </v-container>
+    <v-container fluid v-if="registerSD == false">
+			<v-row>
+        PPDB SD Belum dibuka
+      </v-row>
+    </v-container>    
   </FrontLayout>
 </template>
 <script>
@@ -126,17 +129,14 @@ import FrontLayout from '@/views/layouts/FrontLayout';
 export default {
   name: 'PSBSD',
   created() {
-    this.initialize();
-    this.registerSD = true;
+    this.initialize();    
   },
   data: () => ({            
     btnLoading: false, 
-    registerSD:null,    
+    registerSD: null,    
     //form
     form_valid: true, 
     dialogkonfirmasipendaftaran: false,  
-    daftar_jenjang: [],
-    kode_jenjang: "",
     formdata: {
       name: "",
       email: "", 
@@ -180,12 +180,16 @@ export default {
     ], 
   }),
   methods: {
-    initialize: async function()
-    {
+    initialize: async function() {
       await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
-        this.daftar_jenjang = data.jenjang_studi;
+        let jenjang_studi = data.jenjang_studi;
+          jenjang_studi.forEach(element => {
+          if (element.kode_jenjang == 2) {            
+            this.registerSD = element.status_pendaftaran == 1;            
+          }
+        });
       });                                
-    }, 
+    },
     save: async function()
     {
       if (this.$refs.frmpendaftaran.validate())

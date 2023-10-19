@@ -462,12 +462,12 @@ export default {
   },
   data: () => ({ 
     firstloading: true,
-    kode_jenjang:null,
-    tahun_pendaftaran:null,
-    nama_jenjang:null,
+    kode_jenjang: null,
+    tahun_pendaftaran: null,
+    nama_jenjang: null,
     
     breadcrumbs: [],
-    dashboard:null,
+    dashboard: null,
     datatableLoading: false,
     btnLoading: false, 
           

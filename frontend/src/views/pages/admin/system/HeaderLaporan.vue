@@ -112,11 +112,11 @@ export default {
         //form
         form_valid: true,
         formdata: {
-            header_1:null,
-            header_2:null,
-            header_3:null,
-            header_4:null,
-            header_address:null,
+            header_1: null,
+            header_2: null,
+            header_3: null,
+            header_4: null,
+            header_address: null,
         },
     }),
     methods: {
