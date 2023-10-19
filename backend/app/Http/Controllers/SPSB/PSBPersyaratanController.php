@@ -67,7 +67,7 @@ class PSBPersyaratanController extends Controller {
                                 'pid'=>'fetchdata',
                                 'psb'=>$data,
                                 'message'=>'Fetch data calon calon peserta didik baru berhasil diperoleh'
-                            ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);  
+                            ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  
     }    
     /**
      * digunakan untuk mendapatkan calon calon peserta didik baru yang telah mengisi formulir pendaftaran
@@ -409,7 +409,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
         }
 
     }
@@ -446,7 +446,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
         }
 
     }
@@ -503,7 +503,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
         }
 
     }
@@ -560,7 +560,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
         }
 
     }
@@ -588,7 +588,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
         }
 
     }

@@ -265,8 +265,8 @@
                         <template v-slot:expanded-item="{ headers, item }">
                             <td :colspan="headers.length" class="text-center">
                                 <v-col cols="12">
-                                    <strong>ID:</strong>{{ item.id }}                                    
-                                    <strong>USERNAME:</strong>{{ item.username }}                                    
+                                    <strong>ID:</strong>{{ item.id }}                     
+                                    <strong>USERNAME:</strong>{{ item.username }}                     
                                     <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
                                     <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
                                 </v-col>                                
@@ -290,8 +290,7 @@ import ModuleHeader from '@/components/ModuleHeader';
 import Filter7 from '@/components/sidebar/FilterMode7';
 export default {
     name: 'PendaftaranBaru',  
-    created()
-    {
+    created() {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];      
         this.breadcrumbs = [
             {
@@ -440,18 +439,18 @@ export default {
         },   
         dataTableRowClicked(item)
         {
-            if ( item === this.expanded[0])
+            if (item === this.expanded[0])
             {
-                this.expanded=[];                
+                this.expanded = [];        
             }
             else
             {
-                this.expanded=[item];
-            }               
+                this.expanded = [item];
+            }
         },
         aktifkan(id)
         {
-            this.btnLoading=true;
+            this.btnLoading = true;
             this.$ajax.post('/akademik/kemahasiswaan/updatestatus/'+id,
                 {
                     'active':1
@@ -486,7 +485,7 @@ export default {
         },
         syncPermission: async function()
         {
-            this.btnLoading=true;
+            this.btnLoading = true;
             await this.$ajax.post('/system/users/syncallpermissions',
                 {
                     role_name: 'siswabaru',
@@ -504,7 +503,7 @@ export default {
                 this.btnLoading = false;
             });     
         },
-        async addItem ()
+        async addItem()
         {
             this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];  
             this.formdata.ta=this.tahun_pendaftaran;
@@ -519,7 +518,7 @@ export default {
         save: async function() {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;
+                this.btnLoading = true;
                 if (this.editedIndex > -1) 
                 {
                     await this.$ajax.post('/spsb/psb/updatependaftar/'+this.formdata.id,
@@ -574,7 +573,7 @@ export default {
         },
         async resend(id)
         {
-            this.btnLoading=true;
+            this.btnLoading = true;
             await this.$ajax.post('/spsb/psb/resend',
                 {
                     id:id, 
@@ -591,7 +590,7 @@ export default {
                 this.btnLoading = false;
             });
         },
-        async viewItem (item) {           
+        async viewItem(item) {           
             await this.$ajax.get('/keuangan/konfirmasipembayaran/'+item.id, 
             {
                 headers: {
@@ -603,7 +602,7 @@ export default {
                 this.dialogdetailitem=true;
             });          
         },
-        async editItem (item) {
+        async editItem(item) {
             this.editedIndex = this.datatable.indexOf(item);
             this.formdata = Object.assign({}, item);
             this.formdata.nomor_hp='+'+this.formdata.nomor_hp;
@@ -613,11 +612,11 @@ export default {
             });                
             this.dialogfrm = true;
         },
-        deleteItem (item) {           
+        deleteItem(item) {           
             this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus PESERTA DIDIK BARU '+item.name+' ?', { color: 'red' }).then((confirm) => {
                 if (confirm)
                 {
-                    this.btnLoading=true;
+                    this.btnLoading = true;
                     this.$ajax.post('/spsb/psb/'+item.id,
                         {
                             '_method': 'DELETE',
@@ -637,7 +636,7 @@ export default {
                 }
             });
         },
-        closedialogdetailitem () {
+        closedialogdetailItem() {
             this.dialogdetailitem = false;            
             setTimeout(() => {
                 this.formdata = Object.assign({}, this.formdefault)
@@ -645,7 +644,7 @@ export default {
                 }, 300
             );
         },
-        closedialogfrm () {
+        closedialogfrm() {
             this.dialogfrm = false;            
             setTimeout(() => {
                 this.formdata = Object.assign({}, this.formdefault);                

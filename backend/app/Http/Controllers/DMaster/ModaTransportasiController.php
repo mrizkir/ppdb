@@ -21,6 +21,6 @@ class ModaTransportasiController extends Controller {
                                     'pid'=>'fetchdata',  
                                     'moda_transportasi'=>$moda,                                                                                                                                   
                                     'message'=>'Fetch data moda transportasi berhasil.'
-                                ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
+                                ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
     }  
 }

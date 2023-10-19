@@ -137,8 +137,7 @@ import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
     name: 'Permissions',
-    created()
-    {
+    created() {
         this.breadcrumbs = [
             {
                 text: 'HOME',
@@ -211,16 +210,16 @@ export default {
         },
         dataTableRowClicked(item)
         {
-            if ( item === this.expanded[0])
+            if (item === this.expanded[0])
             {
-                this.expanded=[];                
+                this.expanded = [];        
             }
             else
             {
-                this.expanded=[item];
-            }               
+                this.expanded = [item];
+            }
         },
-        editItem (item) {
+        editItem(item) {
             this.editedIndex = this.daftar_permissions.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
@@ -240,7 +239,7 @@ export default {
             {
                 if (!(this.editedIndex > -1)) 
                 {
-                    this.btnLoading=true;
+                    this.btnLoading = true;
                     this.$ajax.post('/system/setting/permissions/store',
                         {
                             name: this.editedItem.name.toLowerCase()
@@ -259,11 +258,11 @@ export default {
                 }
             }
         },
-        deleteItem (item) {   
+        deleteItem(item) {   
             this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus permission '+item.name+' ?', { color: 'red' }).then((confirm) => {
                 if (confirm)
                 {
-                    this.btnLoading=true;
+                    this.btnLoading = true;
                     this.$ajax.post('/system/setting/permissions/'+item.id,
                     {
                         '_method': 'DELETE',

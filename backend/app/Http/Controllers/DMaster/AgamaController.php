@@ -21,6 +21,6 @@ class AgamaController extends Controller {
                                     'pid'=>'fetchdata',  
                                     'agama'=>$agama,                                                                                                                                   
                                     'message'=>'Fetch data agama berhasil.'
-                                ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
+                                ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
     }  
 }

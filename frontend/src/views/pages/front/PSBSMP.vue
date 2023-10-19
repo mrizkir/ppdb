@@ -127,7 +127,7 @@ export default {
   name: 'PSBSMP',
   created() {
     this.initialize();
-    this.registerSMP = true;
+    this.registerSMP = false;
   },
   data: () => ({     
     registerSMP: null,    
@@ -225,7 +225,7 @@ export default {
       this.$refs.recaptcha.reset();  
       this.formdata.captcha_response='';
     },
-    closedialogfrm () {
+    closedialogfrm() {
       this.dialogkonfirmasipendaftaran = false;            
       setTimeout(() => {
         this.frmpendaftaran = Object.assign({}, this.formdefault);                                

@@ -21,6 +21,6 @@ class NegaraController extends Controller {
                                     'pid'=>'fetchdata',  
                                     'negara'=>$negara,                                                                                                                                   
                                     'message'=>'Fetch data negara berhasil.'
-                                ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
+                                ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
     }  
 }

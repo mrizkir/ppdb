@@ -135,7 +135,7 @@ export default {
     methods: {
         save()
         {
-            this.btnLoading=true;
+            this.btnLoading = true;
             this.$ajax.post('/system/setting/roles/storerolepermissions',
                 {
                     role_id: this.role.id,
@@ -155,7 +155,7 @@ export default {
         },
         revoke(item)
         {   
-            this.btnLoading=true;         
+            this.btnLoading = true;         
             this.$ajax.post('/system/setting/roles/revokerolepermissions',
                 {
                     role_id: this.role.id,

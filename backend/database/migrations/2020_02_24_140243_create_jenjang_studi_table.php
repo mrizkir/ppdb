@@ -6,29 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateJenjangStudiTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {   
-        Schema::defaultStringLength(191);
-        Schema::create('jenjang_studi', function (Blueprint $table) {
-            $table->tinyInteger('kode_jenjang');                        
-            $table->string('nama_jenjang');
-            
-            $table->primary('kode_jenjang');              
-        });
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{   
+		Schema::defaultStringLength(191);
+		Schema::create('jenjang_studi', function (Blueprint $table) {
+			$table->tinyInteger('kode_jenjang');                        
+			$table->string('nama_jenjang');    
+			$table->boolean('status_pendaftaran')->default(0);        
+			$table->primary('kode_jenjang');   			           
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('jenjang_studi');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('jenjang_studi');
+	}
 }

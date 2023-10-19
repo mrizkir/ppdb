@@ -121,8 +121,7 @@ import FormSituasiKeluarga from '@/components/FormSituasiKeluarga';
 import Filter7 from '@/components/sidebar/FilterMode7';
 export default {
     name: 'SituasiKeluarga', 
-    created()
-    {
+    created() {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         this.breadcrumbs = [
             {
@@ -212,14 +211,14 @@ export default {
         },
         dataTableRowClicked(item)
         {
-            if ( item === this.expanded[0])
+            if (item === this.expanded[0])
             {
-                this.expanded=[];                
+                this.expanded = [];        
             }
             else
             {
-                this.expanded=[item];
-            }               
+                this.expanded = [item];
+            }
         },
         badgeColor(item)
         {

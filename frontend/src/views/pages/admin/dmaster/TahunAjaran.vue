@@ -258,20 +258,20 @@ export default {
         },
         dataTableRowClicked(item)
         {
-            if ( item === this.expanded[0])
+            if (item === this.expanded[0])
             {
-                this.expanded=[];
+                this.expanded = [];
             }
             else
             {
-                this.expanded=[item];
+                this.expanded = [item];
             }
         },
-        viewItem (item) {
+        viewItem(item) {
             this.formdata=item;
             this.dialogdetailitem=true;
         },
-        editItem (item) {
+        editItem(item) {
             this.editedIndex = this.datatable.indexOf(item);
             this.formdata = Object.assign({}, item);
             this.old_tahun=item.tahun;
@@ -280,7 +280,7 @@ export default {
         save: async function() {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;
+                this.btnLoading = true;
                 if (this.editedIndex > -1)
                 {
                     await this.$ajax.post('/datamaster/tahunajaran/'+this.old_tahun,
@@ -323,11 +323,11 @@ export default {
                 }
             }
         },
-        deleteItem (item) {
+        deleteItem(item) {
             this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus data dengan ID '+item.tahun+' ?', { color: 'red' }).then((confirm) => {
                 if (confirm)
                 {
-                    this.btnLoading=true;
+                    this.btnLoading = true;
                     this.$ajax.post('/datamaster/tahunajaran/'+item.tahun,
                         {
                             '_method': 'DELETE',
@@ -347,7 +347,7 @@ export default {
                 }
             });
         },
-        closedialogdetailitem () {
+        closedialogdetailItem() {
             this.dialogdetailitem = false;
             setTimeout(() => {
                 this.formdata = Object.assign({}, this.formdefault)
@@ -355,7 +355,7 @@ export default {
                 }, 300
             );
         },
-        closedialogfrm () {
+        closedialogfrm() {
             this.dialogfrm = false;
             setTimeout(() => {
                 this.formdata = Object.assign({}, this.formdefault);

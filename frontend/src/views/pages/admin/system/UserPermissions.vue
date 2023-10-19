@@ -169,7 +169,7 @@ export default {
     methods: {        
         save()
         {
-            this.btnLoading=true;
+            this.btnLoading = true;
             this.$ajax.post('/system/users/storeuserpermissions',
                 {
                     user_id: this.user.id,
@@ -188,7 +188,7 @@ export default {
         },
         revoke(item)
         {   
-            this.btnLoading=true;         
+            this.btnLoading = true;         
             this.$ajax.post('/system/users/revokeuserpermissions',
                 {
                     user_id: this.user.id,

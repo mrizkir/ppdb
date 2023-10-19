@@ -369,14 +369,14 @@ export default {
         },
         dataTableRowClicked(item)
         {
-            if ( item === this.expanded[0])
+            if (item === this.expanded[0])
             {
-                this.expanded=[];                
+                this.expanded = [];        
             }
             else
             {
-                this.expanded=[item];
-            }               
+                this.expanded = [item];
+            }
         },
         showDialogTambahUserSuperAdmin: async function()
         {
@@ -401,7 +401,7 @@ export default {
                             text:element.name,
                             disabled: false, 
                         });                        
-                    }                    
+                    }     
                 });        
                 this.daftar_roles=daftar_roles;     
                 this.dialog = true;                                    
@@ -434,12 +434,12 @@ export default {
                             text:element.name,
                             disabled: false, 
                         });                        
-                    }                    
+                    }     
                 });        
                 this.daftar_roles=daftar_roles;                                                
             });    
 
-            this.btnLoading=true;
+            this.btnLoading = true;
             await this.$ajax.get('/system/users/'+item.id+'/roles',
             {
                 headers: {
@@ -465,7 +465,7 @@ export default {
         save () {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;
+                this.btnLoading = true;
                 if (this.editedIndex > -1) 
                 {
                     this.$ajax.post('/system/users/'+this.editedItem.id,
@@ -514,11 +514,11 @@ export default {
                 }
             }
         },
-        deleteItem (item) {           
+        deleteItem(item) {           
             this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus username '+item.username+' ?', { color: 'red' }).then((confirm) => {
                 if (confirm)
                 {
-                    this.btnLoading=true;
+                    this.btnLoading = true;
                     this.$ajax.post('/system/users/'+item.id,
                         {
                             '_method': 'DELETE',

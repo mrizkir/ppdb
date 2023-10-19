@@ -121,8 +121,7 @@
   import Filter7 from '@/components/sidebar/FilterMode7';
   export default {
     name: 'FormulirPendaftaran', 
-    created()
-    {
+    created() {
       this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
       this.breadcrumbs = [
         {
@@ -211,11 +210,11 @@
         
       },
       dataTableRowClicked(item) {
-        if ( item === this.expanded[0]) {
-          this.expanded=[];                
+        if (item === this.expanded[0]) {
+          this.expanded = [];        
         } else {
-          this.expanded=[item];
-        }               
+          this.expanded = [item];
+        }
       },
       badgeColor(item)
       {

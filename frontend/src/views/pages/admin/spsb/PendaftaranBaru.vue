@@ -582,18 +582,18 @@ export default {
     },   
     dataTableRowClicked(item)
     {
-      if ( item === this.expanded[0])
+      if (item === this.expanded[0])
       {
-        this.expanded=[];                
+        this.expanded = [];        
       }
       else
       {
-        this.expanded=[item];
+        this.expanded = [item];
       }               
     },
     aktifkan(id)
     {
-      this.btnLoading=true;
+      this.btnLoading = true;
       this.$ajax.post('/akademik/kemahasiswaan/updatestatus/'+id,
         {
           'active':1
@@ -628,7 +628,7 @@ export default {
     },
     syncPermission: async function()
     {
-      this.btnLoading=true;
+      this.btnLoading = true;
       await this.$ajax.post('/system/users/syncallpermissions',
         {
           role_name: 'siswabaru',
@@ -661,7 +661,7 @@ export default {
     save: async function() {
       if (this.$refs.frmdata.validate())
       {
-        this.btnLoading=true;
+        this.btnLoading = true;
         if (this.editedIndex > -1) 
         {
           await this.$ajax.post('/spsb/psb/updatependaftar/'+this.formdata.id,
@@ -716,7 +716,7 @@ export default {
     },
     async resend(id)
     {
-      this.btnLoading=true;
+      this.btnLoading = true;
       await this.$ajax.post('/spsb/psb/resend',
         {
           id:id, 
@@ -759,7 +759,7 @@ export default {
       this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus PESERTA DIDIK BARU '+item.name+' ?', { color: 'red' }).then((confirm) => {
         if (confirm)
         {
-          this.btnLoading=true;
+          this.btnLoading = true;
           this.$ajax.post('/spsb/psb/'+item.id,
             {
               '_method': 'DELETE',
@@ -787,7 +787,7 @@ export default {
         }, 300
       );
     },
-    closedialogfrm () {
+    closedialogfrm() {
       this.dialogfrm = false;            
       setTimeout(() => {
         this.formdata = Object.assign({}, this.formdefault);                

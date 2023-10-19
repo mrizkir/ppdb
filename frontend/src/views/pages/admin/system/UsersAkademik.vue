@@ -422,18 +422,18 @@ export default {
         },
         dataTableRowClicked(item)
         {
-            if ( item === this.expanded[0])
+            if (item === this.expanded[0])
             {
-                this.expanded=[];                
+                this.expanded = [];        
             }
             else
             {
-                this.expanded=[item];
-            }               
+                this.expanded = [item];
+            }
         },
         syncPermission: async function()
         {
-            this.btnLoading=true;
+            this.btnLoading = true;
             await this.$ajax.post('/system/users/syncallpermissions',
                 {
                     role_name: 'akademik', 
@@ -472,7 +472,7 @@ export default {
                             text:element.name,
                             disabled: false, 
                         });                        
-                    }                    
+                    }     
                 });        
                 this.daftar_roles=daftar_roles;                     
                 this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];                          
@@ -520,12 +520,12 @@ export default {
                             text:element.name,
                             disabled: false, 
                         });                        
-                    }                    
+                    }     
                 });        
                 this.daftar_roles=daftar_roles;                                                
             });    
 
-            this.btnLoading=true;
+            this.btnLoading = true;
             await this.$ajax.get('/system/users/'+item.id+'/roles',
             {
                 headers: {
@@ -538,7 +538,7 @@ export default {
             });
         },
         setPermission: async function (item) {          
-            this.btnLoading=true;  
+            this.btnLoading = true;  
             this.$ajax.get('/system/setting/roles/'+this.role_id+'/permission',{
                 headers: {
                     Authorization: this.TOKEN
@@ -583,7 +583,7 @@ export default {
         save () {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;
+                this.btnLoading = true;
                 if (this.editedIndex > -1) 
                 {
                     this.$ajax.post('/system/usersakademik/'+this.editedItem.id,
@@ -634,11 +634,11 @@ export default {
                 }
             }
         },
-        deleteItem (item) {           
+        deleteItem(item) {           
             this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus username '+item.username+' ?', { color: 'red' }).then((confirm) => {
                 if (confirm)
                 {
-                    this.btnLoading=true;
+                    this.btnLoading = true;
                     this.$ajax.post('/system/usersakademik/'+item.id,
                         {
                             '_method': 'DELETE',

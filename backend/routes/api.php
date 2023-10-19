@@ -35,6 +35,7 @@ $router->group(['prefix'=>'v3'], function () use ($router)
 	
 	//data master - jenjang studi
 	$router->get('/datamaster/jenjangstudi',['uses'=>'DMaster\JenjangStudiController@index','as'=>'jenjangstudi.index']);
+	$router->put('/datamaster/jenjangstudi/{id}',['uses'=>'DMaster\JenjangStudiController@update','as'=>'jenjangstudi.update']);
 
 	//pendaftaran siswa baru
 	$router->post('/spsb/psb/store',['uses'=>'SPSB\PSBController@store','as'=>'psb.store']);
@@ -110,8 +111,7 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 	$router->post('/spsb/psbpersyaratan/verifikasipersyaratan/{id}',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\PSBPersyaratanController@verifikasipersyaratan','as'=>'psbpersyaratan.verifikasipersyaratan']);
 	$router->delete('/spsb/psbpersyaratan/hapusfilepersyaratan/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBPersyaratanController@hapusfilepersyaratan','as'=>'psbpersyaratan.hapusfilepersyaratan']);
 
-	//keuangan - konfirmasi pembayaran
-	
+	//keuangan - konfirmasi pembayaran	
 	$router->get('/keuangan/konfirmasipembayaran/{id}',['middleware'=>['role:superadmin|keuangan|siswa|siswabaru'],'uses'=>'Keuangan\KonfirmasiPembayaranController@show','as'=>'konfirmasipembayaran.show']);
 	$router->put('/keuangan/konfirmasipembayaran/{id}',['middleware'=>['role:superadmin|keuangan|siswa|siswabaru'],'uses'=>'Keuangan\KonfirmasiPembayaranController@update','as'=>'konfirmasipembayaran.update']);
 

@@ -63,8 +63,7 @@ import SystemConfigLayout from '@/views/layouts/SystemConfigLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
     name: 'Email',
-    created()
-    {
+    created() {
         this.breadcrumbs = [
             {
                 text: 'HOME',
@@ -113,7 +112,7 @@ export default {
         save () {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;
+                this.btnLoading = true;
                 this.$ajax.post('/system/setting/variables',
                     {
                         '_method': 'PUT', 

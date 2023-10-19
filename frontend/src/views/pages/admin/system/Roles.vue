@@ -231,8 +231,7 @@ import ModuleHeader from '@/components/ModuleHeader';
 import RolePermissions from '@/views/pages/admin/system/RolePermissions';
 export default {
     name: 'Roles',
-    created()
-    {
+    created() {
         this.breadcrumbs = [
             {
                 text: 'HOME',
@@ -319,16 +318,16 @@ export default {
         },
         dataTableRowClicked(item)
         {
-            if ( item === this.expanded[0])
+            if (item === this.expanded[0])
             {
-                this.expanded=[];                
+                this.expanded = [];        
             }
             else
             {
-                this.expanded=[item];
-            }               
+                this.expanded = [item];
+            }
         },
-        viewItem (item) {
+        viewItem(item) {
             this.editedIndex = this.datatable.indexOf(item);
             this.editedItem = Object.assign({}, item);
 
@@ -340,12 +339,12 @@ export default {
                 if (status==200)
                 {
                     this.permissions_selected = data.permissions;
-                }                 
+                }  
             });  
             
             this.dialogdetail = true;
         },
-        editItem (item) {
+        editItem(item) {
             this.editedIndex = this.datatable.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
@@ -359,7 +358,7 @@ export default {
                 if (status==200)
                 {
                     this.daftar_permissions = data.permissions;
-                }                 
+                }  
             });          
 
             this.$ajax.get('/system/setting/roles/'+item.id+'/permission',{
@@ -370,7 +369,7 @@ export default {
                 if (status==200)
                 {
                     this.permissions_selected = data.permissions;
-                }                 
+                }  
             });  
             this.dialogRolePermission = true;
             this.editedItem=item;
@@ -395,7 +394,7 @@ export default {
             this.form_error_message='';
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;
+                this.btnLoading = true;
                 if (this.editedIndex > -1) 
                 {
                     this.$ajax.post('/system/setting/roles/'+this.editedItem.id,

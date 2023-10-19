@@ -131,8 +131,7 @@ import ProfilSiswaBaru from '@/components/ProfilSiswaBaru';
 import Filter7 from '@/components/sidebar/FilterMode7';
 export default {
     name: 'NilaiUjian', 
-    created()
-    {
+    created() {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         this.breadcrumbs = [
             {
@@ -235,14 +234,14 @@ export default {
         },
         dataTableRowClicked(item)
         {
-            if ( item === this.expanded[0])
+            if (item === this.expanded[0])
             {
-                this.expanded=[];                
+                this.expanded = [];        
             }
             else
             {
-                this.expanded=[item];
-            }               
+                this.expanded = [item];
+            }
         },
         badgeColor(item)
         {
@@ -259,7 +258,7 @@ export default {
         },
         printtoexcel: async function()
         {
-            this.btnLoading=true;
+            this.btnLoading = true;
             await this.$ajax.post('/spsb/reportspsbkelulusan/printtoexcel',
                 {
                     TA: this.tahun_pendaftaran,                                     

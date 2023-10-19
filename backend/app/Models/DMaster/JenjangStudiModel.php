@@ -23,7 +23,7 @@ class JenjangStudiModel extends Model {
      * @var array
      */
     protected $fillable = [
-        'kode_jenjang', 'nama_jenjang'
+        'kode_jenjang', 'nama_jenjang', 'status_pendaftaran'
     ];
     /**
      * enable auto_increment.

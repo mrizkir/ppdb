@@ -21,6 +21,6 @@ class KebutuhanKhususController extends Controller {
                                     'pid'=>'fetchdata',  
                                     'kebutuhan_khusus'=>$kebutuhan_khusus,                                                                                                                                   
                                     'message'=>'Fetch data kebutuhan khusus berhasil.'
-                                ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
+                                ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
     }  
 }

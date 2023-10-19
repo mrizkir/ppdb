@@ -31,7 +31,7 @@ class UIController extends Controller {
                                     'buka_ppdb'=>$buka_ppdb,
                                     'identitas'=>$identitas,
                                     'message'=>'Fetch data ui untuk front berhasil diperoleh'
-                                ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);
+                                ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
     /**
      * digunakan untuk mendapatkan Identitas Perguruan Tinggi
@@ -112,6 +112,6 @@ class UIController extends Controller {
                                     'kode_jenjang'=>$kode_jenjang,                                                                                                            
                                     'theme'=>$theme,
                                     'message'=>'Fetch data ui untuk admin berhasil diperoleh'
-                                ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);  
+                                ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  
     }
 }               

@@ -254,7 +254,7 @@ export default {
         save () {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;
+                this.btnLoading = true;
                 
                 this.$ajax.post('/system/migration/store',
                     {

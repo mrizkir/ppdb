@@ -225,7 +225,7 @@ export default {
       this.$refs.recaptcha.reset();  
       this.formdata.captcha_response='';
     },
-    closedialogfrm () {
+    closedialogfrm() {
       this.dialogkonfirmasipendaftaran = false;            
       setTimeout(() => {
         this.frmpendaftaran = Object.assign({}, this.formdefault);                                

@@ -80,8 +80,7 @@ import SystemConfigLayout from '@/views/layouts/SystemConfigLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
     name: 'HeaderLaporan',
-    created()
-    {
+    created() {
         this.breadcrumbs = [
             {
                 text: 'HOME',

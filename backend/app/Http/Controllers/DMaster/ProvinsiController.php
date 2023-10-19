@@ -18,7 +18,7 @@ class ProvinsiController extends Controller {
                                     'pid'=>'fetchdata',  
                                     'provinsi'=>$provinsi,                                                                                                                                   
                                     'message'=>'Fetch data provinsi berhasil.'
-                                ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
+                                ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
     }
     /**
      * daftar kabupaten
@@ -42,7 +42,7 @@ class ProvinsiController extends Controller {
                                         'pid'=>'fetchdata',  
                                         'kabupaten'=>$kabupaten,                                                                                                                                   
                                         'message'=>'Fetch data kabupaten berdasarkan id provinsi berhasil.'
-                                    ],200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  ;     
 
         }
     }

@@ -131,8 +131,7 @@ import VueRecaptcha from 'vue-recaptcha';
 import FrontLayout from '@/views/layouts/FrontLayout';
 export default {
     name: 'PSB',
-    created()
-    {
+    created() {
         this.initialize();
     },
     data: () => ({            
@@ -230,7 +229,7 @@ export default {
             this.$refs.recaptcha.reset();  
             this.formdata.captcha_response='';
         },
-        closedialogfrm () {
+        closedialogfrm() {
             this.dialogkonfirmasipendaftaran = false;            
             setTimeout(() => {
                 this.frmpendaftaran = Object.assign({}, this.formdefault);                                

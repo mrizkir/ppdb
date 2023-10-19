@@ -298,7 +298,7 @@ export default {
         {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;
+                this.btnLoading = true;
                 this.$ajax.post('/system/users/updatepassword/'+this.$store.getters['auth/AttributeUser']('id'),
                     {
                         '_method': 'PUT',
@@ -341,7 +341,7 @@ export default {
             {
                 if (this.formdata.foto)
                 {                
-                    this.btnLoading=true;
+                    this.btnLoading = true;
                     var formdata = new FormData();
                     formdata.append('foto',this.formdata.foto);
                     await this.$ajax.post('/setting/users/uploadfoto/'+this.$store.getters.User.id,formdata, 
@@ -363,7 +363,7 @@ export default {
         },
         resetFoto: async function() 
         {
-            this.btnLoading=true;
+            this.btnLoading = true;
             await this.$ajax.post('/setting/users/resetfoto/'+this.$store.getters.User.id,{}, 
                 {
                     headers: {

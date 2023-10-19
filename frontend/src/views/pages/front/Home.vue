@@ -305,7 +305,7 @@
     created() {
       this.registerTK = false;
       this.registerSD = true;
-      this.registerSMP = true;
+      this.registerSMP = false;
       this.registerSMA = true;
     },
     data: () => ({

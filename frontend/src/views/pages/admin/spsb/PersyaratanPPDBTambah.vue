@@ -217,8 +217,7 @@ import ModuleHeader from '@/components/ModuleHeader';
 
 export default {
     name: 'PersyaratanPPDBTambah', 
-    created()
-    {
+    created() {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         if (this.dashboard == 'siswabaru')
         {
