@@ -98,7 +98,7 @@ class TahunAjaranController extends Controller {
                                     'pid'=>'store',
                                     'ta'=>$ta,
                                     'message'=>'Data tahun ajaran berhasil disimpan.'
-                                ],200);
+                                ], 200);
 
     }
     /**
@@ -154,7 +154,7 @@ class TahunAjaranController extends Controller {
                                     'pid'=>'update',
                                     'ta'=>$ta,
                                     'message'=>'Data tahun ajaran '.$ta->tahun_ajaran.' berhasil diubah.'
-                                ],200);
+                                ], 200);
         }
     }
     /**
@@ -190,7 +190,7 @@ class TahunAjaranController extends Controller {
                                         'status'=>1,
                                         'pid'=>'destroy',
                                         'message'=>"Tahun Ajaran dengan kode ($id) berhasil dihapus"
-                                    ],200);
+                                    ], 200);
         }
 
     }

@@ -181,25 +181,25 @@ export default {
             status_mhs: [],
         },
         rule_nis: [
-            value => !!value||"Nomor Induk Siswa (NIS) mohon untuk diisi !!!",
+            value => !!value || "Nomor Induk Siswa (NIS) mohon untuk diisi !!!",
             value => /^[0-9]+$/.test(value) || 'Nomor Induk Siswa (NIS) hanya boleh angka',
         ], 
         rule_nirm: [
-            value => !!value||"Nomor Induk Registrasi Masuk (NIRM) mohon untuk diisi !!!",
+            value => !!value || "Nomor Induk Registrasi Masuk (NIRM) mohon untuk diisi !!!",
             value => /^[0-9]+$/.test(value) || 'Nomor Induk Registrasi Masuk (NIRM) hanya boleh angka',
         ], 
         rule_nama_mhs: [
-            value => !!value||"Nama Siswa mohon untuk diisi !!!",
+            value => !!value || "Nama Siswa mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Siswa hanya boleh string dan spasi',
         ], 
         rule_jenjang: [
-            value => !!value||"Program studi mohon untuk dipilih !!!"
+            value => !!value || "Program studi mohon untuk dipilih !!!"
         ], 
         rule_kelas: [
-            value => !!value||"Kelas mohon untuk dipilih !!!"
+            value => !!value || "Kelas mohon untuk dipilih !!!"
         ],
         rule_dw: [
-            value => !!value||"Mohon dipilih Dosen Wali untuk Siswa ini !!!"
+            value => !!value || "Mohon dipilih Dosen Wali untuk Siswa ini !!!"
         ], 
         
         datatableLoading: false,
@@ -223,11 +223,11 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data })=>{                              
+            }).then(({ data }) => {                              
                 this.daftar_dw = data.users; 
             });
 
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.post('/system/migration',
             {
                 TA: this.tahun_pendaftaran
@@ -236,7 +236,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data })=>{                              
+            }).then(({ data }) => {                              
                 this.daftar_tasmt = data.daftar_tasmt; 
                 var dt = this.daftar_tasmt;
                 var i=0;
@@ -244,7 +244,7 @@ export default {
                     this.formdata.status_mhs[i]='A';
                     i+=1;
                 });
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             });
             this.daftar_status_mhs=this.$store.getters['uiadmin/getDaftarStatusSiswa'];
 
@@ -272,7 +272,7 @@ export default {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }
-                ).then(({ data })=>{    
+                ).then(({ data }) => {    
                     console.log(data);
                     setTimeout(() => {
                         this.$router.go();

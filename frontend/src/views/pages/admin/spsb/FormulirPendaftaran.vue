@@ -173,8 +173,8 @@
       datatable: [],
       headers: [                        
         { text: '', value: 'foto', width:70 },    
-        { text: 'NAMA PESERTA DIDIK', value: 'name',width:350, sortable: true },
-        { text: 'JK', value: 'jk', sortable: false,width:50 },
+        { text: 'NAMA PESERTA DIDIK', value: 'name', width:350, sortable: true },
+        { text: 'JK', value: 'jk', sortable: false, width:50 },
         { text: 'NOMOR HP', value: 'nomor_hp', sortable: false, width: 100},
         { text: 'ASAL SEKOLAH', value: 'asal_sekolah', width: 100, sortable: true },
         { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
@@ -199,7 +199,7 @@
             this.user_id = this.$store.getters['auth/AttributeUser']('id');
           break;
           default :
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.post('/spsb/formulirpendaftaran',
             {
               TA: this.tahun_pendaftaran,
@@ -209,9 +209,9 @@
               headers: {
                 Authorization: this.$store.getters["auth/Token"]
               }
-            }).then(({ data })=>{     
+            }).then(({ data }) => {     
               this.datatable = data.psb;
-              this.datatableLoading=false;
+              this.datatableLoading = false;
             }); 
             this.firstloading=false;
             this.$refs.filter7.setFirstTimeLoading(this.firstloading); 

@@ -89,11 +89,11 @@
         desc: "",
       }, 
       rule_tinggal_bersama: [
-        value => !!value||"Peserta Didik tinggal bersama siapa mohon untuk diisi !!!",
+        value => !!value || "Peserta Didik tinggal bersama siapa mohon untuk diisi !!!",
         value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Tempat tinggal Peserta Didik hanya boleh string dan spasi',
       ],               
       rule_status_pernikahan: [
-        value => !!value||"Mohon Status Pernikahan untuk dipilih !!!"
+        value => !!value || "Mohon Status Pernikahan untuk dipilih !!!"
       ], 
     }),
     methods: {
@@ -106,7 +106,7 @@
             }
           },
           
-        ).then(({ data })=>{   
+        ).then(({ data }) => {   
           this.formdata.tinggal_bersama = data.formulir.tinggal_bersama;
           this.formdata.status_pernikahan = data.formulir.status_pernikahan;
           this.formdata.desc = data.formulir.desc;

@@ -31,7 +31,7 @@ class UsersAkademikController extends Controller {
                                 'role'=>$role,
                                 'users'=>$data,
                                 'message'=>'Fetch data users Akademik berhasil diperoleh'
-                            ],200);  
+                            ], 200);  
     }    
     /**
      * Store a newly created resource in storage.
@@ -147,7 +147,7 @@ class UsersAkademikController extends Controller {
                                     'pid'=>'store',
                                     'user'=>$user,                                    
                                     'message'=>'Data user Akademik berhasil disimpan.'
-                                ],200); 
+                                ], 200); 
 
     }
     /**
@@ -294,7 +294,7 @@ class UsersAkademikController extends Controller {
                                     'pid'=>'update',
                                     'user'=>$user,      
                                     'message'=>'Data user Akademik '.$user->username.' berhasil diubah.'
-                                ],200); 
+                                ], 200); 
         }
     }
     /**
@@ -334,7 +334,7 @@ class UsersAkademikController extends Controller {
                                         'status'=>1,
                                         'pid'=>'destroy',                
                                         'message'=>"User Akademik ($username) berhasil dihapus"
-                                    ],200);
+                                    ], 200);
         }
                   
     }

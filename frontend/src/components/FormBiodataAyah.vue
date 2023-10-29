@@ -260,60 +260,60 @@ export default {
             desc: "",
         },  
         rule_hubungan: [
-            value => !!value||"Mohon hubungan dengan Peserta Didik untuk dipilih !!!"
+            value => !!value || "Mohon hubungan dengan Peserta Didik untuk dipilih !!!"
         ], 
         rule_nama_ayah: [
-            value => !!value||"Nama Peserta Didik mohon untuk diisi !!!",
+            value => !!value || "Nama Peserta Didik mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Peserta Didik hanya boleh string dan spasi',
         ], 
         rule_tempat_lahir: [
-            value => !!value||"Tempat Lahir mohon untuk diisi !!!"
+            value => !!value || "Tempat Lahir mohon untuk diisi !!!"
         ], 
         rule_tanggal_lahir: [
-            value => !!value||"Tanggal Lahir mohon untuk dipilih !!!"
+            value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"
         ], 
         rule_agama: [
-            value => !!value||"Mohon agama Peserta Didik mohon untuk diisi !!!"
+            value => !!value || "Mohon agama Peserta Didik mohon untuk diisi !!!"
         ], 
         rule_desa: [
-            value => !!value||"Mohon Desa untuk dipilih !!!"
+            value => !!value || "Mohon Desa untuk dipilih !!!"
         ], 
         rule_alamat_rumah: [
-            value => !!value||"Alamat Rumah mohon untuk diisi !!!"
+            value => !!value || "Alamat Rumah mohon untuk diisi !!!"
         ], 
         rule_negara: [
-            value => !!value||"Mohon Kewarganegaraan  untuk dipilih !!!"
+            value => !!value || "Mohon Kewarganegaraan  untuk dipilih !!!"
         ], 
         rule_nomorhp: [
-            value => !!value||"Nomor HP mohon untuk diisi !!!",
+            value => !!value || "Nomor HP mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
         ], 
         rule_email: [
-            value => !!value||"Email mohon untuk diisi !!!",
+            value => !!value || "Email mohon untuk diisi !!!",
             v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
         ],  
         rule_pendidikan: [
-            value => !!value||"Jenjang pendidikan mohon untuk diisi !!!", 
+            value => !!value || "Jenjang pendidikan mohon untuk diisi !!!", 
         ], 
         rule_pekerjaan_instansi: [
-            value => !!value||"Pekerjaan beserta Instansi mohon untuk di isi !!!", 
+            value => !!value || "Pekerjaan beserta Instansi mohon untuk di isi !!!", 
         ], 
         rule_penghasilan: [
-            value => !!value||"Penghasilan mohon untuk untuk di isi !!!",
+            value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
             value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',  
         ], 
     }),
     methods: {
         initialize: async function()
         {
-            this.$ajax.get('/datamaster/negara').then(({ data })=>{                
+            this.$ajax.get('/datamaster/negara').then(({ data }) => {                
                 this.daftar_negara = data.negara;
             });
-            this.$ajax.get('/datamaster/provinsi').then(({ data })=>{                
+            this.$ajax.get('/datamaster/provinsi').then(({ data }) => {                
                 this.daftar_provinsi = data.provinsi;
             });
             
-            await this.$ajax.get('/datamaster/agama').then(({ data })=>{                  
+            await this.$ajax.get('/datamaster/agama').then(({ data }) => {                  
                 this.daftar_agama = data.agama;
             });
                     
@@ -324,7 +324,7 @@ export default {
                     }
                 },
                 
-            ).then(({ data })=>{   
+            ).then(({ data }) => {   
                 this.formdata.nama_ayah = data.formulir.nama_ayah;
                 this.formdata.hubungan = data.formulir.hubungan;
                 this.formdata.tempat_lahir = data.formulir.tempat_lahir;
@@ -424,7 +424,7 @@ export default {
             if (val.id != null && val.id != '')
             {
                 this.btnLoadingProv=true;
-                this.$ajax.get('/datamaster/provinsi/'+val.id+'/kabupaten').then(({ data })=>{                
+                this.$ajax.get('/datamaster/provinsi/'+val.id+'/kabupaten').then(({ data }) => {                
                     this.daftar_kabupaten = data.kabupaten;
                     this.btnLoadingProv=false;
                 });
@@ -436,7 +436,7 @@ export default {
             if (val.id != null && val.id != '')
             {
                 this.btnLoadingKab=true;
-                this.$ajax.get('/datamaster/kabupaten/'+val.id+'/kecamatan').then(({ data })=>{
+                this.$ajax.get('/datamaster/kabupaten/'+val.id+'/kecamatan').then(({ data }) => {
                     this.daftar_kecamatan = data.kecamatan;
                     this.btnLoadingKab=false;
                 });
@@ -447,7 +447,7 @@ export default {
             if (val.id != null && val.id != '')
             {
                 this.btnLoadingKec=true;
-                this.$ajax.get('/datamaster/kecamatan/'+val.id+'/desa').then(({ data })=>{
+                this.$ajax.get('/datamaster/kecamatan/'+val.id+'/desa').then(({ data }) => {
                     this.daftar_desa = data.desa;
                     this.btnLoadingKec=false;
                 });

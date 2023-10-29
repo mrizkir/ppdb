@@ -248,23 +248,23 @@ export default {
         fileaktalahir: null,
 
         rule_filefotoselfi: [
-            value => !!value||"Mohon pilih file foto selfi !!!",  
+            value => !!value || "Mohon pilih file foto selfi !!!",  
             value =>  !value || value.size < 2000000 || 'File foto selfi harus kurang dari 2MB.'                
         ],
         rule_file_ktp_ayah: [
-            value => !!value||"Mohon pilih file ktp !!!",  
+            value => !!value || "Mohon pilih file ktp !!!",  
             value =>  !value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
         ],
         rule_file_ktp_ibu: [
-            value => !!value||"Mohon pilih file ktp !!!",  
+            value => !!value || "Mohon pilih file ktp !!!",  
             value =>  !value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
         ],
         rule_filekk: [
-            value => !!value||"Mohon pilih file Kartu Keluarga !!!",  
+            value => !!value || "Mohon pilih file Kartu Keluarga !!!",  
             value =>  !value || value.size < 2000000 || 'File kartu keluarga harus kurang dari 2MB.'                
         ],
         rule_fileaktalahir: [
-            value => !!value||"Mohon pilih file Akta Lahir !!!",  
+            value => !!value || "Mohon pilih file Akta Lahir !!!",  
             value =>  !value || value.size < 2000000 || 'File akta lahir harus kurang dari 2MB.'                
         ],
     }),
@@ -278,7 +278,7 @@ export default {
                     }
                 },
                 
-            ).then(({ data })=>{   
+            ).then(({ data }) => {   
                 this.peryaratanppdb = data.formulir;
                 this.$refs.frmuploadfotoselfi.resetValidation();
             });

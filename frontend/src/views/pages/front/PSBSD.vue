@@ -158,30 +158,30 @@ export default {
       code: ""
     },
     rule_name: [
-      value => !!value||"Nama Calon Peserta Didik mohon untuk diisi !!!",
+      value => !!value || "Nama Calon Peserta Didik mohon untuk diisi !!!",
       value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Calon Peserta Didik hanya boleh string dan spasi',
     ], 
     rule_nomorhp: [
-      value => !!value||"Nomor Kontak WA mohon untuk diisi !!!",
+      value => !!value || "Nomor Kontak WA mohon untuk diisi !!!",
       value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor Kontak WA hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
     ], 
     rule_email: [
-      value => !!value||"Email mohon untuk diisi !!!",
+      value => !!value || "Email mohon untuk diisi !!!",
       v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
     ],
     rule_jenjang: [
-      value => !!value||"Program studi mohon untuk dipilih !!!"
+      value => !!value || "Program studi mohon untuk dipilih !!!"
     ], 
     rule_username: [
-      value => !!value||"Username mohon untuk diisi dengan nama depan anak !!!"
+      value => !!value || "Username mohon untuk diisi dengan nama depan anak !!!"
     ], 
     rule_password: [
-      value => !!value||"Password mohon untuk diisi !!!"
+      value => !!value || "Password mohon untuk diisi !!!"
     ], 
   }),
   methods: {
     initialize: async function() {
-      await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
+      await this.$ajax.get('/datamaster/jenjangstudi').then(({ data }) => {
         let jenjang_studi = data.jenjang_studi;
           jenjang_studi.forEach(element => {
           if (element.kode_jenjang == 2) {            
@@ -203,7 +203,7 @@ export default {
           kode_jenjang:2,
           password: this.formdata.password,
           captcha_response: this.formdata.captcha_response,
-        }).then(({ data })=>{
+        }).then(({ data }) => {
           this.formkonfirmasi.email = data.email;
           this.formkonfirmasi.code = data.code;
           this.btnLoading = false;

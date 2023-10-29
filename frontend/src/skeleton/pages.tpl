@@ -239,7 +239,7 @@ export default {
         datatable: [],
         headers: [                        
             { text: 'ID', value: 'id' },
-            { text: 'AKSI', value: 'actions', sortable: false,width:100 },
+            { text: 'AKSI', value: 'actions', sortable: false, width:100 },
         ],
         search: "", 
 
@@ -266,27 +266,27 @@ export default {
 
         //form rules  
         rule_user_nomorhp: [
-            value => !!value||"Kode mohon untuk diisi !!!",
+            value => !!value || "Kode mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Kode hanya boleh angka',
         ], 
         rule_name: [
-            value => !!value||"Mohon untuk di isi name !!!",  
+            value => !!value || "Mohon untuk di isi name !!!",  
             value => /^[A-Za-z\s]*$/.test(value) || 'Name hanya boleh string dan spasi',
         ], 
     }),
     methods: {
         initialize: async function() 
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.get('/path',{
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data })=>{               
+            }).then(({ data }) => {               
                 this.datatable = data.object;
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             }).catch(()=>{
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             });
         },
         dataTableRowClicked(item)
@@ -307,7 +307,7 @@ export default {
             //     headers: {
             //         Authorization: this.$store.getters["auth/Token"]
             //     }
-            // }).then(({ data })=>{               
+            // }).then(({ data }) => {               
                                            
             // });
         }, 
@@ -332,7 +332,7 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(({ data })=>{   
+                    ).then(({ data }) => {   
                         Object.assign(this.datatable[this.editedIndex], data.object);
                         this.closedialogfrm();
                         this.btnLoading = false;
@@ -350,7 +350,7 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(({ data })=>{   
+                    ).then(({ data }) => {   
                         this.datatable.push(data.object);
                         this.closedialogfrm();
                         this.btnLoading = false;

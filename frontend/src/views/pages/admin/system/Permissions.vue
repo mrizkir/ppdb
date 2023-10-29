@@ -190,21 +190,21 @@ export default {
         },
         //form rules        
         rule_permission_name: [
-            value => !!value||"Mohon untuk di isi nama Permission !!!",  
+            value => !!value || "Mohon untuk di isi nama Permission !!!",  
             value => /^[a-zA-Z\\-]+$/.test(value) || 'Nama Permission hanya boleh string',
         ], 
     }),
     methods: {
         initialize () 
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             this.$ajax.get('/system/setting/permissions',{
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{                
+            }).then(({ data }) => {                
                 this.daftar_permissions = data.permissions;
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             });
             
         },

@@ -408,51 +408,51 @@
         desc: "",
       },
       rule_nama_siswa: [
-        value => !!value||"Nama Peserta Didik mohon untuk diisi !!!",
+        value => !!value || "Nama Peserta Didik mohon untuk diisi !!!",
         value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Peserta Didik hanya boleh string dan spasi",
       ], 
       rule_nama_panggilan: [
-        value => !!value||"Nama Panggilan Panggilan Peserta mohon untuk diisi !!!",
+        value => !!value || "Nama Panggilan Panggilan Peserta mohon untuk diisi !!!",
         value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Panggilan Peserta Didik hanya boleh string dan spasi",
       ],
       rule_nik: [
-        value => !!value||"Mohon NIK Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
+        value => !!value || "Mohon NIK Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
         value => /^[0-9]+$/.test(value) || "NIk Peserta Didik hanya boleh angka",
       ], 
       rule_tempat_lahir: [
-        value => !!value||"Tempat Lahir mohon untuk diisi !!!"
+        value => !!value || "Tempat Lahir mohon untuk diisi !!!"
       ], 
       rule_tanggal_lahir: [
-        value => !!value||"Tanggal Lahir mohon untuk dipilih !!!"
+        value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"
       ], 
       rule_agama: [
-        value => !!value||"Mohon agama Peserta Didik mohon untuk diisi !!!"
+        value => !!value || "Mohon agama Peserta Didik mohon untuk diisi !!!"
       ], 
       rule_tinggi: [
-        value => !!value||"Tinggi badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
+        value => !!value || "Tinggi badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
         value => /^[0-9]+$/.test(value) || "Tinggi badan Peserta Didik hanya boleh angka",
       ], 
       rule_berat_badan: [
-        value => !!value||"Berat badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
+        value => !!value || "Berat badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
         value => /^[0-9]+$/.test(value) || "Berat badan Peserta Didik hanya boleh angka",
       ], 
       rule_desa: [
-        value => !!value||"Mohon Desa untuk dipilih !!!"
+        value => !!value || "Mohon Desa untuk dipilih !!!"
       ], 
       rule_address1_rt: [
-        value => !!value||"Mohon RT untuk di isi !!!"
+        value => !!value || "Mohon RT untuk di isi !!!"
       ], 
       rule_address1_rw: [
-        value => !!value||"Mohon RW untuk di isi !!!"
+        value => !!value || "Mohon RW untuk di isi !!!"
       ], 
       rule_negara: [
-        value => !!value||"Mohon Kewarganegaraan  untuk dipilih !!!"
+        value => !!value || "Mohon Kewarganegaraan  untuk dipilih !!!"
       ], 
       rule_alamat_rumah: [
-        value => !!value||"Alamat Rumah mohon untuk diisi !!!"
+        value => !!value || "Alamat Rumah mohon untuk diisi !!!"
       ], 
       rule_kode_pos: [
-        value => !!value||"Kode POS mohon untuk diisi !!!",
+        value => !!value || "Kode POS mohon untuk diisi !!!",
         value => /^[0-9]+$/.test(value) || "Kode pos hanya boleh angka", 
         value => {
           if (value && typeof value !== "undefined" && value.length > 0){
@@ -465,47 +465,47 @@
         }               
       ], 
       rule_moda_transportasi: [
-        value => !!value||"Mohon moda transportasi untuk dipilih !!!"
+        value => !!value || "Mohon moda transportasi untuk dipilih !!!"
       ], 
       rule_jarak_ke_sekolah: [
-        value => !!value||"Jarak ke sekolah mohon untuk diisi !!!",
+        value => !!value || "Jarak ke sekolah mohon untuk diisi !!!",
         value => /^[0-9]+$/.test(value) || "Jarak ke sekolah hanya boleh angka",
       ], 
       rule_waktu_tempuh: [
-        value => !!value||"Waktu tempuh ke sekolah mohon untuk diisi !!!",
+        value => !!value || "Waktu tempuh ke sekolah mohon untuk diisi !!!",
         value => /^[0-9]+$/.test(value) || "Waktu sekolah ke sekolah hanya boleh angka",
       ], 
       rule_jenjang: [
-        value => !!value||"Jenjang Studi mohon untuk dipilih !!!"
+        value => !!value || "Jenjang Studi mohon untuk dipilih !!!"
       ], 
       rule_nisn: [
-        value => !!value||"NISN mohon untuk diisi !!!",
+        value => !!value || "NISN mohon untuk diisi !!!",
         value => /^[0-9]+$/.test(value) || "NISN hanya boleh angka",
       ], 
     }),
     methods: {
       initialize: async function()
       {
-        this.$ajax.get("/datamaster/negara").then(({ data })=>{                
+        this.$ajax.get("/datamaster/negara").then(({ data }) => {                
           this.daftar_negara = data.negara;
         });
-        this.$ajax.get("/datamaster/provinsi").then(({ data })=>{                
+        this.$ajax.get("/datamaster/provinsi").then(({ data }) => {                
           this.daftar_provinsi = data.provinsi;
         });
         
-        await this.$ajax.get("/datamaster/agama").then(({ data })=>{                  
+        await this.$ajax.get("/datamaster/agama").then(({ data }) => {                  
           this.daftar_agama = data.agama;
         });
 
-        await this.$ajax.get("/datamaster/modatransportasi").then(({ data })=>{                  
+        await this.$ajax.get("/datamaster/modatransportasi").then(({ data }) => {                  
           this.daftar_moda_transportasi = data.moda_transportasi;
         });
         
-        await this.$ajax.get("/datamaster/kebutuhankhusus").then(({ data })=>{                  
+        await this.$ajax.get("/datamaster/kebutuhankhusus").then(({ data }) => {                  
           this.daftar_kebutuhan_khusus = data.kebutuhan_khusus;
         });
 
-        await this.$ajax.get("/datamaster/jenjangstudi").then(({ data })=>{                  
+        await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {                  
           this.daftar_jenjang = data.jenjang_studi;
         });
             
@@ -516,7 +516,7 @@
             }
           },
           
-        ).then(({ data })=>{   
+        ).then(({ data }) => {   
           this.formdata.nama_siswa = data.formulir.nama_siswa;
           this.formdata.nisn = data.formulir.nisn;
           this.formdata.nama_panggilan = data.formulir.nama_panggilan;
@@ -571,7 +571,7 @@
       save: async function() {
         if (this.$refs.frmdata.validate()) {
           this.btnLoading = true;
-          await this.$ajax.post("/spsb/formulirpendaftaran/"+this.user_id, {
+          await this.$ajax.post("/spsb/formulirpendaftaran/" + this.user_id, {
             _method: "put",
             nama_siswa: this.formdata.nama_siswa,
             nisn: this.formdata.nisn,
@@ -631,7 +631,7 @@
       {
         if (this.$store.getters["uiadmin/getDefaultDashboard"] =="siswabaru")
         {
-          this.$router.push("/dashboard/"+this.$store.getters["auth/AccessToken"]);
+          this.$router.push("/dashboard/" + this.$store.getters["auth/AccessToken"]);
         }
         else
         {
@@ -644,7 +644,7 @@
         if (val.id != null && val.id != "")
         {
           this.btnLoadingProv=true;
-          this.$ajax.get("/datamaster/provinsi/"+val.id+"/kabupaten").then(({ data })=>{                
+          this.$ajax.get("/datamaster/provinsi/"+val.id+"/kabupaten").then(({ data }) => {                
             this.daftar_kabupaten = data.kabupaten;
             this.btnLoadingProv=false;
           });
@@ -655,7 +655,7 @@
         if (val.id != null && val.id != "")
         {
           this.btnLoadingKab=true;
-          this.$ajax.get("/datamaster/kabupaten/"+val.id+"/kecamatan").then(({ data })=>{
+          this.$ajax.get("/datamaster/kabupaten/"+val.id+"/kecamatan").then(({ data }) => {
             this.daftar_kecamatan = data.kecamatan;
             this.btnLoadingKab=false;
           });
@@ -665,7 +665,7 @@
         if (val.id != null && val.id != "") {
           this.btnLoadingKec=true;
           this.$ajax.get("/datamaster/kecamatan/" + val.id + "/desa")
-            .then(({ data })=>{
+            .then(({ data }) => {
               this.daftar_desa = data.desa;
               this.btnLoadingKec=false;
             });

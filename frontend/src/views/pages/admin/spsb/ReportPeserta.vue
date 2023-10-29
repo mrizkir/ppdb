@@ -186,10 +186,10 @@ export default {
         //tables
         headers: [                        
             { text: '', value: 'foto', width:70 }, 
-            { text: 'NAMA PESERTA DIDIK', value: 'name',width:350, sortable: true },
+            { text: 'NAMA PESERTA DIDIK', value: 'name', width:350, sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },
-            { text: 'FOTO SELFIE', value: 'file_fotoselfi', sortable: false}, 
-            { text: 'KTP', value: 'file_ktp_ayah', sortable: false},  
+            { text: 'FOTO SELFIE', value: 'file_fotoselfi', sortable: false }, 
+            { text: 'KTP', value: 'file_ktp_ayah', sortable: false },  
             { text: 'KK', value: 'file_kk', sortable: true},  
             { text: 'AKTA LAHIR', value: 'file_aktalahir', sortable: true}, 
             { text: 'BIODATA', value: 'biodata', sortable: false, width: 100 },
@@ -213,7 +213,7 @@ export default {
         },
         initialize: async function() 
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.post('/spsb/psbpersyaratan',
             {
                 TA: this.tahun_pendaftaran,
@@ -223,9 +223,9 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data })=>{               
+            }).then(({ data }) => {               
                 this.datatable = data.psb;
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             });
             this.firstloading=false;
             this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
@@ -251,7 +251,7 @@ export default {
         },    
         async printBiodata(item)
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.post('/report/calonpesertadidik/printpdf',
             {
                 user_id:item.id,
@@ -260,12 +260,12 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data })=>{               
+            }).then(({ data }) => {               
                 this.file_pdf = data.pdf_file;
                 this.dialogprintpdf=true;
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             }).catch(()=>{
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             });
         },
         closedialogprintpdf () {                  

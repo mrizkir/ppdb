@@ -101,7 +101,7 @@ class PSBPersyaratanController extends Controller {
                                 'pid'=>'fetchdata',
                                 'psb'=>$data,
                                 'message'=>'Fetch data calon calon peserta didik baru berhasil diperoleh'
-                            ],200);  
+                            ], 200);  
     }  
     /**
      * Store a newly created resource in storage.
@@ -204,7 +204,7 @@ class PSBPersyaratanController extends Controller {
                                     'email'=>$user->email,                              
                                     'code'=>\App\Helpers\Helper::formatUang($code),                                                                    
                                     'message'=>'Data Peserta Didik baru berhasil disimpan.'
-                                ],200); 
+                                ], 200); 
 
     }      
     /**
@@ -277,7 +277,7 @@ class PSBPersyaratanController extends Controller {
                                     'pendaftar'=>$user,
                                     'code'=>$code,                                                                                                    
                                     'message'=>'Data Peserta Didik baru berhasil disimpan.'
-                                ],200); 
+                                ], 200); 
 
     }      
     /**
@@ -338,7 +338,7 @@ class PSBPersyaratanController extends Controller {
                                     'pid'=>'store',
                                     'pendaftar'=>$user,                                                                                                  
                                     'message'=>'Data Peserta Didik baru berhasil diubah.'
-                                ],200); 
+                                ], 200); 
 
     }      
     /**
@@ -619,7 +619,7 @@ class PSBPersyaratanController extends Controller {
                                             'pid'=>'fetchdata',                                                                                                                                        
                                             'user'=>$user,                                                                                                                                        
                                             'message'=>'Peserta Didik berhasil diperoleh.'
-                                        ],200);
+                                        ], 200);
             }
             else
             {
@@ -694,7 +694,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'store',
                                         'konfirmasi'=>$konfirmasi,
                                         'message'=>"Konfirmasi pembayaran untuk user_id ('.$konfirmasi->user_id.')   berhasil diupload"
-                                    ],200);
+                                    ], 200);
         }
         else
         {
@@ -819,7 +819,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'store',
                                         'formulir'=>$formulir,                                                                                                                                          
                                         'message'=>'Formulir Pendaftaran Peserta Didik baru berhasil diubah.'
-                                    ],200); 
+                                    ], 200); 
         }
     }           
     /**
@@ -861,7 +861,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'store',
                                         'formulir'=>$formulir,                                                                                                                                          
                                         'message'=>'Formulir Situasi Keluarga baru berhasil diubah.'
-                                    ],200); 
+                                    ], 200); 
         }
     }           
     /**
@@ -948,7 +948,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'store',
                                         'formulir'=>$formulir,                                                                                                                                          
                                         'message'=>'Formulir Biodata Ayah Wali baru berhasil diubah.'
-                                    ],200); 
+                                    ], 200); 
         }
     }           
     /**
@@ -1030,7 +1030,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'store',
                                         'formulir'=>$formulir,                                                                                                                                          
                                         'message'=>'Formulir Biodata Ibu Wali baru berhasil diubah.'
-                                    ],200); 
+                                    ], 200); 
         }
     }           
     public function uploadfileselfi (Request $request,$id)
@@ -1067,7 +1067,7 @@ class PSBPersyaratanController extends Controller {
                                             'pid'=>'store',                                            
                                             'formulir'=>$formulir,                
                                             'message'=>"Foto Selfi berhasil diupload"
-                                        ],200);    
+                                        ], 200);    
                     
             }
             else
@@ -1116,7 +1116,7 @@ class PSBPersyaratanController extends Controller {
                                             'pid'=>'store',                                                   
                                             'formulir'=>$formulir,                
                                             'message'=>"File KTP Ayah Wali berhasil diupload"
-                                        ],200);    
+                                        ], 200);    
                     
             }
             else
@@ -1165,7 +1165,7 @@ class PSBPersyaratanController extends Controller {
                                             'pid'=>'store',                                                   
                                             'formulir'=>$formulir,                
                                             'message'=>"File KTP Ibu Wali berhasil diupload"
-                                        ],200);    
+                                        ], 200);    
                     
             }
             else
@@ -1214,7 +1214,7 @@ class PSBPersyaratanController extends Controller {
                                             'pid'=>'store',                                                   
                                             'formulir'=>$formulir,                
                                             'message'=>"File KK berhasil diupload"
-                                        ],200);    
+                                        ], 200);    
                     
             }
             else
@@ -1263,7 +1263,7 @@ class PSBPersyaratanController extends Controller {
                                             'pid'=>'store',                                                   
                                             'formulir'=>$formulir,                
                                             'message'=>"File KK berhasil diupload"
-                                        ],200);    
+                                        ], 200);    
                     
             }
             else
@@ -1315,7 +1315,7 @@ class PSBPersyaratanController extends Controller {
                                         'status'=>1,
                                         'pid'=>'destroy',                
                                         'message'=>"Peserta Didik Baru ($name) berhasil dihapus"
-                                    ],200);
+                                    ], 200);
         }
                   
     }      

@@ -164,7 +164,7 @@ export default {
         datatable: [],
         headers: [                        
             { text: '', value: 'foto', width:70 },    
-            { text: 'NAMA SISWA', value: 'name',width:350, sortable: true },
+            { text: 'NAMA SISWA', value: 'name', width:350, sortable: true },
             { text: 'TINGGAL BERSAMA', value: 'tinggal_bersama', width: 100},
             { text: 'STATUS PERNIKAHAN ORTU', value: 'status_pernikahan', width: 100, sortable: true },
             { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
@@ -190,7 +190,7 @@ export default {
                     this.user_id=this.$store.getters['auth/AttributeUser']('id');
                 break;
                 default :
-                    this.datatableLoading=true;
+                    this.datatableLoading = true;
                     await this.$ajax.post('/spsb/situasikeluarga',
                     {
                         TA: this.tahun_pendaftaran,
@@ -200,9 +200,9 @@ export default {
                         headers: {
                             Authorization: this.$store.getters["auth/Token"]
                         }
-                    }).then(({ data })=>{               
+                    }).then(({ data }) => {               
                         this.datatable = data.psb;
-                        this.datatableLoading=false;
+                        this.datatableLoading = false;
                     }); 
                     this.firstloading=false;
                     this.$refs.filter7.setFirstTimeLoading(this.firstloading); 

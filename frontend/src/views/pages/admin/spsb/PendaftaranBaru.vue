@@ -474,11 +474,11 @@ export default {
     //tables
     headers: [                        
       { text: '', value: 'foto', width:70 }, 
-      { text: 'NAMA PESERTA DIDIK', value: 'name',width:350, sortable: true },
+      { text: 'NAMA PESERTA DIDIK', value: 'name', width:350, sortable: true },
       { text: 'USERNAME', value: 'username', sortable: true },
       { text: 'EMAIL', value: 'email', sortable: true },  
-      { text: 'NOMOR HP', value: 'nomor_hp', sortable: false},
-      { text: 'KODE', value: 'code', sortable: false},  
+      { text: 'NOMOR HP', value: 'nomor_hp', sortable: false },
+      { text: 'KODE', value: 'code', sortable: false },  
       { text: 'TGL.DAFTAR', value: 'created_at', sortable: true},  
       { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
     ],
@@ -520,28 +520,28 @@ export default {
     editedIndex: -1,
 
     rule_name: [
-      value => !!value||"Nama Siswa mohon untuk diisi !!!",
+      value => !!value || "Nama Siswa mohon untuk diisi !!!",
       value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Siswa hanya boleh string dan spasi',
     ], 
     rule_nomorhp: [
-      value => !!value||"Nomor HP mohon untuk diisi !!!",
+      value => !!value || "Nomor HP mohon untuk diisi !!!",
       value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
     ], 
     rule_email: [
-      value => !!value||"Email mohon untuk diisi !!!",
+      value => !!value || "Email mohon untuk diisi !!!",
       v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
     ],
     rule_fakultas: [
-      value => !!value||"Fakultas mohon untuk dipilih !!!"
+      value => !!value || "Fakultas mohon untuk dipilih !!!"
     ], 
     rule_jenjang: [
-      value => !!value||"Jenjang studi mohon untuk dipilih !!!"
+      value => !!value || "Jenjang studi mohon untuk dipilih !!!"
     ],   
     rule_username: [
-      value => !!value||"Username mohon untuk diisi !!!"
+      value => !!value || "Username mohon untuk diisi !!!"
     ], 
     rule_password: [
-      value => !!value||"Password mohon untuk diisi !!!"
+      value => !!value || "Password mohon untuk diisi !!!"
     ], 
   }),
   methods: {
@@ -555,7 +555,7 @@ export default {
     },
     initialize: async function() 
     {
-      this.datatableLoading=true;
+      this.datatableLoading = true;
       await this.$ajax.post('/spsb/psb',
       {
         TA: this.tahun_pendaftaran,
@@ -565,9 +565,9 @@ export default {
         headers: {
           Authorization: this.$store.getters["auth/Token"]
         }
-      }).then(({ data })=>{               
+      }).then(({ data }) => {               
         this.datatable = data.psb;
-        this.datatableLoading=false;
+        this.datatableLoading = false;
       });
       this.firstloading=false;
       this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
@@ -619,7 +619,7 @@ export default {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
-      ).then(({ data })=>{   
+      ).then(({ data }) => {   
         this.data_konfirmasi = data.konfirmasi;
         this.btnLoading = false;
       }).catch(()=>{
@@ -652,7 +652,7 @@ export default {
       this.formdata.ta=this.tahun_pendaftaran;
       this.formdata.kode_jenjang=this.kode_jenjang;
 
-      await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
+      await this.$ajax.get('/datamaster/jenjangstudi').then(({ data }) => {
         this.daftar_jenjang = data.jenjang_studi;
       });
 
@@ -704,7 +704,7 @@ export default {
                 Authorization: this.$store.getters["auth/Token"]
               }
             }
-          ).then(({ data })=>{                           
+          ).then(({ data }) => {                           
             this.datatable.push(data.pendaftar);
             this.closedialogfrm();
             this.btnLoading = false;
@@ -739,7 +739,7 @@ export default {
         headers: {
           Authorization: this.$store.getters["auth/Token"]
         }
-      }).then(({ data })=>{               
+      }).then(({ data }) => {               
         this.formdata=item;
         this.data_konfirmasi = data.konfirmasi;
         this.dialogdetailitem=true;
@@ -750,7 +750,7 @@ export default {
       this.formdata = Object.assign({}, item);
       this.formdata.nomor_hp='+'+this.formdata.nomor_hp;
       this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
-      await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
+      await this.$ajax.get('/datamaster/jenjangstudi').then(({ data }) => {
         this.daftar_jenjang = data.jenjang_studi;
       });
       this.dialogfrm = true;

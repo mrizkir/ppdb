@@ -24,7 +24,7 @@ class PersyaratanController extends Controller {
                                     'pid'=>'fetchdata',  
                                     'persyaratan'=>$persyaratan,                                                                                                                                   
                                     'message'=>'Fetch data persyaratan berhasil.'
-                                ],200);     
+                                ], 200);     
     }    
     /**
      * daftar persyaratan dari sebuah proses 
@@ -65,7 +65,7 @@ class PersyaratanController extends Controller {
                                     'pid'=>'fetchdata',  
                                     'persyaratan'=>$persyaratan,                                                                                                                                   
                                     'message'=>"Fetch data persyaratan $id berhasil diperoleh."
-                                ],200);     
+                                ], 200);     
 
 
     }
@@ -102,7 +102,7 @@ class PersyaratanController extends Controller {
                                         'status'=>1,
                                         'pid'=>'destroy',                
                                         'message'=>"Persyaratan dengan kode ($id) berhasil dihapus"
-                                    ],200);
+                                    ], 200);
         }
                   
     }

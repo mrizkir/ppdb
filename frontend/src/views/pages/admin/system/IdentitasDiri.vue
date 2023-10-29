@@ -114,26 +114,26 @@ export default {
         },
         //form rules        
         rule_nama_sekolah: [
-            value => !!value||"Mohon untuk di isi Nama Sekolah !!!",  
+            value => !!value || "Mohon untuk di isi Nama Sekolah !!!",  
         ], 
         rule_nama_singkatan_pt: [
-            value => !!value||"Mohon untuk di isi Nama Alias Sekolah !!!",  
+            value => !!value || "Mohon untuk di isi Nama Alias Sekolah !!!",  
         ],
         rule_kode_sekolah: [
-            value => !!value||"Mohon untuk di isi Kode Sekolah !!!",  
+            value => !!value || "Mohon untuk di isi Kode Sekolah !!!",  
             value => /^[0-9]+$/.test(value) || 'Kode Sekolah hanya boleh angka',
         ]
     }),
     methods: {
         initialize: async function() 
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.get('/system/setting/variables',
             {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{  
+            }).then(({ data }) => {  
                 let setting = data.setting;
                 this.formdata.nama_sekolah=setting.NAMA_SEKOLAH;
                 this.formdata.nama_alias_pt=setting.NAMA_SEKOLAH_ALIAS;

@@ -263,7 +263,7 @@ export default {
         headers: [                        
             { text: 'NAMA ROLE', value: 'name' },
             { text: 'GUARD', value: 'guard_name' }, 
-            { text: 'AKSI', value: 'actions', sortable: false,width:130 },
+            { text: 'AKSI', value: 'actions', sortable: false, width:130 },
         ],
         //tables
         headersdetail: [                        
@@ -293,7 +293,7 @@ export default {
         },
         //form rules        
         rule_role_name: [
-            value => !!value||"Mohon untuk di isi nama Role !!!",  
+            value => !!value || "Mohon untuk di isi nama Role !!!",  
             value => /^[A-Za-z]*$/.test(value) || 'Nama Role hanya boleh string',
         ], 
         form_error_message: ""
@@ -301,16 +301,16 @@ export default {
     methods: {
         initialize () 
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             this.$ajax.get('/system/setting/roles',{
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data,status})=>{
+            }).then(({data,status}) => {
                 if (status==200)
                 {
                     this.datatable = data.roles;
-                    this.datatableLoading=false;
+                    this.datatableLoading = false;
                 }     
             
             });
@@ -335,7 +335,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data,status})=>{
+            }).then(({data,status}) => {
                 if (status==200)
                 {
                     this.permissions_selected = data.permissions;
@@ -354,7 +354,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data,status})=>{
+            }).then(({data,status}) => {
                 if (status==200)
                 {
                     this.daftar_permissions = data.permissions;
@@ -365,7 +365,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({data,status})=>{
+            }).then(({data,status}) => {
                 if (status==200)
                 {
                     this.permissions_selected = data.permissions;
@@ -407,7 +407,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({ data })=>{   
+                    ).then(({ data }) => {   
                         Object.assign(this.datatable[this.editedIndex], data.roles);
                         this.close();
                     }).catch(()=>{
@@ -424,7 +424,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({ data })=>{   
+                    ).then(({ data }) => {   
                         this.datatable.push(data.roles);
                         this.close();
                     }).catch(()=>{

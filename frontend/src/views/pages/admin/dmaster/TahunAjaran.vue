@@ -233,27 +233,27 @@ export default {
 
     //form rules
     rule_tahun: [
-      value => !!value||"Tahun Pelajaran mohon untuk diisi Misalnya 2020 !!!",
+      value => !!value || "Tahun Pelajaran mohon untuk diisi Misalnya 2020 !!!",
       value => /^[0-9]+$/.test(value) || 'Tahun Pelajaran hanya boleh angka',
       value => (value && value.length == 4) || 'Kode kelas hanya boleh 4 karakter'
     ],
     rule_tahun_ajaran: [
-      value => !!value||"Mohon untuk di isi nama tahun akademik !!!",
+      value => !!value || "Mohon untuk di isi nama tahun akademik !!!",
     ],
   }),
   methods: {
     initialize: async function()
     {
-      this.datatableLoading=true;
+      this.datatableLoading = true;
       await this.$ajax.get('/datamaster/tahunajaran',{
         headers: {
           Authorization: this.TOKEN
         }
-      }).then(({ data })=>{
+      }).then(({ data }) => {
         this.datatable = data.ta;
-        this.datatableLoading=false;
+        this.datatableLoading = false;
       }).catch(()=>{
-        this.datatableLoading=false;
+        this.datatableLoading = false;
       });
     },
     dataTableRowClicked(item)
@@ -294,7 +294,7 @@ export default {
                 Authorization: this.TOKEN
               }
             }
-          ).then(({ data })=>{
+          ).then(({ data }) => {
             Object.assign(this.datatable[this.editedIndex], data.ta);
             this.closedialogfrm();
             this.btnLoading = false;
@@ -313,7 +313,7 @@ export default {
                 Authorization: this.TOKEN
               }
             }
-          ).then(({ data })=>{
+          ).then(({ data }) => {
             this.datatable.push(data.ta);
             this.closedialogfrm();
             this.btnLoading = false;

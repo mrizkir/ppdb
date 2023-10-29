@@ -122,13 +122,13 @@ export default {
     methods: {
         initialize: async function() 
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.get('/system/setting/variables',
             {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{  
+            }).then(({ data }) => {  
                 let setting = data.setting;
                 this.formdata.header_1=setting.HEADER_1;
                 this.formdata.header_2=setting.HEADER_2;

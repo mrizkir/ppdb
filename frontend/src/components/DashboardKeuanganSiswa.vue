@@ -97,8 +97,8 @@ export default {
         kombi_genap_cancelled: [],    
 
         headers: [                        
-            { text: 'NAMA KOMPONEN', value: 'nama_kombi', sortable: false},    
-            { text: 'JUMLAH', align: 'end',value: 'jumlah',width:250, sortable: false},
+            { text: 'NAMA KOMPONEN', value: 'nama_kombi', sortable: false },    
+            { text: 'JUMLAH', align: 'end',value: 'jumlah', width:250, sortable: false },
         ], 
         //statistik
         total_transaction:0,
@@ -115,7 +115,7 @@ export default {
     methods:{
         initialize: async function()
 		{	
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.post('/dashboard/keuangan',
             {
                 TA: this.ta,
@@ -124,7 +124,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data })=>{                 
+            }).then(({ data }) => {                 
                 this.total_transaction = data.total_transaction;
                 this.total_transaction_paid = data.total_transaction_paid;
                 this.total_transaction_unpaid = data.total_transaction_unpaid;
@@ -139,9 +139,9 @@ export default {
                 this.kombi_ganjil_cancelled = data.kombi_ganjil_cancelled;
                 this.kombi_genap_cancelled = data.kombi_genap_cancelled;
                 
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             }).catch(()=>{
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             });
 
         }

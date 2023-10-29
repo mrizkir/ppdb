@@ -366,23 +366,23 @@ export default {
         },
         //form rules        
         rule_user_name: [
-            value => !!value||"Mohon untuk di isi nama User !!!",  
+            value => !!value || "Mohon untuk di isi nama User !!!",  
             value => /^[A-Za-z\s]*$/.test(value) || 'Nama User hanya boleh string dan spasi',
         ], 
         rule_user_email: [
-            value => !!value||"Mohon untuk di isi email User !!!",  
+            value => !!value || "Mohon untuk di isi email User !!!",  
             value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',    
         ], 
         rule_user_nomorhp: [
-            value => !!value||"Nomor HP mohon untuk diisi !!!",
+            value => !!value || "Nomor HP mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
         ], 
         rule_user_username: [
-            value => !!value||"Mohon untuk di isi username User !!!",  
+            value => !!value || "Mohon untuk di isi username User !!!",  
             value => /^[A-Za-z_]*$/.test(value) || 'Username hanya boleh string dan underscore', 
         ], 
         rule_user_password: [
-            value => !!value||"Mohon untuk di isi password User !!!",
+            value => !!value || "Mohon untuk di isi password User !!!",
             value => {
                 if (value && typeof value !== 'undefined' && value.length > 0){
                     return value.length >= 8 || 'Minimal Password 8 karaketer';
@@ -408,15 +408,15 @@ export default {
     methods: {
         initialize: async function() 
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.get('/system/userskeuangan',{
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{               
+            }).then(({ data }) => {               
                 this.daftar_users = data.users;
                 this.role_id = data.role.id;
-                this.datatableLoading=false;
+                this.datatableLoading = false;
             });
             
         },
@@ -455,7 +455,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{      
+            }).then(({ data }) => {      
                 let roles = data.roles;
                 var daftar_roles=[];
                 roles.forEach(element => {
@@ -490,7 +490,7 @@ export default {
                         Authorization: this.TOKEN
                     }
                 }
-            ).then(({ data })=>{   
+            ).then(({ data }) => {   
                 let daftar_jenjang = data.daftar_jenjang;
                 var jenjang=[];
                 daftar_jenjang.forEach(element => {
@@ -503,7 +503,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{      
+            }).then(({ data }) => {      
                 let roles = data.roles;
                 var daftar_roles=[];
                 roles.forEach(element => {
@@ -531,7 +531,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{  
+            }).then(({ data }) => {  
                 this.editedItem.role_id = data.roles;
                 this.btnLoading = false;
                 this.dialogEdit = true;
@@ -543,7 +543,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{
+            }).then(({ data }) => {
                 this.daftar_permissions = data.permissions;
             }).catch(()=>{
                 this.btnLoading = false;
@@ -553,7 +553,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{
+            }).then(({ data }) => {
                 this.permissions_selected = data.permissions;
                 this.btnLoading = false;
                    
@@ -602,7 +602,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({ data })=>{   
+                    ).then(({ data }) => {   
                         Object.assign(this.daftar_users[this.editedIndex], data.user);
                         this.close();
                     }).catch(()=>{
@@ -625,7 +625,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({ data })=>{   
+                    ).then(({ data }) => {   
                         this.daftar_users.push(data.user);
                         this.close();
                     }).catch(()=>{

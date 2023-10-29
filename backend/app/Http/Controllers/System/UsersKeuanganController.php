@@ -31,7 +31,7 @@ class UsersKeuanganController extends Controller {
                                 'role'=>$role,
                                 'users'=>$data,
                                 'message'=>'Fetch data users Keuangan berhasil diperoleh'
-                            ],200);  
+                            ], 200);  
     }    
     /**
      * Store a newly created resource in storage.
@@ -146,7 +146,7 @@ class UsersKeuanganController extends Controller {
                                     'pid'=>'store',
                                     'user'=>$user,                                    
                                     'message'=>'Data user Keuangan berhasil disimpan.'
-                                ],200); 
+                                ], 200); 
 
     }
     /**
@@ -292,7 +292,7 @@ class UsersKeuanganController extends Controller {
                                     'pid'=>'update',
                                     'user'=>$user,      
                                     'message'=>'Data user Keuangan '.$user->username.' berhasil diubah.'
-                                ],200); 
+                                ], 200); 
         }
     }
     /**
@@ -332,7 +332,7 @@ class UsersKeuanganController extends Controller {
                                         'status'=>1,
                                         'pid'=>'destroy',                
                                         'message'=>"User Keuangan ($username) berhasil dihapus"
-                                    ],200);
+                                    ], 200);
         }
                   
     }

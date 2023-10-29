@@ -104,23 +104,23 @@ export default {
         },
         //form rules        
         rule_tahun_pendaftaran: [
-            value => !!value||"Mohon untuk di pilih tahun pendaftaran!!!",  
+            value => !!value || "Mohon untuk di pilih tahun pendaftaran!!!",  
         ], 
     }),
     methods: {
         initialize: async function() 
         {
-            this.$ajax.get('/datamaster/tahunajaran').then(({ data })=>{                
+            this.$ajax.get('/datamaster/tahunajaran').then(({ data }) => {                
                 this.daftar_ta = data.ta;
             }); 
 
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.get('/system/setting/variables',
             {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{  
+            }).then(({ data }) => {  
                 let setting = data.setting;
                 this.formdata.tahun_pendaftaran=parseInt(setting.DEFAULT_TAHUN_PENDAFTARAN);
                 this.formdata.buka_ppdb=setting.DEFAULT_BUKA_PPDB == '0'?false: true;

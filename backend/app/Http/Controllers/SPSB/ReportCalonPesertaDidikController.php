@@ -61,6 +61,6 @@ class ReportCalonPesertaDidikController extends Controller
                   'pesertadidik_c'=>$pesertadidik_c,
                   'pesertadidik_d'=>$pesertadidik_d,
                   'pdf_file'=>$pdf_file                                    
-                ],200);
+                ], 200);
   }
 }

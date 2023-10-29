@@ -49,7 +49,7 @@ class SystemMigrationController extends Controller {
                                 'pid'=>'fetchdata',
                                 'daftar_tasmt'=>$daftar_tasmt,
                                 'message'=>'Fetch data daftar tahun semester berhasil diperoleh'
-                            ],200); 
+                            ], 200); 
     }
     public function store(Request $request)
     {
@@ -213,6 +213,6 @@ class SystemMigrationController extends Controller {
                                 'pid'=>'store',                                
                                 'user'=>$user,                                
                                 'message'=>'Proses migrasi siswa ini berhasil dilakukan, silahkan cek dimasing-masing halaman'
-                            ],200);
+                            ], 200);
     }
 }

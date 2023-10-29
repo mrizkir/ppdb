@@ -101,22 +101,22 @@ export default {
         },
         //form rules
         rule_site_key: [
-            value => !!value||"Mohon untuk di isi site key !!!",
+            value => !!value || "Mohon untuk di isi site key !!!",
         ],
         rule_private_key: [
-            value => !!value||"Mohon untuk di isi private key !!!",
+            value => !!value || "Mohon untuk di isi private key !!!",
         ],
     }),
     methods: {
         initialize: async function()
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.get('/system/setting/variables',
             {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{
+            }).then(({ data }) => {
                 let setting = data.setting;
                 this.formdata.siteKey=setting.CAPTCHA_SITE_KEY;
                 this.formdata.privateKey=setting.CAPTCHA_PRIVATE_KEY;

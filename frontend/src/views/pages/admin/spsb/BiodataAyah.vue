@@ -164,10 +164,10 @@ export default {
         datatable: [],
         headers: [                        
             { text: '', value: 'foto', width:70 },    
-            { text: 'NAMA SISWA', value: 'name',width:350, sortable: true },
+            { text: 'NAMA SISWA', value: 'name', width:350, sortable: true },
             { text: 'NAMA AYAH', value: 'nama_ayah'}, 
             { text: 'NOMOR HP', value: 'nomor_hp', width: 100}, 
-            { text: 'AKSI', value: 'actions', sortable: false,width:50 },
+            { text: 'AKSI', value: 'actions', sortable: false, width:50 },
         ],
         search: "",  
         
@@ -190,7 +190,7 @@ export default {
                     this.user_id=this.$store.getters['auth/AttributeUser']('id');
                 break;
                 default :
-                    this.datatableLoading=true;
+                    this.datatableLoading = true;
                     await this.$ajax.post('/spsb/biodataayah',
                     {
                         TA: this.tahun_pendaftaran,
@@ -200,9 +200,9 @@ export default {
                         headers: {
                             Authorization: this.$store.getters["auth/Token"]
                         }
-                    }).then(({ data })=>{               
+                    }).then(({ data }) => {               
                         this.datatable = data.psb;
-                        this.datatableLoading=false;
+                        this.datatableLoading = false;
                     }); 
                     this.firstloading=false;
                     this.$refs.filter7.setFirstTimeLoading(this.firstloading); 

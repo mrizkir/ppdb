@@ -97,13 +97,13 @@ export default {
     methods: {
         initialize: async function() 
         {
-            this.datatableLoading=true;
+            this.datatableLoading = true;
             await this.$ajax.get('/system/setting/variables',
             {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data })=>{                  
+            }).then(({ data }) => {                  
                 let setting = data.setting;
                 this.formdata.email_mhs_isvalid=parseInt(setting.EMAIL_SISWA_ISVALID);
             });

@@ -109,7 +109,7 @@ export default {
         filepersyaratan: [],
         //form rules  
         rule_foto: [
-            value => !!value||"Mohon pilih foto !!!",  
+            value => !!value || "Mohon pilih foto !!!",  
             value =>  !value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
         ],
     }),
@@ -213,7 +213,7 @@ export default {
                     Authorization: this.$store.getters["auth/Token"]
                 }
             }
-            ).then(({ data })=>{   
+            ).then(({ data }) => {   
                 this.badgeColor = data.persyaratan.verified;
                 this.badgeIcon = data.persyaratan.verified;
                 this.btnHapus=true;

@@ -54,7 +54,7 @@ class KonfirmasiPembayaranController extends Controller
                                         'pid'=>'fetchdata',  
                                         'konfirmasi'=>$konfirmasi,                                                                                                                                   
                                         'message'=>'Fetch data detail konfirmasi berhasil.'
-                                    ],200);     
+                                    ], 200);     
         }
     }    
     /**
@@ -89,7 +89,7 @@ class KonfirmasiPembayaranController extends Controller
                                         'pid'=>'update',                                          
                                         'konfirmasi'=>$konfirmasi,                                          
                                         'message'=>"Mengubah data konfirmasi dengan id ($id) berhasil."                                        
-                                    ],200);   
+                                    ], 200);   
         }
         
     }

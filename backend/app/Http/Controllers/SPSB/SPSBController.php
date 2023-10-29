@@ -178,7 +178,7 @@ class SPSBController extends Controller
                                 'total_tidak_lulus'=>$total_tidak_lulus,
 
                                 'message'=>'Fetch data dashboard psb berhasil diperoleh'
-                            ],200);    
+                            ], 200);    
         
     }
 }

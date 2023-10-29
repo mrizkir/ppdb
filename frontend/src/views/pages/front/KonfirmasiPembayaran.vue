@@ -201,31 +201,31 @@ export default {
             bukti_bayar: [],
         },
         rule_username: [
-            value => !!value||"Kolom Username mohon untuk diisi !!!"
+            value => !!value || "Kolom Username mohon untuk diisi !!!"
         ], 
         //form rules  
         rule_channel_pembayaran: [
-            value => !!value||"Mohon dipilih Channel Pembayaran mohon untuk dipilih !!!"
+            value => !!value || "Mohon dipilih Channel Pembayaran mohon untuk dipilih !!!"
         ], 
         rule_nama_pengirim: [
-            value => !!value||"Mohon diisi nama pengirim !!!"
+            value => !!value || "Mohon diisi nama pengirim !!!"
         ],
         rule_nomor_rekening: [
-            value => !!value||"Mohon diisi nomor rekening pengirim !!!",
+            value => !!value || "Mohon diisi nomor rekening pengirim !!!",
             value => /^[0-9]+$/.test(value) || 'Nomor Rekening hanya boleh angka',
         ],
         rule_nama_bank: [
-            value => !!value||"Mohon diisi nama bank !!!"
+            value => !!value || "Mohon diisi nama bank !!!"
         ],
         rule_tanggal_bayar: [
-            value => !!value||"Tanggal Bayar mohon untuk diisi !!!"
+            value => !!value || "Tanggal Bayar mohon untuk diisi !!!"
         ], 
         rule_bukti_bayar: [
-            value => !!value||"Mohon pilih foto !!!",  
+            value => !!value || "Mohon pilih foto !!!",  
             value =>  !value || value.size < 2000000 || 'File Bukti Bayar harus kurang dari 2MB.'                
         ],
         rule_total_bayar: [
-            value => !!value||"Dana yang  ditransfer mohon untuk untuk di isi !!!",
+            value => !!value || "Dana yang  ditransfer mohon untuk untuk di isi !!!",
             value => /^[0-9]+$/.test(value) || 'Dana yang  ditransfer hanya boleh angka',  
         ], 
     }),
@@ -237,7 +237,7 @@ export default {
                 this.btnLoading = true;
                 await this.$ajax.post('/spsb/psb/konfirmasi', {
                     username: this.formdata.username, 
-                }).then(({ data })=>{  
+                }).then(({ data }) => {  
                     this.data_pd = data.user;
                     this.formdata.id = data.user.id;
                     this.formdata.username = data.user.username;

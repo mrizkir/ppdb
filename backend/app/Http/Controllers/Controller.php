@@ -97,6 +97,6 @@ class Controller extends BaseController
                                     'pid'=>'fetchdata',
                                     'permissions'=>$permissions,                                    
                                     'message'=>'Fetch permission role '.$user->username.' berhasil diperoleh.'
-                                ],200); 
+                                ], 200); 
     }
 }

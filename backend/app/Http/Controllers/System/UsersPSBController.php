@@ -31,7 +31,7 @@ class UsersPSBController extends Controller {
                                 'role'=>$role,
                                 'users'=>$data,
                                 'message'=>'Fetch data users PSB berhasil diperoleh'
-                            ],200);  
+                            ], 200);  
     }    
     /**
      * Store a newly created resource in storage.
@@ -148,7 +148,7 @@ class UsersPSBController extends Controller {
                                     'pid'=>'store',
                                     'user'=>$user,                                    
                                     'message'=>'Data user PSB berhasil disimpan.'
-                                ],200); 
+                                ], 200); 
 
     }
     /**
@@ -298,7 +298,7 @@ class UsersPSBController extends Controller {
                                     'pid'=>'update',
                                     'user'=>$user,      
                                     'message'=>'Data user PSB '.$user->username.' berhasil diubah.'
-                                ],200); 
+                                ], 200); 
         }
     }
     /**
@@ -338,7 +338,7 @@ class UsersPSBController extends Controller {
                                         'status'=>1,
                                         'pid'=>'destroy',                
                                         'message'=>"User PSB ($username) berhasil dihapus"
-                                    ],200);
+                                    ], 200);
         }
                   
     }

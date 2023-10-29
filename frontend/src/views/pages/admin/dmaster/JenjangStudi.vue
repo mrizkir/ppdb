@@ -114,7 +114,7 @@
         {
           text: "HOME",
           disabled: false,
-          href: "/dashboard/"+this.$store.getters["auth/AccessToken"]
+          href: "/dashboard/" + this.$store.getters["auth/AccessToken"]
         },
         {
           text: "DATA MASTER",
@@ -141,8 +141,8 @@
       dialogfrm: false,
 
       headers: [                                            
-        { text: "ID", value: "kode_jenjang",width:10, sortable: false },
-        { text: "NAMA JENJANG", value: "nama_jenjang", sortable: false},
+        { text: "ID", value: "kode_jenjang", width:10, sortable: false },
+        { text: "NAMA JENJANG", value: "nama_jenjang", sortable: false },
         { text: "AKSI", value: "actions", sortable: false, width: 100 },
       ],
       form_valid: true,
@@ -161,15 +161,15 @@
     }),
     methods: {
       initialize: async function() {
-        this.datatableLoading=true;
+        this.datatableLoading = true;
         await this.$ajax.get("/datamaster/jenjangstudi", 
         {
           headers: {
             Authorization: this.$store.getters["auth/Token"]
           }
-        }).then(({ data })=>{            
+        }).then(({ data }) => {            
           this.datatable = data.jenjang_studi;
-          this.datatableLoading=false;
+          this.datatableLoading = false;
         });
       },
       dataTableRowClicked(item) {

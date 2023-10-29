@@ -276,11 +276,11 @@ export default {
             },
             //form rules  
             rule_foto: [
-                value => !!value||"Mohon pilih gambar !!!",  
+                value => !!value || "Mohon pilih gambar !!!",  
                 value =>  !value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
             ], 
             rule_user_password: [
-                value => !!value||"Mohon untuk di isi password User !!!",
+                value => !!value || "Mohon untuk di isi password User !!!",
                 value => {
                     if (value && typeof value !== 'undefined' && value.length > 0){
                         return value.length >= 8 || 'Minimal Password 8 karaketer';
@@ -309,7 +309,7 @@ export default {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }
-                ).then(({ data })=>{                                            
+                ).then(({ data }) => {                                            
                     this.$refs.frmdata.reset(); 
                     this.formdata.foto = data.foto;
                     this.formdata=this.formdefault; 
@@ -351,7 +351,7 @@ export default {
                                 'Content-Type': 'multipart/form-data'                      
                             }
                         }
-                    ).then(({ data })=>{                           
+                    ).then(({ data }) => {                           
                         this.btnLoading = false;
                         this.$store.dispatch('updateFoto',data.user.foto);
                     }).catch(()=>{
@@ -370,7 +370,7 @@ export default {
                         Authorization: this.$store.getters["auth/Token"],   
                     }
                 }
-            ).then(({ data })=>{                           
+            ).then(({ data }) => {                           
                 this.btnLoading = false;
                 this.$store.dispatch('updateFoto',data.user.foto);
             }).catch(()=>{
@@ -385,7 +385,7 @@ export default {
                         Authorization: this.$store.getters["auth/Token"],   
                     }
                 }
-            ).then(({ data })=>{                           
+            ).then(({ data }) => {                           
                 this.data_mhs = data.mahasiswa;
             })
         }

@@ -175,13 +175,13 @@ export default {
         datatable: [],
         headers: [                        
             { text: '', value: 'foto', width:70 },    
-            { text: 'NO.FORMULIR', value: 'no_formulir',width:120, sortable: true },
-            { text: 'NAMA SISWA', value: 'name',width:350, sortable: true },
+            { text: 'NO.FORMULIR', value: 'no_formulir', width:120, sortable: true },
+            { text: 'NAMA SISWA', value: 'name', width:350, sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp', width: 100},
             { text: 'KELAS', value: 'nkelas', width: 100, sortable: true },
             { text: 'NILAI', value: 'nilai', width: 100, sortable: true },
             { text: 'STATUS', value: 'status', width: 100, sortable: true },
-            { text: 'AKSI', value: 'actions', sortable: false,width:50 },
+            { text: 'AKSI', value: 'actions', sortable: false, width:50 },
         ],
         search: "",  
         
@@ -212,7 +212,7 @@ export default {
 
                 break;
                 default :
-                    this.datatableLoading=true;
+                    this.datatableLoading = true;
                     await this.$ajax.post('/spsb/reportspsbkelulusan',
                     {
                         TA: this.tahun_pendaftaran,
@@ -223,9 +223,9 @@ export default {
                         headers: {
                             Authorization: this.$store.getters["auth/Token"]
                         }
-                    }).then(({ data })=>{               
+                    }).then(({ data }) => {               
                         this.datatable = data.psb;
-                        this.datatableLoading=false;
+                        this.datatableLoading = false;
                     }); 
                     this.firstloading=false;
                     this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
@@ -272,7 +272,7 @@ export default {
                     },
                     responseType: 'arraybuffer'
                 }
-            ).then(({ data })=>{              
+            ).then(({ data }) => {              
                 const url = window.URL.createObjectURL(new Blob([data]));
                 const link = document.createElement('a');
                 link.href = url;

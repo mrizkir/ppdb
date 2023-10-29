@@ -66,7 +66,7 @@ class ReportKelulusanController extends Controller {
                                 'pid'=>'fetchdata',
                                 'psb'=>$data,
                                 'message'=>'Fetch data calon siswa baru berhasil diperoleh'
-                            ],200);  
+                            ], 200);  
     }            
     /**
      * Detail nilai dan jadwal ujian
@@ -120,7 +120,7 @@ class ReportKelulusanController extends Controller {
                                         'kjur'=>$formulir->kode_jenjang,                                        
                                         'data_nilai_ujian'=>$data_nilai_ujian,                                        
                                         'message'=>"Data nilai dengan ID ($id) berhasil diperoleh"
-                                    ],200);
+                                    ], 200);
         }
 
     }   
