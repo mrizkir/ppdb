@@ -3,387 +3,395 @@ import VueRouter from "vue-router";
 import store from "../store/index";
 import NotFoundComponent from "../components/NotFoundComponent";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
     name: "FrontDashboard",
-    meta:{
-      title: "DASHBOARD"
+    meta: {
+      title: "DASHBOARD",
     },
-    component: () => import("../views/pages/front/Home.vue")
+    component: () => import("../views/pages/front/Home.vue"),
   },
   {
     path: "/psbtk",
     name: "FrontPSBtk",
-    meta:{
-      title: "PENDAFTARAN CALON PESERTA DIDIK TK"
+    meta: {
+      title: "PENDAFTARAN CALON PESERTA DIDIK TK",
     },
-    component: () => import("../views/pages/front/PSBTK.vue")
+    component: () => import("../views/pages/front/PSBTK.vue"),
   },
   {
     path: "/psbsd",
     name: "FrontPSBsd",
-    meta:{
-      title: "PENDAFTARAN CALON PESERTA DIDIK SD"
+    meta: {
+      title: "PENDAFTARAN CALON PESERTA DIDIK SD",
     },
-    component: () => import("../views/pages/front/PSBSD.vue")
+    component: () => import("../views/pages/front/PSBSD.vue"),
   },
   {
     path: "/psbsmp",
     name: "FrontPSBsmp",
-    meta:{
-      title: "PENDAFTARAN CALON PESERTA DIDIK SMP"
+    meta: {
+      title: "PENDAFTARAN CALON PESERTA DIDIK SMP",
     },
-    component: () => import("../views/pages/front/PSBSMP.vue")
+    component: () => import("../views/pages/front/PSBSMP.vue"),
   },
   {
     path: "/psbsma",
     name: "FrontPSBsma",
-    meta:{
-      title: "PENDAFTARAN CALON PESERTA DIDIK SMA"
+    meta: {
+      title: "PENDAFTARAN CALON PESERTA DIDIK SMA",
     },
-    component: () => import("../views/pages/front/PSBSMA.vue")
+    component: () => import("../views/pages/front/PSBSMA.vue"),
   },
   {
     path: "/konfirmasipembayaran",
     name: "FrontKonfirmasiPembayaran",
-    meta:{
-      title: "KONFIRMASI PEMBAYARAN"
+    meta: {
+      title: "KONFIRMASI PEMBAYARAN",
     },
-    component: () => import("../views/pages/front/KonfirmasiPembayaran.vue")
+    component: () => import("../views/pages/front/KonfirmasiPembayaran.vue"),
   },
   {
     path: "/videotutorial",
     name: "FrontVideoTutorial",
-    meta:{
-      title: "VIDEO TUTORIAL"
+    meta: {
+      title: "VIDEO TUTORIAL",
     },
-    component: () => import("../views/pages/front/VideoTutorial.vue")
+    component: () => import("../views/pages/front/VideoTutorial.vue"),
   },
   {
     path: "/login",
     name: "FrontLogin",
-    meta:{
-      title: "LOGIN"
+    meta: {
+      title: "LOGIN",
     },
-    component: () => import("../views/pages/front/Login.vue")
+    component: () => import("../views/pages/front/Login.vue"),
   },
   {
     path: "/dashboard/:token",
     name: "AdminDashboard",
-    meta:{
-      title: "DASHBOARD",			
-        },
-    component: () => import("../views/pages/admin/Dashboard.vue"),		
+    meta: {
+      title: "DASHBOARD",
+    },
+    component: () => import("../views/pages/admin/Dashboard.vue"),
   },
-  //dmaster	
+  //dmaster
   {
     path: "/dmaster",
     name: "DMaster",
-    meta:{
+    meta: {
       title: "DATA MASTER",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/dmaster/DMaster.vue"),		
+    },
+    component: () => import("../views/pages/admin/dmaster/DMaster.vue"),
   },
   {
     path: "/dmaster/jenjangstudi",
     name: "DMasterJenjangStudi",
-    meta:{
+    meta: {
       title: "DATA MASTER - JENJANG STUDI",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/dmaster/JenjangStudi.vue"),		
-  },		
+    },
+    component: () => import("../views/pages/admin/dmaster/JenjangStudi.vue"),
+  },
   {
     path: "/dmaster/ta",
     name: "DMasterTahunAjaran",
-    meta:{
+    meta: {
       title: "DATA MASTER - TAHUN AJARAN",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/dmaster/TahunAjaran.vue"),		
-  },	
-  //spsb	
+    },
+    component: () => import("../views/pages/admin/dmaster/TahunAjaran.vue"),
+  },
+  {
+    path: "/dmaster/kuotapendaftaran",
+    name: "DMasterKuotaPendaftaran",
+    meta: {
+      title: "DATA MASTER - KUOTA PENDAFTARAN",
+      requiresAuth: true,
+    },
+    component: () =>
+      import("../views/pages/admin/dmaster/KuotaPendaftaran.vue"),
+  },
+  //spsb
   {
     path: "/spsb",
     name: "SPSB",
-    meta:{
+    meta: {
       title: "SPSB",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/SPSB.vue"),		
-  },		
+    },
+    component: () => import("../views/pages/admin/spsb/SPSB.vue"),
+  },
   {
     path: "/spsb/pendaftaranbaru",
     name: "SPSBPendaftaranBaru",
-    meta:{
+    meta: {
       title: "SPSB - PENDAFTARAN BARU",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/PendaftaranBaru.vue"),		
-  },	
+    },
+    component: () => import("../views/pages/admin/spsb/PendaftaranBaru.vue"),
+  },
   {
     path: "/spsb/formulirpendaftaran",
     name: "SPSBFormulirPendaftaran",
-    meta:{
+    meta: {
       title: "SPSB - BIODATA ANANDA",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/FormulirPendaftaran.vue"),		
+    },
+    component: () =>
+      import("../views/pages/admin/spsb/FormulirPendaftaran.vue"),
   },
   {
     path: "/spsb/situasikeluarga",
     name: "SPSBFormSituasiKeluarga",
-    meta:{
+    meta: {
       title: "SPSB - SITUASI KELUARGA",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/SituasiKeluarga.vue"),		
+    },
+    component: () => import("../views/pages/admin/spsb/SituasiKeluarga.vue"),
   },
   {
     path: "/spsb/biodataayah",
     name: "SPSBFormulirBiodataAyah",
-    meta:{
+    meta: {
       title: "SPSB - BIOADATA AYAH",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/BiodataAyah.vue"),		
+    },
+    component: () => import("../views/pages/admin/spsb/BiodataAyah.vue"),
   },
   {
     path: "/spsb/biodataibu",
     name: "SPSBFormulirBiodataIbu",
-    meta:{
+    meta: {
       title: "SPSB - BIOADATA IBU",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/BiodataIbu.vue"),		
+    },
+    component: () => import("../views/pages/admin/spsb/BiodataIbu.vue"),
   },
   {
     path: "/spsb/persyaratan",
     name: "SPSBPersyaratan",
-    meta:{
+    meta: {
       title: "SPSB - PERSYARATAN",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/PersyaratanPSB.vue"),		
-  },		
+    },
+    component: () => import("../views/pages/admin/spsb/PersyaratanPSB.vue"),
+  },
   {
     path: "/spsb/persyaratantambah",
     name: "SPSBPersyaratanTambah",
-    meta:{
+    meta: {
       title: "SPSB - PERSYARATAN",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/PersyaratanPPDBTambah.vue"),		
-  },		
+    },
+    component: () =>
+      import("../views/pages/admin/spsb/PersyaratanPPDBTambah.vue"),
+  },
   {
     path: "/spsb/laporanpeserta",
     name: "SPSBReportPeserta",
-    meta:{
+    meta: {
       title: "SPSB - LAPORAN CALON PESERTA DIDIK",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/ReportPeserta.vue"),		
+    },
+    component: () => import("../views/pages/admin/spsb/ReportPeserta.vue"),
   },
   {
     path: "/spsb/laporanjenjang",
     name: "SPSBReportJenjang",
-    meta:{
+    meta: {
       title: "SPSB - LAPORAN JENJANG STUDI",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/ReportJenjang.vue"),		
+    },
+    component: () => import("../views/pages/admin/spsb/ReportJenjang.vue"),
   },
   {
     path: "/spsb/laporankelulusan",
     name: "SPSBReportKelulusan",
-    meta:{
+    meta: {
       title: "SPSB - LAPORAN KELULUSAN",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/spsb/ReportKelulusan.vue"),		
-  },	
-  //system	
+    },
+    component: () => import("../views/pages/admin/spsb/ReportKelulusan.vue"),
+  },
+  //system
   {
     path: "/system-setting",
     name: "SystemSetting",
-    meta:{
+    meta: {
       title: "SETTING - SISTEM",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/SystemSetting.vue"),		
-  },	
+    },
+    component: () => import("../views/pages/admin/system/SystemSetting.vue"),
+  },
   {
     path: "/system-setting/identitasdiri",
     name: "SettingIdentitasDiri",
-    meta:{
+    meta: {
       title: "SETTING - IDENTITAS DIRI",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/IdentitasDiri.vue"),		
-  },	
+    },
+    component: () => import("../views/pages/admin/system/IdentitasDiri.vue"),
+  },
   {
     path: "/system-setting/ppdb",
     name: "SettingPPDB",
-    meta:{
+    meta: {
       title: "SETTING - PPDB",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/SettingPPDB.vue"),		
-  },	
+    },
+    component: () => import("../views/pages/admin/system/SettingPPDB.vue"),
+  },
   {
     path: "/system-setting/headerlaporan",
     name: "HeaderLaporan",
-    meta:{
+    meta: {
       title: "SETTING - HEADER LAPORAN",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/HeaderLaporan.vue"),		
-  },	
+    },
+    component: () => import("../views/pages/admin/system/HeaderLaporan.vue"),
+  },
   {
     path: "/system-setting/captcha",
     name: "SettingCaptcha",
-    meta:{
+    meta: {
       title: "SETTING - CAPTCHA",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/Captcha.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/Captcha.vue"),
   },
   {
     path: "/system-setting/email",
     name: "SettingEmail",
-    meta:{
+    meta: {
       title: "SETTING - EMAIL",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/Email.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/Email.vue"),
   },
   {
     path: "/system-users",
     name: "SystemUsers",
-    meta:{
+    meta: {
       title: "SYSTEM - USERS",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/SystemUsers.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/SystemUsers.vue"),
   },
   {
     path: "/system-users/permissions",
     name: "UsersPermissions",
-    meta:{
+    meta: {
       title: "USERS - PERMISSIONS",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/Permissions.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/Permissions.vue"),
   },
   {
     path: "/system-users/roles",
     name: "UsersRoles",
-    meta:{
+    meta: {
       title: "USERS - ROLES",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/Roles.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/Roles.vue"),
   },
   {
     path: "/system-users/superadmin",
     name: "UsersSuperadmin",
-    meta:{
+    meta: {
       title: "USERS - SUPER ADMIN",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/UsersSuperadmin.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/UsersSuperadmin.vue"),
   },
   {
     path: "/system-users/psb",
     name: "UsersPSB",
-    meta:{
+    meta: {
       title: "USERS - PSB",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/UsersPSB.vue"),		
-  },	
+    },
+    component: () => import("../views/pages/admin/system/UsersPSB.vue"),
+  },
   {
     path: "/system-users/jenjang",
     name: "UsersJenjang",
-    meta:{
+    meta: {
       title: "USERS - JENJANG STUDI",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/UsersJenjang.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/UsersJenjang.vue"),
   },
   {
     path: "/system-users/dosen",
     name: "UsersDosen",
-    meta:{
+    meta: {
       title: "USERS - DOSEN",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/UsersDosen.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/UsersDosen.vue"),
   },
   {
     path: "/system-users/keuangan",
     name: "UsersKeuangan",
-    meta:{
+    meta: {
       title: "USERS - KEUANGAN",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/UsersKeuangan.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/UsersKeuangan.vue"),
   },
   {
     path: "/system-users/profil",
     name: "UsersProfil",
-    meta:{
+    meta: {
       title: "USERS - PROFILE",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/UsersProfile.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/UsersProfile.vue"),
   },
   {
     path: "/system-migration",
     name: "SystemMigration",
-    meta:{
+    meta: {
       title: "MIGRASI SISTEM",
       requiresAuth: true,
-        },
-    component: () => import("../views/pages/admin/system/SystemMigration.vue"),		
+    },
+    component: () => import("../views/pages/admin/system/SystemMigration.vue"),
   },
   {
     path: "/404",
     name: "NotFoundComponent",
-    meta:{
-            title: "PAGE NOT FOUND"
-        },
-    component: NotFoundComponent
+    meta: {
+      title: "PAGE NOT FOUND",
+    },
+    component: NotFoundComponent,
   },
-  { 
-    path: "*", 
-    redirect: "/404" 
+  {
+    path: "*",
+    redirect: "/404",
   },
-]
+];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title;	
-  if (to.matched.some(record => record.meta.requiresAuth))	
-  {
-    if (store.getters["auth/Authenticated"])
-    {
+  document.title = to.meta.title;
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters["auth/Authenticated"]) {
       next();
       return;
     }
     next("/login");
-  }
-  else
-  {
+  } else {
     next();
   }
-})
-export default router
+});
+export default router;

@@ -66,6 +66,11 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 	//data master - jenjang studi	
 	$router->put('/datamaster/jenjangstudi/{id}',['uses'=>'DMaster\JenjangStudiController@update','as'=>'jenjangstudi.update']);
 
+	//data master - kuota pendaftaran
+	$router->get('/datamaster/kuotapendaftaran',['middleware'=>['role:superadmin'],'uses'=>'DMaster\KuotaPendaftaranController@index','as'=>'kuota-pendaftaran.index']);
+	$router->put('/datamaster/kuotapendaftaran/{id}',['middleware'=>['role:superadmin'],'uses'=>'DMaster\KuotaPendaftaranController@update','as'=>'kuota-pendaftaran.update']);
+	$router->delete('/datamaster/kuotapendaftaran/{id}',['middleware'=>['role:superadmin'],'uses'=>'DMaster\KuotaPendaftaranController@destroy','as'=>'`kuota-pendaftaran.destroy']);
+
 	//spsb - pendaftaran siswa baru
 	$router->post('/spsb/psb',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'SPSB\PSBController@index','as'=>'psb.index']);
 	$router->post('/spsb/psb/storependaftar',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\PSBController@storependaftar','as'=>'psb.storependaftar']);

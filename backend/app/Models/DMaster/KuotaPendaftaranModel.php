@@ -4,13 +4,13 @@ namespace App\Models\DMaster;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DesaModel extends Model {    
+class KuotaPendaftaranModel extends Model {    
    /**
    * nama tabel model ini.
    *
    * @var string
    */
-  protected $table = 'wilayah_desa';
+  protected $table = 'kuota_pendaftaran';
   /**
    * primary key tabel ini.
    *
@@ -23,7 +23,11 @@ class DesaModel extends Model {
    * @var array
    */
   protected $fillable = [
-    'id', 'kecamatan_id','nama'
+    'id', 
+    'tahun',
+    'kode_jenjang',
+    'kuota_l',
+    'kuota_p',
   ];
   /**
    * enable auto_increment.
@@ -36,5 +40,5 @@ class DesaModel extends Model {
    *
    * @var string
    */
-  public $timestamps = false;
+  public $timestamps = true;
 }

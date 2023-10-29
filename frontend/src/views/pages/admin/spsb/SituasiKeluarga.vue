@@ -164,10 +164,10 @@ export default {
         datatable: [],
         headers: [                        
             { text: '', value: 'foto', width:70 },    
-            { text: 'NAMA SISWA', value: 'name',width:350,sortable: true },
-            { text: 'TINGGAL BERSAMA', value: 'tinggal_bersama',width:100},
-            { text: 'STATUS PERNIKAHAN ORTU', value: 'status_pernikahan',width:100,sortable: true },
-            { text: 'AKSI', value: 'actions', sortable: false,width:100 },
+            { text: 'NAMA SISWA', value: 'name',width:350, sortable: true },
+            { text: 'TINGGAL BERSAMA', value: 'tinggal_bersama', width: 100},
+            { text: 'STATUS PERNIKAHAN ORTU', value: 'status_pernikahan', width: 100, sortable: true },
+            { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
         ],
         search: "",  
         

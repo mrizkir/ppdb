@@ -297,14 +297,14 @@ export default {
         //tables
         headers: [                        
             { text: '', value: 'foto' },
-            { text: 'USERNAME', value: 'username',sortable: true },
-            { text: 'NAMA DOSEN', value: 'name',sortable: true },
-            { text: 'NIDN', value: 'nidn',sortable: true },  
-            { text: 'NIPY', value: 'nipy',sortable: true },  
-            { text: 'NOMOR HP', value: 'nomor_hp',sortable: true },  
-            { text: 'DW', value: 'is_dw',sortable: true },  
-            { text: 'ROLE ASAL', value: 'default_role',sortable: true },  
-            { text: 'AKSI', value: 'actions', sortable: false,width:100 },
+            { text: 'USERNAME', value: 'username', sortable: true },
+            { text: 'NAMA DOSEN', value: 'name', sortable: true },
+            { text: 'NIDN', value: 'nidn', sortable: true },  
+            { text: 'NIPY', value: 'nipy', sortable: true },  
+            { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },  
+            { text: 'DW', value: 'is_dw', sortable: true },  
+            { text: 'ROLE ASAL', value: 'default_role', sortable: true },  
+            { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
         ],
         expanded: [],
         search: "",
@@ -514,7 +514,7 @@ export default {
         },
     },
     computed: {
-        formTitle () {
+        formTitle() {
             return this.editedIndex === -1 ? 'TAMBAH USER DOSEN' : 'EDIT USER DOSEN'
         },
         ...mapGetters('auth',{            

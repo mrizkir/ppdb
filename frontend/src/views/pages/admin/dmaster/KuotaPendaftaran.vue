@@ -5,7 +5,7 @@
         mdi-stairs-up
       </template>
       <template v-slot:name>
-        JENJANG STUDI
+        KUOTA PENDAFTARAN
       </template>
       <template v-slot:subtitle>
         
@@ -24,7 +24,7 @@
           colored-border
           type="info"
         >
-          Halaman ini berisi informasi jenjang studi. ID dan Nama Jenjang melekat ke sistem sehingga tidak bisa diubah.
+          Halaman ini digunakan untuk mengatur kuota pendaftaran per jenjang dan tahun ajaran.
         </v-alert>
       </template>
     </ModuleHeader>
@@ -34,54 +34,71 @@
           <v-data-table
             :headers="headers"
             :items="datatable"               
-            item-key="kode_jenjang"
-            sort-by="kode_jenjang"
-            show-expand
-            :disable-pagination="true"
-            :hide-default-footer="true"
+            item-key="id"
+            sort-by="tahun"
+            show-expand            
             :expanded.sync="expanded"
             :single-expand="true"
             @click:row="dataTableRowClicked"
             class="elevation-1"
             :loading="datatableLoading"
-            loading-text="Loading... Please wait"> 
+            loading-text="Loading... Please wait"
+          > 
             <template v-slot:top>
-              <v-dialog v-model="dialogfrm" max-width="500px" persistent>                                    
-                <v-form ref="frmdata" v-model="form_valid" lazy-validation>
-                  <v-card>
-                    <v-card-title>
-                      <span class="headline">SETTING JENJANG STUDI</span>
-                    </v-card-title>
-                    <v-card-subtitle>
-                      <span class="info--text">
-                        Konfigurasi terkait dengan jenjang studi
-                      </span>
-                    </v-card-subtitle>
-                    <v-card-text>                    
-                      <v-switch v-model="formdata.status_pendaftaran" label="Aktif"></v-switch>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue darken-1" text @click.stop="closedialogfrm">BATAL</v-btn>
-                      <v-btn 
-                        color="blue darken-1" 
-                        text 
-                        @click.stop="save" 
-                        :loading="btnLoading"
-                        :disabled="!form_valid || btnLoading">
-                          SIMPAN
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-form>
-              </v-dialog>
+              <v-toolbar flat color="white">
+                <v-toolbar-title>DAFTAR KUOTA PENADFTARAN</v-toolbar-title>
+                <v-divider
+                  class="mx-4"
+                  inset
+                  vertical
+                ></v-divider>
+                <v-spacer></v-spacer>
+                <v-dialog v-model="dialogfrm" max-width="600px" persistent>
+                  <template v-slot:activator="{ on }">
+                    <v-btn color="primary" dark class="mb-2" v-on="on">TAMBAH</v-btn>
+                  </template>
+                  <v-form ref="frmdata" v-model="form_valid" lazy-validation>
+                    <v-card>
+                      <v-card-title>
+                        <span class="headline">{{ formTitle }}</span>
+                      </v-card-title>
+                      <v-card-text>
+                        <v-text-field
+                          v-model="formdata.tahun"
+                          label="TAHUN"
+                          outlined
+                          :rules="rule_tahun">
+                        </v-text-field>
+                        <v-text-field
+                          v-model="formdata.tahun_ajaran"
+                          label="TAHUN AJARAN"
+                          outlined
+                          :rules="rule_tahun_ajaran">
+                        </v-text-field>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click.stop="closedialogfrm">BATAL</v-btn>
+                        <v-btn
+                          color="blue darken-1"
+                          text
+                          @click.stop="save"
+                          :loading="btnLoading"
+                          :disabled="!form_valid || btnLoading">
+                            SIMPAN
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-form>
+                </v-dialog>
+              </v-toolbar>
             </template>    
             <template v-slot:expanded-item="{ headers, item }">
               <td :colspan="headers.length" class="text-center">
-                <v-col cols="12">                                    
+                <v-col cols="12">        
                   <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
                   <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
-                </v-col>                                
+                </v-col>    
               </td>
             </template>
             <template v-slot:item.actions="{ item }">
@@ -108,7 +125,7 @@
   import DataMasterLayout from "@/views/layouts/DataMasterLayout";
   import ModuleHeader from "@/components/ModuleHeader";
   export default {
-    name: "JenjangStudi",
+    name: "KuotaPendaftaran",
     created() {
       this.breadcrumbs = [
         {
@@ -122,7 +139,7 @@
           href: "/dmaster"
         },
         {
-          text: "JENJANG STUDI",
+          text: "KUOTA PENDAFTARAN",
           disabled: true,
           href: "#"
         }
@@ -142,7 +159,10 @@
 
       headers: [                                            
         { text: "ID", value: "kode_jenjang",width:10, sortable: false },
+        { text: "TAHUN", value: "tahun_ajaran", sortable: false},
         { text: "NAMA JENJANG", value: "nama_jenjang", sortable: false},
+        { text: "KUOTA PUTRA", value: "kuota_p", sortable: false},
+        { text: "KUOTA PUTRI", value: "kuota_l", sortable: false},
         { text: "AKSI", value: "actions", sortable: false, width: 100 },
       ],
       form_valid: true,
@@ -162,13 +182,13 @@
     methods: {
       initialize: async function() {
         this.datatableLoading=true;
-        await this.$ajax.get("/datamaster/jenjangstudi", 
+        await this.$ajax.get("/datamaster/kuotapendaftaran", 
         {
           headers: {
             Authorization: this.$store.getters["auth/Token"]
           }
         }).then(({ data })=>{            
-          this.datatable = data.jenjang_studi;
+          this.datatable = data.kuota;
           this.datatableLoading=false;
         });
       },
@@ -219,6 +239,11 @@
           this.editedIndex = -1;
           this.$refs.frmdata.reset();
         }, 300);
+      },
+    },
+    computed: {    
+      formTitle() {
+        return this.editedIndex === -1 ? 'TAMBAH KUOTA' : 'UBAH KUOTA'
       },
     },
     components: {

@@ -164,9 +164,9 @@ export default {
         datatable: [],
         headers: [                        
             { text: '', value: 'foto', width:70 },    
-            { text: 'NAMA SISWA', value: 'name',width:350,sortable: true },
+            { text: 'NAMA SISWA', value: 'name',width:350, sortable: true },
             { text: 'NAMA AYAH', value: 'nama_ayah'}, 
-            { text: 'NOMOR HP', value: 'nomor_hp',width:100}, 
+            { text: 'NOMOR HP', value: 'nomor_hp', width: 100}, 
             { text: 'AKSI', value: 'actions', sortable: false,width:50 },
         ],
         search: "",  

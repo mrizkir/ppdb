@@ -160,7 +160,7 @@ export default {
         headers: [                        
             { text: 'NAMA PERMISSION', value: 'name' },
             { text: 'GUARD', value: 'guard_name' },
-            { text: 'AKSI', value: 'actions', sortable: false,width:100 }, 
+            { text: 'AKSI', value: 'actions', sortable: false, width: 100 }, 
         ],
         search: "",
         perm_selected: [],

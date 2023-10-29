@@ -204,9 +204,9 @@ export default {
         
         datatableLoading: false,
         headers: [                                                
-            { text: 'TAHUN AJARAN', value: 'ta',sortable: false },
-            { text: 'SEMESTER', value: 'semester',sortable: false },
-            { text: 'STATUS', value: 'k_status',sortable: false, width:250 }, 
+            { text: 'TAHUN AJARAN', value: 'ta', sortable: false },
+            { text: 'SEMESTER', value: 'semester', sortable: false },
+            { text: 'STATUS', value: 'k_status', sortable: false, width:250 }, 
         ],
     }),
     methods: {

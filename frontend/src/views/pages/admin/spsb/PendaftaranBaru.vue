@@ -474,13 +474,13 @@ export default {
     //tables
     headers: [                        
       { text: '', value: 'foto', width:70 }, 
-      { text: 'NAMA PESERTA DIDIK', value: 'name',width:350,sortable: true },
-      { text: 'USERNAME', value: 'username',sortable: true },
-      { text: 'EMAIL', value: 'email',sortable: true },  
-      { text: 'NOMOR HP', value: 'nomor_hp',sortable: false},
-      { text: 'KODE', value: 'code',sortable: false},  
-      { text: 'TGL.DAFTAR', value: 'created_at',sortable: true},  
-      { text: 'AKSI', value: 'actions', sortable: false,width:100 },
+      { text: 'NAMA PESERTA DIDIK', value: 'name',width:350, sortable: true },
+      { text: 'USERNAME', value: 'username', sortable: true },
+      { text: 'EMAIL', value: 'email', sortable: true },  
+      { text: 'NOMOR HP', value: 'nomor_hp', sortable: false},
+      { text: 'KODE', value: 'code', sortable: false},  
+      { text: 'TGL.DAFTAR', value: 'created_at', sortable: true},  
+      { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
     ],
     expanded: [],
     search: "",
@@ -815,7 +815,7 @@ export default {
     },
   },
   computed: {        
-    formTitle () {
+    formTitle() {
       return this.editedIndex === -1 ? 'TAMBAH DATA' : 'UBAH DATA'
     },
   },
