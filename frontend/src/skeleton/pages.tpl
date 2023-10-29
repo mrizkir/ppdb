@@ -287,13 +287,13 @@ export default {
                 this.datatableLoading=false;
             }).catch(()=>{
                 this.datatableLoading=false;
-            });  
+            });
         },
         dataTableRowClicked(item)
         {
             if ( item === this.expanded[0])
             {
-                this.expanded=[];                
+                this.expanded=[];
             }
             else
             {
@@ -301,15 +301,15 @@ export default {
             }               
         },
         viewItem (item) {
-            this.formdata=item;      
-            this.dialogdetailitem=true;              
+            this.formdata=item;
+            this.dialogdetailitem=true;
             // this.$ajax.get('/path/'+item.id,{
             //     headers: {
             //         Authorization: this.$store.getters["auth/Token"]
             //     }
             // }).then(({ data })=>{               
                                            
-            // });                      
+            // });
         }, 
         editItem (item) {
             this.editedIndex = this.datatable.indexOf(item);
@@ -338,7 +338,7 @@ export default {
                         this.btnLoading = false;
                     }).catch(()=>{
                         this.btnLoading = false;
-                    });                 
+                    });
                     
                 } else {
                     await this.$ajax.post('/path/store',
@@ -385,7 +385,7 @@ export default {
             });
         },
         closedialogdetailitem () {
-            this.dialogdetailitem = false;            
+            this.dialogdetailitem = false;
             setTimeout(() => {
                 this.formdata = Object.assign({}, this.formdefault)
                 this.editedIndex = -1
@@ -393,9 +393,9 @@ export default {
             );
         },
         closedialogfrm () {
-            this.dialogfrm = false;            
+            this.dialogfrm = false;
             setTimeout(() => {
-                this.formdata = Object.assign({}, this.formdefault);                
+                this.formdata = Object.assign({}, this.formdefault);
                 this.editedIndex = -1
                 this.$refs.frmdata.reset(); 
                 }, 300

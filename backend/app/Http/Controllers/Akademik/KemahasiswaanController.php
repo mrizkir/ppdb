@@ -25,7 +25,7 @@ class KemahasiswaanController extends Controller {
                                     'status'=>0,
                                     'pid'=>'store',                
                                     'message'=>["Data User tidak ditemukan."]
-                                ],422);         
+                                ],422);
         }
         else
         {

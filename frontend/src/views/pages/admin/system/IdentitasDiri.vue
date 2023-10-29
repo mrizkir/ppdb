@@ -134,12 +134,12 @@ export default {
                     Authorization: this.TOKEN
                 }
             }).then(({ data })=>{  
-                let setting = data.setting;                           
+                let setting = data.setting;
                 this.formdata.nama_sekolah=setting.NAMA_SEKOLAH;
                 this.formdata.nama_alias_pt=setting.NAMA_SEKOLAH_ALIAS;
                 this.formdata.bentuk_sekolah=setting.BENTUK_SEKOLAH;
                 this.formdata.kode_sekolah=setting.KODE_SEKOLAH;
-            });          
+            });
             
         },
         save () {
@@ -165,7 +165,7 @@ export default {
                     this.btnLoading = false;
                 }).catch(()=>{
                     this.btnLoading = false;
-                });        
+                });
             }
         }
     },

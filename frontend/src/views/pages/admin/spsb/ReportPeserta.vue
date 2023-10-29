@@ -146,7 +146,7 @@ import Filter7 from '@/components/sidebar/FilterMode7';
 export default {
     name: 'PendaftaranBaru',  
     created() {
-        this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];      
+        this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         this.breadcrumbs = [
             {
                 text: 'HOME',
@@ -163,13 +163,13 @@ export default {
                 disabled: true,
                 href: '#'
             }
-        ];   
+        ];
         this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
 
         let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
         this.kode_jenjang=kode_jenjang;
-        this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);        
-        this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];        
+        this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
+        this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
         this.initialize();
     },
     data: () => ({ 
@@ -213,7 +213,7 @@ export default {
         },
         initialize: async function() 
         {
-            this.datatableLoading=true;            
+            this.datatableLoading=true;
             await this.$ajax.post('/spsb/psbpersyaratan',
             {
                 TA: this.tahun_pendaftaran,
@@ -224,9 +224,9 @@ export default {
                     Authorization: this.$store.getters["auth/Token"]
                 }
             }).then(({ data })=>{               
-                this.datatable = data.psb;                
+                this.datatable = data.psb;
                 this.datatableLoading=false;
-            });          
+            });
             this.firstloading=false;
             this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
         },
@@ -242,7 +242,7 @@ export default {
         {
             if (item === this.expanded[0])
             {
-                this.expanded = [];        
+                this.expanded = [];
             }
             else
             {
@@ -251,7 +251,7 @@ export default {
         },    
         async printBiodata(item)
         {
-            this.datatableLoading=true;            
+            this.datatableLoading=true;
             await this.$ajax.post('/report/calonpesertadidik/printpdf',
             {
                 user_id:item.id,
@@ -266,12 +266,12 @@ export default {
                 this.datatableLoading=false;
             }).catch(()=>{
                 this.datatableLoading=false;
-            });          
+            });
         },
         closedialogprintpdf () {                  
             setTimeout(() => {
                 this.file_pdf=null;
-                this.dialogprintpdf = false;      
+                this.dialogprintpdf = false;
                 }, 300
             );
         },

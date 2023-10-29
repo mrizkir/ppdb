@@ -244,14 +244,14 @@ export default {
                     this.btnLoading = false;
                 }).catch(() => {        
                     this.btnLoading = false;
-                });                                
+                });
             }
         },
         previewImage (e)
         {
             if (typeof e === 'undefined')
             {
-                this.image_prev=null;                
+                this.image_prev=null;
             }
             else
             {
@@ -265,8 +265,8 @@ export default {
           save () {
             if (this.$refs.frmkonfirmasi.validate())
             {
-                this.btnLoading = true;      
-                var data = new FormData();                                    
+                this.btnLoading = true;
+                var data = new FormData(); 
                 data.append('user_id',this.formdata.id);
                 data.append('transaksi_id',this.data_pd.code);
                 data.append('id_channel',this.formdata.id_channel);
@@ -285,7 +285,7 @@ export default {
                         }
                     }
                 ).then(()=>{               
-                    this.btnLoading = false;                              
+                    this.btnLoading = false;
                     this.$router.go();
                 }).catch(()=>{
                     this.btnLoading = false;

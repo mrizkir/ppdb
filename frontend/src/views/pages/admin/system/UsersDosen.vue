@@ -397,14 +397,14 @@ export default {
                 this.daftar_users = data.users;
                 this.role_id = data.role.id;
                 this.datatableLoading=false;
-            });          
+            });
             
         },
         dataTableRowClicked(item)
         {
             if (item === this.expanded[0])
             {
-                this.expanded = [];        
+                this.expanded = [];
             }
             else
             {
@@ -413,18 +413,18 @@ export default {
         },
         showDialogTambahUserDosen: async function()
         {
-            this.dialog = true;            
+            this.dialog = true;
         },
         editItem: async function (item) {
             this.editedIndex = this.daftar_users.indexOf(item)
-            item.password='';            
-            this.editedItem = Object.assign({}, item);                              
+            item.password='';
+            this.editedItem = Object.assign({}, item);
             this.dialogEdit = true;
         },
         close () {            
             this.btnLoading = false;
             this.dialog = false;
-            this.dialogEdit = false;            
+            this.dialogEdit = false;
             setTimeout(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
@@ -460,7 +460,7 @@ export default {
                         this.close();
                     }).catch(()=>{
                         this.btnLoading = false;
-                    });                    
+                    });
                     
                 } else {
                     this.$ajax.post('/system/usersdosen/store',

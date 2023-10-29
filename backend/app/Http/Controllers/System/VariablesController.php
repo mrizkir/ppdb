@@ -41,7 +41,7 @@ class VariablesController extends Controller {
             ],                     
         ],[
             'name.required'=>'Setting mohon untuk di isi',
-        ]);        
+        ]);
         $pid = $request->input('pid');
         $config=json_decode($request->input('setting'),true);
         

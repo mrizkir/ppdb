@@ -107,10 +107,10 @@
           },
           
         ).then(({ data })=>{   
-          this.formdata.tinggal_bersama = data.formulir.tinggal_bersama;           
-          this.formdata.status_pernikahan = data.formulir.status_pernikahan;                                                           
-          this.formdata.desc = data.formulir.desc;                                                           
-          this.$refs.frmdata.resetValidation();       
+          this.formdata.tinggal_bersama = data.formulir.tinggal_bersama;
+          this.formdata.status_pernikahan = data.formulir.status_pernikahan;
+          this.formdata.desc = data.formulir.desc;
+          this.$refs.frmdata.resetValidation();
         });
       },
       save: async function() {
@@ -128,13 +128,13 @@
             }
           }
           ).then(()=>{   
-            this.btnLoading = false;     
-            this.$router.go();                   
+            this.btnLoading = false;
+            this.$router.go();
           }).catch(() => {   
             this.btnLoading = false;
-          });                                    
-          this.form_valid=true;                                                                                        
-          this.$refs.frmdata.resetValidation();                 
+          }); 
+          this.form_valid=true; 
+          this.$refs.frmdata.resetValidation();
         }                             
       },
       kembali()

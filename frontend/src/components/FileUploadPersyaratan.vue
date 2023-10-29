@@ -67,10 +67,10 @@ export default {
     name: 'FileUploadPersyaratan',
     created ()
     {
-        this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];   
+        this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         if (this.item.path == null || this.item.persyaratan_psb_id==null)
         {            
-            this.image_prev=this.item.path;            
+            this.image_prev=this.item.path;
         }
         else
         {            
@@ -133,13 +133,13 @@ export default {
         },
         upload: async function (index,item)
         {
-            let data = item;   
+            let data = item;
             if (this.$refs.frmpersyaratan.validate())
             {
                 if (typeof this.filepersyaratan[index] !== 'undefined')
                 {
                     this.btnLoading=true;
-                    var formdata = new FormData();                    
+                    var formdata = new FormData();
                     formdata.append('nama_persyaratan',data.nama_persyaratan);
                     formdata.append('persyaratan_id',data.persyaratan_id);
                     formdata.append('persyaratan_psb_id',data.persyaratan_psb_id);
@@ -154,10 +154,10 @@ export default {
                     ).then(()=>{                   
                         this.btnHapus=false;
                         this.btnSimpan=true;
-                        this.btnLoading = false;                        
+                        this.btnLoading = false;
                     }).catch(()=>{
                         this.btnLoading = false;
-                    });                    
+                    });
                 }               
             }            
         },
@@ -177,11 +177,11 @@ export default {
                         }
                     ).then(()=>{                   
                         this.btnHapus=true;
-                        this.photoPersyaratan=require('@/assets/no-image.png');        
-                        this.btnLoading = false;                        
+                        this.photoPersyaratan=require('@/assets/no-image.png');
+                        this.btnLoading = false;
                     }).catch(()=>{
                         this.btnLoading = false;
-                    });  
+                    });
                 }
             });
         },
@@ -203,7 +203,7 @@ export default {
         },
         verifikasipersyaratan: async function (item)
         {
-            this.btnLoading = true;    
+            this.btnLoading = true;
             await this.$ajax.post('/spsb/psbpersyaratan/verifikasipersyaratan/'+item.persyaratan_psb_id,
             {                    
                 
@@ -214,14 +214,14 @@ export default {
                 }
             }
             ).then(({ data })=>{   
-                this.badgeColor = data.persyaratan.verified;              
-                this.badgeIcon = data.persyaratan.verified;              
-                this.btnHapus=true;          
-                this.btnVerifikasi=true;     
-                this.btnLoading = false;                        
+                this.badgeColor = data.persyaratan.verified;
+                this.badgeIcon = data.persyaratan.verified;
+                this.btnHapus=true;
+                this.btnVerifikasi=true;
+                this.btnLoading = false;
             }).catch(() => {                   
                 this.btnLoading = false;
-            });                             
+            });
         }
     },
     computed: {

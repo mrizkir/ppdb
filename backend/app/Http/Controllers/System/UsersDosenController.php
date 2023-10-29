@@ -87,7 +87,7 @@ class UsersDosenController extends Controller {
         ]);
         $user = \DB::transaction(function () use ($request){
 
-            $now = \Carbon\Carbon::now()->toDateTimeString();        
+            $now = \Carbon\Carbon::now()->toDateTimeString();
             $user=User::create([
                 'id'=>Uuid::uuid4()->toString(),
                 'name'=>$request->input('name'),
@@ -100,9 +100,9 @@ class UsersDosenController extends Controller {
                 'foto'=> 'storage/images/users/no_photo.png',
                 'created_at'=>$now, 
                 'updated_at'=>$now
-            ]);            
+            ]);
             $role='dosen';   
-            $user->assignRole($role);               
+            $user->assignRole($role);   
             
             $permission=Role::findByName('dosen')->permissions;
             $permissions=$permission->pluck('name');
@@ -182,14 +182,14 @@ class UsersDosenController extends Controller {
 
             $user = \DB::transaction(function () use ($request,$user){
 
-                $user->name = $request->input('name');                
+                $user->name = $request->input('name');    
                 $user->email = $request->input('email');
                 $user->nomor_hp = $request->input('nomor_hp');
-                $user->username = $request->input('username');        
+                $user->username = $request->input('username');
                 if (!empty(trim($request->input('password')))) {
                     $user->password = Hash::make($request->input('password'));
                 }    
-                $user->updated_at = \Carbon\Carbon::now()->toDateTimeString();                
+                $user->updated_at = \Carbon\Carbon::now()->toDateTimeString();    
                 $user->save();
 
                 $user_dosen=UserDosen::find($user->id);
@@ -197,7 +197,7 @@ class UsersDosenController extends Controller {
                 $user_dosen->nidn = $request->input('nidn');
                 $user_dosen->nipy = $request->input('nipy');
                 $user_dosen->is_dw = $request->input('is_dw');
-                $user_dosen->save();                                
+                $user_dosen->save();
                 
                 if ($request->input('is_dw') == 'true')
                 {
@@ -278,7 +278,7 @@ class UsersDosenController extends Controller {
                                         'status'=>1,
                                         'pid'=>'destroy',                
                                         'message'=>"User Dosen ($username) berhasil dihapus"
-                                    ],200);         
+                                    ],200);
         }
                   
     }

@@ -140,7 +140,7 @@ class PSBPersyaratanController extends Controller {
                             ]
         ]);
         $user = \DB::transaction(function () use ($request){
-            $now = \Carbon\Carbon::now()->toDateTimeString();                   
+            $now = \Carbon\Carbon::now()->toDateTimeString();       
             $code=349000+mt_rand(1,999);
             $ta=ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN');
             $user=User::create([
@@ -159,11 +159,11 @@ class PSBPersyaratanController extends Controller {
                 'default_role'=>'siswabaru',          
                 'created_at'=>$now, 
                 'updated_at'=>$now
-            ]);            
+            ]);
             $role='siswabaru';   
             $user->assignRole($role);
             $permission=Role::findByName('siswabaru')->permissions;
-            $user->givePermissionTo($permission->pluck('name'));             
+            $user->givePermissionTo($permission->pluck('name')); 
             
             FormulirPendaftaranAModel::create([
                 'user_id'=>$user->id,
@@ -187,11 +187,11 @@ class PSBPersyaratanController extends Controller {
             ]);
             return $user;
         });
-        $config_kirim_email = ConfigurationModel::getCache('EMAIL_SISWA_ISVALID');        
+        $config_kirim_email = ConfigurationModel::getCache('EMAIL_SISWA_ISVALID');
         if (!is_null($user) && $config_kirim_email==1)
         {
             $code='';
-            app()->mailer->to($request->input('email'))->send(new VerifyEmailAddress($user->code));            
+            app()->mailer->to($request->input('email'))->send(new VerifyEmailAddress($user->code));
         }
         else
         {
@@ -227,7 +227,7 @@ class PSBPersyaratanController extends Controller {
             'password'=>'required',                        
         ]);
         $user = \DB::transaction(function () use ($request){
-            $now = \Carbon\Carbon::now()->toDateTimeString();                   
+            $now = \Carbon\Carbon::now()->toDateTimeString();       
             $code=mt_rand(1000,9999);
             $ta=$request->input('tahun_pendaftaran');
             $user=User::create([
@@ -246,11 +246,11 @@ class PSBPersyaratanController extends Controller {
                 'foto'=>'storage/images/users/no_photo.png', 
                 'created_at'=>$now, 
                 'updated_at'=>$now
-            ]);            
+            ]);
             $role='siswabaru';   
             $user->assignRole($role);
             $permission=Role::findByName('siswabaru')->permissions;
-            $user->givePermissionTo($permission->pluck('name'));             
+            $user->givePermissionTo($permission->pluck('name')); 
             
             FormulirPendaftaranAModel::create([
                 'user_id'=>$user->id,
@@ -261,11 +261,11 @@ class PSBPersyaratanController extends Controller {
 
             return $user;
         });
-        $config_kirim_email = ConfigurationModel::getCache('EMAIL_SISWA_ISVALID');        
+        $config_kirim_email = ConfigurationModel::getCache('EMAIL_SISWA_ISVALID');
         if (!is_null($user) && $config_kirim_email==1)
         {
-            $code='';            
-            app()->mailer->to($request->input('email'))->send(new VerifyEmailAddress($user->code));            
+            $code='';
+            app()->mailer->to($request->input('email'))->send(new VerifyEmailAddress($user->code));
         }       
         else
         {
@@ -316,7 +316,7 @@ class PSBPersyaratanController extends Controller {
                 $user->name = $request->input('name');
                 $user->email = $request->input('email');
                 $user->nomor_hp = $request->input('nomor_hp');
-                $user->username = $request->input('username');        
+                $user->username = $request->input('username');
                 if (!empty(trim($request->input('password')))) {
                     $user->password = Hash::make($request->input('password'));
                 }
@@ -324,7 +324,7 @@ class PSBPersyaratanController extends Controller {
                 $user->save();
 
                 $formulir=FormulirPendaftaranAModel::find($user->id);
-                $formulir->nama_siswa=$request->input('name');                
+                $formulir->nama_siswa=$request->input('name');    
                 $formulir->kode_jenjang=$request->input('kode_jenjang');
                 $formulir->ta=$request->input('tahun_pendaftaran');
                 $formulir->save();
@@ -409,7 +409,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
         }
 
     }
@@ -446,7 +446,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
         }
 
     }
@@ -503,7 +503,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
         }
 
     }
@@ -560,7 +560,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
         }
 
     }
@@ -588,7 +588,7 @@ class PSBPersyaratanController extends Controller {
                                         'pid'=>'fetchdata',                
                                         'formulir'=>$formulir,                                                                                
                                         'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);        
+                                    ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
         }
 
     }
@@ -606,7 +606,7 @@ class PSBPersyaratanController extends Controller {
         $now = \Carbon\Carbon::now()->toDateTimeString();       
         $username= $request->input('username');  
 
-        $user = \DB::table('users')->where('username',$username)->get();        
+        $user = \DB::table('users')->where('username',$username)->get();
 
         if ($user->count()>0)
         {
@@ -659,7 +659,7 @@ class PSBPersyaratanController extends Controller {
             'tanggal_bayar'=>'required',            
             'bukti_bayar'=>'required',            
         ]);
-        $transaksi_id=$request->input('transaksi_id');        
+        $transaksi_id=$request->input('transaksi_id');
         $bukti_bayar=$request->file('bukti_bayar');
         $mime_type=$bukti_bayar->getMimeType();
         if ($mime_type=='image/png' || $mime_type=='image/jpeg')
@@ -809,7 +809,7 @@ class PSBPersyaratanController extends Controller {
                 $formulir->save();
 
                 $user=$formulir->User;
-                $user->name = $request->input('nama_siswa');                
+                $user->name = $request->input('nama_siswa');    
                 $user->save();    
 
                 return $formulir;
@@ -850,7 +850,7 @@ class PSBPersyaratanController extends Controller {
 
             $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
                 $formulir->tinggal_bersama=$request->input('tinggal_bersama');
-                $formulir->status_pernikahan=$request->input('status_pernikahan');                
+                $formulir->status_pernikahan=$request->input('status_pernikahan');    
                 
                 $formulir->save();
 
@@ -912,7 +912,7 @@ class PSBPersyaratanController extends Controller {
 
             $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
                 $formulir->nama_ayah=$request->input('nama_ayah');
-                $formulir->hubungan=$request->input('hubungan');                
+                $formulir->hubungan=$request->input('hubungan');    
                 $formulir->tempat_lahir=$request->input('tempat_lahir');
                 $formulir->tanggal_lahir=$request->input('tanggal_lahir');
                 $formulir->idagama=$request->input('idagama');
@@ -925,7 +925,7 @@ class PSBPersyaratanController extends Controller {
                 $formulir->address1_kabupaten=$request->input('address1_kabupaten');
                 $formulir->address1_provinsi_id=$request->input('address1_provinsi_id');
                 $formulir->address1_provinsi=$request->input('address1_provinsi');
-                $formulir->alamat_tempat_tinggal=$request->input('alamat_tempat_tinggal');                
+                $formulir->alamat_tempat_tinggal=$request->input('alamat_tempat_tinggal');    
                 $formulir->kewarganegaraan=$request->input('kewarganegaraan');
                 
                 $formulir->nomor_hp=$request->input('nomor_hp');
@@ -937,8 +937,8 @@ class PSBPersyaratanController extends Controller {
                 $formulir->save();
 
                 $user=$formulir->User;
-                $user->nomor_hp = $request->input('nomor_hp');                
-                $user->email = $request->input('email');                
+                $user->nomor_hp = $request->input('nomor_hp');    
+                $user->email = $request->input('email');    
                 $user->save();    
 
                 return $formulir;
@@ -999,7 +999,7 @@ class PSBPersyaratanController extends Controller {
 
             $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
                 $formulir->nama_ibu=$request->input('nama_ibu');
-                $formulir->hubungan=$request->input('hubungan');                
+                $formulir->hubungan=$request->input('hubungan');    
                 $formulir->tempat_lahir=$request->input('tempat_lahir');
                 $formulir->tanggal_lahir=$request->input('tanggal_lahir');
                 $formulir->idagama=$request->input('idagama');
@@ -1012,7 +1012,7 @@ class PSBPersyaratanController extends Controller {
                 $formulir->address1_kabupaten=$request->input('address1_kabupaten');
                 $formulir->address1_provinsi_id=$request->input('address1_provinsi_id');
                 $formulir->address1_provinsi=$request->input('address1_provinsi');
-                $formulir->alamat_tempat_tinggal=$request->input('alamat_tempat_tinggal');                
+                $formulir->alamat_tempat_tinggal=$request->input('alamat_tempat_tinggal');    
                 $formulir->kewarganegaraan=$request->input('kewarganegaraan');
                 
                 $formulir->nomor_hp=$request->input('nomor_hp');
@@ -1021,7 +1021,7 @@ class PSBPersyaratanController extends Controller {
                 $formulir->pekerjaan_instansi=$request->input('pekerjaan_instansi');
                 $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
                 
-                $formulir->save();             
+                $formulir->save(); 
 
                 return $formulir;
             });
@@ -1048,7 +1048,7 @@ class PSBPersyaratanController extends Controller {
         {
             $this->validate($request, [                      
                 'filefotoselfi'=>'required'                        
-            ]);            
+            ]);
             $filefotoselfi = $request->file('filefotoselfi');
             $mime_type=$filefotoselfi->getMimeType();
             if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
@@ -1097,7 +1097,7 @@ class PSBPersyaratanController extends Controller {
         {
             $this->validate($request, [                      
                 'filektpayah'=>'required'                        
-            ]);            
+            ]);
             $filektpayah = $request->file('filektpayah');
             $mime_type=$filektpayah->getMimeType();
             if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
@@ -1146,7 +1146,7 @@ class PSBPersyaratanController extends Controller {
         {
             $this->validate($request, [                      
                 'filektpibu'=>'required'                        
-            ]);            
+            ]);
             $filektpibu = $request->file('filektpibu');
             $mime_type=$filektpibu->getMimeType();
             if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
@@ -1195,7 +1195,7 @@ class PSBPersyaratanController extends Controller {
         {
             $this->validate($request, [                      
                 'filekk'=>'required'                        
-            ]);            
+            ]);
             $filekk = $request->file('filekk');
             $mime_type=$filekk->getMimeType();
             if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
@@ -1244,7 +1244,7 @@ class PSBPersyaratanController extends Controller {
         {
             $this->validate($request, [                      
                 'fileaktalahir'=>'required'                        
-            ]);            
+            ]);
             $fileaktalahir = $request->file('fileaktalahir');
             $mime_type=$fileaktalahir->getMimeType();
             if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
@@ -1315,7 +1315,7 @@ class PSBPersyaratanController extends Controller {
                                         'status'=>1,
                                         'pid'=>'destroy',                
                                         'message'=>"Peserta Didik Baru ($name) berhasil dihapus"
-                                    ],200);         
+                                    ],200);
         }
                   
     }      

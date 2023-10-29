@@ -77,10 +77,10 @@ class KonfirmasiPembayaranController extends Controller
         {
             $this->validate($request, [                      
                 'verified'=>'required'                        
-            ]);            
+            ]);
             $konfirmasi = \DB::transaction(function () use ($request,$konfirmasi){  
                 $konfirmasi->verified=$request->input('verified');
-                $konfirmasi->save();              
+                $konfirmasi->save();  
                 return $konfirmasi;
             });
             

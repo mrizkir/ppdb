@@ -311,12 +311,12 @@ export default {
                     }
                 ).then(({ data })=>{                                            
                     this.$refs.frmdata.reset(); 
-                    this.formdata.foto = data.foto;       
+                    this.formdata.foto = data.foto;
                     this.formdata=this.formdefault; 
                     this.btnLoading = false;
                 }).catch(()=>{
                     this.btnLoading = false;
-                });                     
+                });
             }
         },
         previewImage (e)
@@ -353,10 +353,10 @@ export default {
                         }
                     ).then(({ data })=>{                           
                         this.btnLoading = false;
-                        this.$store.dispatch('updateFoto',data.user.foto);                        
+                        this.$store.dispatch('updateFoto',data.user.foto);
                     }).catch(()=>{
                         this.btnLoading = false;
-                    });    
+                    });
                     this.$refs.frmdata.reset(); 
                 }   
             }
@@ -375,7 +375,7 @@ export default {
                 this.$store.dispatch('updateFoto',data.user.foto);
             }).catch(()=>{
                 this.btnLoading = false;
-            });    
+            });
         },
         async fetchSiswa()
         {
@@ -386,7 +386,7 @@ export default {
                     }
                 }
             ).then(({ data })=>{                           
-                this.data_mhs = data.mahasiswa;            
+                this.data_mhs = data.mahasiswa;
             })
         }
         

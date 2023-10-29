@@ -38,7 +38,7 @@ class UIController extends Controller {
      */
     public function admin ()
     {
-        $config = ConfigurationModel::getCache();        
+        $config = ConfigurationModel::getCache();
         $theme=[
             'V-SYSTEM-BAR-CSS-CLASS'=>$config['V-SYSTEM-BAR-CSS-CLASS'],
             'V-APP-BAR-NAV-ICON-CSS-CLASS'=>$config['V-APP-BAR-NAV-ICON-CSS-CLASS'],
@@ -90,7 +90,7 @@ class UIController extends Controller {
             $formulir=\App\Models\SPSB\FormulirPendaftaranAModel::find($this->getUserid());
             $daftar_ta=TAModel::where('tahun','=',$formulir->ta)
                                 ->select(\DB::raw('tahun AS value,tahun_ajaran AS text'))
-                                ->get();              
+                                ->get();  
             
             $daftar_jenjang=JenjangStudiModel::select(\DB::raw('kode_jenjang AS id,nama_jenjang AS text'))
                                 ->where('kode_jenjang',$formulir->kode_jenjang)

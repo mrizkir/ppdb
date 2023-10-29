@@ -42,7 +42,7 @@ class Controller extends BaseController
      */
     public function hasRole($name) 
     {
-        return $this->guard()->user()->hasRole($name);        
+        return $this->guard()->user()->hasRole($name);
     }
     /**
      * @return object auth api

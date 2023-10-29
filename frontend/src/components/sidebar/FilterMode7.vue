@@ -21,11 +21,11 @@ export default {
     name: 'FilterMode7',
     created()
     {
-        this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];  
-        this.kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];                                    
+        this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];
+        this.kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang']; 
 
-        this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];  
-        this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];  
+        this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
+        this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
     },
     data:()=>({
         firstloading: true,
@@ -46,16 +46,16 @@ export default {
         {
             if (!this.firstloading)
             {
-                this.$store.dispatch('uiadmin/updateTahunPendaftaran',val);  
-                this.$emit('changeTahunPendaftaran',val);          
+                this.$store.dispatch('uiadmin/updateTahunPendaftaran',val);
+                this.$emit('changeTahunPendaftaran',val);
             }            
         },
         kode_jenjang(val)
         {
             if (!this.firstloading)
             {
-                this.$store.dispatch('uiadmin/updateJenjang',val);  
-                this.$emit('changeJenjang',val);          
+                this.$store.dispatch('uiadmin/updateJenjang',val);
+                this.$emit('changeJenjang',val);
             }
         },
     }

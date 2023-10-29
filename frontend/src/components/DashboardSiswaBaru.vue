@@ -132,7 +132,7 @@ export default {
 	name: 'DashboardSiswaBaru',
 	created()
 	{
-		this.initialize();                  
+		this.initialize(); 
 	},
 	data:()=>({
 		btnLoading: false, 

@@ -487,11 +487,11 @@
       initialize: async function()
       {
         this.$ajax.get("/datamaster/negara").then(({ data })=>{                
-          this.daftar_negara = data.negara;                
-        });            
+          this.daftar_negara = data.negara;
+        });
         this.$ajax.get("/datamaster/provinsi").then(({ data })=>{                
-          this.daftar_provinsi = data.provinsi;                
-        });            
+          this.daftar_provinsi = data.provinsi;
+        });
         
         await this.$ajax.get("/datamaster/agama").then(({ data })=>{                  
           this.daftar_agama = data.agama;
@@ -517,15 +517,15 @@
           },
           
         ).then(({ data })=>{   
-          this.formdata.nama_siswa = data.formulir.nama_siswa;           
-          this.formdata.nisn = data.formulir.nisn;           
-          this.formdata.nama_panggilan = data.formulir.nama_panggilan;           
-          this.formdata.jk = data.formulir.jk;    
-          this.formdata.nik = data.formulir.nik;       
-          this.formdata.tempat_lahir = data.formulir.tempat_lahir;           
-          this.formdata.tanggal_lahir = data.formulir.tanggal_lahir;           
-          this.formdata.idagama = data.formulir.idagama;    
-          this.formdata.id_kebutuhan_khusus = data.formulir.id_kebutuhan_khusus;           
+          this.formdata.nama_siswa = data.formulir.nama_siswa;
+          this.formdata.nisn = data.formulir.nisn;
+          this.formdata.nama_panggilan = data.formulir.nama_panggilan;
+          this.formdata.jk = data.formulir.jk;
+          this.formdata.nik = data.formulir.nik;
+          this.formdata.tempat_lahir = data.formulir.tempat_lahir;
+          this.formdata.tanggal_lahir = data.formulir.tanggal_lahir;
+          this.formdata.idagama = data.formulir.idagama;
+          this.formdata.id_kebutuhan_khusus = data.formulir.id_kebutuhan_khusus;
           
           this.provinsi_id={
             id:data.formulir.address1_provinsi_id,
@@ -544,28 +544,28 @@
             nama:data.formulir.address1_kelurahan
           };
           
-          this.formdata.address1_rt = data.formulir.address1_rt;                    
-          this.formdata.address1_rw = data.formulir.address1_rw;    
-          this.formdata.alamat_tempat_tinggal = data.formulir.alamat_tempat_tinggal;    
-          this.formdata.kode_pos = data.formulir.kode_pos;    
-          this.formdata.kewarganegaraan = data.formulir.kewarganegaraan;    
+          this.formdata.address1_rt = data.formulir.address1_rt;
+          this.formdata.address1_rw = data.formulir.address1_rw;
+          this.formdata.alamat_tempat_tinggal = data.formulir.alamat_tempat_tinggal;
+          this.formdata.kode_pos = data.formulir.kode_pos;
+          this.formdata.kewarganegaraan = data.formulir.kewarganegaraan;
 
-          this.formdata.asal_sekolah = data.formulir.asal_sekolah;    
-          this.formdata.anak_ke = data.formulir.anak_ke;    
-          this.formdata.jumlah_saudara = data.formulir.jumlah_saudara;    
-          this.formdata.golongan_darah = data.formulir.golongan_darah;    
-          this.formdata.penyakit = data.formulir.penyakit;    
-          this.formdata.avoid_food = data.formulir.avoid_food;    
-          this.formdata.tinggi = data.formulir.tinggi;    
-          this.formdata.berat_badan = data.formulir.berat_badan;    
-          this.formdata.ukuran_seragam = data.formulir.ukuran_seragam;    
-          this.formdata.id_moda = data.formulir.id_moda;    
-          this.formdata.jarak_ke_sekolah = data.formulir.jarak_ke_sekolah;    
-          this.formdata.waktu_tempuh = data.formulir.waktu_tempuh;    
+          this.formdata.asal_sekolah = data.formulir.asal_sekolah;
+          this.formdata.anak_ke = data.formulir.anak_ke;
+          this.formdata.jumlah_saudara = data.formulir.jumlah_saudara;
+          this.formdata.golongan_darah = data.formulir.golongan_darah;
+          this.formdata.penyakit = data.formulir.penyakit;
+          this.formdata.avoid_food = data.formulir.avoid_food;
+          this.formdata.tinggi = data.formulir.tinggi;
+          this.formdata.berat_badan = data.formulir.berat_badan;
+          this.formdata.ukuran_seragam = data.formulir.ukuran_seragam;
+          this.formdata.id_moda = data.formulir.id_moda;
+          this.formdata.jarak_ke_sekolah = data.formulir.jarak_ke_sekolah;
+          this.formdata.waktu_tempuh = data.formulir.waktu_tempuh;
           
-          this.formdata.kode_jenjang = data.formulir.kode_jenjang;    
+          this.formdata.kode_jenjang = data.formulir.kode_jenjang;
           
-          this.$refs.frmdata.resetValidation();       
+          this.$refs.frmdata.resetValidation();
         });
       },
       save: async function() {
@@ -618,13 +618,13 @@
             }
           }
           ).then(()=>{   
-            this.btnLoading = false;     
-            this.$router.go();                   
+            this.btnLoading = false;
+            this.$router.go();
           }).catch(() => {   
             this.btnLoading = false;
-          });                                    
-          this.form_valid=true;                                                                                        
-          this.$refs.frmdata.resetValidation();                 
+          }); 
+          this.form_valid=true; 
+          this.$refs.frmdata.resetValidation();
         }                             
       },
       kembali()

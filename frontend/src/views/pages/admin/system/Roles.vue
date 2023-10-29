@@ -313,14 +313,14 @@ export default {
                     this.datatableLoading=false;
                 }     
             
-            });          
+            });
             
         },
         dataTableRowClicked(item)
         {
             if (item === this.expanded[0])
             {
-                this.expanded = [];        
+                this.expanded = [];
             }
             else
             {
@@ -340,7 +340,7 @@ export default {
                 {
                     this.permissions_selected = data.permissions;
                 }  
-            });  
+            });
             
             this.dialogdetail = true;
         },
@@ -359,7 +359,7 @@ export default {
                 {
                     this.daftar_permissions = data.permissions;
                 }  
-            });          
+            });
 
             this.$ajax.get('/system/setting/roles/'+item.id+'/permission',{
                 headers: {
@@ -370,7 +370,7 @@ export default {
                 {
                     this.permissions_selected = data.permissions;
                 }  
-            });  
+            });
             this.dialogRolePermission = true;
             this.editedItem=item;
         
@@ -379,7 +379,7 @@ export default {
             this.btnLoading = false;
             this.dialog = false;
             this.$refs.frmdata.reset(); 
-            this.form_error_message='';           
+            this.form_error_message='';
             setTimeout(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
@@ -388,7 +388,7 @@ export default {
         },
         closeRolePermissions () {    
             this.permissions_selected=[];
-            this.dialogRolePermission = false;  
+            this.dialogRolePermission = false;
         },
         save () {
             this.form_error_message='';
@@ -412,7 +412,7 @@ export default {
                         this.close();
                     }).catch(()=>{
                         this.btnLoading = false;
-                    });                    
+                    });
                     
                 } else {
                     this.$ajax.post('/system/setting/roles/store',

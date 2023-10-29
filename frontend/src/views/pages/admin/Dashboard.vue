@@ -79,7 +79,7 @@
 	export default {
 		name: 'Dashboard',
 		created() {
-			this.TOKEN = this.$route.params.token;        
+			this.TOKEN = this.$route.params.token;
 			this.breadcrumbs = [
 				{
 					text: 'HOME',
@@ -109,11 +109,11 @@
 						Authorization: 'Bearer '+this.TOKEN
 					}
 				}).then(({ data })=>{          
-					this.dashboard = data.role[0];    
-					this.$store.dispatch('uiadmin/changeDashboard',this.dashboard);                                       
-				});                 
-				this.$store.dispatch('uiadmin/init',this.$ajax);              
-				this.tahun_pendaftaran = this.$store.getters['uifront/getTahunPendaftaran'];            
+					this.dashboard = data.role[0];
+					this.$store.dispatch('uiadmin/changeDashboard',this.dashboard);
+				});
+				this.$store.dispatch('uiadmin/init',this.$ajax);
+				this.tahun_pendaftaran = this.$store.getters['uifront/getTahunPendaftaran'];
 			}
 		},
 		computed: {

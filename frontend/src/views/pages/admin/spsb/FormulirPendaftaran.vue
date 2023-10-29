@@ -92,6 +92,15 @@
                 @click.stop="editItem(item)">
                 mdi-pencil
               </v-icon>
+              <v-icon
+                small
+                :loading="btnLoading"
+                :disabled="btnLoading"
+                @click.stop="deleteItem(item)"
+                v-if="item.default_role== 'dosen'"
+              >
+                mdi-delete
+              </v-icon>
             </template>
             <template v-slot:expanded-item="{ headers, item }">
               <td :colspan="headers.length" class="text-center">
@@ -145,7 +154,7 @@
       let kode_jenjang = this.$store.getters['uiadmin/getKodeJenjang'];
       this.kode_jenjang=kode_jenjang;
       this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
-      this.tahun_pendaftaran = this.$store.getters['uiadmin/getTahunPendaftaran'];                
+      this.tahun_pendaftaran = this.$store.getters['uiadmin/getTahunPendaftaran'];
       this.initialize()   
     },  
     data: () => ({
@@ -187,10 +196,10 @@
         switch(this.dashboard)
         {
           case 'siswabaru':
-            this.user_id = this.$store.getters['auth/AttributeUser']('id');                    
+            this.user_id = this.$store.getters['auth/AttributeUser']('id');
           break;
           default :
-            this.datatableLoading=true;            
+            this.datatableLoading=true;
             await this.$ajax.post('/spsb/formulirpendaftaran',
             {
               TA: this.tahun_pendaftaran,
@@ -201,9 +210,9 @@
                 Authorization: this.$store.getters["auth/Token"]
               }
             }).then(({ data })=>{     
-              this.datatable = data.psb;                
+              this.datatable = data.psb;
               this.datatableLoading=false;
-            });         
+            }); 
             this.firstloading=false;
             this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
         }
@@ -211,7 +220,7 @@
       },
       dataTableRowClicked(item) {
         if (item === this.expanded[0]) {
-          this.expanded = [];        
+          this.expanded = [];
         } else {
           this.expanded = [item];
         }
@@ -224,26 +233,25 @@
       {
         return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
       },  
-      editItem(item)
-      {
+      editItem(item) {
         this.user_id=item.id;
-        this.datapesertadidik = item;            
+        this.datapesertadidik = item;
       },
-      
     },
     watch: {
       tahun_pendaftaran() {
         if (!this.firstloading) {
           this.initialize();
-        }            
+        }
       },
       kode_jenjang(val) {
-        if (!this.firstloading)
-        {
-          this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](val);
+        if (!this.firstloading) {
+          this.nama_jenjang = this.$store.getters["uiadmin/getNamaJenjang"](
+            val
+          );
           this.initialize();
-        }            
-      }
+        }
+      },
     },
     components: {
       SPSBLayout,

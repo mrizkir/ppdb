@@ -221,7 +221,7 @@ export default {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         if (this.dashboard == 'siswabaru')
         {
-            this.pesertadidik_id=this.$store.getters['auth/AttributeUser']('id');            
+            this.pesertadidik_id=this.$store.getters['auth/AttributeUser']('id');
         }
         this.initialize()   
     },
@@ -280,7 +280,7 @@ export default {
                 
             ).then(({ data })=>{   
                 this.peryaratanppdb = data.formulir;
-                this.$refs.frmuploadfotoselfi.resetValidation();  
+                this.$refs.frmuploadfotoselfi.resetValidation();
             });
 
         },
@@ -291,7 +291,7 @@ export default {
                 if (typeof this.filefotoselfi !== 'undefined' && this.filefotoselfi !== null )
                 {
                     this.btnLoadingFotoSelfi=true;
-                    var formdata = new FormData();                                        
+                    var formdata = new FormData();
                     formdata.append('filefotoselfi',this.filefotoselfi);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileselfi/'+this.pesertadidik_id,formdata, 
                         {
@@ -301,11 +301,11 @@ export default {
                             }
                         }
                     ).then(()=>{                                                            
-                        this.btnLoadingFotoSelfi=false;                                                  
-                        this.$router.go();                     
+                        this.btnLoadingFotoSelfi=false;
+                        this.$router.go();
                     }).catch(()=>{
-                        this.btnLoadingFotoSelfi=false;                        
-                    });                    
+                        this.btnLoadingFotoSelfi=false;
+                    });
                 }
             }
         }, 
@@ -316,7 +316,7 @@ export default {
                 if (typeof this.filektpayah !== 'undefined' && this.filektpayah !== null )
                 {
                     this.btnLoadingKTPAyah=true;
-                    var formdata = new FormData();                                        
+                    var formdata = new FormData();
                     formdata.append('filektpayah',this.filektpayah);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpayah/'+this.pesertadidik_id,formdata, 
                         {
@@ -326,11 +326,11 @@ export default {
                             }
                         }
                     ).then(()=>{                                                            
-                        this.btnLoadingKTPAyah=false;                                                  
-                        this.$router.go();                     
+                        this.btnLoadingKTPAyah=false;
+                        this.$router.go();
                     }).catch(()=>{
-                        this.btnLoadingKTPAyah=false;                        
-                    });                    
+                        this.btnLoadingKTPAyah=false;
+                    });
                 }
             }
         }, 
@@ -341,7 +341,7 @@ export default {
                 if (typeof this.filektpibu !== 'undefined' && this.filektpibu !== null )
                 {
                     this.btnLoadingKTPIbu=true;
-                    var formdata = new FormData();                                        
+                    var formdata = new FormData();
                     formdata.append('filektpibu',this.filektpibu);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpibu/'+this.pesertadidik_id,formdata, 
                         {
@@ -351,11 +351,11 @@ export default {
                             }
                         }
                     ).then(()=>{                                                            
-                        this.btnLoadingKTPIbu=false;                                                  
-                        this.$router.go();                     
+                        this.btnLoadingKTPIbu=false;
+                        this.$router.go();
                     }).catch(()=>{
-                        this.btnLoadingKTPIbu=false;                        
-                    });                    
+                        this.btnLoadingKTPIbu=false;
+                    });
                 }
             }
         }, 
@@ -366,7 +366,7 @@ export default {
                 if (typeof this.filekk !== 'undefined' && this.filekk !== null )
                 {
                     this.btnLoadingKK=true;
-                    var formdata = new FormData();                                        
+                    var formdata = new FormData();
                     formdata.append('filekk',this.filekk);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilekk/'+this.pesertadidik_id,formdata, 
                         {
@@ -376,11 +376,11 @@ export default {
                             }
                         }
                     ).then(()=>{                                                            
-                        this.btnLoadingKK=false;                                                  
-                        this.$router.go();                     
+                        this.btnLoadingKK=false;
+                        this.$router.go();
                     }).catch(()=>{
-                        this.btnLoadingKK=false;                        
-                    });                    
+                        this.btnLoadingKK=false;
+                    });
                 }
             }
         }, 
@@ -391,7 +391,7 @@ export default {
                 if (typeof this.fileaktalahir !== 'undefined' && this.fileaktalahir !== null )
                 {
                     this.btnLoadingAktaLahir=true;
-                    var formdata = new FormData();                                        
+                    var formdata = new FormData();
                     formdata.append('fileaktalahir',this.fileaktalahir);
                     await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileaktalahir/'+this.pesertadidik_id,formdata, 
                         {
@@ -401,11 +401,11 @@ export default {
                             }
                         }
                     ).then(()=>{                                                            
-                        this.btnLoadingAktaLahir=false;                                                  
-                        this.$router.go();                     
+                        this.btnLoadingAktaLahir=false;
+                        this.$router.go();
                     }).catch(()=>{
-                        this.btnLoadingAktaLahir=false;                        
-                    });                    
+                        this.btnLoadingAktaLahir=false;
+                    });
                 }
             }
         }, 

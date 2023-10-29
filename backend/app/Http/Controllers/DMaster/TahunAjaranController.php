@@ -28,7 +28,7 @@ class TahunAjaranController extends Controller {
      */
     public function daftarbulan(Request $request,$id)
     {
-        $ta=TAModel::find($id);         
+        $ta=TAModel::find($id);
         if (is_null($ta))
         {
             return Response()->json([

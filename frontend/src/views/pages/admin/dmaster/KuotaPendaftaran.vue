@@ -18,12 +18,7 @@
         </v-breadcrumbs>
       </template>
       <template v-slot:desc>
-        <v-alert                                        
-          color="cyan"
-          border="left"           
-          colored-border
-          type="info"
-        >
+        <v-alert color="cyan" border="left" colored-border type="info">
           Halaman ini digunakan untuk mengatur kuota pendaftaran per jenjang dan tahun ajaran.
         </v-alert>
       </template>
@@ -110,7 +105,8 @@
             </template>    
             <template v-slot:expanded-item="{ headers, item }">
               <td :colspan="headers.length" class="text-center">
-                <v-col cols="12">        
+                <v-col cols="12">    
+                  <strong>ID:</strong>{{ item.id }}    
                   <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
                   <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
                 </v-col>    
@@ -126,6 +122,14 @@
               >
                 mdi-pencil
               </v-icon>
+              <v-icon
+                small
+                :loading="btnLoading"
+                :disabled="btnLoading"
+                @click.stop="deleteItem(item)"              
+              >
+                mdi-delete
+            </v-icon>
             </template>
             <template v-slot:no-data>
               Data belum tersedia
@@ -229,14 +233,14 @@
         }
       },
       async addItem() {
-        this.daftar_ta = this.$store.getters['uiadmin/getDaftarTA'];  
-        this.formdata.ta = this.$store.getters['uiadmin/getTahunPendaftaran'];        
+        this.daftar_ta = this.$store.getters['uiadmin/getDaftarTA'];
+        this.formdata.ta = this.$store.getters['uiadmin/getTahunPendaftaran'];
 
         await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
           this.daftar_jenjang = data.jenjang_studi;
         });
 
-        this.dialogfrm = true;      
+        this.dialogfrm = true;
       },
       save: async function() {
         if (this.$refs.frmdata.validate()) {
@@ -283,7 +287,7 @@
             ).then(({ data })=>{                           
               this.datatable.push(data.pendaftar);
               this.closedialogfrm();
-              this.btnLoading = false;       
+              this.btnLoading = false;
             }).catch(()=>{
               this.btnLoading = false;
             });

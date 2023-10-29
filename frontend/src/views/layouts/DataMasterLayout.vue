@@ -238,7 +238,7 @@
           if (value >= 0)
           {
             setTimeout(() => { 
-              this.loginTime=this.AUTHENTICATED==true?this.loginTime+1:-1;                                                                     
+              this.loginTime=this.AUTHENTICATED==true?this.loginTime+1:-1;
             }, 1000);
           }
           else

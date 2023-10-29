@@ -142,7 +142,7 @@ class SystemMigrationController extends Controller {
             $role='siswa';   
             $user->assignRole($role);
             $permission=Role::findByName('siswa')->permissions;
-            $user->givePermissionTo($permission->pluck('name'));            
+            $user->givePermissionTo($permission->pluck('name'));
             
             DataSiswaMigrationModel::create([
                 'id'=>Uuid::uuid4()->toString(),
@@ -153,7 +153,7 @@ class SystemMigrationController extends Controller {
                 'tahun'=>$ta,
                 'idsmt'=>1
             ]);
-            $status_siswa=$request->input('status_siswa');            
+            $status_siswa=$request->input('status_siswa');
             $i=0;
             for ($tahun=$ta;$tahun < 2020; $tahun++)
             {
@@ -181,7 +181,7 @@ class SystemMigrationController extends Controller {
                         'tahun'=>$ta,
                         'idsmt'=>1
                     ]);
-                    $i+=1;                    
+                    $i+=1;
                     DulangModel::create([
                         'id'=>Uuid::uuid4()->toString(),
                         'user_id'=>$user->id,
@@ -207,7 +207,7 @@ class SystemMigrationController extends Controller {
                 }                
             }   
             return $user;
-        });        
+        });
         return Response()->json([
                                 'status'=>1,
                                 'pid'=>'store',                                

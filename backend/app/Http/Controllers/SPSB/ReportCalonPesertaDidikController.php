@@ -48,7 +48,7 @@ class ReportCalonPesertaDidikController extends Controller
                                     'title' => 'Formulir Pendaftaran Calon Peserta Didik',
                                   ]
                               );
-    $file_pdf=\App\Helpers\Helper::public_path('exported/pdf/')."/$user_id.pdf";        
+    $file_pdf=\App\Helpers\Helper::public_path('exported/pdf/')."/$user_id.pdf";
     $pdf->save($file_pdf);
 
     $pdf_file="storage/exported/pdf/$user_id.pdf";

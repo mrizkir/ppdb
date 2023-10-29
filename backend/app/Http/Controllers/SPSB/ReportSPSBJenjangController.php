@@ -38,7 +38,7 @@ class ReportSPSBJenjangController extends Controller {
       'nama_prodi'=>$request->input('nama_prodi'),            
     ];
 
-    $report= new \App\Models\Report\ReportSPSBModel ($data_report);          
+    $report= new \App\Models\Report\ReportSPSBModel ($data_report);
     return $report->prodi();
   }
 }

@@ -14,8 +14,8 @@ export default {
     name: 'FilterMode1',
     created()
     {
-        this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];  
-        this.tahun_ajaran=this.$store.getters['uiadmin/getTahunAkademik'];  
+        this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
+        this.tahun_ajaran=this.$store.getters['uiadmin/getTahunAkademik'];
     },
     data:()=>({
         firstloading: true,
@@ -34,8 +34,8 @@ export default {
         {
             if (!this.firstloading)
             {
-                this.$store.dispatch('uiadmin/updateTahunAkademik',val);  
-                this.$emit('changeTahunAkademik',val);          
+                this.$store.dispatch('uiadmin/updateTahunAkademik',val);
+                this.$emit('changeTahunAkademik',val);
             }            
         },
     }

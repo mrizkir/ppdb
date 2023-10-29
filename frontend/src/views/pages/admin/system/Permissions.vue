@@ -205,14 +205,14 @@ export default {
             }).then(({ data })=>{                
                 this.daftar_permissions = data.permissions;
                 this.datatableLoading=false;
-            });          
+            });
             
         },
         dataTableRowClicked(item)
         {
             if (item === this.expanded[0])
             {
-                this.expanded = [];        
+                this.expanded = [];
             }
             else
             {
@@ -280,7 +280,7 @@ export default {
                         this.btnLoading = false;
                     });
                 }
-            });      
+            });
         },
     },
     computed: {

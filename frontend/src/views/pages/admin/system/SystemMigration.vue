@@ -216,8 +216,8 @@ export default {
         },
 		initialize: async function()
 		{	
-            this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];  
-            this.daftar_kelas=this.$store.getters['uiadmin/getDaftarKelas'];                      
+            this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];
+            this.daftar_kelas=this.$store.getters['uiadmin/getDaftarKelas'];
 
             await this.$ajax.get('/akademik/dosenwali',{
                 headers: {
@@ -246,9 +246,9 @@ export default {
                 });
                 this.datatableLoading=false;
             });
-            this.daftar_status_mhs=this.$store.getters['uiadmin/getDaftarStatusSiswa'];  
+            this.daftar_status_mhs=this.$store.getters['uiadmin/getDaftarStatusSiswa'];
 
-            this.firstloading=false;            
+            this.firstloading=false;
             this.$refs.filter9.setFirstTimeLoading(this.firstloading); 
         },
         save () {
@@ -273,15 +273,15 @@ export default {
                         }
                     }
                 ).then(({ data })=>{    
-                    console.log(data);                   
+                    console.log(data);
                     setTimeout(() => {
-                        this.$router.go();    
+                        this.$router.go();
                         this.btnLoading = false;
                         }, 300
-                    );                                  
+                    );
                 }).catch(()=>{
                     this.btnLoading = false;
-                });                                   
+                });
                  
             }
         },

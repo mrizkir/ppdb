@@ -145,7 +145,7 @@ export default {
         let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
         this.kode_jenjang=kode_jenjang;
         this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
-        this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];                
+        this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
         this.initialize()   
     },  
     data: () => ({
@@ -187,10 +187,10 @@ export default {
             switch(this.dashboard)
             {
                 case 'siswabaru':
-                    this.user_id=this.$store.getters['auth/AttributeUser']('id');                    
+                    this.user_id=this.$store.getters['auth/AttributeUser']('id');
                 break;
                 default :
-                    this.datatableLoading=true;            
+                    this.datatableLoading=true;
                     await this.$ajax.post('/spsb/situasikeluarga',
                     {
                         TA: this.tahun_pendaftaran,
@@ -201,9 +201,9 @@ export default {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }).then(({ data })=>{               
-                        this.datatable = data.psb;                
+                        this.datatable = data.psb;
                         this.datatableLoading=false;
-                    });         
+                    }); 
                     this.firstloading=false;
                     this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
             }
@@ -213,7 +213,7 @@ export default {
         {
             if (item === this.expanded[0])
             {
-                this.expanded = [];        
+                this.expanded = [];
             }
             else
             {
@@ -231,7 +231,7 @@ export default {
         editItem(item)
         {
             this.user_id=item.id;
-            this.datapesertadidik = item;              
+            this.datapesertadidik = item;
         },
     },
     watch: {

@@ -104,9 +104,9 @@ export default {
                     Authorization: this.TOKEN
                 }
             }).then(({ data })=>{                  
-                let setting = data.setting;             
-                this.formdata.email_mhs_isvalid=parseInt(setting.EMAIL_SISWA_ISVALID);                
-            });          
+                let setting = data.setting;
+                this.formdata.email_mhs_isvalid=parseInt(setting.EMAIL_SISWA_ISVALID);
+            });
             
         },
         save () {
@@ -130,7 +130,7 @@ export default {
                     this.btnLoading = false;
                 }).catch(()=>{
                     this.btnLoading = false;
-                });        
+                });
             }
         }
     },

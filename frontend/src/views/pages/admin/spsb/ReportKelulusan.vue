@@ -155,7 +155,7 @@ export default {
         let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
         this.kode_jenjang=kode_jenjang;
         this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
-        this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];                
+        this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
         this.initialize()   
     },  
     data: () => ({
@@ -212,7 +212,7 @@ export default {
 
                 break;
                 default :
-                    this.datatableLoading=true;            
+                    this.datatableLoading=true;
                     await this.$ajax.post('/spsb/reportspsbkelulusan',
                     {
                         TA: this.tahun_pendaftaran,
@@ -224,9 +224,9 @@ export default {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }).then(({ data })=>{               
-                        this.datatable = data.psb;                
+                        this.datatable = data.psb;
                         this.datatableLoading=false;
-                    });         
+                    }); 
                     this.firstloading=false;
                     this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
             }
@@ -236,7 +236,7 @@ export default {
         {
             if (item === this.expanded[0])
             {
-                this.expanded = [];        
+                this.expanded = [];
             }
             else
             {
@@ -276,19 +276,19 @@ export default {
                 const url = window.URL.createObjectURL(new Blob([data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'laporan_jenjang_'+Date.now()+'.xlsx');                
-                link.setAttribute('id', 'download_laporan');                
+                link.setAttribute('download', 'laporan_jenjang_'+Date.now()+'.xlsx');
+                link.setAttribute('id', 'download_laporan');
                 document.body.appendChild(link);
-                link.click();                     
+                link.click();
                 document.body.removeChild(link);
                 this.btnLoading = false;
             }).catch(()=>{
                 this.btnLoading = false;
-            });     
+            });
         },  
         closeProfilSiswaBaru ()
         {
-            this.dialogprofilmhsbaru = false;                     
+            this.dialogprofilmhsbaru = false;
         }        
     },
     watch: {

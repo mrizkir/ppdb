@@ -111,7 +111,7 @@ export default {
         initialize: async function() 
         {
             this.$ajax.get('/datamaster/tahunajaran').then(({ data })=>{                
-                this.daftar_ta = data.ta;                               
+                this.daftar_ta = data.ta;
             }); 
 
             this.datatableLoading=true;
@@ -121,11 +121,11 @@ export default {
                     Authorization: this.TOKEN
                 }
             }).then(({ data })=>{  
-                let setting = data.setting;                                           
-                this.formdata.tahun_pendaftaran=parseInt(setting.DEFAULT_TAHUN_PENDAFTARAN);                
+                let setting = data.setting;
+                this.formdata.tahun_pendaftaran=parseInt(setting.DEFAULT_TAHUN_PENDAFTARAN);
                 this.formdata.buka_ppdb=setting.DEFAULT_BUKA_PPDB == '0'?false: true;
                 this.datatableLoading=false
-            });          
+            });
             
         },
         save () {
@@ -150,7 +150,7 @@ export default {
                     this.btnLoading = false;
                 }).catch(()=>{
                     this.btnLoading = false;
-                });        
+                });
             }
         }
     },

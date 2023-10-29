@@ -181,14 +181,14 @@ export default {
                     }
                 }
             ).then(()=>{   
-                this.close();                
+                this.close();
             }).catch(()=>{
                 this.btnLoading = false;
             });
         },
         revoke(item)
         {   
-            this.btnLoading = true;         
+            this.btnLoading = true; 
             this.$ajax.post('/system/users/revokeuserpermissions',
                 {
                     user_id: this.user.id,
@@ -200,7 +200,7 @@ export default {
                     }
                 }
             ).then(()=>{   
-                this.close();                
+                this.close();
             }).catch(()=>{
                 this.btnLoading = false;
             });
@@ -208,7 +208,7 @@ export default {
         close()
         {            
             this.btnLoading = false;
-            this.permissions_selected=[];     
+            this.permissions_selected=[];
             this.$emit('closeUserPermissions');
         }
     },
@@ -239,7 +239,7 @@ export default {
             },
             set (val)
             {                
-                this.perm_selected=val;                
+                this.perm_selected=val;
             }
         }
 

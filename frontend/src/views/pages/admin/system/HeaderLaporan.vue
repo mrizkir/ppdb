@@ -129,13 +129,13 @@ export default {
                     Authorization: this.TOKEN
                 }
             }).then(({ data })=>{  
-                let setting = data.setting;                           
+                let setting = data.setting;
                 this.formdata.header_1=setting.HEADER_1;
                 this.formdata.header_2=setting.HEADER_2;
                 this.formdata.header_3=setting.HEADER_3;
                 this.formdata.header_4=setting.HEADER_4;
                 this.formdata.header_address=setting.HEADER_ADDRESS;
-            });          
+            });
             
         },
         save () {
@@ -163,7 +163,7 @@ export default {
                     this.btnLoading = false;
                 }).catch(()=>{
                     this.btnLoading = false;
-                });        
+                });
             }
         }
     },

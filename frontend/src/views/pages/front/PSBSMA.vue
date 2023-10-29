@@ -185,10 +185,10 @@ export default {
         let jenjang_studi = data.jenjang_studi;
           jenjang_studi.forEach(element => {
           if (element.kode_jenjang == 4) {            
-            this.registerSMA = element.status_pendaftaran == 1;            
+            this.registerSMA = element.status_pendaftaran == 1;
           }
         });
-      });                                
+      });
     },
     save: async function()
     {
@@ -206,33 +206,33 @@ export default {
         }).then(({ data })=>{
           this.formkonfirmasi.email = data.email;
           this.formkonfirmasi.code = data.code;
-          this.btnLoading = false;    
-          this.dialogkonfirmasipendaftaran=true;  
+          this.btnLoading = false;
+          this.dialogkonfirmasipendaftaran=true;
           
-          this.form_valid=true;                                                                                        
+          this.form_valid=true; 
           this.$refs.frmpendaftaran.reset(); 
           this.formdata = Object.assign({}, this.formdefault)
         }).catch(() => {   
           this.btnLoading = false;
-        });     
+        });
       }
-      this.resetRecaptcha();                        
+      this.resetRecaptcha();
     }, 
     onVerify: function (response) {
-      this.formdata.captcha_response=response;            
+      this.formdata.captcha_response=response;
     },
     onExpired: function() {
       this.formdata.captcha_response = '';
     },
     resetRecaptcha()
     {
-      this.$refs.recaptcha.reset();  
+      this.$refs.recaptcha.reset();
       this.formdata.captcha_response = '';
     },
     closedialogfrm() {
-      this.dialogkonfirmasipendaftaran = false;            
+      this.dialogkonfirmasipendaftaran = false;
       setTimeout(() => {
-        this.frmpendaftaran = Object.assign({}, this.formdefault);                                
+        this.frmpendaftaran = Object.assign({}, this.formdefault);
         this.$refs.frmpendaftaran.reset(); 
         this.$router.push('/konfirmasipembayaran');
       }, 300);

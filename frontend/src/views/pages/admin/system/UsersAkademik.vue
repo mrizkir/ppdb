@@ -417,14 +417,14 @@ export default {
                 this.daftar_users = data.users;
                 this.role_id = data.role.id;
                 this.datatableLoading=false;
-            });          
+            });
             
         },
         dataTableRowClicked(item)
         {
             if (item === this.expanded[0])
             {
-                this.expanded = [];        
+                this.expanded = [];
             }
             else
             {
@@ -447,7 +447,7 @@ export default {
                 this.btnLoading = false;
             }).catch(()=>{
                 this.btnLoading = false;
-            });     
+            });
         },
         showDialogTambahUserAkademik: async function()
         {
@@ -464,26 +464,26 @@ export default {
                         daftar_roles.push({
                             text:element.name,
                             disabled: true,
-                        });                        
+                        });
                     }
                     else if (element.name== 'dosen'||element.name== 'dosenwali')
                     {
                         daftar_roles.push({
                             text:element.name,
                             disabled: false, 
-                        });                        
+                        });
                     }     
-                });        
-                this.daftar_roles=daftar_roles;                     
-                this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];                          
-                this.dialog = true;            
-            });               
+                });
+                this.daftar_roles=daftar_roles;
+                this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];
+                this.dialog = true;
+            });
         },
         editItem: async function (item) {
             this.editedIndex = this.daftar_users.indexOf(item)
-            item.password='';            
-            this.editedItem = Object.assign({}, item);      
-            this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];  
+            item.password='';
+            this.editedItem = Object.assign({}, item);
+            this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];
             await this.$ajax.get('/system/users/'+item.id+'/jenjang',    
                 {
                     headers: {
@@ -494,10 +494,10 @@ export default {
                 let daftar_jenjang = data.daftar_jenjang;
                 var jenjang=[];
                 daftar_jenjang.forEach(element => {
-                    jenjang.push(element.id);                        
-                });   
-                this.editedItem.kode_jenjang=jenjang;                 
-            });                         
+                    jenjang.push(element.id);
+                });
+                this.editedItem.kode_jenjang=jenjang;
+            });
             
             await this.$ajax.get('/system/setting/roles',{
                 headers: {
@@ -512,18 +512,18 @@ export default {
                         daftar_roles.push({
                             text:element.name,
                             disabled: true,
-                        });                        
+                        });
                     }
                     else if (element.name== 'dosen'||element.name== 'dosenwali')
                     {
                         daftar_roles.push({
                             text:element.name,
                             disabled: false, 
-                        });                        
+                        });
                     }     
-                });        
-                this.daftar_roles=daftar_roles;                                                
-            });    
+                });
+                this.daftar_roles=daftar_roles;
+            });
 
             this.btnLoading = true;
             await this.$ajax.get('/system/users/'+item.id+'/roles',
@@ -532,22 +532,22 @@ export default {
                     Authorization: this.TOKEN
                 }
             }).then(({ data })=>{  
-                this.editedItem.role_id = data.roles;                   
+                this.editedItem.role_id = data.roles;
                 this.btnLoading = false;
                 this.dialogEdit = true;
             });
         },
         setPermission: async function (item) {          
-            this.btnLoading = true;  
+            this.btnLoading = true;
             this.$ajax.get('/system/setting/roles/'+this.role_id+'/permission',{
                 headers: {
                     Authorization: this.TOKEN
                 }
             }).then(({ data })=>{
-                this.daftar_permissions = data.permissions;                           
+                this.daftar_permissions = data.permissions;
             }).catch(()=>{
                 this.btnLoading = false;
-            });          
+            });
 
             await this.$ajax.get('/system/users/'+item.id+'/permission',{
                 headers: {
@@ -559,7 +559,7 @@ export default {
                    
             }).catch(()=>{
                 this.btnLoading = false;
-            });  
+            });
             this.dialogUserPermission = true;
             this.editedItem=item;
         
@@ -567,7 +567,7 @@ export default {
         close () {            
             this.btnLoading = false;
             this.dialog = false;
-            this.dialogEdit = false;            
+            this.dialogEdit = false;
             setTimeout(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
@@ -578,7 +578,7 @@ export default {
         closeUserPermissions () {
             this.btnLoading = false;
             this.permissions_selected=[];
-            this.dialogUserPermission = false;  
+            this.dialogUserPermission = false;
         },
         save () {
             if (this.$refs.frmdata.validate())
@@ -607,7 +607,7 @@ export default {
                         this.close();
                     }).catch(()=>{
                         this.btnLoading = false;
-                    });                    
+                    });
                     
                 } else {
                     this.$ajax.post('/system/usersakademik/store',

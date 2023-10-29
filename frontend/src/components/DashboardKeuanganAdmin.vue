@@ -185,7 +185,7 @@ export default {
     methods:{
         initialize: async function()
 		{	
-            this.datatableLoading=true;            
+            this.datatableLoading=true;
             await this.$ajax.post('/dashboard/keuangan',
             {
                 TA: this.ta,
@@ -196,9 +196,9 @@ export default {
                 }
             }).then(({ data })=>{                 
                 this.total_transaction = data.total_transaction;
-                this.total_transaction_paid = data.total_transaction_paid;          
-                this.total_transaction_unpaid = data.total_transaction_unpaid;          
-                this.total_transaction_cancelled = data.total_transaction_cancelled;          
+                this.total_transaction_paid = data.total_transaction_paid;
+                this.total_transaction_unpaid = data.total_transaction_unpaid;
+                this.total_transaction_cancelled = data.total_transaction_cancelled;
 
                 this.kombi_ganjil_unpaid = data.kombi_ganjil_unpaid;
                 this.kombi_genap_unpaid = data.kombi_genap_unpaid;
@@ -212,17 +212,17 @@ export default {
                 this.datatableLoading=false;
             }).catch(()=>{
                 this.datatableLoading=false;
-            });             
+            });
 
         }
     },
     computed:{        
         totalKombiGanjilPaid()
         {
-            var total = 0;            
+            var total = 0;
             for (var i =0; i < this.kombi_ganjil_paid.length; i++)
             {
-                var item = this.kombi_ganjil_paid[i];                                
+                var item = this.kombi_ganjil_paid[i];
                 total=total+parseFloat(item.jumlah);
             }           
             return total;

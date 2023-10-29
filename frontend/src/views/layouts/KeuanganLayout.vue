@@ -217,7 +217,7 @@ export default {
     name: 'KeuanganLayout',  
     created()
     {
-        this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];        
+        this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
     },
     props: {
         showrightsidebar: {
@@ -308,7 +308,7 @@ export default {
                 if (value >= 0)
                 {
                     setTimeout(() => { 
-                        this.loginTime=this.AUTHENTICATED==true?this.loginTime+1:-1;                                                                     
+                        this.loginTime=this.AUTHENTICATED==true?this.loginTime+1:-1;
 					}, 1000);
                 }
                 else

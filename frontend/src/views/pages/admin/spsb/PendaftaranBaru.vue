@@ -434,7 +434,7 @@ import Filter7 from '@/components/sidebar/FilterMode7';
 export default {
   name: 'PendaftaranBaru',  
   created() {
-    this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];      
+    this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
     this.breadcrumbs = [
       {
         text: 'HOME',
@@ -451,13 +451,13 @@ export default {
         disabled: true,
         href: '#'
       }
-    ];   
+    ];
     this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
 
     let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
     this.kode_jenjang=kode_jenjang;
-    this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);        
-    this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];        
+    this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
+    this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
     this.initialize();
   },
   data: () => ({ 
@@ -555,7 +555,7 @@ export default {
     },
     initialize: async function() 
     {
-      this.datatableLoading=true;            
+      this.datatableLoading=true;
       await this.$ajax.post('/spsb/psb',
       {
         TA: this.tahun_pendaftaran,
@@ -566,9 +566,9 @@ export default {
           Authorization: this.$store.getters["auth/Token"]
         }
       }).then(({ data })=>{               
-        this.datatable = data.psb;                
+        this.datatable = data.psb;
         this.datatableLoading=false;
-      });          
+      });
       this.firstloading=false;
       this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
     },
@@ -584,7 +584,7 @@ export default {
     {
       if (item === this.expanded[0])
       {
-        this.expanded = [];        
+        this.expanded = [];
       }
       else
       {
@@ -644,11 +644,11 @@ export default {
         this.btnLoading = false;
       }).catch(()=>{
         this.btnLoading = false;
-      });     
+      });
     },
     async addItem ()
     {
-      this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];  
+      this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
       this.formdata.ta=this.tahun_pendaftaran;
       this.formdata.kode_jenjang=this.kode_jenjang;
 
@@ -656,7 +656,7 @@ export default {
         this.daftar_jenjang = data.jenjang_studi;
       });
 
-      this.dialogfrm = true;                       
+      this.dialogfrm = true;
     },
     save: async function() {
       if (this.$refs.frmdata.validate())
@@ -686,7 +686,7 @@ export default {
             this.btnLoading = false;
           }).catch(()=>{
             this.btnLoading = false;
-          });                 
+          });
           
         } else {
           await this.$ajax.post('/spsb/psb/storependaftar',
@@ -707,7 +707,7 @@ export default {
           ).then(({ data })=>{                           
             this.datatable.push(data.pendaftar);
             this.closedialogfrm();
-            this.btnLoading = false;                        
+            this.btnLoading = false;
           }).catch(()=>{
             this.btnLoading = false;
           });
@@ -740,19 +740,19 @@ export default {
           Authorization: this.$store.getters["auth/Token"]
         }
       }).then(({ data })=>{               
-        this.formdata=item;  
-        this.data_konfirmasi = data.konfirmasi;    
+        this.formdata=item;
+        this.data_konfirmasi = data.konfirmasi;
         this.dialogdetailitem=true;
-      });          
+      });
     },
     async editItem (item) {
       this.editedIndex = this.datatable.indexOf(item);
       this.formdata = Object.assign({}, item);
       this.formdata.nomor_hp='+'+this.formdata.nomor_hp;
-      this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];              
+      this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
       await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
         this.daftar_jenjang = data.jenjang_studi;
-      });                
+      });
       this.dialogfrm = true;
     },
     deleteItem (item) {           
@@ -780,7 +780,7 @@ export default {
       });
     },
     closedialogdetailitem () {
-      this.dialogdetailitem = false;            
+      this.dialogdetailitem = false;
       setTimeout(() => {
         this.formdata = Object.assign({}, this.formdefault)
         this.editedIndex = -1;
@@ -788,9 +788,9 @@ export default {
       );
     },
     closedialogfrm() {
-      this.dialogfrm = false;            
+      this.dialogfrm = false;
       setTimeout(() => {
-        this.formdata = Object.assign({}, this.formdefault);                
+        this.formdata = Object.assign({}, this.formdefault);
         this.editedIndex = -1;
         this.$refs.frmdata.reset(); 
         }, 300

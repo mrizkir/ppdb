@@ -148,14 +148,14 @@ export default {
                 }
             ).then(()=>{   
                 this.btnLoading = false;
-                this.close();                
+                this.close();
             }).catch(()=>{
                 this.btnLoading = false;
             });
         },
         revoke(item)
         {   
-            this.btnLoading = true;         
+            this.btnLoading = true; 
             this.$ajax.post('/system/setting/roles/revokerolepermissions',
                 {
                     role_id: this.role.id,
@@ -168,7 +168,7 @@ export default {
                 }
             ).then(()=>{   
                 this.btnLoading = false;
-                this.close();                
+                this.close();
             }).catch(()=>{
                 this.btnLoading = false;
             });
@@ -207,7 +207,7 @@ export default {
             },
             set (val)
             {                
-                this.perm_selected=val;                
+                this.perm_selected=val;
             }
         }
     }

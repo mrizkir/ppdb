@@ -307,11 +307,11 @@ export default {
         initialize: async function()
         {
             this.$ajax.get('/datamaster/negara').then(({ data })=>{                
-                this.daftar_negara = data.negara;                
-            });            
+                this.daftar_negara = data.negara;
+            });
             this.$ajax.get('/datamaster/provinsi').then(({ data })=>{                
-                this.daftar_provinsi = data.provinsi;                
-            });            
+                this.daftar_provinsi = data.provinsi;
+            });
             
             await this.$ajax.get('/datamaster/agama').then(({ data })=>{                  
                 this.daftar_agama = data.agama;
@@ -325,11 +325,11 @@ export default {
                 },
                 
             ).then(({ data })=>{   
-                this.formdata.nama_ayah = data.formulir.nama_ayah;           
-                this.formdata.hubungan = data.formulir.hubungan;                           
-                this.formdata.tempat_lahir = data.formulir.tempat_lahir;           
-                this.formdata.tanggal_lahir = data.formulir.tanggal_lahir;           
-                this.formdata.idagama = data.formulir.idagama;    
+                this.formdata.nama_ayah = data.formulir.nama_ayah;
+                this.formdata.hubungan = data.formulir.hubungan;
+                this.formdata.tempat_lahir = data.formulir.tempat_lahir;
+                this.formdata.tanggal_lahir = data.formulir.tanggal_lahir;
+                this.formdata.idagama = data.formulir.idagama;
                 
                 this.provinsi_id={
                     id:data.formulir.address1_provinsi_id,
@@ -348,17 +348,17 @@ export default {
                     nama:data.formulir.address1_kelurahan
                 };
                 
-                this.formdata.alamat_tempat_tinggal = data.formulir.alamat_tempat_tinggal;    
-                this.formdata.kewarganegaraan = data.formulir.kewarganegaraan;    
+                this.formdata.alamat_tempat_tinggal = data.formulir.alamat_tempat_tinggal;
+                this.formdata.kewarganegaraan = data.formulir.kewarganegaraan;
   
-                this.formdata.nomor_hp='+'+data.formulir.nomor_hp;    
-                this.formdata.email = data.formulir.email;    
-                this.formdata.pendidikan = data.formulir.pendidikan;    
-                this.formdata.pekerjaan_instansi = data.formulir.pekerjaan_instansi;    
-                this.formdata.penghasilan_bulanan = data.formulir.penghasilan_bulanan;    
+                this.formdata.nomor_hp='+'+data.formulir.nomor_hp;
+                this.formdata.email = data.formulir.email;
+                this.formdata.pendidikan = data.formulir.pendidikan;
+                this.formdata.pekerjaan_instansi = data.formulir.pekerjaan_instansi;
+                this.formdata.penghasilan_bulanan = data.formulir.penghasilan_bulanan;
                 
                 
-                this.$refs.frmdata.resetValidation();       
+                this.$refs.frmdata.resetValidation();
             });
         },
         save: async function()
@@ -397,13 +397,13 @@ export default {
                     }
                 }
                 ).then(()=>{   
-                    this.btnLoading = false;     
-                    this.$router.go();                   
+                    this.btnLoading = false;
+                    this.$router.go();
                 }).catch(() => {   
                     this.btnLoading = false;
-                });                                    
-                this.form_valid=true;                                                                                        
-                this.$refs.frmdata.resetValidation();                 
+                }); 
+                this.form_valid=true; 
+                this.$refs.frmdata.resetValidation();
             }                             
         },
         kembali()

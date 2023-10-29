@@ -35,7 +35,7 @@ class PersyaratanController extends Controller {
         switch($id)
         {
             case 'psb' :     
-                $kode_jenjang=intval($request->input('kode_jenjang'));        
+                $kode_jenjang=intval($request->input('kode_jenjang'));
                 if ($kode_jenjang >0 )
                 {
                     $this->validate($request, [            
@@ -102,7 +102,7 @@ class PersyaratanController extends Controller {
                                         'status'=>1,
                                         'pid'=>'destroy',                
                                         'message'=>"Persyaratan dengan kode ($id) berhasil dihapus"
-                                    ],200);         
+                                    ],200);
         }
                   
     }
