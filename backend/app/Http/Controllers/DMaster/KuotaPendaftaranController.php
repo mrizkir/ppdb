@@ -9,6 +9,8 @@ use App\Models\DMaster\KuotaPendaftaranModel;
 use App\Models\DMaster\TAModel;
 use App\Models\DMaster\JenjangStudiModel;
 
+use Ramsey\Uuid\Uuid;
+
 class KuotaPendaftaranController extends Controller {
   /**
    * daftar tahun ajaran
@@ -84,30 +86,35 @@ class KuotaPendaftaranController extends Controller {
     $this->hasPermissionTo('DMASTER-TA_STORE');
 
     $rule=[
-      'tahun'=>'required|numeric|unique:ta,tahun',
-      'tahun_ajaran'=>'required|string|unique:ta,tahun_ajaran',
+      'ta'=>'required|numeric',      
+      'kode_jenjang'=>'required|numeric',      
+      'kuota_l'=>'required|numeric',      
+      'kuota_p'=>'required|numeric',      
     ];
 
     $this->validate($request, $rule);
 
-    $ta=TAModel::create([
-      'tahun'=>$request->input('tahun'),
-      'tahun_ajaran'=>strtoupper($request->input('tahun_ajaran')),
+    $kuota = KuotaPendaftaranModel::create([
+      'id' => Uuid::uuid4()->toString(),
+      'tahun' => $request->input('ta'),      
+      'kode_jenjang' => $request->input('kode_jenjang'),
+      'kuota_l' => $request->input('kuota_l'),
+      'kuota_p' => $request->input('kuota_p'),
     ]);
 
     \App\Models\System\ActivityLog::log($request,[
-                    'object' => $ta,
-                    'object_id'=>$ta->tahun,
-                    'user_id' => $this->guard()->user()->id,
-                    'message' => 'Menambah tahun ajaran baru berhasil'
-                  ]);
+      'object' => $kuota,
+      'object_id'=>$kuota->id,
+      'user_id' => $this->guard()->user()->id,
+      'message' => 'Menambah kuota pendaftaran ajaran baru berhasil'
+    ]);
 
     return Response()->json([
-                  'status'=>1,
-                  'pid'=>'store',
-                  'ta'=>$ta,
-                  'message'=>'Data tahun ajaran berhasil disimpan.'
-                ],200);
+      'status'=>1,
+      'pid'=>'store',
+      'kuota'=>$kuota,
+      'message'=>'Data kuota pendaftaran berhasil disimpan.'
+    ],200);
 
   }
   /**

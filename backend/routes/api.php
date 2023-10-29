@@ -68,6 +68,7 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 
 	//data master - kuota pendaftaran
 	$router->get('/datamaster/kuotapendaftaran',['middleware'=>['role:superadmin'],'uses'=>'DMaster\KuotaPendaftaranController@index','as'=>'kuota-pendaftaran.index']);
+	$router->post('/datamaster/kuotapendaftaran',['middleware'=>['role:superadmin'],'uses'=>'DMaster\KuotaPendaftaranController@store','as'=>'kuota-pendaftaran.store']);
 	$router->put('/datamaster/kuotapendaftaran/{id}',['middleware'=>['role:superadmin'],'uses'=>'DMaster\KuotaPendaftaranController@update','as'=>'kuota-pendaftaran.update']);
 	$router->delete('/datamaster/kuotapendaftaran/{id}',['middleware'=>['role:superadmin'],'uses'=>'DMaster\KuotaPendaftaranController@destroy','as'=>'`kuota-pendaftaran.destroy']);
 

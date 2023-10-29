@@ -535,7 +535,7 @@ export default {
       value => !!value||"Fakultas mohon untuk dipilih !!!"
     ], 
     rule_jenjang: [
-      value => !!value||"Program studi mohon untuk dipilih !!!"
+      value => !!value||"Jenjang studi mohon untuk dipilih !!!"
     ],   
     rule_username: [
       value => !!value||"Username mohon untuk diisi !!!"

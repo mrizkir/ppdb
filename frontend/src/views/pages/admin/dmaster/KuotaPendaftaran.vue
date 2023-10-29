@@ -53,28 +53,43 @@
                   vertical
                 ></v-divider>
                 <v-spacer></v-spacer>
-                <v-dialog v-model="dialogfrm" max-width="600px" persistent>
-                  <template v-slot:activator="{ on }">
-                    <v-btn color="primary" dark class="mb-2" v-on="on">TAMBAH</v-btn>
-                  </template>
+                <v-btn color="primary" class="mb-2" @click.stop="addItem">
+                  TAMBAH
+                </v-btn>
+                <v-dialog v-model="dialogfrm" max-width="600px" persistent>                  
                   <v-form ref="frmdata" v-model="form_valid" lazy-validation>
                     <v-card>
                       <v-card-title>
                         <span class="headline">{{ formTitle }}</span>
                       </v-card-title>
                       <v-card-text>
-                        <v-text-field
-                          v-model="formdata.tahun"
-                          label="TAHUN"
+                        <v-select
+                          label="JENJANG STUDI"
+                          v-model="formdata.kode_jenjang"
+                          :items="daftar_jenjang"
+                          item-text="nama_jenjang"
+                          item-value="kode_jenjang"
+                          :rules="rule_jenjang"
                           outlined
-                          :rules="rule_tahun">
-                        </v-text-field>
-                        <v-text-field
-                          v-model="formdata.tahun_ajaran"
-                          label="TAHUN AJARAN"
+                        />
+                        <v-select
+                          v-model="formdata.ta"
+                          :items="daftar_ta"                                           
+                          label="TAHUN PENDAFTARAN"
                           outlined
-                          :rules="rule_tahun_ajaran">
-                        </v-text-field>
+                        />
+                        <v-text-field
+                          v-model="formdata.kuota_l"
+                          label="KUOTA SISWA LAKI-LAKI"
+                          outlined
+                          :rules="rule_kuota_l"
+                        />
+                        <v-text-field
+                          v-model="formdata.kuota_p"
+                          label="KUOTA SISWA PEREMPUAN"
+                          outlined
+                          :rules="rule_kuota_p"
+                        />                        
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
@@ -147,7 +162,7 @@
       this.initialize();
     },
     data: () => ({
-      breadcrumbs: [],  
+      breadcrumbs: [], 
 
       btnLoading: false,
       datatableLoading: false,
@@ -165,19 +180,33 @@
         { text: "KUOTA PUTRI", value: "kuota_l", sortable: false},
         { text: "AKSI", value: "actions", sortable: false, width: 100 },
       ],
+      //form data   
       form_valid: true,
+      daftar_jenjang: [],
+      daftar_ta: [], 
       formdata: {
-        kode_jenjang: "",
-        nama_jenjang: "",
-        status_pendaftaran: false, 
-      },  
+        kode_jenjang: null,
+        ta: null,
+        kuota_l: null, 
+        kuota_p: null, 
+      },
       formdefault: {
-        kode_jenjang: "",
-        nama_jenjang: "",
-        status_pendaftaran: false, 
+        kode_jenjang: null,
+        ta: null,
+        kuota_l: 0, 
+        kuota_p: 0,
       },
 
       editedIndex: -1,
+      rule_jenjang: [
+        value => !!value||"Jenjang studi mohon untuk dipilih !!!"
+      ],
+      rule_kuota_l: [
+        value => !!value||"Kuota Pendaftaran siswa laki-laki mohon untuk diisi !!!",
+      ],
+      rule_kuota_p: [
+        value => !!value||"Kuota Pendaftaran siswa perempuan mohon untuk diisi !!!",
+      ],
     }),
     methods: {
       initialize: async function() {
@@ -187,7 +216,7 @@
           headers: {
             Authorization: this.$store.getters["auth/Token"]
           }
-        }).then(({ data })=>{            
+        }).then(({ data })=>{
           this.datatable = data.kuota;
           this.datatableLoading=false;
         });
@@ -199,39 +228,73 @@
           this.expanded = [item];
         }
       },
-      async editItem(item) {
-        this.editedIndex = this.datatable.indexOf(item);
-        this.formdata = Object.assign({}, item);
-        this.dialogfrm = true;
+      async addItem() {
+        this.daftar_ta = this.$store.getters['uiadmin/getDaftarTA'];  
+        this.formdata.ta = this.$store.getters['uiadmin/getTahunPendaftaran'];        
+
+        await this.$ajax.get('/datamaster/jenjangstudi').then(({ data })=>{
+          this.daftar_jenjang = data.jenjang_studi;
+        });
+
+        this.dialogfrm = true;      
       },
       save: async function() {
         if (this.$refs.frmdata.validate()) {
           this.btnLoading = true;
-          if (this.editedIndex > -1) {
-            await this.$ajax
-              .post(
-                "/datamaster/jenjangstudi/" + this.formdata.kode_jenjang,
-                {
-                  _method: "PUT",
-                  status_pendaftaran: this.formdata.status_pendaftaran,
-                },
-                {
-                  headers: {
-                    Authorization: this.$store.getters["auth/Token"],
-                  },
+          if (this.editedIndex > -1) 
+          {
+            await this.$ajax.post('/spsb/psb/updatependaftar/'+this.formdata.id,
+              {
+                '_method': 'PUT',
+                name: this.formdata.name,
+                email: this.formdata.email, 
+                nomor_hp: this.formdata.nomor_hp,
+                kode_jenjang: this.formdata.kode_jenjang,
+                tahun_pendaftaran: this.formdata.ta,
+                username: this.formdata.username,
+                password: this.formdata.password,
+              },
+              {
+                headers: {
+                  Authorization: this.$store.getters["auth/Token"]
                 }
-              )
-              .then(() => {
-                this.initialize();
-                this.closedialogfrm();
-                this.btnLoading = false;
-              })
-              .catch(() => {
-                this.btnLoading = false;
-              });
+              }
+            ).then(()=>{   
+              this.initialize();
+              this.closedialogfrm();
+              this.btnLoading = false;
+            }).catch(()=>{
+              this.btnLoading = false;
+            });
+            
+          } else {
+            await this.$ajax.post('/datamaster/kuotapendaftaran',
+              {
+                kode_jenjang: this.formdata.kode_jenjang,
+                ta: this.formdata.ta,                 
+                kuota_l: this.formdata.kuota_l, 
+                kuota_p: this.formdata.kuota_p, 
+              },
+              {
+                headers: {
+                  Authorization: this.$store.getters["auth/Token"]
+                }
+              }
+            ).then(({ data })=>{                           
+              this.datatable.push(data.pendaftar);
+              this.closedialogfrm();
+              this.btnLoading = false;       
+            }).catch(()=>{
+              this.btnLoading = false;
+            });
           }
         }
       },
+      async editItem(item) {
+        this.editedIndex = this.datatable.indexOf(item);
+        this.formdata = Object.assign({}, item);
+        this.dialogfrm = true;
+      }, 
       closedialogfrm() {
         this.dialogfrm = false;
         setTimeout(() => {
@@ -241,9 +304,9 @@
         }, 300);
       },
     },
-    computed: {    
+    computed: {
       formTitle() {
-        return this.editedIndex === -1 ? 'TAMBAH KUOTA' : 'UBAH KUOTA'
+        return this.editedIndex === -1 ? "TAMBAH KUOTA" : "UBAH KUOTA";
       },
     },
     components: {
