@@ -1,11 +1,11 @@
 <template>
-    <FrontLayout>        
+    <FrontLayout>
         <v-container class="fill-height" fluid v-if="bukaPPDB">
             <v-row align="center" justify="center" no-gutters>
                 <v-col cols="12">
                     <h1 class="text-center display-1 font-weight-black primary--text">
                         KONFIRMASI PEMBAYARAN
-                    </h1>                        
+                    </h1>
                 </v-col>
                 <v-col xs="12" md="6" sm="12">
                     <v-form ref="frmkonfirmasi" @keyup.native.enter="checkUsername" lazy-validation v-if="data_pd==null">
@@ -19,7 +19,7 @@
                                     label="USERNAME" 
                                     :rules="rule_username"
                                     outlined 
-                                    dense />                           
+                                    dense />
                             </v-card-text>
                             <v-card-actions class="justify-center">
                                 <v-btn 
@@ -31,10 +31,10 @@
                                         Konfirmasi
                                 </v-btn>	
                             </v-card-actions>
-                        </v-card>                        
+                        </v-card>
                     </v-form>
                     <v-form ref="frmkonfirmasi" @keyup.native.enter="save" lazy-validation v-else>
-                        <v-card outlined class="mb-2">                                                        
+                        <v-card outlined class="mb-2">
                             <v-card-text>
                                 <v-card flat>
                                     <v-card-title>NAMA PESERTA DIDIK:</v-card-title>  
@@ -60,9 +60,9 @@
                                         {{data_pd.code|formatUang}}
                                     </v-card-subtitle>
                                 </v-card>
-                            </v-card-text>                            
+                            </v-card-text>
                         </v-card>  
-                        <v-card>                                                            
+                        <v-card>
                             <v-card-text>  
                                 <v-select
                                     label="PEMBAYARAN MELALUI :"
@@ -72,7 +72,7 @@
                                     item-value="id_channel"
                                     :rules="rule_channel_pembayaran"
                                     outlined
-                                />  
+                                />
                                 <v-text-field
                                     v-model="formdata.total_bayar"
                                     label="SEBESAR :"
@@ -83,17 +83,17 @@
                                     v-model="formdata.nomor_rekening_pengirim"
                                     label="NOMOR REKENING PENGIRIM:" 
                                     :rules="rule_nomor_rekening"
-                                    outlined />  
+                                    outlined />
                                 <v-text-field 
                                     v-model="formdata.nama_rekening_pengirim"
                                     label="NAMA PENGIRIM:" 
                                     :rules="rule_nama_pengirim"
-                                    outlined />  
+                                    outlined />
                                 <v-text-field 
                                     v-model="formdata.nama_bank_pengirim"
                                     label="BANK PENGIRIM:" 
                                     :rules="rule_nama_bank"
-                                    outlined /> 
+                                    outlined />
                                 <v-menu
                                     ref="menuTanggalBayar"
                                     v-model="menuTanggalBayar"
@@ -136,7 +136,7 @@
                                     v-model="formdata.bukti_bayar"
                                     @change="previewImage">
                                 </v-file-input> 
-                                <v-img class="white--text align-end" :src="buktiBayar"></v-img>                                                                               
+                                <v-img class="white--text align-end" :src="buktiBayar"></v-img>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -150,7 +150,7 @@
                                         SIMPAN
                                 </v-btn>
                             </v-card-actions>
-                        </v-card>                      
+                        </v-card>
                     </v-form>
                 </v-col>
             </v-row>
@@ -242,7 +242,7 @@ export default {
                     this.formdata.id = data.user.id;
                     this.formdata.username = data.user.username;
                     this.btnLoading = false;
-                }).catch(() => {        
+                }).catch(() => {     
                     this.btnLoading = false;
                 });
             }
@@ -257,7 +257,7 @@ export default {
             {
                 let reader = new FileReader();
                 reader.readAsDataURL(e);
-                reader.onload = img => {                    
+                reader.onload = img => {                 
                     this.image_prev=img.target.result;
                 } 
             }          

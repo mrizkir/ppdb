@@ -15,7 +15,7 @@
               item-value="kode_jenjang"
               :rules="rule_jenjang"
               filled
-            />        
+            />
             <v-text-field
               v-model="formdata.asal_sekolah"
               label="ASAL SEKOLAH"
@@ -48,7 +48,7 @@
               filled
             />
             <v-radio-group v-model="formdata.jk" row>
-              JENIS KELAMIN : 
+              JENIS KELAMIN :
               <v-radio label="LAKI-LAKI" value="L"></v-radio>
               <v-radio label="PEREMPUAN" value="P"></v-radio>
             </v-radio-group>
@@ -65,7 +65,7 @@
                   :items="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"
                   v-model="formdata.anak_ke"
                   filled
-                />   
+                />
               </v-col>
               <v-col cols="6">
                 <v-select
@@ -73,7 +73,7 @@
                   :items="[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"
                   v-model="formdata.jumlah_saudara"
                   filled
-                />   
+                />
               </v-col>
             </v-row>
             <v-text-field
@@ -120,7 +120,7 @@
               item-value="idagama" 
               :rules="rule_agama"
               filled
-            />        
+            />
           </v-card-text>
         </v-card>
         <v-card class="mb-4">
@@ -133,7 +133,7 @@
               :items="daftar_golongan_darah"
               v-model="formdata.golongan_darah"
               filled
-            />    
+            />
             <v-text-field
               label="TINGGI (CM)"
               v-model="formdata.tinggi" 
@@ -145,13 +145,13 @@
               v-model="formdata.berat_badan" 
               :rules="rule_berat_badan"          
               filled
-            />  
+            />
             <v-select
               label="UKURAN SERAGAM"
               :items="['S','M','L','XL','9','10','11','12','13']"
               v-model="formdata.ukuran_seragam"
               filled
-            />           
+            />
             <v-text-field
               label="PENYAKIT"
               v-model="formdata.penyakit"             
@@ -169,7 +169,7 @@
               item-text="nama_kebutuhan"
               item-value="id_kebutuhan"
               filled
-            />               
+            />
           </v-card-text>
         </v-card>
         <v-card class="mb-4">
@@ -248,7 +248,7 @@
               item-value="id" 
               :rules="rule_negara"            
               filled
-            />        
+            />
           </v-card-text>
         </v-card>
         <v-card class="mb-4">
@@ -298,7 +298,7 @@
         </v-card>
       </v-form>
     </v-col>
-    <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>  
+    <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
   </v-row>
 </template>
 <script>

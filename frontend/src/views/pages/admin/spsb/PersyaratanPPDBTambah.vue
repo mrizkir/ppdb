@@ -34,7 +34,7 @@
                                     v-if="peryaratanppdb.file_fotoselfi">                                                                      
                                     LIHAT
                                 </v-btn>                               
-                                <v-spacer/>             
+                                <v-spacer/>
                                 <v-btn 
                                     color="grey darken-1" 
                                     text 
@@ -73,7 +73,7 @@
                                     v-if="peryaratanppdb.file_ktp_ayah">                                                                      
                                     LIHAT
                                 </v-btn>                               
-                                <v-spacer/>   
+                                <v-spacer/>
                                 <v-btn 
                                     color="grey darken-1" 
                                     text 
@@ -151,7 +151,7 @@
                                     v-if="peryaratanppdb.file_kk">                                                                      
                                     LIHAT
                                 </v-btn>                               
-                                <v-spacer/>    
+                                <v-spacer/>
                                 <v-btn 
                                     color="grey darken-1" 
                                     text 
@@ -190,7 +190,7 @@
                                     v-if="peryaratanppdb.file_aktalahir">                                                                      
                                     LIHAT
                                 </v-btn>                               
-                                <v-spacer/>   
+                                <v-spacer/>
                                 <v-btn 
                                     color="grey darken-1" 
                                     text 
@@ -223,7 +223,7 @@ export default {
         {
             this.pesertadidik_id=this.$store.getters['auth/AttributeUser']('id');
         }
-        this.initialize()   
+        this.initialize()
     },
     data: () => ({ 
         dashboard: null,

@@ -39,19 +39,19 @@
                                     label="NAMA SEKOLAH"
                                     outlined
                                     :rules="rule_nama_sekolah">
-                                </v-text-field>                                                                                               
+                                </v-text-field>                                                                                             
                                 <v-text-field 
                                     v-model="formdata.nama_alias_pt" 
                                     label="NAMA SINGKATAN SEKOLAH"
                                     outlined
                                     :rules="rule_nama_singkatan_pt">
-                                </v-text-field>                                
+                                </v-text-field>                              
                                 <v-text-field 
                                     v-model="formdata.kode_sekolah" 
                                     label="KODE SEKOLAH (SESUAI DAPODIK)"
                                     outlined
                                     :rules="rule_kode_sekolah">
-                                </v-text-field>                                                                                               
+                                </v-text-field>                                                                                             
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>                                

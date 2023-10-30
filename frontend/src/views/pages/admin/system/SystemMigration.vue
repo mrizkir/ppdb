@@ -48,12 +48,12 @@
                                     v-model="formdata.nis"
                                     label="NIS"   
                                     :rules="rule_nis"                                                      
-                                    outlined /> 
+                                    outlined />
                                 <v-text-field 
                                     v-model="formdata.nirm"
                                     label="NIRM" 
                                     :rules="rule_nirm"                                                           
-                                    outlined /> 
+                                    outlined />
                                 <v-text-field
                                     label="NAMA LENGKAP"
                                     v-model="formdata.nama_mhs"
@@ -75,7 +75,7 @@
                                     item-value="id"
                                     :rules="rule_kelas"
                                     outlined
-                                />          
+                                />
                                 <v-select
                                     label="DOSEN WALI"
                                     v-model="formdata.dosen_id"
@@ -83,7 +83,7 @@
                                     item-text="name"
                                     item-value="id"
                                     :rules="rule_dw"
-                                    outlined/>                                                        
+                                    outlined/>
                             </v-card-text>                            
                         </v-card>         
                         <v-card class="mb-4">

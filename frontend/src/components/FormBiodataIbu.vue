@@ -64,7 +64,7 @@
                             item-value="idagama"                    
                             :rules="rule_agama"
                             filled
-                        />                                     
+                        />
                     </v-card-text>
                 </v-card>                
                 <v-card class="mb-4">
@@ -110,7 +110,7 @@
                             return-object
                             :rules="rule_desa"
                             filled
-                        />                        
+                        />
                         <v-text-field
                             v-model="formdata.alamat_tempat_tinggal"
                             label="ALAMAT RUMAH"
@@ -131,13 +131,13 @@
                             label="NOMOR HP (TERHUBUNG KE WA)"
                             :rules="rule_nomorhp"
                             filled
-                        />                        
+                        />
                         <v-text-field
                             v-model="formdata.email"
                             label="EMAIL"
                             :rules="rule_email"
                             filled
-                        />                        
+                        />
                     </v-card-text>
                 </v-card>
                 <v-card class="mb-4">
@@ -184,7 +184,7 @@
                 </v-card>
             </v-form>
         </v-col>
-        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>  
+        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
     </v-row>
 </template>
 <script>

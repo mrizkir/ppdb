@@ -60,7 +60,7 @@ export default {
 	{
 		this.$store.dispatch('uifront/init',this.$ajax);
 	},
-	computed : {
+	computed: {
 		...mapGetters('uifront',{
 			namaSekolahAlias: 'getNamaSekolahAlias',
 			bukaPPDB: 'getBukaPPDB',

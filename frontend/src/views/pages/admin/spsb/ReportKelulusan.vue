@@ -79,7 +79,7 @@
                                     </v-icon>
                                 </v-btn>                              
                                 <v-dialog v-model="dialogprofilmhsbaru" :fullscreen="true">                                    
-                                    <ProfilSiswaBaru :item="datamhsbaru" v-on:closeProfilSiswaBaru="closeProfilSiswaBaru" />                                    
+                                    <ProfilSiswaBaru :item="datamhsbaru" v-on:closeProfilSiswaBaru="closeProfilSiswaBaru" />
                                 </v-dialog>                                
                             </v-toolbar>
                         </template>
@@ -91,7 +91,7 @@
                                     overlap
                                 >                
                                     <v-avatar size="30">                                        
-                                        <v-img :src="$api.url+'/'+item.foto" />                                                                     
+                                        <v-img :src="$api.url+'/'+item.foto" />
                                     </v-avatar>                                                                                                  
                             </v-badge>
                         </template>
@@ -156,7 +156,7 @@ export default {
         this.kode_jenjang=kode_jenjang;
         this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
         this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
-        this.initialize()   
+        this.initialize()
     },  
     data: () => ({
         firstloading: true,

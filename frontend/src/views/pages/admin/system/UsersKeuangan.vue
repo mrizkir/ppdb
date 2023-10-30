@@ -96,13 +96,13 @@
                                                     label="NAMA USER"
                                                     outlined
                                                     :rules="rule_user_name">
-                                                </v-text-field>                                                                                               
+                                                </v-text-field>                                                                                             
                                                 <v-text-field 
                                                     v-model="editedItem.email" 
                                                     label="EMAIL"
                                                     outlined
                                                     :rules="rule_user_email">
-                                                </v-text-field>                                                        
+                                                </v-text-field>                                                      
                                                 <v-text-field 
                                                     v-model="editedItem.nomor_hp" 
                                                     label="NOMOR HP"
@@ -196,7 +196,7 @@
                                                     :type="'password'"
                                                     outlined
                                                     :rules="rule_user_passwordEdit">
-                                                </v-text-field>   
+                                                </v-text-field> 
                                                 <v-autocomplete 
                                                     :items="daftar_jenjang" 
                                                     v-model="editedItem.kode_jenjang"
@@ -264,7 +264,7 @@
                         </template>
                         <template v-slot:item.foto="{ item }">                            
                             <v-avatar size="30">
-                                <v-img :src="$api.url+'/'+item.foto" />                                
+                                <v-img :src="$api.url+'/'+item.foto" />
                             </v-avatar>                                                                                                  
                         </template>
                         <template v-slot:expanded-item="{ headers, item }">

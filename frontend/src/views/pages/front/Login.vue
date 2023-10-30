@@ -3,7 +3,7 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center" no-gutters>
                 <v-col xs="12" sm="6" md="4">
-                    <h1 class="text-center display-1 font-weight-black primary--text">LOGIN</h1>   
+                    <h1 class="text-center display-1 font-weight-black primary--text">LOGIN</h1>
                     <v-alert
                         outlined
                         dense
@@ -12,23 +12,23 @@
                         icon="mdi-close-octagon-outline"
                     >
                         Username atau Password tidak dikenal !.
-                    </v-alert>                                
+                    </v-alert>
                     <v-form ref="frmlogin" @keyup.native.enter="doLogin" lazy-validation>
                         <v-card outlined>
-                            <v-card-text>                                
+                            <v-card-text>
                                 <v-text-field 
                                     v-model="formlogin.username"
                                     label="Username" 
                                     :rules="rule_username"
                                     outlined 
-                                    dense />   
+                                    dense />
                                 <v-text-field 
                                     v-model="formlogin.password"
                                     label="Password" 
                                     type="password"
-                                    :rules="rule_password"       
+                                    :rules="rule_password" 
                                     outlined 
-                                    dense />  
+                                    dense />
                             </v-card-text>
                             <v-card-actions class="justify-center">
                                  <v-btn 
@@ -89,7 +89,7 @@ export default {
                             'Authorization': data.token_type+' '+data.access_token,
                         }
                     })
-                    .then(response => {    
+                    .then(response => { 
                         var data_user = {
                             token: data,
                             user:response.data
@@ -99,7 +99,7 @@ export default {
                     this.btnLoading = false;
                     this.form_error=false;
                     this.$router.push('/dashboard/'+data.access_token);
-                }).catch(() => {                    
+                }).catch(() => {                 
                     this.form_error=true;
                     this.btnLoading = false;
                 });

@@ -16,7 +16,7 @@ use App\Models\SPSB\PersyaratanPPDBModel;
 use App\Models\System\ConfigurationModel;
 use App\Models\Keuangan\KonfirmasiPembayaranModel;
 
-use App\Helpers\Helper;
+use App\Helpers\HelperPendaftaran;
 use App\Mail\SiswaBaruRegistered;
 use App\Mail\VerifyEmailAddress;
 
@@ -245,7 +245,8 @@ class PSBController extends Controller {
   public function store(Request $request)
   {
     $this->validate($request, [
-      'name'=>'required',            
+      'name'=>'required',
+      'jk'=>'required|in:L,P',
       'email'=>'required|string|email',
       'nomor_hp'=>'required|numeric',            
       'kode_jenjang'=>'required|numeric|exists:jenjang_studi,kode_jenjang',            
@@ -272,6 +273,16 @@ class PSBController extends Controller {
         }
       ]
     ]);
+
+    //cek kuota    
+    if (!HelperPendaftaran::checkKuotaPendaftaran(ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN'), $request->input('kode_jenjang'), $request->input('jk')))
+    {
+      return Response()->json([
+        'status'=>0,
+        'pid'=>'store',        
+        'message'=>'Proses pendaftaran gagal karena kuota pendaftaran habis.'
+      ], 422);
+    }
     $user = \DB::transaction(function () use ($request){
       $now = \Carbon\Carbon::now()->toDateTimeString();   
       $kode_jenjang=$request->input('kode_jenjang');
@@ -316,6 +327,7 @@ class PSBController extends Controller {
       FormulirPendaftaranAModel::create([
         'user_id'=>$user->id,
         'nama_siswa'=>strtoupper($request->input('name')),                                
+        'jk'=>strtoupper($request->input('jk')),                                
         'kode_jenjang'=>$kode_jenjang,
         'ta'=>$ta,
       ]);
@@ -350,7 +362,7 @@ class PSBController extends Controller {
       'status'=>1,
       'pid'=>'store',
       'email'=>$user->email,                              
-      'code'=>\App\Helpers\Helper::formatUang($code),    
+      'code'=>HelperPendaftaran::formatUang($code),    
       'message'=>'Data Peserta Didik baru berhasil disimpan.'
     ], 200);
   }      
@@ -481,11 +493,11 @@ class PSBController extends Controller {
     }
 
     return Response()->json([
-                  'status'=>1,
-                  'pid'=>'store',
-                  'pendaftar'=>$user,                                  
-                  'message'=>'Data Peserta Didik baru berhasil diubah.'
-                ], 200);
+      'status'=>1,
+      'pid'=>'store',
+      'pendaftar'=>$user,                                  
+      'message'=>'Data Peserta Didik baru berhasil diubah.'
+    ], 200);
 
   }      
   /**
@@ -813,7 +825,7 @@ class PSBController extends Controller {
     $mime_type=$bukti_bayar->getMimeType();
     if ($mime_type=='image/png' || $mime_type=='image/jpeg')
     {
-      $folder=Helper::public_path('images/buktibayar/');
+      $folder=HelperPendaftaran::public_path('images/buktibayar/');
       $file_name=uniqid('img').".".$bukti_bayar->getClientOriginalExtension();
 
       $konfirmasi=KonfirmasiPembayaranModel::updateOrCreate([
@@ -1200,11 +1212,11 @@ class PSBController extends Controller {
       $mime_type=$filefotoselfi->getMimeType();
       if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
       {
-        $folder=\App\Helpers\Helper::public_path('persyaratanppdb/');
+        $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('fotoselfi_').".".$filefotoselfi->getClientOriginalExtension();
-        if (is_file(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_fotoselfi))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_fotoselfi))))                
         {
-          unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_fotoselfi)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_fotoselfi)));
         }                
         $formulir->file_fotoselfi="storage/persyaratanppdb/$file_name";
         $formulir->save();
@@ -1249,11 +1261,11 @@ class PSBController extends Controller {
       $mime_type=$filektpayah->getMimeType();
       if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
       {
-        $folder=\App\Helpers\Helper::public_path('persyaratanppdb/');
+        $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('ktp_').".".$filektpayah->getClientOriginalExtension();
-        if (is_file(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_ktp_ayah))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_ktp_ayah))))                
         {
-          unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_ktp_ayah)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_ktp_ayah)));
         }                
         $formulir->file_ktp_ayah="storage/persyaratanppdb/$file_name";
         $formulir->save();
@@ -1298,11 +1310,11 @@ class PSBController extends Controller {
       $mime_type=$filektpibu->getMimeType();
       if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
       {
-        $folder=\App\Helpers\Helper::public_path('persyaratanppdb/');
+        $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('ktp_').".".$filektpibu->getClientOriginalExtension();
-        if (is_file(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_ktp_ibu))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_ktp_ibu))))                
         {
-          unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_ktp_ibu)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_ktp_ibu)));
         }                
         $formulir->file_ktp_ibu="storage/persyaratanppdb/$file_name";
         $formulir->save();
@@ -1347,11 +1359,11 @@ class PSBController extends Controller {
       $mime_type=$filekk->getMimeType();
       if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
       {
-        $folder=\App\Helpers\Helper::public_path('persyaratanppdb/');
+        $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('kk_').".".$filekk->getClientOriginalExtension();
-        if (is_file(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_kk))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_kk))))                
         {
-          unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_kk)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_kk)));
         }                
         $formulir->file_kk="storage/persyaratanppdb/$file_name";
         $formulir->save();
@@ -1396,11 +1408,11 @@ class PSBController extends Controller {
       $mime_type=$fileaktalahir->getMimeType();
       if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
       {
-        $folder=\App\Helpers\Helper::public_path('persyaratanppdb/');
+        $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('aktalahir_').".".$fileaktalahir->getClientOriginalExtension();
-        if (is_file(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_aktalahir))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_aktalahir))))                
         {
-          unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_aktalahir)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_aktalahir)));
         }                
         $formulir->file_aktalahir="storage/persyaratanppdb/$file_name";
         $formulir->save();

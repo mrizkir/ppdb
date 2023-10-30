@@ -19,12 +19,12 @@
               v-model="formdata.status_pernikahan"                   
               :rules="rule_status_pernikahan"
               filled
-            /> 
+            />
             <v-textarea
               label="ANGGOTA KELUARGA/ORANG LAIN YANG TINGGAL SERUMAH TULISKAN SECARA TERPERICI"
               v-model="formdata.desc"              
               filled
-            />                       
+            />
           </v-card-text>
         </v-card>                
         <v-card class="mb-4">                    
@@ -50,7 +50,7 @@
         </v-card>
       </v-form>
     </v-col>
-    <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>  
+    <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
   </v-row>
 </template>
 <script>

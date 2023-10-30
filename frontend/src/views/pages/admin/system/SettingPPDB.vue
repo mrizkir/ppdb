@@ -37,7 +37,7 @@
                                     label="TAHUN PENDAFTARAN"
                                     item-text="tahun_ajaran"
                                     item-value="tahun"
-                                    filled/>   
+                                    filled/>
                                 <v-switch
                                     v-model="formdata.buka_ppdb"
                                     flat

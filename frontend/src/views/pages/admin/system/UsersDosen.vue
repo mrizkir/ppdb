@@ -85,24 +85,24 @@
                                                     label="NAMA DOSEN"
                                                     outlined
                                                     :rules="rule_user_name">
-                                                </v-text-field>                                                                                               
+                                                </v-text-field>                                                                                             
                                                 <v-text-field 
                                                     v-model="editedItem.nidn" 
                                                     label="NIDN (NOMOR INDUK DOSEN NASIONAL)"
                                                     outlined>
-                                                </v-text-field>                                                                                               
+                                                </v-text-field>                                                                                             
                                                 <v-text-field 
                                                     v-model="editedItem.nipy" 
                                                     label="NIPY (NOMOR INDUK PEGAWAI YAYASAN)"
                                                     outlined
                                                     :rules="rule_nipy">
-                                                </v-text-field>                                                                                               
+                                                </v-text-field>                                                                                             
                                                 <v-text-field 
                                                     v-model="editedItem.email" 
                                                     label="EMAIL"
                                                     outlined
                                                     :rules="rule_user_email">
-                                                </v-text-field>                                                        
+                                                </v-text-field>                                                      
                                                 <v-text-field 
                                                     v-model="editedItem.nomor_hp" 
                                                     label="NOMOR HP"
@@ -121,7 +121,7 @@
                                                     :type="'password'"
                                                     outlined
                                                     :rules="rule_user_password">
-                                                </v-text-field>   
+                                                </v-text-field> 
                                                 <v-switch
                                                     v-model="editedItem.is_dw"
                                                     label="SEBAGAI DOSEN WALI">
@@ -159,13 +159,13 @@
                                                     v-model="editedItem.nidn" 
                                                     label="NIDN (NOMOR INDUK DOSEN NASIONAL)"
                                                     outlined>
-                                                </v-text-field>                                                                                               
+                                                </v-text-field>                                                                                             
                                                 <v-text-field 
                                                     v-model="editedItem.nipy" 
                                                     label="NIPY (NOMOR INDUK PEGAWAI YAYASAN)"
                                                     outlined
                                                     :rules="rule_nipy">
-                                                </v-text-field>     
+                                                </v-text-field>   
                                                 <v-text-field 
                                                     v-model="editedItem.email" 
                                                     label="EMAIL"
@@ -240,7 +240,7 @@
                         </template>
                         <template v-slot:item.foto="{ item }">                            
                             <v-avatar size="30">
-                                <v-img :src="$api.url+'/'+item.foto" />                                
+                                <v-img :src="$api.url+'/'+item.foto" />
                             </v-avatar>                                                                                                  
                         </template>
                         <template v-slot:expanded-item="{ headers, item }">

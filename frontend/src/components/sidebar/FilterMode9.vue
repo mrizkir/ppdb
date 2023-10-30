@@ -5,7 +5,7 @@
                 v-model="tahun_pendaftaran"
                 :items="daftar_ta"       
                 label="TAHUN PENDAFTARAN"
-                outlined/> 
+                outlined/>
         </v-list-item-content>
     </v-list-item>	
 </template>

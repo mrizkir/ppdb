@@ -81,7 +81,7 @@
                   overlap
                 >                
                   <v-avatar size="30">                                        
-                    <v-img :src="$api.url+'/'+item.foto" />                                                                     
+                    <v-img :src="$api.url+'/'+item.foto" />
                   </v-avatar>                                                                                                  
               </v-badge>
             </template>
@@ -155,7 +155,7 @@
       this.kode_jenjang=kode_jenjang;
       this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
       this.tahun_pendaftaran = this.$store.getters['uiadmin/getTahunPendaftaran'];
-      this.initialize()   
+      this.initialize()
     },  
     data: () => ({
       user_id: null,

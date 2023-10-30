@@ -93,20 +93,20 @@
                           v-model="formdata.name"
                           label="NAMA LENGKAP" 
                           :rules="rule_name"
-                          outlined/>     
+                          outlined/>
                         
                         <v-text-field 
                           v-model="formdata.nomor_hp"
                           label="NOMOR HP (ex: +628123456789)" 
                           :rules="rule_nomorhp"
                           outlined
-                        />                               
+                        />
                         <v-text-field 
                           v-model="formdata.email"
                           label="EMAIL" 
                           :rules="rule_email"
                           outlined
-                        />                                                       
+                        />
                         <v-select
                           label="JENJANG STUDI"
                           v-model="formdata.kode_jenjang"
@@ -121,25 +121,25 @@
                           :items="daftar_ta"                                           
                           label="TAHUN PENDAFTARAN"
                           outlined
-                        />   
+                        />
                         <v-text-field 
                           v-model="formdata.username"
                           label="USERNAME" 
                           :rules="rule_username"
-                          outlined />   
+                          outlined />
                         <v-text-field 
                           v-model="formdata.password"
                           label="PASSWORD" 
                           type="password"                                                                    
                           outlined 
-                          v-if="editedIndex>-1" /> 
+                          v-if="editedIndex>-1" />
                         <v-text-field 
                           v-model="formdata.password"
                           label="PASSWORD" 
                           type="password"
-                          :rules="rule_password"       
+                          :rules="rule_password" 
                           outlined 
-                          v-else /> 
+                          v-else />
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
@@ -329,7 +329,7 @@
                                 </v-col>
                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
                               </v-row>                                                            
-                              <v-img class="white--text align-end" :src="$api.url+'/'+data_konfirmasi.bukti_bayar" />  
+                              <v-img class="white--text align-end" :src="$api.url+'/'+data_konfirmasi.bukti_bayar" />
                             </v-card-text>
                           </v-card>
                         </v-col>                                                
@@ -388,7 +388,7 @@
                 :icon="badgeIcon(item)"
                 overlap>                
                 <v-avatar size="30">                                        
-                  <v-img :src="$api.url+'/'+item.foto" />                                                                     
+                  <v-img :src="$api.url+'/'+item.foto" />
                 </v-avatar>                                                                                                  
               </v-badge>
             </template>

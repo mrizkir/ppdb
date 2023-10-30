@@ -5,37 +5,37 @@
                 <v-col cols="12">
                     <h1 class="text-center display-1 font-weight-black primary--text">
                         PRA-PENDAFTARAN CALON PESERTA DIDIK
-                    </h1>    
+                    </h1>
                     <h4 class="text-center title font-weight-black primary--text">
-                        TAHUN PELAJARAN {{tahunPendaftaran|formatTA}}
+                        TAHUN PELAJARAN {{ tahunPendaftaran | formatTA }}
                     </h4>
                 </v-col>
             </v-row>
         </v-container>
-        <v-container class="fill-height" fluid v-if="bukaPPDB">            
+        <v-container class="fill-height" fluid v-if="bukaPPDB">
             <v-row align="center" justify="center" no-gutters>
                 <v-col xs="12" md="7" sm="12">
                     <v-form ref="frmpendaftaran" v-model="form_valid" lazy-validation>
                         <v-card outlined>
-                            <v-card-text>                                
+                            <v-card-text>
                                 <v-text-field 
                                     v-model="formdata.name"
                                     label="NAMA CALON PESERTA DIDIK" 
                                     :rules="rule_name"
                                     outlined 
-                                    dense />                                  
+                                    dense />
                                 <v-text-field 
                                     v-model="formdata.nomor_hp"
                                     label="NOMOR KONTAK WA (ex: +628123456789)" 
                                     :rules="rule_nomorhp"
                                     outlined 
-                                    dense />                               
+                                    dense />
                                 <v-text-field 
                                     v-model="formdata.email"
                                     label="SURAT ELEKTRONIK" 
                                     :rules="rule_email"
                                     outlined 
-                                    dense />                                 
+                                    dense />
                                 <v-select
                                     label="JENJANG STUDI"
                                     v-model="kode_jenjang"
@@ -50,18 +50,18 @@
                                     label="USERNAME" 
                                     :rules="rule_username"
                                     outlined 
-                                    dense />   
+                                    dense />
                                 <v-text-field 
                                     v-model="formdata.password"
                                     label="PASSWORD" 
                                     type="password"
-                                    :rules="rule_password"       
+                                    :rules="rule_password" 
                                     outlined 
-                                    dense />                                  
-                                <v-alert color="error" class="mb-0" text v-if="formdata.captcha_response.length<=0">
-                                    Mohon dicentang Google Captcha (ANTI SPAMMERS)   
+                                    dense />
+                                <v-alert color="error" class="mb-0" text v-if="formdata.captcha_response.length <= 0">
+                                    Mohon dicentang Google Captcha (ANTI SPAMMERS)
                                 </v-alert>
-                            </v-card-text>                            
+                            </v-card-text>
                             <v-card-actions class="justify-center">
                                 <vue-recaptcha 
                                     ref="recaptcha"
@@ -69,9 +69,9 @@
                                     @verify="onVerify"
                                     @expired="onExpired"
                                     :loadRecaptchaScript="true">
-                                </vue-recaptcha>                                                                   
-                            </v-card-actions>                            
-                            <v-card-actions class="justify-center">                                
+                                </vue-recaptcha>
+                            </v-card-actions>
+                            <v-card-actions class="justify-center">
                                  <v-btn 
                                     color="primary" 
                                     @click="save" 
@@ -79,48 +79,48 @@
                                     :disabled="btnLoading"
                                     block>
                                         DAFTAR
-                                </v-btn>	                                 
+                                </v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-form>
-                    <v-dialog v-model="dialogkonfirmasipendaftaran" max-width="500px" persistent>                                    
+                    <v-dialog v-model="dialogkonfirmasipendaftaran" max-width="500px" persistent>
                         <v-form ref="frmkonfirmasi" v-model="form_valid" lazy-validation>
                             <v-card>
                                 <v-card-title>
                                     <span class="headline">Konfirmasi Pendaftaran</span>
                                 </v-card-title>
-                                <v-card-text>    
+                                <v-card-text>
                                     <v-alert type="success">
                                         Proses PRA-PENDAFTARAN berhasil, silahkan Ayah/Bunda/Wali melakukan pembayaran dengan mentransfer beserta Biaya Pendaftaran sebesar :
-                                    </v-alert>                                    
+                                    </v-alert>
                                     <v-text-field 
                                         v-model="formkonfirmasi.code" 
                                         label="BIAYA PENDAFTARAN + KODE TRANSFER"
                                         outlined
                                         :disabled="true">
-                                    </v-text-field>  
+                                    </v-text-field>
                                     Transfer ke Rekening berikut : 
                                     <v-alert type="info">
                                         BANK RIAU KEPRI SYARIAH <br>
                                         NOMOR REKENING : 821-31-02956 <br>
-                                        A.N : SEKOLAH DASAR ISLAM DE GREEN CAMP<br>                                        
-                                    </v-alert>                                     
-                                    <strong>SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.</strong>                            
+                                        A.N : SEKOLAH DASAR ISLAM DE GREEN CAMP<br>
+                                    </v-alert>
+                                    <strong>SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.</strong>
                                 </v-card-text>
                                 <v-card-actions>
-                                    <v-spacer></v-spacer>                                                                                  
+                                    <v-spacer></v-spacer>
                                     <v-btn 
                                         color="blue darken-1" 
                                         text 
-                                        @click.stop="closedialogfrm">                                         
+                                        @click.stop="closedialogfrm">
                                             OK
                                     </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-form>
-                    </v-dialog>   
+                    </v-dialog>
                 </v-col>
-                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
             </v-row>
         </v-container>
     </FrontLayout>
@@ -134,7 +134,7 @@ export default {
     created() {
         this.initialize();
     },
-    data: () => ({            
+    data: () => ({
         btnLoading: false,
         //form
         form_valid: true, 
@@ -155,7 +155,7 @@ export default {
             nomor_hp: "",
             username: "",
             password: "",
-            captcha_response: ""   
+            captcha_response: "",
         }, 
         formkonfirmasi: {
             email: "",
@@ -197,9 +197,9 @@ export default {
                 this.btnLoading = true;
                 await this.$ajax.post('/spsb/psb/store', {
                     name: this.formdata.name,
-                    email: this.formdata.email, 
+                    email: this.formdata.email,
                     nomor_hp: this.formdata.nomor_hp,
-                    username: this.formdata.username,           
+                    username: this.formdata.username,
                     kode_jenjang: this.kode_jenjang,
                     password: this.formdata.password,
                     captcha_response: this.formdata.captcha_response,
@@ -207,39 +207,39 @@ export default {
                     this.formkonfirmasi.email = data.email;
                     this.formkonfirmasi.code = data.code;
                     this.btnLoading = false;
-                    this.dialogkonfirmasipendaftaran=true;
+                    this.dialogkonfirmasipendaftaran = true;
                     
-                    this.form_valid=true; 
-                    this.$refs.frmpendaftaran.reset(); 
+                    this.form_valid = true;
+                    this.$refs.frmpendaftaran.reset();
                     this.formdata = Object.assign({}, this.formdefault)
-                }).catch(() => {   
+                }).catch(() => {
                     this.btnLoading = false;
                 });
             }
             this.resetRecaptcha();
         },
-        onVerify: function (response) {
-            this.formdata.captcha_response=response;
+        onVerify: function(response) {
+            this.formdata.captcha_response = response;
         },
         onExpired: function() {
-            this.formdata.captcha_response='';
+            this.formdata.captcha_response = "";
         },
         resetRecaptcha()
         {
             this.$refs.recaptcha.reset();
-            this.formdata.captcha_response='';
+            this.formdata.captcha_response = "";
         },
         closedialogfrm() {
             this.dialogkonfirmasipendaftaran = false;
             setTimeout(() => {
                 this.frmpendaftaran = Object.assign({}, this.formdefault);
-                this.$refs.frmpendaftaran.reset(); 
+                this.$refs.frmpendaftaran.reset();
                 this.$router.push('/konfirmasipembayaran');
                 }, 300
             );
         },
     },
-    computed : {
+    computed: {
         ...mapGetters('uifront',{
             sitekey: 'getCaptchaKey',
             tahunPendaftaran: 'getTahunPendaftaran',

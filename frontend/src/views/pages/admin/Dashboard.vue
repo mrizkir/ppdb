@@ -20,7 +20,7 @@
 						</v-card-text>
 					</v-card>
 				</v-col>
-				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>            
+				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
 				<v-col xs="12" sm="4" md="3" v-if="$store.getters['auth/can']('SPSB-GROUP')">
 					<v-card 
 						min-height="140"
@@ -36,7 +36,7 @@
 						</v-card-text>
 					</v-card>
 				</v-col>
-				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>                            
+				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
 				<v-col xs="12" sm="4" md="3" v-if="$store.getters['auth/can']('SYSTEM-USERS-GROUP')">
 					<v-card 
 						min-height="140"
@@ -52,7 +52,7 @@
 						</v-card-text>
 					</v-card>
 				</v-col>
-				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>            
+				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
 				<v-col xs="12" sm="4" md="3" v-if="$store.getters['auth/can']('SYSTEM-SETTING-GROUP')">
 					<v-card 
 						min-height="140"
@@ -68,7 +68,7 @@
 						</v-card-text>
 					</v-card>
 				</v-col>
-				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>   
+				<v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
 			</v-row>
 		</v-container>
 	</AdminLayout>
