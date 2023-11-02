@@ -109,10 +109,10 @@
                     <div>
                       Seleksi PPDB terdiri dari 9 (Sembilan) tahapan. Sebelum melanjutkan pastikan terlebih dahulu :
                       <ol type="a">
-                        <li>Ananda sudah berusia minimal <strong>4 tahun</strong> pada 31 Juli 2023 <strong>untuk Jenjang Studi TK</strong></li>
-                        <li>Ananda sudah berusia minimal <strong>6 tahun</strong> pada 31 Juli 2023.<strong>untuk Jenjang Studi SD</strong></li>
-                        <li>Ananda sudah berusia maksimal <strong>15 tahun</strong> pada 31 Juli 2023.<strong>untuk Jenjang Studi SMP</strong></li>
-                        <li>Ananda sudah berusia maksimal <strong>17 tahun</strong> pada 31 Juli 2023.<strong>untuk Jenjang Studi SMA</strong></li>
+                        <li>Ananda sudah berusia minimal <strong>4.5 tahun</strong> pada 31 Juli {{ 2024 }}. <strong>untuk Jenjang Studi TK</strong></li>
+                        <li>Ananda sudah berusia minimal <strong>6 tahun</strong> pada 31 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SD</strong></li>
+                        <li>Ananda sudah berusia maksimal <strong>15 tahun</strong> pada 31 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SMP</strong></li>
+                        <li>Ananda sudah berusia maksimal <strong>17 tahun</strong> pada 31 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SMA</strong></li>
                       </ol>
                     </div>
                   </div>
@@ -131,9 +131,10 @@
                       Klik menu PRA-PENDAFTARAN maka muncul halaman pra-pendaftaran, yang terdiri dari beberapa bagian yang wajib untuk diisi, yaitu : 
                       <ol type="a">
                         <li>Nama Calon Peserta Didik</li>
+                        <li>Jenis Kelamin</li>
                         <li>Nomor Kontak WA Wali</li>
                         <li>Surat Elektronik</li>
-                        <li>Jenjang Studi (SD, SMP)</li>
+                        <li>Jenjang Studi (TK, SD, SMP, SMA)</li>
                         <li>Username</li>
                         <li>Password</li>
                       </ol>
@@ -165,7 +166,7 @@
                         <li>Nama rekening pengirim</li>
                         <li>Nama pengirim</li>
                         <li>Bank Pengirim</li>
-                        <li>Tanggal Bayar/Transer</li>
+                        <li>Tanggal Bayar/Transfer</li>
                         <li>Catatan</li>
                         <li>Unggah Foto/Scan/Screenshoot Bukti Bayar</li>
                       </ol>
@@ -238,7 +239,7 @@
                       KESEPAKATAN KERJA SAMA (MoU) Pendidikan
                     </h2>
                     <div>
-                      Pada waktu yang bersamaan, setelah jadwal interview dan observasi selesai dikomunikasikan, Panitia akan melanjutkan dengan memberikan informasi jadwal Zoom Meeting.  Kegiatan Zoom Meeting  dilaksanakan sebelum jadwal interview-observasi. Pelaksanaan kegiatan Zoom Meeting adalah pada hari Sabtu.  Tautan kegiatan ini akan dikirimkan oleh Panitia melalui nomor kontak WA pendaftar.  Zoom Meeting bersifat klasikal per jenjang TK/SD/SMP.  Topik pembahasan pada kegiatan tersebut, yaitu tentang konsep serta program sekolah pada masing-masing jenjang pendidikan di Sekolah Islam De Green Camp.  Kegiatan ini wajib diikuti oleh setiap orangtua/wali calon PDB.
+                      Pada waktu yang bersamaan, setelah jadwal interview dan observasi selesai dikomunikasikan, Panitia akan melanjutkan dengan memberikan informasi jadwal Zoom Meeting.  Kegiatan Zoom Meeting  dilaksanakan sebelum jadwal interview-observasi. Pelaksanaan kegiatan Zoom Meeting adalah pada hari Sabtu.  Tautan kegiatan ini akan dikirimkan oleh Panitia melalui nomor kontak WA pendaftar.  Zoom Meeting bersifat klasikal per jenjang TK/SD/SMP/SMA.  Topik pembahasan pada kegiatan tersebut, yaitu tentang konsep serta program sekolah pada masing-masing jenjang pendidikan di Sekolah Islam De Green Camp.  Kegiatan ini wajib diikuti oleh setiap orangtua/wali calon PDB.
                     </div>
                     <v-alert type="warning">
                       <div class="title">
@@ -289,6 +290,7 @@
   </FrontLayout>
 </template>
 <script>
+  import { mapGetters } from "vuex";
   import FrontLayout from "@/views/layouts/FrontLayout";
   export default {
     name: "Home",
@@ -328,6 +330,11 @@
           });
         });
       },
+    },
+    computed: {
+      ...mapGetters("uifront",{        
+        tahunPendaftaran: "getTahunPendaftaran",
+      }),
     },
     components: {
       FrontLayout,

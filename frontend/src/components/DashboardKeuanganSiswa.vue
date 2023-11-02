@@ -87,24 +87,24 @@ export default {
         datatableLoading: false,
 
         //daftar komponen biaya
-        kombi_ganjil_unpaid: [],    
-        kombi_genap_unpaid: [],    
+        kombi_ganjil_unpaid: [],
+        kombi_genap_unpaid: [],
 
-        kombi_ganjil_paid: [],    
-        kombi_genap_paid: [],    
+        kombi_ganjil_paid: [],
+        kombi_genap_paid: [],
 
-        kombi_ganjil_cancelled: [],    
-        kombi_genap_cancelled: [],    
+        kombi_ganjil_cancelled: [],
+        kombi_genap_cancelled: [],
 
         headers: [                        
-            { text: 'NAMA KOMPONEN', value: 'nama_kombi', sortable: false },    
-            { text: 'JUMLAH', align: 'end',value: 'jumlah', width:250, sortable: false },
+            { text: 'NAMA KOMPONEN', value: 'nama_kombi', sortable: false },
+            { text: 'JUMLAH', align: 'end',value: 'jumlah', width: 250, sortable: false },
         ], 
         //statistik
-        total_transaction:0,
-        total_transaction_paid:0,
-        total_transaction_unpaid:0,
-        total_transaction_cancelled:0
+        total_transaction: 0,
+        total_transaction_paid: 0,
+        total_transaction_unpaid: 0,
+        total_transaction_cancelled: 0
     }),
     props:{
         ta:{
@@ -140,7 +140,7 @@ export default {
                 this.kombi_genap_cancelled = data.kombi_genap_cancelled;
                 
                 this.datatableLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.datatableLoading = false;
             });
 

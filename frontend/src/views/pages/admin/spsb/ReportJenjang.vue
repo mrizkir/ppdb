@@ -159,8 +159,8 @@ export default {
         expanded: [],
         datatable: [],
         headers: [                        
-            { text: '', value: 'foto', width:70 },    
-            { text: 'NAMA SISWA', value: 'name', width:350, sortable: true },
+            { text: '', value: 'foto', width:70 },
+            { text: 'NAMA SISWA', value: 'name', width: 350, sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp', width: 100},
             { text: 'KELAS', value: 'nkelas', width: 100, sortable: true }, 
         ],
@@ -227,7 +227,7 @@ export default {
             this.btnLoading = true;
             await this.$ajax.post('/spsb/reportspsbjenjang/printtoexcel',
                 {
-                    TA: this.tahun_pendaftaran,                                     
+                    TA: this.tahun_pendaftaran,    
                     kode_jenjang: this.kode_jenjang, 
                     nama_jenjang: this.nama_jenjang, 
                 },
@@ -247,7 +247,7 @@ export default {
                 link.click();
                 document.body.removeChild(link);
                 this.btnLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         }     

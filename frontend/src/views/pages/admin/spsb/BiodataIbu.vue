@@ -163,8 +163,8 @@ export default {
         expanded: [],
         datatable: [],
         headers: [                        
-            { text: '', value: 'foto', width:70 },    
-            { text: 'NAMA SISWA', value: 'name', width:350, sortable: true },
+            { text: '', value: 'foto', width:70 },
+            { text: 'NAMA SISWA', value: 'name', width: 350, sortable: true },
             { text: 'NAMA IBU', value: 'nama_ibu'}, 
             { text: 'NOMOR HP', value: 'nomor_hp', width: 100}, 
             { text: 'AKSI', value: 'actions', sortable: false, width:50 },

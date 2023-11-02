@@ -38,7 +38,7 @@ export default {
 		},error => {
 			const {
 				config,
-				response: {data, status}
+				response: {data,status}
 			}=error;
 			
 			switch (status)

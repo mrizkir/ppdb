@@ -177,7 +177,7 @@
   </DataMasterLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import DataMasterLayout from '@/views/layouts/DataMasterLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
@@ -252,7 +252,7 @@ export default {
       }).then(({ data }) => {
         this.datatable = data.ta;
         this.datatableLoading = false;
-      }).catch(()=>{
+      }).catch(() => {
         this.datatableLoading = false;
       });
     },
@@ -298,7 +298,7 @@ export default {
             Object.assign(this.datatable[this.editedIndex], data.ta);
             this.closedialogfrm();
             this.btnLoading = false;
-          }).catch(()=>{
+          }).catch(() => {
             this.btnLoading = false;
           });
 
@@ -317,7 +317,7 @@ export default {
             this.datatable.push(data.ta);
             this.closedialogfrm();
             this.btnLoading = false;
-          }).catch(()=>{
+          }).catch(() => {
             this.btnLoading = false;
           });
         }
@@ -341,7 +341,7 @@ export default {
             const index = this.datatable.indexOf(item);
             this.datatable.splice(index, 1);
             this.btnLoading = false;
-          }).catch(()=>{
+          }).catch(() => {
             this.btnLoading = false;
           });
         }

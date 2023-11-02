@@ -70,7 +70,7 @@
     </SystemConfigLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import SystemConfigLayout from '@/views/layouts/SystemConfigLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
@@ -110,7 +110,7 @@ export default {
             nama_sekolah: "",
             nama_alias_pt: "",
             bentuk_sekolah: "",
-            kode_sekolah:0,
+            kode_sekolah: 0,
         },
         //form rules        
         rule_nama_sekolah: [
@@ -154,16 +154,16 @@ export default {
                             101: this.formdata.nama_sekolah,
                             102: this.formdata.nama_alias_pt, 
                             104: this.formdata.kode_sekolah,
-                        }),                                                                                                 
+                        }),                                                                
                     },
                     {
                         headers: {
                             Authorization: this.TOKEN
                         }
                     }
-                ).then(()=>{                       
+                ).then(() => {        
                     this.btnLoading = false;
-                }).catch(()=>{
+                }).catch(() => {
                     this.btnLoading = false;
                 });
             }
@@ -172,7 +172,7 @@ export default {
     computed: { 
         ...mapGetters('auth',{            
             ACCESS_TOKEN: 'AccessToken',  
-            TOKEN: 'Token',       
+            TOKEN: 'Token',
         }),
     },
     components: {

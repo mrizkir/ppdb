@@ -239,7 +239,7 @@ export default {
         datatable: [],
         headers: [                        
             { text: 'ID', value: 'id' },
-            { text: 'AKSI', value: 'actions', sortable: false, width:100 },
+            { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
         ],
         search: "", 
 
@@ -250,17 +250,17 @@ export default {
         //form data   
         form_valid: true, 
         formdata: {
-            id:0,
+            id: 0,
             name: "",
             created_at: '',
             updated_at: '',
 
         },
         formdefault: {
-            id:0,
-            name: "",          
+            id: 0,
+            name: "",  
             created_at: '',
-            updated_at: '',    
+            updated_at: '',
         },
         editedIndex: -1,
 
@@ -285,7 +285,7 @@ export default {
             }).then(({ data }) => {               
                 this.datatable = data.object;
                 this.datatableLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.datatableLoading = false;
             });
         },
@@ -325,7 +325,7 @@ export default {
                     await this.$ajax.post('/path/'+this.formdata.id,
                         {
                             '_method': 'PUT',
-                            name: this.formdata.name,    
+                            name: this.formdata.name,
                         },
                         {
                             headers:{
@@ -336,7 +336,7 @@ export default {
                         Object.assign(this.datatable[this.editedIndex], data.object);
                         this.closedialogfrm();
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                     
@@ -354,7 +354,7 @@ export default {
                         this.datatable.push(data.object);
                         this.closedialogfrm();
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
@@ -378,7 +378,7 @@ export default {
                         const index = this.datatable.indexOf(item);
                         this.datatable.splice(index, 1);
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }                

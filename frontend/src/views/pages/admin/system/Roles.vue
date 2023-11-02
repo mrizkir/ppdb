@@ -225,7 +225,7 @@
     </SystemUserLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 import RolePermissions from '@/views/pages/admin/system/RolePermissions';
@@ -263,7 +263,7 @@ export default {
         headers: [                        
             { text: 'NAMA ROLE', value: 'name' },
             { text: 'GUARD', value: 'guard_name' }, 
-            { text: 'AKSI', value: 'actions', sortable: false, width:130 },
+            { text: 'AKSI', value: 'actions', sortable: false, width: 130 },
         ],
         //tables
         headersdetail: [                        
@@ -278,14 +278,14 @@ export default {
         dialogRolePermission: false,
         editedIndex: -1,
         editedItem: {
-            id:0,
+            id: 0,
             name: '',
             guard: '',
             created_at: '',
             updated_at: '',
         },
         defaultItem: {
-            id:0,
+            id: 0,
             name: '',
             guard: 'api',
             created_at: '',
@@ -410,7 +410,7 @@ export default {
                     ).then(({ data }) => {   
                         Object.assign(this.datatable[this.editedIndex], data.roles);
                         this.close();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                     
@@ -427,7 +427,7 @@ export default {
                     ).then(({ data }) => {   
                         this.datatable.push(data.roles);
                         this.close();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
@@ -440,7 +440,7 @@ export default {
         },
         ...mapGetters('auth',{            
             ACCESS_TOKEN: 'AccessToken',  
-            TOKEN: 'Token',       
+            TOKEN: 'Token',
         }),
     },
     watch: {

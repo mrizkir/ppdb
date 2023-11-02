@@ -94,7 +94,7 @@ export default {
                             token: data,
                             user:response.data
                         }
-                        this.$store.dispatch('auth/afterLoginSuccess',data_user);
+                        this.$store.dispatch('auth/afterLoginSuccess', data_user);
                     });
                     this.btnLoading = false;
                     this.form_error=false;

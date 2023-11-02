@@ -172,8 +172,8 @@
       expanded: [],
       datatable: [],
       headers: [                        
-        { text: '', value: 'foto', width:70 },    
-        { text: 'NAMA PESERTA DIDIK', value: 'name', width:350, sortable: true },
+        { text: '', value: 'foto', width:70 },
+        { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
         { text: 'JK', value: 'jk', sortable: false, width:50 },
         { text: 'NOMOR HP', value: 'nomor_hp', sortable: false, width: 100},
         { text: 'ASAL SEKOLAH', value: 'asal_sekolah', width: 100, sortable: true },

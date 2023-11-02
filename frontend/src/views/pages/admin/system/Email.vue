@@ -58,7 +58,7 @@
     </SystemConfigLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import SystemConfigLayout from '@/views/layouts/SystemConfigLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
@@ -119,16 +119,16 @@ export default {
                         'pid': 'email',
                         setting:JSON.stringify({
                             910: this.formdata.email_mhs_isvalid, 
-                        }),                                                                                                 
+                        }),                                                                
                     },
                     {
                         headers: {
                             Authorization: this.TOKEN
                         }
                     }
-                ).then(()=>{                       
+                ).then(() => {        
                     this.btnLoading = false;
-                }).catch(()=>{
+                }).catch(() => {
                     this.btnLoading = false;
                 });
             }
@@ -137,7 +137,7 @@ export default {
     computed: { 
         ...mapGetters('auth',{            
             ACCESS_TOKEN: 'AccessToken',  
-            TOKEN: 'Token',       
+            TOKEN: 'Token',
         }),
     },
     components: {

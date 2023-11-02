@@ -184,8 +184,8 @@
         { text: "ID", value: "kode_jenjang", width: 10, sortable: false },
         { text: "TAHUN", value: "tahun_ajaran", sortable: false },
         { text: "NAMA JENJANG", value: "nama_jenjang", sortable: false },
-        { text: "KUOTA PUTRA", value: "kuota_p", sortable: false },
-        { text: "KUOTA PUTRI", value: "kuota_l", sortable: false },
+        { text: "KUOTA PUTRA", value: "kuota_l", sortable: false },
+        { text: "KUOTA PUTRI", value: "kuota_p", sortable: false },
         { text: "AKSI", value: "actions", sortable: false, width: 100 },
       ],
       //form data

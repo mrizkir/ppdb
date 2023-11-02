@@ -118,7 +118,7 @@
     </v-card>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 export default {
     name: 'RolePermissions',
     data: () => ({
@@ -126,7 +126,7 @@ export default {
         //tables
         headers: [                        
             { text: 'NAMA PERMISSION', value: 'name' },
-            { text: 'GUARD', value: 'guard_name' },   
+            { text: 'GUARD', value: 'guard_name' },
             { text: 'AKSI', value: 'actions', sortable: false, width: 100 },  
         ],
         search: "",
@@ -149,7 +149,7 @@ export default {
             ).then(()=>{   
                 this.btnLoading = false;
                 this.close();
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         },
@@ -169,7 +169,7 @@ export default {
             ).then(()=>{   
                 this.btnLoading = false;
                 this.close();
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         },
@@ -177,7 +177,7 @@ export default {
         {
             this.btnLoading = false;
             this.permissions_selected=[];
-            this.$emit('closeRolePermissions',this.role.id);
+            this.$emit('closeRolePermissions', this.role.id);
         }
     },
     props: {
@@ -187,7 +187,7 @@ export default {
     },
     computed: {
         ...mapGetters('auth', {         
-            TOKEN: 'Token',       
+            TOKEN: 'Token',
         }),
         daftar_permissions()
         {

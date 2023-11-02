@@ -186,7 +186,7 @@ export default {
         //tables
         headers: [                        
             { text: '', value: 'foto', width:70 }, 
-            { text: 'NAMA PESERTA DIDIK', value: 'name', width:350, sortable: true },
+            { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },
             { text: 'FOTO SELFIE', value: 'file_fotoselfi', sortable: false }, 
             { text: 'KTP', value: 'file_ktp_ayah', sortable: false },  
@@ -237,7 +237,7 @@ export default {
         badgeIcon(item)
         {
             return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
-        },   
+        },
         dataTableRowClicked(item)
         {
             if (item === this.expanded[0])
@@ -248,7 +248,7 @@ export default {
             {
                 this.expanded = [item];
             }
-        },    
+        },
         async printBiodata(item)
         {
             this.datatableLoading = true;
@@ -264,7 +264,7 @@ export default {
                 this.file_pdf = data.pdf_file;
                 this.dialogprintpdf=true;
                 this.datatableLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.datatableLoading = false;
             });
         },

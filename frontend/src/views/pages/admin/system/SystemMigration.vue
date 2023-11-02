@@ -159,7 +159,7 @@ export default {
     data: () => ({        
         firstloading: true,
         breadcrumbs: [],
-        tahun_pendaftaran:0,  
+        tahun_pendaftaran: 0,  
         
         //form
         form_valid: true, 
@@ -206,7 +206,7 @@ export default {
         headers: [                                                
             { text: 'TAHUN AJARAN', value: 'ta', sortable: false },
             { text: 'SEMESTER', value: 'semester', sortable: false },
-            { text: 'STATUS', value: 'k_status', sortable: false, width:250 }, 
+            { text: 'STATUS', value: 'k_status', sortable: false, width: 250 }, 
         ],
     }),
     methods: {
@@ -263,9 +263,9 @@ export default {
                         nama_mhs: this.formdata.nama_mhs,
                         dosen_id: this.formdata.dosen_id,
                         kode_jenjang: this.formdata.kode_jenjang,  
-                        idkelas: this.formdata.idkelas,    
+                        idkelas: this.formdata.idkelas,
                         tahun_pendaftaran: this.tahun_pendaftaran, 
-                        status_mhs:JSON.stringify(Object.assign({},this.formdata.status_mhs)),                                                                               
+                        status_mhs:JSON.stringify(Object.assign({},this.formdata.status_mhs)),                                              
                     },
                     {
                         headers: {
@@ -279,7 +279,7 @@ export default {
                         this.btnLoading = false;
                         }, 300
                     );
-                }).catch(()=>{
+                }).catch(() => {
                     this.btnLoading = false;
                 });
                  

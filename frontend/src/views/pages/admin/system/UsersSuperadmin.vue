@@ -240,7 +240,7 @@
     </SystemUserLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
@@ -267,9 +267,9 @@ export default {
     },  
    
     data: () => ({ 
-        role_id:0,
+        role_id: 0,
         datatableLoading: false,
-        btnLoading: false,   
+        btnLoading: false,
         //tables
         headers: [                        
             { text: '', value: 'foto' },
@@ -290,18 +290,18 @@ export default {
         dialogEdit: false,
         editedIndex: -1,  
         editedItem: {
-            id:0,
+            id: 0,
             username: '',
             password: '',
             name: '',
             email: '',
-            nomor_hp: "",    
+            nomor_hp: "",
             role_id: ['superadmin'],
             created_at: '',
             updated_at: '',
         },
         defaultItem: {
-            id:0,
+            id: 0,
             username: '',
             password: '',
             name: '',
@@ -318,7 +318,7 @@ export default {
         ], 
         rule_user_email: [
             value => !!value || "Mohon untuk di isi email User !!!",  
-            value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',    
+            value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',
         ], 
         rule_user_nomorhp: [
             value => !!value || "Nomor HP mohon untuk diisi !!!",
@@ -486,7 +486,7 @@ export default {
                     ).then(({ data }) => {   
                         Object.assign(this.daftar_users[this.editedIndex], data.user);
                         this.close();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                     
@@ -508,7 +508,7 @@ export default {
                     ).then(({ data }) => {   
                         this.daftar_users.push(data.user);
                         this.close();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
@@ -532,7 +532,7 @@ export default {
                         const index = this.daftar_users.indexOf(item);
                         this.daftar_users.splice(index, 1);
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
@@ -545,7 +545,7 @@ export default {
         },
         ...mapGetters('auth',{            
             ACCESS_TOKEN: 'AccessToken',  
-            TOKEN: 'Token',       
+            TOKEN: 'Token',
         }),
     },
 

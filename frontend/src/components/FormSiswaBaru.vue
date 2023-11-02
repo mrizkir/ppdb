@@ -359,16 +359,16 @@
       daftar_negara: [],
 
       daftar_provinsi: [],
-      provinsi_id:0,
+      provinsi_id: 0,
 
       daftar_kabupaten: [],
-      kabupaten_id:0,
+      kabupaten_id: 0,
 
       daftar_kecamatan: [],
-      kecamatan_id:0,
+      kecamatan_id: 0,
 
       daftar_desa: [],
-      desa_id:0,
+      desa_id: 0,
 
       daftar_jenjang: [],
       
@@ -380,8 +380,8 @@
         nik: "", 
         tempat_lahir: "",
         tanggal_lahir: "",
-        idagama:1,
-        id_kebutuhan_khusus:1,
+        idagama: 1,
+        id_kebutuhan_khusus: 1,
         
         alamat_tempat_tinggal: "",
         address1_rt: "",
@@ -390,8 +390,8 @@
         kewarganegaraan: "",
 
         asal_sekolah: "",
-        anak_ke:1,
-        jumlah_saudara:0,
+        anak_ke: 1,
+        jumlah_saudara: 0,
         golongan_darah:"-",
         penyakit: "",
         avoid_food: "",

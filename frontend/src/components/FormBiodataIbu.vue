@@ -225,29 +225,29 @@ export default {
             {
                 value: 'IBU_WALI',
                 text: 'IBU WALI'
-            },    
+            },
         ],
 
         daftar_negara: [],
 
         daftar_provinsi: [],
-        provinsi_id:0,
+        provinsi_id: 0,
 
         daftar_kabupaten: [],
-        kabupaten_id:0,
+        kabupaten_id: 0,
 
         daftar_kecamatan: [],
-        kecamatan_id:0,
+        kecamatan_id: 0,
 
         daftar_desa: [],
-        desa_id:0,
+        desa_id: 0,
 
         formdata:{
             nama_ibu: "",
             hubungan: "",
             tempat_lahir: "",
             tanggal_lahir: "",
-            idagama:1,
+            idagama: 1,
             
             alamat_tempat_tinggal: "", 
             kewarganegaraan: "",
@@ -300,7 +300,7 @@ export default {
         ], 
         rule_penghasilan: [
             value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
-            value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',   
+            value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',
         ], 
     }),
     methods: {
@@ -369,10 +369,10 @@ export default {
                 await this.$ajax.post('/spsb/formulirpendaftaran/biodataibu/'+this.user_id, {
                     _method: "put",
                     nama_ibu: this.formdata.nama_ibu,
-                    hubungan: this.formdata.hubungan,    
+                    hubungan: this.formdata.hubungan,
                     tempat_lahir: this.formdata.tempat_lahir,
                     tanggal_lahir: this.formdata.tanggal_lahir,
-                    idagama: this.formdata.idagama,    
+                    idagama: this.formdata.idagama,
 
                     address1_provinsi_id: this.provinsi_id.id,
                     address1_provinsi: this.provinsi_id.nama,
@@ -389,7 +389,7 @@ export default {
                     email: this.formdata.email,
                     pendidikan: this.formdata.pendidikan,
                     pekerjaan_instansi: this.formdata.pekerjaan_instansi,
-                    penghasilan_bulanan: this.formdata.penghasilan_bulanan,    
+                    penghasilan_bulanan: this.formdata.penghasilan_bulanan,
                 },
                 {
                     headers:{

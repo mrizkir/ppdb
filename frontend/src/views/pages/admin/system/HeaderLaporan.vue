@@ -75,7 +75,7 @@
     </SystemConfigLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import SystemConfigLayout from '@/views/layouts/SystemConfigLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
@@ -152,16 +152,16 @@ export default {
                             703: this.formdata.header_3,
                             704: this.formdata.header_4,
                             705: this.formdata.header_address,
-                        }),                                                                                                 
+                        }),                                                                
                     },
                     {
                         headers: {
                             Authorization: this.TOKEN
                         }
                     }
-                ).then(()=>{                       
+                ).then(() => {        
                     this.btnLoading = false;
-                }).catch(()=>{
+                }).catch(() => {
                     this.btnLoading = false;
                 });
             }
@@ -170,7 +170,7 @@ export default {
     computed: { 
         ...mapGetters('auth',{            
             ACCESS_TOKEN: 'AccessToken',  
-            TOKEN: 'Token',       
+            TOKEN: 'Token',
         }),
     },
     components: {

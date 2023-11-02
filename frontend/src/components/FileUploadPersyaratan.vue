@@ -99,12 +99,12 @@ export default {
 
         btnSimpan: true,  
         btnHapus: true,  
-        btnVerifikasi: true,    
+        btnVerifikasi: true,
         btnLoading: false,
         image_prev:null,
 
         //form
-        verified:0,
+        verified: 0,
         form_valid: true,
         filepersyaratan: [],
         //form rules  
@@ -140,22 +140,22 @@ export default {
                 {
                     this.btnLoading=true;
                     var formdata = new FormData();
-                    formdata.append('nama_persyaratan',data.nama_persyaratan);
-                    formdata.append('persyaratan_id',data.persyaratan_id);
-                    formdata.append('persyaratan_psb_id',data.persyaratan_psb_id);
-                    formdata.append('foto',this.filepersyaratan[index]);
-                    await this.$ajax.post('/spsb/psbpersyaratan/upload/'+this.user_id,formdata, 
+                    formdata.append('nama_persyaratan', data.nama_persyaratan);
+                    formdata.append('persyaratan_id', data.persyaratan_id);
+                    formdata.append('persyaratan_psb_id', data.persyaratan_psb_id);
+                    formdata.append('foto', this.filepersyaratan[index]);
+                    await this.$ajax.post('/spsb/psbpersyaratan/upload/'+this.user_id,formdata,
                         {
                             headers:{
                                 Authorization: this.$store.getters["auth/Token"],
-                                'Content-Type': 'multipart/form-data'                      
+                                "Content-Type": "multipart/form-data"                      
                             }
                         }
-                    ).then(()=>{                   
+                    ).then(() => {    
                         this.btnHapus=false;
                         this.btnSimpan=true;
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }               
@@ -175,11 +175,11 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]                
                             }
                         }
-                    ).then(()=>{                   
+                    ).then(() => {    
                         this.btnHapus=true;
                         this.photoPersyaratan=require('@/assets/no-image.png');
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }

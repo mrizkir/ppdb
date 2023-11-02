@@ -286,7 +286,7 @@
     </SystemUserLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 import UserPermissions from '@/views/pages/admin/system/UserPermissions';
@@ -314,7 +314,7 @@ export default {
     },
 
     data: () => ({
-        role_id:0,
+        role_id: 0,
         datatableLoading: false,
         btnLoading: false,
         //tables
@@ -341,7 +341,7 @@ export default {
         editedIndex: -1,
         daftar_jenjang: [],
         editedItem: {
-            id:0,
+            id: 0,
             username: '',
             password: '',
             name: '',
@@ -353,7 +353,7 @@ export default {
             updated_at: '',
         },
         defaultItem: {
-            id:0,
+            id: 0,
             username: '',
             password: '',
             name: '',
@@ -445,7 +445,7 @@ export default {
                 }
             ).then(()=>{
                 this.btnLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         },
@@ -545,7 +545,7 @@ export default {
                 }
             }).then(({ data }) => {
                 this.daftar_permissions = data.permissions;
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
 
@@ -557,7 +557,7 @@ export default {
                 this.permissions_selected = data.permissions;
                 this.btnLoading = false;
 
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
             this.dialogUserPermission = true;
@@ -605,7 +605,7 @@ export default {
                     ).then(({ data }) => {
                         Object.assign(this.daftar_users[this.editedIndex], data.user);
                         this.close();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
 
@@ -628,7 +628,7 @@ export default {
                     ).then(({ data }) => {
                         this.daftar_users.push(data.user);
                         this.close();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
@@ -652,7 +652,7 @@ export default {
                         const index = this.daftar_users.indexOf(item);
                         this.daftar_users.splice(index, 1);
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }

@@ -142,7 +142,7 @@
 	</div>    
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 export default {
 	name: 'SystemUserLayout', 
 	props: {
@@ -152,9 +152,9 @@ export default {
 		}
 	}, 
 	data:()=>({
-		loginTime:0,
+		loginTime: 0,
 		drawer:null,
-	}),    
+	}),
 	methods: {        
 		logout ()
 		{
@@ -191,7 +191,7 @@ export default {
 			TOKEN: 'Token',  
 			ROLE: 'Role',
 			CAN_ACCESS: 'can', 
-			ATTRIBUTE_USER: 'AttributeUser',    
+			ATTRIBUTE_USER: 'AttributeUser',
 		}),
 		APP_NAME ()
 		{

@@ -292,18 +292,18 @@ export default {
                 {
                     this.btnLoadingFotoSelfi=true;
                     var formdata = new FormData();
-                    formdata.append('filefotoselfi',this.filefotoselfi);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileselfi/'+this.pesertadidik_id,formdata, 
+                    formdata.append('filefotoselfi', this.filefotoselfi);
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileselfi/'+this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
-                                'Content-Type': 'multipart/form-data'                      
+                                "Content-Type": "multipart/form-data"                      
                             }
                         }
-                    ).then(()=>{                                                            
+                    ).then(() => {                                             
                         this.btnLoadingFotoSelfi=false;
                         this.$router.go();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoadingFotoSelfi=false;
                     });
                 }
@@ -317,18 +317,18 @@ export default {
                 {
                     this.btnLoadingKTPAyah=true;
                     var formdata = new FormData();
-                    formdata.append('filektpayah',this.filektpayah);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpayah/'+this.pesertadidik_id,formdata, 
+                    formdata.append('filektpayah', this.filektpayah);
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpayah/'+this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
-                                'Content-Type': 'multipart/form-data'                      
+                                "Content-Type": "multipart/form-data"                      
                             }
                         }
-                    ).then(()=>{                                                            
+                    ).then(() => {                                             
                         this.btnLoadingKTPAyah=false;
                         this.$router.go();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoadingKTPAyah=false;
                     });
                 }
@@ -342,18 +342,18 @@ export default {
                 {
                     this.btnLoadingKTPIbu=true;
                     var formdata = new FormData();
-                    formdata.append('filektpibu',this.filektpibu);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpibu/'+this.pesertadidik_id,formdata, 
+                    formdata.append('filektpibu', this.filektpibu);
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpibu/'+this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
-                                'Content-Type': 'multipart/form-data'                      
+                                "Content-Type": "multipart/form-data"                      
                             }
                         }
-                    ).then(()=>{                                                            
+                    ).then(() => {                                             
                         this.btnLoadingKTPIbu=false;
                         this.$router.go();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoadingKTPIbu=false;
                     });
                 }
@@ -367,18 +367,18 @@ export default {
                 {
                     this.btnLoadingKK=true;
                     var formdata = new FormData();
-                    formdata.append('filekk',this.filekk);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilekk/'+this.pesertadidik_id,formdata, 
+                    formdata.append('filekk', this.filekk);
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilekk/'+this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
-                                'Content-Type': 'multipart/form-data'                      
+                                "Content-Type": "multipart/form-data"                      
                             }
                         }
-                    ).then(()=>{                                                            
+                    ).then(() => {                                             
                         this.btnLoadingKK=false;
                         this.$router.go();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoadingKK=false;
                     });
                 }
@@ -392,18 +392,18 @@ export default {
                 {
                     this.btnLoadingAktaLahir=true;
                     var formdata = new FormData();
-                    formdata.append('fileaktalahir',this.fileaktalahir);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileaktalahir/'+this.pesertadidik_id,formdata, 
+                    formdata.append('fileaktalahir', this.fileaktalahir);
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileaktalahir/'+this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
-                                'Content-Type': 'multipart/form-data'                      
+                                "Content-Type": "multipart/form-data"                      
                             }
                         }
-                    ).then(()=>{                                                            
+                    ).then(() => {                                             
                         this.btnLoadingAktaLahir=false;
                         this.$router.go();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoadingAktaLahir=false;
                     });
                 }

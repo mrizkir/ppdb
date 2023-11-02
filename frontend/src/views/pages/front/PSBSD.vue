@@ -133,7 +133,7 @@
   </FrontLayout>
 </template>
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters } from "vuex";
   import VueRecaptcha from 'vue-recaptcha';
   import FrontLayout from '@/views/layouts/FrontLayout';
   export default {
@@ -143,7 +143,7 @@
     },
     data: () => ({
       btnLoading: false, 
-      registerSD: null,    
+      registerSD: null,
       //form
       form_valid: true, 
       dialogkonfirmasipendaftaran: false,  
@@ -213,7 +213,7 @@
             email: this.formdata.email,
             nomor_hp: this.formdata.nomor_hp,
             username: this.formdata.username,
-            kode_jenjang:2,
+            kode_jenjang: 2,
             password: this.formdata.password,
             captcha_response: this.formdata.captcha_response,
           }).then(({ data }) => {
@@ -252,9 +252,9 @@
       },
     },
     computed: {
-      ...mapGetters('uifront',{
+      ...mapGetters("uifront",{
         sitekey: 'getCaptchaKey',
-        tahunPendaftaran: 'getTahunPendaftaran',
+        tahunPendaftaran: "getTahunPendaftaran",
         bukaPPDB: 'getBukaPPDB',
       }),
     }, 

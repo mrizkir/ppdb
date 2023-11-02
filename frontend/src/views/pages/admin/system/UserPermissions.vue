@@ -151,7 +151,7 @@
     
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 export default {
     name: 'UserPermissions',
     data: () => ({
@@ -182,7 +182,7 @@ export default {
                 }
             ).then(()=>{   
                 this.close();
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         },
@@ -201,7 +201,7 @@ export default {
                 }
             ).then(()=>{   
                 this.close();
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         },
@@ -219,7 +219,7 @@ export default {
     },
     computed: {
         ...mapGetters('auth', {    
-            TOKEN: 'Token',       
+            TOKEN: 'Token',
         }),
         daftar_permissions()
         {

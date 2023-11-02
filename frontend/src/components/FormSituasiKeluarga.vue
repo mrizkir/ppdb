@@ -81,7 +81,7 @@
         {
           value: 'CERAI',
           text: 'CERAI'
-        },    
+        },
       ],
       formdata:{
         tinggal_bersama: "",
@@ -91,7 +91,7 @@
       rule_tinggal_bersama: [
         value => !!value || "Peserta Didik tinggal bersama siapa mohon untuk diisi !!!",
         value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Tempat tinggal Peserta Didik hanya boleh string dan spasi',
-      ],               
+      ],
       rule_status_pernikahan: [
         value => !!value || "Mohon Status Pernikahan untuk dipilih !!!"
       ], 

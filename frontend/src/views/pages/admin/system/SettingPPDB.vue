@@ -61,7 +61,7 @@
     </SystemConfigLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import SystemConfigLayout from '@/views/layouts/SystemConfigLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
@@ -139,16 +139,16 @@ export default {
                         setting:JSON.stringify({
                             203: this.formdata.tahun_pendaftaran, 
                             206: this.formdata.buka_ppdb, 
-                        }),                                                                                                 
+                        }),                                                                
                     },
                     {
                         headers: {
                             Authorization: this.TOKEN
                         }
                     }
-                ).then(()=>{                       
+                ).then(() => {        
                     this.btnLoading = false;
-                }).catch(()=>{
+                }).catch(() => {
                     this.btnLoading = false;
                 });
             }
@@ -157,7 +157,7 @@ export default {
     computed: { 
         ...mapGetters('auth',{            
             ACCESS_TOKEN: 'AccessToken',  
-            TOKEN: 'Token',       
+            TOKEN: 'Token',
         }),
     },
     components: {

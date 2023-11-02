@@ -286,7 +286,7 @@
     </SystemUserLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 import UserPermissions from '@/views/pages/admin/system/UserPermissions';
@@ -314,9 +314,9 @@ export default {
     },  
    
     data: () => ({ 
-        role_id:0,
+        role_id: 0,
         datatableLoading: false,
-        btnLoading: false,   
+        btnLoading: false,
         //tables
         headers: [                        
             { text: '', value: 'foto' },
@@ -341,7 +341,7 @@ export default {
         editedIndex: -1,
         daftar_jenjang: [],
         editedItem: {
-            id:0,
+            id: 0,
             username: '',
             password: '',
             name: '',
@@ -353,7 +353,7 @@ export default {
             updated_at: '',
         },
         defaultItem: {
-            id:0,
+            id: 0,
             username: '',
             password: '',
             name: '',
@@ -371,7 +371,7 @@ export default {
         ], 
         rule_user_email: [
             value => !!value || "Mohon untuk di isi email User !!!",  
-            value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',    
+            value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',
         ], 
         rule_user_nomorhp: [
             value => !!value || "Nomor HP mohon untuk diisi !!!",
@@ -443,9 +443,9 @@ export default {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 }
-            ).then(()=>{                   
+            ).then(() => {    
                 this.btnLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         },
@@ -484,7 +484,7 @@ export default {
             item.password='';
             this.editedItem = Object.assign({}, item);
             this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];
-            await this.$ajax.get('/system/users/'+item.id+'/jenjang',    
+            await this.$ajax.get('/system/users/'+item.id+'/jenjang',
                 {
                     headers: {
                         Authorization: this.TOKEN
@@ -545,7 +545,7 @@ export default {
                 }
             }).then(({ data }) => {
                 this.daftar_permissions = data.permissions;
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
 
@@ -557,7 +557,7 @@ export default {
                 this.permissions_selected = data.permissions;
                 this.btnLoading = false;
                    
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
             this.dialogUserPermission = true;
@@ -605,7 +605,7 @@ export default {
                     ).then(({ data }) => {   
                         Object.assign(this.daftar_users[this.editedIndex], data.user);
                         this.close();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                     
@@ -617,8 +617,8 @@ export default {
                             nomor_hp: this.editedItem.nomor_hp,  
                             username: this.editedItem.username,
                             password: this.editedItem.password, 
-                            kode_jenjang:JSON.stringify(Object.assign({},this.editedItem.kode_jenjang)),    
-                            role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),   
+                            kode_jenjang:JSON.stringify(Object.assign({},this.editedItem.kode_jenjang)),
+                            role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
                             headers: {
@@ -628,7 +628,7 @@ export default {
                     ).then(({ data }) => {   
                         this.daftar_users.push(data.user);
                         this.close();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
@@ -652,7 +652,7 @@ export default {
                         const index = this.daftar_users.indexOf(item);
                         this.daftar_users.splice(index, 1);
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
@@ -665,7 +665,7 @@ export default {
         },
         ...mapGetters('auth',{            
             ACCESS_TOKEN: 'AccessToken',  
-            TOKEN: 'Token',       
+            TOKEN: 'Token',
         }),
     },
 

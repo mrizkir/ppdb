@@ -132,7 +132,7 @@
     </SystemUserLayout>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters} from "vuex";
 import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
@@ -175,14 +175,14 @@ export default {
         dialog: false,
         editedIndex: -1,
         editedItem: {
-            id:0,
+            id: 0,
             name: '',
             guard: '',
             created_at: '',
             updated_at: '',
         },
         defaultItem: {
-            id:0,
+            id: 0,
             name: '',
             guard: 'api',
             created_at: '',
@@ -252,7 +252,7 @@ export default {
                     ).then(()=>{   
                         this.initialize();
                         this.close();
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
@@ -276,7 +276,7 @@ export default {
                         const index = this.daftar_permissions.indexOf(item);
                         this.daftar_permissions.splice(index, 1);
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }

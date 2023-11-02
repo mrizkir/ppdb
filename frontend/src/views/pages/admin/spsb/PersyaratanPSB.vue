@@ -331,7 +331,7 @@ export default {
         //tables
         headers: [                        
             { text: '', value: 'foto', width:70 }, 
-            { text: 'NAMA PESERTA DIDIK', value: 'name', width:350, sortable: true },
+            { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },
             { text: 'FOTO SELFIE', value: 'file_fotoselfi', sortable: false }, 
             { text: 'KTP', value: 'file_ktp_ayah', sortable: false },  
@@ -372,7 +372,7 @@ export default {
             kode_jenjang: "",
             ta: "",
             created_at: '',
-            updated_at: '',   
+            updated_at: '',
         }, 
         editedIndex: -1,
 
@@ -393,7 +393,7 @@ export default {
         ], 
         rule_jenjang: [
             value => !!value || "Program studi mohon untuk dipilih !!!"
-        ],   
+        ],
         rule_username: [
             value => !!value || "Username mohon untuk diisi !!!"
         ], 
@@ -436,7 +436,7 @@ export default {
         badgeIcon(item)
         {
             return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
-        },   
+        },
         dataTableRowClicked(item)
         {
             if (item === this.expanded[0])
@@ -453,7 +453,7 @@ export default {
             this.btnLoading = true;
             this.$ajax.post('/akademik/kemahasiswaan/updatestatus/'+id,
                 {
-                    'active':1
+                    'active': 1
                 },
                 {
                     headers: {
@@ -463,13 +463,13 @@ export default {
             ).then(()=>{   
                 this.initialize();
                 this.btnLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
             this.$ajax.post('/keuangan/konfirmasipembayaran/'+id,
                 {
                     '_method': 'put',
-                    'verified':1,
+                    'verified': 1,
                 },
                 {
                     headers: {
@@ -479,7 +479,7 @@ export default {
             ).then(({ data }) => {   
                 this.data_konfirmasi = data.konfirmasi;
                 this.btnLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         },
@@ -497,9 +497,9 @@ export default {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 }
-            ).then(()=>{                   
+            ).then(() => {    
                 this.btnLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         },
@@ -529,7 +529,7 @@ export default {
                             nomor_hp: this.formdata.nomor_hp,
                             kode_jenjang: this.formdata.kode_jenjang,
                             tahun_pendaftaran: this.formdata.ta,
-                            username: this.formdata.username,                                       
+                            username: this.formdata.username,      
                             password: this.formdata.password,  
                         },
                         {
@@ -541,7 +541,7 @@ export default {
                         this.initialize();
                         this.closedialogfrm();
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                     
@@ -551,7 +551,7 @@ export default {
                             name: this.formdata.name,
                             email: this.formdata.email, 
                             nomor_hp: this.formdata.nomor_hp,
-                            username: this.formdata.username,           
+                            username: this.formdata.username,
                             kode_jenjang: this.formdata.kode_jenjang, 
                             tahun_pendaftaran: this.formdata.ta,
                             password: this.formdata.password, 
@@ -565,7 +565,7 @@ export default {
                         this.datatable.push(data.pendaftar);
                         this.closedialogfrm();
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
@@ -586,7 +586,7 @@ export default {
             ).then(()=>{           
                 this.closedialogdetailitem();
                 this.btnLoading = false;
-            }).catch(()=>{
+            }).catch(() => {
                 this.btnLoading = false;
             });
         },
@@ -630,7 +630,7 @@ export default {
                         const index = this.datatable.indexOf(item);
                         this.datatable.splice(index, 1);
                         this.btnLoading = false;
-                    }).catch(()=>{
+                    }).catch(() => {
                         this.btnLoading = false;
                     });
                 }
