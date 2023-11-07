@@ -77,7 +77,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>USERNAME :</v-card-title>
@@ -86,7 +86,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                             </v-row>
                                             <v-row no-gutters>
                                                 <v-col xs="12" sm="6" md="6">
@@ -97,7 +97,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>NOMOR HP :</v-card-title>
@@ -106,7 +106,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                             </v-row>
                                             <v-row no-gutters>
                                                 <v-col xs="12" sm="6" md="6">
@@ -123,7 +123,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>FILE KTP AYAH/IBU/WALI :</v-card-title>
@@ -145,7 +145,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                             </v-row>                                            
                                             <v-row no-gutters>
                                                 <v-col xs="12" sm="6" md="6">
@@ -162,7 +162,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>FILE AKTA LAHIR :</v-card-title>
@@ -177,7 +177,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                             </v-row>                                            
                                             <v-row no-gutters>
                                                 <v-col xs="12" sm="6" md="6">
@@ -188,7 +188,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>UPDATED :</v-card-title>
@@ -197,7 +197,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                             </v-row>                                            
                                         </v-card-text>
                                         <v-card-actions>
@@ -296,7 +296,7 @@ export default {
             {
                 text: 'HOME',
                 disabled: false,
-                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/' + this.$store.getters['auth/AccessToken']
             },
             {
                 text: 'SPSB',
@@ -521,7 +521,7 @@ export default {
                 this.btnLoading = true;
                 if (this.editedIndex > -1) 
                 {
-                    await this.$ajax.post('/spsb/psb/updatependaftar/'+this.formdata.id,
+                    await this.$ajax.post('/spsb/psb/updatependaftar/' + this.formdata.id,
                         {
                             '_method': 'PUT',
                             name: this.formdata.name,
@@ -605,7 +605,7 @@ export default {
         async editItem(item) {
             this.editedIndex = this.datatable.indexOf(item);
             this.formdata = Object.assign({}, item);
-            this.formdata.nomor_hp='+'+this.formdata.nomor_hp;
+            this.formdata.nomor_hp='+' + this.formdata.nomor_hp;
             this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
             await this.$ajax.get('/datamaster/jenjangstudi').then(({ data }) => {
                 this.daftar_jenjang = data.jenjang_studi;

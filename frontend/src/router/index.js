@@ -217,6 +217,26 @@ const routes = [
     },
     component: () => import("../views/pages/admin/spsb/ReportKelulusan.vue"),
   },
+  //keuangan
+  {
+    path: "/keuangan",
+    name: "Keuangan",
+    meta: {
+      title: "KEUANGAN",
+      requiresAuth: true,
+    },
+    component: () => import("../views/pages/admin/keuangan/Keuangan.vue"),
+  },
+  {
+		path: "/keuangan/biayakomponenperiode",
+		name: "KeuanganBiayaKomponenPeriode",
+		meta: {
+			title: "KEUANGAN - BIAYA KOMPONEN PERIODE",
+			requiresAuth: true,
+		},
+		component: () =>
+			import("../views/pages/admin/keuangan/BiayaKomponenPeriode.vue"),
+	},
   //system
   {
     path: "/system-setting",

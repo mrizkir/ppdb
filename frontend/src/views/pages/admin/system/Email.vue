@@ -38,7 +38,7 @@
                                    <v-col xs="12" sm="4" md="3">                                       
                                        <v-switch v-model="formdata.email_mhs_isvalid" label="Check Email Siswa Valid"></v-switch>
                                    </v-col>
-                                   <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                   <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                </v-row>
                             </v-card-text>
                             <v-card-actions>
@@ -68,7 +68,7 @@ export default {
             {
                 text: 'HOME',
                 disabled: false,
-                href: '/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/' + this.ACCESS_TOKEN
             },
             {
                 text: 'KONFIGURASI SISTEM',

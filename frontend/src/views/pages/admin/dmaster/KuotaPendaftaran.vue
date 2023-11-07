@@ -38,7 +38,7 @@
           >
             <template v-slot:top>
               <v-toolbar flat color="white">
-                <v-toolbar-title>DAFTAR KUOTA PENADFTARAN</v-toolbar-title>
+                <v-toolbar-title>DAFTAR KUOTA PENDAFTARAN</v-toolbar-title>
                 <v-divider class="mx-4" inset vertical />
                 <v-spacer></v-spacer>
                 <v-btn color="primary" class="mb-2" @click.stop="addItem">

@@ -171,7 +171,7 @@
                             </v-card-subtitle>
                           </v-card>
                         </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                         <v-col xs="12" sm="6" md="6">
                           <v-card flat>
                             <v-card-title>USERNAME :</v-card-title>
@@ -180,7 +180,7 @@
                             </v-card-subtitle>
                           </v-card>
                         </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                       </v-row>
                       <v-row no-gutters>
                         <v-col xs="12" sm="6" md="6">
@@ -191,7 +191,7 @@
                             </v-card-subtitle>
                           </v-card>
                         </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                         <v-col xs="12" sm="6" md="6">
                           <v-card flat>
                             <v-card-title>NOMOR HP :</v-card-title>
@@ -200,7 +200,7 @@
                             </v-card-subtitle>
                           </v-card>
                         </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                       </v-row>
                       <v-row no-gutters>
                         <v-col xs="12" sm="6" md="6">
@@ -211,7 +211,7 @@
                             </v-card-subtitle>
                           </v-card>
                         </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                         <v-col xs="12" sm="6" md="6">
                           <v-card flat>
                             <v-card-title>CREATED/UPDATED :</v-card-title>
@@ -221,7 +221,7 @@
                             </v-card-subtitle>
                           </v-card>
                         </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                       </v-row>
                       <v-row no-gutters v-if="data_konfirmasi.bukti_bayar">
                         <v-col cols="12">
@@ -237,7 +237,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                 <v-col xs="12" sm="6" md="6">
                                   <v-card flat>
                                     <v-card-title>KODE BILLING :</v-card-title>
@@ -246,7 +246,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                               </v-row>
                               <v-row>
                                 <v-col xs="12" sm="6" md="6">
@@ -257,7 +257,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                 <v-col xs="12" sm="6" md="6">
                                   <v-card flat>
                                     <v-card-title>TANGGAL KONFIRMASI :</v-card-title>
@@ -266,7 +266,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>                                                
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                               </v-row>
                               <v-row>
                                 <v-col xs="12" sm="6" md="6">
@@ -277,7 +277,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>                                                
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                 <v-col xs="12" sm="6" md="6">
                                   <v-card flat>
                                     <v-card-title>NAMA REKENING PENGIRIM :</v-card-title>
@@ -286,7 +286,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                               </v-row>
                               <v-row>
                                 <v-col xs="12" sm="6" md="6">
@@ -297,7 +297,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                 <v-col xs="12" sm="6" md="6">
                                   <v-card flat>
                                     <v-card-title>TOTAL BAYAR :</v-card-title>
@@ -306,7 +306,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                               </v-row>
                               <v-row>
                                 <v-col xs="12" sm="6" md="6">
@@ -317,7 +317,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                 <v-col xs="12" sm="6" md="6">
                                   <v-card flat>
                                     <v-card-title>CREATED/UPDATED :</v-card-title>
@@ -327,7 +327,7 @@
                                     </v-card-subtitle>
                                   </v-card>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                               </v-row>                                                            
                               <v-img class="white--text align-end" :src="$api.url+'/'+data_konfirmasi.bukti_bayar" />
                             </v-card-text>
@@ -439,7 +439,7 @@ export default {
       {
         text: 'HOME',
         disabled: false,
-        href: '/dashboard/'+this.$store.getters['auth/AccessToken']
+        href: '/dashboard/' + this.$store.getters['auth/AccessToken']
       },
       {
         text: 'SPSB',
@@ -664,7 +664,7 @@ export default {
         this.btnLoading = true;
         if (this.editedIndex > -1) 
         {
-          await this.$ajax.post('/spsb/psb/updatependaftar/'+this.formdata.id,
+          await this.$ajax.post('/spsb/psb/updatependaftar/' + this.formdata.id,
             {
               '_method': 'PUT',
               name: this.formdata.name,
@@ -748,7 +748,7 @@ export default {
     async editItem (item) {
       this.editedIndex = this.datatable.indexOf(item);
       this.formdata = Object.assign({}, item);
-      this.formdata.nomor_hp='+'+this.formdata.nomor_hp;
+      this.formdata.nomor_hp='+' + this.formdata.nomor_hp;
       this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
       await this.$ajax.get('/datamaster/jenjangstudi').then(({ data }) => {
         this.daftar_jenjang = data.jenjang_studi;

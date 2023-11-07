@@ -274,7 +274,7 @@ export default {
             {
                 text: 'HOME',
                 disabled: false,
-                href: '/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/' + this.ACCESS_TOKEN
             },
             {
                 text: 'USER SISTEM',
@@ -438,7 +438,7 @@ export default {
                 this.btnLoading = true;
                 if (this.editedIndex > -1) 
                 {
-                    this.$ajax.post('/system/usersdosen/'+this.editedItem.id,
+                    this.$ajax.post('/system/usersdosen/' + this.editedItem.id,
                         {
                             '_method': 'PUT',
                             name: this.editedItem.name,

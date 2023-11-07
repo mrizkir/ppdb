@@ -29,7 +29,7 @@
             </template>
         </ModuleHeader> 
         <v-container fluid v-if="dashboard== 'siswabaru' || datapesertadidik!=null">
-            <FormSituasiKeluarga :user_id="user_id"/>
+            <FormSituasiKeluarga :user_id="user_id" />
         </v-container>
         <v-container fluid v-else>
             <v-row class="mb-4" no-gutters>
@@ -127,7 +127,7 @@ export default {
             {
                 text: 'HOME',
                 disabled: false,
-                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/' + this.$store.getters['auth/AccessToken']
             },
             {
                 text: 'SPSB',

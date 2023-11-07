@@ -271,7 +271,7 @@ export default {
     methods: {
         initialize: async function()
 		{	
-            await this.$ajax.get('/spsb/formulirpendaftaran/persyaratanppdb/'+this.$store.getters['auth/AttributeUser']('id'),  
+            await this.$ajax.get('/spsb/formulirpendaftaran/persyaratanppdb/' + this.$store.getters['auth/AttributeUser']('id'),  
                 {
                     headers: {
                         Authorization: this.$store.getters["auth/Token"]
@@ -293,7 +293,7 @@ export default {
                     this.btnLoadingFotoSelfi=true;
                     var formdata = new FormData();
                     formdata.append('filefotoselfi', this.filefotoselfi);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileselfi/'+this.pesertadidik_id,formdata,
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileselfi/' + this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
@@ -318,7 +318,7 @@ export default {
                     this.btnLoadingKTPAyah=true;
                     var formdata = new FormData();
                     formdata.append('filektpayah', this.filektpayah);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpayah/'+this.pesertadidik_id,formdata,
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpayah/' + this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
@@ -343,7 +343,7 @@ export default {
                     this.btnLoadingKTPIbu=true;
                     var formdata = new FormData();
                     formdata.append('filektpibu', this.filektpibu);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpibu/'+this.pesertadidik_id,formdata,
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilektpibu/' + this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
@@ -368,7 +368,7 @@ export default {
                     this.btnLoadingKK=true;
                     var formdata = new FormData();
                     formdata.append('filekk', this.filekk);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilekk/'+this.pesertadidik_id,formdata,
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilekk/' + this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
@@ -393,7 +393,7 @@ export default {
                     this.btnLoadingAktaLahir=true;
                     var formdata = new FormData();
                     formdata.append('fileaktalahir', this.fileaktalahir);
-                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileaktalahir/'+this.pesertadidik_id,formdata,
+                    await this.$ajax.post('/spsb/formulirpendaftaran/uploadfileaktalahir/' + this.pesertadidik_id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],

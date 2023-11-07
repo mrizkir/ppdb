@@ -203,7 +203,7 @@
                         <v-list-item-title>FILTER</v-list-item-title>
                     </v-list-item-content>		
                 </v-list-item>
-                <slot name="filtersidebar"/>		                	
+                <slot name="filtersidebar" />		                	
             </v-list>
 		</v-navigation-drawer>
         <v-main class="mx-4 mb-4">			

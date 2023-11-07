@@ -24,7 +24,7 @@
                 <v-spacer/>
                 <v-btn
                     icon
-                    :href="this.$api.url+'/'+this.item.path"
+                    :href="this.$api.url+'/' + this.item.path"
                     target="_blank"           
                     v-if="verified == 1">
                     <v-icon>
@@ -75,7 +75,7 @@ export default {
         else
         {            
             this.btnHapus=this.isVerified(this.item);
-            this.image_prev=this.$api.url+'/'+this.item.path;
+            this.image_prev=this.$api.url+'/' + this.item.path;
             this.badgeColor=this.item.verified;
             this.badgeIcon=this.item.verified;
         }        
@@ -144,7 +144,7 @@ export default {
                     formdata.append('persyaratan_id', data.persyaratan_id);
                     formdata.append('persyaratan_psb_id', data.persyaratan_psb_id);
                     formdata.append('foto', this.filepersyaratan[index]);
-                    await this.$ajax.post('/spsb/psbpersyaratan/upload/'+this.user_id,formdata,
+                    await this.$ajax.post('/spsb/psbpersyaratan/upload/' + this.user_id,formdata,
                         {
                             headers:{
                                 Authorization: this.$store.getters["auth/Token"],

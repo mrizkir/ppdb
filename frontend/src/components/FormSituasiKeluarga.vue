@@ -50,7 +50,7 @@
         </v-card>
       </v-form>
     </v-col>
-    <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+    <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
   </v-row>
 </template>
 <script>
@@ -99,7 +99,7 @@
     methods: {
       initialize: async function()
       {        
-        await this.$ajax.get('/spsb/formulirpendaftaran/situasikeluarga/'+this.user_id,  
+        await this.$ajax.get('/spsb/formulirpendaftaran/situasikeluarga/' + this.user_id,  
           {
             headers:{
               Authorization: this.$store.getters["auth/Token"]
@@ -141,7 +141,7 @@
       {
         if (this.$store.getters['uiadmin/getDefaultDashboard'] == 'siswabaru')
         {
-          this.$router.push('/dashboard/'+this.$store.getters['auth/AccessToken']);
+          this.$router.push('/dashboard/' + this.$store.getters['auth/AccessToken']);
         }
         else
         {

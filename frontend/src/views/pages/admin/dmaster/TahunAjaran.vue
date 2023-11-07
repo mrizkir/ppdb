@@ -119,7 +119,7 @@
                             </v-card-subtitle>
                           </v-card>
                         </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                         <v-col xs="12" sm="6" md="6">
                           <v-card flat>
                             <v-card-title>TAHUN AJARAN :</v-card-title>
@@ -128,7 +128,7 @@
                             </v-card-subtitle>
                           </v-card>
                         </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                       </v-row>
                     </v-card-text>
                     <v-card-actions>
@@ -187,7 +187,7 @@ export default {
       {
         text: 'HOME',
         disabled: false,
-        href: '/dashboard/'+this.ACCESS_TOKEN
+        href: '/dashboard/' + this.ACCESS_TOKEN
       },
       {
         text: 'DATA MASTER',
@@ -283,7 +283,7 @@ export default {
         this.btnLoading = true;
         if (this.editedIndex > -1)
         {
-          await this.$ajax.post('/datamaster/tahunajaran/'+this.old_tahun,
+          await this.$ajax.post('/datamaster/tahunajaran/' + this.old_tahun,
             {
               '_method': 'PUT',
               tahun: this.formdata.tahun,

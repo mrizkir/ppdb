@@ -298,7 +298,7 @@
         </v-card>
       </v-form>
     </v-col>
-    <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+    <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
   </v-row>
 </template>
 <script>

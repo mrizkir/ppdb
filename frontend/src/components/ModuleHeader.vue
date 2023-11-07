@@ -2,7 +2,7 @@
     <v-container :fluid="isReportPage">        
         <v-row no-gutters>
             <v-col cols="12" xs="12" sm="12" md="12">
-                <slot name="breadcrumbs"/>
+                <slot name="breadcrumbs" />
             </v-col>
         </v-row>
         <v-row no-gutters>            

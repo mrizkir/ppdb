@@ -65,7 +65,7 @@
                                         </v-card-subtitle>
                                     </v-card>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                 <v-col xs="12" sm="6" md="9">
                                     <v-row>
                                         <v-col xs="12" sm="6" md="6">
@@ -76,7 +76,7 @@
                                                 </v-card-subtitle>
                                             </v-card>
                                         </v-col>
-                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                         <v-col xs="12" sm="6" md="6">
                                              <v-card flat>
                                                 <v-card-title>EMAIL:</v-card-title>  
@@ -85,7 +85,7 @@
                                                 </v-card-subtitle>
                                             </v-card>
                                         </v-col>
-                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                     </v-row>
                                     <v-row>
                                         <v-col xs="12" sm="6" md="6">
@@ -96,7 +96,7 @@
                                                 </v-card-subtitle>
                                             </v-card>
                                         </v-col>
-                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                         <v-col xs="12" sm="6" md="6">
                                              <v-card flat>
                                                 <v-card-title>ROLE:</v-card-title>  
@@ -105,7 +105,7 @@
                                                 </v-card-subtitle>
                                             </v-card>
                                         </v-col>
-                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                     </v-row>
                                     <v-row>
                                         <v-col xs="12" sm="6" md="6">
@@ -116,7 +116,7 @@
                                                 </v-card-subtitle>
                                             </v-card>
                                         </v-col>
-                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                         <v-col xs="12" sm="6" md="6">
                                              <v-card flat>
                                                 <v-card-title>STATUS:</v-card-title>  
@@ -130,7 +130,7 @@
                                                 </v-card-subtitle>
                                             </v-card>
                                         </v-col>
-                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                     </v-row>
                                     <v-row>
                                         <v-col xs="12" sm="6" md="6">
@@ -141,7 +141,7 @@
                                                 </v-card-subtitle>
                                             </v-card>
                                         </v-col>
-                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                         <v-col xs="12" sm="6" md="6">
                                             <v-card flat>
                                                 <v-card-title>UPDATED_AT:</v-card-title>  
@@ -150,10 +150,10 @@
                                                 </v-card-subtitle>
                                             </v-card>
                                         </v-col>
-                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                     </v-row>
                                 </v-col>
-                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                             </v-row>
                         </v-card-text>
                     </v-card>                    
@@ -163,7 +163,7 @@
                 <v-col xs="12" sm="6" md="6" v-if="dashboard== 'mahasiswa'">
                     
                 </v-col>
-                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                 <v-col xs="12" sm="6" md="6">
                     <v-form ref="frmdata" v-model="form_valid" lazy-validation>
                         <v-card>
@@ -191,7 +191,7 @@
                         </v-card>
                     </v-form>
                 </v-col>
-                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
             </v-row>
         </v-container>
     </SystemUserLayout>
@@ -208,7 +208,7 @@ export default {
             {
                 text: 'HOME',
                 disabled: false,
-                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/' + this.$store.getters['auth/AccessToken']
             },
             {
                 text: 'SYSTEM',
@@ -299,7 +299,7 @@ export default {
             if (this.$refs.frmdata.validate())
             {
                 this.btnLoading = true;
-                this.$ajax.post('/system/users/updatepassword/'+this.$store.getters['auth/AttributeUser']('id'),
+                this.$ajax.post('/system/users/updatepassword/' + this.$store.getters['auth/AttributeUser']('id'),
                     {
                         '_method': 'PUT',
                         password: this.formdata.password,
@@ -344,7 +344,7 @@ export default {
                     this.btnLoading = true;
                     var formdata = new FormData();
                     formdata.append('foto', this.formdata.foto);
-                    await this.$ajax.post('/setting/users/uploadfoto/'+this.$store.getters.User.id,formdata,
+                    await this.$ajax.post('/setting/users/uploadfoto/' + this.$store.getters.User.id,formdata,
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],  
@@ -364,7 +364,7 @@ export default {
         resetFoto: async function() 
         {
             this.btnLoading = true;
-            await this.$ajax.post('/setting/users/resetfoto/'+this.$store.getters.User.id,{}, 
+            await this.$ajax.post('/setting/users/resetfoto/' + this.$store.getters.User.id,{}, 
                 {
                     headers: {
                         Authorization: this.$store.getters["auth/Token"],
@@ -379,7 +379,7 @@ export default {
         },
         async fetchSiswa()
         {
-            await this.$ajax.get('/akademik/kemahasiswaan/biodatamhs1/'+this.$store.getters['auth/AttributeUser']('id'), 
+            await this.$ajax.get('/akademik/kemahasiswaan/biodatamhs1/' + this.$store.getters['auth/AttributeUser']('id'), 
                 {
                     headers: {
                         Authorization: this.$store.getters["auth/Token"],
@@ -397,7 +397,7 @@ export default {
             {
                 if (this.avatar==null)
                 {
-                    let photo = this.$api.url+'/'+this.$store.getters.User.foto;			
+                    let photo = this.$api.url+'/' + this.$store.getters.User.foto;			
                     return photo;
                 }
                 else

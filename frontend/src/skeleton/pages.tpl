@@ -125,7 +125,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>CREATED :</v-card-title>
@@ -134,7 +134,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                             </v-row>
                                             <v-row no-gutters>
                                                 <v-col xs="12" sm="6" md="6">
@@ -145,7 +145,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>UPDATED :</v-card-title>
@@ -154,7 +154,7 @@
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
-                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+                                                <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                             </v-row>
                                         </v-card-text>
                                         <v-card-actions>
@@ -217,7 +217,7 @@ export default {
             {
                 text: 'HOME',
                 disabled: false,
-                href: '/dashboard/'+this.$store.getters['auth/AccessToken']
+                href: '/dashboard/' + this.$store.getters['auth/AccessToken']
             },
             {
                 text: 'PAGE_GROUP',
@@ -322,7 +322,7 @@ export default {
                 this.btnLoading=true;
                 if (this.editedIndex > -1) 
                 {
-                    await this.$ajax.post('/path/'+this.formdata.id,
+                    await this.$ajax.post('/path/' + this.formdata.id,
                         {
                             '_method': 'PUT',
                             name: this.formdata.name,

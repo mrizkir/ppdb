@@ -74,7 +74,7 @@ export default {
             {
                 text: 'HOME',
                 disabled: false,
-                href: '/dashboard/'+this.ACCESS_TOKEN
+                href: '/dashboard/' + this.ACCESS_TOKEN
             },
             {
                 text: 'KONFIGURASI SISTEM',

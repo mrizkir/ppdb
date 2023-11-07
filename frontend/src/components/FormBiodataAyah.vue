@@ -184,7 +184,7 @@
                 </v-card>
             </v-form>
         </v-col>
-        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly"/>
+        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
     </v-row>
 </template>
 <script>
@@ -317,7 +317,7 @@ export default {
                 this.daftar_agama = data.agama;
             });
                     
-            await this.$ajax.get('/spsb/formulirpendaftaran/biodataayah/'+this.user_id,  
+            await this.$ajax.get('/spsb/formulirpendaftaran/biodataayah/' + this.user_id,  
                 {
                     headers:{
                         Authorization: this.$store.getters["auth/Token"]
@@ -366,7 +366,7 @@ export default {
             if (this.$refs.frmdata.validate())
             {
                 this.btnLoading = true;
-                await this.$ajax.post('/spsb/formulirpendaftaran/biodataayah/'+this.user_id, {
+                await this.$ajax.post('/spsb/formulirpendaftaran/biodataayah/' + this.user_id, {
                     _method: "put",
                     nama_ayah: this.formdata.nama_ayah,
                     hubungan: this.formdata.hubungan,
@@ -410,7 +410,7 @@ export default {
         {
             if (this.$store.getters['uiadmin/getDefaultDashboard'] == 'siswabaru')
             {
-                this.$router.push('/dashboard/'+this.$store.getters['auth/AccessToken']);
+                this.$router.push('/dashboard/' + this.$store.getters['auth/AccessToken']);
             }
             else
             {
