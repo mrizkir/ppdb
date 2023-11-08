@@ -27,8 +27,8 @@
                         Halaman ini berisi laporan per calon peserta didik 
                     </v-alert>
             </template>
-        </ModuleHeader>  
-        <v-container fluid>    
+        </ModuleHeader>
+        <v-container fluid> 
             <v-row class="mb-4" no-gutters>
                 <v-col cols="12">
                     <v-card>
@@ -60,32 +60,32 @@
                         :loading="datatableLoading"
                         loading-text="Loading... Please wait">
                         <template v-slot:top>
-                            <v-toolbar flat color="white">                                
+                            <v-toolbar flat color="white">
                                 <v-spacer></v-spacer>
                             </v-toolbar>
-                        </template>                        
-                        <template v-slot:item.foto="{ item }">    
+                        </template> 
+                        <template v-slot:item.foto="{ item }"> 
                             <v-badge
                                 bordered
                                 :color="badgeColor(item)"
                                 :icon="badgeIcon(item)"
-                                overlap>                
-                                <v-avatar size="30">                                        
+                                overlap> 
+                                <v-avatar size="30"> 
                                     <v-img :src="$api.url+'/'+item.foto" />
-                                </v-avatar>                                                                                                  
+                                </v-avatar>
                             </v-badge>
                         </template>
-                        <template v-slot:item.file_fotoselfi="{ item }">                            
-                            {{item.file_fotoselfi==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>                            
+                        <template v-slot:item.file_fotoselfi="{ item }">
+                            {{item.file_fotoselfi==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>
                         </template>
-                        <template v-slot:item.file_ktp_ayah="{ item }">                            
-                            {{item.file_ktp_ayah==null || item.file_ktp_ibu==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}} <br >                            
+                        <template v-slot:item.file_ktp_ayah="{ item }">
+                            {{item.file_ktp_ayah==null || item.file_ktp_ibu==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}} <br >
                         </template>
-                        <template v-slot:item.file_kk="{ item }">                            
-                            {{item.file_kk==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>                             
+                        <template v-slot:item.file_kk="{ item }">
+                            {{item.file_kk==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br> 
                         </template>
-                        <template v-slot:item.file_aktalahir="{ item }">                            
-                            {{item.file_aktalahir==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>                            
+                        <template v-slot:item.file_aktalahir="{ item }">
+                            {{item.file_aktalahir==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>
                         </template>
                         <template v-slot:expanded-item="{ headers, item }">
                             <td :colspan="headers.length" class="text-center">
@@ -94,7 +94,7 @@
                                     <strong>USERNAME:</strong>{{ item.username }}                     
                                     <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
                                     <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
-                                </v-col>                                
+                                </v-col>
                             </td>
                         </template>
                         <template v-slot:item.biodata="{ item }">
@@ -106,7 +106,7 @@
                                 @click.stop="printBiodata(item)"
                             >
                                 mdi-printer
-                            </v-icon>                            
+                            </v-icon>
                         </template>
                         <template v-slot:no-data>
                             Data belum tersedia
@@ -114,7 +114,7 @@
                     </v-data-table>
                 </v-col>
             </v-row>
-            <v-dialog v-model="dialogprintpdf" max-width="500px" persistent>                
+            <v-dialog v-model="dialogprintpdf" max-width="500px" persistent> 
                 <v-card>
                     <v-card-title>
                         <span class="headline">Print to PDF</span>
@@ -123,15 +123,15 @@
                         <v-btn
                             color="green"
                             text
-                            :href="this.$api.url+'/'+file_pdf">                            
+                            :href="this.$api.url+'/'+file_pdf">
                             Download
-                        </v-btn>                           
+                        </v-btn> 
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click.stop="closedialogprintpdf">BATAL</v-btn>                            
+                        <v-btn color="blue darken-1" text @click.stop="closedialogprintpdf">BATAL</v-btn>
                     </v-card-actions>
-                </v-card>            
+                </v-card>
             </v-dialog>
         </v-container>
         <template v-slot:filtersidebar>

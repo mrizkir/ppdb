@@ -2,7 +2,7 @@
   <AdminLayout>		
     <v-container v-if="dashboard== 'siswabaru'">
       <DashboardMB />
-    </v-container>        
+    </v-container> 
     <v-container fluid v-else>
       <v-row>
         <v-col xs="12" sm="4" md="3" v-if="$store.getters['auth/can']('DMASTER-GROUP')">
@@ -14,7 +14,7 @@
             dark>
             <v-card-title class="headline">
               DATA MASTER
-            </v-card-title>                        
+            </v-card-title> 
             <v-card-text>
               Pengaturan berbagai parameter sebagai referensi dari modul-modul lain dalam sistem.
             </v-card-text>
@@ -30,7 +30,7 @@
             dark>
             <v-card-title class="headline">
               SPSB
-            </v-card-title>                        
+            </v-card-title> 
             <v-card-text>
               Modul ini digunakan untuk mengelola Seleksi Penerimaan Peserta Didik Baru (SPSB) tahun {{tahun_pendaftaran}}.
             </v-card-text>
@@ -68,7 +68,7 @@
             dark>
             <v-card-title class="headline">
               USER SISTEM
-            </v-card-title>                        
+            </v-card-title> 
             <v-card-text>
               Modul ini digunakan untuk mengelola user sistem.
             </v-card-text>
@@ -84,7 +84,7 @@
             dark>
             <v-card-title class="headline">
               KONFIGURASI SISTEM
-            </v-card-title>                        
+            </v-card-title> 
             <v-card-text>
               Modul ini digunakan untuk mengatur berbagai macam konfigurasi sistem.
             </v-card-text>

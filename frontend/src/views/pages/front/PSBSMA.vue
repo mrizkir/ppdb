@@ -130,7 +130,7 @@
 			<v-row>
         PPDB SMA Belum dibuka
       </v-row>
-    </v-container>  
+    </v-container>
   </FrontLayout>
 </template>
 <script>

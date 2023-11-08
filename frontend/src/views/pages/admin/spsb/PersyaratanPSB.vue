@@ -27,8 +27,8 @@
                         Halaman ini berisi daftar persyaratan-persyaratan yang telah diunggah para calon peserta didik.
                     </v-alert>
             </template>
-        </ModuleHeader>  
-        <v-container fluid>    
+        </ModuleHeader>
+        <v-container fluid> 
             <v-row class="mb-4" no-gutters>
                 <v-col cols="12">
                     <v-card>
@@ -60,8 +60,8 @@
                         :loading="datatableLoading"
                         loading-text="Loading... Please wait">
                         <template v-slot:top>
-                            <v-toolbar flat color="white">                                
-                                <v-spacer></v-spacer>                                
+                            <v-toolbar flat color="white">
+                                <v-spacer></v-spacer>
                                 <v-dialog v-model="dialogdetailitem" max-width="750px" persistent>
                                     <v-card>
                                         <v-card-title>
@@ -117,9 +117,9 @@
                                                                 color="green"
                                                                 text
                                                                 :href="$api.url+'/'+formdata.file_fotoselfi"
-                                                                v-if="formdata.file_fotoselfi">                                                                      
+                                                                v-if="formdata.file_fotoselfi">
                                                                 LIHAT
-                                                            </v-btn>   
+                                                            </v-btn>
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
@@ -127,26 +127,26 @@
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>FILE KTP AYAH/IBU/WALI :</v-card-title>
-                                                        <v-card-subtitle>                                                              
+                                                        <v-card-subtitle>
                                                             <v-btn
                                                                 color="green"
                                                                 text
                                                                 :href="$api.url+'/'+formdata.file_ktp_ayah"
-                                                                v-if="formdata.file_ktp_ayah">                                                                      
+                                                                v-if="formdata.file_ktp_ayah">
                                                                 LIHAT KTP AYAH/WALI
                                                             </v-btn> 
                                                             <v-btn
                                                                 color="green"
                                                                 text
                                                                 :href="$api.url+'/'+formdata.file_ktp_ibu"
-                                                                v-if="formdata.file_ktp_ibu">                                                                      
+                                                                v-if="formdata.file_ktp_ibu">
                                                                 LIHAT KTP IBU/WALI
-                                                            </v-btn>    
+                                                            </v-btn> 
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
                                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                                            </v-row>                                            
+                                            </v-row> 
                                             <v-row no-gutters>
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
@@ -156,9 +156,9 @@
                                                                 color="green"
                                                                 text
                                                                 :href="$api.url+'/'+formdata.file_kk"
-                                                                v-if="formdata.file_kk">                                                                      
+                                                                v-if="formdata.file_kk">
                                                                 LIHAT
-                                                            </v-btn>   
+                                                            </v-btn>
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
@@ -166,19 +166,19 @@
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>FILE AKTA LAHIR :</v-card-title>
-                                                        <v-card-subtitle>                                                              
+                                                        <v-card-subtitle>
                                                             <v-btn
                                                                 color="green"
                                                                 text
                                                                 :href="$api.url+'/'+formdata.file_aktalahir"
-                                                                v-if="formdata.file_aktalahir">                                                                      
+                                                                v-if="formdata.file_aktalahir">
                                                                 LIHAT
-                                                            </v-btn>                                                             
+                                                            </v-btn>
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
                                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                                            </v-row>                                            
+                                            </v-row> 
                                             <v-row no-gutters>
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
@@ -192,19 +192,19 @@
                                                 <v-col xs="12" sm="6" md="6">
                                                     <v-card flat>
                                                         <v-card-title>UPDATED :</v-card-title>
-                                                        <v-card-subtitle>                                                              
+                                                        <v-card-subtitle>
                                                             {{$date(formdata.updated_at).format('DD/MM/YYYY HH:mm')}}
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
                                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                                            </v-row>                                            
+                                            </v-row> 
                                         </v-card-text>
                                         <v-card-actions>
-                                            <v-spacer></v-spacer>                                            
+                                            <v-spacer></v-spacer> 
                                             <v-btn color="blue darken-1" text @click.stop="closedialogdetailitem">KELUAR</v-btn>
                                         </v-card-actions>
-                                    </v-card>                                    
+                                    </v-card>
                                 </v-dialog>
                             </v-toolbar>
                         </template>
@@ -217,17 +217,17 @@
                                 @click.stop="viewItem(item)"
                             >
                                 mdi-eye
-                            </v-icon>                            
+                            </v-icon>
                         </template>
-                        <template v-slot:item.foto="{ item }">    
+                        <template v-slot:item.foto="{ item }"> 
                             <v-badge
                                 bordered
                                 :color="badgeColor(item)"
                                 :icon="badgeIcon(item)"
-                                overlap>                
-                                <v-avatar size="30">                                        
+                                overlap> 
+                                <v-avatar size="30"> 
                                     <v-img :src="$api.url+'/'+item.foto" />
-                                </v-avatar>                                                                                                  
+                                </v-avatar>
                             </v-badge>
                         </template>
                         <template v-slot:item.file_fotoselfi="{ item }"> 
@@ -236,31 +236,31 @@
                             </v-icon> 
                             <v-icon color="green" v-else>
                                 mdi-check
-                            </v-icon>                                                      
+                            </v-icon> 
                         </template>
-                        <template v-slot:item.file_ktp_ayah="{ item }">      
+                        <template v-slot:item.file_ktp_ayah="{ item }"> 
                             <v-icon color="grey" v-if="item.file_ktp_ayah==null || item.file_ktp_ibu==null">
                                 mdi-close
                             </v-icon> 
                             <v-icon color="green" v-else>
                                 mdi-check
-                            </v-icon>                                                  
+                            </v-icon>
                         </template>
-                        <template v-slot:item.file_kk="{ item }">  
+                        <template v-slot:item.file_kk="{ item }">
                             <v-icon color="grey" v-if="item.file_kk==null">
                                 mdi-close
                             </v-icon> 
                             <v-icon color="green" v-else>
                                 mdi-check
-                            </v-icon>                                                                                                        
+                            </v-icon> 
                         </template>
-                        <template v-slot:item.file_aktalahir="{ item }">   
+                        <template v-slot:item.file_aktalahir="{ item }">
                             <v-icon color="grey" v-if="item.file_aktalahir==null">
                                 mdi-close
                             </v-icon> 
                             <v-icon color="green" v-else>
                                 mdi-check
-                            </v-icon>                                                       
+                            </v-icon>
                         </template>
                         <template v-slot:expanded-item="{ headers, item }">
                             <td :colspan="headers.length" class="text-center">
@@ -269,7 +269,7 @@
                                     <strong>USERNAME:</strong>{{ item.username }}                     
                                     <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
                                     <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
-                                </v-col>                                
+                                </v-col>
                             </td>
                         </template>
                         <template v-slot:no-data>

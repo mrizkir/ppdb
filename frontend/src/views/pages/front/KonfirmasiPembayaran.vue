@@ -37,33 +37,33 @@
 						<v-card outlined class="mb-2">
 							<v-card-text>
 								<v-card flat>
-									<v-card-title>NAMA PESERTA DIDIK:</v-card-title>  
+									<v-card-title>NAMA PESERTA DIDIK:</v-card-title>
 									<v-card-subtitle>
 										{{data_pd.name}}
 									</v-card-subtitle>
 								</v-card>
 								<v-card flat>
-									<v-card-title>NOMOR KONTAK WA:</v-card-title>  
+									<v-card-title>NOMOR KONTAK WA:</v-card-title>
 									<v-card-subtitle>
 										{{data_pd.nomor_hp}}
 									</v-card-subtitle>
 								</v-card>
 								<v-card flat>
-									<v-card-title>EMAIL:</v-card-title>  
+									<v-card-title>EMAIL:</v-card-title>
 									<v-card-subtitle>
 										{{data_pd.email}}
 									</v-card-subtitle>
 								</v-card>
 								<v-card flat>
-									<v-card-title>BIAYA + KODE TRANSFER:</v-card-title>  
+									<v-card-title>BIAYA + KODE TRANSFER:</v-card-title>
 									<v-card-subtitle>
 										{{data_pd.code|formatUang}}
 									</v-card-subtitle>
 								</v-card>
 							</v-card-text>
-						</v-card>  
+						</v-card>
 						<v-card>
-							<v-card-text>  
+							<v-card-text>
 								<v-select
 									label="PEMBAYARAN MELALUI :"
 									v-model="formdata.id_channel"
@@ -222,7 +222,7 @@ export default {
 		], 
 		rule_bukti_bayar: [
 			value => !!value || "Mohon pilih foto !!!",  
-			value =>  !value || value.size < 2000000 || 'File Bukti Bayar harus kurang dari 2MB.'                
+			value =>!value || value.size < 2000000 || 'File Bukti Bayar harus kurang dari 2MB.'                
 		],
 		rule_total_bayar: [
 			value => !!value || "Dana yang  ditransfer mohon untuk untuk di isi !!!",

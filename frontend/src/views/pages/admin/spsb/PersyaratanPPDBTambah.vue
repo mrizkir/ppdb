@@ -26,25 +26,25 @@
                                     v-model="filefotoselfi">
                                 </v-file-input>
                             </v-card-text>
-                            <v-card-actions>      
+                            <v-card-actions> 
                                 <v-btn
                                     color="green"
                                     text
                                     :href="this.$api.url+'/'+peryaratanppdb.file_fotoselfi"
-                                    v-if="peryaratanppdb.file_fotoselfi">                                                                      
+                                    v-if="peryaratanppdb.file_fotoselfi">
                                     LIHAT
-                                </v-btn>                               
+                                </v-btn> 
                                 <v-spacer/>
                                 <v-btn 
                                     color="grey darken-1" 
                                     text 
-                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>                                                            
+                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
                                 <v-btn
                                     color="orange"
                                     text
                                     @click="uploadFotoSelfi"
                                     :loading="btnLoadingFotoSelfi"                       
-                                    :disabled="!form_valid_foto_selfi||btnLoadingFotoSelfi">                                   
+                                    :disabled="!form_valid_foto_selfi||btnLoadingFotoSelfi">
                                     UNGGAH
                                 </v-btn>
                             </v-card-actions>
@@ -65,25 +65,25 @@
                                     v-model="filektpayah">
                                 </v-file-input>
                             </v-card-text>
-                            <v-card-actions>      
+                            <v-card-actions> 
                                 <v-btn
                                     color="green"
                                     text
                                     :href="this.$api.url+'/'+peryaratanppdb.file_ktp_ayah"
-                                    v-if="peryaratanppdb.file_ktp_ayah">                                                                      
+                                    v-if="peryaratanppdb.file_ktp_ayah">
                                     LIHAT
-                                </v-btn>                               
+                                </v-btn> 
                                 <v-spacer/>
                                 <v-btn 
                                     color="grey darken-1" 
                                     text 
-                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>                                   
+                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
                                 <v-btn
                                     color="orange"
                                     text
                                     @click="uploadKTPAyah"
                                     :loading="btnLoadingKTPAyah"                       
-                                    :disabled="!form_valid_ktp_ayah||btnLoadingKTPAyah">                                   
+                                    :disabled="!form_valid_ktp_ayah||btnLoadingKTPAyah">
                                     UNGGAH
                                 </v-btn>
                             </v-card-actions>
@@ -104,25 +104,25 @@
                                     v-model="filektpibu">
                                 </v-file-input>
                             </v-card-text>
-                            <v-card-actions>      
+                            <v-card-actions> 
                                 <v-btn
                                     color="green"
                                     text
                                     :href="this.$api.url+'/'+peryaratanppdb.file_ktp_ibu"
-                                    v-if="peryaratanppdb.file_ktp_ibu">                                                                      
+                                    v-if="peryaratanppdb.file_ktp_ibu">
                                     LIHAT
-                                </v-btn>                               
+                                </v-btn> 
                                 <v-spacer/>
                                 <v-btn 
                                     color="grey darken-1" 
                                     text 
-                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>                                                                         
+                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn> 
                                 <v-btn
                                     color="orange"
                                     text
                                     @click="uploadKTPIbu"
                                     :loading="btnLoadingKTPIbu"                       
-                                    :disabled="!form_valid_ktp_ibu||btnLoadingKTPIbu">                                   
+                                    :disabled="!form_valid_ktp_ibu||btnLoadingKTPIbu">
                                     UNGGAH
                                 </v-btn>
                             </v-card-actions>
@@ -143,25 +143,25 @@
                                     v-model="filekk">
                                 </v-file-input>
                             </v-card-text>
-                            <v-card-actions>      
+                            <v-card-actions> 
                                 <v-btn
                                     color="green"
                                     text
                                     :href="this.$api.url+'/'+peryaratanppdb.file_kk"
-                                    v-if="peryaratanppdb.file_kk">                                                                      
+                                    v-if="peryaratanppdb.file_kk">
                                     LIHAT
-                                </v-btn>                               
+                                </v-btn> 
                                 <v-spacer/>
                                 <v-btn 
                                     color="grey darken-1" 
                                     text 
-                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>                                                                     
+                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn> 
                                 <v-btn
                                     color="orange"
                                     text
                                     @click="uploadKK"
                                     :loading="btnLoadingKK"                       
-                                    :disabled="!form_valid_kk||btnLoadingKK">                                   
+                                    :disabled="!form_valid_kk||btnLoadingKK">
                                     UNGGAH
                                 </v-btn>
                             </v-card-actions>
@@ -182,25 +182,25 @@
                                     v-model="fileaktalahir">
                                 </v-file-input>
                             </v-card-text>
-                            <v-card-actions>      
+                            <v-card-actions> 
                                 <v-btn
                                     color="green"
                                     text
                                     :href="this.$api.url+'/'+peryaratanppdb.file_aktalahir"
-                                    v-if="peryaratanppdb.file_aktalahir">                                                                      
+                                    v-if="peryaratanppdb.file_aktalahir">
                                     LIHAT
-                                </v-btn>                               
+                                </v-btn> 
                                 <v-spacer/>
                                 <v-btn 
                                     color="grey darken-1" 
                                     text 
-                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>                                                                      
+                                    @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
                                 <v-btn
                                     color="orange"
                                     text
                                     @click="uploadAktaLahir"
                                     :loading="btnLoadingAktaLahir"                       
-                                    :disabled="!form_valid_aktalahir||btnLoadingAktaLahir">                                   
+                                    :disabled="!form_valid_aktalahir||btnLoadingAktaLahir">
                                     UNGGAH
                                 </v-btn>
                             </v-card-actions>
@@ -249,23 +249,23 @@ export default {
 
         rule_filefotoselfi: [
             value => !!value || "Mohon pilih file foto selfi !!!",  
-            value =>  !value || value.size < 2000000 || 'File foto selfi harus kurang dari 2MB.'                
+            value =>!value || value.size < 2000000 || 'File foto selfi harus kurang dari 2MB.'                
         ],
         rule_file_ktp_ayah: [
             value => !!value || "Mohon pilih file ktp !!!",  
-            value =>  !value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
+            value =>!value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
         ],
         rule_file_ktp_ibu: [
             value => !!value || "Mohon pilih file ktp !!!",  
-            value =>  !value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
+            value =>!value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
         ],
         rule_filekk: [
             value => !!value || "Mohon pilih file Kartu Keluarga !!!",  
-            value =>  !value || value.size < 2000000 || 'File kartu keluarga harus kurang dari 2MB.'                
+            value =>!value || value.size < 2000000 || 'File kartu keluarga harus kurang dari 2MB.'                
         ],
         rule_fileaktalahir: [
             value => !!value || "Mohon pilih file Akta Lahir !!!",  
-            value =>  !value || value.size < 2000000 || 'File akta lahir harus kurang dari 2MB.'                
+            value =>!value || value.size < 2000000 || 'File akta lahir harus kurang dari 2MB.'                
         ],
     }),
     methods: {

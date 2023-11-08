@@ -1,6 +1,6 @@
 <template>
     <v-list-item>
-        <v-list-item-content>                     
+        <v-list-item-content>
             <v-select
                 v-model="tahun_pendaftaran"
                 :items="daftar_ta"       
@@ -36,13 +36,13 @@ export default {
         daftar_ta: [],
         tahun_pendaftaran:null
     }),
-    methods:{
+    methods: {
         setFirstTimeLoading (bool)
         {
             this.firstloading=bool;
         }
     },
-    watch:{
+    watch: {
         tahun_pendaftaran(val)
         {
             if (!this.firstloading)

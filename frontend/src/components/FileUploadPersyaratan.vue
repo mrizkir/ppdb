@@ -1,7 +1,7 @@
 <template>
     <v-form v-model="form_valid" ref="frmpersyaratan" lazy-validation>
-        <v-card class="mx-auto" max-width="400">               
-            <v-img class="white--text align-end" height="200px" :src="photoPersyaratan"></v-img>                            
+        <v-card class="mx-auto" max-width="400">
+            <v-img class="white--text align-end" height="200px" :src="photoPersyaratan"></v-img>
             <v-card-text class="text--primary">
                 <div>
                     <v-file-input 
@@ -19,7 +19,7 @@
                 <v-badge
                     bordered
                     :color="badgeColor"
-                    :icon="badgeIcon">   
+                    :icon="badgeIcon">
                 </v-badge>
                 <v-spacer/>
                 <v-btn
@@ -37,7 +37,7 @@
                     @click="upload(index,item)"
                     :loading="btnLoading"                       
                     :disabled="btnLoading||btnSimpan"
-                    v-if="verified == 0">                                   
+                    v-if="verified == 0">
                     Simpan
                 </v-btn>
                 <v-btn
@@ -46,7 +46,7 @@
                     @click="hapusfilepersysaratan(item)"
                     :loading="btnLoading"                       
                     :disabled="btnLoading||btnHapus"
-                    v-if="verified == 0">                   
+                    v-if="verified == 0">
                     Hapus
                 </v-btn>
                 <v-btn
@@ -55,12 +55,12 @@
                     @click="verifikasipersyaratan(item)"
                     :loading="btnLoading"                       
                     :disabled="btnLoading||btnVerifikasi" 
-                    v-if="dashboard != 'siswabaru' && dashboard != 'mahasiswa' && verified == 0">                
+                    v-if="dashboard != 'siswabaru' && dashboard != 'mahasiswa' && verified == 0"> 
                     Verifikasi
                 </v-btn>
             </v-card-actions>
-        </v-card>            
-    </v-form>        
+        </v-card>
+    </v-form> 
 </template>
 <script>
 export default {
@@ -80,16 +80,16 @@ export default {
             this.badgeIcon=this.item.verified;
         }        
     },
-    props:{
-        user_id:{
+    props: {
+        user_id: {
             type:String,
             required: true
         },
-        index:{
+        index: {
             type:Number,
             required: true
         },
-        item:{
+        item: {
             type:Object,
             required: true
         }
@@ -110,7 +110,7 @@ export default {
         //form rules  
         rule_foto: [
             value => !!value || "Mohon pilih foto !!!",  
-            value =>  !value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
+            value =>!value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
         ],
     }),
     methods: {        
@@ -146,7 +146,7 @@ export default {
                     formdata.append('foto', this.filepersyaratan[index]);
                     await this.$ajax.post('/spsb/psbpersyaratan/upload/' + this.user_id,formdata,
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.$store.getters["auth/Token"],
                                 "Content-Type": "multipart/form-data"                      
                             }
@@ -171,7 +171,7 @@ export default {
                             _method: 'DELETE'
                         }, 
                         {
-                            headers:{
+                            headers: {
                                 Authorization: this.$store.getters["auth/Token"]                
                             }
                         }
@@ -209,7 +209,7 @@ export default {
                 
             },
             {
-                headers:{
+                headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
             }
@@ -225,7 +225,7 @@ export default {
         }
     },
     computed: {
-        photoPersyaratan:{
+        photoPersyaratan: {
             get ()
             {   
                 if (this.image_prev==null)
@@ -243,7 +243,7 @@ export default {
             }
             
         },
-        badgeColor:{
+        badgeColor: {
             get()
             {
                 return this.verified == 1 ? 'success': 'error'
@@ -254,7 +254,7 @@ export default {
             }
             
         },
-        badgeIcon:{
+        badgeIcon: {
             get()
             {
                 return this.verified == 1 ? 'mdi-check-bold': 'mdi-close-thick';

@@ -24,13 +24,13 @@
                         berisi informasi profile user.
                 </v-alert>
             </template>
-        </ModuleHeader>   
-        <v-container fluid>    
+        </ModuleHeader>
+        <v-container fluid> 
             <v-row class="mb-4">
                 <v-col cols="12">
                     <v-card color="grey lighten-4">
                         <v-toolbar elevation="2"> 
-                            <v-toolbar-title>DATA USER</v-toolbar-title>                                                        
+                            <v-toolbar-title>DATA USER</v-toolbar-title> 
                         </v-toolbar>
                         <v-card-text>
                             <v-row>
@@ -41,25 +41,25 @@
                                         </v-card-text>
                                     </v-card>
                                     <v-card flat v-if="dashboard== 'mahasiswa'">
-                                        <v-card-title>NIS / NIRM</v-card-title>  
+                                        <v-card-title>NIS / NIRM</v-card-title>
                                         <v-card-subtitle>
                                             {{data_mhs.nis}} / {{data_mhs.nirm}}
                                         </v-card-subtitle>
                                     </v-card>
                                     <v-card flat v-if="dashboard== 'mahasiswa'">
-                                        <v-card-title>JENJANG STUDI</v-card-title>  
+                                        <v-card-title>JENJANG STUDI</v-card-title>
                                         <v-card-subtitle>
                                             {{data_mhs.nama_jenjang}}
                                         </v-card-subtitle>
                                     </v-card>
                                     <v-card flat v-if="dashboard== 'mahasiswa'">
-                                        <v-card-title>KELAS</v-card-title>  
+                                        <v-card-title>KELAS</v-card-title>
                                         <v-card-subtitle>
                                             {{data_mhs.nama_kelas}}
                                         </v-card-subtitle>
                                     </v-card>
                                     <v-card flat v-if="dashboard== 'mahasiswa'">
-                                        <v-card-title>DOSEN WALI</v-card-title>  
+                                        <v-card-title>DOSEN WALI</v-card-title>
                                         <v-card-subtitle>
                                             {{data_mhs.dosen_wali}}
                                         </v-card-subtitle>
@@ -70,7 +70,7 @@
                                     <v-row>
                                         <v-col xs="12" sm="6" md="6">
                                              <v-card flat>
-                                                <v-card-title>ID:</v-card-title>  
+                                                <v-card-title>ID:</v-card-title>
                                                 <v-card-subtitle>
                                                     {{formdata.id}}
                                                 </v-card-subtitle>
@@ -79,7 +79,7 @@
                                         <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                         <v-col xs="12" sm="6" md="6">
                                              <v-card flat>
-                                                <v-card-title>EMAIL:</v-card-title>  
+                                                <v-card-title>EMAIL:</v-card-title>
                                                 <v-card-subtitle>
                                                     {{formdata.email}}
                                                 </v-card-subtitle>
@@ -90,7 +90,7 @@
                                     <v-row>
                                         <v-col xs="12" sm="6" md="6">
                                              <v-card flat>
-                                                <v-card-title>USERNAME:</v-card-title>  
+                                                <v-card-title>USERNAME:</v-card-title>
                                                 <v-card-subtitle>
                                                     {{formdata.username}}
                                                 </v-card-subtitle>
@@ -99,7 +99,7 @@
                                         <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                         <v-col xs="12" sm="6" md="6">
                                              <v-card flat>
-                                                <v-card-title>ROLE:</v-card-title>  
+                                                <v-card-title>ROLE:</v-card-title>
                                                 <v-card-subtitle>
                                                     {{formdata.default_role}}
                                                 </v-card-subtitle>
@@ -110,7 +110,7 @@
                                     <v-row>
                                         <v-col xs="12" sm="6" md="6">
                                              <v-card flat>
-                                                <v-card-title>NOMOR HP:</v-card-title>  
+                                                <v-card-title>NOMOR HP:</v-card-title>
                                                 <v-card-subtitle>
                                                     {{formdata.nomor_hp}}
                                                 </v-card-subtitle>
@@ -119,7 +119,7 @@
                                         <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                         <v-col xs="12" sm="6" md="6">
                                              <v-card flat>
-                                                <v-card-title>STATUS:</v-card-title>  
+                                                <v-card-title>STATUS:</v-card-title>
                                                 <v-card-subtitle>
                                                     <v-chip 
                                                         :color="userstatus"
@@ -135,7 +135,7 @@
                                     <v-row>
                                         <v-col xs="12" sm="6" md="6">
                                             <v-card flat>
-                                                <v-card-title>CREATED_AT:</v-card-title>  
+                                                <v-card-title>CREATED_AT:</v-card-title>
                                                 <v-card-subtitle>
                                                     {{$date(formdata.created_at).format('DD/MM/YYYY HH:mm')}}
                                                 </v-card-subtitle>
@@ -144,7 +144,7 @@
                                         <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                         <v-col xs="12" sm="6" md="6">
                                             <v-card flat>
-                                                <v-card-title>UPDATED_AT:</v-card-title>  
+                                                <v-card-title>UPDATED_AT:</v-card-title>
                                                 <v-card-subtitle>
                                                     {{$date(formdata.updated_at).format('DD/MM/YYYY HH:mm')}}
                                                 </v-card-subtitle>
@@ -156,7 +156,7 @@
                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                             </v-row>
                         </v-card-text>
-                    </v-card>                    
+                    </v-card> 
                 </v-col>
             </v-row>
             <v-row> 
@@ -170,7 +170,7 @@
                             <v-card-title>
                                 <span class="headline">GANTI PASSWORD</span>
                             </v-card-title>
-                            <v-card-text>    
+                            <v-card-text> 
                                  <v-text-field 
                                     v-model="formdata.password" 
                                     label="PASSWORD BARU"
@@ -180,7 +180,7 @@
                                 </v-text-field> 
                             </v-card-text>
                             <v-card-actions>
-                                <v-spacer></v-spacer>                                
+                                <v-spacer></v-spacer>
                                 <v-btn 
                                     color="blue darken-1" 
                                     text 
@@ -226,7 +226,7 @@ export default {
             this.fetchSiswa();
         }
     }, 
-    data ()
+    data()
     {
         return {
             dashboard: null,
@@ -277,7 +277,7 @@ export default {
             //form rules  
             rule_foto: [
                 value => !!value || "Mohon pilih gambar !!!",  
-                value =>  !value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
+                value =>!value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
             ], 
             rule_user_password: [
                 value => !!value || "Mohon untuk di isi password User !!!",

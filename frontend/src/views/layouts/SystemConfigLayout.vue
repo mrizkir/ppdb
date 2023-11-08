@@ -10,7 +10,7 @@
                     FORMULIR PENDAFTARAN PPDB SEKOLAH ISLAM DE GREEN CAMP
                 </span>
 			</v-toolbar-title>
-            <v-spacer></v-spacer>            
+            <v-spacer></v-spacer>
             <v-divider
                 class="mx-4"
                 inset
@@ -26,7 +26,7 @@
                 <template v-slot:activator="{on}">
                     <v-avatar size="30">
                         <v-img :src="photoUser" v-on="on" />
-                    </v-avatar>                    
+                    </v-avatar> 
                 </template>
                 <v-list>
                     <v-list-item>
@@ -37,19 +37,19 @@
                             <v-list-item-title class="title">
                                 {{ATTRIBUTE_USER('username')}}
                             </v-list-item-title>
-                            <v-list-item-subtitle>                                
+                            <v-list-item-subtitle>
                                 {{ROLE}}
                             </v-list-item-subtitle>
                         </v-list-item-content>
-                    </v-list-item>                    
-                    <v-divider/>
+                    </v-list-item>
+                    <v-divider />
                     <v-list-item to="/system-users/profil">
                         <v-list-item-icon class="mr-2">
 							<v-icon>mdi-account</v-icon>
 						</v-list-item-icon>
                         <v-list-item-title>Profil</v-list-item-title>
                     </v-list-item>
-                    <v-divider/>
+                    <v-divider />
                     <v-list-item @click.prevent="logout">
                         <v-list-item-icon class="mr-2">
 							<v-icon>mdi-power</v-icon>
@@ -58,7 +58,7 @@
                     </v-list-item>
                 </v-list>
             </v-menu>			
-        </v-app-bar>    
+        </v-app-bar> 
         <v-navigation-drawer v-model="drawer" width="300" dark class="green darken-1" :temporary="hideleftnav" app>
 			<v-list-item>
 				<v-list-item-avatar>
@@ -93,7 +93,7 @@
                             IDENTITAS DIRI
                         </v-list-item-title>
                     </v-list-item-content>
-                </v-list-item>    
+                </v-list-item>
                 <v-list-item link v-if="CAN_ACCESS('SYSTEM-SETTING-VARIABLES')" to="/system-setting/ppdb">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-account</v-icon>
@@ -103,7 +103,7 @@
                             PPDB
                         </v-list-item-title>
                     </v-list-item-content>
-                </v-list-item>    
+                </v-list-item>
                 <v-subheader>HEADER</v-subheader>
                 <v-list-item link v-if="CAN_ACCESS('SYSTEM-SETTING-VARIABLES')" to="/system-setting/headerlaporan">
                     <v-list-item-icon class="mr-2">
@@ -114,7 +114,7 @@
                             HEADER LAPORAN
                         </v-list-item-title>
                     </v-list-item-content>
-                </v-list-item>    
+                </v-list-item>
                 <v-subheader>SERVER</v-subheader>
                 <v-list-item link v-if="CAN_ACCESS('SYSTEM-SETTING-VARIABLES')" to="/system-setting/captcha">
                     <v-list-item-icon class="mr-2">
@@ -125,7 +125,7 @@
                             CAPTCHA
                         </v-list-item-title>
                     </v-list-item-content>
-                </v-list-item>    
+                </v-list-item>
                 <v-list-item link v-if="CAN_ACCESS('SYSTEM-SETTING-VARIABLES')" to="/system-setting/email">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-account</v-icon>
@@ -135,13 +135,13 @@
                             EMAIL
                         </v-list-item-title>
                     </v-list-item-content>
-                </v-list-item>                    
+                </v-list-item>
             </v-list>
-        </v-navigation-drawer>        
+        </v-navigation-drawer> 
         <v-main class="mx-4 mb-4">			
 			<slot />
 		</v-main>
-    </div>    
+    </div> 
 </template>
 <script>
 import {mapGetters} from "vuex";

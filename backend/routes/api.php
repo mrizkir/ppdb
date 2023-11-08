@@ -57,6 +57,7 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 
 	// dashboard
 	$router->post('/dashboard/psb',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'SPSB\SPSBController@index','as'=>'dashboardspsb.index']);    
+	$router->post('/dashboard/keuangan',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'Keuangan\KeuanganController@index','as'=>'dashboardkeuangan.index']);
 
 	//data master - tahun ajaran
 	$router->post('/datamaster/tahunajaran/store',['middleware'=>['role:superadmin'],'uses'=>'DMaster\TahunAjaranController@store','as'=>'tahunajaran.store']);

@@ -1,4 +1,4 @@
-<template>    
+<template> 
     <v-row align="center" justify="center" class="mb-4" no-gutters>
         <v-col xs="12" sm="12" md="7">
             <v-form ref="frmdata" v-model="form_valid" lazy-validation>
@@ -66,7 +66,7 @@
                             filled
                         />
                     </v-card-text>
-                </v-card>                
+                </v-card> 
                 <v-card class="mb-4">
                     <v-card-title>
                         ALAMAT
@@ -144,7 +144,7 @@
                     <v-card-title>
                         PENDIDIKAN DAN PEKERJAAN
                     </v-card-title>
-                    <v-card-text>                        
+                    <v-card-text> 
                         <v-text-field
                             v-model="formdata.pendidikan"
                             label="PENDIDIKAN"
@@ -164,10 +164,10 @@
                             filled
                         />
                     </v-card-text>
-                </v-card>                
-                <v-card class="mb-4">                    
-                    <v-card-actions>                        
-                        <v-spacer></v-spacer>                        
+                </v-card> 
+                <v-card class="mb-4"> 
+                    <v-card-actions> 
+                        <v-spacer></v-spacer> 
                         <v-btn 
                             color="grey darken-1" 
                             text 
@@ -195,7 +195,7 @@ export default {
         this.initialize();
     },
     props: {          
-        user_id:{            
+        user_id: {            
             type: String,
             required: true
         }
@@ -242,7 +242,7 @@ export default {
         daftar_desa: [],
         desa_id: 0,
 
-        formdata:{
+        formdata: {
             nama_ayah: "",
             hubungan: "",
             tempat_lahir: "",
@@ -319,7 +319,7 @@ export default {
                     
             await this.$ajax.get('/spsb/formulirpendaftaran/biodataayah/' + this.user_id,  
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 },
@@ -392,7 +392,7 @@ export default {
                     penghasilan_bulanan: this.formdata.penghasilan_bulanan,
                 },
                 {
-                    headers:{
+                    headers: {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 }
@@ -418,7 +418,7 @@ export default {
             }
         }
     },
-    watch:{
+    watch: {
         provinsi_id(val)
         {
             if (val.id != null && val.id != '')

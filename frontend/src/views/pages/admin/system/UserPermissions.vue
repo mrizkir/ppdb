@@ -46,7 +46,7 @@
                                                 {{user.theme}}
                                             </v-card-text>
                                         </v-card>
-                                   </v-col>                                    
+                                   </v-col>
                                    <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                 </v-row>
                                 <v-row no-gutters>
@@ -62,7 +62,7 @@
                                     <v-col xs="12" sm="6" md="6">
                                        <v-card flat>
                                             <v-card-title>CREATED :</v-card-title>
-                                            <v-card-text>                                                
+                                            <v-card-text>
                                                 {{$date(user.created_at).format('DD/MM/YYYY HH:mm')}}
                                             </v-card-text>
                                         </v-card>
@@ -82,7 +82,7 @@
                                    <v-col xs="12" sm="6" md="6">
                                        <v-card flat>
                                             <v-card-title>UPDATED :</v-card-title>
-                                            <v-card-text>                                                
+                                            <v-card-text>
                                                 {{$date(user.updated_at).format('DD/MM/YYYY HH:mm')}}
                                             </v-card-text>
                                         </v-card>
@@ -92,7 +92,7 @@
                            </v-card-text>
                         </v-card>
                     </v-col>
-                </v-row>                
+                </v-row> 
                 <v-row class="mb-4" no-gutters>
                     <v-col cols="12">
                         <v-card>
@@ -120,7 +120,7 @@
                             show-select
                             class="elevation-1"
                         >
-                        <template v-slot:item.actions="{ item }">                            
+                        <template v-slot:item.actions="{ item }">
                             <v-icon
                                 small
                                 :loading="btnLoading"

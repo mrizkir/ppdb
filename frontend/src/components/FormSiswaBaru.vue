@@ -6,7 +6,7 @@
           <v-card-title>
             RENCANA STUDI
           </v-card-title>
-          <v-card-text>                        
+          <v-card-text> 
             <v-select
               label="JENJANG STUDI"
               v-model="formdata.kode_jenjang"
@@ -278,10 +278,10 @@
               filled
             />
           </v-card-text>
-        </v-card>                
-        <v-card class="mb-4">                    
-          <v-card-actions>                        
-            <v-spacer></v-spacer>  
+        </v-card> 
+        <v-card class="mb-4"> 
+          <v-card-actions> 
+            <v-spacer></v-spacer>
             <v-btn 
               color="grey darken-1" 
               text 
@@ -309,7 +309,7 @@
       this.initialize();
     },
     props: {    
-      user_id:{            
+      user_id: {            
         type: String,
         required: true
       }
@@ -372,7 +372,7 @@
 
       daftar_jenjang: [],
       
-      formdata:{
+      formdata: {
         nama_siswa: "",
         nisn: null,
         nama_panggilan: "", 
@@ -511,7 +511,7 @@
             
         await this.$ajax.get("/spsb/formulirpendaftaran/" + this.user_id,  
           {
-            headers:{
+            headers: {
               Authorization: this.$store.getters["auth/Token"]
             }
           },
@@ -613,7 +613,7 @@
             kode_jenjang: this.formdata.kode_jenjang,
           },
           {
-            headers:{
+            headers: {
               Authorization: this.$store.getters["auth/Token"]
             }
           }
@@ -639,7 +639,7 @@
         }
       }
     },
-    watch:{
+    watch: {
       provinsi_id(val) {
         if (val.id != null && val.id != "")
         {

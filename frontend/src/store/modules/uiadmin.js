@@ -52,7 +52,7 @@ const mutations = {
   setTahunPendaftaran(state, tahun) {
     state.tahun_pendaftaran = tahun;
   },
-  setTahunAkademik(state, tahun) {
+  setTahunAjaran(state, tahun) {
     state.tahun_ajaran = tahun;
   },
 
@@ -62,7 +62,7 @@ const mutations = {
   setSemesterPendaftaran(state, semester) {
     state.semester_pendaftaran = semester;
   },
-  setSemesterAkademik(state, semester) {
+  setSemester(state, semester) {
     state.semester_akademik = semester;
   },
 
@@ -111,7 +111,7 @@ const getters = {
   getTahunPendaftaran: state => {
     return parseInt(state.tahun_pendaftaran);
   },
-  getTahunAkademik: state => {
+  getTahunAjaran: state => {
     return parseInt(state.tahun_ajaran);
   },
 
@@ -129,7 +129,7 @@ const getters = {
   getSemesterPendaftaran: state => {
     return parseInt(state.semester_pendaftaran);
   },
-  getSemesterAkademik: state => {
+  getSemester: state => {
     return parseInt(state.semester_akademik);
   },
 
@@ -167,9 +167,9 @@ const actions = {
         .then(({ data }) => {
           commit("setDaftarTA", data.daftar_ta);
           commit("setTahunPendaftaran", data.tahun_pendaftaran);
-          commit("setTahunAkademik", data.tahun_ajaran);
+          commit("setTahunAjaran", data.tahun_ajaran);
           commit("setDaftarSemester", data.daftar_semester);
-          commit("setSemesterAkademik", data.semester_akademik);
+          commit("setSemester", data.semester_akademik);
 
           commit("setDaftarJenjang", data.daftar_jenjang);
           commit("setKodeJenjang", data.kode_jenjang);
@@ -211,15 +211,15 @@ const actions = {
   updateTahunPendaftaran({ commit }, tahun) {
     commit("setTahunPendaftaran", tahun);
   },
-  updateTahunAkademik({ commit }, tahun) {
-    commit("setTahunAkademik", tahun);
+  updateTahunAjaran({ commit }, tahun) {
+    commit("setTahunAjaran", tahun);
   },
 
   updateSemesterPendaftaran({ commit }, semester) {
     commit("setSemesterPendaftaran", semester);
   },
-  updateSemesterAkademik({ commit }, semester) {
-    commit("setSemesterAkademik", semester);
+  updateSemester({ commit }, semester) {
+    commit("setSemester", semester);
   },
 
   reinit({ commit }) {

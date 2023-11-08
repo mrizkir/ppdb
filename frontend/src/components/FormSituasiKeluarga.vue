@@ -26,10 +26,10 @@
               filled
             />
           </v-card-text>
-        </v-card>                
-        <v-card class="mb-4">                    
-          <v-card-actions>                        
-            <v-spacer></v-spacer>  
+        </v-card> 
+        <v-card class="mb-4"> 
+          <v-card-actions> 
+            <v-spacer></v-spacer>
             <v-btn 
               color="grey darken-1" 
               text 
@@ -60,7 +60,7 @@
       this.initialize();
     },
     props: {        
-      user_id:{            
+      user_id: {            
         type: String,
         required: true,
       },
@@ -83,7 +83,7 @@
           text: 'CERAI'
         },
       ],
-      formdata:{
+      formdata: {
         tinggal_bersama: "",
         status_pernikahan: 'UTUH', 
         desc: "",
@@ -101,7 +101,7 @@
       {        
         await this.$ajax.get('/spsb/formulirpendaftaran/situasikeluarga/' + this.user_id,  
           {
-            headers:{
+            headers: {
               Authorization: this.$store.getters["auth/Token"]
             }
           },
@@ -123,7 +123,7 @@
             desc: this.formdata.desc, 
           },
           {
-            headers:{
+            headers: {
               Authorization: this.$store.getters["auth/Token"]
             }
           }

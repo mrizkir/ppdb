@@ -16,7 +16,7 @@
                         <v-icon>mdi-chevron-right</v-icon>
                     </template>
                 </v-breadcrumbs>
-            </template>            
+            </template>
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
@@ -70,22 +70,22 @@
                                     inset
                                     vertical
                                 ></v-divider>
-                                <v-spacer></v-spacer>                                
+                                <v-spacer></v-spacer>
                             </v-toolbar>
                         </template>
-                        <template v-slot:item.foto="{ item }">    
+                        <template v-slot:item.foto="{ item }"> 
                             <v-badge
                                     bordered
                                     :color="badgeColor(item)"
                                     :icon="badgeIcon(item)"
                                     overlap
-                                >                
-                                    <v-avatar size="30">                                        
+                                > 
+                                    <v-avatar size="30"> 
                                         <v-img :src="$api.url+'/'+item.foto" />
-                                    </v-avatar>                                                                                                  
+                                    </v-avatar>
                             </v-badge>
                         </template>
-                        <template v-slot:item.actions="{ item }">                            
+                        <template v-slot:item.actions="{ item }">
                             <v-icon
                                 small
                                 class="mr-2"
@@ -99,7 +99,7 @@
                                     <strong>ID:</strong>{{ item.id }}
                                     <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
                                     <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
-                                </v-col>                                
+                                </v-col>
                             </td>
                         </template>
                         <template v-slot:no-data>
@@ -108,7 +108,7 @@
                     </v-data-table>
                 </v-col>
             </v-row>
-        </v-container>        
+        </v-container> 
         <template v-slot:filtersidebar v-if="dashboard!='siswabaru'">
             <Filter7 v-on:changeTahunPendaftaran="changeTahunPendaftaran" v-on:changeJenjang="changeJenjang" ref="filter7" />	
         </template>

@@ -25,7 +25,7 @@ export default {
         this.kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang']; 
 
         this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
-        this.tahun_ajaran=this.$store.getters['uiadmin/getTahunAkademik'];
+        this.tahun_ajaran=this.$store.getters['uiadmin/getTahunAjaran'];
     },
     data:()=>({
         firstloading: true,
@@ -35,19 +35,19 @@ export default {
         daftar_ta: [],
         tahun_ajaran:null
     }),
-    methods:{
+    methods: {
         setFirstTimeLoading (bool)
         {
             this.firstloading=bool;
         }
     },
-    watch:{
+    watch: {
         tahun_ajaran(val)
         {
             if (!this.firstloading)
             {
-                this.$store.dispatch('uiadmin/updateTahunAkademik',val);
-                this.$emit('changeTahunAkademik',val);
+                this.$store.dispatch('uiadmin/updateTahunAjaran',val);
+                this.$emit('changeTahunAjaran',val);
             }            
         },
         kode_jenjang(val)

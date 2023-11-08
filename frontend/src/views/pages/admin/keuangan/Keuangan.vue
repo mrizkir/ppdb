@@ -7,7 +7,7 @@
       <template v-slot:name>
         KEUANGAN
       </template>
-      <template v-slot:subtitle> TAHUN AKADEMIK {{ tahun_akademik }}</template>
+      <template v-slot:subtitle> TAHUN AJARAN {{ tahun_ajaran }}</template>
       <template v-slot:breadcrumbs>
         <v-breadcrumbs :items="breadcrumbs" class="pa-0">
           <template v-slot:divider>
@@ -17,22 +17,19 @@
       </template>
       <template v-slot:desc>
         <v-alert color="cyan" border="left" colored-border type="info">
-          dashboard untuk memperoleh ringkasan informasi keuangan perguruan
-          tinggi.
+          dashboard untuk memperoleh ringkasan informasi keuangan sekolah.
         </v-alert>
       </template>
     </ModuleHeader>
     <template v-slot:filtersidebar>
-      <Filter1 v-on:changeTahunAkademik="changeTahunAkademik" ref="filter1" />
-    </template>	
-    <DashboardKeuanganAdmin :ta="tahun_akademik" />
+      <Filter1 v-on:changeTahunAjaran="changeTahunAjaran" ref="filter1" />
+    </template>
   </KeuanganLayout>
 </template>
 <script>
   import KeuanganLayout from "@/views/layouts/KeuanganLayout";
   import ModuleHeader from "@/components/ModuleHeader";
-  import Filter1 from "@/components/sidebar/FilterMode1";	
-  import DashboardKeuanganAdmin from "@/components/DashboardKeuanganAdmin";
+  import Filter1 from "@/components/sidebar/FilterMode1";
   export default {
     name: "Keuangan",
     created() {
@@ -49,7 +46,7 @@
           href: "#",
         },
       ];
-      this.tahun_akademik = this.$store.getters["uiadmin/getTahunAkademik"];
+      this.tahun_ajaran = this.$store.getters["uiadmin/getTahunPendaftaran"];
     },
     mounted() {
       this.firstloading = false;
@@ -58,19 +55,18 @@
     data: () => ({
       firstloading: true,
       breadcrumbs: [],
-      tahun_akademik: 0,
+      tahun_ajaran: 0,
       dashboard: null,
     }),
     methods: {
-      changeTahunAkademik(tahun) {
-        this.tahun_akademik = tahun;
+      changeTahunAjaran(tahun) {
+        this.tahun_ajaran = tahun;
       },
     },
     components: {
       KeuanganLayout,
       ModuleHeader,
       Filter1,
-      DashboardKeuanganAdmin,
     },
   };
 </script>

@@ -46,7 +46,7 @@
             :loading="datatableLoading"
             loading-text="Loading... Please wait"> 
             <template v-slot:top>
-              <v-dialog v-model="dialogfrm" max-width="500px" persistent>                                    
+              <v-dialog v-model="dialogfrm" max-width="500px" persistent>
                 <v-form ref="frmdata" v-model="form_valid" lazy-validation>
                   <v-card>
                     <v-card-title>
@@ -57,7 +57,7 @@
                         Konfigurasi terkait dengan jenjang studi
                       </span>
                     </v-card-subtitle>
-                    <v-card-text>                    
+                    <v-card-text> 
                       <v-switch v-model="formdata.status_pendaftaran" label="Aktif"></v-switch>
                     </v-card-text>
                     <v-card-actions>
@@ -75,13 +75,13 @@
                   </v-card>
                 </v-form>
               </v-dialog>
-            </template>    
+            </template> 
             <template v-slot:expanded-item="{ headers, item }">
               <td :colspan="headers.length" class="text-center">
-                <v-col cols="12">                                    
+                <v-col cols="12">
                   <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
                   <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
-                </v-col>                                
+                </v-col>
               </td>
             </template>
             <template v-slot:item.actions="{ item }">

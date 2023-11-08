@@ -116,17 +116,17 @@ export default {
 	{
 		this.$root.$confirm = this.$refs.confirm;
 	},
-	data ()
+	data()
 	{
 		return {
 			snackbar_success: false,
 			snackbar_error: false,
 			snackbar_color: 'error',
 			page_message: "",
-			page_form_error_message:{}
+			page_form_error_message: {}
 		}
 	},	
-	components:{
+	components: {
 		confirm
 	}
 };

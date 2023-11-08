@@ -24,8 +24,8 @@
                     Masing-masing user bisa memiliki beberapa role, minisal 1 role untuk bisa menggunakan sistem. Setiap role memiliki permission.
                     </v-alert>
             </template>
-        </ModuleHeader>  
-         <v-container fluid>    
+        </ModuleHeader>
+         <v-container fluid> 
             <v-row class="mb-4" no-gutters>
                 <v-col xs="12" sm="12" md="12">
                     <v-card>
@@ -89,7 +89,7 @@
                                                                 label="NAMA ROLE"
                                                                 :rules="rule_role_name">
                                                             </v-text-field>
-                                                        </v-col>                                            
+                                                        </v-col> 
                                                     </v-row>
                                                 </v-container>
                                             </v-card-text>
@@ -107,8 +107,8 @@
                                             </v-card-actions>
                                         </v-card>
                                     </v-form>
-                                </v-dialog>                                
-                                <v-dialog v-model="dialogRolePermission" max-width="800px" persistent>                                                                    
+                                </v-dialog>
+                                <v-dialog v-model="dialogRolePermission" max-width="800px" persistent>
                                     <RolePermissions :role="editedItem" :daftarpermissions="daftar_permissions" :permissionsselected="permissions_selected" v-on:closeRolePermissions="closeRolePermissions" />
                                 </v-dialog>
                             </v-toolbar>
@@ -150,9 +150,9 @@
                         <template v-slot:no-data>
                             Data belum tersedia
                         </template>
-                    </v-data-table>                    
+                    </v-data-table> 
                 </v-col>
-                <v-dialog v-model="dialogdetail" width="800px">                                    
+                <v-dialog v-model="dialogdetail" width="800px">
                     <v-card>
                         <v-card-title>
                             <span class="headline">DETAIL ROLE</span>
@@ -180,7 +180,7 @@
                                         </v-card>
                                     </v-col>
                                     <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                                </v-row>  
+                                </v-row>
                                 <v-row no-gutters>
                                     <v-col xs="12" sm="6" md="6">
                                         <v-card flat>
@@ -200,7 +200,7 @@
                                         </v-card>
                                     </v-col>
                                     <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                                </v-row>  
+                                </v-row>
                                 <v-row no-gutters>
                                     <v-col cols="12">
                                         <v-data-table                                                        
@@ -218,7 +218,7 @@
                         <v-card-actions>
                             
                         </v-card-actions>
-                    </v-card>                                    
+                    </v-card>
                 </v-dialog>
             </v-row>
         </v-container>

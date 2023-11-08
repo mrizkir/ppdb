@@ -27,8 +27,8 @@
             Halaman ini berisi pendaftar baru.
           </v-alert>
       </template>
-    </ModuleHeader>  
-    <v-container fluid>    
+    </ModuleHeader>
+    <v-container fluid> 
       <v-row class="mb-4" no-gutters>
         <v-col cols="12">
           <v-card>
@@ -60,7 +60,7 @@
             :loading="datatableLoading"
             loading-text="Loading... Please wait">
             <template v-slot:top>
-              <v-toolbar flat color="white">                                
+              <v-toolbar flat color="white">
                 <v-spacer></v-spacer>
                 <v-btn 
                   :loading="btnLoading"
@@ -76,7 +76,7 @@
                   @click.stop="addItem">
                     TAMBAH
                 </v-btn>
-                <v-dialog v-model="dialogfrm" max-width="500px" persistent>                                    
+                <v-dialog v-model="dialogfrm" max-width="500px" persistent>
                   <v-form ref="frmdata" v-model="form_valid" lazy-validation>
                     <v-card>
                       <v-card-title>
@@ -226,8 +226,8 @@
                       <v-row no-gutters v-if="data_konfirmasi.bukti_bayar">
                         <v-col cols="12">
                           <v-card>
-                            <v-card-title>BUKTI BAYAR TRANSFER</v-card-title>     
-                            <v-card-text>                                                   
+                            <v-card-title>BUKTI BAYAR TRANSFER</v-card-title>
+                            <v-card-text> 
                               <v-row>
                                 <v-col xs="12" sm="6" md="6">
                                   <v-card flat>
@@ -265,7 +265,7 @@
                                       {{$date(data_konfirmasi.tanggal_bayar).format('DD/MM/YYYY')}}
                                     </v-card-subtitle>
                                   </v-card>
-                                </v-col>                                                
+                                </v-col>
                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                               </v-row>
                               <v-row>
@@ -276,7 +276,7 @@
                                       {{data_konfirmasi.nomor_rekening_pengirim}}
                                     </v-card-subtitle>
                                   </v-card>
-                                </v-col>                                                
+                                </v-col>
                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                                 <v-col xs="12" sm="6" md="6">
                                   <v-card flat>
@@ -328,11 +328,11 @@
                                   </v-card>
                                 </v-col>
                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                              </v-row>                                                            
+                              </v-row>
                               <v-img class="white--text align-end" :src="$api.url+'/'+data_konfirmasi.bukti_bayar" />
                             </v-card-text>
                           </v-card>
-                        </v-col>                                                
+                        </v-col>
                       </v-row>
                     </v-card-text>
                     <v-card-actions>
@@ -349,7 +349,7 @@
                       </v-btn>
                       <v-btn color="blue darken-1" text @click.stop="closedialogdetailitem">KELUAR</v-btn>
                     </v-card-actions>
-                  </v-card>                                    
+                  </v-card>
                 </v-dialog>
               </v-toolbar>
             </template>
@@ -381,18 +381,18 @@
                 mdi-delete
               </v-icon>
             </template>
-            <template v-slot:item.foto="{ item }">    
+            <template v-slot:item.foto="{ item }"> 
               <v-badge
                 bordered
                 :color="badgeColor(item)"
                 :icon="badgeIcon(item)"
-                overlap>                
-                <v-avatar size="30">                                        
+                overlap> 
+                <v-avatar size="30"> 
                   <v-img :src="$api.url+'/'+item.foto" />
-                </v-avatar>                                                                                                  
+                </v-avatar>
               </v-badge>
             </template>
-            <template v-slot:item.created_at="{ item }">                            
+            <template v-slot:item.created_at="{ item }">
               {{$date(item.created_at).format('DD/MM/YYYY HH:mm')}}
             </template>
             <template v-slot:expanded-item="{ headers, item }">

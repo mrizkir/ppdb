@@ -262,7 +262,5 @@
       FrontLayout,
       VueRecaptcha
     },
-    
-    
   }
 </script>

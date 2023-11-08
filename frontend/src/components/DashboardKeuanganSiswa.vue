@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid>            
+    <v-container fluid>
         <v-row dense>
             <v-col xs="12" sm="4" md="3">
                 <v-card                         
@@ -9,7 +9,7 @@
                     dark>
                     <v-card-title class="headline">
                         TOTAL TRANSAKSI
-                    </v-card-title>    
+                    </v-card-title> 
                     <v-card-subtitle>
                         Total transaksi keseluruhan
                     </v-card-subtitle>
@@ -27,7 +27,7 @@
                     dark>
                     <v-card-title class="headline">
                         TRANSAKSI PAID
-                    </v-card-title>    
+                    </v-card-title> 
                     <v-card-subtitle>
                         Total transaksi dengan status PAID
                     </v-card-subtitle>
@@ -45,7 +45,7 @@
                     dark>
                     <v-card-title class="headline">
                         TRANSAKSI UNPAID
-                    </v-card-title>    
+                    </v-card-title> 
                     <v-card-subtitle>
                         Total transaksi dengan status UNPAID
                     </v-card-subtitle>
@@ -63,7 +63,7 @@
                     dark>
                     <v-card-title class="headline">
                         TRANSAKSI CANCELLED
-                    </v-card-title>    
+                    </v-card-title> 
                     <v-card-subtitle>
                         Total transaksi dengan status CANCELLED
                     </v-card-subtitle>
@@ -73,8 +73,8 @@
                 </v-card>
             </v-col>
             <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-        </v-row>  
-    </v-container>    
+        </v-row>
+    </v-container> 
 </template>
 <script>
 export default {
@@ -106,13 +106,13 @@ export default {
         total_transaction_unpaid: 0,
         total_transaction_cancelled: 0
     }),
-    props:{
-        ta:{
+    props: {
+        ta: {
             type:Number,
             required: true
         }
     },
-    methods:{
+    methods: {
         initialize: async function()
 		{	
             this.datatableLoading = true;
@@ -146,7 +146,7 @@ export default {
 
         }
     },
-    computed:{        
+    computed: {        
         totalKombiGanjilPaid()
         {
             var total = 0;
@@ -168,8 +168,8 @@ export default {
             return total;
         }
     }, 
-    watch:{
-        ta ()
+    watch: {
+        ta()
         {
             this.initialize();
         }
