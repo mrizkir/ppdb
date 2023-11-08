@@ -230,11 +230,11 @@ class PSBController extends Controller {
     ->get();
     
     return Response()->json([
-                'status'=>1,
-                'pid'=>'fetchdata',
-                'psb'=>$data,
-                'message'=>'Fetch data calon peserta didik berhasil diperoleh'
-              ], 200); 
+      'status'=>1,
+      'pid'=>'fetchdata',
+      'psb'=>$data,
+      'message'=>'Fetch data calon peserta didik berhasil diperoleh'
+    ], 200); 
   }  
   /**
    * Store a newly created resource in storage.
@@ -273,9 +273,10 @@ class PSBController extends Controller {
         }
       ]
     ]);
-
+    $tahun_pendaftaran = ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN');
+    $kode_jenjang = $request->input('kode_jenjang');
     //cek kuota    
-    if (!HelperPendaftaran::checkKuotaPendaftaran(ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN'), $request->input('kode_jenjang'), $request->input('jk')))
+    if (!HelperPendaftaran::checkKuotaPendaftaran($tahun_pendaftaran, $kode_jenjang, $request->input('jk')))
     {
       return Response()->json([
         'status'=>0,
@@ -283,20 +284,38 @@ class PSBController extends Controller {
         'message'=>'Proses pendaftaran gagal karena kuota pendaftaran habis.'
       ], 422);
     }
-    $user = \DB::transaction(function () use ($request){
+
+    //cek total bayar
+    $kombi = \DB::table('pe3_kombi_periode')
+    ->where('kombi_id', 101)
+    ->where('kode_jenjang', $kode_jenjang)
+    ->where('tahun', $tahun_pendaftaran)
+    ->where('biaya', '>', 0)
+    ->first();
+    
+    if(is_null($kombi) )
+    { 
+      return Response()->json([
+        'status'=>0,
+        'pid'=>'store',        
+        'message'=>"Biaya pendaftaran jenjang pendidikan ($kode_jenjang) belum ditentukan oleh Admin.",
+        'kombi'=>$kombi,
+      ], 422);
+    }
+    $user = \DB::transaction(function () use ($request, $kombi){
       $now = \Carbon\Carbon::now()->toDateTimeString();   
       $kode_jenjang=$request->input('kode_jenjang');
       switch($kode_jenjang)
       {
         case 1:
-          $code = 349000 + mt_rand(1,999);
+          $code = $kombi->biaya + mt_rand(1,999);
         break;
         case 2:
         case 3:                
-          $code = 349000 + mt_rand(1,999);
+          $code = $kombi->biaya + mt_rand(1,999);
         break;
         case 4:                
-          $code = 349000 + mt_rand(1,999);
+          $code = $kombi->biaya + mt_rand(1,999);
         break;
         default:
           $code=0;

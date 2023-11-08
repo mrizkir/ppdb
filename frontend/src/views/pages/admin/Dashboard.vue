@@ -32,7 +32,7 @@
               SPSB
             </v-card-title> 
             <v-card-text>
-              Modul ini digunakan untuk mengelola Seleksi Penerimaan Peserta Didik Baru (SPSB) tahun {{tahun_pendaftaran}}.
+              Modul ini digunakan untuk mengelola Seleksi Penerimaan Peserta Didik Baru (SPSB) tahun {{ tahun_pendaftaran }}.
             </v-card-text>
           </v-card>
         </v-col>
@@ -74,7 +74,7 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />				
+        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />			
         <v-col xs="12" sm="4" md="3" v-if="$store.getters['auth/can']('SYSTEM-SETTING-GROUP')">
           <v-card 
             min-height="140"
@@ -90,7 +90,7 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />								
+        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />							
       </v-row>
     </v-container>
   </AdminLayout>

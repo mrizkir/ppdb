@@ -130,7 +130,7 @@
 <script>
   import { mapGetters } from "vuex";
   import VueRecaptcha from 'vue-recaptcha';
-  import FrontLayout from '@/views/layouts/FrontLayout';
+  import FrontLayout from "@/views/layouts/FrontLayout";
   export default {
     name: 'PSBSMP',
     created() {
@@ -188,7 +188,7 @@
     }),
     methods: {
       initialize: async function() {
-        await this.$ajax.get('/datamaster/jenjangstudi').then(({ data }) => {
+        await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
           let jenjang_studi = data.jenjang_studi;
             jenjang_studi.forEach(element => {
             if (element.kode_jenjang == 3) {            
@@ -201,7 +201,7 @@
       {
         if (this.$refs.frmpendaftaran.validate()) {
           this.btnLoading = true;
-          await this.$ajax.post('/spsb/psb/store', {
+          await this.$ajax.post("/spsb/psb/store", {
             name: this.formdata.name,
             jk: this.formdata.jk,
             email: this.formdata.email,
@@ -240,16 +240,16 @@
         setTimeout(() => {
           this.frmpendaftaran = Object.assign({}, this.formdefault);
           this.$refs.frmpendaftaran.reset();
-          this.$router.push('/konfirmasipembayaran');
+          this.$router.push("/konfirmasipembayaran");
           }, 300
         );
       },
     },
     computed: {
       ...mapGetters("uifront",{
-        sitekey: 'getCaptchaKey',
+        sitekey: "getCaptchaKey",
         tahunPendaftaran: "getTahunPendaftaran",
-        bukaPPDB: 'getBukaPPDB',
+        bukaPPDB: "getBukaPPDB",
       }),
     }, 
     components: {

@@ -44,7 +44,7 @@
             @click:row="dataTableRowClicked"
             class="elevation-1"
             :loading="datatableLoading"
-            loading-text="Loading... Please wait"> 
+            loading-text="Loading... Please wait">
             <template v-slot:top>
               <v-dialog v-model="dialogfrm" max-width="500px" persistent>
                 <v-form ref="frmdata" v-model="form_valid" lazy-validation>

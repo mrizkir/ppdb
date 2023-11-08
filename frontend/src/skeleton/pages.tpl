@@ -72,11 +72,7 @@
                         <template v-slot:top>
                             <v-toolbar flat color="white">
                                 <v-toolbar-title>DATA TABLE</v-toolbar-title>
-                                <v-divider
-                                    class="mx-4"
-                                    inset
-                                    vertical
-                                ></v-divider>
+                                <v-divider class="mx-4" inset vertical />
                                 <v-spacer></v-spacer>
                                 <v-dialog v-model="dialogfrm" max-width="500px" persistent>
                                     <template v-slot:activator="{ on }">
@@ -165,7 +161,7 @@
                                 </v-dialog>
                             </v-toolbar>
                         </template>
-                        <template v-slot:item.id="{ item }"> 
+                        <template v-slot:item.id="{ item }">
                            {{item.id}}
                         </template>
                         <template v-slot:item.actions="{ item }">

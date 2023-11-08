@@ -80,7 +80,7 @@
                             show-select
                             class="elevation-1"
                         >
-                            <template v-slot:item.actions="{ item }"> 
+                            <template v-slot:item.actions="{ item }">
                                 <v-tooltip color="info" bottom>
                                     <template v-slot:activator="{on,attrs}">
                                         <v-btn 

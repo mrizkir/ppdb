@@ -8,7 +8,7 @@
                 MIGRASI SISTEM 
             </template>
             <template v-slot:subtitle>
-                TAHUN PENDAFTARAN {{tahun_pendaftaran}}
+                TAHUN PENDAFTARAN {{ tahun_pendaftaran }}
             </template>
             <template v-slot:breadcrumbs>
                 <v-breadcrumbs :items="breadcrumbs" class="pa-0">
@@ -33,7 +33,7 @@
         </template>
         <v-container fluid>
             <v-row>
-                <v-col cols="12"> 
+                <v-col cols="12">
                     <v-form ref="frmdata" v-model="form_valid" lazy-validation>
                         <v-card class="mb-4">
                             <v-card-title>

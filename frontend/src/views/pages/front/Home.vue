@@ -60,7 +60,7 @@
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly && registerSMA" />	
+        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly && registerSMA" />
         <v-col xs="12" sm="6" md="3" v-if="registerSMA">
           <v-card color="#207FA2" dark>
             <v-card-title class="headline">

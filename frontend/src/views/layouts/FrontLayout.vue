@@ -63,7 +63,7 @@ export default {
 	computed: {
 		...mapGetters("uifront",{
 			namaSekolahAlias: 'getNamaSekolahAlias',
-			bukaPPDB: 'getBukaPPDB',
+			bukaPPDB: "getBukaPPDB",
 		})
 	}
 }

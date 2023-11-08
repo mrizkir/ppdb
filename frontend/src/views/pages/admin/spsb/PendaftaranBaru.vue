@@ -8,7 +8,7 @@
         PENDAFTAR 
       </template>
       <template v-slot:subtitle>
-        TAHUN PENDAFTARAN {{tahun_pendaftaran}} - {{nama_jenjang}}
+        TAHUN PENDAFTARAN {{ tahun_pendaftaran }} - {{ nama_jenjang }}
       </template>
       <template v-slot:breadcrumbs>
         <v-breadcrumbs :items="breadcrumbs" class="pa-0">
@@ -84,7 +84,7 @@
                       </v-card-title>
                       <v-card-subtitle>
                         <span class="info--text">
-                          Secara default akan tersimpan di jenjang <strong>{{nama_jenjang}} - {{tahun_pendaftaran}}.</strong>
+                          Secara default akan tersimpan di jenjang <strong>{{ nama_jenjang }} - {{ tahun_pendaftaran }}.</strong>
                           Anda bisa merubahnya dengan memilih JENJANG STUDI atau Tahun Pelajaran dibawah ini.
                         </span>
                       </v-card-subtitle>
@@ -381,13 +381,13 @@
                 mdi-delete
               </v-icon>
             </template>
-            <template v-slot:item.foto="{ item }"> 
+            <template v-slot:item.foto="{ item }">
               <v-badge
                 bordered
                 :color="badgeColor(item)"
                 :icon="badgeIcon(item)"
                 overlap> 
-                <v-avatar size="30"> 
+                <v-avatar size="30">
                   <v-img :src="$api.url+'/'+item.foto" />
                 </v-avatar>
               </v-badge>
@@ -423,7 +423,7 @@
       </v-row>
     </v-container>
     <template v-slot:filtersidebar>
-      <Filter7 v-on:changeTahunPendaftaran="changeTahunPendaftaran" v-on:changeJenjang="changeJenjang" ref="filter7" />	
+      <Filter7 v-on:changeTahunPendaftaran="changeTahunPendaftaran" v-on:changeJenjang="changeJenjang" ref="filter7" />
     </template>
   </SPSBLayout>
 </template>
@@ -456,7 +456,7 @@ export default {
 
     let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
     this.kode_jenjang=kode_jenjang;
-    this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
+    this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
     this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
     this.initialize();
   },
@@ -652,7 +652,7 @@ export default {
       this.formdata.ta=this.tahun_pendaftaran;
       this.formdata.kode_jenjang=this.kode_jenjang;
 
-      await this.$ajax.get('/datamaster/jenjangstudi').then(({ data }) => {
+      await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
         this.daftar_jenjang = data.jenjang_studi;
       });
 
@@ -750,7 +750,7 @@ export default {
       this.formdata = Object.assign({}, item);
       this.formdata.nomor_hp='+' + this.formdata.nomor_hp;
       this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
-      await this.$ajax.get('/datamaster/jenjangstudi').then(({ data }) => {
+      await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
         this.daftar_jenjang = data.jenjang_studi;
       });
       this.dialogfrm = true;
@@ -809,7 +809,7 @@ export default {
     {
       if (!this.firstloading)
       {
-        this.nama_jenjang=this.$store.getters['uiadmin/getNamaJenjang'](val);
+        this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](val);
         this.initialize();
       }            
     },

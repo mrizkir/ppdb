@@ -29,7 +29,7 @@
             <v-row class="mb-4">
                 <v-col cols="12">
                     <v-card color="grey lighten-4">
-                        <v-toolbar elevation="2"> 
+                        <v-toolbar elevation="2">
                             <v-toolbar-title>DATA USER</v-toolbar-title> 
                         </v-toolbar>
                         <v-card-text>

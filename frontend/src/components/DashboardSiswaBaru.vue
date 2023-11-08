@@ -1,7 +1,7 @@
 <template>
 	<v-row no-gutters>
 		<v-col cols="12">
-			<v-timeline align-top :dense="$vuetify.breakpoint.smAndDown"> 
+			<v-timeline align-top :dense="$vuetify.breakpoint.smAndDown">
 				<v-timeline-item color="red lighten-2" icon="mdi-roman-numeral-1" fill-dot>
 					<v-card color="red lighten-2" dark>
 						<v-card-title class="title">DATA ANANDA</v-card-title>

@@ -159,7 +159,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import FrontLayout from '@/views/layouts/FrontLayout';
+import FrontLayout from "@/views/layouts/FrontLayout";
 export default {
 	name: 'KonfirmasiPembayaran',
 	data: () => ({     
@@ -314,7 +314,7 @@ export default {
 			
 		},
 		...mapGetters("uifront",{            
-			bukaPPDB: 'getBukaPPDB',
+			bukaPPDB: "getBukaPPDB",
 		}),
 	},
 	components: {

@@ -55,7 +55,7 @@
                     @click="verifikasipersyaratan(item)"
                     :loading="btnLoading"                       
                     :disabled="btnLoading||btnVerifikasi" 
-                    v-if="dashboard != 'siswabaru' && dashboard != 'mahasiswa' && verified == 0"> 
+                    v-if="dashboard != 'siswabaru' && dashboard != 'mahasiswa' && verified == 0">
                     Verifikasi
                 </v-btn>
             </v-card-actions>

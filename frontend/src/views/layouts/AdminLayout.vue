@@ -10,11 +10,7 @@
                 </span>
 			</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-divider
-                class="mx-4"
-                inset
-                vertical
-            ></v-divider>
+            <v-divider class="mx-4" inset vertical />
             <v-menu 
                 :close-on-content-click="true"
                 origin="center center"

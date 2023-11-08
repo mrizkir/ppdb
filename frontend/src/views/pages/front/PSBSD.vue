@@ -1,6 +1,6 @@
 <template>
   <FrontLayout>
-    <v-container class="fill-height" fluid v-if="bukaPPDB && registerSD"> 
+    <v-container class="fill-height" fluid v-if="bukaPPDB && registerSD">
       <v-row align="center" justify="center" no-gutters>
         <v-col cols="12">
           <h1 class="text-center display-1 font-weight-black primary--text">
@@ -135,7 +135,7 @@
 <script>
   import { mapGetters } from "vuex";
   import VueRecaptcha from 'vue-recaptcha';
-  import FrontLayout from '@/views/layouts/FrontLayout';
+  import FrontLayout from "@/views/layouts/FrontLayout";
   export default {
     name: 'PSBSD',
     created() {
@@ -154,7 +154,7 @@
         nomor_hp: "",
         username: "",
         password: "",
-        captcha_response: ""
+        captcha_response: "",
       },  
       formdefault: {
         name: "",
@@ -193,7 +193,7 @@
     }),
     methods: {
       initialize: async function() {
-        await this.$ajax.get('/datamaster/jenjangstudi').then(({ data }) => {
+        await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
           let jenjang_studi = data.jenjang_studi;
             jenjang_studi.forEach(element => {
             if (element.kode_jenjang == 2) {            
@@ -202,12 +202,10 @@
           });
         });
       },
-      save: async function()
-      {
-        if (this.$refs.frmpendaftaran.validate())
-        {
+      save: async function() {
+        if (this.$refs.frmpendaftaran.validate()) {
           this.btnLoading = true;
-          await this.$ajax.post('/spsb/psb/store', {
+          await this.$ajax.post("/spsb/psb/store", {
             name: this.formdata.name,
             jk: this.formdata.jk,
             email: this.formdata.email,
@@ -246,16 +244,15 @@
         setTimeout(() => {
           this.frmpendaftaran = Object.assign({}, this.formdefault);
           this.$refs.frmpendaftaran.reset();
-          this.$router.push('/konfirmasipembayaran');
-          }, 300
-        );
+          this.$router.push("/konfirmasipembayaran");
+        }, 300);
       },
     },
     computed: {
       ...mapGetters("uifront",{
-        sitekey: 'getCaptchaKey',
+        sitekey: "getCaptchaKey",
         tahunPendaftaran: "getTahunPendaftaran",
-        bukaPPDB: 'getBukaPPDB',
+        bukaPPDB: "getBukaPPDB",
       }),
     }, 
     components: {
