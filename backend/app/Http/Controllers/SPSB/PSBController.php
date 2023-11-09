@@ -12,6 +12,7 @@ use App\Models\SPSB\FormulirPendaftaranAModel;
 use App\Models\SPSB\FormulirPendaftaranBModel;
 use App\Models\SPSB\FormulirPendaftaranCModel;
 use App\Models\SPSB\FormulirPendaftaranDModel;
+use App\Models\SPSB\FormulirPendaftaranEModel;
 use App\Models\SPSB\PersyaratanPPDBModel;
 use App\Models\System\ConfigurationModel;
 use App\Models\Keuangan\KonfirmasiPembayaranModel;
@@ -358,6 +359,10 @@ class PSBController extends Controller {
         'nomor_hp'=>$request->input('nomor_hp'),
       ]);
       FormulirPendaftaranDModel::create([
+        'user_id'=>$user->id,            
+        'nomor_hp'=>$request->input('nomor_hp'),
+      ]);
+      FormulirPendaftaranEModel::create([
         'user_id'=>$user->id,            
         'nomor_hp'=>$request->input('nomor_hp'),
       ]);
@@ -750,6 +755,43 @@ class PSBController extends Controller {
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
+  public function showkontakdarurat(Request $request,$id)
+  {
+    $formulir=FormulirPendaftaranEModel::select(\DB::raw('
+      users.id,
+      formulir_pendaftaran_e.user_id,
+      formulir_pendaftaran_e.nama_kontak,
+      formulir_pendaftaran_e.hubungan,      
+      formulir_pendaftaran_e.alamat_kontak,
+      formulir_pendaftaran_e.nomor_hp
+    '))
+    ->join('users','users.id','formulir_pendaftaran_e.user_id')                                            
+    ->find($id);
+
+    if (is_null($formulir))
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran Kontak Darurat dengan ID ($id) gagal diperoleh"]
+      ], 422);
+    }
+    else
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'formulir'=>$formulir,                
+        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+      ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
+    }
+  }
+  /**
+   * Detail formulir pendaftaran
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
   public function showpersyaratanppdb(Request $request,$id)
   {
     $formulir=PersyaratanPPDBModel::find($id);
@@ -870,19 +912,19 @@ class PSBController extends Controller {
                             ]);
 
       return Response()->json([
-                    'status'=>0,
-                    'pid'=>'store',
-                    'konfirmasi'=>$konfirmasi,
-                    'message'=>"Konfirmasi pembayaran untuk user_id ('.$konfirmasi->user_id.')   berhasil diupload"
-                  ], 200);
+        'status'=>0,
+        'pid'=>'store',
+        'konfirmasi'=>$konfirmasi,
+        'message'=>"Konfirmasi pembayaran untuk user_id ('.$konfirmasi->user_id.')   berhasil diupload"
+      ], 200);
     }
     else
     {
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'store',
-                    'message'=>["Extensi file yang diupload bukan jpg atau png."]
-                  ],422);
+        'status'=>1,
+        'pid'=>'store',
+        'message'=>["Extensi file yang diupload bukan jpg atau png."]
+      ],422);
     }
 
   }   
@@ -995,11 +1037,11 @@ class PSBController extends Controller {
         return $formulir;
       });
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'store',
-                    'formulir'=>$formulir,          
-                    'message'=>'Formulir Pendaftaran Peserta Didik baru berhasil diubah.'
-                  ], 200);
+        'status'=>1,
+        'pid'=>'store',
+        'formulir'=>$formulir,          
+        'message'=>'Formulir Pendaftaran Peserta Didik baru berhasil diubah.'
+      ], 200);
     }
   }           
   /**
@@ -1055,14 +1097,13 @@ class PSBController extends Controller {
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'update',                
-                  'message'=>["Formulir Biodata Ayah dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'update',                
+        'message'=>["Formulir Biodata Ayah dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
-    {
-       
+    {       
       $this->validate($request, [
         'nama_ayah'=>'required',            
         'hubungan'=>'required',                            
@@ -1122,11 +1163,11 @@ class PSBController extends Controller {
         return $formulir;
       });
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'store',
-                    'formulir'=>$formulir,          
-                    'message'=>'Formulir Biodata Ayah Wali baru berhasil diubah.'
-                  ], 200);
+        'status'=>1,
+        'pid'=>'store',
+        'formulir'=>$formulir,          
+        'message'=>'Formulir Biodata Ayah Wali baru berhasil diubah.'
+      ], 200);
     }
   }           
   /**
@@ -1142,14 +1183,13 @@ class PSBController extends Controller {
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'update',                
-                  'message'=>["Formulir Biodata Ibu dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'update',                
+        'message'=>["Formulir Biodata Ibu dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
-    {
-       
+    {       
       $this->validate($request, [
         'nama_ibu'=>'required',            
         'hubungan'=>'required',                            
@@ -1204,11 +1244,56 @@ class PSBController extends Controller {
         return $formulir;
       });
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'store',
-                    'formulir'=>$formulir,          
-                    'message'=>'Formulir Biodata Ibu Wali baru berhasil diubah.'
-                  ], 200);
+        'status'=>1,
+        'pid'=>'store',
+        'formulir'=>$formulir,          
+        'message'=>'Formulir Biodata Ibu Wali baru berhasil diubah.'
+      ], 200);
+    }
+  }   
+  /**
+   * update formulir pendaftaran
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function updatekontakdarurat(Request $request,$id)
+  {
+    $formulir=FormulirPendaftaranEModel::find($id);
+
+    if (is_null($formulir))
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'update',                
+        'message'=>["Formulir Biodata Ibu dengan ID ($id) gagal diperoleh"]
+      ], 422);
+    }
+    else
+    {       
+      $this->validate($request, [
+        'nama_kontak'=>'required',            
+        'hubungan'=>'required',                                
+        'alamat_kontak'=>'required',                        
+        'nomor_hp'=>'required',        
+      ]);
+
+      $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
+        $formulir->nama_kontak=strtoupper($request->input('nama_kontak'));
+        $formulir->hubungan=$request->input('hubungan');            
+        $formulir->alamat_kontak=$request->input('alamat_kontak');
+        $formulir->nomor_hp=$request->input('nomor_hp');
+        
+        $formulir->save(); 
+
+        return $formulir;
+      });
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'store',
+        'formulir'=>$formulir,          
+        'message'=>'Formulir Kontak Darurat baru berhasil diubah.'
+      ], 200);
     }
   }           
   public function uploadfileselfi (Request $request,$id)
@@ -1467,15 +1552,15 @@ class PSBController extends Controller {
     $this->hasPermissionTo('SPSB-PSB_DESTROY');
 
     $user = User::where('isdeleted','1')
-          ->find($id); 
+    ->find($id); 
     
     if (is_null($user))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'destroy',                
-                  'message'=>["Calon Peserta Didik Baru dengan ID ($id) gagal dihapus"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'destroy',                
+        'message'=>["Calon Peserta Didik Baru dengan ID ($id) gagal dihapus"]
+      ], 422);
     }
     else
     {
@@ -1490,10 +1575,10 @@ class PSBController extends Controller {
       ]);
 
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'destroy',                
-                    'message'=>"Peserta Didik Baru ($name) berhasil dihapus"
-                  ], 200);
+        'status'=>1,
+        'pid'=>'destroy',                
+        'message'=>"Peserta Didik Baru ($name) berhasil dihapus"
+      ], 200);
     }
           
   }      

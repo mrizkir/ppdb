@@ -4,13 +4,13 @@ namespace App\Models\SPSB;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FormulirPendaftaranDModel extends Model {    
-  /**
+class FormulirPendaftaranEModel extends Model {    
+   /**
    * nama tabel model ini.
    *
    * @var string
-  */
-  protected $table = 'formulir_pendaftaran_d';
+   */
+  protected $table = 'formulir_pendaftaran_e';
   /**
    * primary key tabel ini.
    *
@@ -24,30 +24,10 @@ class FormulirPendaftaranDModel extends Model {
    */
   protected $fillable = [        
     'user_id',
-    'nama_ibu',
-    'hubungan',  
-    'tempat_lahir',     
-    'tanggal_lahir',
-    'idagama',
-    
-    'address1_desa_id',
-    'address1_kelurahan',
-    'address1_kecamatan_id',
-    'address1_kecamatan',
-    'address1_kabupaten_id',
-    'address1_kabupaten',
-    'address1_provinsi_id',
-    'address1_provinsi',
-    'alamat_tempat_tinggal',                
-    'kewarganegaraan',
-    'nomor_hp',
-    
-    'email',
-    'pendidikan',
-    'pekerjaan_instansi',
-    'penghasilan_bulanan',
-
-    'desc',        
+    'nama_kontak',
+    'hubungan',      
+    'alamat_kontak',                    
+    'nomor_hp',    
   ];
   /**
    * enable auto_increment.

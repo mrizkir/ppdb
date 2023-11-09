@@ -89,10 +89,12 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 	$router->get('/spsb/formulirpendaftaran/situasikeluarga/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@showsituasikeluarga','as'=>'formulirpendaftaran.showsituasikeluarga']);
 	$router->get('/spsb/formulirpendaftaran/biodataayah/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@showbiodataayah','as'=>'formulirpendaftaran.showbiodataayah']);
 	$router->get('/spsb/formulirpendaftaran/biodataibu/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@showbiodataibu','as'=>'formulirpendaftaran.showbiodataibu']);
+	$router->get('/spsb/formulirpendaftaran/kontakdarurat/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@showkontakdarurat','as'=>'formulirpendaftaran.showkontakdarurat']);
 	$router->put('/spsb/formulirpendaftaran/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@update','as'=>'formulirpendaftaran.update']);
 	$router->put('/spsb/formulirpendaftaran/situasikeluarga/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@updatesituasikeluarga','as'=>'formulirpendaftaran.updatesituasikeluarga']);
 	$router->put('/spsb/formulirpendaftaran/biodataayah/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@updatebiodataayah','as'=>'formulirpendaftaran.updatebiodataayah']);
 	$router->put('/spsb/formulirpendaftaran/biodataibu/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@updatebiodataibu','as'=>'formulirpendaftaran.updatebiodataibu']);
+	$router->put('/spsb/formulirpendaftaran/kontakdarurat/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@updatekontakdarurat','as'=>'formulirpendaftaran.updatekontakdarurat']);
 	
 	// id disini user_id
 	$router->get('/spsb/formulirpendaftaran/persyaratanppdb/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@showpersyaratanppdb','as'=>'formulirpendaftaran.showpersyaratanppdb']);

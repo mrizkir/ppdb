@@ -351,7 +351,7 @@ export default {
                 this.formdata.alamat_tempat_tinggal = data.formulir.alamat_tempat_tinggal;
                 this.formdata.kewarganegaraan = data.formulir.kewarganegaraan;
   
-                this.formdata.nomor_hp='+'+data.formulir.nomor_hp;
+                this.formdata.nomor_hp = "+" + data.formulir.nomor_hp;
                 this.formdata.email = data.formulir.email;
                 this.formdata.pendidikan = data.formulir.pendidikan;
                 this.formdata.pekerjaan_instansi = data.formulir.pekerjaan_instansi;

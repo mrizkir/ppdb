@@ -29,7 +29,7 @@
       </template>
     </ModuleHeader> 
     <v-container fluid v-if="dashboard== 'siswabaru' || datapesertadidik!=null">
-      <FormBiodataIbu :user_id="user_id" />
+      <FormKontakDarurat :user_id="user_id" />
     </v-container>
     <v-container fluid v-else>
       <v-row class="mb-4" no-gutters>
@@ -117,7 +117,7 @@
 <script>
   import SPSBLayout from '@/views/layouts/SPSBLayout';
   import ModuleHeader from '@/components/ModuleHeader';
-  import FormBiodataIbu from '@/components/FormBiodataIbu';
+  import FormKontakDarurat from '@/components/FormKontakDarurat';
   import Filter7 from '@/components/sidebar/FilterMode7';
   export default {
     name: 'BiodataIbu', 
@@ -254,7 +254,7 @@
     components: {
       SPSBLayout,
       ModuleHeader,
-      FormBiodataIbu,
+      FormKontakDarurat,
       Filter7    
     },
   }

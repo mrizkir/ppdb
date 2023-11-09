@@ -181,6 +181,15 @@ const routes = [
     component: () => import("../views/pages/admin/spsb/PersyaratanPSB.vue"),
   },
   {
+    path: "/spsb/kontakdarurat",
+    name: "SPSBKontakDarurat",
+    meta: {
+      title: "SPSB - KONTAK DARURAT",
+      requiresAuth: true,
+    },
+    component: () => import("../views/pages/admin/spsb/KontakDarurat.vue"),
+  },
+  {
     path: "/spsb/persyaratantambah",
     name: "SPSBPersyaratanTambah",
     meta: {
@@ -228,15 +237,15 @@ const routes = [
     component: () => import("../views/pages/admin/keuangan/Keuangan.vue"),
   },
   {
-		path: "/keuangan/biayakomponenperiode",
-		name: "KeuanganBiayaKomponenPeriode",
-		meta: {
-			title: "KEUANGAN - BIAYA KOMPONEN PERIODE",
-			requiresAuth: true,
-		},
-		component: () =>
-			import("../views/pages/admin/keuangan/BiayaKomponenPeriode.vue"),
-	},
+    path: "/keuangan/biayakomponenperiode",
+    name: "KeuanganBiayaKomponenPeriode",
+    meta: {
+      title: "KEUANGAN - BIAYA KOMPONEN PERIODE",
+      requiresAuth: true,
+    },
+    component: () =>
+      import("../views/pages/admin/keuangan/BiayaKomponenPeriode.vue"),
+  },
   //system
   {
     path: "/system-setting",
