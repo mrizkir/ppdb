@@ -4,20 +4,13 @@
       <v-form ref="frmdata" v-model="form_valid" lazy-validation>
         <v-card class="mb-4">
           <v-card-title>
-            DATA IBU WALI                                                                       
+            DATA WALI                                                                       
           </v-card-title>
-          <v-card-text>
-            <v-select
-              label="HUBUNGAN DENGAN ANANDA"
-              :items="daftar_hubungan"
-              v-model="formdata.hubungan"                   
-              :rules="rule_hubungan"
-              filled
-            />
+          <v-card-text>            
             <v-text-field
-              label="NAMA IBU KANDUNG"
-              v-model="formdata.nama_ibu"
-              :rules="rule_nama_ibu"
+              label="NAMA WALI"
+              v-model="formdata.nama_wali"
+              :rules="rule_nama_wali"
               filled
             />
             <v-text-field
@@ -189,7 +182,7 @@
 </template>
 <script>
 export default {
-  name: 'FormBiodataIbu',
+  name: 'FormBiodataWali',
   created()
   {
     this.initialize();
@@ -211,22 +204,7 @@ export default {
 
     menuTanggalLahir: false,
     
-    daftar_agama: [],
-
-    daftar_hubungan: [
-      {
-        value: 'IBU_KANDUNG',
-        text: 'IBU KANDUNG'
-      },
-      {
-        value: 'IBU_SAMBUNG',
-        text: 'IBU SAMBUNG'
-      }, 
-      {
-        value: 'IBU_WALI',
-        text: 'IBU WALI'
-      },
-    ],
+    daftar_agama: [],   
 
     daftar_negara: [],
 
@@ -243,8 +221,7 @@ export default {
     desa_id: 0,
 
     formdata: {
-      nama_ibu: "",
-      hubungan: "",
+      nama_wali: "",      
       tempat_lahir: "",
       tanggal_lahir: "",
       idagama: 1,
@@ -258,13 +235,10 @@ export default {
       penghasilan_bulanan: "",
       
       desc: "",
-    },  
-    rule_hubungan: [
-      value => !!value || "Mohon hubungan dengan Ibu untuk dipilih !!!"
-    ], 
-    rule_nama_ibu: [
-      value => !!value || "Nama Ibu mohon untuk diisi !!!",
-      value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Ibu hanya boleh string dan spasi',
+    },      
+    rule_nama_wali: [
+      value => !!value || "Nama Wali mohon untuk diisi !!!",
+      value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Wali hanya boleh string dan spasi',
     ], 
     rule_tempat_lahir: [
       value => !!value || "Tempat Lahir mohon untuk diisi !!!"
@@ -273,7 +247,7 @@ export default {
       value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"
     ], 
     rule_agama: [
-      value => !!value || "Mohon agama Ibu mohon untuk diisi !!!"
+      value => !!value || "Mohon agama Wali mohon untuk diisi !!!"
     ], 
     rule_desa: [
       value => !!value || "Mohon Desa untuk dipilih !!!"
@@ -317,7 +291,7 @@ export default {
         this.daftar_agama = data.agama;
       });
           
-      await this.$ajax.get('/spsb/formulirpendaftaran/biodataibu/' + this.user_id,  
+      await this.$ajax.get('/spsb/formulirpendaftaran/biodatawali/' + this.user_id,  
         {
           headers: {
             Authorization: this.$store.getters["auth/Token"]
@@ -325,8 +299,7 @@ export default {
         },
         
       ).then(({ data }) => {   
-        this.formdata.nama_ibu = data.formulir.nama_ibu;
-        this.formdata.hubungan = data.formulir.hubungan;
+        this.formdata.nama_wali = data.formulir.nama_wali;        
         this.formdata.tempat_lahir = data.formulir.tempat_lahir;
         this.formdata.tanggal_lahir = data.formulir.tanggal_lahir;
         this.formdata.idagama = data.formulir.idagama;
@@ -366,10 +339,9 @@ export default {
       if (this.$refs.frmdata.validate())
       {
         this.btnLoading = true;
-        await this.$ajax.post('/spsb/formulirpendaftaran/biodataibu/' + this.user_id, {
+        await this.$ajax.post('/spsb/formulirpendaftaran/biodatawali/' + this.user_id, {
           _method: "put",
-          nama_ibu: this.formdata.nama_ibu,
-          hubungan: this.formdata.hubungan,
+          nama_wali: this.formdata.nama_wali,          
           tempat_lahir: this.formdata.tempat_lahir,
           tanggal_lahir: this.formdata.tanggal_lahir,
           idagama: this.formdata.idagama,

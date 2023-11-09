@@ -304,7 +304,7 @@
       registerSMA: false,
       slides: [
         {
-          src: "storage/images/sliders/slider1.png",
+          src: "storage/images/sliders/slider1.jpg",
         },
       ],
     }),

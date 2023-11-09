@@ -172,6 +172,15 @@ const routes = [
     component: () => import("../views/pages/admin/spsb/BiodataIbu.vue"),
   },
   {
+    path: "/spsb/biodatawali",
+    name: "SPSBFormulirBiodataWali",
+    meta: {
+      title: "SPSB - BIOADATA WALI",
+      requiresAuth: true,
+    },
+    component: () => import("../views/pages/admin/spsb/BiodataWali.vue"),
+  },
+  {
     path: "/spsb/persyaratan",
     name: "SPSBPersyaratan",
     meta: {

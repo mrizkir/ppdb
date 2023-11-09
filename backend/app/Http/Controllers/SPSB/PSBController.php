@@ -13,6 +13,7 @@ use App\Models\SPSB\FormulirPendaftaranBModel;
 use App\Models\SPSB\FormulirPendaftaranCModel;
 use App\Models\SPSB\FormulirPendaftaranDModel;
 use App\Models\SPSB\FormulirPendaftaranEModel;
+use App\Models\SPSB\FormulirPendaftaranFModel;
 use App\Models\SPSB\PersyaratanPPDBModel;
 use App\Models\System\ConfigurationModel;
 use App\Models\Keuangan\KonfirmasiPembayaranModel;
@@ -366,6 +367,10 @@ class PSBController extends Controller {
         'user_id'=>$user->id,            
         'nomor_hp'=>$request->input('nomor_hp'),
       ]);
+      FormulirPendaftaranFModel::create([
+        'user_id'=>$user->id,            
+        'nomor_hp'=>$request->input('nomor_hp'),
+      ]);
       PersyaratanPPDBModel::create([
         'user_id'=>$user->id,                            
       ]);
@@ -701,53 +706,111 @@ class PSBController extends Controller {
   public function showbiodataibu(Request $request,$id)
   {
     $formulir=FormulirPendaftaranDModel::select(\DB::raw('
-                                users.id,
-                                user_id,
-                                nama_ibu,
-                                hubungan,
-                                tempat_lahir,
-                                tanggal_lahir,
-                                idagama,
-                                
-                                address1_desa_id,
-                                address1_kelurahan,
-                                address1_kecamatan_id,
-                                address1_kecamatan,
-                                address1_kabupaten_id,
-                                address1_kabupaten,
-                                address1_provinsi_id,
-                                address1_provinsi,
-                                alamat_tempat_tinggal,
-                                kewarganegaraan,
+      users.id,
+      user_id,
+      nama_ibu,
+      hubungan,
+      tempat_lahir,
+      tanggal_lahir,
+      idagama,
+      
+      address1_desa_id,
+      address1_kelurahan,
+      address1_kecamatan_id,
+      address1_kecamatan,
+      address1_kabupaten_id,
+      address1_kabupaten,
+      address1_provinsi_id,
+      address1_provinsi,
+      alamat_tempat_tinggal,
+      kewarganegaraan,
 
-                                formulir_pendaftaran_d.nomor_hp,
-                                formulir_pendaftaran_d.email,
-                                pendidikan,
-                                pekerjaan_instansi,
-                                penghasilan_bulanan,
-                                
-                                `desc`                                                               
-                              '))
-                      ->join('users','users.id','formulir_pendaftaran_d.user_id')                                            
-                      ->find($id);
+      formulir_pendaftaran_d.nomor_hp,
+      formulir_pendaftaran_d.email,
+      pendidikan,
+      pekerjaan_instansi,
+      penghasilan_bulanan,
+      
+      `desc`                                                               
+    '))
+    ->join('users','users.id','formulir_pendaftaran_d.user_id')                                            
+    ->find($id);
+
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'fetchdata',                
-                  'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
     {
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'fetchdata',                
-                    'formulir'=>$formulir,                
-                    'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                  ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'formulir'=>$formulir,                
+        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+      ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 
+  }
+  /**
+   * Detail formulir pendaftaran
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function showbiodatawali(Request $request,$id)
+  {
+    $formulir=FormulirPendaftaranFModel::select(\DB::raw('
+      users.id,
+      user_id,
+      nama_wali,
+      hubungan,
+      tempat_lahir,
+      tanggal_lahir,
+      idagama,
+      
+      address1_desa_id,
+      address1_kelurahan,
+      address1_kecamatan_id,
+      address1_kecamatan,
+      address1_kabupaten_id,
+      address1_kabupaten,
+      address1_provinsi_id,
+      address1_provinsi,
+      alamat_tempat_tinggal,
+      kewarganegaraan,
+
+      formulir_pendaftaran_f.nomor_hp,
+      formulir_pendaftaran_f.email,
+      pendidikan,
+      pekerjaan_instansi,
+      penghasilan_bulanan,
+      
+      `desc`                                                               
+    '))
+    ->join('users','users.id','formulir_pendaftaran_f.user_id')                                            
+    ->find($id);
+
+    if (is_null($formulir))
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran Biodata Wali dengan ID ($id) gagal diperoleh"]
+      ], 422);
+    }
+    else
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'formulir'=>$formulir,                
+        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+      ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
+    }
   }
   /**
    * Detail formulir pendaftaran
@@ -1083,6 +1146,7 @@ class PSBController extends Controller {
         'message'=>'Formulir Situasi Keluarga baru berhasil diubah.'
       ], 200);
     }
+
   }           
   /**
    * update formulir pendaftaran
@@ -1251,6 +1315,85 @@ class PSBController extends Controller {
       ], 200);
     }
   }   
+  /**
+   * update formulir pendaftaran
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function updatebiodatawali(Request $request,$id)
+  {
+    $formulir=FormulirPendaftaranFModel::find($id);
+
+    if (is_null($formulir))
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'update',                
+        'message'=>["Formulir Biodata Wali dengan ID ($id) gagal diperoleh"]
+      ], 422);
+    }
+    else
+    {       
+      $this->validate($request, [
+        'nama_wali'=>'required',                                
+        'tempat_lahir'=>'required',            
+        'tanggal_lahir'=>'required',
+        'idagama'=>'required|numeric|exists:agama,idagama',
+
+        'address1_provinsi_id'=>'required',
+        'address1_provinsi'=>'required',
+        'address1_kabupaten_id'=>'required',
+        'address1_kabupaten'=>'required',
+        'address1_kecamatan_id'=>'required',
+        'address1_kecamatan'=>'required',
+        'address1_desa_id'=>'required',
+        'address1_kelurahan'=>'required',
+        'alamat_tempat_tinggal'=>'required',                
+        'kewarganegaraan'=>'required|numeric|exists:negara,id',
+        
+        'nomor_hp'=>'required',
+        'email'=>'required',
+        'pendidikan'=>'required',
+        'pekerjaan_instansi'=>'required',        
+        'penghasilan_bulanan'=>'required|numeric', 
+      ]);
+
+      $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
+        $formulir->nama_wali=strtoupper($request->input('nama_wali'));        
+        $formulir->tempat_lahir=strtoupper($request->input('tempat_lahir'));
+        $formulir->tanggal_lahir=$request->input('tanggal_lahir');
+        $formulir->idagama=$request->input('idagama');
+        
+        $formulir->address1_desa_id=$request->input('address1_desa_id');
+        $formulir->address1_kelurahan=$request->input('address1_kelurahan');
+        $formulir->address1_kecamatan_id=$request->input('address1_kecamatan_id');
+        $formulir->address1_kecamatan=$request->input('address1_kecamatan');
+        $formulir->address1_kabupaten_id=$request->input('address1_kabupaten_id');
+        $formulir->address1_kabupaten=$request->input('address1_kabupaten');
+        $formulir->address1_provinsi_id=$request->input('address1_provinsi_id');
+        $formulir->address1_provinsi=$request->input('address1_provinsi');
+        $formulir->alamat_tempat_tinggal=strtoupper($request->input('alamat_tempat_tinggal'));    
+        $formulir->kewarganegaraan=$request->input('kewarganegaraan');
+        
+        $formulir->nomor_hp=$request->input('nomor_hp');
+        $formulir->email=$request->input('email');
+        $formulir->pendidikan=strtoupper($request->input('pendidikan'));
+        $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
+        $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
+        
+        $formulir->save(); 
+
+        return $formulir;
+      });
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'store',
+        'formulir'=>$formulir,          
+        'message'=>'Formulir Biodata Wali baru berhasil diubah.'
+      ], 200);
+    }
+  }  
   /**
    * update formulir pendaftaran
    *

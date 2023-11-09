@@ -74,7 +74,25 @@
             </v-card-text> 
           </v-card>
         </v-timeline-item>
-        <v-timeline-item color="orange" icon="mdi-roman-numeral-5" fill-dot>
+        <v-timeline-item color="green lighten-1" icon="mdi-roman-numeral-5" fill-dot>
+          <v-card color="green lighten-1" dark>
+            <v-card-title class="title">DATA WALI</v-card-title>
+            <v-card-text class="white text--primary">
+              <p>
+                Isilah biodata wali, apabila tidak ada boleh dilewati.                                 
+              </p>
+              <v-btn
+                color="purple darken-1"
+                class="mx-0 mr-2"
+                outlined
+                to="/spsb/biodatawali"
+              >
+                Isian Biodata Wali
+              </v-btn>
+            </v-card-text> 
+          </v-card>
+        </v-timeline-item>
+        <v-timeline-item color="orange" icon="mdi-roman-numeral-6" fill-dot>
           <v-card color="orange" dark>
             <v-card-title class="title">PERSYARATAN</v-card-title>
             <v-card-text class="white text--primary">
@@ -92,7 +110,7 @@
             </v-card-text> 
           </v-card>
         </v-timeline-item>
-        <v-timeline-item color="brown" icon="mdi-roman-numeral-6" fill-dot>
+        <v-timeline-item color="brown" icon="mdi-roman-numeral-7" fill-dot>
           <v-card color="brown" dark>
             <v-card-title class="title">KONTAK DARURAT</v-card-title>
             <v-card-text class="white text--primary">
@@ -110,7 +128,7 @@
             </v-card-text> 
           </v-card>
         </v-timeline-item>
-        <v-timeline-item color="teal lighten-1" icon="mdi-roman-numeral-7" fill-dot>
+        <v-timeline-item color="teal lighten-1" icon="mdi-roman-numeral-8" fill-dot>
           <v-card color="teal lighten-1" dark>
             <v-card-title class="title">KUESIONER</v-card-title>
             <v-card-text class="white text--primary">
