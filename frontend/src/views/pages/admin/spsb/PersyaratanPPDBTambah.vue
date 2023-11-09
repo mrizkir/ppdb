@@ -14,7 +14,7 @@
           <v-form v-model="form_valid_foto_selfi" ref="frmuploadfotoselfi" lazy-validation>
             <v-card class="mb-3">
               <v-card-title>
-                FOTO SELFIE
+                FOTO SELFIE / KELUARGA
               </v-card-title>
               <v-card-text>
                 Foto "Selfie" Keluarga yang terdiri dari (Kedua Orangtua/wali dan Calon Peserta Didik)
@@ -206,6 +206,82 @@
               </v-card-actions>
             </v-card>
           </v-form>
+          <v-form v-model="form_valid_screenshoot" ref="frmuploadscreenshoot" lazy-validation>
+            <v-card class="mb-3">
+              <v-card-title>
+                TANGKAPAN LAYAR MEDIA SOSIAL
+              </v-card-title>
+              <v-card-text>
+                Tangkapan layar follow akun IG Sekolah Islam DGC
+                <v-file-input 
+                  accept="application/pdf,image/jpeg,image/png" 
+                  label="(.pdf, .png, atau .jpg) MAX 2MB"
+                  :rules="rule_screenshoot_medsos"
+                  show-size
+                  v-model="filescreenshoot">
+                </v-file-input>
+              </v-card-text>
+              <v-card-actions> 
+                <v-btn
+                  color="green"
+                  text
+                  :href="this.$api.url+'/'+peryaratanppdb.filescreenshoot"
+                  v-if="peryaratanppdb.filescreenshoot">
+                  LIHAT
+                </v-btn> 
+                <v-spacer/>
+                <v-btn 
+                  color="grey darken-1" 
+                  text 
+                  @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
+                <v-btn
+                  color="orange"
+                  text
+                  @click="uploadScreenShoot"
+                  :loading="btnLoadingScreenShoot"                       
+                  :disabled="!form_valid_screenshoot||btnLoadingScreenShoot">
+                  UNGGAH
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-form>
+          <v-form v-model="form_valid_sertifikat" ref="frmuploadfilesertifikat" lazy-validation>
+            <v-card class="mb-3">
+              <v-card-title>
+                SERTIFIKAT PENGHARGAAN
+              </v-card-title>
+              <v-card-text>                
+                <v-file-input 
+                  accept="application/pdf,image/jpeg,image/png" 
+                  label="(.pdf, .png, atau .jpg) MAX 2MB"                  
+                  show-size
+                  v-model="filesertifikat">
+                </v-file-input>
+              </v-card-text>
+              <v-card-actions> 
+                <v-btn
+                  color="green"
+                  text
+                  :href="this.$api.url+'/'+peryaratanppdb.filesertifikat"
+                  v-if="peryaratanppdb.filesertifikat">
+                  LIHAT
+                </v-btn> 
+                <v-spacer/>
+                <v-btn 
+                  color="grey darken-1" 
+                  text 
+                  @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
+                <v-btn
+                  color="orange"
+                  text
+                  @click="uploadSertifikat"
+                  :loading="btnLoadingSertifikat"                       
+                  :disabled="btnLoadingSertifikat">
+                  UNGGAH
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-form>
         </v-col>
       </v-row>
     </v-container>
@@ -234,18 +310,25 @@ export default {
     form_valid_ktp_ibu: true,
     form_valid_kk: true,
     form_valid_aktalahir: true,
+    form_valid_screenshoot: true,
+    form_valid_sertifikat: true,
     pesertadidik_id: null,
 
     btnLoadingFotoSelfi: false,
     btnLoadingKTPAyah: false,
+    btnLoadingKTPIbu: false,
     btnLoadingKK: false,
     btnLoadingAktaLahir: false,
+    btnLoadingScreenShoot: false,
+    btnLoadingSertifikat: false,
 
     filefotoselfi: null,
     filektpayah: null,
     filektpibu: null,
     filekk: null,
     fileaktalahir: null,
+    filescreenshoot: null,
+    filesertifikat: null,
 
     rule_filefotoselfi: [
       value => !!value || "Mohon pilih file foto selfi !!!",  
@@ -266,6 +349,10 @@ export default {
     rule_fileaktalahir: [
       value => !!value || "Mohon pilih file Akta Lahir !!!",  
       value =>!value || value.size < 2000000 || 'File akta lahir harus kurang dari 2MB.'                
+    ],
+    rule_screenshoot_medsos: [
+      value => !!value || "Mohon screen shoot akun IG  !!!",  
+      value =>!value || value.size < 2000000 || 'Screen shoot akun IG kurang dari 2MB.'                
     ],
   }),
   methods: {
@@ -409,6 +496,12 @@ export default {
         }
       }
     }, 
+    async uploadScreenShoot() {
+
+    },
+    async uploadSertifikat() {
+
+    },
   },
   components: {
     SPSBLayout,

@@ -138,6 +138,11 @@
               :rules="rule_email"
               filled
             />
+            <v-text-field
+              v-model="formdata.akun_medsos"
+              label="ALAMAT AKUN MEDSOS YANG DIMILIKI"              
+              filled
+            />
           </v-card-text>
         </v-card>
         <v-card class="mb-4">
@@ -253,6 +258,7 @@ export default {
       kewarganegaraan: "",
       nomor_hp: "",
       email: "",
+      akun_medsos: "",
       pendidikan: "",
       pekerjaan_instansi: "",
       penghasilan_bulanan: "",
@@ -353,6 +359,7 @@ export default {
   
         this.formdata.nomor_hp = "+" + data.formulir.nomor_hp;
         this.formdata.email = data.formulir.email;
+        this.formdata.akun_medsos = data.formulir.akun_medsos;
         this.formdata.pendidikan = data.formulir.pendidikan;
         this.formdata.pekerjaan_instansi = data.formulir.pekerjaan_instansi;
         this.formdata.penghasilan_bulanan = data.formulir.penghasilan_bulanan;
@@ -387,6 +394,7 @@ export default {
 
           nomor_hp: this.formdata.nomor_hp, 
           email: this.formdata.email,
+          akun_medsos: this.formdata.akun_medsos,
           pendidikan: this.formdata.pendidikan,
           pekerjaan_instansi: this.formdata.pekerjaan_instansi,
           penghasilan_bulanan: this.formdata.penghasilan_bulanan,

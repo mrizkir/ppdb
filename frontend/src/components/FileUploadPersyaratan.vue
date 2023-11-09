@@ -63,208 +63,207 @@
 	</v-form> 
 </template>
 <script>
-export default {
-	name: 'FileUploadPersyaratan',
-	created ()
-	{
-		this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
-		if (this.item.path == null || this.item.persyaratan_psb_id==null)
-		{            
-			this.image_prev=this.item.path;
-		}
-		else
-		{            
-			this.btnHapus=this.isVerified(this.item);
-			this.image_prev=this.$api.url+'/' + this.item.path;
-			this.badgeColor=this.item.verified;
-			this.badgeIcon=this.item.verified;
-		}        
-	},
-	props: {
-		user_id: {
-			type:String,
-			required: true
-		},
-		index: {
-			type:Number,
-			required: true
-		},
-		item: {
-			type:Object,
-			required: true
-		}
-	},
-	data: () => ({     
-		dashboard:null,
-
-		btnSimpan: true,  
-		btnHapus: true,  
-		btnVerifikasi: true,
-		btnLoading: false,
-		image_prev:null,
-
-		//form
-		verified: 0,
-		form_valid: true,
-		filepersyaratan: [],
-		//form rules  
-		rule_foto: [
-			value => !!value || "Mohon pilih foto !!!",  
-			value =>!value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
-		],
-	}),
-	methods: {        
-		previewImage (e)
-		{
-			if (typeof e === 'undefined')
-			{
-				this.image_prev=null;
-				this.btnSimpan=true;
+	export default {
+		name: "FileUploadPersyaratan",
+		created() {
+			this.dashboard = this.$store.getters["uiadmin/getDefaultDashboard"];
+			if (this.item.path == null || this.item.persyaratan_psb_id==null)
+			{            
+				this.image_prev=this.item.path;
 			}
 			else
-			{
-				let reader = new FileReader();
-				reader.readAsDataURL(e);
-				reader.onload = img => {                    
-					this.image_prev=img.target.result;
-				}
-				this.btnSimpan=false;
-			}          
+			{            
+				this.btnHapus=this.isVerified(this.item);
+				this.image_prev=this.$api.url+"/" + this.item.path;
+				this.badgeColor=this.item.verified;
+				this.badgeIcon=this.item.verified;
+			}        
 		},
-		upload: async function (index,item)
-		{
-			let data = item;
-			if (this.$refs.frmpersyaratan.validate())
-			{
-				if (typeof this.filepersyaratan[index] !== 'undefined')
-				{
-					this.btnLoading=true;
-					var formdata = new FormData();
-					formdata.append('nama_persyaratan', data.nama_persyaratan);
-					formdata.append('persyaratan_id', data.persyaratan_id);
-					formdata.append('persyaratan_psb_id', data.persyaratan_psb_id);
-					formdata.append('foto', this.filepersyaratan[index]);
-					await this.$ajax.post('/spsb/psbpersyaratan/upload/' + this.user_id,formdata,
-						{
-							headers: {
-								Authorization: this.$store.getters["auth/Token"],
-								"Content-Type": "multipart/form-data"                      
-							}
-						}
-					).then(() => {    
-						this.btnHapus=false;
-						this.btnSimpan=true;
-						this.btnLoading = false;
-					}).catch(() => {
-						this.btnLoading = false;
-					});
-				}               
-			}            
-		},
-		hapusfilepersysaratan(item)
-		{
-			this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus persyaratan '+item.nama_persyaratan+' ?', { color: 'red' }).then((confirm) => {
-				if (confirm)
-				{
-					this.$ajax.post('/spsb/psbpersyaratan/hapusfilepersyaratan/'+item.persyaratan_psb_id,
-						{
-							_method: 'DELETE'
-						}, 
-						{
-							headers: {
-								Authorization: this.$store.getters["auth/Token"]                
-							}
-						}
-					).then(() => {    
-						this.btnHapus=true;
-						this.photoPersyaratan=require('@/assets/no-image.png');
-						this.btnLoading = false;
-					}).catch(() => {
-						this.btnLoading = false;
-					});
-				}
-			});
-		},
-		isVerified(item)
-		{
-			if (item.path==null)
-			{
-				this.btnVerifikasi=true;
-			}
-			else if(item.verified==true)
-			{
-				this.btnVerifikasi=true;
-			}
-			else
-			{
-				this.btnVerifikasi=false;
-			}
-			return this.btnVerifikasi;
-		},
-		verifikasipersyaratan: async function (item)
-		{
-			this.btnLoading = true;
-			await this.$ajax.post('/spsb/psbpersyaratan/verifikasipersyaratan/'+item.persyaratan_psb_id,
-			{                    
-				
+		props: {
+			user_id: {
+				type:String,
+				required: true
 			},
-			{
-				headers: {
-					Authorization: this.$store.getters["auth/Token"]
-				}
+			index: {
+				type:Number,
+				required: true
+			},
+			item: {
+				type:Object,
+				required: true
 			}
-			).then(({ data }) => {   
-				this.badgeColor = data.persyaratan.verified;
-				this.badgeIcon = data.persyaratan.verified;
-				this.btnHapus=true;
-				this.btnVerifikasi=true;
-				this.btnLoading = false;
-			}).catch(() => {                   
-				this.btnLoading = false;
-			});
-		}
-	},
-	computed: {
-		photoPersyaratan: {
-			get ()
-			{   
-				if (this.image_prev==null)
+		},
+		data: () => ({     
+			dashboard:null,
+
+			btnSimpan: true,  
+			btnHapus: true,  
+			btnVerifikasi: true,
+			btnLoading: false,
+			image_prev:null,
+
+			//form
+			verified: 0,
+			form_valid: true,
+			filepersyaratan: [],
+			//form rules  
+			rule_foto: [
+				value => !!value || "Mohon pilih foto !!!",  
+				value =>!value || value.size < 2000000 || "File foto harus kurang dari 2MB."                
+			],
+		}),
+		methods: {        
+			previewImage (e)
+			{
+				if (typeof e === "undefined")
 				{
-					return require('@/assets/no-image.png');
+					this.image_prev=null;
+					this.btnSimpan=true;
 				}
 				else
 				{
-					return this.image_prev;
+					let reader = new FileReader();
+					reader.readAsDataURL(e);
+					reader.onload = img => {                    
+						this.image_prev=img.target.result;
+					}
+					this.btnSimpan=false;
+				}          
+			},
+			upload: async function (index,item)
+			{
+				let data = item;
+				if (this.$refs.frmpersyaratan.validate())
+				{
+					if (typeof this.filepersyaratan[index] !== "undefined")
+					{
+						this.btnLoading=true;
+						var formdata = new FormData();
+						formdata.append("nama_persyaratan", data.nama_persyaratan);
+						formdata.append("persyaratan_id", data.persyaratan_id);
+						formdata.append("persyaratan_psb_id", data.persyaratan_psb_id);
+						formdata.append("foto", this.filepersyaratan[index]);
+						await this.$ajax.post("/spsb/psbpersyaratan/upload/" + this.user_id,formdata,
+							{
+								headers: {
+									Authorization: this.$store.getters["auth/Token"],
+									"Content-Type": "multipart/form-data"                      
+								}
+							}
+						).then(() => {    
+							this.btnHapus=false;
+							this.btnSimpan=true;
+							this.btnLoading = false;
+						}).catch(() => {
+							this.btnLoading = false;
+						});
+					}               
+				}            
+			},
+			hapusfilepersysaratan(item)
+			{
+				this.$root.$confirm.open("Delete", "Apakah Anda ingin menghapus persyaratan "+item.nama_persyaratan+" ?", { color: "red" }).then((confirm) => {
+					if (confirm)
+					{
+						this.$ajax.post("/spsb/psbpersyaratan/hapusfilepersyaratan/"+item.persyaratan_psb_id,
+							{
+								_method: "DELETE"
+							}, 
+							{
+								headers: {
+									Authorization: this.$store.getters["auth/Token"]                
+								}
+							}
+						).then(() => {    
+							this.btnHapus=true;
+							this.photoPersyaratan=require("@/assets/no-image.png");
+							this.btnLoading = false;
+						}).catch(() => {
+							this.btnLoading = false;
+						});
+					}
+				});
+			},
+			isVerified(item)
+			{
+				if (item.path==null)
+				{
+					this.btnVerifikasi=true;
 				}
+				else if(item.verified==true)
+				{
+					this.btnVerifikasi=true;
+				}
+				else
+				{
+					this.btnVerifikasi=false;
+				}
+				return this.btnVerifikasi;
 			},
-			set (val)
+			verifikasipersyaratan: async function (item)
 			{
-				this.image_prev=val;
+				this.btnLoading = true;
+				await this.$ajax.post("/spsb/psbpersyaratan/verifikasipersyaratan/"+item.persyaratan_psb_id,
+				{                    
+					
+				},
+				{
+					headers: {
+						Authorization: this.$store.getters["auth/Token"]
+					}
+				}
+				).then(({ data }) => {   
+					this.badgeColor = data.persyaratan.verified;
+					this.badgeIcon = data.persyaratan.verified;
+					this.btnHapus=true;
+					this.btnVerifikasi=true;
+					this.btnLoading = false;
+				}).catch(() => {                   
+					this.btnLoading = false;
+				});
 			}
-			
 		},
-		badgeColor: {
-			get()
-			{
-				return this.verified == 1 ? 'success': 'error'
+		computed: {
+			photoPersyaratan: {
+				get ()
+				{   
+					if (this.image_prev==null)
+					{
+						return require("@/assets/no-image.png");
+					}
+					else
+					{
+						return this.image_prev;
+					}
+				},
+				set (val)
+				{
+					this.image_prev=val;
+				}
+				
 			},
-			set(val)
-			{
-				this.verified=val;
-			}
-			
-		},
-		badgeIcon: {
-			get()
-			{
-				return this.verified == 1 ? 'mdi-check-bold': 'mdi-close-thick';
+			badgeColor: {
+				get()
+				{
+					return this.verified == 1 ? "success": "error"
+				},
+				set(val)
+				{
+					this.verified=val;
+				}
+				
 			},
-			set(val)
-			{
-				return this.verified=val;
-			}
-			
-		},  
-	}
-}
+			badgeIcon: {
+				get()
+				{
+					return this.verified == 1 ? "mdi-check-bold": "mdi-close-thick";
+				},
+				set(val)
+				{
+					return this.verified=val;
+				}
+				
+			},  
+		}
+	};
 </script>
