@@ -133,13 +133,37 @@
             <v-card-title class="title">KUESIONER</v-card-title>
             <v-card-text class="white text--primary">
               <p>
-                Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>TK/SD/SMP</strong>
+                Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>TK</strong>
               </p> 
               <v-btn
                 color="purple darken-1"
                 class="mx-0"
                 outlined
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdX5qT2IlAfscPZVLMBlznZ4bfhK5bG_gVQ8BM-NsmRVzRbvQ/viewform?usp=sharing"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeMN-FHtfbDC62ha8I0nhO6zbIgzy9-WSk2UqJaITiVd2GGGA/viewform?usp=sharing"
+                target="_blank"
+              >
+                Isi Kuesioner
+              </v-btn>
+              <p>
+                Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>SD</strong>
+              </p> 
+              <v-btn
+                color="purple darken-1"
+                class="mx-0"
+                outlined
+                href="https://docs.google.com/forms/d/e/1FAIpQLScu2PeEKhCjsGNyFjpXnYwDOKEbiTUsxHLM_oztqioFfWXNxg/viewform?usp=sharing"
+                target="_blank"
+              >
+                Isi Kuesioner
+              </v-btn>
+              <p>
+                Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>SMP</strong>
+              </p> 
+              <v-btn
+                color="purple darken-1"
+                class="mx-0"
+                outlined
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfxUbAWWdQMQ6CUGrAivJ0T6o_wlIel6p1x8jHjjR9Aq9nA7w/viewform?usp=sharing"
                 target="_blank"
               >
                 Isi Kuesioner
@@ -151,7 +175,7 @@
                 color="purple darken-1"
                 class="mx-0"
                 outlined
-                href="https://forms.gle/bzMH6xvWM1pMeNSGA"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd9HjwVVLl7T4c1F_Gk8qmxQ93ixOvD2beFWrZCfs1kQT5l1g/viewform?usp=sharing"
                 target="_blank"
               >
                 Isi Kuesioner

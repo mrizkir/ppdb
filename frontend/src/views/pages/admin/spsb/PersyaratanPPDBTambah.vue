@@ -53,10 +53,10 @@
           <v-form v-model="form_valid_ktp_ayah" ref="frmuploadktpayah" lazy-validation>
             <v-card class="mb-3">
               <v-card-title>
-                SCAN KTP AYAH/WALI
+                SCAN KTP AYAH
               </v-card-title>
               <v-card-text>
-                Scan sisi depan KTP ayah/wali.
+                Scan sisi depan KTP ayah.
                 <v-file-input 
                   accept="application/pdf,image/jpeg,image/png" 
                   label="(.pdf, .png, atau .jpg) MAX 2MB"
@@ -92,10 +92,10 @@
           <v-form v-model="form_valid_ktp_ibu" ref="frmuploadktpibu" lazy-validation>
             <v-card class="mb-3">
               <v-card-title>
-                SCAN KTP IBU/AYAH WALI
+                SCAN KTP IBU
               </v-card-title>
               <v-card-text>
-                Scan sisi depan KTP ibu/wali.
+                Scan sisi depan KTP Ibu.
                 <v-file-input 
                   accept="application/pdf,image/jpeg,image/png" 
                   label="(.pdf, .png, atau .jpg) MAX 2MB"
