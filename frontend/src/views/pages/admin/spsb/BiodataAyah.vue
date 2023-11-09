@@ -230,7 +230,7 @@ export default {
         },  
         editItem(item)
         {
-            this.user_id=item.id;
+            this.user_id = item.id;
             this.datapesertadidik = item;
         },
     },

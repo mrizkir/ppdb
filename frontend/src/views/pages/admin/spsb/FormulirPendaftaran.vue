@@ -124,37 +124,37 @@
   </SPSBLayout>
 </template>
 <script>
-  import SPSBLayout from '@/views/layouts/SPSBLayout';
-  import ModuleHeader from '@/components/ModuleHeader';
-  import FormBiodataAnanda from '@/components/FormSiswaBaru';
-  import Filter7 from '@/components/sidebar/FilterMode7';
+  import SPSBLayout from "@/views/layouts/SPSBLayout";
+  import ModuleHeader from "@/components/ModuleHeader";
+  import FormBiodataAnanda from "@/components/FormSiswaBaru";
+  import Filter7 from "@/components/sidebar/FilterMode7";
   export default {
-    name: 'FormulirPendaftaran', 
+    name: "FormulirPendaftaran", 
     created() {
-      this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
+      this.dashboard = this.$store.getters["uiadmin/getDefaultDashboard"];
       this.breadcrumbs = [
         {
-          text: 'HOME',
+          text: "HOME",
           disabled: false,
-          href: '/dashboard/' + this.$store.getters['auth/AccessToken']
+          href: "/dashboard/" + this.$store.getters["auth/AccessToken"]
         },
         {
-          text: 'SPSB',
+          text: "SPSB",
           disabled: false,
-          href: '/spsb'
+          href: "/spsb"
         },
         {
-          text: 'BIODATA ANANDA',
+          text: "BIODATA ANANDA",
           disabled: true,
-          href: '#'
+          href: "#"
         }
       ];
-      this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
+      this.breadcrumbs[1].disabled=(this.dashboard== "siswabaru");
       
-      let kode_jenjang = this.$store.getters['uiadmin/getKodeJenjang'];
+      let kode_jenjang = this.$store.getters["uiadmin/getKodeJenjang"];
       this.kode_jenjang=kode_jenjang;
-      this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
-      this.tahun_pendaftaran = this.$store.getters['uiadmin/getTahunPendaftaran'];
+      this.nama_jenjang = this.$store.getters["uiadmin/getNamaJenjang"](kode_jenjang);
+      this.tahun_pendaftaran = this.$store.getters["uiadmin/getTahunPendaftaran"];
       this.initialize()
     },  
     data: () => ({
@@ -172,12 +172,12 @@
       expanded: [],
       datatable: [],
       headers: [                        
-        { text: '', value: 'foto', width:70 },
-        { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
-        { text: 'JK', value: 'jk', sortable: false, width:50 },
-        { text: 'NOMOR HP', value: 'nomor_hp', sortable: false, width: 100},
-        { text: 'ASAL SEKOLAH', value: 'asal_sekolah', width: 100, sortable: true },
-        { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
+        { text: "", value: "foto", width:70 },
+        { text: "NAMA PESERTA DIDIK", value: "name", width: 350, sortable: true },
+        { text: "JK", value: "jk", sortable: false, width:50 },
+        { text: "NOMOR HP", value: "nomor_hp", sortable: false, width: 100},
+        { text: "ASAL SEKOLAH", value: "asal_sekolah", width: 100, sortable: true },
+        { text: "AKSI", value: "actions", sortable: false, width: 100 },
       ],
       search: "",  
       
@@ -195,12 +195,12 @@
       initialize: async function() {	
         switch(this.dashboard)
         {
-          case 'siswabaru':
-            this.user_id = this.$store.getters['auth/AttributeUser']('id');
+          case "siswabaru":
+            this.user_id = this.$store.getters["auth/AttributeUser"]("id");
           break;
           default :
             this.datatableLoading = true;
-            await this.$ajax.post('/spsb/formulirpendaftaran',
+            await this.$ajax.post("/spsb/formulirpendaftaran",
             {
               TA: this.tahun_pendaftaran,
               kode_jenjang: this.kode_jenjang,
@@ -227,14 +227,14 @@
       },
       badgeColor(item)
       {
-        return item.active == 1 ? 'success': 'error'
+        return item.active == 1 ? "success": "error"
       },
       badgeIcon(item)
       {
-        return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
+        return item.active == 1 ? "mdi-check-bold": "mdi-close-thick"
       },  
       editItem(item) {
-        this.user_id=item.id;
+        this.user_id = item.id;
         this.datapesertadidik = item;
       },
     },

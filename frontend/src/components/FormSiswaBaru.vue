@@ -32,6 +32,97 @@
         </v-card>
         <v-card class="mb-4">
           <v-card-title>
+            INFORMASI PENDAFTARAN
+          </v-card-title>
+          <v-card-text>
+            Saudara Kandung yang mendaftar juga di jenjang yang sama atau jenjang lainnya pada PPDB SI DGC TP {{ tahun_pendaftaran + ' / ' + (tahun_pendaftaran + 1)}}
+            <v-simple-table dense>
+              <template v-slot:default>             
+                <tbody>                  
+                  <tr>
+                    <td>
+                      <v-checkbox
+                        v-model="saudara_mendaftar_tidak"
+                        label="TIDAK ADA"
+                      />
+                    </td>
+                    <td> - </td>
+                  </tr>
+                  <tr>
+                    <td width="150">
+                      <v-checkbox
+                        v-model="formdata.saudara_mendaftar"
+                        label="TK"
+                        value="1"
+                        :disabled="saudara_mendaftar_tidak"
+                      />
+                    </td>
+                    <td>
+                      <v-text-field
+                        v-model="formdata.nama_saudara_mendaftar_1"
+                        label="NAMA SISWA"
+                        :disabled="saudara_mendaftar_tidak"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <v-checkbox
+                        v-model="formdata.saudara_mendaftar"
+                        label="SD"
+                        value="2"
+                        :disabled="saudara_mendaftar_tidak"
+                      />
+                    </td>
+                    <td>
+                      <v-text-field
+                        v-model="formdata.nama_saudara_mendaftar_2"
+                        label="NAMA SISWA"
+                        :disabled="saudara_mendaftar_tidak"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <v-checkbox
+                        v-model="formdata.saudara_mendaftar"
+                        label="SMP"
+                        value="3"
+                        :disabled="saudara_mendaftar_tidak"
+                      />
+                    </td>
+                    <td>
+                      <v-text-field
+                        v-model="formdata.nama_saudara_mendaftar_3"
+                        label="NAMA SISWA"
+                        :disabled="saudara_mendaftar_tidak"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <v-checkbox
+                        v-model="formdata.saudara_mendaftar"
+                        label="SMA"
+                        value="4"
+                        :disabled="saudara_mendaftar_tidak"
+                      />
+                    </td>
+                    <td>
+                      <v-text-field
+                        v-model="formdata.nama_saudara_mendaftar_4"
+                        label="NAMA SISWA"
+                        :disabled="saudara_mendaftar_tidak"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+          </v-card-text>
+        </v-card>
+        <v-card class="mb-4">
+          <v-card-title>
             DATA UMUM ANANDA
           </v-card-title>
           <v-card-text>
@@ -306,6 +397,7 @@
     name: "FormSiswaBaru",
     created()
     {
+      this.tahun_pendaftaran = this.$store.getters["uiadmin/getTahunPendaftaran"];
       this.initialize();
     },
     props: {    
@@ -319,10 +411,9 @@
       btnLoadingProv: false,
       btnLoadingKab: false,
       btnLoadingKec: false,
-      btnLoadingFakultas: false,
+      tahun_pendaftaran: null,
 
-      //form
-      kode_billing:"N.A",
+      //form      
       form_valid: true,
 
       menuTanggalLahir: false,
@@ -372,17 +463,24 @@
 
       daftar_jenjang: [],
       
+      saudara_mendaftar_tidak: true,
+
       formdata: {
         nama_siswa: "",
         nisn: null,
         nama_panggilan: "", 
-        jk:"L",
+        jk: "L",
         nik: "", 
         tempat_lahir: "",
         tanggal_lahir: "",
         idagama: 1,
         id_kebutuhan_khusus: 1,
-        
+        saudara_mendaftar: [],        
+        nama_saudara_mendaftar_1: null,
+        nama_saudara_mendaftar_2: null,
+        nama_saudara_mendaftar_3: null,
+        nama_saudara_mendaftar_4: null,
+
         alamat_tempat_tinggal: "",
         address1_rt: "",
         address1_rw: "",
@@ -627,14 +725,10 @@
           this.$refs.frmdata.resetValidation();
         }                             
       },
-      kembali()
-      {
-        if (this.$store.getters["uiadmin/getDefaultDashboard"] =="siswabaru")
-        {
+      kembali() {
+        if (this.$store.getters["uiadmin/getDefaultDashboard"] == "siswabaru") {
           this.$router.push("/dashboard/" + this.$store.getters["auth/AccessToken"]);
-        }
-        else
-        {
+        } else {
           this.$router.go();
         }
       }
@@ -671,6 +765,22 @@
             });
         }
       },
+      saudara_mendaftar_tidak(val) {
+        if(val == true) {
+          this.formdata.saudara_mendaftar = [];
+          this.formdata.nama_saudara_mendaftar_1 = null;
+          this.formdata.nama_saudara_mendaftar_2 = null;
+          this.formdata.nama_saudara_mendaftar_3 = null;
+          this.formdata.nama_saudara_mendaftar_4 = null;
+        }
+      },
     },
   };
 </script>
+<style lang="scss">  
+  tbody {
+     tr:hover {
+        background-color: transparent !important;
+     }
+  }
+</style>
