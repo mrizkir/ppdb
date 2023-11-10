@@ -152,12 +152,12 @@ export default {
             type:Boolean,
             default: true
         }
-    },  
+    },
     data:()=>({
         loginTime: 0,
         drawer:null,
     }),
-    methods: {        
+    methods: {
         logout ()
         {
             this.loginTime=0;
@@ -168,7 +168,7 @@ export default {
                         'Authorization': this.TOKEN,
                     }
                 }
-            ).then(()=> {     
+            ).then(()=> {
                 this.$store.dispatch('auth/logout');	
                 this.$store.dispatch('uifront/reinit');	
                 this.$store.dispatch('uiadmin/reinit');	

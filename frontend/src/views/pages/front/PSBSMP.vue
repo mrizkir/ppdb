@@ -129,14 +129,14 @@
 </template>
 <script>
   import { mapGetters } from "vuex";
-  import VueRecaptcha from 'vue-recaptcha';
+  import VueRecaptcha from "vue-recaptcha";
   import FrontLayout from "@/views/layouts/FrontLayout";
   export default {
-    name: 'PSBSMP',
+    name: "PSBSMP",
     created() {
       this.initialize();
     },
-    data: () => ({     
+    data: () => ({
       registerSMP: null,
       btnLoading: false,
       //form
@@ -150,7 +150,7 @@
         username: "",
         password: "",
         captcha_response: ""
-      },  
+      },
       formdefault: {
         name: "",
         jk: "L",
@@ -166,15 +166,15 @@
       },
       rule_name: [
         value => !!value || "Nama Calon Peserta Didik mohon untuk diisi !!!",
-        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Calon Peserta Didik hanya boleh string dan spasi',
+        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Calon Peserta Didik hanya boleh string dan spasi",
       ], 
       rule_nomorhp: [
         value => !!value || "Nomor Kontak WA mohon untuk diisi !!!",
-        value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor Kontak WA hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
+        value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || "Nomor Kontak WA hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388",
       ], 
       rule_email: [
         value => !!value || "Email mohon untuk diisi !!!",
-        v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
+        v => /.+@.+\..+/.test(v) || "Format E-mail mohon di isi dengan benar",
       ],
       rule_jenjang: [
         value => !!value || "Program studi mohon untuk dipilih !!!"
@@ -191,7 +191,7 @@
         await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
           let jenjang_studi = data.jenjang_studi;
             jenjang_studi.forEach(element => {
-            if (element.kode_jenjang == 3) {            
+            if (element.kode_jenjang == 3) {
               this.registerSMP = element.status_pendaftaran == 1;
             }
           });
@@ -251,12 +251,10 @@
         tahunPendaftaran: "getTahunPendaftaran",
         bukaPPDB: "getBukaPPDB",
       }),
-    }, 
+    },
     components: {
       FrontLayout,
-      VueRecaptcha
+      VueRecaptcha,
     },
-    
-    
-  }
+  };
 </script>

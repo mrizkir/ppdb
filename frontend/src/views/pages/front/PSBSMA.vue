@@ -142,7 +142,7 @@
     created() {
       this.initialize();
     },
-    data: () => ({     
+    data: () => ({
       registerSMA: null,
       btnLoading: false, 
       //form
@@ -197,7 +197,7 @@
         await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
           let jenjang_studi = data.jenjang_studi;
             jenjang_studi.forEach(element => {
-            if (element.kode_jenjang == 4) {            
+            if (element.kode_jenjang == 4) {
               this.registerSMA = element.status_pendaftaran == 1;
             }
           });

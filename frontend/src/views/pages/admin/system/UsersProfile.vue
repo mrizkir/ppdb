@@ -309,7 +309,7 @@ export default {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }
-                ).then(({ data }) => {                                            
+                ).then(({ data }) => {
                     this.$refs.frmdata.reset(); 
                     this.formdata.foto = data.foto;
                     this.formdata=this.formdefault; 
@@ -329,10 +329,10 @@ export default {
             {
                 let reader = new FileReader();
                 reader.readAsDataURL(e);
-                reader.onload = img => {                    
+                reader.onload = img => {
                     this.photoUser=img.target.result;
                 }
-            }            
+            }
             
         },
         uploadFoto: async function() 
@@ -340,7 +340,7 @@ export default {
             if (this.$refs.frmuploadfoto.validate())
             {
                 if (this.formdata.foto)
-                {                
+                {
                     this.btnLoading = true;
                     var formdata = new FormData();
                     formdata.append('foto', this.formdata.foto);
@@ -351,14 +351,14 @@ export default {
                                 "Content-Type": "multipart/form-data"                      
                             }
                         }
-                    ).then(({ data }) => {                           
+                    ).then(({ data }) => {
                         this.btnLoading = false;
                         this.$store.dispatch('updateFoto', data.user.foto);
                     }).catch(() => {
                         this.btnLoading = false;
                     });
                     this.$refs.frmdata.reset(); 
-                }   
+                }
             }
         },
         resetFoto: async function() 
@@ -370,7 +370,7 @@ export default {
                         Authorization: this.$store.getters["auth/Token"],
                     }
                 }
-            ).then(({ data }) => {                           
+            ).then(({ data }) => {
                 this.btnLoading = false;
                 this.$store.dispatch('updateFoto', data.user.foto);
             }).catch(() => {
@@ -385,13 +385,13 @@ export default {
                         Authorization: this.$store.getters["auth/Token"],
                     }
                 }
-            ).then(({ data }) => {                           
+            ).then(({ data }) => {
                 this.data_mhs = data.mahasiswa;
             })
         }
         
     },
-    computed: {        
+    computed: {
 		photoUser: {
             get()
             {
@@ -407,7 +407,7 @@ export default {
                 
             },
             set(val)
-            {   
+            {
                 this.avatar = val;
             }
         },

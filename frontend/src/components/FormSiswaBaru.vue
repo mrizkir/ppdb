@@ -37,8 +37,8 @@
           <v-card-text>
             Saudara Kandung yang mendaftar juga di jenjang yang sama atau jenjang lainnya pada PPDB SI DGC TP {{ tahun_pendaftaran + ' / ' + (tahun_pendaftaran + 1)}}
             <v-simple-table dense>
-              <template v-slot:default>             
-                <tbody>                  
+              <template v-slot:default>           
+                <tbody>                
                   <tr>
                     <td>
                       <v-checkbox
@@ -400,13 +400,13 @@
       this.tahun_pendaftaran = this.$store.getters["uiadmin/getTahunPendaftaran"];
       this.initialize();
     },
-    props: {    
-      user_id: {            
+    props: {
+      user_id: {
         type: String,
         required: true
       }
     },
-    data: () => ({        
+    data: () => ({
       btnLoading: false,
       btnLoadingProv: false,
       btnLoadingKab: false,
@@ -560,7 +560,7 @@
           {
             return true;
           }
-        }               
+        }
       ], 
       rule_moda_transportasi: [
         value => !!value || "Mohon moda transportasi untuk dipilih !!!"
@@ -584,26 +584,26 @@
     methods: {
       initialize: async function()
       {
-        this.$ajax.get("/datamaster/negara").then(({ data }) => {                
+        this.$ajax.get("/datamaster/negara").then(({ data }) => {
           this.daftar_negara = data.negara;
         });
-        this.$ajax.get("/datamaster/provinsi").then(({ data }) => {                
+        this.$ajax.get("/datamaster/provinsi").then(({ data }) => {
           this.daftar_provinsi = data.provinsi;
         });
         
-        await this.$ajax.get("/datamaster/agama").then(({ data }) => {                  
+        await this.$ajax.get("/datamaster/agama").then(({ data }) => { 
           this.daftar_agama = data.agama;
         });
 
-        await this.$ajax.get("/datamaster/modatransportasi").then(({ data }) => {                  
+        await this.$ajax.get("/datamaster/modatransportasi").then(({ data }) => { 
           this.daftar_moda_transportasi = data.moda_transportasi;
         });
         
-        await this.$ajax.get("/datamaster/kebutuhankhusus").then(({ data }) => {                  
+        await this.$ajax.get("/datamaster/kebutuhankhusus").then(({ data }) => { 
           this.daftar_kebutuhan_khusus = data.kebutuhan_khusus;
         });
 
-        await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {                  
+        await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => { 
           this.daftar_jenjang = data.jenjang_studi;
         });
             
@@ -614,7 +614,7 @@
             }
           },
           
-        ).then(({ data }) => {   
+        ).then(({ data }) => {
           this.formdata.nama_siswa = data.formulir.nama_siswa;
           this.formdata.nisn = data.formulir.nisn;
           this.formdata.nama_panggilan = data.formulir.nama_panggilan;
@@ -715,58 +715,63 @@
               Authorization: this.$store.getters["auth/Token"]
             }
           }
-          ).then(()=>{   
+          ).then(()=>{
             this.btnLoading = false;
             this.$router.go();
-          }).catch(() => {   
+          }).catch(() => {
             this.btnLoading = false;
           }); 
-          this.form_valid=true; 
+          this.form_valid = true; 
           this.$refs.frmdata.resetValidation();
-        }                             
+        }
       },
       kembali() {
         if (this.$store.getters["uiadmin/getDefaultDashboard"] == "siswabaru") {
-          this.$router.push("/dashboard/" + this.$store.getters["auth/AccessToken"]);
+          this.$router.push(
+            "/dashboard/" + this.$store.getters["auth/AccessToken"]
+          );
         } else {
           this.$router.go();
         }
-      }
+      },
     },
     watch: {
       provinsi_id(val) {
-        if (val.id != null && val.id != "")
-        {
-          this.btnLoadingProv=true;
-          this.$ajax.get("/datamaster/provinsi/"+val.id+"/kabupaten").then(({ data }) => {                
-            this.daftar_kabupaten = data.kabupaten;
-            this.btnLoadingProv=false;
-          });
-          this.daftar_kecamatan=[];
+        if (val.id != null && val.id != "") {
+          this.btnLoadingProv = true;
+          this.$ajax
+            .get("/datamaster/provinsi/" + val.id + "/kabupaten")
+            .then(({ data }) => {
+              this.daftar_kabupaten = data.kabupaten;
+              this.btnLoadingProv = false;
+            });
+          this.daftar_kecamatan = [];
         }
       },
       kabupaten_id(val) {
-        if (val.id != null && val.id != "")
-        {
-          this.btnLoadingKab=true;
-          this.$ajax.get("/datamaster/kabupaten/"+val.id+"/kecamatan").then(({ data }) => {
-            this.daftar_kecamatan = data.kecamatan;
-            this.btnLoadingKab=false;
-          });
+        if (val.id != null && val.id != "") {
+          this.btnLoadingKab = true;
+          this.$ajax
+            .get("/datamaster/kabupaten/" + val.id + "/kecamatan")
+            .then(({ data }) => {
+              this.daftar_kecamatan = data.kecamatan;
+              this.btnLoadingKab = false;
+            });
         }
       },
       kecamatan_id(val) {
         if (val.id != null && val.id != "") {
-          this.btnLoadingKec=true;
-          this.$ajax.get("/datamaster/kecamatan/" + val.id + "/desa")
+          this.btnLoadingKec = true;
+          this.$ajax
+            .get("/datamaster/kecamatan/" + val.id + "/desa")
             .then(({ data }) => {
               this.daftar_desa = data.desa;
-              this.btnLoadingKec=false;
+              this.btnLoadingKec = false;
             });
         }
       },
       saudara_mendaftar_tidak(val) {
-        if(val == true) {
+        if (val == true) {
           this.formdata.saudara_mendaftar = [];
           this.formdata.nama_saudara_mendaftar_1 = null;
           this.formdata.nama_saudara_mendaftar_2 = null;
@@ -777,10 +782,10 @@
     },
   };
 </script>
-<style lang="scss">  
+<style lang="scss">
   tbody {
-     tr:hover {
-        background-color: transparent !important;
-     }
+    tr:hover {
+      background-color: transparent !important;
+    }
   }
 </style>

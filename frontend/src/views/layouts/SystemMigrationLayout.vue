@@ -138,7 +138,7 @@ export default {
         
         dashboard:null,
     }),
-    methods: {        
+    methods: {
         logout ()
         {
             this.loginTime=0;
@@ -149,7 +149,7 @@ export default {
                         'Authorization': this.TOKEN,
                     }
                 }
-            ).then(()=> {     
+            ).then(()=> {
                 this.$store.dispatch('auth/logout');	
                 this.$store.dispatch('uifront/reinit');	
                 this.$store.dispatch('uiadmin/reinit');	
@@ -193,7 +193,7 @@ export default {
 				photo = this.$api.url+'/'+img;	
 			}
 			return photo;
-        },  
+        },
     },
     watch: {
         loginTime: {

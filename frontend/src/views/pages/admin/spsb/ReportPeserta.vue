@@ -90,8 +90,8 @@
                         <template v-slot:expanded-item="{ headers, item }">
                             <td :colspan="headers.length" class="text-center">
                                 <v-col cols="12">
-                                    <strong>ID:</strong>{{ item.id }}                     
-                                    <strong>USERNAME:</strong>{{ item.username }}                     
+                                    <strong>ID:</strong>{{ item.id }}
+                                    <strong>USERNAME:</strong>{{ item.username }}
                                     <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
                                     <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
                                 </v-col>
@@ -189,8 +189,8 @@ export default {
             { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },
             { text: 'FOTO SELFIE', value: 'file_fotoselfi', sortable: false }, 
-            { text: 'KTP', value: 'file_ktp_ayah', sortable: false },  
-            { text: 'KK', value: 'file_kk', sortable: true},  
+            { text: 'KTP', value: 'file_ktp_ayah', sortable: false },
+            { text: 'KK', value: 'file_kk', sortable: true},
             { text: 'AKTA LAHIR', value: 'file_aktalahir', sortable: true}, 
             { text: 'BIODATA', value: 'biodata', sortable: false, width: 100 },
         ],
@@ -223,7 +223,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data }) => {               
+            }).then(({ data }) => {
                 this.datatable = data.psb;
                 this.datatableLoading = false;
             });
@@ -260,7 +260,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data }) => {               
+            }).then(({ data }) => {
                 this.file_pdf = data.pdf_file;
                 this.dialogprintpdf=true;
                 this.datatableLoading = false;
@@ -268,7 +268,7 @@ export default {
                 this.datatableLoading = false;
             });
         },
-        closedialogprintpdf () {                  
+        closedialogprintpdf () { 
             setTimeout(() => {
                 this.file_pdf=null;
                 this.dialogprintpdf = false;
@@ -282,7 +282,7 @@ export default {
             if (!this.firstloading)
             {
                 this.initialize();
-            }            
+            }
         },
         kode_jenjang(val)
         {
@@ -290,10 +290,10 @@ export default {
             {
                 this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](val);
                 this.initialize();
-            }            
+            }
         },
     },
-    computed: {        
+    computed: {
         formTitle() {
             return this.editedIndex === -1 ? 'TAMBAH DATA' : 'UBAH DATA'
         },

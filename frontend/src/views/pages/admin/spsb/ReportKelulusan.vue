@@ -157,7 +157,7 @@ export default {
         this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
         this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
         this.initialize()
-    },  
+    },
     data: () => ({
         firstloading: true,
         kode_jenjang: null,
@@ -223,7 +223,7 @@ export default {
                         headers: {
                             Authorization: this.$store.getters["auth/Token"]
                         }
-                    }).then(({ data }) => {               
+                    }).then(({ data }) => {
                         this.datatable = data.psb;
                         this.datatableLoading = false;
                     }); 
@@ -250,7 +250,7 @@ export default {
         badgeIcon(item)
         {
             return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
-        },  
+        },
         viewItem(item)
         {
             this.datamhsbaru = item;
@@ -272,7 +272,7 @@ export default {
                     },
                     responseType: 'arraybuffer'
                 }
-            ).then(({ data }) => {              
+            ).then(({ data }) => {
                 const url = window.URL.createObjectURL(new Blob([data]));
                 const link = document.createElement('a');
                 link.href = url;
@@ -285,11 +285,11 @@ export default {
             }).catch(() => {
                 this.btnLoading = false;
             });
-        },  
+        },
         closeProfilSiswaBaru ()
         {
             this.dialogprofilmhsbaru = false;
-        }        
+        }
     },
     watch: {
         tahun_pendaftaran()
@@ -297,7 +297,7 @@ export default {
             if (!this.firstloading)
             {
                 this.initialize();
-            }            
+            }
         },
         kode_jenjang(val)
         {
@@ -305,7 +305,7 @@ export default {
             {
                 this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](val);
                 this.initialize();
-            }            
+            }
         }
     },
     components: {

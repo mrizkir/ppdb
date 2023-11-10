@@ -123,7 +123,7 @@
           headers: {
             Authorization: this.$store.getters["auth/Token"]
           }
-        }).then(({ data }) => {                 
+        }).then(({ data }) => {
           this.total_transaction = data.total_transaction;
           this.total_transaction_paid = data.total_transaction_paid;
           this.total_transaction_unpaid = data.total_transaction_unpaid;
@@ -145,13 +145,13 @@
 
       }
     },
-    computed: {        
+    computed: {
       totalKombiGanjilPaid() {
         var total = 0;
         for (var i =0; i < this.kombi_ganjil_paid.length; i++) {
           var item = this.kombi_ganjil_paid[i];
           total=total+parseFloat(item.jumlah);
-        }           
+        }
         return total;
       },
       totalKombiGenapPaid() {

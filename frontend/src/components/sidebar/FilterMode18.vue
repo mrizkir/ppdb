@@ -48,7 +48,7 @@ export default {
             {
                 this.$store.dispatch('uiadmin/updateTahunAjaran',val);
                 this.$emit('changeTahunAjaran',val);
-            }            
+            }
         },
         kode_jenjang(val)
         {

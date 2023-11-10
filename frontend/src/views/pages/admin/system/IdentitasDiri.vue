@@ -86,7 +86,7 @@ export default {
                 text: 'KONFIGURASI SISTEM',
                 disabled: false,
                 href: '/system-setting'
-            },  
+            },
             {
                 text: 'SEKOLAH',
                 disabled: false,
@@ -133,7 +133,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data }) => {  
+            }).then(({ data }) => {
                 let setting = data.setting;
                 this.formdata.nama_sekolah=setting.NAMA_SEKOLAH;
                 this.formdata.nama_alias_pt=setting.NAMA_SEKOLAH_ALIAS;
@@ -161,7 +161,7 @@ export default {
                             Authorization: this.TOKEN
                         }
                     }
-                ).then(() => {        
+                ).then(() => {
                     this.btnLoading = false;
                 }).catch(() => {
                     this.btnLoading = false;
@@ -170,7 +170,7 @@ export default {
         }
     },
     computed: { 
-        ...mapGetters('auth',{            
+        ...mapGetters('auth',{
             ACCESS_TOKEN: 'AccessToken',  
             TOKEN: 'Token',
         }),

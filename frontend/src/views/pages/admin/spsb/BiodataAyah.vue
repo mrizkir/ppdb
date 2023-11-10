@@ -148,7 +148,7 @@ export default {
     this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
     this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
     this.initialize()
-  },  
+  },
   data: () => ({
     user_id: null,
     firstloading: true,
@@ -201,7 +201,7 @@ export default {
             headers: {
               Authorization: this.$store.getters["auth/Token"]
             }
-          }).then(({ data }) => {               
+          }).then(({ data }) => {
             this.datatable = data.psb;
             this.datatableLoading = false;
           }); 
@@ -228,7 +228,7 @@ export default {
     badgeIcon(item)
     {
       return item.active == 1 ? 'mdi-check-bold': 'mdi-close-thick'
-    },  
+    },
     editItem(item)
     {
       this.user_id = item.id;
@@ -241,7 +241,7 @@ export default {
       if (!this.firstloading)
       {
         this.initialize();
-      }            
+      }
     },
     kode_jenjang(val)
     {
@@ -249,7 +249,7 @@ export default {
       {
         this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](val);
         this.initialize();
-      }            
+      }
     }
   },
   components: {

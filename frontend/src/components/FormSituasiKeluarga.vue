@@ -55,12 +55,12 @@
 </template>
 <script>
   export default {
-    name: 'FormSituasiKeluarga',
+    name: "FormSituasiKeluarga",
     created() {
       this.initialize();
     },
-    props: {        
-      user_id: {            
+    props: {
+      user_id: {
         type: String,
         required: true,
       },
@@ -71,26 +71,26 @@
       form_valid: true,
       daftar_status_penikahan: [
         {
-          value: 'UTUH',
-          text: 'UTUH'
+          value: "UTUH",
+          text: "UTUH"
         },
         {
-          value: 'PISAH',
-          text: 'BERPISAH'
-        }, 
+          value: "PISAH",
+          text: "BERPISAH"
+        },
         {
-          value: 'CERAI',
-          text: 'CERAI'
+          value: "CERAI",
+          text: "CERAI"
         },
       ],
       formdata: {
         tinggal_bersama: "",
-        status_pernikahan: 'UTUH', 
+        status_pernikahan: "UTUH", 
         desc: "",
-      }, 
+      },
       rule_tinggal_bersama: [
         value => !!value || "Peserta Didik tinggal bersama siapa mohon untuk diisi !!!",
-        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Tempat tinggal Peserta Didik hanya boleh string dan spasi',
+        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Tempat tinggal Peserta Didik hanya boleh string dan spasi",
       ],
       rule_status_pernikahan: [
         value => !!value || "Mohon Status Pernikahan untuk dipilih !!!"
@@ -98,15 +98,15 @@
     }),
     methods: {
       initialize: async function()
-      {        
-        await this.$ajax.get('/spsb/formulirpendaftaran/situasikeluarga/' + this.user_id,  
+      {
+        await this.$ajax.get("/spsb/formulirpendaftaran/situasikeluarga/" + this.user_id,  
           {
             headers: {
               Authorization: this.$store.getters["auth/Token"]
             }
           },
           
-        ).then(({ data }) => {   
+        ).then(({ data }) => {
           this.formdata.tinggal_bersama = data.formulir.tinggal_bersama;
           this.formdata.status_pernikahan = data.formulir.status_pernikahan;
           this.formdata.desc = data.formulir.desc;
@@ -116,7 +116,7 @@
       save: async function() {
         if (this.$refs.frmdata.validate()) {
           this.btnLoading = true;
-          await this.$ajax.post('/spsb/formulirpendaftaran/situasikeluarga/' + this.user_id, {
+          await this.$ajax.post("/spsb/formulirpendaftaran/situasikeluarga/" + this.user_id, {
             _method: "put",
             tinggal_bersama: this.formdata.tinggal_bersama,
             status_pernikahan: this.formdata.status_pernikahan, 
@@ -127,27 +127,25 @@
               Authorization: this.$store.getters["auth/Token"]
             }
           }
-          ).then(()=>{   
+          ).then(()=>{
             this.btnLoading = false;
             this.$router.go();
-          }).catch(() => {   
+          }).catch(() => {
             this.btnLoading = false;
           }); 
-          this.form_valid=true; 
+          this.form_valid = true; 
           this.$refs.frmdata.resetValidation();
-        }                             
-      },
-      kembali()
-      {
-        if (this.$store.getters['uiadmin/getDefaultDashboard'] == 'siswabaru')
-        {
-          this.$router.push('/dashboard/' + this.$store.getters['auth/AccessToken']);
         }
-        else
-        {
+      },
+      kembali() {
+        if (this.$store.getters["uiadmin/getDefaultDashboard"] == "siswabaru") {
+          this.$router.push(
+            "/dashboard/" + this.$store.getters["auth/AccessToken"]
+          );
+        } else {
           this.$router.go();
         }
-      }
-    }, 
+      },
+    },
   };
 </script>

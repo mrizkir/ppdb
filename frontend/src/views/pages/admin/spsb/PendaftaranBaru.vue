@@ -398,7 +398,7 @@
             <template v-slot:expanded-item="{ headers, item }">
               <td :colspan="headers.length" class="text-center">
                 <v-col cols="12">
-                  <strong>ID:</strong>{{ item.id }}                                    
+                  <strong>ID:</strong>{{ item.id }}
                   <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
                   <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
                 </v-col>
@@ -476,10 +476,10 @@ export default {
       { text: '', value: 'foto', width:70 }, 
       { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
       { text: 'USERNAME', value: 'username', sortable: true },
-      { text: 'EMAIL', value: 'email', sortable: true },  
+      { text: 'EMAIL', value: 'email', sortable: true },
       { text: 'NOMOR HP', value: 'nomor_hp', sortable: false },
-      { text: 'KODE', value: 'code', sortable: false },  
-      { text: 'TGL.DAFTAR', value: 'created_at', sortable: true},  
+      { text: 'KODE', value: 'code', sortable: false },
+      { text: 'TGL.DAFTAR', value: 'created_at', sortable: true},
       { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
     ],
     expanded: [],
@@ -505,7 +505,7 @@ export default {
       ta: "",
       created_at: '',
       updated_at: '',  
-    },  
+    },
     formdefault: {
       name: "",
       email: "", 
@@ -565,7 +565,7 @@ export default {
         headers: {
           Authorization: this.$store.getters["auth/Token"]
         }
-      }).then(({ data }) => {               
+      }).then(({ data }) => {
         this.datatable = data.psb;
         this.datatableLoading = false;
       });
@@ -589,7 +589,7 @@ export default {
       else
       {
         this.expanded = [item];
-      }               
+      }
     },
     aktifkan(id)
     {
@@ -603,7 +603,7 @@ export default {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
-      ).then(()=>{   
+      ).then(()=>{
         this.initialize();
         this.btnLoading = false;
       }).catch(() => {
@@ -619,7 +619,7 @@ export default {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
-      ).then(({ data }) => {   
+      ).then(({ data }) => {
         this.data_konfirmasi = data.konfirmasi;
         this.btnLoading = false;
       }).catch(() => {
@@ -640,7 +640,7 @@ export default {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
-      ).then(() => {    
+      ).then(() => {
         this.btnLoading = false;
       }).catch(() => {
         this.btnLoading = false;
@@ -680,7 +680,7 @@ export default {
                 Authorization: this.$store.getters["auth/Token"]
               }
             }
-          ).then(()=>{   
+          ).then(()=>{
             this.initialize();
             this.closedialogfrm();
             this.btnLoading = false;
@@ -704,7 +704,7 @@ export default {
                 Authorization: this.$store.getters["auth/Token"]
               }
             }
-          ).then(({ data }) => {                           
+          ).then(({ data }) => {
             this.datatable.push(data.pendaftar);
             this.closedialogfrm();
             this.btnLoading = false;
@@ -726,20 +726,20 @@ export default {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
-      ).then(()=>{           
+      ).then(()=>{
         this.closedialogdetailitem();
         this.btnLoading = false;
       }).catch(() => {
         this.btnLoading = false;
       });
     },
-    async viewItem (item) {           
+    async viewItem (item) {
       await this.$ajax.get('/keuangan/konfirmasipembayaran/'+item.id, 
       {
         headers: {
           Authorization: this.$store.getters["auth/Token"]
         }
-      }).then(({ data }) => {               
+      }).then(({ data }) => {
         this.formdata=item;
         this.data_konfirmasi = data.konfirmasi;
         this.dialogdetailitem=true;
@@ -755,7 +755,7 @@ export default {
       });
       this.dialogfrm = true;
     },
-    deleteItem (item) {           
+    deleteItem (item) {
       this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus PESERTA DIDIK BARU '+item.name+' ?', { color: 'red' }).then((confirm) => {
         if (confirm)
         {
@@ -769,7 +769,7 @@ export default {
                 Authorization: this.$store.getters["auth/Token"]
               }
             }
-          ).then(()=>{   
+          ).then(()=>{
             const index = this.datatable.indexOf(item);
             this.datatable.splice(index, 1);
             this.btnLoading = false;
@@ -803,7 +803,7 @@ export default {
       if (!this.firstloading)
       {
         this.initialize();
-      }            
+      }
     },
     kode_jenjang(val)
     {
@@ -811,10 +811,10 @@ export default {
       {
         this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](val);
         this.initialize();
-      }            
+      }
     },
   },
-  computed: {        
+  computed: {
     formTitle() {
       return this.editedIndex === -1 ? 'TAMBAH DATA' : 'UBAH DATA'
     },

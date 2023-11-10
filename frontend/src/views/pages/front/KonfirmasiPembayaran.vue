@@ -162,7 +162,7 @@ import { mapGetters } from "vuex";
 import FrontLayout from "@/views/layouts/FrontLayout";
 export default {
 	name: 'KonfirmasiPembayaran',
-	data: () => ({     
+	data: () => ({
 		btnLoading: false,
 		//form
 		form_valid: true,
@@ -237,12 +237,12 @@ export default {
 				this.btnLoading = true;
 				await this.$ajax.post('/spsb/psb/konfirmasi', {
 					username: this.formdata.username, 
-				}).then(({ data }) => {  
+				}).then(({ data }) => {
 					this.data_pd = data.user;
 					this.formdata.id = data.user.id;
 					this.formdata.username = data.user.username;
 					this.btnLoading = false;
-				}).catch(() => {     
+				}).catch(() => {
 					this.btnLoading = false;
 				});
 			}
@@ -257,10 +257,10 @@ export default {
 			{
 				let reader = new FileReader();
 				reader.readAsDataURL(e);
-				reader.onload = img => {                 
+				reader.onload = img => {
 					this.image_prev=img.target.result;
 				} 
-			}          
+			}
 		},
 		save () {
 			if (this.$refs.frmkonfirmasi.validate())
@@ -280,7 +280,7 @@ export default {
 
 				this.$ajax.post('/spsb/psb/konfirmasipembayaran', data,
 					{
-						headers: {                            
+						headers: {
 							"Content-Type": "multipart/form-data"
 						}
 					}
@@ -297,7 +297,7 @@ export default {
 	computed: {
 		buktiBayar: {
 			get ()
-			{   
+			{
 				if (this.image_prev==null)
 				{
 					return require('@/assets/no-image.png');
@@ -313,7 +313,7 @@ export default {
 			}
 			
 		},
-		...mapGetters("uifront",{            
+		...mapGetters("uifront",{
 			bukaPPDB: "getBukaPPDB",
 		}),
 	},

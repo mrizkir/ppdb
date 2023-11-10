@@ -166,7 +166,7 @@ export default {
         perm_selected: [],
         perm_revoked: []
     }),
-    methods: {        
+    methods: {
         save()
         {
             this.btnLoading = true;
@@ -180,14 +180,14 @@ export default {
                         Authorization: this.TOKEN
                     }
                 }
-            ).then(()=>{   
+            ).then(()=>{
                 this.close();
             }).catch(() => {
                 this.btnLoading = false;
             });
         },
         revoke(item)
-        {   
+        {
             this.btnLoading = true; 
             this.$ajax.post('/system/users/revokeuserpermissions',
                 {
@@ -199,14 +199,14 @@ export default {
                         Authorization: this.TOKEN
                     }
                 }
-            ).then(()=>{   
+            ).then(()=>{
                 this.close();
             }).catch(() => {
                 this.btnLoading = false;
             });
         },
         close()
-        {            
+        {
             this.btnLoading = false;
             this.permissions_selected=[];
             this.$emit('closeUserPermissions');
@@ -218,7 +218,7 @@ export default {
         permissionsselected:Array,
     },
     computed: {
-        ...mapGetters('auth', {    
+        ...mapGetters('auth', {
             TOKEN: 'Token',
         }),
         daftar_permissions()
@@ -238,7 +238,7 @@ export default {
                 }
             },
             set (val)
-            {                
+            {
                 this.perm_selected=val;
             }
         }

@@ -49,7 +49,7 @@ export default {
       {
         this.$store.dispatch('uiadmin/updateTahunAjaran',val);
         this.$emit('changeTahunAjaran',val);
-      }            
+      }
     },
     semester_akademik(val)
     {

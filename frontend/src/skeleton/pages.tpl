@@ -227,7 +227,7 @@ export default {
             }
         ];
         this.initialize()
-    },  
+    },
     data: () => ({ 
         btnLoading: false,
         datatableLoading: false,
@@ -278,7 +278,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data }) => {               
+            }).then(({ data }) => {
                 this.datatable = data.object;
                 this.datatableLoading = false;
             }).catch(() => {
@@ -294,7 +294,7 @@ export default {
             else
             {
                 this.expanded=[item];
-            }               
+            }
         },
         viewItem (item) {
             this.formdata=item;
@@ -303,7 +303,7 @@ export default {
             //     headers: {
             //         Authorization: this.$store.getters["auth/Token"]
             //     }
-            // }).then(({ data }) => {               
+            // }).then(({ data }) => {
                                            
             // });
         }, 
@@ -328,7 +328,7 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(({ data }) => {   
+                    ).then(({ data }) => {
                         Object.assign(this.datatable[this.editedIndex], data.object);
                         this.closedialogfrm();
                         this.btnLoading = false;
@@ -346,7 +346,7 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(({ data }) => {   
+                    ).then(({ data }) => {
                         this.datatable.push(data.object);
                         this.closedialogfrm();
                         this.btnLoading = false;
@@ -356,7 +356,7 @@ export default {
                 }
             }
         },
-        deleteItem (item) {           
+        deleteItem (item) {
             this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus data dengan ID '+item.id+' ?', { color: 'red' }).then((confirm) => {
                 if (confirm)
                 {
@@ -370,14 +370,14 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(()=>{   
+                    ).then(()=>{
                         const index = this.datatable.indexOf(item);
                         this.datatable.splice(index, 1);
                         this.btnLoading = false;
                     }).catch(() => {
                         this.btnLoading = false;
                     });
-                }                
+                }
             });
         },
         closedialogdetailitem () {
@@ -398,7 +398,7 @@ export default {
             );
         },
     },
-    computed: {        
+    computed: {
         formTitle () {
             return this.editedIndex === -1 ? 'TAMBAH DATA' : 'UBAH DATA'
         },

@@ -61,8 +61,8 @@
     created() {
       this.initialize();
     },
-    props: {       
-      user_id: {            
+    props: {
+      user_id: {
         type: String,
         required: true
       }
@@ -77,7 +77,7 @@
         hubungan: "",        
         alamat_kontak: "",        
         nomor_hp: "",
-      },  
+      },
       rule_hubungan: [
         value => !!value || "Mohon hubungan dengan Peserta Didik untuk dipilih !!!"
       ], 
@@ -105,7 +105,7 @@
             }
           },
           
-        ).then(({ data }) => {   
+        ).then(({ data }) => {
           this.formdata.nama_kontak = data.formulir.nama_kontak;
           this.formdata.hubungan = data.formulir.hubungan;
           this.formdata.alamat_kontak = data.formulir.alamat_kontak;            
@@ -130,15 +130,15 @@
               Authorization: this.$store.getters["auth/Token"]
             }
           }
-          ).then(()=>{   
+          ).then(()=>{
             this.btnLoading = false;
             this.$router.go();
-          }).catch(() => {   
+          }).catch(() => {
             this.btnLoading = false;
           }); 
-          this.form_valid=true; 
+          this.form_valid = true; 
           this.$refs.frmdata.resetValidation();
-        }                             
+        }
       },
       kembali()
       {

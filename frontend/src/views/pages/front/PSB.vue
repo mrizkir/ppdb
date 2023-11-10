@@ -148,7 +148,7 @@ export default {
             username: "",
             password: "",
             captcha_response: ""
-        },  
+        },
         formdefault: {
             name: "",
             email: "", 

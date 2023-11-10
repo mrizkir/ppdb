@@ -156,7 +156,7 @@
       this.nama_jenjang = this.$store.getters["uiadmin/getNamaJenjang"](kode_jenjang);
       this.tahun_pendaftaran = this.$store.getters["uiadmin/getTahunPendaftaran"];
       this.initialize()
-    },  
+    },
     data: () => ({
       user_id: null,
       firstloading: true,
@@ -209,7 +209,7 @@
               headers: {
                 Authorization: this.$store.getters["auth/Token"]
               }
-            }).then(({ data }) => {     
+            }).then(({ data }) => {
               this.datatable = data.psb;
               this.datatableLoading = false;
             }); 
@@ -232,7 +232,7 @@
       badgeIcon(item)
       {
         return item.active == 1 ? "mdi-check-bold": "mdi-close-thick"
-      },  
+      },
       editItem(item) {
         this.user_id = item.id;
         this.datapesertadidik = item;

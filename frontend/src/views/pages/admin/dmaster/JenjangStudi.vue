@@ -150,7 +150,7 @@
         kode_jenjang: "",
         nama_jenjang: "",
         status_pendaftaran: false, 
-      },  
+      },
       formdefault: {
         kode_jenjang: "",
         nama_jenjang: "",
@@ -167,7 +167,7 @@
           headers: {
             Authorization: this.$store.getters["auth/Token"]
           }
-        }).then(({ data }) => {            
+        }).then(({ data }) => {
           this.datatable = data.jenjang_studi;
           this.datatableLoading = false;
         });

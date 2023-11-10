@@ -68,16 +68,16 @@
 		created() {
 			this.dashboard = this.$store.getters["uiadmin/getDefaultDashboard"];
 			if (this.item.path == null || this.item.persyaratan_psb_id==null)
-			{            
+			{
 				this.image_prev=this.item.path;
 			}
 			else
-			{            
+			{
 				this.btnHapus=this.isVerified(this.item);
 				this.image_prev=this.$api.url+"/" + this.item.path;
 				this.badgeColor=this.item.verified;
 				this.badgeIcon=this.item.verified;
-			}        
+			}
 		},
 		props: {
 			user_id: {
@@ -93,7 +93,7 @@
 				required: true
 			}
 		},
-		data: () => ({     
+		data: () => ({
 			dashboard:null,
 
 			btnSimpan: true,  
@@ -112,7 +112,7 @@
 				value =>!value || value.size < 2000000 || "File foto harus kurang dari 2MB."                
 			],
 		}),
-		methods: {        
+		methods: {
 			previewImage (e)
 			{
 				if (typeof e === "undefined")
@@ -124,11 +124,11 @@
 				{
 					let reader = new FileReader();
 					reader.readAsDataURL(e);
-					reader.onload = img => {                    
+					reader.onload = img => {
 						this.image_prev=img.target.result;
 					}
 					this.btnSimpan=false;
-				}          
+				}
 			},
 			upload: async function (index,item)
 			{
@@ -150,15 +150,15 @@
 									"Content-Type": "multipart/form-data"                      
 								}
 							}
-						).then(() => {    
+						).then(() => {
 							this.btnHapus=false;
 							this.btnSimpan=true;
 							this.btnLoading = false;
 						}).catch(() => {
 							this.btnLoading = false;
 						});
-					}               
-				}            
+					}
+				}
 			},
 			hapusfilepersysaratan(item)
 			{
@@ -174,7 +174,7 @@
 									Authorization: this.$store.getters["auth/Token"]                
 								}
 							}
-						).then(() => {    
+						).then(() => {
 							this.btnHapus=true;
 							this.photoPersyaratan=require("@/assets/no-image.png");
 							this.btnLoading = false;
@@ -204,7 +204,7 @@
 			{
 				this.btnLoading = true;
 				await this.$ajax.post("/spsb/psbpersyaratan/verifikasipersyaratan/"+item.persyaratan_psb_id,
-				{                    
+				{
 					
 				},
 				{
@@ -212,13 +212,13 @@
 						Authorization: this.$store.getters["auth/Token"]
 					}
 				}
-				).then(({ data }) => {   
+				).then(({ data }) => {
 					this.badgeColor = data.persyaratan.verified;
 					this.badgeIcon = data.persyaratan.verified;
 					this.btnHapus=true;
 					this.btnVerifikasi=true;
 					this.btnLoading = false;
-				}).catch(() => {                   
+				}).catch(() => {
 					this.btnLoading = false;
 				});
 			}
@@ -226,7 +226,7 @@
 		computed: {
 			photoPersyaratan: {
 				get ()
-				{   
+				{
 					if (this.image_prev==null)
 					{
 						return require("@/assets/no-image.png");
@@ -263,7 +263,7 @@
 					return this.verified=val;
 				}
 				
-			},  
+			},
 		}
 	};
 </script>

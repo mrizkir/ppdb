@@ -77,7 +77,7 @@ export default {
                 text: 'KONFIGURASI SISTEM',
                 disabled: false,
                 href: '/system-setting'
-            },  
+            },
             {
                 text: 'SEKOLAH',
                 disabled: false,
@@ -110,7 +110,7 @@ export default {
     methods: {
         initialize: async function() 
         {
-            this.$ajax.get('/datamaster/tahunajaran').then(({ data }) => {                
+            this.$ajax.get('/datamaster/tahunajaran').then(({ data }) => {
                 this.daftar_ta = data.ta;
             }); 
 
@@ -120,7 +120,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data }) => {  
+            }).then(({ data }) => {
                 let setting = data.setting;
                 this.formdata.tahun_pendaftaran=parseInt(setting.DEFAULT_TAHUN_PENDAFTARAN);
                 this.formdata.buka_ppdb=setting.DEFAULT_BUKA_PPDB == '0'?false: true;
@@ -146,7 +146,7 @@ export default {
                             Authorization: this.TOKEN
                         }
                     }
-                ).then(() => {        
+                ).then(() => {
                     this.btnLoading = false;
                 }).catch(() => {
                     this.btnLoading = false;
@@ -155,7 +155,7 @@ export default {
         }
     },
     computed: { 
-        ...mapGetters('auth',{            
+        ...mapGetters('auth',{
             ACCESS_TOKEN: 'AccessToken',  
             TOKEN: 'Token',
         }),

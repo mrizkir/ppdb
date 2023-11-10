@@ -156,7 +156,7 @@ export default {
     {
         this.initialize();
     },
-    data: () => ({        
+    data: () => ({
         firstloading: true,
         breadcrumbs: [],
         tahun_pendaftaran: 0,  
@@ -223,7 +223,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data }) => {                              
+            }).then(({ data }) => {
                 this.daftar_dw = data.users; 
             });
 
@@ -236,7 +236,7 @@ export default {
                 headers: {
                     Authorization: this.$store.getters["auth/Token"]
                 }
-            }).then(({ data }) => {                              
+            }).then(({ data }) => {
                 this.daftar_tasmt = data.daftar_tasmt; 
                 var dt = this.daftar_tasmt;
                 var i=0;
@@ -272,7 +272,7 @@ export default {
                             Authorization: this.$store.getters["auth/Token"]
                         }
                     }
-                ).then(({ data }) => {    
+                ).then(({ data }) => {
                     console.log(data);
                     setTimeout(() => {
                         this.$router.go();
@@ -292,7 +292,7 @@ export default {
             if (!this.firstloading)
             {
                 this.initialize();
-            }            
+            }
         },
     },
     components: {

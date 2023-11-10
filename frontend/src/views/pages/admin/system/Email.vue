@@ -74,7 +74,7 @@ export default {
                 text: 'KONFIGURASI SISTEM',
                 disabled: false,
                 href: '/system-setting'
-            },  
+            },
             {
                 text: 'SERVER - EMAIL',
                 disabled: true,
@@ -103,7 +103,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data }) => {                  
+            }).then(({ data }) => { 
                 let setting = data.setting;
                 this.formdata.email_mhs_isvalid=parseInt(setting.EMAIL_SISWA_ISVALID);
             });
@@ -126,7 +126,7 @@ export default {
                             Authorization: this.TOKEN
                         }
                     }
-                ).then(() => {        
+                ).then(() => {
                     this.btnLoading = false;
                 }).catch(() => {
                     this.btnLoading = false;
@@ -135,7 +135,7 @@ export default {
         }
     },
     computed: { 
-        ...mapGetters('auth',{            
+        ...mapGetters('auth',{
             ACCESS_TOKEN: 'AccessToken',  
             TOKEN: 'Token',
         }),

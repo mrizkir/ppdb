@@ -187,8 +187,8 @@ export default {
   {
     this.initialize();
   },
-  props: {       
-    user_id: {            
+  props: {
+    user_id: {
       type: String,
       required: true
     }
@@ -235,7 +235,7 @@ export default {
       penghasilan_bulanan: "",
       
       desc: "",
-    },      
+    }, 
     rule_nama_wali: [
       value => !!value || "Nama Wali mohon untuk diisi !!!",
       value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Wali hanya boleh string dan spasi',
@@ -280,14 +280,14 @@ export default {
   methods: {
     initialize: async function()
     {
-      this.$ajax.get('/datamaster/negara').then(({ data }) => {                
+      this.$ajax.get('/datamaster/negara').then(({ data }) => {
         this.daftar_negara = data.negara;
       });
-      this.$ajax.get('/datamaster/provinsi').then(({ data }) => {                
+      this.$ajax.get('/datamaster/provinsi').then(({ data }) => {
         this.daftar_provinsi = data.provinsi;
       });
       
-      await this.$ajax.get('/datamaster/agama').then(({ data }) => {                  
+      await this.$ajax.get('/datamaster/agama').then(({ data }) => { 
         this.daftar_agama = data.agama;
       });
           
@@ -298,7 +298,7 @@ export default {
           }
         },
         
-      ).then(({ data }) => {   
+      ).then(({ data }) => {
         this.formdata.nama_wali = data.formulir.nama_wali;        
         this.formdata.tempat_lahir = data.formulir.tempat_lahir;
         this.formdata.tanggal_lahir = data.formulir.tanggal_lahir;
@@ -368,15 +368,15 @@ export default {
             Authorization: this.$store.getters["auth/Token"]
           }
         }
-        ).then(()=>{   
+        ).then(()=>{
           this.btnLoading = false;
           this.$router.go();
-        }).catch(() => {   
+        }).catch(() => {
           this.btnLoading = false;
         }); 
-        this.form_valid=true; 
+        this.form_valid = true; 
         this.$refs.frmdata.resetValidation();
-      }                             
+      }
     },
     kembali()
     {
@@ -396,7 +396,7 @@ export default {
       if (val.id != null && val.id != '')
       {
         this.btnLoadingProv=true;
-        this.$ajax.get('/datamaster/provinsi/'+val.id+'/kabupaten').then(({ data }) => {                
+        this.$ajax.get('/datamaster/provinsi/'+val.id+'/kabupaten').then(({ data }) => {
           this.daftar_kabupaten = data.kabupaten;
           this.btnLoadingProv=false;
         });

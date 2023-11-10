@@ -155,7 +155,7 @@
         username: "",
         password: "",
         captcha_response: "",
-      },  
+      },
       formdefault: {
         name: "",
         jk: "L",
@@ -196,7 +196,7 @@
         await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
           let jenjang_studi = data.jenjang_studi;
             jenjang_studi.forEach(element => {
-            if (element.kode_jenjang == 2) {            
+            if (element.kode_jenjang == 2) {
               this.registerSD = element.status_pendaftaran == 1;
             }
           });

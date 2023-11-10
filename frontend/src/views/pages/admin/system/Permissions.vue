@@ -202,7 +202,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data }) => {                
+            }).then(({ data }) => {
                 this.daftar_permissions = data.permissions;
                 this.datatableLoading = false;
             });
@@ -249,7 +249,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(()=>{   
+                    ).then(()=>{
                         this.initialize();
                         this.close();
                     }).catch(() => {
@@ -258,7 +258,7 @@ export default {
                 }
             }
         },
-        deleteItem(item) {   
+        deleteItem(item) {
             this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus permission '+item.name+' ?', { color: 'red' }).then((confirm) => {
                 if (confirm)
                 {
@@ -272,7 +272,7 @@ export default {
                             Authorization: this.TOKEN
                         }
                     }
-                    ).then(()=>{   
+                    ).then(()=>{
                         const index = this.daftar_permissions.indexOf(item);
                         this.daftar_permissions.splice(index, 1);
                         this.btnLoading = false;
@@ -287,7 +287,7 @@ export default {
         formTitle() {
             return this.editedIndex === -1 ? 'TAMBAH PERMISSION' : 'EDIT PERMISSION'
         },
-        ...mapGetters('auth',{            
+        ...mapGetters('auth',{
             ACCESS_TOKEN: 'AccessToken',  
             TOKEN: 'Token',  
             CAN_ACCESS: 'can', 

@@ -127,7 +127,7 @@ export default {
         headers: [                        
             { text: 'NAMA PERMISSION', value: 'name' },
             { text: 'GUARD', value: 'guard_name' },
-            { text: 'AKSI', value: 'actions', sortable: false, width: 100 },  
+            { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
         ],
         search: "",
         perm_selected: []
@@ -146,7 +146,7 @@ export default {
                         Authorization: this.TOKEN
                     }
                 }
-            ).then(()=>{   
+            ).then(()=>{
                 this.btnLoading = false;
                 this.close();
             }).catch(() => {
@@ -154,7 +154,7 @@ export default {
             });
         },
         revoke(item)
-        {   
+        {
             this.btnLoading = true; 
             this.$ajax.post('/system/setting/roles/revokerolepermissions',
                 {
@@ -166,7 +166,7 @@ export default {
                         Authorization: this.TOKEN
                     }
                 }
-            ).then(()=>{   
+            ).then(()=>{
                 this.btnLoading = false;
                 this.close();
             }).catch(() => {
@@ -186,7 +186,7 @@ export default {
         permissionsselected:Array,
     },
     computed: {
-        ...mapGetters('auth', {         
+        ...mapGetters('auth', {
             TOKEN: 'Token',
         }),
         daftar_permissions()
@@ -195,7 +195,7 @@ export default {
         },
         permissions_selected: {
             get ()
-            {                
+            {
                 if (this.perm_selected.length >0)
                 {
                     return this.perm_selected;
@@ -206,7 +206,7 @@ export default {
                 }
             },
             set (val)
-            {                
+            {
                 this.perm_selected=val;
             }
         }

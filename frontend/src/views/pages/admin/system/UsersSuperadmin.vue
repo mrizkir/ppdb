@@ -264,7 +264,7 @@ export default {
             }
         ];
         this.initialize()
-    },  
+    },
    
     data: () => ({ 
         role_id: 0,
@@ -275,8 +275,8 @@ export default {
             { text: '', value: 'foto' },
             { text: 'USERNAME', value: 'username', sortable: true },
             { text: 'NAME', value: 'name', sortable: true },
-            { text: 'EMAIL', value: 'email', sortable: true },  
-            { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },  
+            { text: 'EMAIL', value: 'email', sortable: true },
+            { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },
             { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
         ],
         expanded: [],
@@ -360,7 +360,7 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data }) => {               
+            }).then(({ data }) => {
                 this.daftar_users = data.users;
                 this.role_id = data.role.id;
                 this.datatableLoading = false;
@@ -384,12 +384,12 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data }) => {      
+            }).then(({ data }) => {
                 let roles = data.roles;
                 var daftar_roles=[];
                 roles.forEach(element => {
                     if (element.name== 'superadmin')
-                    {                        
+                    {
                         daftar_roles.push({
                             text:element.name,
                             disabled: true,
@@ -401,7 +401,7 @@ export default {
                             text:element.name,
                             disabled: false, 
                         });
-                    }     
+                    }
                 });
                 this.daftar_roles=daftar_roles;
                 this.dialog = true; 
@@ -417,12 +417,12 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data }) => {      
+            }).then(({ data }) => {
                 let roles = data.roles;
                 var daftar_roles=[];
                 roles.forEach(element => {
                     if (element.name== 'superadmin')
-                    {                        
+                    {
                         daftar_roles.push({
                             text:element.name,
                             disabled: true,
@@ -434,7 +434,7 @@ export default {
                             text:element.name,
                             disabled: false, 
                         });
-                    }     
+                    }
                 });
                 this.daftar_roles=daftar_roles;
             });
@@ -445,13 +445,13 @@ export default {
                 headers: {
                     Authorization: this.TOKEN
                 }
-            }).then(({ data }) => {  
+            }).then(({ data }) => {
                 this.editedItem.role_id = data.roles;
                 this.btnLoading = false;
                 this.dialogEdit = true;
             });
         },
-        close () {            
+        close () {
             this.btnLoading = false;
             this.dialog = false;
             this.dialogEdit = false;
@@ -483,7 +483,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({ data }) => {   
+                    ).then(({ data }) => {
                         Object.assign(this.daftar_users[this.editedIndex], data.user);
                         this.close();
                     }).catch(() => {
@@ -505,7 +505,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({ data }) => {   
+                    ).then(({ data }) => {
                         this.daftar_users.push(data.user);
                         this.close();
                     }).catch(() => {
@@ -514,7 +514,7 @@ export default {
                 }
             }
         },
-        deleteItem(item) {           
+        deleteItem(item) {
             this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus username '+item.username+' ?', { color: 'red' }).then((confirm) => {
                 if (confirm)
                 {
@@ -528,7 +528,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(()=>{   
+                    ).then(()=>{
                         const index = this.daftar_users.indexOf(item);
                         this.daftar_users.splice(index, 1);
                         this.btnLoading = false;
@@ -543,7 +543,7 @@ export default {
         formTitle() {
             return this.editedIndex === -1 ? 'TAMBAH USER SUPER ADMIN' : 'EDIT USER SUPER ADMIN'
         },
-        ...mapGetters('auth',{            
+        ...mapGetters('auth',{
             ACCESS_TOKEN: 'AccessToken',  
             TOKEN: 'Token',
         }),

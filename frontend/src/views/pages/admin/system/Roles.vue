@@ -268,7 +268,7 @@ export default {
         //tables
         headersdetail: [                        
             { text: 'NAMA PERMISSION', value: 'name' },
-            { text: 'GUARD', value: 'guard_name' },  
+            { text: 'GUARD', value: 'guard_name' },
         ],
         search: "",
         //form
@@ -311,7 +311,7 @@ export default {
                 {
                     this.datatable = data.roles;
                     this.datatableLoading = false;
-                }     
+                }
             
             });
             
@@ -339,7 +339,7 @@ export default {
                 if (status==200)
                 {
                     this.permissions_selected = data.permissions;
-                }  
+                }
             });
             
             this.dialogdetail = true;
@@ -349,7 +349,7 @@ export default {
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
-        setPermission (item) {            
+        setPermission (item) {
             this.$ajax.get('/system/setting/permissions',{
                 headers: {
                     Authorization: this.TOKEN
@@ -358,7 +358,7 @@ export default {
                 if (status==200)
                 {
                     this.daftar_permissions = data.permissions;
-                }  
+                }
             });
 
             this.$ajax.get('/system/setting/roles/'+item.id+'/permission',{
@@ -369,7 +369,7 @@ export default {
                 if (status==200)
                 {
                     this.permissions_selected = data.permissions;
-                }  
+                }
             });
             this.dialogRolePermission = true;
             this.editedItem=item;
@@ -386,7 +386,7 @@ export default {
                 }, 300
             );
         },
-        closeRolePermissions () {    
+        closeRolePermissions () {
             this.permissions_selected=[];
             this.dialogRolePermission = false;
         },
@@ -407,7 +407,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({ data }) => {   
+                    ).then(({ data }) => {
                         Object.assign(this.datatable[this.editedIndex], data.roles);
                         this.close();
                     }).catch(() => {
@@ -424,7 +424,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(({ data }) => {   
+                    ).then(({ data }) => {
                         this.datatable.push(data.roles);
                         this.close();
                     }).catch(() => {
@@ -434,11 +434,11 @@ export default {
             }
         },
     },
-    computed: {        
+    computed: {
         formTitle() {
             return this.editedIndex === -1 ? 'TAMBAH ROLE' : 'EDIT ROLE'
         },
-        ...mapGetters('auth',{            
+        ...mapGetters('auth',{
             ACCESS_TOKEN: 'AccessToken',  
             TOKEN: 'Token',
         }),

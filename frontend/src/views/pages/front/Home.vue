@@ -332,7 +332,7 @@
       },
     },
     computed: {
-      ...mapGetters("uifront",{        
+      ...mapGetters("uifront",{
         tahunPendaftaran: "getTahunPendaftaran",
       }),
     },

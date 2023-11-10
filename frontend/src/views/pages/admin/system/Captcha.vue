@@ -80,7 +80,7 @@ export default {
                 text: 'KONFIGURASI SISTEM',
                 disabled: false,
                 href: '/system-setting'
-            },  
+            },
             {
                 text: 'SERVER - CAPTCHA',
                 disabled: true,

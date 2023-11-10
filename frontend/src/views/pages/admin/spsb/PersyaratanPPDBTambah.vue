@@ -365,7 +365,7 @@ export default {
           }
         },
         
-      ).then(({ data }) => {   
+      ).then(({ data }) => {
         this.peryaratanppdb = data.formulir;
         this.$refs.frmuploadfotoselfi.resetValidation();
       });
@@ -387,7 +387,7 @@ export default {
                 "Content-Type": "multipart/form-data"                      
               }
             }
-          ).then(() => {                                             
+          ).then(() => {
             this.btnLoadingFotoSelfi=false;
             this.$router.go();
           }).catch(() => {
@@ -412,7 +412,7 @@ export default {
                 "Content-Type": "multipart/form-data"                      
               }
             }
-          ).then(() => {                                             
+          ).then(() => {
             this.btnLoadingKTPAyah=false;
             this.$router.go();
           }).catch(() => {
@@ -437,7 +437,7 @@ export default {
                 "Content-Type": "multipart/form-data"                      
               }
             }
-          ).then(() => {                                             
+          ).then(() => {
             this.btnLoadingKTPIbu=false;
             this.$router.go();
           }).catch(() => {
@@ -462,7 +462,7 @@ export default {
                 "Content-Type": "multipart/form-data"                      
               }
             }
-          ).then(() => {                                             
+          ).then(() => {
             this.btnLoadingKK=false;
             this.$router.go();
           }).catch(() => {
@@ -487,7 +487,7 @@ export default {
                 "Content-Type": "multipart/form-data"                      
               }
             }
-          ).then(() => {                                             
+          ).then(() => {
             this.btnLoadingAktaLahir=false;
             this.$router.go();
           }).catch(() => {
