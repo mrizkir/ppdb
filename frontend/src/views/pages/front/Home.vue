@@ -109,10 +109,10 @@
                     <div>
                       Seleksi PPDB terdiri dari 9 (Sembilan) tahapan. Sebelum melanjutkan pastikan terlebih dahulu :
                       <ol type="a">
-                        <li>Ananda sudah berusia min. <strong>4.5 tahun</strong> maks. <strong>7 Tahun</strong> pada 31 Juli {{ 2024 }}. <strong>untuk Jenjang Studi TK</strong></li>
-                        <li>Ananda sudah berusia min. <strong>6 tahun</strong> maks. <strong>9 Tahun</strong> pada 31 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SD</strong></li>
-                        <li>Ananda sudah berusia min. <strong>10 Tahun</strong> maks. <strong>15 tahun</strong> pada 31 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SMP</strong></li>
-                        <li>Ananda sudah berusia min. <strong>13 Tahun</strong> maks. <strong>17 tahun</strong> pada 31 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SMA</strong></li>
+                        <li>Ananda sudah berusia min. <strong>4.5 tahun</strong> maks. <strong>7 Tahun</strong> pada 01 Juli {{ 2024 }}. <strong>untuk Jenjang Studi TK</strong></li>
+                        <li>Ananda sudah berusia min. <strong>6 tahun</strong> maks. <strong>9 Tahun</strong> pada 01 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SD</strong></li>
+                        <li>Ananda sudah berusia min. <strong>10 Tahun</strong> maks. <strong>15 tahun</strong> pada 01 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SMP</strong></li>
+                        <li>Ananda sudah berusia min. <strong>13 Tahun</strong> maks. <strong>17 tahun</strong> pada 01 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SMA</strong></li>
                       </ol>
                     </div>
                   </div>
