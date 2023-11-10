@@ -331,34 +331,34 @@ export default {
     filesertifikat: null,
 
     rule_filefotoselfi: [
-      value => !!value || "Mohon pilih file foto selfi !!!",  
+      value => !!value || "Mohon pilih file foto selfi !!!",
       value =>!value || value.size < 2000000 || 'File foto selfi harus kurang dari 2MB.'                
     ],
     rule_file_ktp_ayah: [
-      value => !!value || "Mohon pilih file ktp !!!",  
+      value => !!value || "Mohon pilih file ktp !!!",
       value =>!value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
     ],
     rule_file_ktp_ibu: [
-      value => !!value || "Mohon pilih file ktp !!!",  
+      value => !!value || "Mohon pilih file ktp !!!",
       value =>!value || value.size < 2000000 || 'File ktp harus kurang dari 2MB.'                
     ],
     rule_filekk: [
-      value => !!value || "Mohon pilih file Kartu Keluarga !!!",  
+      value => !!value || "Mohon pilih file Kartu Keluarga !!!",
       value =>!value || value.size < 2000000 || 'File kartu keluarga harus kurang dari 2MB.'                
     ],
     rule_fileaktalahir: [
-      value => !!value || "Mohon pilih file Akta Lahir !!!",  
+      value => !!value || "Mohon pilih file Akta Lahir !!!",
       value =>!value || value.size < 2000000 || 'File akta lahir harus kurang dari 2MB.'                
     ],
     rule_screenshoot_medsos: [
-      value => !!value || "Mohon screen shoot akun IG  !!!",  
+      value => !!value || "Mohon screen shoot akun IG  !!!",
       value =>!value || value.size < 2000000 || 'Screen shoot akun IG kurang dari 2MB.'                
     ],
   }),
   methods: {
     initialize: async function()
     {	
-      await this.$ajax.get('/spsb/formulirpendaftaran/persyaratanppdb/' + this.$store.getters['auth/AttributeUser']('id'),  
+      await this.$ajax.get('/spsb/formulirpendaftaran/persyaratanppdb/' + this.$store.getters['auth/AttributeUser']('id'),
         {
           headers: {
             Authorization: this.$store.getters["auth/Token"]

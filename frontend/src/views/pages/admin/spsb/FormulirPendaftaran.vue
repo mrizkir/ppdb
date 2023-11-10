@@ -179,7 +179,7 @@
         { text: "ASAL SEKOLAH", value: "asal_sekolah", width: 100, sortable: true },
         { text: "AKSI", value: "actions", sortable: false, width: 100 },
       ],
-      search: "",  
+      search: "",
       
       datapesertadidik: null
     }),

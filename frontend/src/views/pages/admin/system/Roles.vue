@@ -254,7 +254,7 @@ export default {
     data: () => ({
         breadcrumbs: [],
         datatableLoading: false,
-        btnLoading: false,  
+        btnLoading: false,
         expanded: [],
         datatable: [],
         daftar_permissions: [],
@@ -293,9 +293,9 @@ export default {
         },
         //form rules        
         rule_role_name: [
-            value => !!value || "Mohon untuk di isi nama Role !!!",  
+            value => !!value || "Mohon untuk di isi nama Role !!!",
             value => /^[A-Za-z]*$/.test(value) || 'Nama Role hanya boleh string',
-        ], 
+        ],
         form_error_message: ""
     }),
     methods: {
@@ -408,7 +408,7 @@ export default {
                             }
                         }
                     ).then(({ data }) => {
-                        Object.assign(this.datatable[this.editedIndex], data.roles);
+                        Object.assign(this.datatable[this.editedIndex],data.roles);
                         this.close();
                     }).catch(() => {
                         this.btnLoading = false;
@@ -439,7 +439,7 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH ROLE' : 'EDIT ROLE'
         },
         ...mapGetters('auth',{
-            ACCESS_TOKEN: 'AccessToken',  
+            ACCESS_TOKEN: 'AccessToken',
             TOKEN: 'Token',
         }),
     },

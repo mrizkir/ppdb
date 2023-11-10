@@ -170,7 +170,7 @@ export default {
       { text: 'NOMOR HP', value: 'nomor_hp', width: 100}, 
       { text: 'AKSI', value: 'actions', sortable: false, width:50 },
     ],
-    search: "",  
+    search: "",
     
     datapesertadidik: null
   }),

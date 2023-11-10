@@ -68,10 +68,10 @@
       },
       rule_username: [
         value => !!value || "Kolom Username mohon untuk diisi !!!"
-      ], 
+      ],
       rule_password: [
         value => !!value || "Kolom Password mohon untuk diisi !!!"
-      ], 
+      ],
       
     }),
     methods: {

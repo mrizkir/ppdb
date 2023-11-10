@@ -74,31 +74,31 @@
       form_valid: true,
       formdata: {
         nama_kontak: "",
-        hubungan: "",        
-        alamat_kontak: "",        
+        hubungan: "",      
+        alamat_kontak: "",      
         nomor_hp: "",
       },
       rule_hubungan: [
         value => !!value || "Mohon hubungan dengan Peserta Didik untuk dipilih !!!"
-      ], 
+      ],
       rule_nama_kontak: [
         value => !!value || "Nama Peserta Didik mohon untuk diisi !!!",
         value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Peserta Didik hanya boleh string dan spasi',
-      ],         
+      ],
       rule_alamat_rumah: [
         value => !!value || "Alamat Rumah mohon untuk diisi !!!"
-      ], 
+      ],
       rule_negara: [
         value => !!value || "Mohon Kewarganegaraan  untuk dipilih !!!"
-      ], 
+      ],
       rule_nomorhp: [
         value => !!value || "Nomor HP mohon untuk diisi !!!",
         value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
-      ],      
+      ],
     }),
     methods: {
       initialize: async function() {
-        await this.$ajax.get('/spsb/formulirpendaftaran/kontakdarurat/' + this.user_id,  
+        await this.$ajax.get('/spsb/formulirpendaftaran/kontakdarurat/' + this.user_id,
           {
             headers: {
               Authorization: this.$store.getters["auth/Token"]
@@ -121,7 +121,7 @@
           await this.$ajax.post('/spsb/formulirpendaftaran/kontakdarurat/' + this.user_id, {
             _method: "put",
             nama_kontak: this.formdata.nama_kontak,
-            hubungan: this.formdata.hubungan,         
+            hubungan: this.formdata.hubungan,       
             alamat_kontak: this.formdata.alamat_kontak,
             nomor_hp: this.formdata.nomor_hp, 
           },

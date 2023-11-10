@@ -104,7 +104,7 @@
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                    PPDB Sekolah De Green Camp
+                    PPDB Sekolah Islam De Green Camp
                     </h2>
                     <div>
                       Seleksi PPDB terdiri dari 9 (Sembilan) tahapan. Sebelum melanjutkan pastikan terlebih dahulu :

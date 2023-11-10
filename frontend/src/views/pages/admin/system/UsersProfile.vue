@@ -252,8 +252,8 @@ export default {
                 email: "",
                 nomor_hp: "",
                 theme: "",
-                foto: "",  
-                active: "",                                   
+                foto: "",
+                active: "",                                 
                 default_role: "",
                 locked: "",
                 created_at: '',
@@ -267,8 +267,8 @@ export default {
                 email: "",
                 nomor_hp: "",
                 theme: "",
-                foto: "",  
-                active: "",                                   
+                foto: "",
+                active: "",                                 
                 default_role: "",
                 locked: "",
                 created_at: '',
@@ -276,9 +276,9 @@ export default {
             },
             //form rules  
             rule_foto: [
-                value => !!value || "Mohon pilih gambar !!!",  
+                value => !!value || "Mohon pilih gambar !!!",
                 value =>!value || value.size < 2000000 || 'File foto harus kurang dari 2MB.'                
-            ], 
+            ],
             rule_user_password: [
                 value => !!value || "Mohon untuk di isi password User !!!",
                 value => {
@@ -347,7 +347,7 @@ export default {
                     await this.$ajax.post('/setting/users/uploadfoto/' + this.$store.getters.User.id,formdata,
                         {
                             headers: {
-                                Authorization: this.$store.getters["auth/Token"],  
+                                Authorization: this.$store.getters["auth/Token"],
                                 "Content-Type": "multipart/form-data"                      
                             }
                         }

@@ -183,12 +183,12 @@ export default {
             { text: 'STATUS', value: 'status', width: 100, sortable: true },
             { text: 'AKSI', value: 'actions', sortable: false, width:50 },
         ],
-        search: "",  
+        search: "",
         
         datamhsbaru: {},
 
         //form data 
-        filter_status: 1,  
+        filter_status: 1,
         form_valid: true,
 
         data_mhs: {},
@@ -261,7 +261,7 @@ export default {
             this.btnLoading = true;
             await this.$ajax.post('/spsb/reportspsbkelulusan/printtoexcel',
                 {
-                    TA: this.tahun_pendaftaran,    
+                    TA: this.tahun_pendaftaran,  
                     kode_jenjang: this.kode_jenjang, 
                     nama_jenjang: this.nama_jenjang, 
                     filter_status: this.filter_status, 

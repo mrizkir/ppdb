@@ -160,7 +160,7 @@ export default {
     data: () => ({
         breadcrumbs: [],
         datatableLoading: false,
-        btnLoading: false,  
+        btnLoading: false,
         expanded: [],
         daftar_permissions: [],
         //tables
@@ -190,9 +190,9 @@ export default {
         },
         //form rules        
         rule_permission_name: [
-            value => !!value || "Mohon untuk di isi nama Permission !!!",  
+            value => !!value || "Mohon untuk di isi nama Permission !!!",
             value => /^[a-zA-Z\\-]+$/.test(value) || 'Nama Permission hanya boleh string',
-        ], 
+        ],
     }),
     methods: {
         initialize () 
@@ -288,10 +288,10 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH PERMISSION' : 'EDIT PERMISSION'
         },
         ...mapGetters('auth',{
-            ACCESS_TOKEN: 'AccessToken',  
-            TOKEN: 'Token',  
+            ACCESS_TOKEN: 'AccessToken',
+            TOKEN: 'Token',
             CAN_ACCESS: 'can', 
-            ATTRIBUTE_USER: 'AttributeUser',  
+            ATTRIBUTE_USER: 'AttributeUser',
         }),
     },
     watch: {

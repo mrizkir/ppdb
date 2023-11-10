@@ -114,13 +114,13 @@ export default {
         },
         //form rules        
         rule_nama_sekolah: [
-            value => !!value || "Mohon untuk di isi Nama Sekolah !!!",  
-        ], 
+            value => !!value || "Mohon untuk di isi Nama Sekolah !!!",
+        ],
         rule_nama_singkatan_pt: [
-            value => !!value || "Mohon untuk di isi Nama Alias Sekolah !!!",  
+            value => !!value || "Mohon untuk di isi Nama Alias Sekolah !!!",
         ],
         rule_kode_sekolah: [
-            value => !!value || "Mohon untuk di isi Kode Sekolah !!!",  
+            value => !!value || "Mohon untuk di isi Kode Sekolah !!!",
             value => /^[0-9]+$/.test(value) || 'Kode Sekolah hanya boleh angka',
         ]
     }),
@@ -154,7 +154,7 @@ export default {
                             101: this.formdata.nama_sekolah,
                             102: this.formdata.nama_alias_pt, 
                             104: this.formdata.kode_sekolah,
-                        }),                                                                
+                        }),                                                              
                     },
                     {
                         headers: {
@@ -171,7 +171,7 @@ export default {
     },
     computed: { 
         ...mapGetters('auth',{
-            ACCESS_TOKEN: 'AccessToken',  
+            ACCESS_TOKEN: 'AccessToken',
             TOKEN: 'Token',
         }),
     },

@@ -164,7 +164,7 @@ export default {
             { text: 'NOMOR HP', value: 'nomor_hp', width: 100},
             { text: 'KELAS', value: 'nkelas', width: 100, sortable: true }, 
         ],
-        search: "",  
+        search: "",
         
         datamhsbaru: {}
     }),
@@ -227,7 +227,7 @@ export default {
             this.btnLoading = true;
             await this.$ajax.post('/spsb/reportspsbjenjang/printtoexcel',
                 {
-                    TA: this.tahun_pendaftaran,    
+                    TA: this.tahun_pendaftaran,  
                     kode_jenjang: this.kode_jenjang, 
                     nama_jenjang: this.nama_jenjang, 
                 },

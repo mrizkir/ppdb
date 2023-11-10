@@ -415,9 +415,7 @@
 
       //form      
       form_valid: true,
-
       menuTanggalLahir: false,
-      
       daftar_agama: [],
 
       daftar_moda_transportasi: [],
@@ -475,7 +473,7 @@
         tanggal_lahir: "",
         idagama: 1,
         id_kebutuhan_khusus: 1,
-        saudara_mendaftar: [],        
+        saudara_mendaftar: [],
         nama_saudara_mendaftar_1: null,
         nama_saudara_mendaftar_2: null,
         nama_saudara_mendaftar_3: null,
@@ -508,47 +506,47 @@
       rule_nama_siswa: [
         value => !!value || "Nama Peserta Didik mohon untuk diisi !!!",
         value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Peserta Didik hanya boleh string dan spasi",
-      ], 
+      ],
       rule_nama_panggilan: [
         value => !!value || "Nama Panggilan Panggilan Peserta mohon untuk diisi !!!",
         value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Panggilan Peserta Didik hanya boleh string dan spasi",
       ],
       rule_nik: [
-        value => !!value || "Mohon NIK Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
+        value => !!value || "Mohon NIK Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",
         value => /^[0-9]+$/.test(value) || "NIk Peserta Didik hanya boleh angka",
-      ], 
+      ],
       rule_tempat_lahir: [
         value => !!value || "Tempat Lahir mohon untuk diisi !!!"
-      ], 
+      ],
       rule_tanggal_lahir: [
         value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"
-      ], 
+      ],
       rule_agama: [
         value => !!value || "Mohon agama Peserta Didik mohon untuk diisi !!!"
-      ], 
+      ],
       rule_tinggi: [
-        value => !!value || "Tinggi badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
+        value => !!value || "Tinggi badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",
         value => /^[0-9]+$/.test(value) || "Tinggi badan Peserta Didik hanya boleh angka",
-      ], 
+      ],
       rule_berat_badan: [
-        value => !!value || "Berat badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",  
+        value => !!value || "Berat badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",
         value => /^[0-9]+$/.test(value) || "Berat badan Peserta Didik hanya boleh angka",
-      ], 
+      ],
       rule_desa: [
-        value => !!value || "Mohon Desa untuk dipilih !!!"
-      ], 
+        value => !!value || "Mohon Desa untuk dipilih !!!",
+      ],
       rule_address1_rt: [
-        value => !!value || "Mohon RT untuk di isi !!!"
-      ], 
+        value => !!value || "Mohon RT untuk di isi !!!",
+      ],
       rule_address1_rw: [
-        value => !!value || "Mohon RW untuk di isi !!!"
-      ], 
+        value => !!value || "Mohon RW untuk di isi !!!",
+      ],
       rule_negara: [
-        value => !!value || "Mohon Kewarganegaraan  untuk dipilih !!!"
-      ], 
+        value => !!value || "Mohon Kewarganegaraan  untuk dipilih !!!",
+      ],
       rule_alamat_rumah: [
-        value => !!value || "Alamat Rumah mohon untuk diisi !!!"
-      ], 
+        value => !!value || "Alamat Rumah mohon untuk diisi !!!",
+      ],
       rule_kode_pos: [
         value => !!value || "Kode POS mohon untuk diisi !!!",
         value => /^[0-9]+$/.test(value) || "Kode pos hanya boleh angka", 
@@ -561,25 +559,25 @@
             return true;
           }
         }
-      ], 
+      ],
       rule_moda_transportasi: [
         value => !!value || "Mohon moda transportasi untuk dipilih !!!"
-      ], 
+      ],
       rule_jarak_ke_sekolah: [
         value => !!value || "Jarak ke sekolah mohon untuk diisi !!!",
         value => /^[0-9]+$/.test(value) || "Jarak ke sekolah hanya boleh angka",
-      ], 
+      ],
       rule_waktu_tempuh: [
         value => !!value || "Waktu tempuh ke sekolah mohon untuk diisi !!!",
         value => /^[0-9]+$/.test(value) || "Waktu sekolah ke sekolah hanya boleh angka",
-      ], 
+      ],
       rule_jenjang: [
         value => !!value || "Jenjang Studi mohon untuk dipilih !!!"
-      ], 
+      ],
       rule_nisn: [
         value => !!value || "NISN mohon untuk diisi !!!",
         value => /^[0-9]+$/.test(value) || "NISN hanya boleh angka",
-      ], 
+      ],
     }),
     methods: {
       initialize: async function()
@@ -607,7 +605,7 @@
           this.daftar_jenjang = data.jenjang_studi;
         });
             
-        await this.$ajax.get("/spsb/formulirpendaftaran/" + this.user_id,  
+        await this.$ajax.get("/spsb/formulirpendaftaran/" + this.user_id,
           {
             headers: {
               Authorization: this.$store.getters["auth/Token"]

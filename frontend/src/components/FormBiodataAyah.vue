@@ -267,47 +267,47 @@ export default {
     },
     rule_hubungan: [
       value => !!value || "Mohon hubungan dengan Ayah untuk dipilih !!!"
-    ], 
+    ],
     rule_nama_ayah: [
       value => !!value || "Nama Ayah mohon untuk diisi !!!",
       value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Ayah hanya boleh string dan spasi',
-    ], 
+    ],
     rule_tempat_lahir: [
       value => !!value || "Tempat Lahir mohon untuk diisi !!!"
-    ], 
+    ],
     rule_tanggal_lahir: [
       value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"
-    ], 
+    ],
     rule_agama: [
       value => !!value || "Mohon agama Ayah mohon untuk diisi !!!"
-    ], 
+    ],
     rule_desa: [
       value => !!value || "Mohon Desa untuk dipilih !!!"
-    ], 
+    ],
     rule_alamat_rumah: [
       value => !!value || "Alamat Rumah mohon untuk diisi !!!"
-    ], 
+    ],
     rule_negara: [
       value => !!value || "Mohon Kewarganegaraan  untuk dipilih !!!"
-    ], 
+    ],
     rule_nomorhp: [
       value => !!value || "Nomor HP mohon untuk diisi !!!",
       value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
-    ], 
+    ],
     rule_email: [
       value => !!value || "Email mohon untuk diisi !!!",
       v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
-    ],  
+    ],
     rule_pendidikan: [
       value => !!value || "Jenjang pendidikan mohon untuk diisi !!!", 
-    ], 
+    ],
     rule_pekerjaan_instansi: [
       value => !!value || "Pekerjaan beserta Instansi mohon untuk di isi !!!", 
-    ], 
+    ],
     rule_penghasilan: [
       value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
-      value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',  
-    ], 
+      value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',
+    ],
   }),
   methods: {
     initialize: async function()
@@ -323,7 +323,7 @@ export default {
         this.daftar_agama = data.agama;
       });
           
-      await this.$ajax.get('/spsb/formulirpendaftaran/biodataayah/' + this.user_id,  
+      await this.$ajax.get('/spsb/formulirpendaftaran/biodataayah/' + this.user_id,
         {
           headers: {
             Authorization: this.$store.getters["auth/Token"]

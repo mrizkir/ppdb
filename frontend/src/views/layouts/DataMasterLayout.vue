@@ -150,7 +150,7 @@
 <script>
   import {mapGetters} from "vuex";
   export default {
-    name: 'DataMasterLayout',  
+    name: 'DataMasterLayout',
     props: {
       showrightsidebar: {
         type:Boolean,
@@ -193,9 +193,9 @@
     },
     computed: {
       ...mapGetters('auth',{
-        AUTHENTICATED: 'Authenticated',  
-        ACCESS_TOKEN: 'AccessToken',  
-        TOKEN: 'Token',  
+        AUTHENTICATED: 'Authenticated',
+        ACCESS_TOKEN: 'AccessToken',
+        TOKEN: 'Token',
         ROLE: 'Role',
         CAN_ACCESS: 'can', 
         ATTRIBUTE_USER: 'AttributeUser',

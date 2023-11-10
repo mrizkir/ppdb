@@ -268,7 +268,7 @@ import {mapGetters} from "vuex";
 import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 export default {
-    name: 'UsersDosen',  
+    name: 'UsersDosen',
     created() {
         this.breadcrumbs = [
             {
@@ -336,31 +336,31 @@ export default {
             nidn: "",
             nipy: "",
             email: '',
-            nomor_hp: '',  
+            nomor_hp: '',
             is_dw: false, 
             created_at: '',
             updated_at: '',
         },
         //form rules        
         rule_user_name: [
-            value => !!value || "Mohon untuk di isi nama Dosen !!!",  
+            value => !!value || "Mohon untuk di isi nama Dosen !!!",
             value => /^[A-Za-z\s]*$/.test(value) || 'Nama Dosen hanya boleh string dan spasi',
-        ], 
+        ],
         rule_nipy: [
-            value => !!value || "Mohon untuk di isi Nomor Induk Pegawai Yayasan (NIPY) dari User ini !!!",  
-        ], 
+            value => !!value || "Mohon untuk di isi Nomor Induk Pegawai Yayasan (NIPY) dari User ini !!!",
+        ],
         rule_user_email: [
-            value => !!value || "Mohon untuk di isi email User !!!",  
+            value => !!value || "Mohon untuk di isi email User !!!",
             value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',
-        ], 
+        ],
         rule_user_nomorhp: [
             value => !!value || "Nomor HP mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
-        ], 
+        ],
         rule_user_username: [
-            value => !!value || "Mohon untuk di isi username User !!!",  
+            value => !!value || "Mohon untuk di isi username User !!!",
             value => /^[A-Za-z_]*$/.test(value) || 'Username hanya boleh string dan underscore', 
-        ], 
+        ],
         rule_user_password: [
             value => !!value || "Mohon untuk di isi password User !!!",
             value => {
@@ -372,7 +372,7 @@ export default {
                     return true;
                 }
             }
-        ], 
+        ],
         rule_user_passwordEdit: [
             value => {
                 if (value && typeof value !== 'undefined' && value.length > 0){
@@ -445,7 +445,7 @@ export default {
                             nidn: this.editedItem.nidn,
                             nipy: this.editedItem.nipy,
                             email: this.editedItem.email,
-                            nomor_hp: this.editedItem.nomor_hp,  
+                            nomor_hp: this.editedItem.nomor_hp,
                             username: this.editedItem.username,
                             password: this.editedItem.password, 
                             is_dw: this.editedItem.is_dw,
@@ -469,7 +469,7 @@ export default {
                             nidn: this.editedItem.nidn,
                             nipy: this.editedItem.nipy,
                             email: this.editedItem.email,
-                            nomor_hp: this.editedItem.nomor_hp,  
+                            nomor_hp: this.editedItem.nomor_hp,
                             username: this.editedItem.username,
                             password: this.editedItem.password,
                             is_dw: this.editedItem.is_dw,
@@ -518,7 +518,7 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH USER DOSEN' : 'EDIT USER DOSEN'
         },
         ...mapGetters('auth',{
-            ACCESS_TOKEN: 'AccessToken',  
+            ACCESS_TOKEN: 'AccessToken',
             TOKEN: 'Token',
         }),
     },

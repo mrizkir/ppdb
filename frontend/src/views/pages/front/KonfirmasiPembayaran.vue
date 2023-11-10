@@ -202,11 +202,11 @@ export default {
 		},
 		rule_username: [
 			value => !!value || "Kolom Username mohon untuk diisi !!!"
-		], 
+		],
 		//form rules  
 		rule_channel_pembayaran: [
 			value => !!value || "Mohon dipilih Channel Pembayaran mohon untuk dipilih !!!"
-		], 
+		],
 		rule_nama_pengirim: [
 			value => !!value || "Mohon diisi nama pengirim !!!"
 		],
@@ -219,15 +219,15 @@ export default {
 		],
 		rule_tanggal_bayar: [
 			value => !!value || "Tanggal Bayar mohon untuk diisi !!!"
-		], 
+		],
 		rule_bukti_bayar: [
-			value => !!value || "Mohon pilih foto !!!",  
+			value => !!value || "Mohon pilih foto !!!",
 			value =>!value || value.size < 2000000 || 'File Bukti Bayar harus kurang dari 2MB.'                
 		],
 		rule_total_bayar: [
 			value => !!value || "Dana yang  ditransfer mohon untuk untuk di isi !!!",
-			value => /^[0-9]+$/.test(value) || 'Dana yang  ditransfer hanya boleh angka',  
-		], 
+			value => /^[0-9]+$/.test(value) || 'Dana yang  ditransfer hanya boleh angka',
+		],
 	}),
 	methods: {
 		async checkUsername ()

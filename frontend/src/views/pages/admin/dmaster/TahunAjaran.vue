@@ -295,7 +295,7 @@ export default {
               }
             }
           ).then(({ data }) => {
-            Object.assign(this.datatable[this.editedIndex], data.ta);
+            Object.assign(this.datatable[this.editedIndex],data.ta);
             this.closedialogfrm();
             this.btnLoading = false;
           }).catch(() => {

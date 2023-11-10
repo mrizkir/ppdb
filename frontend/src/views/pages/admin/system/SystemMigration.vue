@@ -159,7 +159,7 @@ export default {
     data: () => ({
         firstloading: true,
         breadcrumbs: [],
-        tahun_pendaftaran: 0,  
+        tahun_pendaftaran: 0,
         
         //form
         form_valid: true, 
@@ -167,7 +167,7 @@ export default {
 
         daftar_jenjang: [],
         daftar_kelas: [],
-        daftar_dw: [],  
+        daftar_dw: [],
 
         daftar_tasmt: [],
         daftar_status_mhs: [],
@@ -183,24 +183,24 @@ export default {
         rule_nis: [
             value => !!value || "Nomor Induk Siswa (NIS) mohon untuk diisi !!!",
             value => /^[0-9]+$/.test(value) || 'Nomor Induk Siswa (NIS) hanya boleh angka',
-        ], 
+        ],
         rule_nirm: [
             value => !!value || "Nomor Induk Registrasi Masuk (NIRM) mohon untuk diisi !!!",
             value => /^[0-9]+$/.test(value) || 'Nomor Induk Registrasi Masuk (NIRM) hanya boleh angka',
-        ], 
+        ],
         rule_nama_mhs: [
             value => !!value || "Nama Siswa mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Siswa hanya boleh string dan spasi',
-        ], 
+        ],
         rule_jenjang: [
             value => !!value || "Program studi mohon untuk dipilih !!!"
-        ], 
+        ],
         rule_kelas: [
             value => !!value || "Kelas mohon untuk dipilih !!!"
         ],
         rule_dw: [
             value => !!value || "Mohon dipilih Dosen Wali untuk Siswa ini !!!"
-        ], 
+        ],
         
         datatableLoading: false,
         headers: [                                                
@@ -262,10 +262,10 @@ export default {
                         nirm: this.formdata.nirm,
                         nama_mhs: this.formdata.nama_mhs,
                         dosen_id: this.formdata.dosen_id,
-                        kode_jenjang: this.formdata.kode_jenjang,  
+                        kode_jenjang: this.formdata.kode_jenjang,
                         idkelas: this.formdata.idkelas,
                         tahun_pendaftaran: this.tahun_pendaftaran, 
-                        status_mhs:JSON.stringify(Object.assign({},this.formdata.status_mhs)),                                              
+                        status_mhs:JSON.stringify(Object.assign({},this.formdata.status_mhs)),                                            
                     },
                     {
                         headers: {

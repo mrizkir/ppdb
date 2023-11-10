@@ -291,7 +291,7 @@ import SystemUserLayout from '@/views/layouts/SystemUserLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 import UserPermissions from '@/views/pages/admin/system/UserPermissions';
 export default {
-    name: 'UsersKeuangan',  
+    name: 'UsersKeuangan',
     created() {
         this.breadcrumbs = [
             {
@@ -348,7 +348,7 @@ export default {
             email: '',
             nomor_hp: "",
             kode_jenjang: [],
-            role_id: ['keuangan'], 
+            role_id: ['keuangan'],
             created_at: '',
             updated_at: '',
         },
@@ -358,29 +358,29 @@ export default {
             password: '',
             name: '',
             email: '',
-            nomor_hp: '',  
-            kode_jenjang: [], 
-            role_id: ['keuangan'],  
+            nomor_hp: '',
+            kode_jenjang: [],
+            role_id: ['keuangan'],
             created_at: '',
             updated_at: '',
         },
         //form rules        
         rule_user_name: [
-            value => !!value || "Mohon untuk di isi nama User !!!",  
+            value => !!value || "Mohon untuk di isi nama User !!!",
             value => /^[A-Za-z\s]*$/.test(value) || 'Nama User hanya boleh string dan spasi',
-        ], 
+        ],
         rule_user_email: [
-            value => !!value || "Mohon untuk di isi email User !!!",  
+            value => !!value || "Mohon untuk di isi email User !!!",
             value => /.+@.+\..+/.test(value) || 'Format E-mail harus benar',
-        ], 
+        ],
         rule_user_nomorhp: [
             value => !!value || "Nomor HP mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
-        ], 
+        ],
         rule_user_username: [
-            value => !!value || "Mohon untuk di isi username User !!!",  
+            value => !!value || "Mohon untuk di isi username User !!!",
             value => /^[A-Za-z_]*$/.test(value) || 'Username hanya boleh string dan underscore', 
-        ], 
+        ],
         rule_user_password: [
             value => !!value || "Mohon untuk di isi password User !!!",
             value => {
@@ -392,7 +392,7 @@ export default {
                     return true;
                 }
             }
-        ], 
+        ],
         rule_user_passwordEdit: [
             value => {
                 if (value && typeof value !== 'undefined' && value.length > 0){
@@ -403,7 +403,7 @@ export default {
                     return true;
                 }
             }
-        ], 
+        ],
     }),
     methods: {
         initialize: async function() 
@@ -591,11 +591,11 @@ export default {
                             '_method': 'PUT',
                             name: this.editedItem.name,
                             email: this.editedItem.email,
-                            nomor_hp: this.editedItem.nomor_hp,  
+                            nomor_hp: this.editedItem.nomor_hp,
                             username: this.editedItem.username,
                             password: this.editedItem.password,
-                            kode_jenjang:JSON.stringify(Object.assign({},this.editedItem.kode_jenjang)),  
-                            role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),  
+                            kode_jenjang:JSON.stringify(Object.assign({},this.editedItem.kode_jenjang)),
+                            role_id:JSON.stringify(Object.assign({},this.editedItem.role_id)),
                         },
                         {
                             headers: {
@@ -603,7 +603,7 @@ export default {
                             }
                         }
                     ).then(({ data }) => {
-                        Object.assign(this.daftar_users[this.editedIndex], data.user);
+                        Object.assign(this.daftar_users[this.editedIndex],data.user);
                         this.close();
                     }).catch(() => {
                         this.btnLoading = false;
@@ -614,7 +614,7 @@ export default {
                         {
                             name: this.editedItem.name,
                             email: this.editedItem.email,
-                            nomor_hp: this.editedItem.nomor_hp,  
+                            nomor_hp: this.editedItem.nomor_hp,
                             username: this.editedItem.username,
                             password: this.editedItem.password, 
                             kode_jenjang:JSON.stringify(Object.assign({},this.editedItem.kode_jenjang)),
@@ -664,7 +664,7 @@ export default {
             return this.editedIndex === -1 ? 'TAMBAH USER KEUANGAN' : 'EDIT USER KEUANGAN'
         },
         ...mapGetters('auth',{
-            ACCESS_TOKEN: 'AccessToken',  
+            ACCESS_TOKEN: 'AccessToken',
             TOKEN: 'Token',
         }),
     },

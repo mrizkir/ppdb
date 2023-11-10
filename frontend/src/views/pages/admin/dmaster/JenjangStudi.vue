@@ -130,7 +130,7 @@
       this.initialize();
     },
     data: () => ({
-      breadcrumbs: [],  
+      breadcrumbs: [],
 
       btnLoading: false,
       datatableLoading: false,

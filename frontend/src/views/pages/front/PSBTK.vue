@@ -26,6 +26,37 @@
                   outlined
                   dense
                 />
+                <v-menu
+                  ref="menuTanggalLahir"
+                  v-model="menuTanggalLahir"
+                  :close-on-content-click="false"
+                  :return-value.sync="formdata.tanggal_lahir"
+                  transition="scale-transition"
+                  offset-y
+                  max-width="290px"
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      v-model="formdata.tanggal_lahir"
+                      label="TANGGAL LAHIR"       
+                      readonly
+                      outlined 
+                      dense
+                      v-on="on"
+                      :rules="rule_tanggal_lahir"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="formdata.tanggal_lahir"   
+                    no-title                                
+                    scrollable
+                    >
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menuTanggalLahir = false">Cancel</v-btn>
+                    <v-btn text color="primary" @click="$refs.menuTanggalLahir.save(formdata.tanggal_lahir)">OK</v-btn>
+                  </v-date-picker>
+                </v-menu>
                 <v-radio-group v-model="formdata.jk" row>
                   JENIS KELAMIN :
                   <v-radio label="LAKI-LAKI" value="L"></v-radio>
@@ -160,8 +191,10 @@
       //form
       form_valid: true,
       dialogkonfirmasipendaftaran: false,
+      menuTanggalLahir: false,
       formdata: {
         name: "",
+        tanggal_lahir: "",
         jk: "L",
         email: "",
         nomor_hp: "",
@@ -171,6 +204,7 @@
       },
       formdefault: {
         name: "",
+        tanggal_lahir: "",
         jk: "L",
         email: "",
         nomor_hp: "",
@@ -224,6 +258,7 @@
           await this.$ajax
             .post("/spsb/psb/store", {
               name: this.formdata.name,
+              tanggal_lahir: this.formdata.tanggal_lahir,
               jk: this.formdata.jk,
               email: this.formdata.email,
               nomor_hp: this.formdata.nomor_hp,

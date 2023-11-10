@@ -62,7 +62,7 @@
 <script>
 import {mapGetters} from "vuex";
 export default {
-    name: 'AdminLayout',  
+    name: 'AdminLayout',
     props: {
         showrightsidebar: {
             type:Boolean,
@@ -105,9 +105,9 @@ export default {
 	},
     computed: {
         ...mapGetters('auth',{
-            AUTHENTICATED: 'Authenticated',  
-            ACCESS_TOKEN: 'AccessToken',  
-            TOKEN: 'Token',  
+            AUTHENTICATED: 'Authenticated',
+            ACCESS_TOKEN: 'AccessToken',
+            TOKEN: 'Token',
             ROLE: 'Role',
             CAN_ACCESS: 'can', 
             ATTRIBUTE_USER: 'AttributeUser',

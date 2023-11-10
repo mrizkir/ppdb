@@ -94,12 +94,12 @@
       ],
       rule_status_pernikahan: [
         value => !!value || "Mohon Status Pernikahan untuk dipilih !!!"
-      ], 
+      ],
     }),
     methods: {
       initialize: async function()
       {
-        await this.$ajax.get("/spsb/formulirpendaftaran/situasikeluarga/" + this.user_id,  
+        await this.$ajax.get("/spsb/formulirpendaftaran/situasikeluarga/" + this.user_id,
           {
             headers: {
               Authorization: this.$store.getters["auth/Token"]

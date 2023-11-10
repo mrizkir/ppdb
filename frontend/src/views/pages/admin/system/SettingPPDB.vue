@@ -97,15 +97,15 @@ export default {
         btnLoading: false,
         //form
         form_valid: true, 
-        daftar_ta: [],  
+        daftar_ta: [],
         formdata: {
-            tahun_pendaftaran: "",  
-            buka_ppdb: false,  
+            tahun_pendaftaran: "",
+            buka_ppdb: false,
         },
         //form rules        
         rule_tahun_pendaftaran: [
-            value => !!value || "Mohon untuk di pilih tahun pendaftaran!!!",  
-        ], 
+            value => !!value || "Mohon untuk di pilih tahun pendaftaran!!!",
+        ],
     }),
     methods: {
         initialize: async function() 
@@ -139,7 +139,7 @@ export default {
                         setting:JSON.stringify({
                             203: this.formdata.tahun_pendaftaran, 
                             206: this.formdata.buka_ppdb, 
-                        }),                                                                
+                        }),                                                              
                     },
                     {
                         headers: {
@@ -156,7 +156,7 @@ export default {
     },
     computed: { 
         ...mapGetters('auth',{
-            ACCESS_TOKEN: 'AccessToken',  
+            ACCESS_TOKEN: 'AccessToken',
             TOKEN: 'Token',
         }),
     },

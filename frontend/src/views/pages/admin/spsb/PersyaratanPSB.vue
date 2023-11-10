@@ -289,7 +289,7 @@ import SPSBLayout from '@/views/layouts/SPSBLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 import Filter7 from '@/components/sidebar/FilterMode7';
 export default {
-    name: 'PendaftaranBaru',  
+    name: 'PendaftaranBaru',
     created() {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         this.breadcrumbs = [
@@ -349,9 +349,9 @@ export default {
         data_konfirmasi: {},
 
         //form data   
-        form_valid: true,  
+        form_valid: true,
         daftar_jenjang: [],
-        daftar_ta: [], 
+        daftar_ta: [],
         formdata: {
             name: "",
             email: "", 
@@ -361,7 +361,7 @@ export default {
             kode_jenjang: "", 
             ta: "",
             created_at: '',
-            updated_at: '',  
+            updated_at: '',
         },
         formdefault: {
             name: "",
@@ -379,27 +379,27 @@ export default {
         rule_name: [
             value => !!value || "Nama Siswa mohon untuk diisi !!!",
             value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Siswa hanya boleh string dan spasi',
-        ], 
+        ],
         rule_nomorhp: [
             value => !!value || "Nomor HP mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
-        ], 
+        ],
         rule_email: [
             value => !!value || "Email mohon untuk diisi !!!",
             v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
         ],
         rule_fakultas: [
             value => !!value || "Fakultas mohon untuk dipilih !!!"
-        ], 
+        ],
         rule_jenjang: [
             value => !!value || "Program studi mohon untuk dipilih !!!"
         ],
         rule_username: [
             value => !!value || "Username mohon untuk diisi !!!"
-        ], 
+        ],
         rule_password: [
             value => !!value || "Password mohon untuk diisi !!!"
-        ], 
+        ],
     }),
     methods: {
         changeTahunPendaftaran (tahun)
@@ -529,8 +529,8 @@ export default {
                             nomor_hp: this.formdata.nomor_hp,
                             kode_jenjang: this.formdata.kode_jenjang,
                             tahun_pendaftaran: this.formdata.ta,
-                            username: this.formdata.username,      
-                            password: this.formdata.password,  
+                            username: this.formdata.username,    
+                            password: this.formdata.password,
                         },
                         {
                             headers: {

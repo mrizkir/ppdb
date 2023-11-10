@@ -96,8 +96,8 @@
 		data: () => ({
 			dashboard:null,
 
-			btnSimpan: true,  
-			btnHapus: true,  
+			btnSimpan: true,
+			btnHapus: true,
 			btnVerifikasi: true,
 			btnLoading: false,
 			image_prev:null,
@@ -108,7 +108,7 @@
 			filepersyaratan: [],
 			//form rules  
 			rule_foto: [
-				value => !!value || "Mohon pilih foto !!!",  
+				value => !!value || "Mohon pilih foto !!!",
 				value =>!value || value.size < 2000000 || "File foto harus kurang dari 2MB."                
 			],
 		}),

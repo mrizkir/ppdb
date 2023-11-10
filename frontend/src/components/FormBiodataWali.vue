@@ -204,7 +204,7 @@ export default {
 
     menuTanggalLahir: false,
     
-    daftar_agama: [],   
+    daftar_agama: [],
 
     daftar_negara: [],
 
@@ -221,7 +221,7 @@ export default {
     desa_id: 0,
 
     formdata: {
-      nama_wali: "",      
+      nama_wali: "",    
       tempat_lahir: "",
       tanggal_lahir: "",
       idagama: 1,
@@ -239,43 +239,43 @@ export default {
     rule_nama_wali: [
       value => !!value || "Nama Wali mohon untuk diisi !!!",
       value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Wali hanya boleh string dan spasi',
-    ], 
+    ],
     rule_tempat_lahir: [
       value => !!value || "Tempat Lahir mohon untuk diisi !!!"
-    ], 
+    ],
     rule_tanggal_lahir: [
       value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"
-    ], 
+    ],
     rule_agama: [
       value => !!value || "Mohon agama Wali mohon untuk diisi !!!"
-    ], 
+    ],
     rule_desa: [
       value => !!value || "Mohon Desa untuk dipilih !!!"
-    ], 
+    ],
     rule_alamat_rumah: [
       value => !!value || "Alamat Rumah mohon untuk diisi !!!"
-    ], 
+    ],
     rule_negara: [
       value => !!value || "Mohon Kewarganegaraan  untuk dipilih !!!"
-    ], 
+    ],
     rule_nomorhp: [
       value => !!value || "Nomor HP mohon untuk diisi !!!",
       value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
-    ], 
+    ],
     rule_email: [
       value => !!value || "Email mohon untuk diisi !!!",
       v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
-    ],  
+    ],
     rule_pendidikan: [
       value => !!value || "Jenjang pendidikan mohon untuk diisi !!!", 
-    ], 
+    ],
     rule_pekerjaan_instansi: [
       value => !!value || "Pekerjaan beserta Instansi mohon untuk di isi !!!", 
-    ], 
+    ],
     rule_penghasilan: [
       value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
       value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',
-    ], 
+    ],
   }),
   methods: {
     initialize: async function()
@@ -291,7 +291,7 @@ export default {
         this.daftar_agama = data.agama;
       });
           
-      await this.$ajax.get('/spsb/formulirpendaftaran/biodatawali/' + this.user_id,  
+      await this.$ajax.get('/spsb/formulirpendaftaran/biodatawali/' + this.user_id,
         {
           headers: {
             Authorization: this.$store.getters["auth/Token"]
@@ -341,7 +341,7 @@ export default {
         this.btnLoading = true;
         await this.$ajax.post('/spsb/formulirpendaftaran/biodatawali/' + this.user_id, {
           _method: "put",
-          nama_wali: this.formdata.nama_wali,          
+          nama_wali: this.formdata.nama_wali,        
           tempat_lahir: this.formdata.tempat_lahir,
           tanggal_lahir: this.formdata.tanggal_lahir,
           idagama: this.formdata.idagama,

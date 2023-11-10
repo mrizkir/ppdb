@@ -603,7 +603,7 @@ export default {
                             }
                         }
                     ).then(({ data }) => {
-                        Object.assign(this.daftar_users[this.editedIndex], data.user);
+                        Object.assign(this.daftar_users[this.editedIndex],data.user);
                         this.close();
                     }).catch(() => {
                         this.btnLoading = false;

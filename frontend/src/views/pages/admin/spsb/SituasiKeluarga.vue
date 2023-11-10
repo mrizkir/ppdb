@@ -169,7 +169,7 @@ export default {
             { text: 'STATUS PERNIKAHAN ORTU', value: 'status_pernikahan', width: 100, sortable: true },
             { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
         ],
-        search: "",  
+        search: "",
         
         datapesertadidik: null
     }),

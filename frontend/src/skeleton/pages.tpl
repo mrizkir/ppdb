@@ -254,7 +254,7 @@ export default {
         },
         formdefault: {
             id: 0,
-            name: "",  
+            name: "",
             created_at: '',
             updated_at: '',
         },
@@ -264,11 +264,11 @@ export default {
         rule_user_nomorhp: [
             value => !!value || "Kode mohon untuk diisi !!!",
             value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Kode hanya boleh angka',
-        ], 
+        ],
         rule_name: [
-            value => !!value || "Mohon untuk di isi name !!!",  
+            value => !!value || "Mohon untuk di isi name !!!",
             value => /^[A-Za-z\s]*$/.test(value) || 'Name hanya boleh string dan spasi',
-        ], 
+        ],
     }),
     methods: {
         initialize: async function() 
@@ -329,7 +329,7 @@ export default {
                             }
                         }
                     ).then(({ data }) => {
-                        Object.assign(this.datatable[this.editedIndex], data.object);
+                        Object.assign(this.datatable[this.editedIndex],data.object);
                         this.closedialogfrm();
                         this.btnLoading = false;
                     }).catch(() => {

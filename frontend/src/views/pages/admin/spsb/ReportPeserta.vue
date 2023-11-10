@@ -144,7 +144,7 @@ import SPSBLayout from '@/views/layouts/SPSBLayout';
 import ModuleHeader from '@/components/ModuleHeader';
 import Filter7 from '@/components/sidebar/FilterMode7';
 export default {
-    name: 'PendaftaranBaru',  
+    name: 'PendaftaranBaru',
     created() {
         this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
         this.breadcrumbs = [
