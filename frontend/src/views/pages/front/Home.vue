@@ -84,7 +84,7 @@
             <v-card-title>
               BAGAN ALUR PROSES PENDAFTARAN
             </v-card-title>
-            <v-img :src="$api.url+'/storage/images/informasi/alur_pendaftaran.jpg'"></v-img>
+            <v-img :src="$api.url + '/storage/images/informasi/alur_pendaftaran.jpeg'"></v-img>
           </v-card>
         </v-col>
         <v-col xs="12" md="12" sm="12">
@@ -109,7 +109,7 @@
                     <div>
                       Seleksi PPDB terdiri dari 9 (Sembilan) tahapan. Sebelum melanjutkan pastikan terlebih dahulu :
                       <ol type="a">
-                        <li>Ananda sudah berusia min. <strong>4.5 tahun</strong> maks. <strong>7 Tahun</strong> pada 01 Juli {{ 2024 }}. <strong>untuk Jenjang Studi TK</strong></li>
+                        <li>Ananda sudah berusia min. <strong>4.5 tahun</strong> maks. <strong>6 Tahun</strong> pada 01 Juli {{ 2024 }}. <strong>untuk Jenjang Studi TK</strong></li>
                         <li>Ananda sudah berusia min. <strong>6 tahun</strong> maks. <strong>9 Tahun</strong> pada 01 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SD</strong></li>
                         <li>Ananda sudah berusia min. <strong>10 Tahun</strong> maks. <strong>15 tahun</strong> pada 01 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SMP</strong></li>
                         <li>Ananda sudah berusia min. <strong>13 Tahun</strong> maks. <strong>17 tahun</strong> pada 01 Juli {{ 2024 }}.<strong>untuk Jenjang Studi SMA</strong></li>
@@ -216,7 +216,7 @@
                     JADWAL INTERVIEW
                     </h2>
                     <div>
-                      Setelah pengisian formulir selesai, Panitia akan menghubungi nomor kontak WA pendaftar. Pada tahap ini, Panitia akan memberikan jadwal interview bagi orang tua/wali calon Peserta Didik Baru (PDB) dan observasi bagi calon PDB. Jadwal interview dan observasi berlangsung bersamaan bagi setiap keluarga dengan durasi 60 menit.  Jadwal yang telah difiksasi (disepakati melalui pesan WA) tidak dapat diubah, kecuali jika ada udzur syar’i.
+                      Setelah pengisian formulir selesai, Panitia akan menghubungi nomor kontak WA pendaftar. Pada tahap ini, Panitia akan memberikan jadwal interview bagi orang tua/wali calon Peserta Didik Baru (PDB) dan observasi bagi calon PDB. Jadwal interview dan observasi berlangsung bersamaan bagi setiap keluarga dengan durasi 60 menit.
                     </div>
                     <v-alert type="warning">
                       <div class="title">
@@ -236,10 +236,10 @@
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                      KESEPAKATAN KERJA SAMA (MoU) Pendidikan
+                      PEMAPARAN PROGRAM SEKOLAH
                     </h2>
                     <div>
-                      Pada waktu yang bersamaan, setelah jadwal interview dan observasi selesai dikomunikasikan, Panitia akan melanjutkan dengan memberikan informasi jadwal Zoom Meeting.  Kegiatan Zoom Meeting  dilaksanakan sebelum jadwal interview-observasi. Pelaksanaan kegiatan Zoom Meeting adalah pada hari Sabtu.  Tautan kegiatan ini akan dikirimkan oleh Panitia melalui nomor kontak WA pendaftar.  Zoom Meeting bersifat klasikal per jenjang TK/SD/SMP/SMA.  Topik pembahasan pada kegiatan tersebut, yaitu tentang konsep serta program sekolah pada masing-masing jenjang pendidikan di Sekolah Islam De Green Camp.  Kegiatan ini wajib diikuti oleh setiap orangtua/wali calon PDB.
+                      Pada waktu yang bersamaan, setelah jadwal interview dan observasi selesai dikomunikasikan, Panitia akan melanjutkan dengan memberikan informasi jadwal Zoom Meeting.  Kegiatan ini wajib diikuti oleh setiap orangtua/wali calon PDB.
                     </div>
                     <v-alert type="warning">
                       <div class="title">
@@ -257,10 +257,10 @@
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                      DISCLAIMER DAN PERSYARATAN
+                      OBSERVASI CALON PESERTA DIDIK
                     </h2>
                     <div>
-                      Pendaftar yang tidak menghadiri jadwal interview maupun observasi tanpa melakukan konfirmasi H-1 kepada Panitia akan dianggap mengundurkan diri. Saat menghadiri kegiatan ini, perndaftar harus membawa berkas asli akta kelahiran, KTP kedua orang tua/wali,d an KK yang sesuai dengan berkas unggah saat melakukan pendaftaran daring. Apabila berkas asli tidak dibawa, maka proses interview dan observasi dibatalkan atau tidak dapat dilaksanakan. Orang tua/wali juga akan diminta untuk menandatangani berkas bermaterai (materai Rp 10.000,- disiapkan oleh panitia).
+                      Pengamatan calon peserta didik oleh Observer.
                     </div>
                   </div>
                 </v-timeline-item>
@@ -272,12 +272,42 @@
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
+                      INTERVIEW ORANG TUA CALON PESERTA DIDIK
+                    </h2>
+                    <div>
+                      Proses ini wajib diikuti oleh kedua orang tua calon peserta didik.
+                    </div>
+                  </div>
+                </v-timeline-item>
+                <v-timeline-item small color="green">
+                  <template v-slot:opposite>
+                    <span :class="`headline font-weight-bold green--text`">
+                      TAHAP KE - 10
+                    </span>
+                  </template>
+                  <div class="py-4">
+                    <h2 :class="`headline font-weight-light mb-4`">
                       PENGUMUMAN HASIL SELEKSI
                     </h2>
                     <div>
                       Pengumuman hasil seleksi PPDB Sekolah Islam De Green Camp
                       akan disampaikan melalui kontak WA Pendaftar; selanjutnya
                       Keputusan Panitia tidak dapat diganggu gugat.
+                    </div>
+                  </div>
+                </v-timeline-item>
+                <v-timeline-item small color="green">
+                  <template v-slot:opposite>
+                    <span :class="`headline font-weight-bold green--text`">
+                      TAHAP KE - 11
+                    </span>
+                  </template>
+                  <div class="py-4">
+                    <h2 :class="`headline font-weight-light mb-4`">
+                      DISCLAIMER DAN PERSYARATAN
+                    </h2>
+                    <div>
+                      Pendaftar yang tidak menghadiri jadwal interview maupun observasi tanpa melakukan konfirmasi H-1 kepada Panitia akan dianggap mengundurkan diri. Saat menghadiri kegiatan ini, perndaftar harus membawa berkas asli akta kelahiran, KTP kedua orang tua/wali,d an KK yang sesuai dengan berkas unggah saat melakukan pendaftaran daring. Apabila berkas asli tidak dibawa, maka proses interview dan observasi dibatalkan atau tidak dapat dilaksanakan. Orang tua/wali juga akan diminta untuk menandatangani berkas bermaterai (materai Rp 10.000,- disiapkan oleh panitia).
                     </div>
                   </div>
                 </v-timeline-item>

@@ -38,9 +38,9 @@ class PSBController extends Controller
     switch($kode_jenjang)
     {
       case 1:
-        if($usia < 4.5 || $usia > 7.0 )
+        if($usia < 4.5 || $usia > 6.0 )
         {
-          throw new Exception("Usia siswa TK ($usia) diluar batas yang telah ditetapkan (4.5 s.d 7).");          
+          throw new Exception("Usia siswa TK ($usia) diluar batas yang telah ditetapkan (4.5 s.d 6).");          
         }
       break;
       case 2:
@@ -991,10 +991,10 @@ class PSBController extends Controller
     else
     {
       return Response()->json([
-                    'status'=>0,
-                    'pid'=>'fetchdata',        
-                    'message'=>['Peserta Didik gagal diperoleh.']
-                  ],422);
+        'status'=>0,
+        'pid'=>'fetchdata',        
+        'message'=>['Peserta Didik gagal diperoleh.']
+      ],422);
     }
 
   }   

@@ -4,7 +4,7 @@
       <v-form ref="frmdata" v-model="form_valid" lazy-validation>
         <v-card class="mb-4">
           <v-card-title>
-            DATA AYAH WALI
+            DATA AYAH
           </v-card-title>
           <v-card-text>
             <v-select
@@ -171,6 +171,31 @@
           </v-card-text>
         </v-card> 
         <v-card class="mb-4">
+          <v-card-title>
+            MEDIA SOSIAL
+          </v-card-title>
+          <v-card-text> 
+            <v-text-field
+              v-model="formdata.fb_account"
+              label="NAMA AKUN FACEBOOK"
+              :rules="rule_fb"
+              filled
+            />
+            <v-text-field
+              v-model="formdata.ig_account"
+              label="NAMA AKUN INSTAGRAM"
+              :rules="rule_ig"
+              filled
+            />
+            <v-text-field
+              v-model="formdata.tiktok_account"
+              label="NAMA AKUN TIKTOK"
+              :rules="rule_tiktok"
+              filled
+            />
+          </v-card-text>
+        </v-card> 
+        <v-card class="mb-4">
           <v-card-actions> 
             <v-spacer></v-spacer> 
             <v-btn 
@@ -262,7 +287,9 @@ export default {
       pendidikan: "",
       pekerjaan_instansi: "",
       penghasilan_bulanan: "",
-      
+      fb_account: "-",
+      ig_account: "-",
+      tiktok_account: "-",
       desc: "",
     },
     rule_hubungan: [
@@ -307,6 +334,15 @@ export default {
     rule_penghasilan: [
       value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
       value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',
+    ],
+    rule_fb: [
+      value => !!value || "Nama akun FB mohon untuk di isi bila tidak ada isi dengan '-'!!!", 
+    ],
+    rule_ig: [
+      value => !!value || "Nama akun IG mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
+    ],
+    rule_tiktok: [
+      value => !!value || "Nama akun TIKTOK mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
     ],
   }),
   methods: {

@@ -4,7 +4,7 @@
       <v-form ref="frmdata" v-model="form_valid" lazy-validation>
         <v-card class="mb-4">
           <v-card-title>
-            DATA IBU WALI                                                                       
+            DATA IBU                                                                       
           </v-card-title>
           <v-card-text>
             <v-select

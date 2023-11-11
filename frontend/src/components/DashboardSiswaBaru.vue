@@ -151,7 +151,7 @@
                 color="purple darken-1"
                 class="mx-0"
                 outlined
-                href="https://docs.google.com/forms/d/e/1FAIpQLScu2PeEKhCjsGNyFjpXnYwDOKEbiTUsxHLM_oztqioFfWXNxg/viewform?usp=sharing"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfU456TIgg0aGhcbc6kvnceFuH5VDgfffzip0Qrdi_SD9Vf5A/viewform?usp=sharing"
                 target="_blank"
               >
                 Isi Kuesioner
@@ -163,7 +163,7 @@
                 color="purple darken-1"
                 class="mx-0"
                 outlined
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfxUbAWWdQMQ6CUGrAivJ0T6o_wlIel6p1x8jHjjR9Aq9nA7w/viewform?usp=sharing"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSe61YmUopsDGJeCbUDYLRYtZhebvxoMzQwTxtLlsOjg7MB1IA/viewform?usp=sharing"
                 target="_blank"
               >
                 Isi Kuesioner
