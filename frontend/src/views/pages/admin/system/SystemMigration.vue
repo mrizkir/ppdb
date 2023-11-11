@@ -20,7 +20,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"           
+                    border="left"
                     colored-border
                     type="info"
                     >
@@ -46,13 +46,13 @@
                                 </v-alert>
                                 <v-text-field 
                                     v-model="formdata.nis"
-                                    label="NIS"   
-                                    :rules="rule_nis"                                                      
+                                    label="NIS"
+                                    :rules="rule_nis"
                                     outlined />
                                 <v-text-field 
                                     v-model="formdata.nirm"
                                     label="NIRM" 
-                                    :rules="rule_nirm"                                                           
+                                    :rules="rule_nirm" 
                                     outlined />
                                 <v-text-field
                                     label="NAMA LENGKAP"
@@ -93,7 +93,7 @@
                             <v-card-text>
                                 <v-data-table 
                                     :loading="datatableLoading"
-                                    loading-text="Loading... Please wait"                                                                             
+                                    loading-text="Loading... Please wait"
                                     :disable-pagination="true"
                                     :hide-default-footer="true"
                                     :headers="headers"
@@ -102,7 +102,7 @@
                                     dense> 
                                     <template v-slot:item.k_status="{ item }">
                                         <v-select       
-                                            v-model="formdata.status_mhs[daftar_tasmt.indexOf(item)]"                                                                       
+                                            v-model="formdata.status_mhs[daftar_tasmt.indexOf(item)]" 
                                             :items="daftar_status_mhs"
                                             item-text="text"
                                             item-value="id" />
@@ -162,7 +162,7 @@ export default {
         tahun_pendaftaran: 0,
         
         //form
-        form_valid: true, 
+        form_valid: true,
         btnLoading: false,
 
         daftar_jenjang: [],

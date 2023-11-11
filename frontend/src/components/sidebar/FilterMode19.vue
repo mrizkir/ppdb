@@ -3,12 +3,12 @@
         <v-list-item-content>
             <v-select
                 v-model="tahun_pendaftaran"
-                :items="daftar_ta"            
+                :items="daftar_ta"
                 label="TAHUN PENDAFTARAN"
                 outlined/>
             <v-select
                 v-model="semester_pendaftaran"
-                :items="daftar_semester"            
+                :items="daftar_semester"
                 item-text="text"
                 item-value="id"
                 label="SEMESTER PENDAFTARAN"

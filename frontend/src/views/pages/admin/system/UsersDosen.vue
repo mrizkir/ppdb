@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"           
+                    border="left"
                     colored-border
                     type="info"
                     >
@@ -66,7 +66,7 @@
                                     vertical
                                 ></v-divider>
                                 <v-spacer></v-spacer>
-                                <v-btn color="primary"                           
+                                <v-btn color="primary"
                                     class="mb-2" 
                                     :loading="btnLoading"
                                     :disabled="btnLoading"

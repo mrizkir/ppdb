@@ -170,7 +170,7 @@
             <v-text-field
               label="TEMPAT LAHIR"
               v-model="formdata.tempat_lahir" 
-              :rules="rule_tempat_lahir"          
+              :rules="rule_tempat_lahir"
               filled
             />
             <v-menu
@@ -186,7 +186,7 @@
               <template v-slot:activator="{ on }">
                 <v-text-field
                   v-model="formdata.tanggal_lahir"
-                  label="TANGGAL LAHIR"       
+                  label="TANGGAL LAHIR"
                   readonly
                   filled
                   v-on="on"
@@ -194,8 +194,8 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="formdata.tanggal_lahir"   
-                no-title                                
+                v-model="formdata.tanggal_lahir"
+                no-title
                 scrollable
                 >
                 <v-spacer></v-spacer>
@@ -228,13 +228,13 @@
             <v-text-field
               label="TINGGI (CM)"
               v-model="formdata.tinggi" 
-              :rules="rule_tinggi"          
+              :rules="rule_tinggi"
               filled
             />
             <v-text-field
               label="BERAT BADAN (KG)"
               v-model="formdata.berat_badan" 
-              :rules="rule_berat_badan"          
+              :rules="rule_berat_badan"
               filled
             />
             <v-select
@@ -245,7 +245,7 @@
             />
             <v-text-field
               label="PENYAKIT"
-              v-model="formdata.penyakit"             
+              v-model="formdata.penyakit"
               filled
             />
             <v-text-field
@@ -337,7 +337,7 @@
               v-model="formdata.kewarganegaraan"
               item-text="country_name"
               item-value="id" 
-              :rules="rule_negara"            
+              :rules="rule_negara"
               filled
             />
           </v-card-text>

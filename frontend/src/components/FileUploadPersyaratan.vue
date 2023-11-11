@@ -25,7 +25,7 @@
 				<v-btn
 					icon
 					:href="this.$api.url+'/' + this.item.path"
-					target="_blank"           
+					target="_blank"
 					v-if="verified == 1">
 					<v-icon>
 						mdi-download
@@ -35,7 +35,7 @@
 					color="orange"
 					text
 					@click="upload(index,item)"
-					:loading="btnLoading"                       
+					:loading="btnLoading"
 					:disabled="btnLoading||btnSimpan"
 					v-if="verified == 0">
 					Simpan
@@ -44,7 +44,7 @@
 					color="orange"
 					text
 					@click="hapusfilepersysaratan(item)"
-					:loading="btnLoading"                       
+					:loading="btnLoading"
 					:disabled="btnLoading||btnHapus"
 					v-if="verified == 0">
 					Hapus
@@ -53,7 +53,7 @@
 					color="orange"
 					text
 					@click="verifikasipersyaratan(item)"
-					:loading="btnLoading"                       
+					:loading="btnLoading"
 					:disabled="btnLoading||btnVerifikasi" 
 					v-if="dashboard != 'siswabaru' && verified == 0">
 					Verifikasi
@@ -109,7 +109,7 @@
 			//form rules  
 			rule_foto: [
 				value => !!value || "Mohon pilih foto !!!",
-				value =>!value || value.size < 2000000 || "File foto harus kurang dari 2MB."                
+				value =>!value || value.size < 2000000 || "File foto harus kurang dari 2MB."
 			],
 		}),
 		methods: {
@@ -147,7 +147,7 @@
 							{
 								headers: {
 									Authorization: this.$store.getters["auth/Token"],
-									"Content-Type": "multipart/form-data"                      
+									"Content-Type": "multipart/form-data"
 								}
 							}
 						).then(() => {

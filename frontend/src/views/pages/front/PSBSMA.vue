@@ -8,7 +8,7 @@
           </h1>
           <h3 class="text-center display-1 font-weight-black primary--text">
             JENJANG PENDIDIKAN MENENGAH ATAS
-          </h3> 
+          </h3>
           <h4 class="text-center title font-weight-black primary--text">
             TAHUN PELAJARAN {{ tahunPendaftaran | formatTA }}
           </h4>
@@ -39,7 +39,7 @@
                   <template v-slot:activator="{ on }">
                     <v-text-field
                       v-model="formdata.tanggal_lahir"
-                      label="TANGGAL LAHIR"       
+                      label="TANGGAL LAHIR"
                       readonly
                       outlined 
                       dense
@@ -48,8 +48,8 @@
                     ></v-text-field>
                   </template>
                   <v-date-picker
-                    v-model="formdata.tanggal_lahir"   
-                    no-title                                
+                    v-model="formdata.tanggal_lahir"
+                    no-title
                     scrollable
                     >
                     <v-spacer></v-spacer>
@@ -135,9 +135,9 @@
                   </v-text-field>
                   Transfer ke Rekening berikut : 
                   <v-alert type="info">
-                    BANK RIAU KEPRI SYARIAH <br>
-                    NOMOR REKENING : 821-21-28255 <br>
-                    A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br>
+                    BANK RIAU KEPRI SYARIAH <br />
+                    NOMOR REKENING : 821-21-28255 <br />
+                    A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br />
                   </v-alert>
                   <strong>SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.</strong>
                 </v-card-text>

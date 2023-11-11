@@ -141,9 +141,9 @@
                       Setelah tekan tombol "Daftar" maka akan muncul konfirmasi pendaftaran yang menyatakan proses pengisian form telah berhasil; 
                       dan disana juga memuat informasi biaya pendaftaran. Selanjutnya lakukan pembayaran dengan cara ditransfer ke :<br />
                       <v-alert type="tkinfo">
-                        BANK RIAU KEPRI SYARIAH <br>
-                        NOMOR REKENING : 821-21-28255 <br>
-                        A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br>												
+                        BANK RIAU KEPRI SYARIAH <br />
+                        NOMOR REKENING : 821-21-28255 <br />
+                        A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br />												
                       </v-alert>
                     </div>
                   </div>
@@ -362,7 +362,7 @@
       },
     },
     computed: {
-      ...mapGetters("uifront",{
+      ...mapGetters("uifront", {
         tahunPendaftaran: "getTahunPendaftaran",
       }),
     },

@@ -20,7 +20,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"           
+                    border="left"
                     colored-border
                     type="info"
                     >
@@ -76,16 +76,16 @@
                             </v-badge>
                         </template>
                         <template v-slot:item.file_fotoselfi="{ item }">
-                            {{item.file_fotoselfi==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>
+                            {{item.file_fotoselfi==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br />
                         </template>
                         <template v-slot:item.file_ktp_ayah="{ item }">
                             {{item.file_ktp_ayah==null || item.file_ktp_ibu==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}} <br >
                         </template>
                         <template v-slot:item.file_kk="{ item }">
-                            {{item.file_kk==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br> 
+                            {{item.file_kk==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br /> 
                         </template>
                         <template v-slot:item.file_aktalahir="{ item }">
-                            {{item.file_aktalahir==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br>
+                            {{item.file_aktalahir==null ?'BELUM DIUNGGAH': 'TELAH DIUNGGAH'}}<br />
                         </template>
                         <template v-slot:expanded-item="{ headers, item }">
                             <td :colspan="headers.length" class="text-center">

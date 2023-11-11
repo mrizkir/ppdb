@@ -3,7 +3,7 @@
     <v-list-item-content>
       <v-select
         v-model="tahun_ajaran"
-        :items="daftar_ta"       
+        :items="daftar_ta"
         label="TAHUN AJARAN"
         outlined/>
     </v-list-item-content>

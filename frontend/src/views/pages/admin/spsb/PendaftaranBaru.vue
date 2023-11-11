@@ -20,7 +20,7 @@
       <template v-slot:desc>
         <v-alert                                        
           color="cyan"
-          border="left"           
+          border="left"
           colored-border
           type="info"
           >
@@ -118,7 +118,7 @@
                         />
                         <v-select
                           v-model="formdata.ta"
-                          :items="daftar_ta"                                           
+                          :items="daftar_ta"
                           label="TAHUN PENDAFTARAN"
                           outlined
                         />
@@ -130,7 +130,7 @@
                         <v-text-field 
                           v-model="formdata.password"
                           label="PASSWORD" 
-                          type="password"                                                                    
+                          type="password"
                           outlined 
                           v-if="editedIndex>-1" />
                         <v-text-field 
@@ -340,7 +340,7 @@
                       <v-btn 
                         small 
                         class="primary" 
-                        @click.stop="aktifkan(formdata.id)"                                
+                        @click.stop="aktifkan(formdata.id)"
                         :disabled="btnLoading"
                         :loading="btnLoading"
                         v-if="data_konfirmasi.verified==0">
@@ -406,7 +406,7 @@
                   <v-btn 
                     small 
                     class="primary" 
-                    @click.stop="aktifkan(item.id)"                                
+                    @click.stop="aktifkan(item.id)"
                     :disabled="btnLoading"
                     :loading="btnLoading">
                       <v-icon>mdi-email-check</v-icon>

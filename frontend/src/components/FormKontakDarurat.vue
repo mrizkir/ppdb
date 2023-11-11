@@ -16,7 +16,7 @@
             <v-text-field
               label="HUBUNGAN DENGAN MURID"
               v-model="formdata.hubungan" 
-              :rules="rule_hubungan"          
+              :rules="rule_hubungan"
               filled
             />            
             <v-text-field

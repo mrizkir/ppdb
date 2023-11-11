@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"           
+                    border="left"
                     colored-border
                     type="info"
                     >
@@ -33,7 +33,7 @@
                             <v-card-text>
                                 <v-select
                                     v-model="formdata.tahun_pendaftaran"
-                                    :items="daftar_ta"       
+                                    :items="daftar_ta"
                                     label="TAHUN PENDAFTARAN"
                                     item-text="tahun_ajaran"
                                     item-value="tahun"
@@ -96,7 +96,7 @@ export default {
         datatableLoading: false,
         btnLoading: false,
         //form
-        form_valid: true, 
+        form_valid: true,
         daftar_ta: [],
         formdata: {
             tahun_pendaftaran: "",

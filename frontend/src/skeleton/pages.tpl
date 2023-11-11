@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"           
+                    border="left"
                     colored-border
                     type="info"
                     >
@@ -244,7 +244,7 @@ export default {
         dialogdetailitem: false,
 
         //form data   
-        form_valid: true, 
+        form_valid: true,
         formdata: {
             id: 0,
             name: "",

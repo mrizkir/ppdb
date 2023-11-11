@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"           
+                    border="left"
                     colored-border
                     type="info"
                     >
@@ -243,7 +243,7 @@ export default {
                 nama_kelas: 'N.A',
                 dosen_wali: 'N.A',
             },
-            form_valid: true, 
+            form_valid: true,
             formdata: {
                 id: 0,
                 username: "", 
@@ -348,7 +348,7 @@ export default {
                         {
                             headers: {
                                 Authorization: this.$store.getters["auth/Token"],
-                                "Content-Type": "multipart/form-data"                      
+                                "Content-Type": "multipart/form-data"
                             }
                         }
                     ).then(({ data }) => {

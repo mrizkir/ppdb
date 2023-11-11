@@ -101,9 +101,9 @@
                                     </v-text-field>
                                     Transfer ke Rekening berikut : 
                                     <v-alert type="info">
-                                        BANK RIAU KEPRI SYARIAH <br>
-                                        NOMOR REKENING : 821-31-02956 <br>
-                                        A.N : SEKOLAH DASAR ISLAM DE GREEN CAMP<br>
+                                        BANK RIAU KEPRI SYARIAH <br />
+                                        NOMOR REKENING : 821-31-02956 <br />
+                                        A.N : SEKOLAH DASAR ISLAM DE GREEN CAMP<br />
                                     </v-alert>
                                     <strong>SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.</strong>
                                 </v-card-text>
@@ -137,7 +137,7 @@ export default {
     data: () => ({
         btnLoading: false,
         //form
-        form_valid: true, 
+        form_valid: true,
         dialogkonfirmasipendaftaran: false,
         daftar_jenjang: [],
         kode_jenjang: "",
@@ -240,7 +240,7 @@ export default {
         },
     },
     computed: {
-        ...mapGetters("uifront",{
+        ...mapGetters("uifront", {
             sitekey: "getCaptchaKey",
             tahunPendaftaran: "getTahunPendaftaran",
             bukaPPDB: "getBukaPPDB",

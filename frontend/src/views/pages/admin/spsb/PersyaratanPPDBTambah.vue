@@ -43,7 +43,7 @@
                   color="orange"
                   text
                   @click="uploadFotoSelfi"
-                  :loading="btnLoadingFotoSelfi"                       
+                  :loading="btnLoadingFotoSelfi"
                   :disabled="!form_valid_foto_selfi||btnLoadingFotoSelfi">
                   UNGGAH
                 </v-btn>
@@ -82,7 +82,7 @@
                   color="orange"
                   text
                   @click="uploadKTPAyah"
-                  :loading="btnLoadingKTPAyah"                       
+                  :loading="btnLoadingKTPAyah"
                   :disabled="!form_valid_ktp_ayah||btnLoadingKTPAyah">
                   UNGGAH
                 </v-btn>
@@ -121,7 +121,7 @@
                   color="orange"
                   text
                   @click="uploadKTPIbu"
-                  :loading="btnLoadingKTPIbu"                       
+                  :loading="btnLoadingKTPIbu"
                   :disabled="!form_valid_ktp_ibu||btnLoadingKTPIbu">
                   UNGGAH
                 </v-btn>
@@ -160,7 +160,7 @@
                   color="orange"
                   text
                   @click="uploadKK"
-                  :loading="btnLoadingKK"                       
+                  :loading="btnLoadingKK"
                   :disabled="!form_valid_kk||btnLoadingKK">
                   UNGGAH
                 </v-btn>
@@ -199,7 +199,7 @@
                   color="orange"
                   text
                   @click="uploadAktaLahir"
-                  :loading="btnLoadingAktaLahir"                       
+                  :loading="btnLoadingAktaLahir"
                   :disabled="!form_valid_aktalahir||btnLoadingAktaLahir">
                   UNGGAH
                 </v-btn>
@@ -238,7 +238,7 @@
                   color="orange"
                   text
                   @click="uploadScreenShoot"
-                  :loading="btnLoadingScreenShoot"                       
+                  :loading="btnLoadingScreenShoot"
                   :disabled="!form_valid_screenshoot||btnLoadingScreenShoot">
                   UNGGAH
                 </v-btn>
@@ -253,7 +253,7 @@
               <v-card-text>                
                 <v-file-input 
                   accept="application/pdf,image/jpeg,image/png" 
-                  label="(.pdf, .png, atau .jpg) MAX 2MB"                  
+                  label="(.pdf, .png, atau .jpg) MAX 2MB"
                   show-size
                   v-model="filesertifikat">
                 </v-file-input>
@@ -275,7 +275,7 @@
                   color="orange"
                   text
                   @click="uploadSertifikat"
-                  :loading="btnLoadingSertifikat"                       
+                  :loading="btnLoadingSertifikat"
                   :disabled="btnLoadingSertifikat">
                   UNGGAH
                 </v-btn>
@@ -384,7 +384,7 @@ export default {
             {
               headers: {
                 Authorization: this.$store.getters["auth/Token"],
-                "Content-Type": "multipart/form-data"                      
+                "Content-Type": "multipart/form-data"
               }
             }
           ).then(() => {
@@ -409,7 +409,7 @@ export default {
             {
               headers: {
                 Authorization: this.$store.getters["auth/Token"],
-                "Content-Type": "multipart/form-data"                      
+                "Content-Type": "multipart/form-data"
               }
             }
           ).then(() => {
@@ -434,7 +434,7 @@ export default {
             {
               headers: {
                 Authorization: this.$store.getters["auth/Token"],
-                "Content-Type": "multipart/form-data"                      
+                "Content-Type": "multipart/form-data"
               }
             }
           ).then(() => {
@@ -459,7 +459,7 @@ export default {
             {
               headers: {
                 Authorization: this.$store.getters["auth/Token"],
-                "Content-Type": "multipart/form-data"                      
+                "Content-Type": "multipart/form-data"
               }
             }
           ).then(() => {
@@ -484,7 +484,7 @@ export default {
             {
               headers: {
                 Authorization: this.$store.getters["auth/Token"],
-                "Content-Type": "multipart/form-data"                      
+                "Content-Type": "multipart/form-data"
               }
             }
           ).then(() => {

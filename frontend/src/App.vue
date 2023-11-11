@@ -2,10 +2,10 @@
 	<v-app>
 		<router-view/>		
 		<v-snackbar v-model="snackbar_success" :color="snackbar_color" :top="true">
-			{{ page_message }}<br>			
+			{{ page_message }}<br />			
 		</v-snackbar>
 		<v-snackbar v-model="snackbar_error" :color="snackbar_color" :top="true">
-			{{ page_message }}<br>
+			{{ page_message }}<br />
 			<div v-for="err in page_form_error_message" v-bind:key="err.name">
 				<strong>{{err.field}}</strong>
 				<div v-for="error in err.error" v-bind:key="error.message">

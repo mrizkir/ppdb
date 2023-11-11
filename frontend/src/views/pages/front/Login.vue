@@ -82,7 +82,7 @@
             username: this.formlogin.username,
             password: this.formlogin.password
             }).then(({ data }) => {
-              this.$ajax.get("/auth/me",{
+              this.$ajax.get("/auth/me", {
                 headers: {
                   "Authorization": data.token_type+" " + data.access_token,
                 }

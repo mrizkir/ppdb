@@ -17,7 +17,7 @@
             <template v-slot:desc>
                 <v-alert                                        
                     color="cyan"
-                    border="left"           
+                    border="left"
                     colored-border
                     type="info"
                     >
@@ -207,7 +207,7 @@
                                             :headers="headersdetail"
                                             :items="permissions_selected"
                                             item-key="name"
-                                            sort-by="name"                                   
+                                            sort-by="name"
                                             class="elevation-1"
                                         >
                                         </v-data-table>

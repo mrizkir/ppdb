@@ -20,7 +20,7 @@
       <template v-slot:desc>
         <v-alert                                        
           color="cyan"
-          border="left"           
+          border="left"
           colored-border
           type="info"
         >
@@ -33,7 +33,7 @@
         <v-col cols="12">
           <v-data-table
             :headers="headers"
-            :items="datatable"               
+            :items="datatable"
             item-key="kode_jenjang"
             sort-by="kode_jenjang"
             show-expand

@@ -107,7 +107,7 @@
 									<template v-slot:activator="{ on }">
 										<v-text-field
 											v-model="formdata.tanggal_bayar"
-											label="TANGGAL BAYAR/TRANSFER"                                   
+											label="TANGGAL BAYAR/TRANSFER"
 											readonly
 											outlined
 											v-on="on"
@@ -115,8 +115,8 @@
 										></v-text-field>
 									</template>
 									<v-date-picker
-										v-model="formdata.tanggal_bayar"                               
-										no-title                                
+										v-model="formdata.tanggal_bayar"
+										no-title
 										scrollable
 										>
 										<v-spacer></v-spacer>
@@ -126,7 +126,7 @@
 								</v-menu>
 								<v-textarea 
 									v-model="formdata.desc"
-									label="CATATAN:"                                                           
+									label="CATATAN:" 
 									outlined />
 								<v-file-input 
 									accept="image/jpeg,image/png" 
@@ -313,7 +313,7 @@ export default {
 			}
 			
 		},
-		...mapGetters("uifront",{
+		...mapGetters("uifront", {
 			bukaPPDB: "getBukaPPDB",
 		}),
 	},

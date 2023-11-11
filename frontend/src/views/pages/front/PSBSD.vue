@@ -39,7 +39,7 @@
                   <template v-slot:activator="{ on }">
                     <v-text-field
                       v-model="formdata.tanggal_lahir"
-                      label="TANGGAL LAHIR"       
+                      label="TANGGAL LAHIR"
                       readonly
                       outlined 
                       dense
@@ -48,8 +48,8 @@
                     ></v-text-field>
                   </template>
                   <v-date-picker
-                    v-model="formdata.tanggal_lahir"   
-                    no-title                                
+                    v-model="formdata.tanggal_lahir"
+                    no-title
                     scrollable
                     >
                     <v-spacer></v-spacer>
@@ -134,9 +134,9 @@
                   </v-text-field>
                   Transfer ke Rekening berikut : 
                   <v-alert type="info">
-                    BANK RIAU KEPRI SYARIAH <br>
-                    NOMOR REKENING : 821-21-28255 <br>
-                    A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br>
+                    BANK RIAU KEPRI SYARIAH <br />
+                    NOMOR REKENING : 821-21-28255 <br />
+                    A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br />
                   </v-alert>
                   <strong>SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.</strong>
                 </v-card-text>
@@ -176,7 +176,7 @@
       btnLoading: false, 
       registerSD: null,
       //form
-      form_valid: true, 
+      form_valid: true,
       dialogkonfirmasipendaftaran: false,
       menuTanggalLahir: false,
       formdata: {
@@ -287,7 +287,7 @@
       },
     },
     computed: {
-      ...mapGetters("uifront",{
+      ...mapGetters("uifront", {
         sitekey: "getCaptchaKey",
         tahunPendaftaran: "getTahunPendaftaran",
         bukaPPDB: "getBukaPPDB",

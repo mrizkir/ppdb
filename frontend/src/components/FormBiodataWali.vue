@@ -16,7 +16,7 @@
             <v-text-field
               label="TEMPAT LAHIR"
               v-model="formdata.tempat_lahir" 
-              :rules="rule_tempat_lahir"          
+              :rules="rule_tempat_lahir"
               filled
             />
             <v-menu
@@ -32,7 +32,7 @@
               <template v-slot:activator="{ on }">
                 <v-text-field
                   v-model="formdata.tanggal_lahir"
-                  label="TANGGAL LAHIR"                                   
+                  label="TANGGAL LAHIR"
                   readonly
                   filled
                   v-on="on"
@@ -40,8 +40,8 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="formdata.tanggal_lahir"                               
-                no-title                                
+                v-model="formdata.tanggal_lahir"
+                no-title
                 scrollable
                 >
                 <v-spacer></v-spacer>
@@ -54,7 +54,7 @@
               :items="daftar_agama"
               v-model="formdata.idagama"
               item-text="nama_agama"
-              item-value="idagama"                    
+              item-value="idagama"
               :rules="rule_agama"
               filled
             />
@@ -116,7 +116,7 @@
               v-model="formdata.kewarganegaraan"
               item-text="country_name"
               item-value="id" 
-              :rules="rule_negara"                                        
+              :rules="rule_negara"
               filled
             />
             <v-text-field

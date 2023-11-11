@@ -16,13 +16,13 @@
             <v-select
               label="STATUS PERNIKAHAN ORANG TUA SAAT PENDAFTARAN"
               :items="daftar_status_penikahan"
-              v-model="formdata.status_pernikahan"                   
+              v-model="formdata.status_pernikahan"
               :rules="rule_status_pernikahan"
               filled
             />
             <v-textarea
               label="ANGGOTA KELUARGA/ORANG LAIN YANG TINGGAL SERUMAH TULISKAN SECARA TERPERICI"
-              v-model="formdata.desc"              
+              v-model="formdata.desc" 
               filled
             />
           </v-card-text>
