@@ -248,7 +248,7 @@ export default {
             });
             this.daftar_status_mhs=this.$store.getters['uiadmin/getDaftarStatusSiswa'];
 
-            this.firstloading=false;
+            this.firstloading = false;
             this.$refs.filter9.setFirstTimeLoading(this.firstloading); 
         },
         save () {

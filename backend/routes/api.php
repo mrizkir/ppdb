@@ -106,6 +106,8 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 	$router->post('/spsb/formulirpendaftaran/uploadfilekk/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@uploadfilekk','as'=>'formulirpendaftaran.uploadfilekk']);
 	$router->post('/spsb/formulirpendaftaran/uploadfileaktalahir/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@uploadfileaktalahir','as'=>'formulirpendaftaran.uploadfileaktalahir']);
 	$router->post('/spsb/formulirpendaftaran/uploadfilescreenshoot/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@uploadfilescreenshoot','as'=>'formulirpendaftaran.uploadfilescreenshoot']);
+	$router->post('/spsb/formulirpendaftaran/uploadfilesertifikat/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@uploadfilesertifikat','as'=>'formulirpendaftaran.uploadfilesertifikat']);
+	$router->post('/spsb/formulirpendaftaran/uploadfilenisn/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBController@uploadfilenisn','as'=>'formulirpendaftaran.uploadfilenisn']);
 
 	//spsb - report calon peserta didik
 	$router->get('/report/calonpesertadidik',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\ReportCalonPesertaDidikController@index','as'=>'reportcalonpesertadidik.index']);

@@ -118,7 +118,7 @@
 				if (typeof e === "undefined")
 				{
 					this.image_prev=null;
-					this.btnSimpan=true;
+					this.btnSimpan = true;
 				}
 				else
 				{
@@ -127,7 +127,7 @@
 					reader.onload = img => {
 						this.image_prev=img.target.result;
 					}
-					this.btnSimpan=false;
+					this.btnSimpan = false;
 				}
 			},
 			upload: async function (index,item)
@@ -137,7 +137,7 @@
 				{
 					if (typeof this.filepersyaratan[index] !== "undefined")
 					{
-						this.btnLoading=true;
+						this.btnLoading = true;
 						var formdata = new FormData();
 						formdata.append("nama_persyaratan", data.nama_persyaratan);
 						formdata.append("persyaratan_id", data.persyaratan_id);
@@ -151,8 +151,8 @@
 								}
 							}
 						).then(() => {
-							this.btnHapus=false;
-							this.btnSimpan=true;
+							this.btnHapus = false;
+							this.btnSimpan = true;
 							this.btnLoading = false;
 						}).catch(() => {
 							this.btnLoading = false;
@@ -175,7 +175,7 @@
 								}
 							}
 						).then(() => {
-							this.btnHapus=true;
+							this.btnHapus = true;
 							this.photoPersyaratan=require("@/assets/no-image.png");
 							this.btnLoading = false;
 						}).catch(() => {
@@ -188,15 +188,15 @@
 			{
 				if (item.path==null)
 				{
-					this.btnVerifikasi=true;
+					this.btnVerifikasi = true;
 				}
-				else if(item.verified==true)
+				else if(item.verified = true)
 				{
-					this.btnVerifikasi=true;
+					this.btnVerifikasi = true;
 				}
 				else
 				{
-					this.btnVerifikasi=false;
+					this.btnVerifikasi = false;
 				}
 				return this.btnVerifikasi;
 			},
@@ -215,8 +215,8 @@
 				).then(({ data }) => {
 					this.badgeColor = data.persyaratan.verified;
 					this.badgeIcon = data.persyaratan.verified;
-					this.btnHapus=true;
-					this.btnVerifikasi=true;
+					this.btnHapus = true;
+					this.btnVerifikasi = true;
 					this.btnLoading = false;
 				}).catch(() => {
 					this.btnLoading = false;

@@ -205,7 +205,7 @@ export default {
             this.datatable = data.psb;
             this.datatableLoading = false;
           }); 
-          this.firstloading=false;
+          this.firstloading = false;
           this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
       }
       

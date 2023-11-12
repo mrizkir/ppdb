@@ -30,7 +30,7 @@ export default {
 				case 'destroy' :
 				case 'resendemail' :
 					this.snackbar_color='success';
-					this.snackbar_success=true;
+					this.snackbar_success = true;
 					this.page_message = data.message;
 				break;
 			}
@@ -50,28 +50,28 @@ export default {
 						this.$store.dispatch('uifront/reinit');	
 						this.$store.dispatch('uiadmin/reinit');	
 						this.snackbar_color='error';
-						this.snackbar_error=true;	
+						this.snackbar_error = true;	
 						this.page_message='('+status+': '+data.error+') Token telah expire mohon login kembali';	
 					}
 				break;
 				case 403:
-					this.snackbar_error=true;						
+					this.snackbar_error = true;						
 					this.snackbar_color='error';
 					this.page_message='('+status+': Forbidden) '+data.message+' to access resource ['+config.baseURL+config.url+']';										
 				break;
 				case 404:
-					this.snackbar_error=true;						
+					this.snackbar_error = true;						
 					this.snackbar_color='error';
 					this.page_message='('+status+': '+data.error+') Mohon untuk dicek url route ('+config.baseURL+config.url+') apakah tersedia';										
 				break;
 				case 405:
-					this.snackbar_error=true;						
+					this.snackbar_error = true;						
 					this.snackbar_color='error';
 					this.page_message='('+status+': '+data.exception+') Mohon untuk dicek HTTP METHOD ';										
 				break;
 				case 422:
 					this.snackbar_color='error';
-					this.snackbar_error=true;	
+					this.snackbar_error = true;	
 					var error_messages=[];					
 					for (var p in data)
 					{
@@ -104,7 +104,7 @@ export default {
 					this.page_message='('+status+': Unprocessible Entity) ';	
 				break;				
 				case 500:			
-					this.snackbar_error=true;			
+					this.snackbar_error = true;			
 					this.snackbar_color='error';
 					this.page_message='('+status+' (internal server eror): '+data.message;										
 				break;

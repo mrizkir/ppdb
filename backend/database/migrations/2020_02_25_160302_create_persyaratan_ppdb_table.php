@@ -22,7 +22,9 @@ class CreatePersyaratanPPDBTable extends Migration
       $table->string('file_ktp_ibu')->nullable();            
       $table->string('file_kk')->nullable();            
       $table->string('file_aktalahir')->nullable();            
-      $table->string('file_screenshoot_medsos')->nullable();            
+      $table->string('file_screenshoot_medsos')->nullable();
+      $table->string('file_sertifikat')->nullable();
+      $table->string('file_nisn')->nullable();
       $table->timestamps();
 
 

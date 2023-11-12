@@ -298,7 +298,7 @@ export default {
         },
         viewItem (item) {
             this.formdata=item;
-            this.dialogdetailitem=true;
+            this.dialogdetailitem = true;
             // this.$ajax.get('/path/'+item.id,{
             //     headers: {
             //         Authorization: this.$store.getters["auth/Token"]
@@ -315,7 +315,7 @@ export default {
         save: async function() {
             if (this.$refs.frmdata.validate())
             {
-                this.btnLoading=true;
+                this.btnLoading = true;
                 if (this.editedIndex > -1) 
                 {
                     await this.$ajax.post('/path/' + this.formdata.id,
@@ -360,7 +360,7 @@ export default {
             this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus data dengan ID '+item.id+' ?', { color: 'red' }).then((confirm) => {
                 if (confirm)
                 {
-                    this.btnLoading=true;
+                    this.btnLoading = true;
                     this.$ajax.post('/path/'+item.id,
                         {
                             '_method': 'DELETE',

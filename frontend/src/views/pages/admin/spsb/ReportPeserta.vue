@@ -227,7 +227,7 @@ export default {
                 this.datatable = data.psb;
                 this.datatableLoading = false;
             });
-            this.firstloading=false;
+            this.firstloading = false;
             this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
         },
         badgeColor(item)
@@ -262,7 +262,7 @@ export default {
                 }
             }).then(({ data }) => {
                 this.file_pdf = data.pdf_file;
-                this.dialogprintpdf=true;
+                this.dialogprintpdf = true;
                 this.datatableLoading = false;
             }).catch(() => {
                 this.datatableLoading = false;

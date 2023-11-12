@@ -124,7 +124,7 @@ export default {
                 let setting = data.setting;
                 this.formdata.tahun_pendaftaran=parseInt(setting.DEFAULT_TAHUN_PENDAFTARAN);
                 this.formdata.buka_ppdb=setting.DEFAULT_BUKA_PPDB == '0'?false: true;
-                this.datatableLoading=false
+                this.datatableLoading = false
             });
             
         },

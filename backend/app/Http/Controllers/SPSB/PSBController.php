@@ -1640,7 +1640,7 @@ class PSBController extends Controller
         return Response()->json([
           'status'=>0,
           'pid'=>'update',
-          'message'=>["Extensi file yang diupload bukan jpg atau png."]
+          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -1687,7 +1687,7 @@ class PSBController extends Controller
         return Response()->json([
           'status'=>0,
           'pid'=>'store',
-          'message'=>["Extensi file yang diupload bukan jpg atau png."]
+          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -1733,7 +1733,7 @@ class PSBController extends Controller
         return Response()->json([
           'status'=>0,
           'pid'=>'store',
-          'message'=>["Extensi file yang diupload bukan jpg atau png."]
+          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -1780,7 +1780,7 @@ class PSBController extends Controller
         return Response()->json([
                     'status'=>0,
                     'pid'=>'store',
-                    'message'=>["Extensi file yang diupload bukan jpg atau png."]
+                    'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
                   ], 422);
         
 
@@ -1829,7 +1829,7 @@ class PSBController extends Controller
         return Response()->json([
                     'status'=>0,
                     'pid'=>'store',
-                    'message'=>["Extensi file yang diupload bukan jpg atau png."]
+                    'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
                   ], 422);
         
 
@@ -1877,7 +1877,145 @@ class PSBController extends Controller
         return Response()->json([
           'status'=>0,
           'pid'=>'store',
-          'message'=>["Extensi file yang diupload bukan jpg atau png."]
+          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+        ], 422);
+      }            
+    }
+  }
+  public function uploadfilesertifikat (Request $request,$id)
+  {
+    $formulir=PersyaratanPPDBModel::find($id);
+    if (is_null($formulir))
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+      ], 422);
+    }
+    else
+    {
+      $this->validate($request, [                      
+        'filesertifikat'=>'required'                        
+      ]);
+      $filesertifikat = $request->file('filesertifikat');
+      $mime_type=$filesertifikat->getMimeType();
+      if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
+      {
+        $folder=HelperPendaftaran::public_path('persyaratanppdb/');
+        $file_name=uniqid('sertifikat_').".".$filesertifikat->getClientOriginalExtension();
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_sertifikat))))                
+        {
+          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_sertifikat)));
+        }                
+        $formulir->file_sertifikat="storage/persyaratanppdb/$file_name";
+        $formulir->save();
+        $filesertifikat->move($folder,$file_name);
+        return Response()->json([
+          'status'=>1,
+          'pid'=>'store',       
+          'formulir'=>$formulir,                
+          'message'=>"File sertifikat berhasil diupload"
+        ], 200); 
+      }
+      else
+      {
+        return Response()->json([
+          'status'=>0,
+          'pid'=>'store',
+          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+        ], 422);
+      }            
+    }
+  }
+  public function uploadfilenisn (Request $request,$id)
+  {
+    $formulir=PersyaratanPPDBModel::find($id);
+    if (is_null($formulir))
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+      ], 422);
+    }
+    else
+    {
+      $this->validate($request, [                      
+        'filenisn'=>'required'                        
+      ]);
+      $filenisn = $request->file('filenisn');
+      $mime_type=$filenisn->getMimeType();
+      if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
+      {
+        $folder=HelperPendaftaran::public_path('persyaratanppdb/');
+        $file_name=uniqid('nisn_').".".$filenisn->getClientOriginalExtension();
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_nisn))))                
+        {
+          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_nisn)));
+        }                
+        $formulir->file_nisn="storage/persyaratanppdb/$file_name";
+        $formulir->save();
+        $filenisn->move($folder,$file_name);
+        return Response()->json([
+          'status'=>1,
+          'pid'=>'store',       
+          'formulir'=>$formulir,                
+          'message'=>"File nisn berhasil diupload"
+        ], 200); 
+      }
+      else
+      {
+        return Response()->json([
+          'status'=>0,
+          'pid'=>'store',
+          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+        ], 422);
+      }            
+    }
+  }
+  public function uploadfilekia (Request $request,$id)
+  {
+    $formulir=PersyaratanPPDBModel::find($id);
+    if (is_null($formulir))
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+      ], 422);
+    }
+    else
+    {
+      $this->validate($request, [                      
+        'filekia'=>'required'                        
+      ]);
+      $filekia = $request->file('filekia');
+      $mime_type=$filekia->getMimeType();
+      if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
+      {
+        $folder=HelperPendaftaran::public_path('persyaratanppdb/');
+        $file_name=uniqid('kia_').".".$filekia->getClientOriginalExtension();
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_kia))))                
+        {
+          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_kia)));
+        }                
+        $formulir->file_kia="storage/persyaratanppdb/$file_name";
+        $formulir->save();
+        $filekia->move($folder,$file_name);
+        return Response()->json([
+          'status'=>1,
+          'pid'=>'store',       
+          'formulir'=>$formulir,                
+          'message'=>"File kia berhasil diupload"
+        ], 200); 
+      }
+      else
+      {
+        return Response()->json([
+          'status'=>0,
+          'pid'=>'store',
+          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }

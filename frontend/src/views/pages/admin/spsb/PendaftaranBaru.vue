@@ -569,7 +569,7 @@ export default {
         this.datatable = data.psb;
         this.datatableLoading = false;
       });
-      this.firstloading=false;
+      this.firstloading = false;
       this.$refs.filter7.setFirstTimeLoading(this.firstloading); 
     },
     badgeColor(item)
@@ -742,7 +742,7 @@ export default {
       }).then(({ data }) => {
         this.formdata=item;
         this.data_konfirmasi = data.konfirmasi;
-        this.dialogdetailitem=true;
+        this.dialogdetailitem = true;
       });
     },
     async editItem (item) {

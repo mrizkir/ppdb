@@ -437,10 +437,10 @@ export default {
     {
       if (val.id != null && val.id != '')
       {
-        this.btnLoadingProv=true;
+        this.btnLoadingProv = true;
         this.$ajax.get('/datamaster/provinsi/'+val.id+'/kabupaten').then(({ data }) => {
           this.daftar_kabupaten = data.kabupaten;
-          this.btnLoadingProv=false;
+          this.btnLoadingProv = false;
         });
         this.daftar_kecamatan=[];
       }
@@ -449,10 +449,10 @@ export default {
     {
       if (val.id != null && val.id != '')
       {
-        this.btnLoadingKab=true;
+        this.btnLoadingKab = true;
         this.$ajax.get('/datamaster/kabupaten/'+val.id+'/kecamatan').then(({ data }) => {
           this.daftar_kecamatan = data.kecamatan;
-          this.btnLoadingKab=false;
+          this.btnLoadingKab = false;
         });
       }
     },
@@ -460,10 +460,10 @@ export default {
     {
       if (val.id != null && val.id != '')
       {
-        this.btnLoadingKec=true;
+        this.btnLoadingKec = true;
         this.$ajax.get('/datamaster/kecamatan/'+val.id+'/desa').then(({ data }) => {
           this.daftar_desa = data.desa;
-          this.btnLoadingKec=false;
+          this.btnLoadingKec = false;
         });
       }
     },
