@@ -66,7 +66,7 @@
               filled
             />
           </v-card-text>
-        </v-card> 
+        </v-card>
         <v-card class="mb-4">
           <v-card-title>
             ALAMAT
@@ -169,7 +169,7 @@
               filled
             />
           </v-card-text>
-        </v-card> 
+        </v-card>
         <v-card class="mb-4">
           <v-card-title>
             MEDIA SOSIAL
@@ -194,7 +194,7 @@
               filled
             />
           </v-card-text>
-        </v-card> 
+        </v-card>
         <v-card class="mb-4">
           <v-card-actions> 
             <v-spacer></v-spacer> 
@@ -219,7 +219,7 @@
 </template>
 <script>
 export default {
-  name: 'FormBiodataAyah',
+  name: "FormBiodataAyah",
   created()
   {
     this.initialize();
@@ -245,16 +245,16 @@ export default {
 
     daftar_hubungan: [
       {
-        value: 'AYAH_KANDUNG',
-        text: 'AYAH KANDUNG'
+        value: "AYAH_KANDUNG",
+        text: "AYAH KANDUNG"
       },
       {
-        value: 'AYAH_SAMBUNG',
-        text: 'AYAH SAMBUNG'
+        value: "AYAH_SAMBUNG",
+        text: "AYAH SAMBUNG"
       }, 
       {
-        value: 'AYAH_WALI',
-        text: 'AYAH WALI'
+        value: "AYAH_WALI",
+        text: "AYAH WALI"
       },
     ],
 
@@ -297,7 +297,7 @@ export default {
     ],
     rule_nama_ayah: [
       value => !!value || "Nama Ayah mohon untuk diisi !!!",
-      value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Ayah hanya boleh string dan spasi',
+      value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Ayah hanya boleh string dan spasi",
     ],
     rule_tempat_lahir: [
       value => !!value || "Tempat Lahir mohon untuk diisi !!!"
@@ -319,11 +319,11 @@ export default {
     ],
     rule_nomorhp: [
       value => !!value || "Nomor HP mohon untuk diisi !!!",
-      value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
+      value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || "Nomor HP hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388",
     ],
     rule_email: [
       value => !!value || "Email mohon untuk diisi !!!",
-      v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
+      v => /.+@.+\..+/.test(v) || "Format E-mail mohon di isi dengan benar",
     ],
     rule_pendidikan: [
       value => !!value || "Jenjang pendidikan mohon untuk diisi !!!", 
@@ -333,7 +333,7 @@ export default {
     ],
     rule_penghasilan: [
       value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
-      value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',
+      value => /^[0-9]+$/.test(value) || "Penghasilan hanya boleh angka",
     ],
     rule_fb: [
       value => !!value || "Nama akun FB mohon untuk di isi bila tidak ada isi dengan '-'!!!", 
@@ -348,18 +348,18 @@ export default {
   methods: {
     initialize: async function()
     {
-      this.$ajax.get('/datamaster/negara').then(({ data }) => {
+      this.$ajax.get("/datamaster/negara").then(({ data }) => {
         this.daftar_negara = data.negara;
       });
-      this.$ajax.get('/datamaster/provinsi').then(({ data }) => {
+      this.$ajax.get("/datamaster/provinsi").then(({ data }) => {
         this.daftar_provinsi = data.provinsi;
       });
       
-      await this.$ajax.get('/datamaster/agama').then(({ data }) => { 
+      await this.$ajax.get("/datamaster/agama").then(({ data }) => { 
         this.daftar_agama = data.agama;
       });
           
-      await this.$ajax.get('/spsb/formulirpendaftaran/biodataayah/' + this.user_id,
+      await this.$ajax.get("/spsb/formulirpendaftaran/biodataayah/" + this.user_id,
         {
           headers: {
             Authorization: this.$store.getters["auth/Token"]
@@ -399,8 +399,9 @@ export default {
         this.formdata.pendidikan = data.formulir.pendidikan;
         this.formdata.pekerjaan_instansi = data.formulir.pekerjaan_instansi;
         this.formdata.penghasilan_bulanan = data.formulir.penghasilan_bulanan;
-        
-        
+        this.formdata.fb_account = data.formulir.fb_account;
+        this.formdata.ig_account = data.formulir.ig_account;
+        this.formdata.tiktok_account = data.formulir.tiktok_account;
         this.$refs.frmdata.resetValidation();
       });
     },
@@ -409,7 +410,7 @@ export default {
       if (this.$refs.frmdata.validate())
       {
         this.btnLoading = true;
-        await this.$ajax.post('/spsb/formulirpendaftaran/biodataayah/' + this.user_id, {
+        await this.$ajax.post("/spsb/formulirpendaftaran/biodataayah/" + this.user_id, {
           _method: "put",
           nama_ayah: this.formdata.nama_ayah,
           hubungan: this.formdata.hubungan,
@@ -434,6 +435,9 @@ export default {
           pendidikan: this.formdata.pendidikan,
           pekerjaan_instansi: this.formdata.pekerjaan_instansi,
           penghasilan_bulanan: this.formdata.penghasilan_bulanan,
+          fb_account: formdata.fb_account,
+          ig_account: formdata.ig_account,
+          tiktok_account: formdata.tiktok_account,
         },
         {
           headers: {
@@ -452,9 +456,9 @@ export default {
     },
     kembali()
     {
-      if (this.$store.getters['uiadmin/getDefaultDashboard'] == 'siswabaru')
+      if (this.$store.getters["uiadmin/getDefaultDashboard"] == "siswabaru")
       {
-        this.$router.push('/dashboard/' + this.$store.getters['auth/AccessToken']);
+        this.$router.push("/dashboard/" + this.$store.getters["auth/AccessToken"]);
       }
       else
       {
@@ -465,10 +469,10 @@ export default {
   watch: {
     provinsi_id(val)
     {
-      if (val.id != null && val.id != '')
+      if (val.id != null && val.id != "")
       {
         this.btnLoadingProv=true;
-        this.$ajax.get('/datamaster/provinsi/'+val.id+'/kabupaten').then(({ data }) => {
+        this.$ajax.get("/datamaster/provinsi/" + val.id + "/kabupaten").then(({ data }) => {
           this.daftar_kabupaten = data.kabupaten;
           this.btnLoadingProv=false;
         });
@@ -477,10 +481,10 @@ export default {
     },
     kabupaten_id(val)
     {
-      if (val.id != null && val.id != '')
+      if (val.id != null && val.id != "")
       {
         this.btnLoadingKab=true;
-        this.$ajax.get('/datamaster/kabupaten/'+val.id+'/kecamatan').then(({ data }) => {
+        this.$ajax.get("/datamaster/kabupaten/" + val.id + "/kecamatan").then(({ data }) => {
           this.daftar_kecamatan = data.kecamatan;
           this.btnLoadingKab=false;
         });
@@ -488,10 +492,10 @@ export default {
     },
     kecamatan_id(val)
     {
-      if (val.id != null && val.id != '')
+      if (val.id != null && val.id != "")
       {
         this.btnLoadingKec=true;
-        this.$ajax.get('/datamaster/kecamatan/'+val.id+'/desa').then(({ data }) => {
+        this.$ajax.get("/datamaster/kecamatan/" + val.id + "/desa").then(({ data }) => {
           this.daftar_desa = data.desa;
           this.btnLoadingKec=false;
         });

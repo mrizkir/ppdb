@@ -32,7 +32,7 @@
               filled
             />
           </v-card-text>
-        </v-card> 
+        </v-card>
         <v-card class="mb-4">
           <v-card-actions> 
             <v-spacer></v-spacer> 

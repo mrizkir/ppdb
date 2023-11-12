@@ -156,7 +156,7 @@
                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                             </v-row>
                         </v-card-text>
-                    </v-card> 
+                    </v-card>
                 </v-col>
             </v-row>
             <v-row> 

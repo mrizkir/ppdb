@@ -18,7 +18,7 @@
                 Isian Ananda
               </v-btn>
             </v-card-text> 
-          </v-card> 
+          </v-card>
         </v-timeline-item>
         <v-timeline-item color="indigo" icon="mdi-roman-numeral-2" fill-dot>
           <v-card color="indigo" dark>
@@ -54,7 +54,7 @@
                 Isian Biodata Ayah   
               </v-btn> 
             </v-card-text> 
-          </v-card> 
+          </v-card>
         </v-timeline-item> 
         <v-timeline-item color="green lighten-1" icon="mdi-roman-numeral-4" fill-dot>
           <v-card color="green lighten-1" dark>

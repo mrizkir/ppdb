@@ -66,7 +66,7 @@
               filled
             />
           </v-card-text>
-        </v-card> 
+        </v-card>
         <v-card class="mb-4">
           <v-card-title>
             ALAMAT
@@ -169,7 +169,32 @@
               filled
             />
           </v-card-text>
-        </v-card> 
+        </v-card>
+        <v-card class="mb-4">
+          <v-card-title>
+            MEDIA SOSIAL
+          </v-card-title>
+          <v-card-text> 
+            <v-text-field
+              v-model="formdata.fb_account"
+              label="NAMA AKUN FACEBOOK"
+              :rules="rule_fb"
+              filled
+            />
+            <v-text-field
+              v-model="formdata.ig_account"
+              label="NAMA AKUN INSTAGRAM"
+              :rules="rule_ig"
+              filled
+            />
+            <v-text-field
+              v-model="formdata.tiktok_account"
+              label="NAMA AKUN TIKTOK"
+              :rules="rule_tiktok"
+              filled
+            />
+          </v-card-text>
+        </v-card>
         <v-card class="mb-4">
           <v-card-actions> 
             <v-spacer></v-spacer> 
@@ -262,8 +287,10 @@ export default {
       pendidikan: "",
       pekerjaan_instansi: "",
       penghasilan_bulanan: "",
-      
       desc: "",
+      fb_account: "-",
+      ig_account: "-",
+      tiktok_account: "-",
     },
     rule_hubungan: [
       value => !!value || "Mohon hubungan dengan Ibu untuk dipilih !!!"
@@ -307,6 +334,15 @@ export default {
     rule_penghasilan: [
       value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
       value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',
+    ],
+    rule_fb: [
+      value => !!value || "Nama akun FB mohon untuk di isi bila tidak ada isi dengan '-'!!!", 
+    ],
+    rule_ig: [
+      value => !!value || "Nama akun IG mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
+    ],
+    rule_tiktok: [
+      value => !!value || "Nama akun TIKTOK mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
     ],
   }),
   methods: {
@@ -363,8 +399,9 @@ export default {
         this.formdata.pendidikan = data.formulir.pendidikan;
         this.formdata.pekerjaan_instansi = data.formulir.pekerjaan_instansi;
         this.formdata.penghasilan_bulanan = data.formulir.penghasilan_bulanan;
-        
-        
+        this.formdata.fb_account = data.formulir.fb_account;
+        this.formdata.ig_account = data.formulir.ig_account;
+        this.formdata.tiktok_account = data.formulir.tiktok_account;
         this.$refs.frmdata.resetValidation();
       });
     },
@@ -397,7 +434,10 @@ export default {
           akun_medsos: this.formdata.akun_medsos,
           pendidikan: this.formdata.pendidikan,
           pekerjaan_instansi: this.formdata.pekerjaan_instansi,
-          penghasilan_bulanan: this.formdata.penghasilan_bulanan,
+          penghasilan_bulanan: formdata.penghasilan_bulanan,
+          fb_account: formdata.fb_account,
+          ig_account: formdata.ig_account,
+          tiktok_account: formdata.tiktok_account,
         },
         {
           headers: {
