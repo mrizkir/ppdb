@@ -249,7 +249,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(()=>{
+                    ).then(() => {
                         this.initialize();
                         this.close();
                     }).catch(() => {
@@ -272,7 +272,7 @@ export default {
                             Authorization: this.TOKEN
                         }
                     }
-                    ).then(()=>{
+                    ).then(() => {
                         const index = this.daftar_permissions.indexOf(item);
                         this.daftar_permissions.splice(index, 1);
                         this.btnLoading = false;

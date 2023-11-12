@@ -180,7 +180,7 @@ export default {
                         Authorization: this.TOKEN
                     }
                 }
-            ).then(()=>{
+            ).then(() => {
                 this.close();
             }).catch(() => {
                 this.btnLoading = false;
@@ -199,7 +199,7 @@ export default {
                         Authorization: this.TOKEN
                     }
                 }
-            ).then(()=>{
+            ).then(() => {
                 this.close();
             }).catch(() => {
                 this.btnLoading = false;

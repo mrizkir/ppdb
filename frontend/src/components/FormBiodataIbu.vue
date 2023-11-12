@@ -436,7 +436,7 @@ export default {
             Authorization: this.$store.getters["auth/Token"],
           },
         }
-        ).then(()=>{
+        ).then(() => {
           this.btnLoading = false;
           this.$router.go();
         }).catch(() => {

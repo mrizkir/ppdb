@@ -54,6 +54,11 @@ class CreateFormulirPendaftaranATable extends Migration
       $table->string('jarak_ke_sekolah')->nullable();
       $table->string('waktu_tempuh')->nullable();
 
+      $table->string('sibling_tk')->nullable();
+      $table->string('sibling_sd')->nullable();
+      $table->string('sibling_smp')->nullable();
+      $table->string('sibling_sma')->nullable();
+
       $table->tinyInteger('kode_jenjang');
       $table->year('ta');
       

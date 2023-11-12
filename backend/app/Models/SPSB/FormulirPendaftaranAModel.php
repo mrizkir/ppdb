@@ -60,10 +60,13 @@ class FormulirPendaftaranAModel extends Model {
     'id_moda',
     'jarak_ke_sekolah',
     'waktu_tempuh',
-
+    'sibling_tk',
+    'sibling_sd',
+    'sibling_smp',
+    'sibling_sma',
     'kode_jenjang',
-    'ta',
 
+    'ta',
     'desc'
   ];
   /**

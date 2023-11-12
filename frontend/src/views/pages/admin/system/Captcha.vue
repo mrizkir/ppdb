@@ -141,7 +141,7 @@ export default {
                             Authorization: this.TOKEN
                         }
                     }
-                ).then(()=>{
+                ).then(() => {
                     this.btnLoading = false;
                 }).catch(() => {
                     this.btnLoading = false;

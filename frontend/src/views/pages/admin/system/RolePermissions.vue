@@ -146,7 +146,7 @@ export default {
                         Authorization: this.TOKEN
                     }
                 }
-            ).then(()=>{
+            ).then(() => {
                 this.btnLoading = false;
                 this.close();
             }).catch(() => {
@@ -166,7 +166,7 @@ export default {
                         Authorization: this.TOKEN
                     }
                 }
-            ).then(()=>{
+            ).then(() => {
                 this.btnLoading = false;
                 this.close();
             }).catch(() => {

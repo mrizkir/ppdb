@@ -443,7 +443,7 @@ export default {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 }
-            ).then(()=>{
+            ).then(() => {
                 this.btnLoading = false;
             }).catch(() => {
                 this.btnLoading = false;
@@ -648,7 +648,7 @@ export default {
                                 Authorization: this.TOKEN
                             }
                         }
-                    ).then(()=>{
+                    ).then(() => {
                         const index = this.daftar_users.indexOf(item);
                         this.daftar_users.splice(index, 1);
                         this.btnLoading = false;

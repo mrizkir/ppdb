@@ -59,7 +59,7 @@
                     </td>
                     <td>
                       <v-text-field
-                        v-model="formdata.nama_saudara_mendaftar_1"
+                        v-model="formdata.sibling_tk"
                         label="NAMA SISWA"
                         :disabled="saudara_mendaftar_tidak"
                       />
@@ -76,7 +76,7 @@
                     </td>
                     <td>
                       <v-text-field
-                        v-model="formdata.nama_saudara_mendaftar_2"
+                        v-model="formdata.sibling_sd"
                         label="NAMA SISWA"
                         :disabled="saudara_mendaftar_tidak"
                       />
@@ -93,7 +93,7 @@
                     </td>
                     <td>
                       <v-text-field
-                        v-model="formdata.nama_saudara_mendaftar_3"
+                        v-model="formdata.sibling_smp"
                         label="NAMA SISWA"
                         :disabled="saudara_mendaftar_tidak"
                       />
@@ -110,7 +110,7 @@
                     </td>
                     <td>
                       <v-text-field
-                        v-model="formdata.nama_saudara_mendaftar_4"
+                        v-model="formdata.sibling_sma"
                         label="NAMA SISWA"
                         :disabled="saudara_mendaftar_tidak"
                       />
@@ -376,15 +376,19 @@
             <v-btn 
               color="grey darken-1" 
               text 
-              @click.stop="kembali">
-                KEMBALI
+              @click.stop="kembali"
+            >
+              KEMBALI
             </v-btn>
             <v-btn 
               color="blue darken-1" 
               text 
               @click.stop="save" 
               :loading="btnLoading"
-              :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
+              :disabled="!form_valid || btnLoading"
+            >
+              SIMPAN
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-form>
@@ -474,10 +478,10 @@
         idagama: 1,
         id_kebutuhan_khusus: 1,
         saudara_mendaftar: [],
-        nama_saudara_mendaftar_1: null,
-        nama_saudara_mendaftar_2: null,
-        nama_saudara_mendaftar_3: null,
-        nama_saudara_mendaftar_4: null,
+        sibling_tk: null,
+        sibling_sd: null,
+        sibling_smp: null,
+        sibling_sma: null,
 
         alamat_tempat_tinggal: "",
         address1_rt: "",
@@ -497,11 +501,7 @@
         id_moda: "",
         jarak_ke_sekolah: "",
         waktu_tempuh: "",
-        
         kode_jenjang: "",
-        ta: "",
-
-        desc: "",
       },
       rule_nama_siswa: [
         value => !!value || "Nama Peserta Didik mohon untuk diisi !!!",
@@ -580,8 +580,7 @@
       ],
     }),
     methods: {
-      initialize: async function()
-      {
+      initialize: async function() {
         this.$ajax.get("/datamaster/negara").then(({ data }) => {
           this.daftar_negara = data.negara;
         });
@@ -612,7 +611,8 @@
             }
           },
           
-        ).then(({ data }) => {
+        )
+        .then(({ data }) => {
           this.formdata.nama_siswa = data.formulir.nama_siswa;
           this.formdata.nisn = data.formulir.nisn;
           this.formdata.nama_panggilan = data.formulir.nama_panggilan;
@@ -658,7 +658,27 @@
           this.formdata.id_moda = data.formulir.id_moda;
           this.formdata.jarak_ke_sekolah = data.formulir.jarak_ke_sekolah;
           this.formdata.waktu_tempuh = data.formulir.waktu_tempuh;
-          
+          this.saudara_mendaftar_tidak = !(data.formulir.sibling_tk.length > 0 || data.formulir.sibling_sd.length > 0 || data.formulir.sibling_smp.length > 0 || data.formulir.sibling_sma.length > 0);
+          if(!this.saudara_mendaftar_tidak) {
+            var sm = [];
+            if(data.formulir.sibling_tk.length > 0) {              
+              sm.push("1");
+            }
+            if(data.formulir.sibling_sd.length > 0) {
+              sm.push("2");
+            }
+            if(data.formulir.sibling_smp.length > 0) {
+              sm.push("3");
+            }
+            if(data.formulir.sibling_sma.length > 0) {
+              sm.push("4");
+            }            
+            this.formdata.saudara_mendaftar = sm;
+          }
+          this.formdata.sibling_tk = data.formulir.sibling_tk;
+          this.formdata.sibling_sd = data.formulir.sibling_sd;
+          this.formdata.sibling_smp = data.formulir.sibling_smp;
+          this.formdata.sibling_sma = data.formulir.sibling_sma;
           this.formdata.kode_jenjang = data.formulir.kode_jenjang;
           
           this.$refs.frmdata.resetValidation();
@@ -705,7 +725,12 @@
             id_moda: this.formdata.id_moda,
             jarak_ke_sekolah: this.formdata.jarak_ke_sekolah,
             waktu_tempuh: this.formdata.waktu_tempuh,
-            
+            saudara_mendaftar_tidak: this.saudara_mendaftar_tidak == true ? 1 : 0,
+            saudara_mendaftar: this.formdata.saudara_mendaftar,
+            sibling_tk: this.formdata.sibling_tk,
+            sibling_sd: this.formdata.sibling_sd,
+            sibling_smp: this.formdata.sibling_smp,
+            sibling_sma: this.formdata.sibling_sma,
             kode_jenjang: this.formdata.kode_jenjang,
           },
           {
@@ -713,10 +738,12 @@
               Authorization: this.$store.getters["auth/Token"]
             }
           }
-          ).then(()=>{
+          )
+          .then(() => {
             this.btnLoading = false;
             this.$router.go();
-          }).catch(() => {
+          })
+          .catch(() => {
             this.btnLoading = false;
           }); 
           this.form_valid = true; 
@@ -771,10 +798,10 @@
       saudara_mendaftar_tidak(val) {
         if (val == true) {
           this.formdata.saudara_mendaftar = [];
-          this.formdata.nama_saudara_mendaftar_1 = null;
-          this.formdata.nama_saudara_mendaftar_2 = null;
-          this.formdata.nama_saudara_mendaftar_3 = null;
-          this.formdata.nama_saudara_mendaftar_4 = null;
+          this.formdata.sibling_tk = null;
+          this.formdata.sibling_sd = null;
+          this.formdata.sibling_smp = null;
+          this.formdata.sibling_sma = null;
         }
       },
     },

@@ -460,7 +460,7 @@ export default {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 }
-            ).then(()=>{
+            ).then(() => {
                 this.initialize();
                 this.btnLoading = false;
             }).catch(() => {
@@ -537,7 +537,7 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(()=>{
+                    ).then(() => {
                         this.initialize();
                         this.closedialogfrm();
                         this.btnLoading = false;
@@ -583,7 +583,7 @@ export default {
                         Authorization: this.$store.getters["auth/Token"]
                     }
                 }
-            ).then(()=>{
+            ).then(() => {
                 this.closedialogdetailitem();
                 this.btnLoading = false;
             }).catch(() => {
@@ -626,7 +626,7 @@ export default {
                                 Authorization: this.$store.getters["auth/Token"]
                             }
                         }
-                    ).then(()=>{
+                    ).then(() => {
                         const index = this.datatable.indexOf(item);
                         this.datatable.splice(index, 1);
                         this.btnLoading = false;

@@ -510,7 +510,30 @@ class PSBController extends Controller
           'kode_jenjang'=>$request->input('kode_jenjang'),
           'ta'=>$ta,
         ]);
-  
+        
+        FormulirPendaftaranBModel::create([
+          'user_id'=>$user->id,                
+        ]);
+        FormulirPendaftaranCModel::create([
+          'user_id'=>$user->id,            
+          'nomor_hp'=>$request->input('nomor_hp'),
+        ]);
+        FormulirPendaftaranDModel::create([
+          'user_id'=>$user->id,            
+          'nomor_hp'=>$request->input('nomor_hp'),
+        ]);
+        FormulirPendaftaranEModel::create([
+          'user_id'=>$user->id,            
+          'nomor_hp'=>$request->input('nomor_hp'),
+        ]);
+        FormulirPendaftaranFModel::create([
+          'user_id'=>$user->id,            
+          'nomor_hp'=>$request->input('nomor_hp'),
+        ]);
+        PersyaratanPPDBModel::create([
+          'user_id'=>$user->id,                            
+        ]);    
+
         return $user;
       });
       $config_kirim_email = ConfigurationModel::getCache('EMAIL_SISWA_ISVALID');
@@ -649,7 +672,10 @@ class PSBController extends Controller
       id_moda,
       jarak_ke_sekolah,
       waktu_tempuh,
-
+      sibling_tk,
+      sibling_sd,
+      sibling_smp,
+      sibling_sma,
       kode_jenjang,
       `desc`,
       users.ta
@@ -660,10 +686,10 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'fetchdata',                
-                  'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
     {
@@ -1121,7 +1147,7 @@ class PSBController extends Controller
         'id_moda'=>'required|numeric|exists:moda_transportasi,id_moda',                
         'jarak_ke_sekolah'=>'required',                
         'waktu_tempuh'=>'required',                
-        
+        'saudara_mendaftar_tidak'=>'required|in:0,1',
         'kode_jenjang'=>'required',
         
       ]);
@@ -1167,6 +1193,35 @@ class PSBController extends Controller
         $formulir->jarak_ke_sekolah=$request->input('jarak_ke_sekolah');
         $formulir->waktu_tempuh=$request->input('waktu_tempuh');
         
+        if($request->input('saudara_mendaftar_tidak') == '0')
+        {
+          $saudara_mendaftar = $request->input('saudara_mendaftar');
+          foreach($saudara_mendaftar as $v)
+          {
+            switch($v)
+            {
+              case 1:
+                $formulir->sibling_tk=$request->input('sibling_tk');                
+              break;
+              case 2:
+                $formulir->sibling_sd=$request->input('sibling_sd');                
+              break;
+              case 3:
+                $formulir->sibling_smp=$request->input('sibling_smp');                
+              break;
+              case 4:
+                $formulir->sibling_sma=$request->input('sibling_sma');
+              break;
+            }
+          }          
+        }
+        else
+        {
+          $formulir->sibling_tk=null;                
+          $formulir->sibling_sd=null;                
+          $formulir->sibling_smp=null;                
+          $formulir->sibling_sma=null;                
+        }
         $formulir->kode_jenjang=$request->input('kode_jenjang');
 
         $formulir->save();
