@@ -38,9 +38,9 @@ class CreateFormulirPendaftaranCTable extends Migration
       $table->string('email')->nullable();
       $table->string('pendidikan')->nullable();
       $table->string('pekerjaan_instansi')->nullable();
-      $table->string('fb_account')->default('-');
-      $table->string('ig_account')->default('-');
-      $table->string('tiktok_account')->default('-');
+      $table->string('fb_account')->nullable();
+      $table->string('ig_account')->nullable();
+      $table->string('tiktok_account')->nullable();
 
       $table->text('desc')->nullable();
       

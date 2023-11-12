@@ -44,7 +44,7 @@ class CreateFormulirPendaftaranATable extends Migration
       $table->string('asal_sekolah')->nullable();
       $table->tinyInteger('anak_ke')->nullable();
       $table->tinyInteger('jumlah_saudara')->nullable();
-      $table->enum('golongan_darah',['-','A','B','AB','O'])->default('-');
+      $table->enum('golongan_darah',['-','A','B','AB','O'])->nullable();
       $table->string('penyakit')->nullable();
       $table->string('avoid_food')->nullable();
       $table->integer('tinggi')->nullable();
