@@ -19,13 +19,14 @@
           <v-form ref="frmpendaftaran" v-model="form_valid" lazy-validation>
             <v-card outlined>
               <v-card-text>
-                <v-text-field 
+                <v-text-field
                   v-model="formdata.name"
                   label="NAMA CALON PESERTA DIDIK"
                   :rules="rule_name"
-                  outlined 
-                  dense />
-                  <v-menu
+                  outlined
+                  dense
+                />
+                <v-menu
                   ref="menuTanggalLahir"
                   v-model="menuTanggalLahir"
                   :close-on-content-click="false"
@@ -40,7 +41,7 @@
                       v-model="formdata.tanggal_lahir"
                       label="TANGGAL LAHIR"
                       readonly
-                      outlined 
+                      outlined
                       dense
                       v-on="on"
                       :rules="rule_tanggal_lahir"
@@ -50,10 +51,24 @@
                     v-model="formdata.tanggal_lahir"
                     no-title
                     scrollable
-                    >
+                  >
                     <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="menuTanggalLahir = false">Cancel</v-btn>
-                    <v-btn text color="primary" @click="$refs.menuTanggalLahir.save(formdata.tanggal_lahir)">OK</v-btn>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="menuTanggalLahir = false"
+                    >
+                      Cancel
+                    </v-btn>
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="
+                        $refs.menuTanggalLahir.save(formdata.tanggal_lahir)
+                      "
+                    >
+                      OK
+                    </v-btn>
                   </v-date-picker>
                 </v-menu>
                 <v-radio-group v-model="formdata.jk" row>
@@ -61,32 +76,41 @@
                   <v-radio label="LAKI-LAKI" value="L"></v-radio>
                   <v-radio label="PEREMPUAN" value="P"></v-radio>
                 </v-radio-group>
-                <v-text-field 
+                <v-text-field
                   v-model="formdata.nomor_hp"
                   label="NOMOR KONTAK WA (ex: +628123456789)"
                   :rules="rule_nomorhp"
-                  outlined 
-                  dense />
-                <v-text-field 
+                  outlined
+                  dense
+                />
+                <v-text-field
                   v-model="formdata.email"
                   label="SURAT ELEKTRONIK"
                   :rules="rule_email"
-                  outlined 
-                  dense />
-                <v-text-field 
+                  outlined
+                  dense
+                />
+                <v-text-field
                   v-model="formdata.username"
                   label="USERNAME"
                   :rules="rule_username"
-                  outlined 
-                  dense />
-                <v-text-field 
+                  outlined
+                  dense
+                />
+                <v-text-field
                   v-model="formdata.password"
                   label="PASSWORD"
                   type="password"
                   :rules="rule_password"
-                  outlined 
-                  dense />
-                <v-alert color="error" class="mb-0" text v-if="formdata.captcha_response.length <= 0">
+                  outlined
+                  dense
+                />
+                <v-alert
+                  color="error"
+                  class="mb-0"
+                  text
+                  v-if="formdata.captcha_response.length <= 0"
+                >
                   Mohon dicentang Google Captcha (ANTI SPAMMERS)
                 </v-alert>
               </v-card-text>
@@ -112,7 +136,11 @@
               </v-card-actions>
             </v-card>
           </v-form>
-          <v-dialog v-model="dialogkonfirmasipendaftaran" max-width="500px" persistent>
+          <v-dialog
+            v-model="dialogkonfirmasipendaftaran"
+            max-width="500px"
+            persistent
+          >
             <v-form ref="frmkonfirmasi" v-model="form_valid" lazy-validation>
               <v-card>
                 <v-card-title>

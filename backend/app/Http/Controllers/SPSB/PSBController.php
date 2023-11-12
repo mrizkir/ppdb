@@ -722,51 +722,53 @@ class PSBController extends Controller
   public function showbiodataayah(Request $request,$id)
   {
     $formulir=FormulirPendaftaranCModel::select(\DB::raw('
-                                users.id,
-                                user_id,
-                                nama_ayah,
-                                hubungan,
-                                tempat_lahir,
-                                tanggal_lahir,
-                                idagama,
-                                
-                                address1_desa_id,
-                                address1_kelurahan,
-                                address1_kecamatan_id,
-                                address1_kecamatan,
-                                address1_kabupaten_id,
-                                address1_kabupaten,
-                                address1_provinsi_id,
-                                address1_provinsi,
-                                alamat_tempat_tinggal,
-                                kewarganegaraan,
+      users.id,
+      user_id,
+      nama_ayah,
+      hubungan,
+      tempat_lahir,
+      tanggal_lahir,
+      idagama,
+      
+      address1_desa_id,
+      address1_kelurahan,
+      address1_kecamatan_id,
+      address1_kecamatan,
+      address1_kabupaten_id,
+      address1_kabupaten,
+      address1_provinsi_id,
+      address1_provinsi,
+      alamat_tempat_tinggal,
+      kewarganegaraan,
 
-                                users.nomor_hp,
-                                users.email,
-                                pendidikan,
-                                pekerjaan_instansi,
-                                penghasilan_bulanan,
-                                
-                                `desc`                                                               
-                              '))
-                      ->join('users','users.id','formulir_pendaftaran_c.user_id')                                            
-                      ->find($id);
+      users.nomor_hp,
+      users.email,
+      pendidikan,
+      pekerjaan_instansi,
+      penghasilan_bulanan,
+      fb_account,
+      ig_account,
+      tiktok_account,
+      `desc`                                                               
+    '))
+    ->join('users','users.id','formulir_pendaftaran_c.user_id')                                            
+    ->find($id);
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'fetchdata',                
-                  'message'=>["Formulir Pendaftaran Biodata Ayah dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran Biodata Ayah dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
     {
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'fetchdata',                
-                    'formulir'=>$formulir,                
-                    'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                  ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'formulir'=>$formulir,                
+        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+      ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 
   }
@@ -803,7 +805,9 @@ class PSBController extends Controller
       pendidikan,
       pekerjaan_instansi,
       penghasilan_bulanan,
-      
+      fb_account,
+      ig_account,
+      tiktok_account,
       `desc`                                                               
     '))
     ->join('users','users.id','formulir_pendaftaran_d.user_id')                                            
@@ -861,7 +865,9 @@ class PSBController extends Controller
       pendidikan,
       pekerjaan_instansi,
       penghasilan_bulanan,
-      
+      fb_account,
+      ig_account,
+      tiktok_account,
       `desc`                                                               
     '))
     ->join('users','users.id','formulir_pendaftaran_f.user_id')                                            
@@ -934,19 +940,19 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'fetchdata',                
-                  'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
     {
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'fetchdata',                
-                    'formulir'=>$formulir,                
-                    'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                  ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'formulir'=>$formulir,                
+        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+      ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 
   }
@@ -982,10 +988,10 @@ class PSBController extends Controller
       else
       {
         return Response()->json([
-                    'status'=>0,
-                    'pid'=>'fetchdata',        
-                    'message'=>['Calon Peserta Didik a.n ('.$user->name.') telah melakukan konfirmasi pembayaran.']
-                  ],422);
+          'status'=>0,
+          'pid'=>'fetchdata',        
+          'message'=>['Calon Peserta Didik a.n ('.$user->name.') telah melakukan konfirmasi pembayaran.']
+        ],422);
       }
     }
     else
@@ -1041,11 +1047,11 @@ class PSBController extends Controller
       $bukti_bayar->move($folder,$file_name);
 
       \App\Models\System\ActivityLog::log($request,[
-                              'object' => $konfirmasi,
-                              'object_id' => $konfirmasi->transaksi_id,
-                              'user_id' => $request->input('user_id'),
-                              'message' => 'Meng-upload bukti pembayaran dan melengkapi informasi  telah berhasil dilakukan.'
-                            ]);
+        'object' => $konfirmasi,
+        'object_id' => $konfirmasi->transaksi_id,
+        'user_id' => $request->input('user_id'),
+        'message' => 'Meng-upload bukti pembayaran dan melengkapi informasi  telah berhasil dilakukan.'
+      ]);
 
       return Response()->json([
         'status'=>0,
@@ -1271,6 +1277,9 @@ class PSBController extends Controller
         'pendidikan'=>'required',
         'pekerjaan_instansi'=>'required',        
         'penghasilan_bulanan'=>'required|numeric', 
+        'fb_account'=>'required', 
+        'ig_account'=>'required', 
+        'tiktok_account'=>'required', 
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1296,6 +1305,9 @@ class PSBController extends Controller
         $formulir->pendidikan=strtoupper($request->input('pendidikan'));
         $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
         $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
+        $formulir->fb_account=$request->input('fb_account');
+        $formulir->ig_account=$request->input('ig_account');
+        $formulir->tiktok_account=$request->input('tiktok_account');
         
         $formulir->save();
 
@@ -1310,7 +1322,7 @@ class PSBController extends Controller
         'status'=>1,
         'pid'=>'update',
         'formulir'=>$formulir,          
-        'message'=>'Formulir Biodata Ayah Wali baru berhasil diubah.'
+        'message'=>'Formulir Biodata Ayah baru berhasil diubah.'
       ], 200);
     }
   }           
@@ -1357,6 +1369,9 @@ class PSBController extends Controller
         'pendidikan'=>'required',
         'pekerjaan_instansi'=>'required',        
         'penghasilan_bulanan'=>'required|numeric', 
+        'fb_account'=>'required', 
+        'ig_account'=>'required', 
+        'tiktok_account'=>'required', 
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1382,6 +1397,9 @@ class PSBController extends Controller
         $formulir->pendidikan=strtoupper($request->input('pendidikan'));
         $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
         $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
+        $formulir->fb_account=$request->input('fb_account');
+        $formulir->ig_account=$request->input('ig_account');
+        $formulir->tiktok_account=$request->input('tiktok_account');
         
         $formulir->save(); 
 
@@ -1391,7 +1409,7 @@ class PSBController extends Controller
         'status'=>1,
         'pid'=>'update',
         'formulir'=>$formulir,          
-        'message'=>'Formulir Biodata Ibu Wali baru berhasil diubah.'
+        'message'=>'Formulir Biodata Ibu baru berhasil diubah.'
       ], 200);
     }
   }   
@@ -1437,6 +1455,9 @@ class PSBController extends Controller
         'pendidikan'=>'required',
         'pekerjaan_instansi'=>'required',        
         'penghasilan_bulanan'=>'required|numeric', 
+        'fb_account'=>'required', 
+        'ig_account'=>'required', 
+        'tiktok_account'=>'required', 
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1461,7 +1482,10 @@ class PSBController extends Controller
         $formulir->pendidikan=strtoupper($request->input('pendidikan'));
         $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
         $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
-        
+        $formulir->fb_account=$request->input('fb_account');
+        $formulir->ig_account=$request->input('ig_account');
+        $formulir->tiktok_account=$request->input('tiktok_account');
+
         $formulir->save(); 
 
         return $formulir;
@@ -1470,7 +1494,7 @@ class PSBController extends Controller
         'status'=>1,
         'pid'=>'update',
         'formulir'=>$formulir,          
-        'message'=>'Formulir Biodata Wali baru berhasil diubah.'
+        'message'=>'Formulir Biodata Wali berhasil diubah.'
       ], 200);
     }
   }  

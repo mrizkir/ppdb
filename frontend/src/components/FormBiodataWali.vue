@@ -159,20 +159,49 @@
           </v-card-text>
         </v-card>
         <v-card class="mb-4">
+          <v-card-title>
+            MEDIA SOSIAL
+          </v-card-title>
+          <v-card-text> 
+            <v-text-field
+              v-model="formdata.fb_account"
+              label="NAMA AKUN FACEBOOK"
+              :rules="rule_fb"
+              filled
+            />
+            <v-text-field
+              v-model="formdata.ig_account"
+              label="NAMA AKUN INSTAGRAM"
+              :rules="rule_ig"
+              filled
+            />
+            <v-text-field
+              v-model="formdata.tiktok_account"
+              label="NAMA AKUN TIKTOK"
+              :rules="rule_tiktok"
+              filled
+            />
+          </v-card-text>
+        </v-card>
+        <v-card class="mb-4">
           <v-card-actions> 
             <v-spacer></v-spacer> 
             <v-btn 
               color="grey darken-1" 
               text 
-              @click.stop="kembali">
-                KEMBALI
+              @click.stop="kembali"
+            >
+              KEMBALI
             </v-btn>
             <v-btn 
               color="blue darken-1" 
               text 
               @click.stop="save" 
               :loading="btnLoading"
-              :disabled="!form_valid || btnLoading">SIMPAN</v-btn>
+              :disabled="!form_valid || btnLoading"
+            >
+              SIMPAN
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-form>
@@ -233,7 +262,9 @@ export default {
       pendidikan: "",
       pekerjaan_instansi: "",
       penghasilan_bulanan: "",
-      
+      fb_account: "-",
+      ig_account: "-",
+      tiktok_account: "-",
       desc: "",
     }, 
     rule_nama_wali: [
@@ -275,6 +306,15 @@ export default {
     rule_penghasilan: [
       value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
       value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',
+    ],
+    rule_fb: [
+      value => !!value || "Nama akun FB mohon untuk di isi bila tidak ada isi dengan '-'!!!", 
+    ],
+    rule_ig: [
+      value => !!value || "Nama akun IG mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
+    ],
+    rule_tiktok: [
+      value => !!value || "Nama akun TIKTOK mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
     ],
   }),
   methods: {
@@ -329,15 +369,14 @@ export default {
         this.formdata.pendidikan = data.formulir.pendidikan;
         this.formdata.pekerjaan_instansi = data.formulir.pekerjaan_instansi;
         this.formdata.penghasilan_bulanan = data.formulir.penghasilan_bulanan;
-        
-        
+        this.formdata.fb_account = data.formulir.fb_account;
+        this.formdata.ig_account = data.formulir.ig_account;
+        this.formdata.tiktok_account = data.formulir.tiktok_account;
         this.$refs.frmdata.resetValidation();
       });
     },
-    save: async function()
-    {
-      if (this.$refs.frmdata.validate())
-      {
+    save: async function() {
+      if (this.$refs.frmdata.validate()) {
         this.btnLoading = true;
         await this.$ajax.post('/spsb/formulirpendaftaran/biodatawali/' + this.user_id, {
           _method: "put",
@@ -362,6 +401,9 @@ export default {
           pendidikan: this.formdata.pendidikan,
           pekerjaan_instansi: this.formdata.pekerjaan_instansi,
           penghasilan_bulanan: this.formdata.penghasilan_bulanan,
+          fb_account: this.formdata.fb_account,
+          ig_account: this.formdata.ig_account,
+          tiktok_account: this.formdata.tiktok_account,
         },
         {
           headers: {

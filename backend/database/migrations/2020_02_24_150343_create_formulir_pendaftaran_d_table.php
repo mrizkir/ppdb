@@ -39,7 +39,10 @@ class CreateFormulirPendaftaranDTable extends Migration
       $table->string('pendidikan')->nullable();
       $table->string('pekerjaan_instansi')->nullable();
       $table->decimal('penghasilan_bulanan',15,2)->default(0);
-
+      $table->string('fb_account')->default('-');
+      $table->string('ig_account')->default('-');
+      $table->string('tiktok_account')->default('-');
+      
       $table->text('desc')->nullable();
       
       $table->timestamps();
