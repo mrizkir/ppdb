@@ -6,7 +6,7 @@
       <v-carousel-item
         v-for="(slide, i) in slides"
         :key="i"
-        :src="$api.url+'/'+slide.src"
+        :src="$api.url + '/' +slide.src"
         :contain="true">
       </v-carousel-item>
     </v-carousel>

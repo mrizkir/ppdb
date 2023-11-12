@@ -21,7 +21,7 @@
 					:color="badgeColor"
 					:icon="badgeIcon">
 				</v-badge>
-				<v-spacer/>
+				<v-spacer />
 				<v-btn
 					icon
 					:href="this.$api.url+'/' + this.item.path"

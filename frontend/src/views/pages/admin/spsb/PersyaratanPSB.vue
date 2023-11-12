@@ -116,7 +116,7 @@
                                                             <v-btn
                                                                 color="green"
                                                                 text
-                                                                :href="$api.url+'/'+formdata.file_fotoselfi"
+                                                                :href="$api.url + '/' +formdata.file_fotoselfi"
                                                                 v-if="formdata.file_fotoselfi">
                                                                 LIHAT
                                                             </v-btn>
@@ -131,17 +131,17 @@
                                                             <v-btn
                                                                 color="green"
                                                                 text
-                                                                :href="$api.url+'/'+formdata.file_ktp_ayah"
+                                                                :href="$api.url + '/' +formdata.file_ktp_ayah"
                                                                 v-if="formdata.file_ktp_ayah">
                                                                 LIHAT KTP AYAH/WALI
-                                                            </v-btn> 
+                                                            </v-btn>
                                                             <v-btn
                                                                 color="green"
                                                                 text
-                                                                :href="$api.url+'/'+formdata.file_ktp_ibu"
+                                                                :href="$api.url + '/' +formdata.file_ktp_ibu"
                                                                 v-if="formdata.file_ktp_ibu">
                                                                 LIHAT KTP IBU/WALI
-                                                            </v-btn> 
+                                                            </v-btn>
                                                         </v-card-subtitle>
                                                     </v-card>
                                                 </v-col>
@@ -155,7 +155,7 @@
                                                             <v-btn
                                                                 color="green"
                                                                 text
-                                                                :href="$api.url+'/'+formdata.file_kk"
+                                                                :href="$api.url + '/' +formdata.file_kk"
                                                                 v-if="formdata.file_kk">
                                                                 LIHAT
                                                             </v-btn>
@@ -170,7 +170,7 @@
                                                             <v-btn
                                                                 color="green"
                                                                 text
-                                                                :href="$api.url+'/'+formdata.file_aktalahir"
+                                                                :href="$api.url + '/' +formdata.file_aktalahir"
                                                                 v-if="formdata.file_aktalahir">
                                                                 LIHAT
                                                             </v-btn>
@@ -226,7 +226,7 @@
                                 :icon="badgeIcon(item)"
                                 overlap> 
                                 <v-avatar size="30">
-                                    <v-img :src="$api.url+'/'+item.foto" />
+                                    <v-img :src="$api.url + '/' +item.foto" />
                                 </v-avatar>
                             </v-badge>
                         </template>

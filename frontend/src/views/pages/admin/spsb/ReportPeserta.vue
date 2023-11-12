@@ -71,7 +71,7 @@
                                 :icon="badgeIcon(item)"
                                 overlap> 
                                 <v-avatar size="30">
-                                    <v-img :src="$api.url+'/'+item.foto" />
+                                    <v-img :src="$api.url + '/' +item.foto" />
                                 </v-avatar>
                             </v-badge>
                         </template>
@@ -123,9 +123,9 @@
                         <v-btn
                             color="green"
                             text
-                            :href="this.$api.url+'/'+file_pdf">
+                            :href="this.$api.url + '/' +file_pdf">
                             Download
-                        </v-btn> 
+                        </v-btn>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>

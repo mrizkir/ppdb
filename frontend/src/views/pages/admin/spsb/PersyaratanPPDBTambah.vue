@@ -30,15 +30,15 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url+'/'+peryaratanppdb.file_fotoselfi"
+                  :href="this.$api.url + '/' + peryaratanppdb.file_fotoselfi"
                   v-if="peryaratanppdb.file_fotoselfi">
                   LIHAT
-                </v-btn> 
-                <v-spacer/>
+                </v-btn>
+                <v-spacer />
                 <v-btn 
                   color="grey darken-1" 
                   text 
-                  @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
+                  @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken'])">KEMBALI</v-btn>
                 <v-btn
                   color="orange"
                   text
@@ -69,15 +69,15 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url+'/'+peryaratanppdb.file_ktp_ayah"
+                  :href="this.$api.url + '/' + peryaratanppdb.file_ktp_ayah"
                   v-if="peryaratanppdb.file_ktp_ayah">
                   LIHAT
-                </v-btn> 
-                <v-spacer/>
+                </v-btn>
+                <v-spacer />
                 <v-btn 
                   color="grey darken-1" 
                   text 
-                  @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
+                  @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken'])">KEMBALI</v-btn>
                 <v-btn
                   color="orange"
                   text
@@ -108,15 +108,15 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url+'/'+peryaratanppdb.file_ktp_ibu"
+                  :href="this.$api.url + '/' + peryaratanppdb.file_ktp_ibu"
                   v-if="peryaratanppdb.file_ktp_ibu">
                   LIHAT
-                </v-btn> 
-                <v-spacer/>
+                </v-btn>
+                <v-spacer />
                 <v-btn 
                   color="grey darken-1" 
                   text 
-                  @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn> 
+                  @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken'])">KEMBALI</v-btn>
                 <v-btn
                   color="orange"
                   text
@@ -147,15 +147,16 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url+'/'+peryaratanppdb.file_kk"
-                  v-if="peryaratanppdb.file_kk">
+                  :href="this.$api.url + '/' + peryaratanppdb.file_kk"
+                  v-if="peryaratanppdb.file_kk"
+                >
                   LIHAT
-                </v-btn> 
-                <v-spacer/>
+                </v-btn>
+                <v-spacer />
                 <v-btn 
                   color="grey darken-1" 
                   text 
-                  @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn> 
+                  @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken'])">KEMBALI</v-btn>
                 <v-btn
                   color="orange"
                   text
@@ -179,22 +180,27 @@
                   label="(.pdf, .png, atau .jpg) MAX 2MB"
                   :rules="rule_fileaktalahir"
                   show-size
-                  v-model="fileaktalahir">
+                  v-model="fileaktalahir"
+                >
                 </v-file-input>
               </v-card-text>
               <v-card-actions> 
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url+'/'+peryaratanppdb.file_aktalahir"
-                  v-if="peryaratanppdb.file_aktalahir">
+                  :href="this.$api.url + '/' + peryaratanppdb.file_aktalahir"
+                  v-if="peryaratanppdb.file_aktalahir"
+                >
                   LIHAT
-                </v-btn> 
-                <v-spacer/>
+                </v-btn>
+                <v-spacer />
                 <v-btn 
                   color="grey darken-1" 
                   text 
-                  @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
+                  @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken'])"
+                >
+                  KEMBALI
+                </v-btn>
                 <v-btn
                   color="orange"
                   text
@@ -218,22 +224,24 @@
                   label="(.pdf, .png, atau .jpg) MAX 2MB"
                   :rules="rule_screenshoot_medsos"
                   show-size
-                  v-model="filescreenshoot">
+                  v-model="filescreenshoot"
+                >
                 </v-file-input>
               </v-card-text>
               <v-card-actions> 
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url+'/'+peryaratanppdb.filescreenshoot"
-                  v-if="peryaratanppdb.filescreenshoot">
+                  :href="this.$api.url + '/' + peryaratanppdb.file_screenshoot_medsos"
+                  v-if="peryaratanppdb.file_screenshoot_medsos"
+                >
                   LIHAT
-                </v-btn> 
-                <v-spacer/>
+                </v-btn>
+                <v-spacer />
                 <v-btn 
                   color="grey darken-1" 
                   text 
-                  @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
+                  @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken'])">KEMBALI</v-btn>
                 <v-btn
                   color="orange"
                   text
@@ -262,15 +270,15 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url+'/'+peryaratanppdb.filesertifikat"
+                  :href="this.$api.url + '/' + peryaratanppdb.filesertifikat"
                   v-if="peryaratanppdb.filesertifikat">
                   LIHAT
-                </v-btn> 
-                <v-spacer/>
+                </v-btn>
+                <v-spacer />
                 <v-btn 
                   color="grey darken-1" 
                   text 
-                  @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken'])">KEMBALI</v-btn>
+                  @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken'])">KEMBALI</v-btn>
                 <v-btn
                   color="orange"
                   text
@@ -351,13 +359,12 @@ export default {
       value =>!value || value.size < 2000000 || 'File akta lahir harus kurang dari 2MB.'                
     ],
     rule_screenshoot_medsos: [
-      value => !!value || "Mohon screen shoot akun IG  !!!",
-      value =>!value || value.size < 2000000 || 'Screen shoot akun IG kurang dari 2MB.'                
+      value => !!value || "Mohon screen shoot akun IG DGC!!!",
+      value =>!value || value.size < 2000000 || 'File hasil screen shoot akun IG mesti kurang dari 2MB.'                
     ],
   }),
   methods: {
-    initialize: async function()
-    {	
+    initialize: async function() {	
       await this.$ajax.get('/spsb/formulirpendaftaran/persyaratanppdb/' + this.$store.getters['auth/AttributeUser']('id'),
         {
           headers: {
@@ -365,18 +372,15 @@ export default {
           }
         },
         
-      ).then(({ data }) => {
+      )
+      .then(({ data }) => {
         this.peryaratanppdb = data.formulir;
         this.$refs.frmuploadfotoselfi.resetValidation();
       });
-
     },
-    async uploadFotoSelfi ()
-    {
-      if (this.$refs.frmuploadfotoselfi.validate())
-      {
-        if (typeof this.filefotoselfi !== 'undefined' && this.filefotoselfi !== null )
-        {
+    async uploadFotoSelfi() {
+      if (this.$refs.frmuploadfotoselfi.validate()) {
+        if (typeof this.filefotoselfi !== 'undefined' && this.filefotoselfi !== null ) {
           this.btnLoadingFotoSelfi=true;
           var formdata = new FormData();
           formdata.append('filefotoselfi', this.filefotoselfi);
@@ -471,12 +475,9 @@ export default {
         }
       }
     }, 
-    async uploadAktaLahir ()
-    {
-      if (this.$refs.frmuploadaktalahir.validate())
-      {
-        if (typeof this.fileaktalahir !== 'undefined' && this.fileaktalahir !== null )
-        {
+    async uploadAktaLahir() {
+      if (this.$refs.frmuploadaktalahir.validate()) {
+        if (typeof this.fileaktalahir !== 'undefined' && this.fileaktalahir !== null ) {
           this.btnLoadingAktaLahir=true;
           var formdata = new FormData();
           formdata.append('fileaktalahir', this.fileaktalahir);
@@ -487,17 +488,40 @@ export default {
                 "Content-Type": "multipart/form-data"
               }
             }
-          ).then(() => {
+          )
+          .then(() => {
             this.btnLoadingAktaLahir=false;
             this.$router.go();
-          }).catch(() => {
+          })
+          .catch(() => {
             this.btnLoadingAktaLahir=false;
           });
         }
       }
     }, 
     async uploadScreenShoot() {
-
+      if (this.$refs.frmuploadscreenshoot.validate()) {
+        if (typeof this.filescreenshoot !== 'undefined' && this.filescreenshoot !== null ) {
+          this.btnLoadingAktaLahir=true;
+          var formdata = new FormData();
+          formdata.append('filescreenshoot', this.filescreenshoot);
+          await this.$ajax.post('/spsb/formulirpendaftaran/uploadfilescreenshoot/' + this.pesertadidik_id, formdata,
+            {
+              headers: {
+                Authorization: this.$store.getters["auth/Token"],
+                "Content-Type": "multipart/form-data"
+              }
+            }
+          )
+          .then(() => {
+            this.btnLoadingScreenShoot=false;
+            this.$router.go();
+          })
+          .catch(() => {
+            this.btnLoadingScreenShoot=false;
+          });
+        }
+      }
     },
     async uploadSertifikat() {
 

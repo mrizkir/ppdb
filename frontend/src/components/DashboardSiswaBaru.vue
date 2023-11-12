@@ -52,7 +52,7 @@
                 to="/spsb/biodataayah"
               >
                 Isian Biodata Ayah   
-              </v-btn> 
+              </v-btn>
             </v-card-text> 
           </v-card>
         </v-timeline-item> 

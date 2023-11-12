@@ -10,7 +10,7 @@
 			<v-toolbar-items class="hidden-sm-and-down">
 				<v-btn to="/" class="mr-2" color="primary" text large>
 					BERANDA
-				</v-btn> 
+				</v-btn>
 				<v-btn to="/konfirmasipembayaran" class="mr-2" color="primary" text large v-if="bukaPPDB">
 					KONFIRMASI PEMBAYARAN
 				</v-btn>

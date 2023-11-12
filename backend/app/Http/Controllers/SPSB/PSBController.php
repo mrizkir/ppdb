@@ -1604,10 +1604,10 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'fetchdata',                
-                  'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
     {
@@ -1698,10 +1698,10 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'fetchdata',                
-                  'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
     {
@@ -1722,22 +1722,19 @@ class PSBController extends Controller
         $formulir->save();
         $filektpibu->move($folder,$file_name);
         return Response()->json([
-                      'status'=>1,
-                      'pid'=>'store',       
-                      'formulir'=>$formulir,                
-                      'message'=>"File KTP Ibu Wali berhasil diupload"
-                    ], 200);   
-          
+          'status'=>1,
+          'pid'=>'store',       
+          'formulir'=>$formulir,                
+          'message'=>"File KTP Ibu Wali berhasil diupload"
+        ], 200);             
       }
       else
       {
         return Response()->json([
-                    'status'=>0,
-                    'pid'=>'store',
-                    'message'=>["Extensi file yang diupload bukan jpg atau png."]
-                  ], 422);
-        
-
+          'status'=>0,
+          'pid'=>'store',
+          'message'=>["Extensi file yang diupload bukan jpg atau png."]
+        ], 422);
       }            
     }
   }
@@ -1747,10 +1744,10 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'fetchdata',                
-                  'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
     {
@@ -1836,6 +1833,52 @@ class PSBController extends Controller
                   ], 422);
         
 
+      }            
+    }
+  }
+  public function uploadfilescreenshoot (Request $request,$id)
+  {
+    $formulir=PersyaratanPPDBModel::find($id);
+    if (is_null($formulir))
+    {
+      return Response()->json([
+        'status'=>1,
+        'pid'=>'fetchdata',                
+        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+      ], 422);
+    }
+    else
+    {
+      $this->validate($request, [                      
+        'filescreenshoot'=>'required'                        
+      ]);
+      $filescreenshoot = $request->file('filescreenshoot');
+      $mime_type=$filescreenshoot->getMimeType();
+      if ($mime_type=='application/pdf' || $mime_type=='image/png' || $mime_type=='image/jpeg')
+      {
+        $folder=HelperPendaftaran::public_path('persyaratanppdb/');
+        $file_name=uniqid('screenshoot_').".".$filescreenshoot->getClientOriginalExtension();
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_screenshoot_medsos))))                
+        {
+          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_screenshoot_medsos)));
+        }                
+        $formulir->file_screenshoot_medsos="storage/persyaratanppdb/$file_name";
+        $formulir->save();
+        $filescreenshoot->move($folder,$file_name);
+        return Response()->json([
+          'status'=>1,
+          'pid'=>'store',       
+          'formulir'=>$formulir,                
+          'message'=>"File Screenshoot berhasil diupload"
+        ], 200); 
+      }
+      else
+      {
+        return Response()->json([
+          'status'=>0,
+          'pid'=>'store',
+          'message'=>["Extensi file yang diupload bukan jpg atau png."]
+        ], 422);
       }            
     }
   }

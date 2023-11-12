@@ -5,7 +5,7 @@
     </v-system-bar>	
     <v-app-bar app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="grey--text"></v-app-bar-nav-icon>
-      <v-toolbar-title class="headline clickable" @click.stop="$router.push('/dashboard/'+$store.getters['auth/AccessToken']).catch(err => {})">
+      <v-toolbar-title class="headline clickable" @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken']).catch(err => {})">
         <span class="hidden-sm-and-down">
           FORMULIR PENDAFTARAN PPDB SEKOLAH ISLAM DE GREEN CAMP
         </span>
@@ -201,7 +201,7 @@ export default {
       }
       else
       {
-        photo = this.$api.url+'/'+img;	
+        photo = this.$api.url + '/' +img;	
       }
       return photo;
     },
