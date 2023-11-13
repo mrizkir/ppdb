@@ -31,7 +31,7 @@ class PSBController extends Controller
   private function checkUsia($request)
   {
     $tanggal_lahir = $request->input('tanggal_lahir');
-    $batas_tanggal = date('2024-07-01');
+    $batas_tanggal = date('2024-07-31');
     $usia = \App\Helpers\Helper::getUsia($tanggal_lahir, $batas_tanggal);
     $kode_jenjang = $request->input('kode_jenjang');
     
