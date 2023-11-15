@@ -7,9 +7,6 @@
       <template v-slot:name>
         JENJANG STUDI
       </template>
-      <template v-slot:subtitle>
-        
-      </template>
       <template v-slot:breadcrumbs>
         <v-breadcrumbs :items="breadcrumbs" class="pa-0">
           <template v-slot:divider>
@@ -18,12 +15,7 @@
         </v-breadcrumbs>
       </template>
       <template v-slot:desc>
-        <v-alert                                        
-          color="cyan"
-          border="left"
-          colored-border
-          type="info"
-        >
+        <v-alert color="cyan" border="left" colored-border type="info">
           Halaman ini berisi informasi jenjang studi. ID dan Nama Jenjang melekat ke sistem sehingga tidak bisa diubah.
         </v-alert>
       </template>
@@ -44,7 +36,8 @@
             @click:row="dataTableRowClicked"
             class="elevation-1"
             :loading="datatableLoading"
-            loading-text="Loading... Please wait">
+            loading-text="Loading... Please wait"
+          >
             <template v-slot:top>
               <v-dialog v-model="dialogfrm" max-width="500px" persistent>
                 <v-form ref="frmdata" v-model="form_valid" lazy-validation>
@@ -57,30 +50,42 @@
                         Konfigurasi terkait dengan jenjang studi
                       </span>
                     </v-card-subtitle>
-                    <v-card-text> 
-                      <v-switch v-model="formdata.status_pendaftaran" label="Aktif"></v-switch>
+                    <v-card-text>
+                      <v-switch
+                        v-model="formdata.status_pendaftaran"
+                        label="Aktif"
+                      />
                     </v-card-text>
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn color="blue darken-1" text @click.stop="closedialogfrm">BATAL</v-btn>
-                      <v-btn 
-                        color="blue darken-1" 
-                        text 
-                        @click.stop="save" 
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click.stop="closedialogfrm"
+                      >
+                        BATAL
+                      </v-btn>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click.stop="save"
                         :loading="btnLoading"
-                        :disabled="!form_valid || btnLoading">
-                          SIMPAN
+                        :disabled="!form_valid || btnLoading"
+                      >
+                        SIMPAN
                       </v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-form>
               </v-dialog>
-            </template> 
+            </template>
             <template v-slot:expanded-item="{ headers, item }">
               <td :colspan="headers.length" class="text-center">
                 <v-col cols="12">
-                  <strong>created_at:</strong>{{ $date(item.created_at).format('DD/MM/YYYY HH:mm') }}
-                  <strong>updated_at:</strong>{{ $date(item.updated_at).format('DD/MM/YYYY HH:mm') }}
+                  <strong>created_at:</strong>
+                  {{ $date(item.created_at).format("DD/MM/YYYY HH:mm") }}
+                  <strong>updated_at:</strong>
+                  {{ $date(item.updated_at).format("DD/MM/YYYY HH:mm") }}
                 </v-col>
               </td>
             </template>
@@ -114,18 +119,18 @@
         {
           text: "HOME",
           disabled: false,
-          href: "/dashboard/" + this.$store.getters["auth/AccessToken"]
+          href: "/dashboard/" + this.$store.getters["auth/AccessToken"],
         },
         {
           text: "DATA MASTER",
           disabled: false,
-          href: "/dmaster"
+          href: "/dmaster",
         },
         {
           text: "JENJANG STUDI",
           disabled: true,
-          href: "#"
-        }
+          href: "#",
+        },
       ];
       this.initialize();
     },
@@ -136,11 +141,10 @@
       datatableLoading: false,
       expanded: [],
       datatable: [],
-      
       //dialog
       dialogfrm: false,
 
-      headers: [                                            
+      headers: [
         { text: "ID", value: "kode_jenjang", width: 10, sortable: false },
         { text: "NAMA JENJANG", value: "nama_jenjang", sortable: false },
         { text: "AKSI", value: "actions", sortable: false, width: 100 },
@@ -149,12 +153,12 @@
       formdata: {
         kode_jenjang: "",
         nama_jenjang: "",
-        status_pendaftaran: false, 
+        status_pendaftaran: false,
       },
       formdefault: {
         kode_jenjang: "",
         nama_jenjang: "",
-        status_pendaftaran: false, 
+        status_pendaftaran: false,
       },
 
       editedIndex: -1,
@@ -162,15 +166,16 @@
     methods: {
       initialize: async function() {
         this.datatableLoading = true;
-        await this.$ajax.get("/datamaster/jenjangstudi", 
-        {
-          headers: {
-            Authorization: this.$store.getters["auth/Token"]
-          }
-        }).then(({ data }) => {
-          this.datatable = data.jenjang_studi;
-          this.datatableLoading = false;
-        });
+        await this.$ajax
+          .get("/datamaster/jenjangstudi", {
+            headers: {
+              Authorization: this.$store.getters["auth/Token"],
+            },
+          })
+          .then(({ data }) => {
+            this.datatable = data.jenjang_studi;
+            this.datatableLoading = false;
+          });
       },
       dataTableRowClicked(item) {
         if (item === this.expanded[0]) {
@@ -193,7 +198,8 @@
                 "/datamaster/jenjangstudi/" + this.formdata.kode_jenjang,
                 {
                   _method: "PUT",
-                  status_pendaftaran: this.formdata.status_pendaftaran,
+                  status_pendaftaran:
+                    this.formdata.status_pendaftaran == true ? 1 : 0,
                 },
                 {
                   headers: {
