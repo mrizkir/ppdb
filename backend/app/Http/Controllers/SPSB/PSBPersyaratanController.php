@@ -153,7 +153,7 @@ class PSBPersyaratanController extends Controller {
                 'ta'=>$ta,
                 'email_verified_at'=>'',
                 'theme'=>'default',  
-                'foto'=> 'storage/images/users/no_photo.png',
+                'foto'=> 'images/users/no_photo.png',
                 'code'=>$code,          
                 'active'=>0,          
                 'default_role'=>'siswabaru',          
@@ -243,7 +243,7 @@ class PSBPersyaratanController extends Controller {
                 'code'=>$code,          
                 'active'=>1,         
                 'default_role'=>'siswabaru',
-                'foto'=>'storage/images/users/no_photo.png', 
+                'foto'=>'images/users/no_photo.png', 
                 'created_at'=>$now, 
                 'updated_at'=>$now
             ]);
@@ -678,7 +678,7 @@ class PSBPersyaratanController extends Controller {
                 'nama_bank_pengirim'=>$request->input('nama_bank_pengirim'),
                 'desc'=>$request->input('desc'),
                 'tanggal_bayar'=>$request->input('tanggal_bayar'),
-                'bukti_bayar'=>"storage/images/buktibayar/$file_name",
+                'bukti_bayar'=>"images/buktibayar/$file_name",
             ]);
             $bukti_bayar->move($folder,$file_name);
 
@@ -1059,7 +1059,7 @@ class PSBPersyaratanController extends Controller {
                 {
                     unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_fotoselfi)));
                 }                
-                $formulir->file_fotoselfi="storage/persyaratanppdb/$file_name";
+                $formulir->file_fotoselfi="persyaratanppdb/$file_name";
                 $formulir->save();
                 $filefotoselfi->move($folder,$file_name);
                 return Response()->json([
@@ -1108,7 +1108,7 @@ class PSBPersyaratanController extends Controller {
                 {
                     unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_ktp_ayah)));
                 }                
-                $formulir->file_ktp_ayah="storage/persyaratanppdb/$file_name";
+                $formulir->file_ktp_ayah="persyaratanppdb/$file_name";
                 $formulir->save();
                 $filektpayah->move($folder,$file_name);
                 return Response()->json([
@@ -1157,7 +1157,7 @@ class PSBPersyaratanController extends Controller {
                 {
                     unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_ktp_ibu)));
                 }                
-                $formulir->file_ktp_ibu="storage/persyaratanppdb/$file_name";
+                $formulir->file_ktp_ibu="persyaratanppdb/$file_name";
                 $formulir->save();
                 $filektpibu->move($folder,$file_name);
                 return Response()->json([
@@ -1206,7 +1206,7 @@ class PSBPersyaratanController extends Controller {
                 {
                     unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_kk)));
                 }                
-                $formulir->file_kk="storage/persyaratanppdb/$file_name";
+                $formulir->file_kk="persyaratanppdb/$file_name";
                 $formulir->save();
                 $filekk->move($folder,$file_name);
                 return Response()->json([
@@ -1255,7 +1255,7 @@ class PSBPersyaratanController extends Controller {
                 {
                     unlink(\App\Helpers\Helper::public_path(str_replace('storage','',$formulir->file_aktalahir)));
                 }                
-                $formulir->file_aktalahir="storage/persyaratanppdb/$file_name";
+                $formulir->file_aktalahir="persyaratanppdb/$file_name";
                 $formulir->save();
                 $fileaktalahir->move($folder,$file_name);
                 return Response()->json([

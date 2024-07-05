@@ -30,7 +30,7 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url + '/' + peryaratanppdb.file_fotoselfi"
+                  :href="this.$api.storageURL + '/' + peryaratanppdb.file_fotoselfi"
                   v-if="peryaratanppdb.file_fotoselfi">
                   LIHAT
                 </v-btn>
@@ -69,7 +69,7 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url + '/' + peryaratanppdb.file_ktp_ayah"
+                  :href="this.$api.storageURL + '/' + peryaratanppdb.file_ktp_ayah"
                   v-if="peryaratanppdb.file_ktp_ayah">
                   LIHAT
                 </v-btn>
@@ -108,7 +108,7 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url + '/' + peryaratanppdb.file_ktp_ibu"
+                  :href="this.$api.storageURL + '/' + peryaratanppdb.file_ktp_ibu"
                   v-if="peryaratanppdb.file_ktp_ibu">
                   LIHAT
                 </v-btn>
@@ -147,7 +147,7 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url + '/' + peryaratanppdb.file_kk"
+                  :href="this.$api.storageURL + '/' + peryaratanppdb.file_kk"
                   v-if="peryaratanppdb.file_kk"
                 >
                   LIHAT
@@ -188,7 +188,7 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url + '/' + peryaratanppdb.file_aktalahir"
+                  :href="this.$api.storageURL + '/' + peryaratanppdb.file_aktalahir"
                   v-if="peryaratanppdb.file_aktalahir"
                 >
                   LIHAT
@@ -232,7 +232,7 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url + '/' + peryaratanppdb.file_screenshoot_medsos"
+                  :href="this.$api.storageURL + '/' + peryaratanppdb.file_screenshoot_medsos"
                   v-if="peryaratanppdb.file_screenshoot_medsos"
                 >
                   LIHAT
@@ -271,7 +271,7 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url + '/' + peryaratanppdb.file_sertifikat"
+                  :href="this.$api.storageURL + '/' + peryaratanppdb.file_sertifikat"
                   v-if="peryaratanppdb.file_sertifikat">
                   LIHAT
                 </v-btn>
@@ -309,7 +309,7 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url + '/' + peryaratanppdb.file_nisn"
+                  :href="this.$api.storageURL + '/' + peryaratanppdb.file_nisn"
                   v-if="peryaratanppdb.file_nisn">
                   LIHAT
                 </v-btn>
@@ -347,7 +347,7 @@
                 <v-btn
                   color="green"
                   text
-                  :href="this.$api.url + '/' + peryaratanppdb.file_kia"
+                  :href="this.$api.storageURL + '/' + peryaratanppdb.file_kia"
                   v-if="peryaratanppdb.file_kia">
                   LIHAT
                 </v-btn>

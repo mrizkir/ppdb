@@ -64,7 +64,7 @@ class UsersController extends Controller {
 				'email_verified_at'=>\Carbon\Carbon::now(),
 				'theme'=>'default',            
 				'default_role'=>'superadmin',            
-				'foto'=> 'storage/images/users/no_photo.png',
+				'foto'=> 'images/users/no_photo.png',
 				'created_at'=>$now, 
 				'updated_at'=>$now
 			]);
@@ -492,10 +492,10 @@ class UsersController extends Controller {
 				$foto->move($folder,$file_name);
 
 				$old_file=$user->foto;
-				$user->foto="storage/images/users/$file_name";
+				$user->foto="images/users/$file_name";
 				$user->save();
 
-				if ($old_file != 'storage/images/users/no_photo.png')
+				if ($old_file != 'images/users/no_photo.png')
 				{
 					$old_file=str_replace('storage/','',$old_file);
 					if (is_file(Helper::public_path($old_file)))
@@ -538,10 +538,10 @@ class UsersController extends Controller {
 		{
 			$username=$user->username;
 			$old_file=$user->foto;
-			$user->foto="storage/images/users/no_photo.png";
+			$user->foto="images/users/no_photo.png";
 			$user->save();
 
-			if ($old_file != 'storage/images/users/no_photo.png')
+			if ($old_file != 'images/users/no_photo.png')
 			{
 				$old_file=str_replace('storage/','',$old_file);
 				if (is_file(Helper::public_path($old_file)))
