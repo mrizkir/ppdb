@@ -6,7 +6,7 @@
       <v-carousel-item
         v-for="(slide, i) in slides"
         :key="i"
-        :src="$api.url + '/' +slide.src"
+        :src="$api.storageURL + '/' +slide.src"
         :contain="true">
       </v-carousel-item>
     </v-carousel>
@@ -84,7 +84,7 @@
             <v-card-title>
               BAGAN ALUR PROSES PENDAFTARAN
             </v-card-title>
-            <v-img :src="$api.url + '/storage/images/informasi/alur_pendaftaran.jpeg'"></v-img>
+            <v-img :src="$api.storageURL + '/images/informasi/alur_pendaftaran.jpeg'"></v-img>
           </v-card>
         </v-col>
         <v-col xs="12" md="12" sm="12">
@@ -334,7 +334,7 @@
       registerSMA: false,
       slides: [
         {
-          src: "storage/images/sliders/slider1.jpg",
+          src: "images/sliders/slider1.jpg",
         },
       ],
     }),

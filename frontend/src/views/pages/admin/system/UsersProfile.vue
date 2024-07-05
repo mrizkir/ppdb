@@ -37,7 +37,7 @@
                                 <v-col xs="12" sm="6" md="3">
                                     <v-card flat>
                                         <v-card-text>
-                                            <v-img :src="$api.url + '/' +formdata.foto" />
+                                            <v-img :src="$api.storageURL + '/' +formdata.foto" />
                                         </v-card-text>
                                     </v-card>
                                     <v-card flat v-if="dashboard== 'mahasiswa'">

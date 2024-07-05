@@ -329,7 +329,7 @@
                                 </v-col>
                                 <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
                               </v-row>
-                              <v-img class="white--text align-end" :src="$api.url + '/' +data_konfirmasi.bukti_bayar" />
+                              <v-img class="white--text align-end" :src="$api.storageURL + '/' +data_konfirmasi.bukti_bayar" />
                             </v-card-text>
                           </v-card>
                         </v-col>
@@ -388,7 +388,7 @@
                 :icon="badgeIcon(item)"
                 overlap> 
                 <v-avatar size="30">
-                  <v-img :src="$api.url + '/' +item.foto" />
+                  <v-img :src="$api.storageURL + '/' +item.foto" />
                 </v-avatar>
               </v-badge>
             </template>
