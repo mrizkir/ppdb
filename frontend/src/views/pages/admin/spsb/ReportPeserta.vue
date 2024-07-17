@@ -123,7 +123,7 @@
                         <v-btn
                             color="green"
                             text
-                            :href="this.$api.url + '/' +file_pdf">
+                            :href="this.$api.storageURL + '/' +file_pdf">
                             Download
                         </v-btn>
                     </v-card-text>
@@ -164,9 +164,9 @@ export default {
                 href: '#'
             }
         ];
-        this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
+        this.breadcrumbs[1].disabled = (this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
 
-        let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
+        let kode_jenjang = this.$store.getters['uiadmin/getKodeJenjang'];
         this.kode_jenjang=kode_jenjang;
         this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
         this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
@@ -185,7 +185,7 @@ export default {
                   
         //tables
         headers: [                        
-            { text: '', value: 'foto', width:70 }, 
+            { text: "", value: "foto", width:70 }, 
             { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },
             { text: 'FOTO SELFIE', value: 'file_fotoselfi', sortable: false }, 

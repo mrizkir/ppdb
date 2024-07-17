@@ -149,7 +149,7 @@
           href: "#"
         }
       ];
-      this.breadcrumbs[1].disabled=(this.dashboard== "siswabaru");
+      this.breadcrumbs[1].disabled = (this.dashboard== "siswabaru");
       
       let kode_jenjang = this.$store.getters["uiadmin/getKodeJenjang"];
       this.kode_jenjang=kode_jenjang;

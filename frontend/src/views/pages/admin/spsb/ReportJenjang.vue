@@ -138,7 +138,7 @@ export default {
                 href: '#'
             }
         ];
-        let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
+        let kode_jenjang = this.$store.getters['uiadmin/getKodeJenjang'];
         this.kode_jenjang=kode_jenjang;
         this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
         this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
@@ -159,7 +159,7 @@ export default {
         expanded: [],
         datatable: [],
         headers: [                        
-            { text: '', value: 'foto', width:70 },
+            { text: "", value: "foto", width:70 },
             { text: 'NAMA SISWA', value: 'name', width: 350, sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp', width: 100},
             { text: 'KELAS', value: 'nkelas', width: 100, sortable: true }, 

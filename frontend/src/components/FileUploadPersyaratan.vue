@@ -24,7 +24,7 @@
 				<v-spacer />
 				<v-btn
 					icon
-					:href="this.$api.url+'/' + this.item.path"
+					:href="this.$api.storageURL +'/' + this.item.path"
 					target="_blank"
 					v-if="verified == 1">
 					<v-icon>

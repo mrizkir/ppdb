@@ -37,7 +37,7 @@
                                 <v-col xs="12" sm="6" md="3">
                                     <v-card flat>
                                         <v-card-text>
-                                            <v-img :src="$api.storageURL + '/' +formdata.foto" />
+                                            <v-img :src="$api.storageURL + '/' + formdata.foto" />
                                         </v-card-text>
                                     </v-card>
                                     <v-card flat v-if="dashboard== 'mahasiswa'">
@@ -247,7 +247,7 @@ export default {
             formdata: {
                 id: 0,
                 username: "", 
-                password: '',
+                password: "",
                 name: "",
                 email: "",
                 nomor_hp: "",
@@ -256,13 +256,13 @@ export default {
                 active: "",                                 
                 default_role: "",
                 locked: "",
-                created_at: '',
-                updated_at: '',
+                created_at: "",
+                updated_at: "",
             },
             formdefault: {
                 id: 0,
                 username: "", 
-                password: '',
+                password: "",
                 name: "",
                 email: "",
                 nomor_hp: "",
@@ -271,8 +271,8 @@ export default {
                 active: "",                                 
                 default_role: "",
                 locked: "",
-                created_at: '',
-                updated_at: '',
+                created_at: "",
+                updated_at: "",
             },
             //form rules  
             rule_foto: [

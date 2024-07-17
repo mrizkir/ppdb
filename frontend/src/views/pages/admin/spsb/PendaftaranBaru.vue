@@ -452,9 +452,9 @@ export default {
         href: '#'
       }
     ];
-    this.breadcrumbs[1].disabled=(this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
+    this.breadcrumbs[1].disabled = (this.dashboard== 'siswabaru'||this.dashboard== 'mahasiswa');
 
-    let kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
+    let kode_jenjang = this.$store.getters['uiadmin/getKodeJenjang'];
     this.kode_jenjang=kode_jenjang;
     this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](kode_jenjang);
     this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
@@ -473,7 +473,7 @@ export default {
           
     //tables
     headers: [                        
-      { text: '', value: 'foto', width:70 }, 
+      { text: "", value: "foto", width:70 }, 
       { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
       { text: 'USERNAME', value: 'username', sortable: true },
       { text: 'EMAIL', value: 'email', sortable: true },
@@ -503,8 +503,8 @@ export default {
       password: "",
       kode_jenjang: "", 
       ta: "",
-      created_at: '',
-      updated_at: '',
+      created_at: "",
+      updated_at: "",
     },
     formdefault: {
       name: "",
@@ -514,8 +514,8 @@ export default {
       password: "",
       kode_jenjang: "",
       ta: "",
-      created_at: '',
-      updated_at: '',
+      created_at: "",
+      updated_at: "",
     }, 
     editedIndex: -1,
 
@@ -650,7 +650,7 @@ export default {
     {
       this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
       this.formdata.ta=this.tahun_pendaftaran;
-      this.formdata.kode_jenjang=this.kode_jenjang;
+      this.formdata.kode_jenjang = this.kode_jenjang;
 
       await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
         this.daftar_jenjang = data.jenjang_studi;
