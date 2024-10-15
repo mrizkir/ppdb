@@ -15,12 +15,7 @@
         </v-breadcrumbs>
       </template>
       <template v-slot:desc>
-        <v-alert
-          color="cyan"
-          border="left"
-          colored-border
-          type="info"
-          >
+        <v-alert color="cyan" border="left" colored-border type="info">
           Halaman untuk mengelola tahun akademik pada sekolah.
         </v-alert>
       </template>
