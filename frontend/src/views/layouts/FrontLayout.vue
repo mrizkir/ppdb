@@ -37,6 +37,9 @@
 					<v-list-item to="/psbsmp">
 						<v-list-item-title>PRA-PENDAFTARAN SMP</v-list-item-title>
 					</v-list-item>
+					<v-list-item to="/psbsma">
+						<v-list-item-title>PRA-PENDAFTARAN SMA</v-list-item-title>
+					</v-list-item>
 					<v-list-item to="/konfirmasipembayaran">
 						<v-list-item-title>KONFIRMASI PEMBAYARAN</v-list-item-title>
 					</v-list-item>

@@ -98,6 +98,7 @@ class PSBController extends Controller
     ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.user_id', 'users.id')
     ->where('users.ta', $ta)
     ->where('kode_jenjang', $kode_jenjang)
+    ->orderBy('created_at', 'desc')
     ->get();
     
     return Response()->json([

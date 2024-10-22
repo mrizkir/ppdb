@@ -126,7 +126,7 @@
                   text
                   v-if="isPenyandangDisabilitas && formdata.jk == 'P'"
                 >
-                  Silahkan mendaftar secara manual Admin jenjang terkait di Sekolah Islam De Green Camp.
+                Silakan mendaftar secara manual kepada Admin di setiap jenjang terkait.
                 </v-alert>
                 <v-alert
                   color="error"

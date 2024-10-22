@@ -14,10 +14,10 @@
           <v-form v-model="form_valid_foto_selfi" ref="frmuploadfotoselfi" lazy-validation>
             <v-card class="mb-3">
               <v-card-title>
-                FOTO SELFIE / KELUARGA (<span class="red--text text--lighten-1">WAJIB</span>)
+                FOTO WEFIE / KELUARGA (<span class="red--text text--lighten-1">WAJIB</span>)
               </v-card-title>
               <v-card-text>
-                Foto "Selfie" Keluarga yang terdiri dari (Kedua Orangtua/wali dan Calon Peserta Didik)
+                Foto "Wefie" Keluarga yang terdiri dari (Kedua Orangtua/wali dan Calon Peserta Didik)
                 <v-file-input 
                   accept="application/pdf,image/jpeg,image/png" 
                   label="(.pdf, .png, atau .jpg) MAX 2MB"
