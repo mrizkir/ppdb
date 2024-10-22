@@ -21,9 +21,9 @@
               <v-card-text>
                 <v-text-field 
                   v-model="formdata.name"
-                  label="NAMA CALON PESERTA DIDIK" 
+                  label="NAMA CALON PESERTA DIDIK"
                   :rules="rule_name"
-                  outlined 
+                  outlined
                   dense
                 />
                 <v-menu
@@ -41,7 +41,7 @@
                       v-model="formdata.tanggal_lahir"
                       label="TANGGAL LAHIR"
                       readonly
-                      outlined 
+                      outlined
                       dense
                       v-on="on"
                       :rules="rule_tanggal_lahir"
@@ -62,56 +62,81 @@
                   <v-radio label="LAKI-LAKI" value="L"></v-radio>
                   <v-radio label="PEREMPUAN" value="P"></v-radio>
                 </v-radio-group>
-                <v-text-field 
+                <v-text-field
                   v-model="formdata.nomor_hp"
-                  label="NOMOR KONTAK WA (ex: +628123456789)" 
+                  label="NOMOR KONTAK WA (ex: +628123456789)"
                   :rules="rule_nomorhp"
-                  outlined 
+                  outlined
                   dense
                 />
                 <v-text-field 
                   v-model="formdata.email"
-                  label="SURAT ELEKTRONIK" 
+                  label="SURAT ELEKTRONIK"
                   :rules="rule_email"
-                  outlined 
+                  outlined
                   dense
                 />
                 <v-text-field 
                   v-model="formdata.username"
-                  label="USERNAME" 
+                  label="USERNAME"
                   :rules="rule_username"
-                  outlined 
+                  outlined
                   dense
                 />
-                <v-text-field 
+                <v-text-field
                   v-model="formdata.password"
-                  label="PASSWORD" 
+                  label="PASSWORD"
                   type="password"
-                  :rules="rule_password" 
-                  outlined 
+                  :rules="rule_password"
+                  outlined
                   dense
                 />
+                <span class="font-weight-medium">
+                  Apakah Peserta Didik Penyandang Disabilitas (PDPD) ?
+                </span>
+                <v-switch
+                  v-model="formdata.penyandang_disabilitas"
+                  label="YA"
+                />
+                <v-alert
+                  color="warning"
+                  class="mb-1"
+                  text
+                  v-if="isPenyandangDisabilitas && formdata.jk == 'L'"
+                >
+                  Pada periode ini belum menerima Peserta Didik Penyandang Disabilitas (PDPD).
+                </v-alert>
+                <v-alert
+                  color="warning"
+                  class="mb-1"
+                  text
+                  v-if="isPenyandangDisabilitas && formdata.jk == 'P'"
+                >
+                  Silahkan mendaftar secara manual Admin jenjang terkait di Sekolah Islam De Green Camp.
+                </v-alert>
                 <v-alert color="error" class="mb-0" text v-if="formdata.captcha_response.length <= 0">
                   Mohon dicentang Google Captcha (ANTI SPAMMERS)
                 </v-alert>
               </v-card-text>
               <v-card-actions class="justify-center">
-                <vue-recaptcha 
+                <vue-recaptcha
                   ref="recaptcha"
-                  :sitekey="sitekey" 
+                  :sitekey="sitekey"
                   @verify="onVerify"
                   @expired="onExpired"
-                  :loadRecaptchaScript="true">
+                  :loadRecaptchaScript="true"
+                >
                 </vue-recaptcha>
               </v-card-actions>
               <v-card-actions class="justify-center">
-                 <v-btn 
-                  color="primary" 
-                  @click="save" 
+                 <v-btn
+                  color="primary"
+                  @click="save"
                   :loading="btnLoading"
-                  :disabled="btnLoading"
-                  block>
-                    DAFTAR
+                  :disabled="btnLoading || isPenyandangDisabilitas"
+                  block
+                >
+                  DAFTAR
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -126,13 +151,14 @@
                   <v-alert type="success">
                     Proses PRA-PENDAFTARAN berhasil, silahkan Ayah/Bunda/Wali melakukan pembayaran dengan mentransfer beserta Biaya Pendaftaran sebesar :
                   </v-alert>
-                  <v-text-field 
-                    v-model="formkonfirmasi.code" 
+                  <v-text-field
+                    v-model="formkonfirmasi.code"
                     label="BIAYA PENDAFTARAN + KODE TRANSFER"
                     outlined
-                    :disabled="true">
+                    :disabled="true"
+                  >
                   </v-text-field>
-                  Transfer ke Rekening berikut : 
+                  Transfer ke Rekening berikut :
                   <v-alert type="info">
                     BANK RIAU KEPRI SYARIAH <br />
                     NOMOR REKENING : 821-21-28255 <br />
@@ -142,11 +168,12 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn 
-                    color="blue darken-1" 
-                    text 
-                    @click.stop="closedialogfrm">
-                      OK
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click.stop="closedialogfrm"
+                  >
+                    OK
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -157,7 +184,7 @@
       </v-row>
     </v-container>
     <v-container fluid v-if="registerSD == false">
-			<v-row>
+      <v-row>
         PPDB SD Belum dibuka
       </v-row>
     </v-container>
@@ -165,15 +192,15 @@
 </template>
 <script>
   import { mapGetters } from "vuex";
-  import VueRecaptcha from 'vue-recaptcha';
+  import VueRecaptcha from "vue-recaptcha";
   import FrontLayout from "@/views/layouts/FrontLayout";
   export default {
-    name: 'PSBSD',
+    name: "PSBSD",
     created() {
       this.initialize();
     },
     data: () => ({
-      btnLoading: false, 
+      btnLoading: false,
       registerSD: null,
       //form
       form_valid: true,
@@ -183,32 +210,34 @@
         name: "",
         tanggal_lahir: "",
         jk: "L",
-        email: "", 
+        email: "",
         nomor_hp: "",
         username: "",
         password: "",
         captcha_response: "",
+        penyandang_disabilitas: false,
       },
       formdefault: {
         name: "",
         tanggal_lahir: "",
         jk: "L",
-        email: "", 
+        email: "",
         nomor_hp: "",
         username: "",
         password: "",
         captcha_response: "",
-      }, 
+        penyandang_disabilitas: false,
+      },
       formkonfirmasi: {
         email: "",
-        code: ""
+        code: "",
       },
       rule_name: [
         value => !!value || "Nama Calon Peserta Didik mohon untuk diisi !!!",
         value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Calon Peserta Didik hanya boleh string dan spasi',
       ],
       rule_tanggal_lahir: [
-        value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"
+        value => !!value || "Tanggal Lahir mohon untuk dipilih !!!",
       ],
       rule_nomorhp: [
         value => !!value || "Nomor Kontak WA mohon untuk diisi !!!",
@@ -219,20 +248,20 @@
         v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
       ],
       rule_jenjang: [
-        value => !!value || "Program studi mohon untuk dipilih !!!"
+        value => !!value || "Program studi mohon untuk dipilih !!!",
       ],
       rule_username: [
-        value => !!value || "Username mohon untuk diisi dengan nama depan anak !!!"
+        value => !!value || "Username mohon untuk diisi dengan nama depan anak !!!",
       ],
       rule_password: [
-        value => !!value || "Password mohon untuk diisi !!!"
+        value => !!value || "Password mohon untuk diisi !!!",
       ],
     }),
     methods: {
       initialize: async function() {
         await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
           let jenjang_studi = data.jenjang_studi;
-            jenjang_studi.forEach(element => {
+          jenjang_studi.forEach(element => {
             if (element.kode_jenjang == 2) {
               this.registerSD = element.status_pendaftaran == 1;
             }
@@ -242,28 +271,31 @@
       save: async function() {
         if (this.$refs.frmpendaftaran.validate()) {
           this.btnLoading = true;
-          await this.$ajax.post("/spsb/psb/store", {
-            name: this.formdata.name,
-            tanggal_lahir: this.formdata.tanggal_lahir,
-            jk: this.formdata.jk,
-            email: this.formdata.email,
-            nomor_hp: this.formdata.nomor_hp,
-            username: this.formdata.username,
-            kode_jenjang: 2,
-            password: this.formdata.password,
-            captcha_response: this.formdata.captcha_response,
-          }).then(({ data }) => {
-            this.formkonfirmasi.email = data.email;
-            this.formkonfirmasi.code = data.code;
-            this.btnLoading = false;
-            this.dialogkonfirmasipendaftaran = true;
-            
-            this.form_valid = true;
-            this.$refs.frmpendaftaran.reset();
-            this.formdata = Object.assign({}, this.formdefault)
-          }).catch(() => {
-            this.btnLoading = false;
-          });
+          await this.$ajax
+            .post("/spsb/psb/store", {
+              name: this.formdata.name,
+              tanggal_lahir: this.formdata.tanggal_lahir,
+              jk: this.formdata.jk,
+              email: this.formdata.email,
+              nomor_hp: this.formdata.nomor_hp,
+              username: this.formdata.username,
+              kode_jenjang: 2,
+              password: this.formdata.password,
+              captcha_response: this.formdata.captcha_response,
+              penyandang_disabilitas: this.formdata.penyandang_disabilitas == true ? 1 : 0,
+            })
+            .then(({ data }) => {
+              this.formkonfirmasi.email = data.email;
+              this.formkonfirmasi.code = data.code;
+              this.btnLoading = false;
+              this.dialogkonfirmasipendaftaran = true;
+              this.form_valid = true;
+              this.$refs.frmpendaftaran.reset();
+              this.formdata = Object.assign({}, this.formdefault);
+            })
+            .catch(() => {
+              this.btnLoading = false;
+            });
         }
         this.resetRecaptcha();
       },
@@ -292,10 +324,13 @@
         tahunPendaftaran: "getTahunPendaftaran",
         bukaPPDB: "getBukaPPDB",
       }),
-    }, 
+      isPenyandangDisabilitas() {
+        return this.formdata.penyandang_disabilitas;
+      },
+    },
     components: {
       FrontLayout,
-      VueRecaptcha
+      VueRecaptcha,
     },
-  }
+  };
 </script>

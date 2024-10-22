@@ -105,6 +105,29 @@
                   outlined
                   dense
                 />
+                <span class="font-weight-medium">
+                  Apakah Peserta Didik Penyandang Disabilitas (PDPD) ?
+                </span>
+                <v-switch
+                  v-model="formdata.penyandang_disabilitas"
+                  label="YA"
+                />
+                <v-alert
+                  color="warning"
+                  class="mb-1"
+                  text
+                  v-if="isPenyandangDisabilitas && formdata.jk == 'L'"
+                >
+                  Pada periode ini belum menerima Peserta Didik Penyandang Disabilitas (PDPD).
+                </v-alert>
+                <v-alert
+                  color="warning"
+                  class="mb-1"
+                  text
+                  v-if="isPenyandangDisabilitas && formdata.jk == 'P'"
+                >
+                  Silahkan mendaftar secara manual Admin jenjang terkait di Sekolah Islam De Green Camp.
+                </v-alert>
                 <v-alert
                   color="error"
                   class="mb-0"
@@ -128,7 +151,7 @@
                   color="primary"
                   @click="save"
                   :loading="btnLoading"
-                  :disabled="btnLoading"
+                  :disabled="btnLoading || isPenyandangDisabilitas"
                   block
                 >
                   DAFTAR
@@ -213,6 +236,7 @@
         username: "",
         password: "",
         captcha_response: "",
+        penyandang_disabilitas: false,
       },
       formdefault: {
         name: "",
@@ -223,6 +247,7 @@
         username: "",
         password: "",
         captcha_response: "",
+        penyandang_disabilitas: false,
       },
       formkonfirmasi: {
         email: "",
@@ -233,6 +258,9 @@
         value =>
           /^[A-Za-z\s\\,\\.]*$/.test(value) ||
           "Nama Calon Peserta Didik hanya boleh string dan spasi",
+      ],
+      rule_tanggal_lahir: [
+        value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"
       ],
       rule_nomorhp: [
         value => !!value || "Nomor Kontak WA mohon untuk diisi !!!",
@@ -278,6 +306,7 @@
               kode_jenjang: 3,
               password: this.formdata.password,
               captcha_response: this.formdata.captcha_response,
+              penyandang_disabilitas: this.formdata.penyandang_disabilitas == true ? 1 : 0,
             })
             .then(({ data }) => {
               this.formkonfirmasi.email = data.email;
@@ -319,6 +348,9 @@
         tahunPendaftaran: "getTahunPendaftaran",
         bukaPPDB: "getBukaPPDB",
       }),
+      isPenyandangDisabilitas() {
+        return this.formdata.penyandang_disabilitas;
+      },
     },
     components: {
       FrontLayout,

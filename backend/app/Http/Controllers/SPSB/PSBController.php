@@ -31,7 +31,7 @@ class PSBController extends Controller
   private function checkUsia($request)
   {
     $tanggal_lahir = $request->input('tanggal_lahir');
-    $batas_tanggal = date('2024-07-31');
+    $batas_tanggal = date('2024-07-01');
     $usia = \App\Helpers\Helper::getUsia($tanggal_lahir, $batas_tanggal);
     $kode_jenjang = $request->input('kode_jenjang');
     
@@ -73,14 +73,14 @@ class PSBController extends Controller
     $this->hasPermissionTo('SPSB-PSB_BROWSE');
 
     $this->validate($request, [           
-      'TA'=>'required',
-      'kode_jenjang'=>'required'
+      'TA' => 'required',
+      'kode_jenjang' => 'required'
     ]);
     
     $ta=$request->input('TA');
     $kode_jenjang=$request->input('kode_jenjang');
 
-    $data = User::where('default_role','siswabaru')
+    $data = User::where('default_role', 'siswabaru')
     ->select(\DB::raw('
       users.id,
       users.username,
@@ -95,16 +95,16 @@ class PSBController extends Controller
       users.created_at,
       users.updated_at'
     ))
-    ->join('formulir_pendaftaran_a','formulir_pendaftaran_a.user_id','users.id')
-    ->where('users.ta',$ta)
-    ->where('kode_jenjang',$kode_jenjang)
+    ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.user_id', 'users.id')
+    ->where('users.ta', $ta)
+    ->where('kode_jenjang', $kode_jenjang)
     ->get();
     
     return Response()->json([
-      'status'=>1,
-      'pid'=>'fetchdata',
-      'psb'=>$data,
-      'message'=>'Fetch data calon peserta didik berhasil diperoleh'
+      'status' => 1,
+      'pid' => 'fetchdata',
+      'psb' => $data,
+      'message' => 'Fetch data calon peserta didik berhasil diperoleh'
     ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  
   }    
   /**
@@ -114,11 +114,11 @@ class PSBController extends Controller
    */
   public function formulirpendaftaran(Request $request)
   {   
-    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE','SPSB-PSB-LAPORAN-PRODI_BROWSE']);
+    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE', 'SPSB-PSB-LAPORAN-PRODI_BROWSE']);
 
     $this->validate($request, [           
-      'TA'=>'required',
-      'kode_jenjang'=>'required'
+      'TA' => 'required',
+      'kode_jenjang' => 'required'
     ]);
     
     $ta=$request->input('TA');
@@ -135,18 +135,18 @@ class PSBController extends Controller
       users.created_at,
       users.updated_at
     '))
-    ->join('users','formulir_pendaftaran_a.user_id','users.id')                                        
-    ->where('users.ta',$ta)
-    ->where('kode_jenjang',$kode_jenjang)                                
-    ->where('users.active',1)    
-    ->orderBy('users.name','ASC') 
+    ->join('users', 'formulir_pendaftaran_a.user_id', 'users.id')                                        
+    ->where('users.ta', $ta)
+    ->where('kode_jenjang', $kode_jenjang)                                
+    ->where('users.active', 1)    
+    ->orderBy('users.name', 'ASC') 
     ->get();
     
     return Response()->json([
-      'status'=>1,
-      'pid'=>'fetchdata',
-      'psb'=>$data,
-      'message'=>'Fetch data calon peserta didik berhasil diperoleh'
+      'status' => 1,
+      'pid' => 'fetchdata',
+      'psb' => $data,
+      'message' => 'Fetch data calon peserta didik berhasil diperoleh'
     ], 200);  
   }  
   /**
@@ -156,39 +156,39 @@ class PSBController extends Controller
    */
   public function biodataayah(Request $request)
   {   
-    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE','SPSB-PSB-LAPORAN-PRODI_BROWSE']);
+    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE', 'SPSB-PSB-LAPORAN-PRODI_BROWSE']);
 
     $this->validate($request, [           
-      'TA'=>'required',
-      'kode_jenjang'=>'required'
+      'TA' => 'required',
+      'kode_jenjang' => 'required'
     ]);
     
     $ta=$request->input('TA');
     $kode_jenjang=$request->input('kode_jenjang');
 
     $data = FormulirPendaftaranAModel::select(\DB::raw('
-            users.id,
-            users.name,
-            formulir_pendaftaran_c.nama_ayah,
-            formulir_pendaftaran_c.nomor_hp,                        
-            users.active,
-            users.foto,
-            users.created_at,
-            users.updated_at
-          '))
-          ->join('users','formulir_pendaftaran_a.user_id','users.id')                                        
-          ->join('formulir_pendaftaran_c','formulir_pendaftaran_c.user_id','users.id')                                        
-          ->where('users.ta',$ta)
-          ->where('kode_jenjang',$kode_jenjang)                                
-          ->where('users.active',1)    
-          ->orderBy('users.name','ASC') 
-          ->get();
+      users.id,
+      users.name,
+      formulir_pendaftaran_c.nama_ayah,
+      formulir_pendaftaran_c.nomor_hp,                        
+      users.active,
+      users.foto,
+      users.created_at,
+      users.updated_at
+    '))
+    ->join('users', 'formulir_pendaftaran_a.user_id', 'users.id')                                        
+    ->join('formulir_pendaftaran_c', 'formulir_pendaftaran_c.user_id', 'users.id')                                        
+    ->where('users.ta', $ta)
+    ->where('kode_jenjang', $kode_jenjang)                                
+    ->where('users.active', 1)    
+    ->orderBy('users.name', 'ASC') 
+    ->get();
     
     return Response()->json([
-      'status'=>1,
-      'pid'=>'fetchdata',
-      'psb'=>$data,
-      'message'=>'Fetch data calon peserta didik berhasil diperoleh'
+      'status' => 1,
+      'pid' => 'fetchdata',
+      'psb' => $data,
+      'message' => 'Fetch data calon peserta didik berhasil diperoleh'
     ], 200); 
   }  
   /**
@@ -198,40 +198,40 @@ class PSBController extends Controller
    */
   public function biodataibu(Request $request)
   {   
-    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE','SPSB-PSB-LAPORAN-PRODI_BROWSE']);
+    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE', 'SPSB-PSB-LAPORAN-PRODI_BROWSE']);
 
     $this->validate($request, [           
-      'TA'=>'required',
-      'kode_jenjang'=>'required'
+      'TA' => 'required',
+      'kode_jenjang' => 'required'
     ]);
     
     $ta=$request->input('TA');
     $kode_jenjang=$request->input('kode_jenjang');
 
     $data = FormulirPendaftaranAModel::select(\DB::raw('
-            users.id,
-            users.name,
-            formulir_pendaftaran_d.nama_ibu,
-            formulir_pendaftaran_d.nomor_hp,                        
-            users.active,
-            users.foto,
-            users.created_at,
-            users.updated_at
-          '))
-          ->join('users','formulir_pendaftaran_a.user_id','users.id')                                        
-          ->join('formulir_pendaftaran_d','formulir_pendaftaran_d.user_id','users.id')                                        
-          ->where('users.ta',$ta)
-          ->where('kode_jenjang',$kode_jenjang)                                
-          ->where('users.active',1)    
-          ->orderBy('users.name','ASC') 
-          ->get();
+      users.id,
+      users.name,
+      formulir_pendaftaran_d.nama_ibu,
+      formulir_pendaftaran_d.nomor_hp,                        
+      users.active,
+      users.foto,
+      users.created_at,
+      users.updated_at
+    '))
+    ->join('users', 'formulir_pendaftaran_a.user_id', 'users.id')                                        
+    ->join('formulir_pendaftaran_d', 'formulir_pendaftaran_d.user_id', 'users.id')                                        
+    ->where('users.ta', $ta)
+    ->where('kode_jenjang', $kode_jenjang)                                
+    ->where('users.active', 1)    
+    ->orderBy('users.name', 'ASC') 
+    ->get();
     
     return Response()->json([
-                'status'=>1,
-                'pid'=>'fetchdata',
-                'psb'=>$data,
-                'message'=>'Fetch data calon peserta didik berhasil diperoleh'
-              ], 200); 
+      'status' => 1,
+      'pid' => 'fetchdata',
+      'psb' => $data,
+      'message' => 'Fetch data calon peserta didik berhasil diperoleh'
+    ], 200); 
   }  
   /**
    * digunakan untuk mendapatkan ayah calon peserta didik yang telah mengisi formulir pendaftaran
@@ -240,11 +240,11 @@ class PSBController extends Controller
    */
   public function situasikeluarga(Request $request)
   {   
-    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE','SPSB-PSB-LAPORAN-PRODI_BROWSE']);
+    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE', 'SPSB-PSB-LAPORAN-PRODI_BROWSE']);
 
     $this->validate($request, [           
-      'TA'=>'required',
-      'kode_jenjang'=>'required'
+      'TA' => 'required',
+      'kode_jenjang' => 'required'
     ]);
     
     $ta=$request->input('TA');
@@ -261,19 +261,19 @@ class PSBController extends Controller
       users.created_at,
       users.updated_at
     '))
-    ->join('users','formulir_pendaftaran_a.user_id','users.id')                                        
-    ->join('formulir_pendaftaran_b','formulir_pendaftaran_b.user_id','users.id')                                        
-    ->where('users.ta',$ta)
-    ->where('kode_jenjang',$kode_jenjang)                                
+    ->join('users', 'formulir_pendaftaran_a.user_id', 'users.id')                                        
+    ->join('formulir_pendaftaran_b', 'formulir_pendaftaran_b.user_id', 'users.id')                                        
+    ->where('users.ta', $ta)
+    ->where('kode_jenjang', $kode_jenjang)                                
     ->where('users.active', 1)    
-    ->orderBy('users.name','ASC') 
+    ->orderBy('users.name', 'ASC') 
     ->get();
     
     return Response()->json([
-      'status'=>1,
-      'pid'=>'fetchdata',
-      'psb'=>$data,
-      'message'=>'Fetch data calon peserta didik berhasil diperoleh'
+      'status' => 1,
+      'pid' => 'fetchdata',
+      'psb' => $data,
+      'message' => 'Fetch data calon peserta didik berhasil diperoleh'
     ], 200); 
   }  
   /**
@@ -287,25 +287,26 @@ class PSBController extends Controller
     try
     {
       $this->validate($request, [
-        'name'=>'required',
-        'tanggal_lahir'=>'required|date_format:Y-m-d',
-        'jk'=>'required|in:L,P',
-        'email'=>'required|string|email',
-        'nomor_hp'=>'required|numeric',            
-        'kode_jenjang'=>'required|numeric|exists:jenjang_studi,kode_jenjang',            
-        'username'=>'required|string|unique:users',
-        'password'=>'required',
-        'captcha_response'=>[
+        'name' => 'required',
+        'tanggal_lahir' => 'required|date_format:Y-m-d',
+        'jk' => 'required|in:L,P',
+        'email' => 'required|string|email',
+        'nomor_hp' => 'required|numeric',            
+        'kode_jenjang' => 'required|numeric|exists:jenjang_studi,kode_jenjang',            
+        'username' => 'required|string|unique:users',
+        'password' => 'required',
+        'penyandang_disabilitas' => 'required|in:0,1',
+        'captcha_response' => [
           'required',
           function ($attribute, $value, $fail) 
           {
             $client = new Client ();
             $response = $client->post(
               'https://www.google.com/recaptcha/api/siteverify',
-              ['form_params'=>
+              ['form_params' => 
                 [
-                  'secret'=>ConfigurationModel::getCache('CAPTCHA_PRIVATE_KEY'),
-                  'response'=>$value
+                  'secret' => ConfigurationModel::getCache('CAPTCHA_PRIVATE_KEY'),
+                  'response' => $value
                 ]
               ]);    
             $body = json_decode((string)$response->getBody());
@@ -317,6 +318,12 @@ class PSBController extends Controller
         ]
       ]);
 
+      $penyandang_disabilitas = $request->input('penyandang_disabilitas');
+      if ($penyandang_disabilitas == 1)
+      {
+        throw new Exception ("Pendaftaran gagal dilakukan karena menyandang Disabilitas. Silahkan hubungi Admin Sekolah Islam De Green Camp.");
+      }  
+
       $tahun_pendaftaran = ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN');
       $kode_jenjang = $request->input('kode_jenjang');
     
@@ -327,9 +334,9 @@ class PSBController extends Controller
       if (!HelperPendaftaran::checkKuotaPendaftaran($tahun_pendaftaran, $kode_jenjang, $request->input('jk')))
       {
         return Response()->json([
-          'status'=>0,
-          'pid'=>'store',        
-          'message'=>'Proses pendaftaran gagal karena kuota pendaftaran habis.'
+          'status' => 0,
+          'pid' => 'store',        
+          'message' => 'Proses pendaftaran gagal karena kuota pendaftaran habis.'
         ], 422);
       }
 
@@ -344,10 +351,10 @@ class PSBController extends Controller
       if(is_null($kombi) )
       { 
         return Response()->json([
-          'status'=>0,
-          'pid'=>'store',        
-          'message'=>"Biaya pendaftaran jenjang pendidikan ($kode_jenjang) belum ditentukan oleh Admin.",
-          'kombi'=>$kombi,
+          'status' => 0,
+          'pid' => 'store',        
+          'message' => "Biaya pendaftaran jenjang pendidikan ($kode_jenjang) belum ditentukan oleh Admin.",
+          'kombi' => $kombi,
         ], 422);
       }
       $user = \DB::transaction(function () use ($request, $kombi){
@@ -368,23 +375,23 @@ class PSBController extends Controller
           default:
             $code=0;
         }            
-        $ta=ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN');
+        $ta = ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN');
         $user=User::create([
-          'id'=>Uuid::uuid4()->toString(),
-          'name'=>strtoupper($request->input('name')),
-          'email'=>$request->input('email'),
-          'username'=> $request->input('username'),
-          'password'=>Hash::make($request->input('password')),
-          'nomor_hp'=>$request->input('nomor_hp'),
-          'ta'=>$ta,
-          'email_verified_at'=>'',
-          'theme'=>'default',  
-          'foto'=> 'images/users/no_photo.png',
-          'code'=>$code,          
-          'active'=>0,          
-          'default_role'=>'siswabaru',          
-          'created_at'=>$now, 
-          'updated_at'=>$now
+          'id' => Uuid::uuid4()->toString(),
+          'name' => strtoupper($request->input('name')),
+          'email' => $request->input('email'),
+          'username' =>  $request->input('username'),
+          'password' => Hash::make($request->input('password')),
+          'nomor_hp' => $request->input('nomor_hp'),
+          'ta' => $ta,
+          'email_verified_at' => '',
+          'theme' => 'default',  
+          'foto' =>  'images/users/no_photo.png',
+          'code' => $code,          
+          'active' => 0,          
+          'default_role' => 'siswabaru',          
+          'created_at' => $now, 
+          'updated_at' => $now
         ]);
         $role='siswabaru';   
         $user->assignRole($role);
@@ -392,62 +399,62 @@ class PSBController extends Controller
         $user->givePermissionTo($permission->pluck('name')); 
         
         FormulirPendaftaranAModel::create([
-          'user_id'=>$user->id,
-          'nama_siswa'=>strtoupper($request->input('name')),    
-          'tanggal_lahir'=>$request->input('tanggal_lahir'),                            
-          'jk'=>strtoupper($request->input('jk')),                                
-          'kode_jenjang'=>$kode_jenjang,
-          'ta'=>$ta,
+          'user_id' => $user->id,
+          'nama_siswa' => strtoupper($request->input('name')),    
+          'tanggal_lahir' => $request->input('tanggal_lahir'),                            
+          'jk' => strtoupper($request->input('jk')),                                
+          'kode_jenjang' => $kode_jenjang,
+          'ta' => $ta,
         ]);
         FormulirPendaftaranBModel::create([
-          'user_id'=>$user->id,                
+          'user_id' => $user->id,                
         ]);
         FormulirPendaftaranCModel::create([
-          'user_id'=>$user->id,            
-          'nomor_hp'=>$request->input('nomor_hp'),
+          'user_id' => $user->id,            
+          'nomor_hp' => $request->input('nomor_hp'),
         ]);
         FormulirPendaftaranDModel::create([
-          'user_id'=>$user->id,            
-          'nomor_hp'=>$request->input('nomor_hp'),
+          'user_id' => $user->id,            
+          'nomor_hp' => $request->input('nomor_hp'),
         ]);
         FormulirPendaftaranEModel::create([
-          'user_id'=>$user->id,            
-          'nomor_hp'=>$request->input('nomor_hp'),
+          'user_id' => $user->id,            
+          'nomor_hp' => $request->input('nomor_hp'),
         ]);
         FormulirPendaftaranFModel::create([
-          'user_id'=>$user->id,            
-          'nomor_hp'=>$request->input('nomor_hp'),
+          'user_id' => $user->id,            
+          'nomor_hp' => $request->input('nomor_hp'),
         ]);
         PersyaratanPPDBModel::create([
-          'user_id'=>$user->id,                            
+          'user_id' => $user->id,                            
         ]);
         return $user;
       });
       $config_kirim_email = ConfigurationModel::getCache('EMAIL_SISWA_ISVALID');
       if (!is_null($user) && $config_kirim_email==1)
       {
-        $code='';
+        $code = '';
         app()->mailer->to($request->input('email'))->send(new VerifyEmailAddress($user->code));
       }
       else
       {
-        $code=$user->code;
+        $code = $user->code;
       }       
 
       return Response()->json([
-        'status'=>1,
-        'pid'=>'store',
-        'email'=>$user->email,                              
-        'code'=>HelperPendaftaran::formatUang($code),    
-        'message'=>'Data Peserta Didik baru berhasil disimpan.'
+        'status' => 1,
+        'pid' => 'store',
+        'email' => $user->email,                              
+        'code' => HelperPendaftaran::formatUang($code),    
+        'message' => 'Data Peserta Didik baru berhasil disimpan.'
       ], 200);
     }
     catch (Exception $e)
     {
       return Response()->json([
-        'status'=>0,
-        'pid'=>'store',        
-        'message'=>$e->getMessage(),
+        'status' => 0,
+        'pid' => 'store',        
+        'message' => $e->getMessage(),
       ], 422);
     }   
   }      
@@ -464,14 +471,14 @@ class PSBController extends Controller
     try
     {
       $this->validate($request, [
-        'name'=>'required',            
-        'tanggal_lahir'=>'required|date_format:Y-m-d',
-        'email'=>'required|string|email',
-        'nomor_hp'=>'required',            
-        'kode_jenjang'=>'required|numeric|exists:jenjang_studi,kode_jenjang',
-        'tahun_pendaftaran'=>'required|numeric',            
-        'username'=>'required|string|unique:users',
-        'password'=>'required',                        
+        'name' => 'required',            
+        'tanggal_lahir' => 'required|date_format:Y-m-d',
+        'email' => 'required|string|email',
+        'nomor_hp' => 'required',            
+        'kode_jenjang' => 'required|numeric|exists:jenjang_studi,kode_jenjang',
+        'tahun_pendaftaran' => 'required|numeric',            
+        'username' => 'required|string|unique:users',
+        'password' => 'required',                        
       ]);
 
       //cek usia
@@ -482,21 +489,21 @@ class PSBController extends Controller
         $code=mt_rand(1000,9999);
         $ta=$request->input('tahun_pendaftaran');
         $user=User::create([
-          'id'=>Uuid::uuid4()->toString(),
-          'name'=>strtoupper($request->input('name')),
-          'email'=>$request->input('email'),
-          'username'=> $request->input('username'),
-          'password'=>Hash::make($request->input('password')),
-          'nomor_hp'=>$request->input('nomor_hp'),
-          'ta'=>$ta,
-          'email_verified_at'=>'',
-          'theme'=>'default',  
-          'code'=>$code,          
-          'active'=>1,         
-          'default_role'=>'siswabaru',
-          'foto'=>'images/users/no_photo.png', 
-          'created_at'=>$now, 
-          'updated_at'=>$now
+          'id' => Uuid::uuid4()->toString(),
+          'name' => strtoupper($request->input('name')),
+          'email' => $request->input('email'),
+          'username' =>  $request->input('username'),
+          'password' => Hash::make($request->input('password')),
+          'nomor_hp' => $request->input('nomor_hp'),
+          'ta' => $ta,
+          'email_verified_at' => '',
+          'theme' => 'default',  
+          'code' => $code,          
+          'active' => 1,         
+          'default_role' => 'siswabaru',
+          'foto' => 'images/users/no_photo.png', 
+          'created_at' => $now, 
+          'updated_at' => $now
         ]);
         $role='siswabaru';   
         $user->assignRole($role);
@@ -504,34 +511,34 @@ class PSBController extends Controller
         $user->givePermissionTo($permission->pluck('name')); 
         
         FormulirPendaftaranAModel::create([
-          'user_id'=>$user->id,
-          'nama_siswa'=>strtoupper($request->input('name')),                                
-          'tanggal_lahir'=>$request->input('tanggal_lahir'),
-          'kode_jenjang'=>$request->input('kode_jenjang'),
-          'ta'=>$ta,
+          'user_id' => $user->id,
+          'nama_siswa' => strtoupper($request->input('name')),                                
+          'tanggal_lahir' => $request->input('tanggal_lahir'),
+          'kode_jenjang' => $request->input('kode_jenjang'),
+          'ta' => $ta,
         ]);
         
         FormulirPendaftaranBModel::create([
-          'user_id'=>$user->id,                
+          'user_id' => $user->id,                
         ]);
         FormulirPendaftaranCModel::create([
-          'user_id'=>$user->id,            
-          'nomor_hp'=>$request->input('nomor_hp'),
+          'user_id' => $user->id,            
+          'nomor_hp' => $request->input('nomor_hp'),
         ]);
         FormulirPendaftaranDModel::create([
-          'user_id'=>$user->id,            
-          'nomor_hp'=>$request->input('nomor_hp'),
+          'user_id' => $user->id,            
+          'nomor_hp' => $request->input('nomor_hp'),
         ]);
         FormulirPendaftaranEModel::create([
-          'user_id'=>$user->id,            
-          'nomor_hp'=>$request->input('nomor_hp'),
+          'user_id' => $user->id,            
+          'nomor_hp' => $request->input('nomor_hp'),
         ]);
         FormulirPendaftaranFModel::create([
-          'user_id'=>$user->id,            
-          'nomor_hp'=>$request->input('nomor_hp'),
+          'user_id' => $user->id,            
+          'nomor_hp' => $request->input('nomor_hp'),
         ]);
         PersyaratanPPDBModel::create([
-          'user_id'=>$user->id,                            
+          'user_id' => $user->id,                            
         ]);    
 
         return $user;
@@ -548,19 +555,19 @@ class PSBController extends Controller
       }
 
       return Response()->json([
-        'status'=>1,
-        'pid'=>'store',
-        'pendaftar'=>$user,
-        'code'=>$code,                                    
-        'message'=>'Data Peserta Didik baru berhasil disimpan.'
+        'status' => 1,
+        'pid' => 'store',
+        'pendaftar' => $user,
+        'code' => $code,                                    
+        'message' => 'Data Peserta Didik baru berhasil disimpan.'
       ], 200);
     }
     catch(Exception $e)
     {
       return Response()->json([
-        'status'=>0,
-        'pid'=>'store',        
-        'message'=>$e->getMessage(),
+        'status' => 0,
+        'pid' => 'store',        
+        'message' => $e->getMessage(),
       ], 422);
     }
   }      
@@ -578,22 +585,22 @@ class PSBController extends Controller
     if (is_null($user))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',                
-        'message'=>["User ID ($id) gagal diupdate"]
+        'status' => 1,
+        'pid' => 'update',                
+        'message' => ["User ID ($id) gagal diupdate"]
       ], 422);
     }
     else
     {
       $this->validate($request, [
-        'username'=>[
+        'username' => [
           'required',
           'unique:users,username,'.$user->id
         ],              
-        'email'=>'required|string|email',
-        'nomor_hp'=>'required',
-        'kode_jenjang'=>'required|numeric|exists:jenjang_studi,kode_jenjang',
-        'tahun_pendaftaran'=>'required|numeric'            
+        'email' => 'required|string|email',
+        'nomor_hp' => 'required',
+        'kode_jenjang' => 'required|numeric|exists:jenjang_studi,kode_jenjang',
+        'tahun_pendaftaran' => 'required|numeric'            
       ]);
       
       $user = \DB::transaction(function () use ($request,$user){
@@ -618,10 +625,10 @@ class PSBController extends Controller
     }
 
     return Response()->json([
-      'status'=>1,
-      'pid'=>'store',
-      'pendaftar'=>$user,                                  
-      'message'=>'Data Peserta Didik baru berhasil diubah.'
+      'status' => 1,
+      'pid' => 'store',
+      'pendaftar' => $user,                                  
+      'message' => 'Data Peserta Didik baru berhasil diubah.'
     ], 200);
 
   }      
@@ -680,24 +687,24 @@ class PSBController extends Controller
       `desc`,
       users.ta
     '))
-    ->join('users','users.id','formulir_pendaftaran_a.user_id')                                            
+    ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
     ->find($id);
 
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'formulir'=>$formulir,                
-        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'formulir' => $formulir,                
+        'message' => "Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
       ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 
@@ -717,25 +724,25 @@ class PSBController extends Controller
       status_pernikahan,                                
       `desc`                                                               
     '))
-    ->join('users','users.id','formulir_pendaftaran_b.user_id')                                            
+    ->join('users', 'users.id', 'formulir_pendaftaran_b.user_id')                                            
     ->find($id);
     
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'fetchdata',                
-                  'message'=>["Formulir Pendaftaran Situasi Keluarga dengan ID ($id) gagal diperoleh"]
-                ], 422);
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran Situasi Keluarga dengan ID ($id) gagal diperoleh"]
+      ], 422);
     }
     else
     {
       return Response()->json([
-                    'status'=>1,
-                    'pid'=>'fetchdata',                
-                    'formulir'=>$formulir,                
-                    'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
-                  ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'formulir' => $formulir,                
+        'message' => "Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+      ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 
   }
@@ -777,23 +784,23 @@ class PSBController extends Controller
       tiktok_account,
       `desc`                                                               
     '))
-    ->join('users','users.id','formulir_pendaftaran_c.user_id')                                            
+    ->join('users', 'users.id', 'formulir_pendaftaran_c.user_id')                                            
     ->find($id);
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran Biodata Ayah dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran Biodata Ayah dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'formulir'=>$formulir,                
-        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'formulir' => $formulir,                
+        'message' => "Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
       ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 
@@ -836,24 +843,24 @@ class PSBController extends Controller
       tiktok_account,
       `desc`                                                               
     '))
-    ->join('users','users.id','formulir_pendaftaran_d.user_id')                                            
+    ->join('users', 'users.id', 'formulir_pendaftaran_d.user_id')                                            
     ->find($id);
 
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'formulir'=>$formulir,                
-        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'formulir' => $formulir,                
+        'message' => "Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
       ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 
@@ -896,24 +903,24 @@ class PSBController extends Controller
       tiktok_account,
       `desc`                                                               
     '))
-    ->join('users','users.id','formulir_pendaftaran_f.user_id')                                            
+    ->join('users', 'users.id', 'formulir_pendaftaran_f.user_id')                                            
     ->find($id);
 
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran Biodata Wali dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran Biodata Wali dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'formulir'=>$formulir,                
-        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'formulir' => $formulir,                
+        'message' => "Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
       ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
   }
@@ -933,24 +940,24 @@ class PSBController extends Controller
       formulir_pendaftaran_e.alamat_kontak,
       formulir_pendaftaran_e.nomor_hp
     '))
-    ->join('users','users.id','formulir_pendaftaran_e.user_id')                                            
+    ->join('users', 'users.id', 'formulir_pendaftaran_e.user_id')                                            
     ->find($id);
 
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran Kontak Darurat dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran Kontak Darurat dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'formulir'=>$formulir,                
-        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'formulir' => $formulir,                
+        'message' => "Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
       ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
   }
@@ -966,18 +973,18 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran Biodata Ibu dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'formulir'=>$formulir,                
-        'message'=>"Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'formulir' => $formulir,                
+        'message' => "Formulir Pendaftaran dengan ID ($id) berhasil diperoleh"
       ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);
     }
 
@@ -991,12 +998,12 @@ class PSBController extends Controller
   public function konfirmasi(Request $request)
   {
     $this->validate($request, [            
-      'username'=>'required|string|exists:users,username',            
+      'username' => 'required|string|exists:users,username',            
     ]);
     $now = \Carbon\Carbon::now()->toDateTimeString();       
     $username= $request->input('username');  
 
-    $user = \DB::table('users')->where('username',$username)->get();
+    $user = \DB::table('users')->where('username', $username)->get();
 
     if ($user->count()>0)
     {
@@ -1005,27 +1012,27 @@ class PSBController extends Controller
       if (is_null($konfirmasi))
       {  
         return Response()->json([
-          'status'=>1,
-          'pid'=>'fetchdata',        
-          'user'=>$user,        
-          'message'=>'Peserta Didik berhasil diperoleh.'
+          'status' => 1,
+          'pid' => 'fetchdata',        
+          'user' => $user,        
+          'message' => 'Peserta Didik berhasil diperoleh.'
         ], 200);
       }
       else
       {
         return Response()->json([
-          'status'=>0,
-          'pid'=>'fetchdata',        
-          'message'=>['Calon Peserta Didik a.n ('.$user->name.') telah melakukan konfirmasi pembayaran.']
+          'status' => 0,
+          'pid' => 'fetchdata',        
+          'message' => ['Calon Peserta Didik a.n ('.$user->name.') telah melakukan konfirmasi pembayaran.']
         ],422);
       }
     }
     else
     {
       return Response()->json([
-        'status'=>0,
-        'pid'=>'fetchdata',        
-        'message'=>['Peserta Didik gagal diperoleh.']
+        'status' => 0,
+        'pid' => 'fetchdata',        
+        'message' => ['Peserta Didik gagal diperoleh.']
       ],422);
     }
 
@@ -1039,15 +1046,15 @@ class PSBController extends Controller
   public function konfirmasipembayaran(Request $request)
   {
     $this->validate($request, [            
-      'user_id'=>'required|string|exists:users,id',
-      'transaksi_id'=>'required|numeric',
-      'id_channel'=>'required',            
-      'nomor_rekening_pengirim'=>'required|numeric',
-      'nama_rekening_pengirim'=>'required',
-      'nama_bank_pengirim'=>'required',
-      'total_bayar'=>'required|numeric',
-      'tanggal_bayar'=>'required',            
-      'bukti_bayar'=>'required',            
+      'user_id' => 'required|string|exists:users,id',
+      'transaksi_id' => 'required|numeric',
+      'id_channel' => 'required',            
+      'nomor_rekening_pengirim' => 'required|numeric',
+      'nama_rekening_pengirim' => 'required',
+      'nama_bank_pengirim' => 'required',
+      'total_bayar' => 'required|numeric',
+      'tanggal_bayar' => 'required',            
+      'bukti_bayar' => 'required',            
     ]);
     $transaksi_id=$request->input('transaksi_id');
     $bukti_bayar=$request->file('bukti_bayar');
@@ -1058,17 +1065,17 @@ class PSBController extends Controller
       $file_name=uniqid('img').".".$bukti_bayar->getClientOriginalExtension();
 
       $konfirmasi=KonfirmasiPembayaranModel::updateOrCreate([
-        'user_id'=>$request->input('user_id'),
-        'transaksi_id'=>$request->input('user_id'),                
-        'no_transaksi'=>$transaksi_id,
-        'id_channel'=>$request->input('id_channel'),
-        'total_bayar'=>$request->input('total_bayar'),
-        'nomor_rekening_pengirim'=>$request->input('nomor_rekening_pengirim'),
-        'nama_rekening_pengirim'=>strtoupper($request->input('nama_rekening_pengirim')),
-        'nama_bank_pengirim'=>strtoupper($request->input('nama_bank_pengirim')),
-        'desc'=>strtoupper($request->input('desc')),
-        'tanggal_bayar'=>$request->input('tanggal_bayar'),
-        'bukti_bayar'=>"images/buktibayar/$file_name",
+        'user_id' => $request->input('user_id'),
+        'transaksi_id' => $request->input('user_id'),                
+        'no_transaksi' => $transaksi_id,
+        'id_channel' => $request->input('id_channel'),
+        'total_bayar' => $request->input('total_bayar'),
+        'nomor_rekening_pengirim' => $request->input('nomor_rekening_pengirim'),
+        'nama_rekening_pengirim' => strtoupper($request->input('nama_rekening_pengirim')),
+        'nama_bank_pengirim' => strtoupper($request->input('nama_bank_pengirim')),
+        'desc' => strtoupper($request->input('desc')),
+        'tanggal_bayar' => $request->input('tanggal_bayar'),
+        'bukti_bayar' => "images/buktibayar/$file_name",
       ]);
       $bukti_bayar->move($folder,$file_name);
 
@@ -1080,18 +1087,18 @@ class PSBController extends Controller
       ]);
 
       return Response()->json([
-        'status'=>0,
-        'pid'=>'store',
-        'konfirmasi'=>$konfirmasi,
-        'message'=>"Konfirmasi pembayaran untuk user_id ('.$konfirmasi->user_id.')   berhasil diupload"
+        'status' => 0,
+        'pid' => 'store',
+        'konfirmasi' => $konfirmasi,
+        'message' => "Konfirmasi pembayaran untuk user_id ('.$konfirmasi->user_id.')   berhasil diupload"
       ], 200);
     }
     else
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'store',
-        'message'=>["Extensi file yang diupload bukan jpg atau png."]
+        'status' => 1,
+        'pid' => 'store',
+        'message' => ["Extensi file yang diupload bukan jpg atau png."]
       ],422);
     }
 
@@ -1106,7 +1113,7 @@ class PSBController extends Controller
   {
     try
     {
-      $formulir=FormulirPendaftaranAModel::find($id);
+      $formulir = FormulirPendaftaranAModel::find($id);
 
       if (is_null($formulir))
       {
@@ -1114,41 +1121,41 @@ class PSBController extends Controller
       }  
 
       $this->validate($request, [
-        'nama_siswa'=>'required',            
-        'nama_panggilan'=>'required',            
-        'jk'=>'required',            
-        'nik'=>'required|numeric',            
-        'tempat_lahir'=>'required',            
-        'tanggal_lahir'=>'required',
-        'idagama'=>'required|numeric|exists:agama,idagama',
-        'id_kebutuhan_khusus'=>'required|numeric|exists:kebutuhan_khusus,id_kebutuhan',
+        'nama_siswa' => 'required',            
+        'nama_panggilan' => 'required',            
+        'jk' => 'required',            
+        'nik' => 'required|numeric',            
+        'tempat_lahir' => 'required',            
+        'tanggal_lahir' => 'required',
+        'idagama' => 'required|numeric|exists:agama,idagama',
+        'id_kebutuhan_khusus' => 'required|numeric|exists:kebutuhan_khusus,id_kebutuhan',
 
-        'address1_provinsi_id'=>'required',
-        'address1_provinsi'=>'required',
-        'address1_kabupaten_id'=>'required',
-        'address1_kabupaten'=>'required',
-        'address1_kecamatan_id'=>'required',
-        'address1_kecamatan'=>'required',
-        'address1_desa_id'=>'required',
-        'address1_kelurahan'=>'required',
-        'alamat_tempat_tinggal'=>'required',
-        'address1_rt'=>'required',
-        'address1_rw'=>'required',
-        'kode_pos'=>'required|max:5',
-        'kewarganegaraan'=>'required|numeric|exists:negara,id',
+        'address1_provinsi_id' => 'required',
+        'address1_provinsi' => 'required',
+        'address1_kabupaten_id' => 'required',
+        'address1_kabupaten' => 'required',
+        'address1_kecamatan_id' => 'required',
+        'address1_kecamatan' => 'required',
+        'address1_desa_id' => 'required',
+        'address1_kelurahan' => 'required',
+        'alamat_tempat_tinggal' => 'required',
+        'address1_rt' => 'required',
+        'address1_rw' => 'required',
+        'kode_pos' => 'required|max:5',
+        'kewarganegaraan' => 'required|numeric|exists:negara,id',
         
-        'anak_ke'=>'required',
-        'jumlah_saudara'=>'required',
-        'golongan_darah'=>'required',                
+        'anak_ke' => 'required',
+        'jumlah_saudara' => 'required',
+        'golongan_darah' => 'required',                
         
-        'tinggi'=>'required',                
-        'berat_badan'=>'required',                
-        'ukuran_seragam'=>'required',                
-        'id_moda'=>'required|numeric|exists:moda_transportasi,id_moda',                
-        'jarak_ke_sekolah'=>'required',                
-        'waktu_tempuh'=>'required',                
-        'saudara_mendaftar_tidak'=>'required|in:0,1',
-        'kode_jenjang'=>'required',
+        'tinggi' => 'required',                
+        'berat_badan' => 'required',                
+        'ukuran_seragam' => 'required',                
+        'id_moda' => 'required|numeric|exists:moda_transportasi,id_moda',                
+        'jarak_ke_sekolah' => 'required',                
+        'waktu_tempuh' => 'required',                
+        'saudara_mendaftar_tidak' => 'required|in:0,1',
+        'kode_jenjang' => 'required',
         
       ]);
 
@@ -1233,18 +1240,18 @@ class PSBController extends Controller
         return $formulir;
       });
       return Response()->json([
-        'status'=>1,
-        'pid'=>'store',
-        'formulir'=>$formulir,          
-        'message'=>'Formulir Pendaftaran Peserta Didik baru berhasil diubah.'
+        'status' => 1,
+        'pid' => 'store',
+        'formulir' => $formulir,          
+        'message' => 'Formulir Pendaftaran Peserta Didik baru berhasil diubah.'
       ], 200);
     }
     catch (Exception $e)
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',                
-        'message'=>[$e->getMessage()]
+        'status' => 1,
+        'pid' => 'update',                
+        'message' => [$e->getMessage()]
       ], 422);
     }    
   }           
@@ -1261,16 +1268,16 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',                
-        'message'=>["Formulir Situasi Keluarga dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'update',                
+        'message' => ["Formulir Situasi Keluarga dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {       
       $this->validate($request, [
-        'tinggal_bersama'=>'required',            
-        'status_pernikahan'=>'required',
+        'tinggal_bersama' => 'required',            
+        'status_pernikahan' => 'required',
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request, $formulir){                            
@@ -1281,10 +1288,10 @@ class PSBController extends Controller
         return $formulir;
       });
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',
-        'formulir'=>$formulir,          
-        'message'=>'Formulir Situasi Keluarga baru berhasil diubah.'
+        'status' => 1,
+        'pid' => 'update',
+        'formulir' => $formulir,          
+        'message' => 'Formulir Situasi Keluarga baru berhasil diubah.'
       ], 200);
     }
 
@@ -1302,39 +1309,39 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',                
-        'message'=>["Formulir Biodata Ayah dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'update',                
+        'message' => ["Formulir Biodata Ayah dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {       
       $this->validate($request, [
-        'nama_ayah'=>'required',            
-        'hubungan'=>'required',                            
-        'tempat_lahir'=>'required',            
-        'tanggal_lahir'=>'required',
-        'idagama'=>'required|numeric|exists:agama,idagama',
+        'nama_ayah' => 'required',            
+        'hubungan' => 'required',                            
+        'tempat_lahir' => 'required',            
+        'tanggal_lahir' => 'required',
+        'idagama' => 'required|numeric|exists:agama,idagama',
 
-        'address1_provinsi_id'=>'required',
-        'address1_provinsi'=>'required',
-        'address1_kabupaten_id'=>'required',
-        'address1_kabupaten'=>'required',
-        'address1_kecamatan_id'=>'required',
-        'address1_kecamatan'=>'required',
-        'address1_desa_id'=>'required',
-        'address1_kelurahan'=>'required',
-        'alamat_tempat_tinggal'=>'required',                
-        'kewarganegaraan'=>'required|numeric|exists:negara,id',
+        'address1_provinsi_id' => 'required',
+        'address1_provinsi' => 'required',
+        'address1_kabupaten_id' => 'required',
+        'address1_kabupaten' => 'required',
+        'address1_kecamatan_id' => 'required',
+        'address1_kecamatan' => 'required',
+        'address1_desa_id' => 'required',
+        'address1_kelurahan' => 'required',
+        'alamat_tempat_tinggal' => 'required',                
+        'kewarganegaraan' => 'required|numeric|exists:negara,id',
         
-        'nomor_hp'=>'required',
-        'email'=>'required',
-        'pendidikan'=>'required',
-        'pekerjaan_instansi'=>'required',        
-        'penghasilan_bulanan'=>'required|numeric', 
-        'fb_account'=>'required', 
-        'ig_account'=>'required', 
-        'tiktok_account'=>'required', 
+        'nomor_hp' => 'required',
+        'email' => 'required',
+        'pendidikan' => 'required',
+        'pekerjaan_instansi' => 'required',        
+        'penghasilan_bulanan' => 'required|numeric', 
+        'fb_account' => 'required', 
+        'ig_account' => 'required', 
+        'tiktok_account' => 'required', 
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1374,10 +1381,10 @@ class PSBController extends Controller
         return $formulir;
       });
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',
-        'formulir'=>$formulir,          
-        'message'=>'Formulir Biodata Ayah baru berhasil diubah.'
+        'status' => 1,
+        'pid' => 'update',
+        'formulir' => $formulir,          
+        'message' => 'Formulir Biodata Ayah baru berhasil diubah.'
       ], 200);
     }
   }           
@@ -1394,39 +1401,39 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',                
-        'message'=>["Formulir Biodata Ibu dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'update',                
+        'message' => ["Formulir Biodata Ibu dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {       
       $this->validate($request, [
-        'nama_ibu'=>'required',            
-        'hubungan'=>'required',                            
-        'tempat_lahir'=>'required',            
-        'tanggal_lahir'=>'required',
-        'idagama'=>'required|numeric|exists:agama,idagama',
+        'nama_ibu' => 'required',            
+        'hubungan' => 'required',                            
+        'tempat_lahir' => 'required',            
+        'tanggal_lahir' => 'required',
+        'idagama' => 'required|numeric|exists:agama,idagama',
 
-        'address1_provinsi_id'=>'required',
-        'address1_provinsi'=>'required',
-        'address1_kabupaten_id'=>'required',
-        'address1_kabupaten'=>'required',
-        'address1_kecamatan_id'=>'required',
-        'address1_kecamatan'=>'required',
-        'address1_desa_id'=>'required',
-        'address1_kelurahan'=>'required',
-        'alamat_tempat_tinggal'=>'required',                
-        'kewarganegaraan'=>'required|numeric|exists:negara,id',
+        'address1_provinsi_id' => 'required',
+        'address1_provinsi' => 'required',
+        'address1_kabupaten_id' => 'required',
+        'address1_kabupaten' => 'required',
+        'address1_kecamatan_id' => 'required',
+        'address1_kecamatan' => 'required',
+        'address1_desa_id' => 'required',
+        'address1_kelurahan' => 'required',
+        'alamat_tempat_tinggal' => 'required',                
+        'kewarganegaraan' => 'required|numeric|exists:negara,id',
         
-        'nomor_hp'=>'required',
-        'email'=>'required',
-        'pendidikan'=>'required',
-        'pekerjaan_instansi'=>'required',        
-        'penghasilan_bulanan'=>'required|numeric', 
-        'fb_account'=>'required', 
-        'ig_account'=>'required', 
-        'tiktok_account'=>'required', 
+        'nomor_hp' => 'required',
+        'email' => 'required',
+        'pendidikan' => 'required',
+        'pekerjaan_instansi' => 'required',        
+        'penghasilan_bulanan' => 'required|numeric', 
+        'fb_account' => 'required', 
+        'ig_account' => 'required', 
+        'tiktok_account' => 'required', 
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1461,10 +1468,10 @@ class PSBController extends Controller
         return $formulir;
       });
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',
-        'formulir'=>$formulir,          
-        'message'=>'Formulir Biodata Ibu baru berhasil diubah.'
+        'status' => 1,
+        'pid' => 'update',
+        'formulir' => $formulir,          
+        'message' => 'Formulir Biodata Ibu baru berhasil diubah.'
       ], 200);
     }
   }   
@@ -1481,38 +1488,38 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',                
-        'message'=>["Formulir Biodata Wali dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'update',                
+        'message' => ["Formulir Biodata Wali dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {       
       $this->validate($request, [
-        'nama_wali'=>'required',                                
-        'tempat_lahir'=>'required',            
-        'tanggal_lahir'=>'required',
-        'idagama'=>'required|numeric|exists:agama,idagama',
+        'nama_wali' => 'required',                                
+        'tempat_lahir' => 'required',            
+        'tanggal_lahir' => 'required',
+        'idagama' => 'required|numeric|exists:agama,idagama',
 
-        'address1_provinsi_id'=>'required',
-        'address1_provinsi'=>'required',
-        'address1_kabupaten_id'=>'required',
-        'address1_kabupaten'=>'required',
-        'address1_kecamatan_id'=>'required',
-        'address1_kecamatan'=>'required',
-        'address1_desa_id'=>'required',
-        'address1_kelurahan'=>'required',
-        'alamat_tempat_tinggal'=>'required',                
-        'kewarganegaraan'=>'required|numeric|exists:negara,id',
+        'address1_provinsi_id' => 'required',
+        'address1_provinsi' => 'required',
+        'address1_kabupaten_id' => 'required',
+        'address1_kabupaten' => 'required',
+        'address1_kecamatan_id' => 'required',
+        'address1_kecamatan' => 'required',
+        'address1_desa_id' => 'required',
+        'address1_kelurahan' => 'required',
+        'alamat_tempat_tinggal' => 'required',                
+        'kewarganegaraan' => 'required|numeric|exists:negara,id',
         
-        'nomor_hp'=>'required',
-        'email'=>'required',
-        'pendidikan'=>'required',
-        'pekerjaan_instansi'=>'required',        
-        'penghasilan_bulanan'=>'required|numeric', 
-        'fb_account'=>'required', 
-        'ig_account'=>'required', 
-        'tiktok_account'=>'required', 
+        'nomor_hp' => 'required',
+        'email' => 'required',
+        'pendidikan' => 'required',
+        'pekerjaan_instansi' => 'required',        
+        'penghasilan_bulanan' => 'required|numeric', 
+        'fb_account' => 'required', 
+        'ig_account' => 'required', 
+        'tiktok_account' => 'required', 
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1546,10 +1553,10 @@ class PSBController extends Controller
         return $formulir;
       });
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',
-        'formulir'=>$formulir,          
-        'message'=>'Formulir Biodata Wali berhasil diubah.'
+        'status' => 1,
+        'pid' => 'update',
+        'formulir' => $formulir,          
+        'message' => 'Formulir Biodata Wali berhasil diubah.'
       ], 200);
     }
   }  
@@ -1566,18 +1573,18 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',                
-        'message'=>["Formulir Biodata Ibu dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'update',                
+        'message' => ["Formulir Biodata Ibu dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {       
       $this->validate($request, [
-        'nama_kontak'=>'required',            
-        'hubungan'=>'required',                                
-        'alamat_kontak'=>'required',                        
-        'nomor_hp'=>'required',        
+        'nama_kontak' => 'required',            
+        'hubungan' => 'required',                                
+        'alamat_kontak' => 'required',                        
+        'nomor_hp' => 'required',        
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1591,10 +1598,10 @@ class PSBController extends Controller
         return $formulir;
       });
       return Response()->json([
-        'status'=>1,
-        'pid'=>'update',
-        'formulir'=>$formulir,          
-        'message'=>'Formulir Kontak Darurat baru berhasil diubah.'
+        'status' => 1,
+        'pid' => 'update',
+        'formulir' => $formulir,          
+        'message' => 'Formulir Kontak Darurat baru berhasil diubah.'
       ], 200);
     }
   }           
@@ -1604,15 +1611,15 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       $this->validate($request, [                      
-        'filefotoselfi'=>'required'                        
+        'filefotoselfi' => 'required'                        
       ]);
       $filefotoselfi = $request->file('filefotoselfi');
       $mime_type=$filefotoselfi->getMimeType();
@@ -1620,27 +1627,27 @@ class PSBController extends Controller
       {
         $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('fotoselfi_').".".$filefotoselfi->getClientOriginalExtension();
-        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_fotoselfi))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_fotoselfi))))                
         {
-          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_fotoselfi)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_fotoselfi)));
         }                
         $formulir->file_fotoselfi="persyaratanppdb/$file_name";
         $formulir->save();
         $filefotoselfi->move($folder,$file_name);
         return Response()->json([
-          'status'=>1,
-          'pid'=>'update',
-          'formulir'=>$formulir,                
-          'message'=>"Foto Selfi berhasil diupload"
+          'status' => 1,
+          'pid' => 'update',
+          'formulir' => $formulir,                
+          'message' => "Foto Selfi berhasil diupload"
         ], 200);   
           
       }
       else
       {
         return Response()->json([
-          'status'=>0,
-          'pid'=>'update',
-          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+          'status' => 0,
+          'pid' => 'update',
+          'message' => ["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -1651,15 +1658,15 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       $this->validate($request, [                      
-        'filektpayah'=>'required'                        
+        'filektpayah' => 'required'                        
       ]);
       $filektpayah = $request->file('filektpayah');
       $mime_type=$filektpayah->getMimeType();
@@ -1667,27 +1674,27 @@ class PSBController extends Controller
       {
         $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('ktp_').".".$filektpayah->getClientOriginalExtension();
-        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_ktp_ayah))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_ktp_ayah))))                
         {
-          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_ktp_ayah)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_ktp_ayah)));
         }                
         $formulir->file_ktp_ayah="persyaratanppdb/$file_name";
         $formulir->save();
         $filektpayah->move($folder,$file_name);
         return Response()->json([
-          'status'=>1,
-          'pid'=>'store',       
-          'formulir'=>$formulir,                
-          'message'=>"File KTP Ayah Wali berhasil diupload"
+          'status' => 1,
+          'pid' => 'store',       
+          'formulir' => $formulir,                
+          'message' => "File KTP Ayah Wali berhasil diupload"
         ], 200);   
           
       }
       else
       {
         return Response()->json([
-          'status'=>0,
-          'pid'=>'store',
-          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+          'status' => 0,
+          'pid' => 'store',
+          'message' => ["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -1698,15 +1705,15 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       $this->validate($request, [                      
-        'filektpibu'=>'required'                        
+        'filektpibu' => 'required'                        
       ]);
       $filektpibu = $request->file('filektpibu');
       $mime_type=$filektpibu->getMimeType();
@@ -1714,26 +1721,26 @@ class PSBController extends Controller
       {
         $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('ktp_').".".$filektpibu->getClientOriginalExtension();
-        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_ktp_ibu))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_ktp_ibu))))                
         {
-          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_ktp_ibu)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_ktp_ibu)));
         }                
         $formulir->file_ktp_ibu="persyaratanppdb/$file_name";
         $formulir->save();
         $filektpibu->move($folder,$file_name);
         return Response()->json([
-          'status'=>1,
-          'pid'=>'store',       
-          'formulir'=>$formulir,                
-          'message'=>"File KTP Ibu Wali berhasil diupload"
+          'status' => 1,
+          'pid' => 'store',       
+          'formulir' => $formulir,                
+          'message' => "File KTP Ibu Wali berhasil diupload"
         ], 200);             
       }
       else
       {
         return Response()->json([
-          'status'=>0,
-          'pid'=>'store',
-          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+          'status' => 0,
+          'pid' => 'store',
+          'message' => ["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -1744,15 +1751,15 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       $this->validate($request, [                      
-        'filekk'=>'required'                        
+        'filekk' => 'required'                        
       ]);
       $filekk = $request->file('filekk');
       $mime_type=$filekk->getMimeType();
@@ -1760,27 +1767,27 @@ class PSBController extends Controller
       {
         $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('kk_').".".$filekk->getClientOriginalExtension();
-        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_kk))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_kk))))                
         {
-          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_kk)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_kk)));
         }                
         $formulir->file_kk="persyaratanppdb/$file_name";
         $formulir->save();
         $filekk->move($folder,$file_name);
         return Response()->json([
-                      'status'=>1,
-                      'pid'=>'store',       
-                      'formulir'=>$formulir,                
-                      'message'=>"File KK berhasil diupload"
+                      'status' => 1,
+                      'pid' => 'store',       
+                      'formulir' => $formulir,                
+                      'message' => "File KK berhasil diupload"
                     ], 200);   
           
       }
       else
       {
         return Response()->json([
-                    'status'=>0,
-                    'pid'=>'store',
-                    'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+                    'status' => 0,
+                    'pid' => 'store',
+                    'message' => ["Extensi file yang diupload bukan jpg, png atau pdf."]
                   ], 422);
         
 
@@ -1793,15 +1800,15 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-                  'status'=>1,
-                  'pid'=>'fetchdata',                
-                  'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+                  'status' => 1,
+                  'pid' => 'fetchdata',                
+                  'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
                 ], 422);
     }
     else
     {
       $this->validate($request, [                      
-        'fileaktalahir'=>'required'                        
+        'fileaktalahir' => 'required'                        
       ]);
       $fileaktalahir = $request->file('fileaktalahir');
       $mime_type=$fileaktalahir->getMimeType();
@@ -1809,30 +1816,27 @@ class PSBController extends Controller
       {
         $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('aktalahir_').".".$fileaktalahir->getClientOriginalExtension();
-        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_aktalahir))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_aktalahir))))                
         {
-          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_aktalahir)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_aktalahir)));
         }                
         $formulir->file_aktalahir="persyaratanppdb/$file_name";
         $formulir->save();
         $fileaktalahir->move($folder,$file_name);
         return Response()->json([
-                      'status'=>1,
-                      'pid'=>'store',       
-                      'formulir'=>$formulir,                
-                      'message'=>"File KK berhasil diupload"
-                    ], 200);   
-          
+          'status' => 1,
+          'pid' => 'store',       
+          'formulir' => $formulir,                
+          'message' => "File KK berhasil diupload"
+        ], 200);   
       }
       else
       {
         return Response()->json([
-                    'status'=>0,
-                    'pid'=>'store',
-                    'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
-                  ], 422);
-        
-
+          'status' => 0,
+          'pid' => 'store',
+          'message' => ["Extensi file yang diupload bukan jpg, png atau pdf."]
+        ], 422);
       }            
     }
   }
@@ -1842,15 +1846,15 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       $this->validate($request, [                      
-        'filescreenshoot'=>'required'                        
+        'filescreenshoot' => 'required'                        
       ]);
       $filescreenshoot = $request->file('filescreenshoot');
       $mime_type=$filescreenshoot->getMimeType();
@@ -1858,26 +1862,26 @@ class PSBController extends Controller
       {
         $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('screenshoot_').".".$filescreenshoot->getClientOriginalExtension();
-        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_screenshoot_medsos))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_screenshoot_medsos))))                
         {
-          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_screenshoot_medsos)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_screenshoot_medsos)));
         }                
         $formulir->file_screenshoot_medsos="persyaratanppdb/$file_name";
         $formulir->save();
         $filescreenshoot->move($folder,$file_name);
         return Response()->json([
-          'status'=>1,
-          'pid'=>'store',       
-          'formulir'=>$formulir,                
-          'message'=>"File Screenshoot berhasil diupload"
+          'status' => 1,
+          'pid' => 'store',       
+          'formulir' => $formulir,                
+          'message' => "File Screenshoot berhasil diupload"
         ], 200); 
       }
       else
       {
         return Response()->json([
-          'status'=>0,
-          'pid'=>'store',
-          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+          'status' => 0,
+          'pid' => 'store',
+          'message' => ["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -1888,15 +1892,15 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       $this->validate($request, [                      
-        'filesertifikat'=>'required'                        
+        'filesertifikat' => 'required'                        
       ]);
       $filesertifikat = $request->file('filesertifikat');
       $mime_type=$filesertifikat->getMimeType();
@@ -1904,26 +1908,26 @@ class PSBController extends Controller
       {
         $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('sertifikat_').".".$filesertifikat->getClientOriginalExtension();
-        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_sertifikat))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_sertifikat))))                
         {
-          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_sertifikat)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_sertifikat)));
         }                
         $formulir->file_sertifikat="persyaratanppdb/$file_name";
         $formulir->save();
         $filesertifikat->move($folder,$file_name);
         return Response()->json([
-          'status'=>1,
-          'pid'=>'store',       
-          'formulir'=>$formulir,                
-          'message'=>"File sertifikat berhasil diupload"
+          'status' => 1,
+          'pid' => 'store',       
+          'formulir' => $formulir,                
+          'message' => "File sertifikat berhasil diupload"
         ], 200); 
       }
       else
       {
         return Response()->json([
-          'status'=>0,
-          'pid'=>'store',
-          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+          'status' => 0,
+          'pid' => 'store',
+          'message' => ["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -1934,15 +1938,15 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       $this->validate($request, [                      
-        'filenisn'=>'required'                        
+        'filenisn' => 'required'                        
       ]);
       $filenisn = $request->file('filenisn');
       $mime_type=$filenisn->getMimeType();
@@ -1950,26 +1954,26 @@ class PSBController extends Controller
       {
         $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('nisn_').".".$filenisn->getClientOriginalExtension();
-        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_nisn))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_nisn))))                
         {
-          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_nisn)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_nisn)));
         }                
         $formulir->file_nisn="persyaratanppdb/$file_name";
         $formulir->save();
         $filenisn->move($folder,$file_name);
         return Response()->json([
-          'status'=>1,
-          'pid'=>'store',       
-          'formulir'=>$formulir,                
-          'message'=>"File nisn berhasil diupload"
+          'status' => 1,
+          'pid' => 'store',       
+          'formulir' => $formulir,                
+          'message' => "File nisn berhasil diupload"
         ], 200); 
       }
       else
       {
         return Response()->json([
-          'status'=>0,
-          'pid'=>'store',
-          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+          'status' => 0,
+          'pid' => 'store',
+          'message' => ["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -1980,15 +1984,15 @@ class PSBController extends Controller
     if (is_null($formulir))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'fetchdata',                
-        'message'=>["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
+        'status' => 1,
+        'pid' => 'fetchdata',                
+        'message' => ["Formulir Pendaftaran dengan ID ($id) gagal diperoleh"]
       ], 422);
     }
     else
     {
       $this->validate($request, [                      
-        'filekia'=>'required'                        
+        'filekia' => 'required'                        
       ]);
       $filekia = $request->file('filekia');
       $mime_type=$filekia->getMimeType();
@@ -1996,26 +2000,26 @@ class PSBController extends Controller
       {
         $folder=HelperPendaftaran::public_path('persyaratanppdb/');
         $file_name=uniqid('kia_').".".$filekia->getClientOriginalExtension();
-        if (is_file(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_kia))))                
+        if (is_file(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_kia))))                
         {
-          unlink(HelperPendaftaran::public_path(str_replace('storage','',$formulir->file_kia)));
+          unlink(HelperPendaftaran::public_path(str_replace('storage', '', $formulir->file_kia)));
         }                
         $formulir->file_kia="persyaratanppdb/$file_name";
         $formulir->save();
         $filekia->move($folder,$file_name);
         return Response()->json([
-          'status'=>1,
-          'pid'=>'store',       
-          'formulir'=>$formulir,                
-          'message'=>"File kia berhasil diupload"
+          'status' => 1,
+          'pid' => 'store',       
+          'formulir' => $formulir,                
+          'message' => "File kia berhasil diupload"
         ], 200); 
       }
       else
       {
         return Response()->json([
-          'status'=>0,
-          'pid'=>'store',
-          'message'=>["Extensi file yang diupload bukan jpg, png atau pdf."]
+          'status' => 0,
+          'pid' => 'store',
+          'message' => ["Extensi file yang diupload bukan jpg, png atau pdf."]
         ], 422);
       }            
     }
@@ -2030,15 +2034,15 @@ class PSBController extends Controller
   { 
     $this->hasPermissionTo('SPSB-PSB_DESTROY');
 
-    $user = User::where('isdeleted','1')
+    $user = User::where('isdeleted', '1')
     ->find($id); 
     
     if (is_null($user))
     {
       return Response()->json([
-        'status'=>1,
-        'pid'=>'destroy',                
-        'message'=>["Calon Peserta Didik Baru dengan ID ($id) gagal dihapus"]
+        'status' => 1,
+        'pid' => 'destroy',                
+        'message' => ["Calon Peserta Didik Baru dengan ID ($id) gagal dihapus"]
       ], 422);
     }
     else
@@ -2054,9 +2058,9 @@ class PSBController extends Controller
       ]);
 
       return Response()->json([
-        'status'=>1,
-        'pid'=>'destroy',                
-        'message'=>"Peserta Didik Baru ($name) berhasil dihapus"
+        'status' => 1,
+        'pid' => 'destroy',                
+        'message' => "Peserta Didik Baru ($name) berhasil dihapus"
       ], 200);
     }
           

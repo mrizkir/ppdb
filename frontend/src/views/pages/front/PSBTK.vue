@@ -105,6 +105,29 @@
                   outlined
                   dense
                 />
+                <span class="font-weight-medium">
+                  Apakah Peserta Didik Penyandang Disabilitas (PDPD) ?
+                </span>
+                <v-switch
+                  v-model="formdata.penyandang_disabilitas"
+                  label="YA"
+                />
+                <v-alert
+                  color="warning"
+                  class="mb-1"
+                  text
+                  v-if="isPenyandangDisabilitas && formdata.jk == 'L'"
+                >
+                  Pada periode ini belum menerima Peserta Didik Penyandang Disabilitas (PDPD).
+                </v-alert>
+                <v-alert
+                  color="warning"
+                  class="mb-1"
+                  text
+                  v-if="isPenyandangDisabilitas && formdata.jk == 'P'"
+                >
+                  Silahkan mendaftar secara manual Admin jenjang terkait di Sekolah Islam De Green Camp.
+                </v-alert>
                 <v-alert
                   color="error"
                   class="mb-0"
@@ -129,7 +152,7 @@
                   color="primary"
                   @click="save"
                   :loading="btnLoading"
-                  :disabled="btnLoading"
+                  :disabled="btnLoading || isPenyandangDisabilitas"
                   block
                 >
                   DAFTAR
@@ -149,7 +172,8 @@
                 </v-card-title>
                 <v-card-text>
                   <v-alert type="success">
-                    Proses PRA-PENDAFTARAN berhasil, silahkan Ayah/Bunda/Wali melakukan pembayaran dengan mentransfer beserta Biaya Pendaftaran sebesar :
+                    Proses PRA-PENDAFTARAN berhasil, silahkan Ayah/Bunda/Wali
+                    melakukan pembayaran dengan mentransfer beserta Biaya Pendaftaran sebesar :
                   </v-alert>
                   <v-text-field
                     v-model="formkonfirmasi.code"
@@ -158,13 +182,15 @@
                     :disabled="true"
                   >
                   </v-text-field>
-                  Transfer ke Rekening berikut : 
+                  Transfer ke Rekening berikut :
                   <v-alert type="info">
                     BANK RIAU KEPRI SYARIAH <br />
                     NOMOR REKENING : 821-21-28255 <br />
                     A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br />
                   </v-alert>
-                  <strong>SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.</strong>
+                  <strong>
+                    SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.
+                  </strong>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -215,6 +241,7 @@
         username: "",
         password: "",
         captcha_response: "",
+        penyandang_disabilitas: false,
       },
       formdefault: {
         name: "",
@@ -225,6 +252,7 @@
         username: "",
         password: "",
         captcha_response: "",
+        penyandang_disabilitas: false,
       },
       formkonfirmasi: {
         email: "",
@@ -235,6 +263,9 @@
         value =>
           /^[A-Za-z\s\\,\\.]*$/.test(value) ||
           "Nama Calon Peserta Didik hanya boleh string dan spasi",
+      ],
+      rule_tanggal_lahir: [
+        value => !!value || "Tanggal Lahir mohon untuk dipilih !!!",
       ],
       rule_nomorhp: [
         value => !!value || "Nomor Kontak WA mohon untuk diisi !!!",
@@ -280,6 +311,7 @@
               kode_jenjang: 1,
               password: this.formdata.password,
               captcha_response: this.formdata.captcha_response,
+              penyandang_disabilitas: this.formdata.penyandang_disabilitas == true ? 1 : 0,
             })
             .then(({ data }) => {
               this.formkonfirmasi.email = data.email;
@@ -321,6 +353,9 @@
         tahunPendaftaran: "getTahunPendaftaran",
         bukaPPDB: "getBukaPPDB",
       }),
+      isPenyandangDisabilitas() {
+        return this.formdata.penyandang_disabilitas;
+      },
     },
     components: {
       FrontLayout,
