@@ -6,6 +6,7 @@ const getDefaultState = () => {
     tahun_pendaftaran: new Date().getFullYear(),
     semester_pendaftaran: 1,
     buka_ppdb: false,
+    buka_ppdb_gtk: false,
     identitas: {
       nama_sekolah: "",
       nama_sekolah_alias: "",
@@ -31,6 +32,9 @@ const mutations = {
   setBukaPPDB(state, buka) {
     state.buka_ppdb = buka;
   },
+  setBukaPPDB_GTK(state, buka) {
+    state.buka_ppdb_gtk = buka;
+  },
   setIdentitas(state, identitas) {
     state.identitas = identitas;
   },
@@ -54,6 +58,9 @@ const getters = {
   getBukaPPDB(state) {
     return state.buka_ppdb == "0" ? false : true;
   },
+  getBukaPPDB_GTK(state) {
+    return state.buka_ppdb_gtk == "0" ? false : true;
+  },
   getNamaSekolah: state => {
     return state.identitas.nama_sekolah;
   },
@@ -74,6 +81,7 @@ const actions = {
         commit("setTahunPendaftaran", data.tahun_pendaftaran);
         commit("setSemesterPendaftaran", data.semester_pendaftaran);
         commit("setBukaPPDB", data.buka_ppdb);
+        commit("setBukaPPDB_GTK", data.buka_ppdb_gtk);
         commit("setIdentitas", data.identitas);
         commit("setLoaded", true);
       });

@@ -1,17 +1,20 @@
 <template>
   <FrontLayout>
-    <v-container class="fill-height" fluid v-if="bukaPPDB && registerSMA">
+    <v-container class="fill-height" fluid v-if="bukaPPDB">
       <v-row align="center" justify="center" no-gutters>
         <v-col cols="12">
           <h1 class="text-center display-1 font-weight-black primary--text">
             PRA-PENDAFTARAN CALON PESERTA DIDIK
           </h1>
           <h3 class="text-center display-1 font-weight-black primary--text">
-            JENJANG PENDIDIKAN MENENGAH ATAS
+            JENJANG PENDIDIKAN TK
           </h3>
           <h4 class="text-center title font-weight-black primary--text">
             TAHUN PELAJARAN {{ tahunPendaftaran | formatTA }}
           </h4>
+          <h6 class="text-center title font-weight-black primary--text">
+            KHUSUS GURU DAN TENAGA KEPENDIDIKAN
+          </h6>
         </v-col>
       </v-row>
       <v-row align="center" justify="center" no-gutters>
@@ -71,6 +74,11 @@
                     </v-btn>
                   </v-date-picker>
                 </v-menu>
+                <v-radio-group v-model="formdata.jk" row>
+                  JENIS KELAMIN :
+                  <v-radio label="LAKI-LAKI" value="L"></v-radio>
+                  <v-radio label="PEREMPUAN" value="P"></v-radio>
+                </v-radio-group>
                 <v-text-field
                   v-model="formdata.nomor_hp"
                   label="NOMOR KONTAK WA (ex: +628123456789)"
@@ -78,11 +86,6 @@
                   outlined
                   dense
                 />
-                <v-radio-group v-model="formdata.jk" row>
-                  JENIS KELAMIN :
-                  <v-radio label="LAKI-LAKI" value="L"></v-radio>
-                  <v-radio label="PEREMPUAN" value="P"></v-radio>
-                </v-radio-group>
                 <v-text-field
                   v-model="formdata.email"
                   label="SURAT ELEKTRONIK"
@@ -126,7 +129,7 @@
                   text
                   v-if="isPenyandangDisabilitas && formdata.jk == 'P'"
                 >
-                  Silakan mendaftar secara manual kepada Admin di setiap jenjang terkait.
+                Silakan mendaftar secara manual kepada Admin di setiap jenjang terkait.
                 </v-alert>
                 <v-alert
                   color="error"
@@ -144,7 +147,8 @@
                   @verify="onVerify"
                   @expired="onExpired"
                   :loadRecaptchaScript="true"
-                />
+                >
+                </vue-recaptcha>
               </v-card-actions>
               <v-card-actions class="justify-center">
                 <v-btn
@@ -159,7 +163,11 @@
               </v-card-actions>
             </v-card>
           </v-form>
-          <v-dialog v-model="dialogkonfirmasipendaftaran" max-width="500px" persistent>
+          <v-dialog
+            v-model="dialogkonfirmasipendaftaran"
+            max-width="500px"
+            persistent
+          >
             <v-form ref="frmkonfirmasi" v-model="form_valid" lazy-validation>
               <v-card>
                 <v-card-title>
@@ -167,7 +175,8 @@
                 </v-card-title>
                 <v-card-text>
                   <v-alert type="success">
-                    Proses PRA-PENDAFTARAN berhasil, silahkan Ayah/Bunda/Wali melakukan pembayaran dengan mentransfer beserta Biaya Pendaftaran sebesar :
+                    Proses PRA-PENDAFTARAN berhasil, silahkan Ayah/Bunda/Wali
+                    melakukan pembayaran dengan mentransfer beserta Biaya Pendaftaran sebesar :
                   </v-alert>
                   <v-text-field
                     v-model="formkonfirmasi.code"
@@ -182,7 +191,9 @@
                     NOMOR REKENING : 821-21-28255 <br />
                     A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br />
                   </v-alert>
-                  <strong>SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.</strong>
+                  <strong>
+                    SETELAH MELAKUKAN TRANSFER, SILAHKAN UNGGAH BUKTI TRANSFER/BAYAR DI HALAMAN KONFIRMASI.
+                  </strong>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -201,9 +212,9 @@
         <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
       </v-row>
     </v-container>
-    <v-container fluid v-if="registerSMA == false">
+    <v-container fluid v-if="registerTK == false">
       <v-row>
-        PPDB SMA Belum dibuka
+        PPDB TK Belum dibuka
       </v-row>
     </v-container>
   </FrontLayout>
@@ -213,13 +224,13 @@
   import VueRecaptcha from "vue-recaptcha";
   import FrontLayout from "@/views/layouts/FrontLayout";
   export default {
-    name: "PSBSMA",
+    name: "PSBTK-GTK",
     created() {
       this.initialize();
     },
     data: () => ({
-      registerSMA: null,
       btnLoading: false,
+      registerTK: null,
       //form
       form_valid: true,
       dialogkonfirmasipendaftaran: false,
@@ -283,8 +294,8 @@
         await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
           let jenjang_studi = data.jenjang_studi;
           jenjang_studi.forEach(element => {
-            if (element.kode_jenjang == 4) {
-              this.registerSMA = element.status_pendaftaran == 1;
+            if (element.kode_jenjang == 1) {
+              this.registerTK = element.status_pendaftaran == 1;
             }
           });
         });
@@ -300,11 +311,10 @@
               email: this.formdata.email,
               nomor_hp: this.formdata.nomor_hp,
               username: this.formdata.username,
-              kode_jenjang: 4,
+              kode_jenjang: 1,
               password: this.formdata.password,
               captcha_response: this.formdata.captcha_response,
-              penyandang_disabilitas:
-                this.formdata.penyandang_disabilitas == true ? 1 : 0,
+              penyandang_disabilitas: this.formdata.penyandang_disabilitas == true ? 1 : 0,
             })
             .then(({ data }) => {
               this.formkonfirmasi.email = data.email;
@@ -344,7 +354,7 @@
       ...mapGetters("uifront", {
         sitekey: "getCaptchaKey",
         tahunPendaftaran: "getTahunPendaftaran",
-        bukaPPDB: "getBukaPPDB",
+        bukaPPDB: "getBukaPPDB_GTK",
       }),
       isPenyandangDisabilitas() {
         return this.formdata.penyandang_disabilitas;

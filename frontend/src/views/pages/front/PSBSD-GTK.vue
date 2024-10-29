@@ -1,17 +1,20 @@
 <template>
   <FrontLayout>
-    <v-container class="fill-height" fluid v-if="bukaPPDB && registerSMA">
+    <v-container class="fill-height" fluid v-if="bukaPPDB">
       <v-row align="center" justify="center" no-gutters>
         <v-col cols="12">
           <h1 class="text-center display-1 font-weight-black primary--text">
             PRA-PENDAFTARAN CALON PESERTA DIDIK
           </h1>
           <h3 class="text-center display-1 font-weight-black primary--text">
-            JENJANG PENDIDIKAN MENENGAH ATAS
+            JENJANG PENDIDIKAN DASAR
           </h3>
           <h4 class="text-center title font-weight-black primary--text">
             TAHUN PELAJARAN {{ tahunPendaftaran | formatTA }}
           </h4>
+          <h6 class="text-center title font-weight-black primary--text">
+            KHUSUS GURU DAN TENAGA KEPENDIDIKAN
+          </h6>
         </v-col>
       </v-row>
       <v-row align="center" justify="center" no-gutters>
@@ -19,7 +22,7 @@
           <v-form ref="frmpendaftaran" v-model="form_valid" lazy-validation>
             <v-card outlined>
               <v-card-text>
-                <v-text-field
+                <v-text-field 
                   v-model="formdata.name"
                   label="NAMA CALON PESERTA DIDIK"
                   :rules="rule_name"
@@ -51,26 +54,17 @@
                     v-model="formdata.tanggal_lahir"
                     no-title
                     scrollable
-                  >
+                    >
                     <v-spacer></v-spacer>
-                    <v-btn
-                      text
-                      color="primary"
-                      @click="menuTanggalLahir = false"
-                    >
-                      Cancel
-                    </v-btn>
-                    <v-btn
-                      text
-                      color="primary"
-                      @click="
-                        $refs.menuTanggalLahir.save(formdata.tanggal_lahir)
-                      "
-                    >
-                      OK
-                    </v-btn>
+                    <v-btn text color="primary" @click="menuTanggalLahir = false">Cancel</v-btn>
+                    <v-btn text color="primary" @click="$refs.menuTanggalLahir.save(formdata.tanggal_lahir)">OK</v-btn>
                   </v-date-picker>
                 </v-menu>
+                <v-radio-group v-model="formdata.jk" row>
+                  JENIS KELAMIN :
+                  <v-radio label="LAKI-LAKI" value="L"></v-radio>
+                  <v-radio label="PEREMPUAN" value="P"></v-radio>
+                </v-radio-group>
                 <v-text-field
                   v-model="formdata.nomor_hp"
                   label="NOMOR KONTAK WA (ex: +628123456789)"
@@ -78,19 +72,14 @@
                   outlined
                   dense
                 />
-                <v-radio-group v-model="formdata.jk" row>
-                  JENIS KELAMIN :
-                  <v-radio label="LAKI-LAKI" value="L"></v-radio>
-                  <v-radio label="PEREMPUAN" value="P"></v-radio>
-                </v-radio-group>
-                <v-text-field
+                <v-text-field 
                   v-model="formdata.email"
                   label="SURAT ELEKTRONIK"
                   :rules="rule_email"
                   outlined
                   dense
                 />
-                <v-text-field
+                <v-text-field 
                   v-model="formdata.username"
                   label="USERNAME"
                   :rules="rule_username"
@@ -128,12 +117,7 @@
                 >
                   Silakan mendaftar secara manual kepada Admin di setiap jenjang terkait.
                 </v-alert>
-                <v-alert
-                  color="error"
-                  class="mb-0"
-                  text
-                  v-if="formdata.captcha_response.length <= 0"
-                >
+                <v-alert color="error" class="mb-0" text v-if="formdata.captcha_response.length <= 0">
                   Mohon dicentang Google Captcha (ANTI SPAMMERS)
                 </v-alert>
               </v-card-text>
@@ -144,10 +128,11 @@
                   @verify="onVerify"
                   @expired="onExpired"
                   :loadRecaptchaScript="true"
-                />
+                >
+                </vue-recaptcha>
               </v-card-actions>
               <v-card-actions class="justify-center">
-                <v-btn
+                 <v-btn
                   color="primary"
                   @click="save"
                   :loading="btnLoading"
@@ -201,9 +186,9 @@
         <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
       </v-row>
     </v-container>
-    <v-container fluid v-if="registerSMA == false">
+    <v-container fluid v-if="registerSD == false">
       <v-row>
-        PPDB SMA Belum dibuka
+        PPDB SD Belum dibuka
       </v-row>
     </v-container>
   </FrontLayout>
@@ -213,13 +198,13 @@
   import VueRecaptcha from "vue-recaptcha";
   import FrontLayout from "@/views/layouts/FrontLayout";
   export default {
-    name: "PSBSMA",
+    name: "PSBSD-GTK",
     created() {
       this.initialize();
     },
     data: () => ({
-      registerSMA: null,
       btnLoading: false,
+      registerSD: null,
       //form
       form_valid: true,
       dialogkonfirmasipendaftaran: false,
@@ -252,39 +237,36 @@
       },
       rule_name: [
         value => !!value || "Nama Calon Peserta Didik mohon untuk diisi !!!",
-        value =>
-          /^[A-Za-z\s\\,\\.]*$/.test(value) ||
-          "Nama Calon Peserta Didik hanya boleh string dan spasi",
+        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Calon Peserta Didik hanya boleh string dan spasi',
       ],
       rule_tanggal_lahir: [
         value => !!value || "Tanggal Lahir mohon untuk dipilih !!!",
       ],
       rule_nomorhp: [
         value => !!value || "Nomor Kontak WA mohon untuk diisi !!!",
-        value =>
-          /^\+[1-9]{1}[0-9]{1,14}$/.test(value) ||
-          "Nomor Kontak WA hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388",
+        value => /^\+[1-9]{1}[0-9]{1,14}$/.test(value) || 'Nomor Kontak WA hanya boleh angka dan gunakan kode negara didepan seperti +6281214553388',
       ],
       rule_email: [
         value => !!value || "Email mohon untuk diisi !!!",
-        v => /.+@.+\..+/.test(v) || "Format E-mail mohon di isi dengan benar",
+        v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
       ],
       rule_jenjang: [
         value => !!value || "Program studi mohon untuk dipilih !!!",
       ],
       rule_username: [
-        value =>
-          !!value || "Username mohon untuk diisi dengan nama depan anak !!!",
+        value => !!value || "Username mohon untuk diisi dengan nama depan anak !!!",
       ],
-      rule_password: [value => !!value || "Password mohon untuk diisi !!!"],
+      rule_password: [
+        value => !!value || "Password mohon untuk diisi !!!",
+      ],
     }),
     methods: {
       initialize: async function() {
         await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
           let jenjang_studi = data.jenjang_studi;
           jenjang_studi.forEach(element => {
-            if (element.kode_jenjang == 4) {
-              this.registerSMA = element.status_pendaftaran == 1;
+            if (element.kode_jenjang == 2) {
+              this.registerSD = element.status_pendaftaran == 1;
             }
           });
         });
@@ -300,11 +282,10 @@
               email: this.formdata.email,
               nomor_hp: this.formdata.nomor_hp,
               username: this.formdata.username,
-              kode_jenjang: 4,
+              kode_jenjang: 2,
               password: this.formdata.password,
               captcha_response: this.formdata.captcha_response,
-              penyandang_disabilitas:
-                this.formdata.penyandang_disabilitas == true ? 1 : 0,
+              penyandang_disabilitas: this.formdata.penyandang_disabilitas == true ? 1 : 0,
             })
             .then(({ data }) => {
               this.formkonfirmasi.email = data.email;
@@ -344,7 +325,7 @@
       ...mapGetters("uifront", {
         sitekey: "getCaptchaKey",
         tahunPendaftaran: "getTahunPendaftaran",
-        bukaPPDB: "getBukaPPDB",
+        bukaPPDB: "getBukaPPDB_GTK",
       }),
       isPenyandangDisabilitas() {
         return this.formdata.penyandang_disabilitas;

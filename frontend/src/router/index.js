@@ -22,12 +22,28 @@ const routes = [
     component: () => import("../views/pages/front/PSBTK.vue"),
   },
   {
+    path: "/psbtkgtk",
+    name: "FrontPSBtkGTK",
+    meta: {
+      title: "PENDAFTARAN CALON PESERTA DIDIK TK",
+    },
+    component: () => import("../views/pages/front/PSBTK-GTK.vue"),
+  },
+  {
     path: "/psbsd",
     name: "FrontPSBsd",
     meta: {
       title: "PENDAFTARAN CALON PESERTA DIDIK SD",
     },
     component: () => import("../views/pages/front/PSBSD.vue"),
+  },
+  {
+    path: "/psbsdgtk",
+    name: "FrontPSBsdGTK",
+    meta: {
+      title: "PENDAFTARAN CALON PESERTA DIDIK SD",
+    },
+    component: () => import("../views/pages/front/PSBSD-GTK.vue"),
   },
   {
     path: "/psbsmp",
@@ -38,12 +54,28 @@ const routes = [
     component: () => import("../views/pages/front/PSBSMP.vue"),
   },
   {
+    path: "/psbsmpgtk",
+    name: "FrontPSBsmpGTK",
+    meta: {
+      title: "PENDAFTARAN CALON PESERTA DIDIK SMP",
+    },
+    component: () => import("../views/pages/front/PSBSMP-GTK.vue"),
+  },
+  {
     path: "/psbsma",
     name: "FrontPSBsma",
     meta: {
       title: "PENDAFTARAN CALON PESERTA DIDIK SMA",
     },
     component: () => import("../views/pages/front/PSBSMA.vue"),
+  },
+  {
+    path: "/psbsmagtk",
+    name: "FrontPSBsmaGTK",
+    meta: {
+      title: "PENDAFTARAN CALON PESERTA DIDIK SMA",
+    },
+    component: () => import("../views/pages/front/PSBSMA-GTK.vue"),
   },
   {
     path: "/konfirmasipembayaran",

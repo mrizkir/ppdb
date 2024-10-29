@@ -1,6 +1,6 @@
 <template>
   <FrontLayout>
-    <v-container class="fill-height" fluid v-if="bukaPPDB && registerSMA">
+    <v-container class="fill-height" fluid v-if="bukaPPDB">
       <v-row align="center" justify="center" no-gutters>
         <v-col cols="12">
           <h1 class="text-center display-1 font-weight-black primary--text">
@@ -12,6 +12,9 @@
           <h4 class="text-center title font-weight-black primary--text">
             TAHUN PELAJARAN {{ tahunPendaftaran | formatTA }}
           </h4>
+          <h6 class="text-center title font-weight-black primary--text">
+            KHUSUS GURU DAN TENAGA KEPENDIDIKAN
+          </h6>
         </v-col>
       </v-row>
       <v-row align="center" justify="center" no-gutters>
@@ -213,7 +216,7 @@
   import VueRecaptcha from "vue-recaptcha";
   import FrontLayout from "@/views/layouts/FrontLayout";
   export default {
-    name: "PSBSMA",
+    name: "PSBSMA-GTK",
     created() {
       this.initialize();
     },
@@ -344,7 +347,7 @@
       ...mapGetters("uifront", {
         sitekey: "getCaptchaKey",
         tahunPendaftaran: "getTahunPendaftaran",
-        bukaPPDB: "getBukaPPDB",
+        bukaPPDB: "getBukaPPDB_GTK",
       }),
       isPenyandangDisabilitas() {
         return this.formdata.penyandang_disabilitas;
