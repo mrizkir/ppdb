@@ -255,7 +255,7 @@ export default {
         SPSBLayout,
         ModuleHeader,
         FormSituasiKeluarga,
-        Filter7    
+        Filter7,
     },
 }
 </script>

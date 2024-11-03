@@ -312,7 +312,7 @@ export default {
         SPSBLayout,
         ModuleHeader,
         ProfilSiswaBaru,
-        Filter7    
+        Filter7,
     },
 }
 </script>

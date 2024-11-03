@@ -256,7 +256,7 @@ export default {
     SPSBLayout,
     ModuleHeader,
     FormBiodataAyah,
-    Filter7    
+    Filter7,
   },
 }
 </script>

@@ -285,40 +285,58 @@ class PSBController extends Controller
    */
   public function store(Request $request)
   {
+    $this->validate($request, [
+      'name' => 'required',
+      'tanggal_lahir' => 'required|date_format:Y-m-d',
+      'jk' => 'required|in:L,P',
+      'email' => 'required|email',
+      'nomor_hp' => 'required|numeric',            
+      'kode_jenjang' => 'required|numeric|exists:jenjang_studi,kode_jenjang',            
+      'username' => 'required|unique:users',
+      'password' => 'required',
+      'penyandang_disabilitas' => 'required|in:0,1',
+      'captcha_response' => [
+        'required',
+        function ($attribute, $value, $fail) 
+        {
+          $client = new Client ();
+          $response = $client->post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            ['form_params' => 
+              [
+                'secret' => ConfigurationModel::getCache('CAPTCHA_PRIVATE_KEY'),
+                'response' => $value
+              ]
+            ]);    
+          $body = json_decode((string)$response->getBody());
+          if (!$body->success)
+          {
+            $fail('Token Google Captcha, salah !!!.');
+          }
+        }
+      ]
+    ], [
+      'name.required' => 'Mohon nama untuk diisi',
+      'tanggal_lahir.required' => 'Mohon tanggal lahir untuk diisi',
+      'tanggal_lahir.date_format' => 'Format tanggal terdapat tidak sesuai. Contoh yang benar(2024-03-03).',
+      'jk.required' => 'Mohon diisi jenis kelamin',
+      'jk.in' => 'Nilai jenis kelamin diantara L,P',  
+      'email.required' => 'Mohon email untuk diisi',
+      'email.email' => 'Format email terdapat kesalahan',
+      'nomor_hp.required' => 'Mohon Nomor HP/WA untuk diisi',      
+      'nomor_hp.numeric' => 'Mohon Nomor HP/WA diisi dengan angka saja.',      
+      'kode_jenjang.required' => 'Mohon Kode jenjang untuk diisi',
+      'kode_jenjang.numeric' => 'Mohon Kode jenjang untuk diisi dengan format numeric',
+      'kode_jenjang.exists' => 'Kode jenjang tidak terdaftar di tabel jenjang studi',
+      'username.required' => 'Mohon username untuk diisi',
+      'username.unique' => 'Username sudah tidak tersedia, silahkan ganti dengan yang lain',
+      'penyandang_disabilitas.required' => 'Mohon diisi status penyandang disabilitas',
+      'penyandang_disabilitas.in' => 'Nilai penyandang disabilitas diantara 0,1',  
+      'captcha_response.required' => 'Mohon isi captcha response',
+    ]);
+
     try
     {
-      $this->validate($request, [
-        'name' => 'required',
-        'tanggal_lahir' => 'required|date_format:Y-m-d',
-        'jk' => 'required|in:L,P',
-        'email' => 'required|string|email',
-        'nomor_hp' => 'required|numeric',            
-        'kode_jenjang' => 'required|numeric|exists:jenjang_studi,kode_jenjang',            
-        'username' => 'required|string|unique:users',
-        'password' => 'required',
-        'penyandang_disabilitas' => 'required|in:0,1',
-        'captcha_response' => [
-          'required',
-          function ($attribute, $value, $fail) 
-          {
-            $client = new Client ();
-            $response = $client->post(
-              'https://www.google.com/recaptcha/api/siteverify',
-              ['form_params' => 
-                [
-                  'secret' => ConfigurationModel::getCache('CAPTCHA_PRIVATE_KEY'),
-                  'response' => $value
-                ]
-              ]);    
-            $body = json_decode((string)$response->getBody());
-            if (!$body->success)
-            {
-              $fail('Token Google Captcha, salah !!!.');
-            }
-          }
-        ]
-      ]);
-
       $penyandang_disabilitas = $request->input('penyandang_disabilitas');
       if ($penyandang_disabilitas == 1)
       {
@@ -377,7 +395,7 @@ class PSBController extends Controller
             $code=0;
         }            
         $ta = ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN');
-        $user=User::create([
+        $user = User::create([
           'id' => Uuid::uuid4()->toString(),
           'name' => strtoupper($request->input('name')),
           'email' => $request->input('email'),
@@ -1157,7 +1175,6 @@ class PSBController extends Controller
         'waktu_tempuh' => 'required',                
         'saudara_mendaftar_tidak' => 'required|in:0,1',
         'kode_jenjang' => 'required',
-        
       ]);
 
       //cek usia

@@ -823,7 +823,7 @@ export default {
   components: {
     SPSBLayout,
     ModuleHeader, 
-    Filter7    
+    Filter7,
   },
 }
 </script>

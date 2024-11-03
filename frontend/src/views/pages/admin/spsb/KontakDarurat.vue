@@ -255,7 +255,7 @@
       SPSBLayout,
       ModuleHeader,
       FormKontakDarurat,
-      Filter7    
+      Filter7,
     },
   }
 </script>

@@ -255,7 +255,7 @@
       SPSBLayout,
       ModuleHeader,
       FormBiodataWali,
-      Filter7    
+      Filter7,
     },
   }
 </script>
