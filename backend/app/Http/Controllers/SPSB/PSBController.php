@@ -31,16 +31,16 @@ class PSBController extends Controller
   private function checkUsia($request)
   {
     $tanggal_lahir = $request->input('tanggal_lahir');
-    $batas_tanggal = date('2024-07-01');
+    $batas_tanggal = date('2025-07-01');
     $usia = \App\Helpers\Helper::getUsia($tanggal_lahir, $batas_tanggal);
     $kode_jenjang = $request->input('kode_jenjang');
     
     switch($kode_jenjang)
     {
       case 1:
-        if($usia < 4.5 || $usia > 6.0 )
+        if($usia < 4.4 || $usia > 6.0 )
         {
-          throw new Exception("Usia siswa TK ($usia) diluar batas yang telah ditetapkan (4.5 s.d 6).");          
+          throw new Exception("Usia siswa TK ($usia) diluar batas yang telah ditetapkan (4.4 s.d 6).");          
         }
       break;
       case 2:
