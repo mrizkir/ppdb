@@ -58,7 +58,7 @@ class PSBController extends Controller
       case 4:
         if($usia < 13.0 || $usia > 17.0 )
         {
-          throw new Exception("Usia siswa SMP ($usia) diluar batas yang telah ditetapkan (13 s.d 17).");          
+          throw new Exception("Usia siswa SMA ($usia) diluar batas yang telah ditetapkan (13 s.d 17).");          
         }
       break;
     }
