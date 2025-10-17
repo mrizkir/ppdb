@@ -96,7 +96,7 @@ class KuotaPendaftaranController extends Controller {
         'status'=>1,
         'pid'=>'update',
         'message'=>["Tahun Ajaran ($id) gagal diupdate"]
-      ],422);
+      ], 422);
     }
     else
     {

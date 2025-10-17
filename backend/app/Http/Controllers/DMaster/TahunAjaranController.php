@@ -35,7 +35,7 @@ class TahunAjaranController extends Controller {
                                     'status'=>1,
                                     'pid'=>'update',                
                                     'message'=>["Tahun Ajaran ($id) gagal diperoleh"]
-                                ],422); 
+                                ], 422); 
         }
         else
         {
@@ -119,7 +119,7 @@ class TahunAjaranController extends Controller {
                                     'status'=>1,
                                     'pid'=>'update',
                                     'message'=>["Tahun Ajaran ($id) gagal diupdate"]
-                                ],422);
+                                ], 422);
         }
         else
         {
@@ -175,7 +175,7 @@ class TahunAjaranController extends Controller {
                                     'status'=>1,
                                     'pid'=>'destroy',
                                     'message'=>["Kode tahun ajaran ($id) gagal dihapus"]
-                                ],422);
+                                ], 422);
         }
         else
         {

@@ -167,7 +167,7 @@ class UsersKeuanganController extends Controller {
                                     'status'=>1,
                                     'pid'=>'update',                
                                     'message'=>["User ID ($id) gagal diupdate"]
-                                ],422); 
+                                ], 422); 
         }
         else
         {
@@ -314,7 +314,7 @@ class UsersKeuanganController extends Controller {
                                     'status'=>1,
                                     'pid'=>'destroy',                
                                     'message'=>["User ID ($id) gagal dihapus"]
-                                ],422); 
+                                ], 422); 
         }
         else
         {

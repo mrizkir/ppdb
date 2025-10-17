@@ -118,7 +118,7 @@ class UsersController extends Controller {
 									'status'=>1,
 									'pid'=>'fetchdata',                
 									'message'=>["User ID ($id) gagal diperoleh"]
-								],422); 
+								], 422); 
 		}
 		else
 		{
@@ -290,7 +290,7 @@ class UsersController extends Controller {
 									'status'=>1,
 									'pid'=>'update',                
 									'message'=>["User ID ($id) gagal diupdate"]
-								],422); 
+								], 422); 
 		}
 		else
 		{
@@ -361,7 +361,7 @@ class UsersController extends Controller {
 									'status'=>1,
 									'pid'=>'update',                
 									'message'=>["Password User ID ($id) gagal diupdate"]
-								],422); 
+								], 422); 
 		}
 		else
 		{
@@ -441,7 +441,7 @@ class UsersController extends Controller {
 									'status'=>0,
 									'pid'=>'destroy',                                      
 									'message'=>["User dengan id ($id) gagal dihapus"]
-								],422);    
+								], 422);    
 		}
 		else
 		{
@@ -475,7 +475,7 @@ class UsersController extends Controller {
 									'status'=>0,
 									'pid'=>'store',                
 									'message'=>["Data User tidak ditemukan."]
-								],422);
+								], 422);
 		}
 		else
 		{
@@ -516,7 +516,7 @@ class UsersController extends Controller {
 										'status'=>1,
 										'pid'=>'store',
 										'message'=>["Extensi file yang diupload bukan jpg atau png."]
-									],422); 
+									], 422); 
 				
 
 			}
@@ -532,7 +532,7 @@ class UsersController extends Controller {
 									'status'=>0,
 									'pid'=>'store',                
 									'message'=>["Data User tidak ditemukan."]
-								],422);
+								], 422);
 		}
 		else
 		{
@@ -568,7 +568,7 @@ class UsersController extends Controller {
 									'status'=>0,
 									'pid'=>'store',                
 									'message'=>["Data User tidak ditemukan."]
-								],422);
+								], 422);
 		}
 		else
 		{

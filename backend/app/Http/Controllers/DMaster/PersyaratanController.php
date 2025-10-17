@@ -87,7 +87,7 @@ class PersyaratanController extends Controller {
                                     'status'=>1,
                                     'pid'=>'destroy',                
                                     'message'=>["Kode persyaratan ($id) gagal dihapus"]
-                                ],422); 
+                                ], 422); 
         }
         else
         {

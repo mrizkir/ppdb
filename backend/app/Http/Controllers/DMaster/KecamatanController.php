@@ -33,7 +33,7 @@ class KecamatanController extends Controller {
                                     'status'=>1,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Fetch data desa berdasarkan id kecamatan gagal"]
-                                ],422); 
+                                ], 422); 
         }
         else
         {

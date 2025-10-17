@@ -45,7 +45,7 @@ class KonfirmasiPembayaranController extends Controller
                                     'status'=>0,
                                     'pid'=>'fetchdata',                
                                     'message'=>["Fetch data transaksi dengan ID ($id) gagal diperoleh di KONFIRMASI PEMBAYARAN"]
-                                ],422); 
+                                ], 422); 
         }
         else
         {
@@ -71,7 +71,7 @@ class KonfirmasiPembayaranController extends Controller
                                     'status'=>0,
                                     'pid'=>'update',                
                                     'message'=>["Update data transaksi dengan ID ($id) gagal diperoleh di KONFIRMASI PEMBAYARAN"]
-                                ],422); 
+                                ], 422); 
         }
         else
         {

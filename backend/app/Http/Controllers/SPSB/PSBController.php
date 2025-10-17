@@ -487,19 +487,19 @@ class PSBController extends Controller
   {
     $this->hasPermissionTo('SPSB-PSB_STORE');
 
+    $this->validate($request, [
+      'name' => 'required',            
+      'tanggal_lahir' => 'required|date_format:Y-m-d',
+      'email' => 'required|string|email',
+      'nomor_hp' => 'required',            
+      'kode_jenjang' => 'required|numeric|exists:jenjang_studi,kode_jenjang',
+      'tahun_pendaftaran' => 'required|numeric',            
+      'username' => 'required|string|unique:users',
+      'password' => 'required',                        
+    ]);
+
     try
     {
-      $this->validate($request, [
-        'name' => 'required',            
-        'tanggal_lahir' => 'required|date_format:Y-m-d',
-        'email' => 'required|string|email',
-        'nomor_hp' => 'required',            
-        'kode_jenjang' => 'required|numeric|exists:jenjang_studi,kode_jenjang',
-        'tahun_pendaftaran' => 'required|numeric',            
-        'username' => 'required|string|unique:users',
-        'password' => 'required',                        
-      ]);
-
       //cek usia
       $this->checkUsia($request);
 
@@ -1043,7 +1043,7 @@ class PSBController extends Controller
           'status' => 0,
           'pid' => 'fetchdata',        
           'message' => ['Calon Peserta Didik a.n ('.$user->name.') telah melakukan konfirmasi pembayaran.']
-        ],422);
+        ], 422);
       }
     }
     else
@@ -1052,7 +1052,7 @@ class PSBController extends Controller
         'status' => 0,
         'pid' => 'fetchdata',        
         'message' => ['Peserta Didik gagal diperoleh.']
-      ],422);
+      ], 422);
     }
 
   }   
@@ -1118,7 +1118,7 @@ class PSBController extends Controller
         'status' => 1,
         'pid' => 'store',
         'message' => ["Extensi file yang diupload bukan jpg atau png."]
-      ],422);
+      ], 422);
     }
 
   }   
@@ -1130,6 +1130,44 @@ class PSBController extends Controller
    */
   public function update(Request $request,$id)
   {
+    $this->validate($request, [
+      'nama_siswa' => 'required',            
+      'nama_panggilan' => 'required',            
+      'jk' => 'required',            
+      'nik' => 'required|numeric',            
+      'tempat_lahir' => 'required',            
+      'tanggal_lahir' => 'required',
+      'idagama' => 'required|numeric|exists:agama,idagama',
+      'id_kebutuhan_khusus' => 'required|numeric|exists:kebutuhan_khusus,id_kebutuhan',
+
+      'address1_provinsi_id' => 'required',
+      'address1_provinsi' => 'required',
+      'address1_kabupaten_id' => 'required',
+      'address1_kabupaten' => 'required',
+      'address1_kecamatan_id' => 'required',
+      'address1_kecamatan' => 'required',
+      'address1_desa_id' => 'required',
+      'address1_kelurahan' => 'required',
+      'alamat_tempat_tinggal' => 'required',
+      'address1_rt' => 'required',
+      'address1_rw' => 'required',
+      'kode_pos' => 'required|max:5',
+      'kewarganegaraan' => 'required|numeric|exists:negara,id',
+      
+      'anak_ke' => 'required',
+      'jumlah_saudara' => 'required',
+      'golongan_darah' => 'required',                
+      
+      'tinggi' => 'required',                
+      'berat_badan' => 'required',                
+      'ukuran_seragam' => 'required',                
+      'id_moda' => 'required|numeric|exists:moda_transportasi,id_moda',                
+      'jarak_ke_sekolah' => 'required',                
+      'waktu_tempuh' => 'required',                
+      'saudara_mendaftar_tidak' => 'required|in:0,1',
+      'kode_jenjang' => 'required',
+    ]);
+    
     try
     {
       $formulir = FormulirPendaftaranAModel::find($id);
@@ -1138,44 +1176,6 @@ class PSBController extends Controller
       {
         throw new Exception ("Formulir Pendaftaran dengan ID ($id) gagal diperoleh");
       }  
-
-      $this->validate($request, [
-        'nama_siswa' => 'required',            
-        'nama_panggilan' => 'required',            
-        'jk' => 'required',            
-        'nik' => 'required|numeric',            
-        'tempat_lahir' => 'required',            
-        'tanggal_lahir' => 'required',
-        'idagama' => 'required|numeric|exists:agama,idagama',
-        'id_kebutuhan_khusus' => 'required|numeric|exists:kebutuhan_khusus,id_kebutuhan',
-
-        'address1_provinsi_id' => 'required',
-        'address1_provinsi' => 'required',
-        'address1_kabupaten_id' => 'required',
-        'address1_kabupaten' => 'required',
-        'address1_kecamatan_id' => 'required',
-        'address1_kecamatan' => 'required',
-        'address1_desa_id' => 'required',
-        'address1_kelurahan' => 'required',
-        'alamat_tempat_tinggal' => 'required',
-        'address1_rt' => 'required',
-        'address1_rw' => 'required',
-        'kode_pos' => 'required|max:5',
-        'kewarganegaraan' => 'required|numeric|exists:negara,id',
-        
-        'anak_ke' => 'required',
-        'jumlah_saudara' => 'required',
-        'golongan_darah' => 'required',                
-        
-        'tinggi' => 'required',                
-        'berat_badan' => 'required',                
-        'ukuran_seragam' => 'required',                
-        'id_moda' => 'required|numeric|exists:moda_transportasi,id_moda',                
-        'jarak_ke_sekolah' => 'required',                
-        'waktu_tempuh' => 'required',                
-        'saudara_mendaftar_tidak' => 'required|in:0,1',
-        'kode_jenjang' => 'required',
-      ]);
 
       //cek usia
       $this->checkUsia($request);
@@ -1281,7 +1281,7 @@ class PSBController extends Controller
    */
   public function updatesituasikeluarga(Request $request,$id)
   {
-    $formulir=FormulirPendaftaranBModel::find($id);
+    $formulir = FormulirPendaftaranBModel::find($id);
 
     if (is_null($formulir))
     {
