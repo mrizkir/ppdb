@@ -109,10 +109,10 @@
                     <div>
                       Seleksi PPDB terdiri dari 9 (Sembilan) tahapan. Sebelum melanjutkan pastikan terlebih dahulu :
                       <ol type="a">
-                        <li>Ananda sudah berusia min. <strong>4.4 tahun</strong> maks. <strong>6 Tahun</strong> pada 01 Juli {{ 2025 }}. <strong>untuk Jenjang Studi TK</strong></li>
-                        <li>Ananda sudah berusia min. <strong>6 tahun</strong> maks. <strong>9 Tahun</strong> pada 01 Juli {{ 2025 }}.<strong>untuk Jenjang Studi SD</strong></li>
-                        <li>Ananda sudah berusia min. <strong>10 Tahun</strong> maks. <strong>15 tahun</strong> pada 01 Juli {{ 2025 }}.<strong>untuk Jenjang Studi SMP</strong></li>
-                        <li>Ananda sudah berusia min. <strong>13 Tahun</strong> maks. <strong>17 tahun</strong> pada 01 Juli {{ 2025 }}.<strong>untuk Jenjang Studi SMA</strong></li>
+                        <li>Ananda sudah berusia min. <strong>4.4 tahun</strong> maks. <strong>7 Tahun</strong> pada Juli {{ 2026 }}. <strong>untuk Jenjang Studi TK</strong></li>
+                        <li>Ananda sudah berusia min. <strong>6 tahun</strong> maks. <strong>8 Tahun</strong> pada Juli {{ 2026 }}.<strong>untuk Jenjang Studi SD</strong></li>
+                        <li>Ananda sudah berusia maks. <strong>14 tahun</strong> pada Juli {{ 2026 }}.<strong>untuk Jenjang Studi SMP</strong></li>
+                        <li>Ananda sudah berusia maks. <strong>17 tahun</strong> pada Juli {{ 2026 }}.<strong>untuk Jenjang Studi SMA</strong></li>
                       </ol>
                     </div>
                   </div>
@@ -216,13 +216,13 @@
                     JADWAL INTERVIEW
                     </h2>
                     <div>
-                      Setelah pengisian formulir selesai, Panitia akan menghubungi nomor kontak WA pendaftar. Pada tahap ini, Panitia akan memberikan jadwal interview bagi orang tua/wali calon Peserta Didik Baru (PDB) dan observasi bagi calon PDB. Jadwal interview dan observasi berlangsung bersamaan bagi setiap keluarga dengan durasi 60 menit.
+                      Setelah pengisian formulir selesai, Panitia akan menghubungi nomor kontak WA pendaftar. Pada tahap ini, Panitia akan memberikan jadwal interview bagi orang tua/wali calon Peserta Didik Baru (PDB) dan observasi bagi calon PDB.
                     </div>
                     <v-alert type="warning">
                       <div class="title">
                         Catatan Penting !!!
                       </div>
-                      Jika dalam pelaksanaannya orang tua/wali calon peserta didik baru tidak merespon informasi yang disampaikan panitia maka dianggap mengundurkan diri.
+                      Jika dalam pelaksanaannya orang tua/wali calon peserta didik baru tidak merespon informasi yang disampaikan panitia dalam waktu 1x24 jam maka dianggap mengundurkan diri.
                     </v-alert>
                   </div>
                 </v-timeline-item>
@@ -239,7 +239,7 @@
                       PEMAPARAN PROGRAM SEKOLAH
                     </h2>
                     <div>
-                      Pada waktu yang bersamaan, setelah jadwal interview dan observasi selesai dikomunikasikan, Panitia akan melanjutkan dengan memberikan informasi jadwal Zoom Meeting.  Kegiatan ini wajib diikuti oleh setiap orangtua/wali calon PDB.
+                      Pada waktu yang bersamaan, setelah jadwal interview dan observasi selesai dikomunikasikan, Panitia akan melanjutkan dengan memberikan informasi jadwal Zoom Meeting.  Kegiatan ini <strong>wajib</strong> diikuti oleh setiap orangtua/wali calon PDB.
                     </div>
                     <v-alert type="warning">
                       <div class="title">
@@ -307,7 +307,7 @@
                       DISCLAIMER DAN PERSYARATAN
                     </h2>
                     <div>
-                      Pendaftar yang tidak menghadiri jadwal interview maupun observasi tanpa melakukan konfirmasi H-1 kepada Panitia akan dianggap mengundurkan diri. Saat menghadiri kegiatan ini, perndaftar harus membawa berkas asli akta kelahiran, KTP kedua orang tua/wali,d an KK yang sesuai dengan berkas unggah saat melakukan pendaftaran daring. Apabila berkas asli tidak dibawa, maka proses interview dan observasi dibatalkan atau tidak dapat dilaksanakan. Orang tua/wali juga akan diminta untuk menandatangani berkas bermaterai (materai Rp 10.000,- disiapkan oleh panitia).
+                      Pendaftar yang tidak menghadiri jadwal interview maupun observasi tanpa melakukan konfirmasi H-1 kepada Panitia akan dianggap mengundurkan diri. Saat menghadiri kegiatan ini, pendaftar harus membawa <strong>berkas asli akta kelahiran, KTP kedua orang tua/wali dan Kartu Keluarga</strong> yang sesuai dengan berkas unggah saat melakukan pendaftaran daring. Apabila berkas asli tidak dibawa, maka proses interview dan observasi dibatalkan atau tidak dapat dilaksanakan. Orang tua/wali juga akan diminta untuk menandatangani berkas bermaterai (materai Rp 10.000,- disiapkan oleh panitia).
                     </div>
                   </div>
                 </v-timeline-item>
