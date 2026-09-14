@@ -139,7 +139,7 @@
                 color="purple darken-1"
                 class="mx-0"
                 outlined
-                href="https://bit.ly/Nota_Persetujuan_TK_2627"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd-8KQpZ_9RYRsNqSGCS4BuYVSSWZrILVGkpjZgm8Af8st70w/viewform?usp=sharing&ouid=116590670459241609195"
                 target="_blank"
               >
                 Isi Kuesioner
@@ -151,7 +151,7 @@
                 color="purple darken-1"
                 class="mx-0"
                 outlined
-                href="https://bit.ly/Nota_Persetujuan_SD_2627"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd-8KQpZ_9RYRsNqSGCS4BuYVSSWZrILVGkpjZgm8Af8st70w/viewform?usp=sharing&ouid=116590670459241609195"
                 target="_blank"
               >
                 Isi Kuesioner
@@ -163,7 +163,7 @@
                 color="purple darken-1"
                 class="mx-0"
                 outlined
-                href="https://bit.ly/Nota_Persetujuan_SMP_2627"
+                href="hhttps://docs.google.com/forms/d/e/1FAIpQLSd-8KQpZ_9RYRsNqSGCS4BuYVSSWZrILVGkpjZgm8Af8st70w/viewform?usp=sharing&ouid=116590670459241609195"
                 target="_blank"
               >
                 Isi Kuesioner
@@ -175,7 +175,7 @@
                 color="purple darken-1"
                 class="mx-0"
                 outlined
-                href="https://bit.ly/Nota_Persetujuan_SMA_2627"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd-8KQpZ_9RYRsNqSGCS4BuYVSSWZrILVGkpjZgm8Af8st70w/viewform?usp=sharing&ouid=116590670459241609195"
                 target="_blank"
               >
                 Isi Kuesioner
