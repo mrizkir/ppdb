@@ -94,7 +94,36 @@
                           label="NAMA LENGKAP" 
                           :rules="rule_name"
                           outlined/>
-                        
+                        <v-menu
+                          ref="menuTanggalLahir"
+                          v-model="menuTanggalLahir"
+                          :close-on-content-click="false"
+                          :return-value.sync="formdata.tanggal_lahir"
+                          transition="scale-transition"
+                          offset-y
+                          max-width="290px"
+                          min-width="290px"
+                        >
+                          <template v-slot:activator="{ on }">
+                            <v-text-field
+                              v-model="formdata.tanggal_lahir"
+                              label="TANGGAL LAHIR"
+                              readonly
+                              outlined
+                              v-on="on"
+                              :rules="rule_tanggal_lahir"
+                            ></v-text-field>
+                          </template>
+                          <v-date-picker
+                            v-model="formdata.tanggal_lahir"
+                            no-title
+                            scrollable
+                            >
+                            <v-spacer></v-spacer>
+                            <v-btn text color="primary" @click="menuTanggalLahir = false">Cancel</v-btn>
+                            <v-btn text color="primary" @click="$refs.menuTanggalLahir.save(formdata.tanggal_lahir)">OK</v-btn>
+                          </v-date-picker>
+                        </v-menu>
                         <v-text-field 
                           v-model="formdata.nomor_hp"
                           label="NOMOR HP (ex: +628123456789)" 
@@ -433,7 +462,9 @@ import ModuleHeader from '@/components/ModuleHeader';
 import Filter7 from '@/components/sidebar/FilterMode7';
 export default {
   name: 'PendaftaranBaru',
-  created() {
+  async created() {
+    await this.$store.dispatch('uiadmin/init', this.$ajax);
+
     this.dashboard = this.$store.getters['uiadmin/getDefaultDashboard'];
     this.breadcrumbs = [
       {
@@ -494,9 +525,10 @@ export default {
     //form data   
     form_valid: true,
     daftar_jenjang: [],
-    daftar_ta: [],
+    menuTanggalLahir: false,
     formdata: {
       name: "",
+      tanggal_lahir: "",
       email: "", 
       nomor_hp: "",
       username: "",
@@ -508,6 +540,7 @@ export default {
     },
     formdefault: {
       name: "",
+      tanggal_lahir: "",
       email: "", 
       nomor_hp: "",
       username: "",
@@ -522,6 +555,9 @@ export default {
     rule_name: [
       value => !!value || "Nama Siswa mohon untuk diisi !!!",
       value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Siswa hanya boleh string dan spasi',
+    ],
+    rule_tanggal_lahir: [
+      value => !!value || "Tanggal lahir mohon untuk diisi !!!",
     ],
     rule_nomorhp: [
       value => !!value || "Nomor HP mohon untuk diisi !!!",
@@ -648,7 +684,7 @@ export default {
     },
     async addItem ()
     {
-      this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
+      await this.$store.dispatch('uiadmin/init', this.$ajax);
       this.formdata.ta=this.tahun_pendaftaran;
       this.formdata.kode_jenjang = this.kode_jenjang;
 
@@ -668,6 +704,7 @@ export default {
             {
               '_method': 'PUT',
               name: this.formdata.name,
+              tanggal_lahir: this.formdata.tanggal_lahir,
               email: this.formdata.email, 
               nomor_hp: this.formdata.nomor_hp,
               kode_jenjang: this.formdata.kode_jenjang,
@@ -692,6 +729,7 @@ export default {
           await this.$ajax.post('/spsb/psb/storependaftar',
             {
               name: this.formdata.name,
+              tanggal_lahir: this.formdata.tanggal_lahir,
               email: this.formdata.email, 
               nomor_hp: this.formdata.nomor_hp,
               username: this.formdata.username,
@@ -745,15 +783,40 @@ export default {
         this.dialogdetailitem = true;
       });
     },
+    formatTanggalLahir(value)
+    {
+      if (!value) {
+        return "";
+      }
+      const tanggal = this.$date(value);
+      return tanggal.isValid() ? tanggal.format('YYYY-MM-DD') : String(value).substring(0, 10);
+    },
     async editItem (item) {
       this.editedIndex = this.datatable.indexOf(item);
       this.formdata = Object.assign({}, item);
       this.formdata.nomor_hp='+' + this.formdata.nomor_hp;
-      this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
+      this.formdata.tanggal_lahir = this.formatTanggalLahir(item.tanggal_lahir);
+
+      await this.$ajax.get("/spsb/formulirpendaftaran/" + item.id,
+        {
+          headers: {
+            Authorization: this.$store.getters["auth/Token"]
+          }
+        }
+      ).then(({ data }) => {
+        this.formdata.tanggal_lahir = this.formatTanggalLahir(data.formulir.tanggal_lahir);
+      }).catch(() => {
+        this.formdata.tanggal_lahir = this.formatTanggalLahir(item.tanggal_lahir);
+      });
+
+      await this.$store.dispatch('uiadmin/init', this.$ajax);
       await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
         this.daftar_jenjang = data.jenjang_studi;
       });
       this.dialogfrm = true;
+      this.$nextTick(() => {
+        this.formdata.tanggal_lahir = this.formatTanggalLahir(this.formdata.tanggal_lahir);
+      });
     },
     deleteItem (item) {
       this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus PESERTA DIDIK BARU '+item.name+' ?', { color: 'red' }).then((confirm) => {
@@ -817,6 +880,9 @@ export default {
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? 'TAMBAH DATA' : 'UBAH DATA'
+    },
+    daftar_ta() {
+      return this.$store.getters['uiadmin/getDaftarTA'];
     },
   },
   

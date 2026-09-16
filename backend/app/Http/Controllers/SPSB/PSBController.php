@@ -92,6 +92,7 @@ class PSBController extends Controller
       users.foto,
       formulir_pendaftaran_a.kode_jenjang,
       formulir_pendaftaran_a.ta,
+      formulir_pendaftaran_a.tanggal_lahir,
       users.created_at,
       users.updated_at'
     ))
@@ -616,11 +617,14 @@ class PSBController extends Controller
           'required',
           'unique:users,username,'.$user->id
         ],              
+        'tanggal_lahir' => 'required|date_format:Y-m-d',
         'email' => 'required|string|email',
         'nomor_hp' => 'required',
         'kode_jenjang' => 'required|numeric|exists:jenjang_studi,kode_jenjang',
         'tahun_pendaftaran' => 'required|numeric'            
       ]);
+
+      $this->checkUsia($request);
       
       $user = \DB::transaction(function () use ($request,$user){
         $user->name = strtoupper($request->input('name'));
@@ -634,7 +638,8 @@ class PSBController extends Controller
         $user->save();
 
         $formulir=FormulirPendaftaranAModel::find($user->id);
-        $formulir->nama_siswa=strtoupper($request->input('name'));    
+        $formulir->nama_siswa=strtoupper($request->input('name'));
+        $formulir->tanggal_lahir=$request->input('tanggal_lahir');
         $formulir->kode_jenjang=$request->input('kode_jenjang');
         $formulir->ta=$request->input('tahun_pendaftaran');
         $formulir->save();

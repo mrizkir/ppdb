@@ -21,27 +21,39 @@ export default {
     name: 'FilterMode7',
     created()
     {
-        this.daftar_jenjang=this.$store.getters['uiadmin/getDaftarJenjang'];
-        this.kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang']; 
-
-        this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
-        this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
+        this.syncFromStore();
     },
     data:()=>({
         firstloading: true,
-        daftar_jenjang: [],
         kode_jenjang:null,
-
-        daftar_ta: [],
         tahun_pendaftaran:null
     }),
     methods: {
         setFirstTimeLoading (bool)
         {
             this.firstloading=bool;
+        },
+        syncFromStore()
+        {
+            this.kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
+            this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
         }
     },
+    computed: {
+        daftar_jenjang() {
+            return this.$store.getters['uiadmin/getDaftarJenjang'];
+        },
+        daftar_ta() {
+            return this.$store.getters['uiadmin/getDaftarTA'];
+        },
+    },
     watch: {
+        '$store.state.uiadmin.loaded'(loaded)
+        {
+            if (loaded) {
+                this.syncFromStore();
+            }
+        },
         tahun_pendaftaran(val)
         {
             if (!this.firstloading)
