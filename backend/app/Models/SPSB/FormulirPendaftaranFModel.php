@@ -16,14 +16,15 @@ class FormulirPendaftaranFModel extends Model {
    *
    * @var string
    */
-  protected $primaryKey = 'user_id';
+  protected $primaryKey = 'formulir_id';
+  protected $keyType = 'string';
   /**
    * The attributes that are mass assignable.
    *
    * @var array
    */
   protected $fillable = [        
-    'user_id',
+    'formulir_id',
     'nama_wali',
     'hubungan',  
     'tempat_lahir',     
@@ -64,8 +65,8 @@ class FormulirPendaftaranFModel extends Model {
    */
   public $timestamps = true;
 
-  public function user()
+  public function formulir()
   {
-    return $this->belongsTo('App\Models\User','user_id','id');
+    return $this->belongsTo('App\Models\SPSB\FormulirPendaftaranAModel','formulir_id','id');
   }
 }

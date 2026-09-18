@@ -102,6 +102,14 @@ const routes = [
     component: () => import("../views/pages/front/Login.vue"),
   },
   {
+    path: "/undangan/:otp",
+    name: "FrontUndanganPMB",
+    meta: {
+      title: "UNDANGAN PMB",
+    },
+    component: () => import("../views/pages/front/UndanganPMB.vue"),
+  },
+  {
     path: "/dashboard/:token",
     name: "AdminDashboard",
     meta: {
@@ -175,6 +183,15 @@ const routes = [
     },
     component: () =>
       import("../views/pages/admin/spsb/FormulirPendaftaran.vue"),
+  },
+  {
+    path: "/spsb/undangan",
+    name: "SPSBDaftarUndangan",
+    meta: {
+      title: "SPSB - UNDANGAN PMB",
+      requiresAuth: true,
+    },
+    component: () => import("../views/pages/admin/spsb/DaftarUndangan.vue"),
   },
   {
     path: "/spsb/situasikeluarga",

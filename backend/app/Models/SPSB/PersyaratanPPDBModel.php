@@ -16,14 +16,15 @@ class PersyaratanPPDBModel extends Model {
 	 *
 	 * @var string
 	 */
-	protected $primaryKey = 'user_id';
+	protected $primaryKey = 'formulir_id';
+	protected $keyType = 'string';
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
 	protected $fillable = [
-		'user_id',
+		'formulir_id',
 		'file_fotoselfi',
 		'file_ktp_ayah',
 		'file_ktp_ibu',

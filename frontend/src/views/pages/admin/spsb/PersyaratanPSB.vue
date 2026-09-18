@@ -590,6 +590,18 @@ export default {
         this.btnLoading = false;
       });
     },
+    normalizeNomorHp(value)
+    {
+      if (!value) {
+        return "";
+      }
+      let hp = String(value).trim();
+      hp = hp.replace(/^\++/, "+");
+      if (hp.charAt(0) !== "+") {
+        hp = "+" + hp;
+      }
+      return hp;
+    },
     async viewItem(item) {
       await this.$ajax.get('/keuangan/konfirmasipembayaran/'+item.id, 
       {
@@ -605,7 +617,7 @@ export default {
     async editItem(item) {
       this.editedIndex = this.datatable.indexOf(item);
       this.formdata = Object.assign({}, item);
-      this.formdata.nomor_hp='+' + this.formdata.nomor_hp;
+      this.formdata.nomor_hp = this.normalizeNomorHp(item.nomor_hp);
       this.daftar_ta=this.$store.getters['uiadmin/getDaftarTA'];
       await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
         this.daftar_jenjang = data.jenjang_studi;

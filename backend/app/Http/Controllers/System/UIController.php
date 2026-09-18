@@ -87,18 +87,32 @@ class UIController extends Controller {
     }
     elseif ($this->hasRole('siswabaru'))
     {
-      $formulir=\App\Models\SPSB\FormulirPendaftaranAModel::find($this->getUserid());
-      $daftar_ta=TAModel::where('tahun','=',$formulir->ta)
-      ->select(\DB::raw('tahun AS value,tahun_ajaran AS text'))
-      ->get();  
-      
-      $daftar_jenjang=JenjangStudiModel::select(\DB::raw('kode_jenjang AS id,nama_jenjang AS text'))
-      ->where('kode_jenjang',$formulir->kode_jenjang)
-      ->get();
-      $kode_jenjang=$formulir->kode_jenjang;
+      $formulir=\App\Helpers\HelperFormulir::currentForUser($this->getUserid());
+      if (is_null($formulir))
+      {
+        $daftar_ta=TAModel::select(\DB::raw('tahun AS value,tahun_ajaran AS text'))
+          ->orderBy('tahun','asc')
+          ->get();
+        $daftar_jenjang=JenjangStudiModel::select(\DB::raw('kode_jenjang AS id,nama_jenjang AS text'))
+          ->get();
+        $kode_jenjang=$config['DEFAULT_KODE_JENJANG'];
+        $tahun_pendaftaran = $config['DEFAULT_TAHUN_PENDAFTARAN'];
+        $tahun_ajaran = $config['DEFAULT_TA'];
+      }
+      else
+      {
+        $daftar_ta=TAModel::where('tahun','=',$formulir->ta)
+        ->select(\DB::raw('tahun AS value,tahun_ajaran AS text'))
+        ->get();  
+        
+        $daftar_jenjang=JenjangStudiModel::select(\DB::raw('kode_jenjang AS id,nama_jenjang AS text'))
+        ->where('kode_jenjang',$formulir->kode_jenjang)
+        ->get();
+        $kode_jenjang=$formulir->kode_jenjang;
 
-      $tahun_pendaftaran = $formulir->ta;
-      $tahun_ajaran = $formulir->ta;
+        $tahun_pendaftaran = $formulir->ta;
+        $tahun_ajaran = $formulir->ta;
+      }
     }                                  
     return Response()->json([
       'status' => 1,

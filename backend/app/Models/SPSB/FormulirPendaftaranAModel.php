@@ -16,13 +16,15 @@ class FormulirPendaftaranAModel extends Model {
    *
    * @var string
    */
-  protected $primaryKey = 'user_id';
+  protected $primaryKey = 'id';
+  protected $keyType = 'string';
   /**
    * The attributes that are mass assignable.
    *
    * @var array
    */
-  protected $fillable = [        
+  protected $fillable = [
+    'id',
     'user_id',
     'nama_siswa',
     'nisn',

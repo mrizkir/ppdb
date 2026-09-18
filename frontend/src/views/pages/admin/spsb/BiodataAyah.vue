@@ -188,7 +188,7 @@ export default {
       switch(this.dashboard)
       {
         case 'siswabaru':
-          this.user_id=this.$store.getters['auth/AttributeUser']('id');
+          this.user_id=this.$store.getters['auth/AttributeUser']('formulir_id') || this.$store.getters['auth/AttributeUser']('id');
         break;
         default :
           this.datatableLoading = true;

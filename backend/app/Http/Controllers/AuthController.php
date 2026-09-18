@@ -50,8 +50,13 @@ class AuthController extends Controller
         $user = $this->guard()->user()->toArray();
         if ($this->hasRole('siswabaru'))
         {
-            $formulir = \App\Models\SPSB\FormulirPendaftaranAModel::find($user['id']);
-            $user['idsmt']=$formulir->idsmt;
+            $formulir = \App\Helpers\HelperFormulir::currentForUser($user['id']);
+            if ($formulir) {
+                $user['idsmt']=$formulir->idsmt;
+                $user['formulir_id']=$formulir->id;
+                $user['kode_jenjang']=$formulir->kode_jenjang;
+                $user['ta']=$formulir->ta;
+            }
         }
         $user['role']=$this->getRoleNames();
         $user['issuperadmin']=$this->hasRole('superadmin');

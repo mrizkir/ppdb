@@ -124,6 +124,12 @@
                             <v-btn text color="primary" @click="$refs.menuTanggalLahir.save(formdata.tanggal_lahir)">OK</v-btn>
                           </v-date-picker>
                         </v-menu>
+                        <v-checkbox
+                          v-model="formdata.cek_usia"
+                          label="CEK USIA"
+                          hide-details
+                          class="mt-n2 mb-4"
+                        />
                         <v-text-field 
                           v-model="formdata.nomor_hp"
                           label="NOMOR HP (ex: +628123456789)" 
@@ -148,6 +154,8 @@
                         <v-select
                           v-model="formdata.ta"
                           :items="daftar_ta"
+                          item-text="text"
+                          item-value="value"
                           label="TAHUN PENDAFTARAN"
                           outlined
                         />
@@ -401,6 +409,20 @@
               >
                 mdi-pencil
               </v-icon>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <span v-bind="attrs" v-on="on">
+                    <v-icon
+                      small
+                      class="mr-2"
+                      color="primary"
+                      @click.stop="undanganItem(item)">
+                      mdi-link-variant
+                    </v-icon>
+                  </span>
+                </template>
+                <span>Buat link undangan</span>
+              </v-tooltip>
               <v-icon
                 small
                 :loading="btnLoading"
@@ -448,6 +470,142 @@
               Data belum tersedia
             </template>
           </v-data-table>
+          <v-dialog v-model="dialogUndangan" max-width="560px" persistent>
+            <v-form ref="frmundangan" v-model="formUndanganValid" lazy-validation>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">LINK UNDANGAN PMB</span>
+                </v-card-title>
+                <v-card-text v-if="undanganSelected">
+                  <div class="mb-3">
+                    <strong>Calon:</strong> {{ undanganSelected.name }}
+                  </div>
+                  <template v-if="dialogUndanganMode === 'form'">
+                    <v-select
+                      label="TARGET JENJANG STUDI"
+                      v-model="formUndangan.kode_jenjang"
+                      :items="daftar_jenjang"
+                      item-text="nama_jenjang"
+                      item-value="kode_jenjang"
+                      :rules="rule_jenjang"
+                      outlined
+                    />
+                    <v-select
+                      v-model="formUndangan.ta"
+                      :items="daftar_ta"
+                      item-text="text"
+                      item-value="value"
+                      label="TAHUN PENDAFTARAN"
+                      :rules="rule_ta_undangan"
+                      outlined
+                    />
+                    <v-menu
+                      ref="menuBerlakuMulai"
+                      v-model="menuBerlakuMulai"
+                      :close-on-content-click="false"
+                      :return-value.sync="formUndangan.berlaku_mulai"
+                      transition="scale-transition"
+                      offset-y
+                      max-width="290px"
+                      min-width="290px"
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-text-field
+                          v-model="formUndangan.berlaku_mulai"
+                          label="BERLAKU MULAI"
+                          readonly
+                          outlined
+                          v-on="on"
+                          :rules="rule_tanggal_undangan"
+                        />
+                      </template>
+                      <v-date-picker v-model="formUndangan.berlaku_mulai" no-title scrollable>
+                        <v-spacer></v-spacer>
+                        <v-btn text color="primary" @click="menuBerlakuMulai = false">BATAL</v-btn>
+                        <v-btn text color="primary" @click="$refs.menuBerlakuMulai.save(formUndangan.berlaku_mulai)">OK</v-btn>
+                      </v-date-picker>
+                    </v-menu>
+                    <v-menu
+                      ref="menuBerlakuSampai"
+                      v-model="menuBerlakuSampai"
+                      :close-on-content-click="false"
+                      :return-value.sync="formUndangan.berlaku_sampai"
+                      transition="scale-transition"
+                      offset-y
+                      max-width="290px"
+                      min-width="290px"
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-text-field
+                          v-model="formUndangan.berlaku_sampai"
+                          label="BERLAKU SAMPAI"
+                          readonly
+                          outlined
+                          v-on="on"
+                          :rules="rule_tanggal_sampai"
+                        />
+                      </template>
+                      <v-date-picker v-model="formUndangan.berlaku_sampai" no-title scrollable>
+                        <v-spacer></v-spacer>
+                        <v-btn text color="primary" @click="menuBerlakuSampai = false">BATAL</v-btn>
+                        <v-btn text color="primary" @click="$refs.menuBerlakuSampai.save(formUndangan.berlaku_sampai)">OK</v-btn>
+                      </v-date-picker>
+                    </v-menu>
+                  </template>
+                  <template v-else-if="undanganResult">
+                    <v-text-field
+                      :value="undanganUrl"
+                      label="LINK UNDANGAN"
+                      outlined
+                      readonly
+                      append-icon="mdi-content-copy"
+                      @click:append="copyText(undanganUrl)"
+                    />
+                    <v-text-field
+                      :value="otpDisplay"
+                      label="KODE OTP"
+                      outlined
+                      readonly
+                      append-icon="mdi-content-copy"
+                      @click:append="copyText(otpDisplay)"
+                    />
+                    <div>
+                      Target:
+                      {{ namaJenjangUndangan }} - {{ undanganResult.ta }}
+                    </div>
+                    <div>
+                      Masa berlaku:
+                      {{ $date(undanganResult.berlaku_mulai).format("DD/MM/YYYY") }}
+                      s.d.
+                      {{ $date(undanganResult.berlaku_sampai).format("DD/MM/YYYY") }}
+                    </div>
+                  </template>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click.stop="closeDialogUndangan">TUTUP</v-btn>
+                  <v-btn
+                    v-if="dialogUndanganMode === 'result'"
+                    color="blue darken-1"
+                    text
+                    @click.stop="dialogUndanganMode = 'form'"
+                  >
+                    GENERATE ULANG
+                  </v-btn>
+                  <v-btn
+                    v-if="dialogUndanganMode === 'form'"
+                    color="blue darken-1"
+                    text
+                    @click.stop="saveUndangan"
+                    :loading="btnLoading"
+                    :disabled="!formUndanganValid || btnLoading"
+                  >
+                    BUAT LINK
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-form>
+          </v-dialog>
         </v-col>
       </v-row>
     </v-container>
@@ -511,7 +669,7 @@ export default {
       { text: 'NOMOR HP', value: 'nomor_hp', sortable: false },
       { text: 'KODE', value: 'code', sortable: false },
       { text: 'TGL.DAFTAR', value: 'created_at', sortable: true},
-      { text: 'AKSI', value: 'actions', sortable: false, width: 100 },
+      { text: 'AKSI', value: 'actions', sortable: false, width: 140 },
     ],
     expanded: [],
     search: "",
@@ -535,6 +693,7 @@ export default {
       password: "",
       kode_jenjang: "", 
       ta: "",
+      cek_usia: true,
       created_at: "",
       updated_at: "",
     },
@@ -547,10 +706,32 @@ export default {
       password: "",
       kode_jenjang: "",
       ta: "",
+      cek_usia: true,
       created_at: "",
       updated_at: "",
     }, 
     editedIndex: -1,
+    closeFrmTimeout: null,
+
+    dialogUndangan: false,
+    dialogUndanganMode: "form",
+    formUndanganValid: true,
+    menuBerlakuMulai: false,
+    menuBerlakuSampai: false,
+    undanganSelected: null,
+    undanganResult: null,
+    formUndangan: {
+      berlaku_mulai: "",
+      berlaku_sampai: "",
+      ta: "",
+      kode_jenjang: "",
+    },
+    rule_tanggal_undangan: [
+      value => !!value || "Tanggal mulai mohon untuk diisi !!!"
+    ],
+    rule_ta_undangan: [
+      value => !!value || "Tahun pendaftaran mohon untuk dipilih !!!"
+    ],
 
     rule_name: [
       value => !!value || "Nama Siswa mohon untuk diisi !!!",
@@ -684,15 +865,22 @@ export default {
     },
     async addItem ()
     {
+      this.clearCloseFrmTimeout();
       await this.$store.dispatch('uiadmin/init', this.$ajax);
-      this.formdata.ta=this.tahun_pendaftaran;
-      this.formdata.kode_jenjang = this.kode_jenjang;
+      this.formdata = Object.assign({}, this.formdefault);
+      this.formdata.ta = Number(this.tahun_pendaftaran);
+      this.formdata.kode_jenjang = Number(this.kode_jenjang);
 
       await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
         this.daftar_jenjang = data.jenjang_studi;
       });
 
       this.dialogfrm = true;
+      this.$nextTick(() => {
+        if (this.$refs.frmdata) {
+          this.$refs.frmdata.resetValidation();
+        }
+      });
     },
     save: async function() {
       if (this.$refs.frmdata.validate())
@@ -709,8 +897,10 @@ export default {
               nomor_hp: this.formdata.nomor_hp,
               kode_jenjang: this.formdata.kode_jenjang,
               tahun_pendaftaran: this.formdata.ta,
+              formulir_id: this.formdata.formulir_id,
               username: this.formdata.username,    
               password: this.formdata.password,
+              cek_usia: this.formdata.cek_usia ? 1 : 0,
             },
             {
               headers: {
@@ -735,7 +925,8 @@ export default {
               username: this.formdata.username,
               kode_jenjang: this.formdata.kode_jenjang, 
               tahun_pendaftaran: this.formdata.ta,
-              password: this.formdata.password, 
+              password: this.formdata.password,
+              cek_usia: this.formdata.cek_usia ? 1 : 0, 
             },
             {
               headers: {
@@ -791,13 +982,36 @@ export default {
       const tanggal = this.$date(value);
       return tanggal.isValid() ? tanggal.format('YYYY-MM-DD') : String(value).substring(0, 10);
     },
+    normalizeNomorHp(value)
+    {
+      if (!value) {
+        return "";
+      }
+      let hp = String(value).trim();
+      hp = hp.replace(/^\++/, "+");
+      if (hp.charAt(0) !== "+") {
+        hp = "+" + hp;
+      }
+      return hp;
+    },
+    clearCloseFrmTimeout()
+    {
+      if (this.closeFrmTimeout) {
+        clearTimeout(this.closeFrmTimeout);
+        this.closeFrmTimeout = null;
+      }
+    },
     async editItem (item) {
+      this.clearCloseFrmTimeout();
       this.editedIndex = this.datatable.indexOf(item);
       this.formdata = Object.assign({}, item);
-      this.formdata.nomor_hp='+' + this.formdata.nomor_hp;
+      this.formdata.nomor_hp = this.normalizeNomorHp(item.nomor_hp);
       this.formdata.tanggal_lahir = this.formatTanggalLahir(item.tanggal_lahir);
+      this.formdata.kode_jenjang = Number(item.kode_jenjang || this.kode_jenjang);
+      this.formdata.ta = Number(item.ta || this.tahun_pendaftaran);
+      this.formdata.cek_usia = true;
 
-      await this.$ajax.get("/spsb/formulirpendaftaran/" + item.id,
+      await this.$ajax.get("/spsb/formulirpendaftaran/" + (item.formulir_id || item.id),
         {
           headers: {
             Authorization: this.$store.getters["auth/Token"]
@@ -805,6 +1019,12 @@ export default {
         }
       ).then(({ data }) => {
         this.formdata.tanggal_lahir = this.formatTanggalLahir(data.formulir.tanggal_lahir);
+        if (data.formulir.kode_jenjang) {
+          this.formdata.kode_jenjang = Number(data.formulir.kode_jenjang);
+        }
+        if (data.formulir.ta) {
+          this.formdata.ta = Number(data.formulir.ta);
+        }
       }).catch(() => {
         this.formdata.tanggal_lahir = this.formatTanggalLahir(item.tanggal_lahir);
       });
@@ -816,6 +1036,9 @@ export default {
       this.dialogfrm = true;
       this.$nextTick(() => {
         this.formdata.tanggal_lahir = this.formatTanggalLahir(this.formdata.tanggal_lahir);
+        if (this.$refs.frmdata) {
+          this.$refs.frmdata.resetValidation();
+        }
       });
     },
     deleteItem (item) {
@@ -852,12 +1075,116 @@ export default {
     },
     closedialogfrm() {
       this.dialogfrm = false;
-      setTimeout(() => {
+      this.clearCloseFrmTimeout();
+      this.closeFrmTimeout = setTimeout(() => {
         this.formdata = Object.assign({}, this.formdefault);
         this.editedIndex = -1;
-        this.$refs.frmdata.reset(); 
-        }, 300
-      );
+        if (this.$refs.frmdata) {
+          this.$refs.frmdata.resetValidation();
+        }
+        this.closeFrmTimeout = null;
+      }, 300);
+    },
+    defaultUndanganDates: function() {
+      return {
+        berlaku_mulai: this.$date().format("YYYY-MM-DD"),
+        berlaku_sampai: this.$date().add(7, "day").format("YYYY-MM-DD"),
+      };
+    },
+    defaultUndanganForm: function(item, undangan) {
+      const dates = this.defaultUndanganDates();
+      return {
+        berlaku_mulai: undangan ? undangan.berlaku_mulai : dates.berlaku_mulai,
+        berlaku_sampai: undangan ? undangan.berlaku_sampai : dates.berlaku_sampai,
+        ta: Number((undangan && undangan.ta) || (item && item.ta) || this.tahun_pendaftaran),
+        kode_jenjang: Number((undangan && undangan.kode_jenjang) || (item && item.kode_jenjang) || this.kode_jenjang),
+      };
+    },
+    undanganItem: async function(item) {
+      this.undanganSelected = item;
+      this.undanganResult = null;
+      this.formUndangan = this.defaultUndanganForm(item);
+      this.dialogUndanganMode = "form";
+      this.dialogUndangan = true;
+      this.btnLoading = true;
+      if (!this.daftar_jenjang.length) {
+        await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
+          this.daftar_jenjang = data.jenjang_studi;
+        });
+      }
+      await this.$ajax
+        .get("/spsb/undangan/" + item.id, {
+          params: {
+            ta: item.ta,
+            kode_jenjang: item.kode_jenjang,
+          },
+          headers: {
+            Authorization: this.$store.getters["auth/Token"],
+          },
+        })
+        .then(({ data }) => {
+          this.btnLoading = false;
+          if (data.undangan) {
+            this.undanganResult = data.undangan;
+            this.formUndangan = this.defaultUndanganForm(item, data.undangan);
+            this.dialogUndanganMode = "result";
+          }
+        })
+        .catch(() => {
+          this.btnLoading = false;
+        });
+    },
+    saveUndangan: async function() {
+      if (!this.$refs.frmundangan.validate()) {
+        return;
+      }
+      this.btnLoading = true;
+      await this.$ajax
+        .post(
+          "/spsb/undangan/store",
+          {
+            user_id: this.undanganSelected.id,
+            formulir_id: this.undanganSelected.formulir_id,
+            berlaku_mulai: this.formUndangan.berlaku_mulai,
+            berlaku_sampai: this.formUndangan.berlaku_sampai,
+            ta: this.formUndangan.ta,
+            kode_jenjang: this.formUndangan.kode_jenjang,
+          },
+          {
+            headers: {
+              Authorization: this.$store.getters["auth/Token"],
+            },
+          }
+        )
+        .then(({ data }) => {
+          this.btnLoading = false;
+          this.undanganResult = data.undangan;
+          this.dialogUndanganMode = "result";
+        })
+        .catch(() => {
+          this.btnLoading = false;
+        });
+    },
+    copyText: function(text) {
+      if (!text) {
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text);
+        return;
+      }
+      const el = document.createElement("textarea");
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    },
+    closeDialogUndangan: function() {
+      this.dialogUndangan = false;
+      this.undanganSelected = null;
+      this.undanganResult = null;
+      this.dialogUndanganMode = "form";
     },
   },
   watch: {
@@ -883,6 +1210,33 @@ export default {
     },
     daftar_ta() {
       return this.$store.getters['uiadmin/getDaftarTA'];
+    },
+    otpDisplay() {
+      if (!this.undanganResult || !this.undanganResult.otp) {
+        return "";
+      }
+      return String(this.undanganResult.otp).padStart(6, "0");
+    },
+    undanganUrl() {
+      if (!this.otpDisplay) {
+        return "";
+      }
+      return window.location.origin + "/undangan/" + this.otpDisplay;
+    },
+    namaJenjangUndangan() {
+      const kode = (this.undanganResult && this.undanganResult.kode_jenjang)
+        || this.formUndangan.kode_jenjang;
+      return this.$store.getters["uiadmin/getNamaJenjang"](kode) || kode;
+    },
+    rule_tanggal_sampai() {
+      return [
+        value => !!value || "Tanggal sampai mohon untuk diisi !!!",
+        value =>
+          !value ||
+          !this.formUndangan.berlaku_mulai ||
+          value >= this.formUndangan.berlaku_mulai ||
+          "Tanggal sampai harus sama atau setelah tanggal mulai",
+      ];
     },
   },
   

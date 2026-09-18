@@ -17,24 +17,25 @@ class ReportCalonPesertaDidikController extends Controller
   public function printpdf (Request $request)
   {
     $this->validate($request, [
-      'user_id'=>'required|exists:formulir_pendaftaran_a,user_id',                                    
+      'user_id'=>'required',
     ]);
     $user_id=$request->input('user_id');
+    $formulir_id=\App\Helpers\HelperFormulir::resolveId($user_id);
     
     $pesertadidik_a=FormulirPendaftaranAModel::leftJoin('agama','formulir_pendaftaran_a.idagama','agama.idagama')
       ->leftJoin('kebutuhan_khusus','formulir_pendaftaran_a.id_kebutuhan_khusus','kebutuhan_khusus.id_kebutuhan')
       ->leftJoin('negara','formulir_pendaftaran_a.kewarganegaraan','negara.id')
       ->leftJoin('moda_transportasi','formulir_pendaftaran_a.id_moda','moda_transportasi.id_moda')
       ->leftJoin('jenjang_studi','formulir_pendaftaran_a.kode_jenjang','jenjang_studi.kode_jenjang')
-      ->find($user_id);
+      ->find($formulir_id);
                         
-    $pesertadidik_b=FormulirPendaftaranBModel::find($user_id);
+    $pesertadidik_b=FormulirPendaftaranBModel::find($formulir_id);
     $pesertadidik_c=FormulirPendaftaranCModel::leftJoin('agama','formulir_pendaftaran_c.idagama','agama.idagama')
     ->leftJoin('negara','formulir_pendaftaran_c.kewarganegaraan','negara.id')
-    ->find($user_id);
+    ->find($formulir_id);
     $pesertadidik_d=FormulirPendaftaranDModel::leftJoin('agama','formulir_pendaftaran_d.idagama','agama.idagama')
     ->leftJoin('negara','formulir_pendaftaran_d.kewarganegaraan','negara.id')
-    ->find($user_id);
+    ->find($formulir_id);
 
     $pdf = \Mccarlosen\LaravelMpdf\Facades\LaravelMpdf::loadView('report.ReportCalonPesertaDidik', 
       [

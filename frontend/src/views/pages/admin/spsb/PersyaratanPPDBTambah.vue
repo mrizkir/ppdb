@@ -382,7 +382,7 @@
       this.dashboard = this.$store.getters["uiadmin/getDefaultDashboard"];
       if (this.dashboard == "siswabaru")
       {
-        this.pesertadidik_id=this.$store.getters["auth/AttributeUser"]("id");
+        this.pesertadidik_id=this.$store.getters["auth/AttributeUser"]("formulir_id") || this.$store.getters["auth/AttributeUser"]("id");
       }
       this.initialize()
     },
@@ -460,7 +460,7 @@
     }),
     methods: {
       initialize: async function() {	
-        await this.$ajax.get("/spsb/formulirpendaftaran/persyaratanppdb/" + this.$store.getters["auth/AttributeUser"]("id"),
+        await this.$ajax.get("/spsb/formulirpendaftaran/persyaratanppdb/" + (this.$store.getters["auth/AttributeUser"]("formulir_id") || this.$store.getters["auth/AttributeUser"]("id")),
           {
             headers: {
               Authorization: this.$store.getters["auth/Token"]

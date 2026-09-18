@@ -107,6 +107,16 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/undangan">
+                    <v-list-item-icon class="mr-2">
+                        <v-icon>mdi-email-newsletter</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>
+                            UNDANGAN PMB
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
                 <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/situasikeluarga">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-document-edit-outline</v-icon>

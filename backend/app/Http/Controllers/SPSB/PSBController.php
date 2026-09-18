@@ -18,6 +18,7 @@ use App\Models\SPSB\PersyaratanPPDBModel;
 use App\Models\System\ConfigurationModel;
 use App\Models\Keuangan\KonfirmasiPembayaranModel;
 
+use App\Helpers\HelperFormulir;
 use App\Helpers\HelperPendaftaran;
 use App\Mail\SiswaBaruRegistered;
 use App\Mail\VerifyEmailAddress;
@@ -83,6 +84,7 @@ class PSBController extends Controller
     $data = User::where('default_role', 'siswabaru')
     ->select(\DB::raw('
       users.id,
+      formulir_pendaftaran_a.id AS formulir_id,
       users.username,
       users.name,
       users.email,
@@ -97,7 +99,7 @@ class PSBController extends Controller
       users.updated_at'
     ))
     ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.user_id', 'users.id')
-    ->where('users.ta', $ta)
+    ->where('formulir_pendaftaran_a.ta', $ta)
     ->where('kode_jenjang', $kode_jenjang)
     ->orderBy('created_at', 'desc')
     ->get();
@@ -127,7 +129,8 @@ class PSBController extends Controller
     $kode_jenjang=$request->input('kode_jenjang');
 
     $data = FormulirPendaftaranAModel::select(\DB::raw('
-      users.id,
+      formulir_pendaftaran_a.id,
+      formulir_pendaftaran_a.user_id,
       users.name,
       users.nomor_hp,
       formulir_pendaftaran_a.jk,
@@ -138,7 +141,7 @@ class PSBController extends Controller
       users.updated_at
     '))
     ->join('users', 'formulir_pendaftaran_a.user_id', 'users.id')                                        
-    ->where('users.ta', $ta)
+    ->where('formulir_pendaftaran_a.ta', $ta)
     ->where('kode_jenjang', $kode_jenjang)                                
     ->where('users.active', 1)    
     ->orderBy('users.name', 'ASC') 
@@ -169,7 +172,8 @@ class PSBController extends Controller
     $kode_jenjang=$request->input('kode_jenjang');
 
     $data = FormulirPendaftaranAModel::select(\DB::raw('
-      users.id,
+      formulir_pendaftaran_a.id,
+      formulir_pendaftaran_a.user_id,
       users.name,
       formulir_pendaftaran_c.nama_ayah,
       formulir_pendaftaran_c.nomor_hp,                        
@@ -179,8 +183,8 @@ class PSBController extends Controller
       users.updated_at
     '))
     ->join('users', 'formulir_pendaftaran_a.user_id', 'users.id')                                        
-    ->join('formulir_pendaftaran_c', 'formulir_pendaftaran_c.user_id', 'users.id')                                        
-    ->where('users.ta', $ta)
+    ->join('formulir_pendaftaran_c', 'formulir_pendaftaran_c.formulir_id', 'formulir_pendaftaran_a.id')                                        
+    ->where('formulir_pendaftaran_a.ta', $ta)
     ->where('kode_jenjang', $kode_jenjang)                                
     ->where('users.active', 1)    
     ->orderBy('users.name', 'ASC') 
@@ -211,7 +215,8 @@ class PSBController extends Controller
     $kode_jenjang=$request->input('kode_jenjang');
 
     $data = FormulirPendaftaranAModel::select(\DB::raw('
-      users.id,
+      formulir_pendaftaran_a.id,
+      formulir_pendaftaran_a.user_id,
       users.name,
       formulir_pendaftaran_d.nama_ibu,
       formulir_pendaftaran_d.nomor_hp,                        
@@ -221,8 +226,8 @@ class PSBController extends Controller
       users.updated_at
     '))
     ->join('users', 'formulir_pendaftaran_a.user_id', 'users.id')                                        
-    ->join('formulir_pendaftaran_d', 'formulir_pendaftaran_d.user_id', 'users.id')                                        
-    ->where('users.ta', $ta)
+    ->join('formulir_pendaftaran_d', 'formulir_pendaftaran_d.formulir_id', 'formulir_pendaftaran_a.id')                                        
+    ->where('formulir_pendaftaran_a.ta', $ta)
     ->where('kode_jenjang', $kode_jenjang)                                
     ->where('users.active', 1)    
     ->orderBy('users.name', 'ASC') 
@@ -253,7 +258,8 @@ class PSBController extends Controller
     $kode_jenjang=$request->input('kode_jenjang');
 
     $data = FormulirPendaftaranAModel::select(\DB::raw('
-      users.id,
+      formulir_pendaftaran_a.id,
+      formulir_pendaftaran_a.user_id,
       users.name,
       formulir_pendaftaran_b.tinggal_bersama,
       formulir_pendaftaran_b.status_pernikahan,                        
@@ -264,8 +270,8 @@ class PSBController extends Controller
       users.updated_at
     '))
     ->join('users', 'formulir_pendaftaran_a.user_id', 'users.id')                                        
-    ->join('formulir_pendaftaran_b', 'formulir_pendaftaran_b.user_id', 'users.id')                                        
-    ->where('users.ta', $ta)
+    ->join('formulir_pendaftaran_b', 'formulir_pendaftaran_b.formulir_id', 'formulir_pendaftaran_a.id')                                        
+    ->where('formulir_pendaftaran_a.ta', $ta)
     ->where('kode_jenjang', $kode_jenjang)                                
     ->where('users.active', 1)    
     ->orderBy('users.name', 'ASC') 
@@ -418,35 +424,16 @@ class PSBController extends Controller
         $permission=Role::findByName('siswabaru')->permissions;
         $user->givePermissionTo($permission->pluck('name')); 
         
-        FormulirPendaftaranAModel::create([
-          'user_id' => $user->id,
+        HelperFormulir::createPaket($user->id, [
           'nama_siswa' => strtoupper($request->input('name')),    
           'tanggal_lahir' => $request->input('tanggal_lahir'),                            
           'jk' => strtoupper($request->input('jk')),                                
           'kode_jenjang' => $kode_jenjang,
           'ta' => $ta,
-        ]);
-        FormulirPendaftaranBModel::create([
-          'user_id' => $user->id,                
-        ]);
-        FormulirPendaftaranCModel::create([
-          'user_id' => $user->id,            
+        ], [
           'nomor_hp' => $request->input('nomor_hp'),
-        ]);
-        FormulirPendaftaranDModel::create([
-          'user_id' => $user->id,            
+        ], [
           'nomor_hp' => $request->input('nomor_hp'),
-        ]);
-        FormulirPendaftaranEModel::create([
-          'user_id' => $user->id,            
-          'nomor_hp' => $request->input('nomor_hp'),
-        ]);
-        FormulirPendaftaranFModel::create([
-          'user_id' => $user->id,            
-          'nomor_hp' => $request->input('nomor_hp'),
-        ]);
-        PersyaratanPPDBModel::create([
-          'user_id' => $user->id,                            
         ]);
         return $user;
       });
@@ -501,8 +488,9 @@ class PSBController extends Controller
 
     try
     {
-      //cek usia
-      $this->checkUsia($request);
+      if (filter_var($request->input('cek_usia', true), FILTER_VALIDATE_BOOLEAN)) {
+        $this->checkUsia($request);
+      }
 
       $user = \DB::transaction(function () use ($request) {
         $now = \Carbon\Carbon::now()->toDateTimeString();       
@@ -530,35 +518,15 @@ class PSBController extends Controller
         $permission=Role::findByName('siswabaru')->permissions;
         $user->givePermissionTo($permission->pluck('name')); 
         
-        FormulirPendaftaranAModel::create([
-          'user_id' => $user->id,
+        HelperFormulir::createPaket($user->id, [
           'nama_siswa' => strtoupper($request->input('name')),                                
           'tanggal_lahir' => $request->input('tanggal_lahir'),
           'kode_jenjang' => $request->input('kode_jenjang'),
           'ta' => $ta,
-        ]);
-        
-        FormulirPendaftaranBModel::create([
-          'user_id' => $user->id,                
-        ]);
-        FormulirPendaftaranCModel::create([
-          'user_id' => $user->id,            
+        ], [
           'nomor_hp' => $request->input('nomor_hp'),
-        ]);
-        FormulirPendaftaranDModel::create([
-          'user_id' => $user->id,            
+        ], [
           'nomor_hp' => $request->input('nomor_hp'),
-        ]);
-        FormulirPendaftaranEModel::create([
-          'user_id' => $user->id,            
-          'nomor_hp' => $request->input('nomor_hp'),
-        ]);
-        FormulirPendaftaranFModel::create([
-          'user_id' => $user->id,            
-          'nomor_hp' => $request->input('nomor_hp'),
-        ]);
-        PersyaratanPPDBModel::create([
-          'user_id' => $user->id,                            
         ]);    
 
         return $user;
@@ -624,7 +592,9 @@ class PSBController extends Controller
         'tahun_pendaftaran' => 'required|numeric'            
       ]);
 
-      $this->checkUsia($request);
+      if (filter_var($request->input('cek_usia', true), FILTER_VALIDATE_BOOLEAN)) {
+        $this->checkUsia($request);
+      }
       
       $user = \DB::transaction(function () use ($request,$user){
         $user->name = strtoupper($request->input('name'));
@@ -637,12 +607,28 @@ class PSBController extends Controller
         $user->ta=$request->input('tahun_pendaftaran');
         $user->save();
 
-        $formulir=FormulirPendaftaranAModel::find($user->id);
-        $formulir->nama_siswa=strtoupper($request->input('name'));
-        $formulir->tanggal_lahir=$request->input('tanggal_lahir');
-        $formulir->kode_jenjang=$request->input('kode_jenjang');
-        $formulir->ta=$request->input('tahun_pendaftaran');
-        $formulir->save();
+        $formulir = null;
+        if ($request->filled('formulir_id')) {
+          $formulir = FormulirPendaftaranAModel::where('id', $request->input('formulir_id'))
+            ->where('user_id', $user->id)
+            ->first();
+        }
+        if (is_null($formulir)) {
+          $formulir = FormulirPendaftaranAModel::where('user_id', $user->id)
+            ->where('ta', $request->input('tahun_pendaftaran'))
+            ->where('kode_jenjang', $request->input('kode_jenjang'))
+            ->first();
+        }
+        if (is_null($formulir)) {
+          $formulir = HelperFormulir::findA($user->id);
+        }
+        if ($formulir) {
+          $formulir->nama_siswa=strtoupper($request->input('name'));
+          $formulir->tanggal_lahir=$request->input('tanggal_lahir');
+          $formulir->kode_jenjang=$request->input('kode_jenjang');
+          $formulir->ta=$request->input('tahun_pendaftaran');
+          $formulir->save();
+        }
         
         return $user;
       });
@@ -665,8 +651,8 @@ class PSBController extends Controller
   public function show(Request $request,$id)
   {
     $formulir=FormulirPendaftaranAModel::select(\DB::raw('
-      users.id,
-      user_id,
+      formulir_pendaftaran_a.id,
+      formulir_pendaftaran_a.user_id,
       nama_siswa,
       nisn,
       nama_panggilan,
@@ -709,10 +695,10 @@ class PSBController extends Controller
       COALESCE(sibling_sma,"") AS sibling_sma,      
       kode_jenjang,
       `desc`,
-      users.ta
+      formulir_pendaftaran_a.ta
     '))
     ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
-    ->find($id);
+    ->find(HelperFormulir::resolveId($id));
 
     if (is_null($formulir))
     {
@@ -743,13 +729,14 @@ class PSBController extends Controller
   {
     $formulir=FormulirPendaftaranBModel::select(\DB::raw('
       users.id,
-      user_id,
+      formulir_id AS user_id,
       tinggal_bersama,
       status_pernikahan,                                
       `desc`                                                               
     '))
-    ->join('users', 'users.id', 'formulir_pendaftaran_b.user_id')                                            
-    ->find($id);
+    ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'formulir_pendaftaran_b.formulir_id')
+    ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
+    ->find(HelperFormulir::resolveId($id));
     
     if (is_null($formulir))
     {
@@ -780,7 +767,7 @@ class PSBController extends Controller
   {
     $formulir=FormulirPendaftaranCModel::select(\DB::raw('
       users.id,
-      user_id,
+      formulir_id AS user_id,
       nama_ayah,
       hubungan,
       tempat_lahir,
@@ -808,8 +795,9 @@ class PSBController extends Controller
       tiktok_account,
       `desc`                                                               
     '))
-    ->join('users', 'users.id', 'formulir_pendaftaran_c.user_id')                                            
-    ->find($id);
+    ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'formulir_pendaftaran_c.formulir_id')
+    ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
+    ->find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -839,7 +827,7 @@ class PSBController extends Controller
   {
     $formulir=FormulirPendaftaranDModel::select(\DB::raw('
       users.id,
-      user_id,
+      formulir_id AS user_id,
       nama_ibu,
       hubungan,
       tempat_lahir,
@@ -867,8 +855,9 @@ class PSBController extends Controller
       tiktok_account,
       `desc`                                                               
     '))
-    ->join('users', 'users.id', 'formulir_pendaftaran_d.user_id')                                            
-    ->find($id);
+    ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'formulir_pendaftaran_d.formulir_id')
+    ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
+    ->find(HelperFormulir::resolveId($id));
 
     if (is_null($formulir))
     {
@@ -899,7 +888,7 @@ class PSBController extends Controller
   {
     $formulir=FormulirPendaftaranFModel::select(\DB::raw('
       users.id,
-      user_id,
+      formulir_id AS user_id,
       nama_wali,
       hubungan,
       tempat_lahir,
@@ -927,8 +916,9 @@ class PSBController extends Controller
       tiktok_account,
       `desc`                                                               
     '))
-    ->join('users', 'users.id', 'formulir_pendaftaran_f.user_id')                                            
-    ->find($id);
+    ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'formulir_pendaftaran_f.formulir_id')
+    ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
+    ->find(HelperFormulir::resolveId($id));
 
     if (is_null($formulir))
     {
@@ -958,14 +948,15 @@ class PSBController extends Controller
   {
     $formulir=FormulirPendaftaranEModel::select(\DB::raw('
       users.id,
-      formulir_pendaftaran_e.user_id,
+      formulir_pendaftaran_e.formulir_id AS user_id,
       formulir_pendaftaran_e.nama_kontak,
       formulir_pendaftaran_e.hubungan,      
       formulir_pendaftaran_e.alamat_kontak,
       formulir_pendaftaran_e.nomor_hp
     '))
-    ->join('users', 'users.id', 'formulir_pendaftaran_e.user_id')                                            
-    ->find($id);
+    ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'formulir_pendaftaran_e.formulir_id')
+    ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
+    ->find(HelperFormulir::resolveId($id));
 
     if (is_null($formulir))
     {
@@ -993,7 +984,7 @@ class PSBController extends Controller
    */
   public function showpersyaratanppdb(Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -1175,7 +1166,7 @@ class PSBController extends Controller
     
     try
     {
-      $formulir = FormulirPendaftaranAModel::find($id);
+      $formulir = FormulirPendaftaranAModel::find(HelperFormulir::resolveId($id));
 
       if (is_null($formulir))
       {
@@ -1286,7 +1277,7 @@ class PSBController extends Controller
    */
   public function updatesituasikeluarga(Request $request,$id)
   {
-    $formulir = FormulirPendaftaranBModel::find($id);
+    $formulir = FormulirPendaftaranBModel::find(HelperFormulir::resolveId($id));
 
     if (is_null($formulir))
     {
@@ -1327,7 +1318,7 @@ class PSBController extends Controller
    */
   public function updatebiodataayah(Request $request,$id)
   {
-    $formulir=FormulirPendaftaranCModel::find($id);
+    $formulir=FormulirPendaftaranCModel::find(HelperFormulir::resolveId($id));
 
     if (is_null($formulir))
     {
@@ -1419,7 +1410,7 @@ class PSBController extends Controller
    */
   public function updatebiodataibu(Request $request,$id)
   {
-    $formulir=FormulirPendaftaranDModel::find($id);
+    $formulir=FormulirPendaftaranDModel::find(HelperFormulir::resolveId($id));
 
     if (is_null($formulir))
     {
@@ -1506,7 +1497,7 @@ class PSBController extends Controller
    */
   public function updatebiodatawali(Request $request,$id)
   {
-    $formulir=FormulirPendaftaranFModel::find($id);
+    $formulir=FormulirPendaftaranFModel::find(HelperFormulir::resolveId($id));
 
     if (is_null($formulir))
     {
@@ -1591,7 +1582,7 @@ class PSBController extends Controller
    */
   public function updatekontakdarurat(Request $request,$id)
   {
-    $formulir=FormulirPendaftaranEModel::find($id);
+    $formulir=FormulirPendaftaranEModel::find(HelperFormulir::resolveId($id));
 
     if (is_null($formulir))
     {
@@ -1630,7 +1621,7 @@ class PSBController extends Controller
   }           
   public function uploadfileselfi (Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -1677,7 +1668,7 @@ class PSBController extends Controller
   }
   public function uploadfilektpayah (Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -1724,7 +1715,7 @@ class PSBController extends Controller
   }
   public function uploadfilektpibu (Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -1770,7 +1761,7 @@ class PSBController extends Controller
   }
   public function uploadfilekk (Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -1819,7 +1810,7 @@ class PSBController extends Controller
   }
   public function uploadfileaktalahir (Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -1865,7 +1856,7 @@ class PSBController extends Controller
   }
   public function uploadfilescreenshoot (Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -1911,7 +1902,7 @@ class PSBController extends Controller
   }
   public function uploadfilesertifikat (Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -1957,7 +1948,7 @@ class PSBController extends Controller
   }
   public function uploadfilenisn (Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([
@@ -2003,7 +1994,7 @@ class PSBController extends Controller
   }
   public function uploadfilekia (Request $request,$id)
   {
-    $formulir=PersyaratanPPDBModel::find($id);
+    $formulir=PersyaratanPPDBModel::find(HelperFormulir::resolveId($id));
     if (is_null($formulir))
     {
       return Response()->json([

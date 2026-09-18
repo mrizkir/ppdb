@@ -108,6 +108,7 @@ class SystemMigrationController extends Controller {
             ]);
             $no_formulir='1'.mt_rand();
             $formulir=FormulirPendaftaranAModel::create([
+                'id'=>Uuid::uuid4()->toString(),
                 'user_id'=>$user->id,
                 'no_formulir'=>$no_formulir,
                 'nama_siswa'=>$request->input('nama_siswa'),                

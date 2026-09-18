@@ -41,6 +41,11 @@ $router->group(['prefix'=>'v3'], function () use ($router)
 	$router->post('/spsb/psb/konfirmasi',['uses'=>'SPSB\PSBController@konfirmasi','as'=>'psb.konfirmasi']);
 	$router->post('/spsb/psb/konfirmasipembayaran',['uses'=>'SPSB\PSBController@konfirmasipembayaran','as'=>'psb.konfirmasipembayaran']);
 
+	// undangan PMB (publik)
+	$router->get('/spsb/undangan/kode/{otp}',['uses'=>'SPSB\UndanganPMBController@preview','as'=>'undanganpmb.preview']);
+	$router->post('/spsb/undangan/kode/{otp}/verify',['uses'=>'SPSB\UndanganPMBController@verify','as'=>'undanganpmb.verify']);
+	$router->post('/spsb/undangan/kode/{otp}/masuk',['uses'=>'SPSB\UndanganPMBController@masuk','as'=>'undanganpmb.masuk']);
+
 	//untuk uifront
 	$router->get('/system/setting/uifront',['uses'=>'System\UIController@frontend','as'=>'uifront.frontend']);
 
@@ -81,6 +86,10 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 	$router->delete('/spsb/psb/{id}',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\PSBController@destroy','as'=>'psb.destroy']);
 
 	//spsb - formulir pendaftaran
+	$router->post('/spsb/undangan',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\UndanganPMBController@index','as'=>'undanganpmb.index']);
+	$router->post('/spsb/undangan/store',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\UndanganPMBController@store','as'=>'undanganpmb.store']);
+	$router->get('/spsb/undangan/{id}',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\UndanganPMBController@show','as'=>'undanganpmb.show']);
+
 	$router->post('/spsb/formulirpendaftaran',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'SPSB\PSBController@formulirpendaftaran','as'=>'formulirpendaftaran.index']);
 	$router->post('/spsb/situasikeluarga',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'SPSB\PSBController@situasikeluarga','as'=>'formulirpendaftaran.situasikeluarga']);
 	$router->post('/spsb/biodataayah',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'SPSB\PSBController@biodataayah','as'=>'formulirpendaftaran.biodataayah']);

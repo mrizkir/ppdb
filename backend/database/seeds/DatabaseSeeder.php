@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ConfigurationTableSeeder::class);
         $this->call(AgamaTableSeeder::class);        
+        $this->call(NegaraTableSeeder::class);
+        $this->call(KomponenBiayaTableSeeder::class);        
         $this->call(TATableSeeder::class);        
         $this->call(KebutuhanKhususTableSeeder::class);
         $this->call(ModaTransportasiTableSeeder::class);        
