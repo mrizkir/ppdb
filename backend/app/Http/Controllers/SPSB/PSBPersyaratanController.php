@@ -675,19 +675,24 @@ class PSBPersyaratanController extends Controller {
       $folder=Helper::public_path('images/buktibayar/');
       $file_name=uniqid('img').".".$bukti_bayar->getClientOriginalExtension();
 
-      $konfirmasi=KonfirmasiPembayaranModel::updateOrCreate([
-        'user_id'=>$request->input('user_id'),
-        'transaksi_id'=>$request->input('user_id'),                
-        'no_transaksi'=>$transaksi_id,
-        'id_channel'=>$request->input('id_channel'),
-        'total_bayar'=>$request->input('total_bayar'),
-        'nomor_rekening_pengirim'=>$request->input('nomor_rekening_pengirim'),
-        'nama_rekening_pengirim'=>$request->input('nama_rekening_pengirim'),
-        'nama_bank_pengirim'=>$request->input('nama_bank_pengirim'),
-        'desc'=>$request->input('desc'),
-        'tanggal_bayar'=>$request->input('tanggal_bayar'),
-        'bukti_bayar'=>"images/buktibayar/$file_name",
-      ]);
+      $konfirmasi=KonfirmasiPembayaranModel::simpanBukti(
+        $request->input('user_id'),
+        [
+          'no_transaksi'=>$transaksi_id,
+          'id_channel'=>$request->input('id_channel'),
+          'total_bayar'=>$request->input('total_bayar'),
+          'nomor_rekening_pengirim'=>$request->input('nomor_rekening_pengirim'),
+          'nama_rekening_pengirim'=>$request->input('nama_rekening_pengirim'),
+          'nama_bank_pengirim'=>$request->input('nama_bank_pengirim'),
+          'desc'=>$request->input('desc'),
+          'tanggal_bayar'=>$request->input('tanggal_bayar'),
+          'bukti_bayar'=>"images/buktibayar/$file_name",
+          'verified' => 0,
+          'ta' => $request->input('ta'),
+          'kode_jenjang' => $request->input('kode_jenjang'),
+        ],
+        $request->input('formulir_id')
+      );
       $bukti_bayar->move($folder,$file_name);
 
       \App\Models\System\ActivityLog::log($request,[

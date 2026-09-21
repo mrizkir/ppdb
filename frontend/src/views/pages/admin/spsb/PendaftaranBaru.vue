@@ -579,6 +579,9 @@
                       s.d.
                       {{ $date(undanganResult.berlaku_sampai).format("DD/MM/YYYY") }}
                     </div>
+                    <div class="caption mt-1 grey--text">
+                      Kode OTP tetap sama dan dapat dipakai berulang selama masa berlaku.
+                    </div>
                   </template>
                 </v-card-text>
                 <v-card-actions>
@@ -830,6 +833,8 @@ export default {
         {
           '_method': 'put',
           'verified': 1,
+          'ta': this.tahun_pendaftaran,
+          'kode_jenjang': this.kode_jenjang,
         },
         {
           headers: {
@@ -965,6 +970,10 @@ export default {
     async viewItem (item) {
       await this.$ajax.get('/keuangan/konfirmasipembayaran/'+item.id, 
       {
+        params: {
+          ta: item.ta || this.tahun_pendaftaran,
+          kode_jenjang: item.kode_jenjang || this.kode_jenjang,
+        },
         headers: {
           Authorization: this.$store.getters["auth/Token"]
         }

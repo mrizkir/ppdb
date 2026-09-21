@@ -1079,19 +1079,41 @@ class PSBController extends Controller
       $folder=HelperPendaftaran::public_path('images/buktibayar/');
       $file_name=uniqid('img').".".$bukti_bayar->getClientOriginalExtension();
 
-      $konfirmasi=KonfirmasiPembayaranModel::updateOrCreate([
-        'user_id' => $request->input('user_id'),
-        'transaksi_id' => $request->input('user_id'),                
-        'no_transaksi' => $transaksi_id,
-        'id_channel' => $request->input('id_channel'),
-        'total_bayar' => $request->input('total_bayar'),
-        'nomor_rekening_pengirim' => $request->input('nomor_rekening_pengirim'),
-        'nama_rekening_pengirim' => strtoupper($request->input('nama_rekening_pengirim')),
-        'nama_bank_pengirim' => strtoupper($request->input('nama_bank_pengirim')),
-        'desc' => strtoupper($request->input('desc')),
-        'tanggal_bayar' => $request->input('tanggal_bayar'),
-        'bukti_bayar' => "images/buktibayar/$file_name",
-      ]);
+      try {
+        $konfirmasi=KonfirmasiPembayaranModel::simpanBukti(
+          $request->input('user_id'),
+          [
+            'no_transaksi' => $transaksi_id,
+            'id_channel' => $request->input('id_channel'),
+            'total_bayar' => $request->input('total_bayar'),
+            'nomor_rekening_pengirim' => $request->input('nomor_rekening_pengirim'),
+            'nama_rekening_pengirim' => strtoupper($request->input('nama_rekening_pengirim')),
+            'nama_bank_pengirim' => strtoupper($request->input('nama_bank_pengirim')),
+            'desc' => strtoupper($request->input('desc')),
+            'tanggal_bayar' => $request->input('tanggal_bayar'),
+            'bukti_bayar' => "images/buktibayar/$file_name",
+            'verified' => 0,
+            'ta' => $request->filled('ta') ? $request->input('ta') : null,
+            'kode_jenjang' => $request->filled('kode_jenjang') ? $request->input('kode_jenjang') : null,
+          ],
+          $request->input('formulir_id')
+        );
+      } catch (Exception $e) {
+        return Response()->json([
+          'status' => 0,
+          'pid' => 'store',
+          'message' => $e->getMessage(),
+        ], 422);
+      }
+
+      if (is_null($konfirmasi) || empty($konfirmasi->transaksi_id)) {
+        return Response()->json([
+          'status' => 0,
+          'pid' => 'store',
+          'message' => 'Konfirmasi pembayaran gagal disimpan.',
+        ], 422);
+      }
+
       $bukti_bayar->move($folder,$file_name);
 
       \App\Models\System\ActivityLog::log($request,[

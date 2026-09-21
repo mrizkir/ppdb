@@ -19,7 +19,7 @@
       </template>
       <template v-slot:desc>
         <v-alert color="cyan" border="left" colored-border type="info">
-          Daftar link undangan PMB. Status pembayaran menunggu verifikasi panitia sebelum calon bisa masuk dashboard.
+          Daftar link undangan PMB. Kode OTP berlaku berulang selama masa berlaku. Status pembayaran menunggu verifikasi panitia sebelum calon bisa masuk dashboard.
         </v-alert>
       </template>
     </ModuleHeader>
@@ -109,6 +109,20 @@
                   </v-icon>
                 </template>
                 <span>Generate ulang</span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon
+                    small
+                    color="red"
+                    v-bind="attrs"
+                    v-on="on"
+                    @click.stop="deleteItem(item)"
+                  >
+                    mdi-delete
+                  </v-icon>
+                </template>
+                <span>Hapus undangan</span>
               </v-tooltip>
             </template>
             <template v-slot:no-data>
@@ -202,6 +216,9 @@
                       s.d.
                       {{ $date(undanganResult.berlaku_sampai).format("DD/MM/YYYY") }}
                     </div>
+                    <div class="caption mt-1 grey--text">
+                      Kode OTP tetap sama dan dapat dipakai berulang selama masa berlaku.
+                    </div>
                   </template>
                 </v-card-text>
                 <v-card-actions>
@@ -284,7 +301,7 @@
         { text: "BERLAKU SAMPAI", value: "berlaku_sampai", width: 140, sortable: true },
         { text: "STATUS OTP", value: "used", width: 150, sortable: true },
         { text: "PEMBAYARAN", value: "bayar", width: 140, sortable: false },
-        { text: "AKSI", value: "actions", sortable: false, width: 100 },
+        { text: "AKSI", value: "actions", sortable: false, width: 130 },
       ],
       search: "",
       filterUsed: "all",
@@ -365,22 +382,25 @@
         return window.location.origin + "/undangan/" + String(item.otp).padStart(6, "0");
       },
       statusBayarText(item) {
-        if (item.verified == 1) {
+        if (this.hasPembayaranUndangan(item) && item.verified == 1) {
           return "SUDAH DIVERIFIKASI";
         }
-        if (item.konfirmasi_id) {
+        if (this.hasPembayaranUndangan(item) && item.konfirmasi_id) {
           return "MENUNGGU VERIFIKASI";
         }
         return "BELUM BAYAR";
       },
       statusBayarColor(item) {
-        if (item.verified == 1) {
+        if (this.hasPembayaranUndangan(item) && item.verified == 1) {
           return "success";
         }
-        if (item.konfirmasi_id) {
+        if (this.hasPembayaranUndangan(item) && item.konfirmasi_id) {
           return "warning";
         }
         return "grey";
+      },
+      hasPembayaranUndangan(item) {
+        return item.used == 1 && !!item.konfirmasi_id;
       },
       undanganItem(item) {
         this.undanganSelected = item;
@@ -448,6 +468,45 @@
         this.undanganSelected = null;
         this.undanganResult = null;
         this.dialogUndanganMode = "form";
+      },
+      deleteItem(item) {
+        const otp = String(item.otp).padStart(6, "0");
+        this.$root.$confirm
+          .open(
+            "Delete",
+            "Hapus undangan OTP " +
+              otp +
+              " milik " +
+              item.name +
+              "? Formulir jenjang ini juga akan dihapus.",
+            { color: "red" }
+          )
+          .then((confirm) => {
+            if (!confirm) {
+              return;
+            }
+            this.btnLoading = true;
+            this.$ajax
+              .post(
+                "/spsb/undangan/" + item.id,
+                { _method: "DELETE" },
+                {
+                  headers: {
+                    Authorization: this.$store.getters["auth/Token"],
+                  },
+                }
+              )
+              .then(() => {
+                const index = this.datatable.indexOf(item);
+                if (index > -1) {
+                  this.datatable.splice(index, 1);
+                }
+                this.btnLoading = false;
+              })
+              .catch(() => {
+                this.btnLoading = false;
+              });
+          });
       },
     },
     watch: {

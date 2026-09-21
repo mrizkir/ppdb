@@ -54,6 +54,34 @@ class UndanganPMBModel extends Model {
    */
   public $timestamps = true;
 
+  /**
+   * OTP berlaku berulang selama tanggal hari ini ada di rentang
+   * berlaku_mulai s.d. berlaku_sampai.
+   */
+  public function isBerlaku($tanggal = null)
+  {
+    $hari = $this->tanggalAcuan($tanggal);
+    $mulai = \Carbon\Carbon::parse($this->berlaku_mulai)->toDateString();
+    $sampai = \Carbon\Carbon::parse($this->berlaku_sampai)->toDateString();
+
+    return $hari >= $mulai && $hari <= $sampai;
+  }
+
+  public function isBelumMulai($tanggal = null)
+  {
+    $hari = $this->tanggalAcuan($tanggal);
+    $mulai = \Carbon\Carbon::parse($this->berlaku_mulai)->toDateString();
+
+    return $hari < $mulai;
+  }
+
+  private function tanggalAcuan($tanggal = null)
+  {
+    return $tanggal
+      ? \Carbon\Carbon::parse($tanggal)->toDateString()
+      : \Carbon\Carbon::today()->toDateString();
+  }
+
   public function user()
   {
     return $this->belongsTo('App\Models\User', 'user_id', 'id');

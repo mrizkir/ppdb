@@ -96,6 +96,21 @@ class HelperFormulir
     return $copyA;
   }
 
+  public static function deletePaket($formulirId)
+  {
+    if (empty($formulirId)) {
+      return;
+    }
+
+    FormulirPendaftaranBModel::where('formulir_id', $formulirId)->delete();
+    FormulirPendaftaranCModel::where('formulir_id', $formulirId)->delete();
+    FormulirPendaftaranDModel::where('formulir_id', $formulirId)->delete();
+    FormulirPendaftaranEModel::where('formulir_id', $formulirId)->delete();
+    FormulirPendaftaranFModel::where('formulir_id', $formulirId)->delete();
+    PersyaratanPPDBModel::where('formulir_id', $formulirId)->delete();
+    FormulirPendaftaranAModel::where('id', $formulirId)->delete();
+  }
+
   private static function cloneChild($class, $fromId, $toId)
   {
     $row = $class::find($fromId);

@@ -53,6 +53,9 @@
                 {{ $date(undanganPreview.berlaku_mulai).format("DD/MM/YYYY") }}
                 s.d.
                 {{ $date(undanganPreview.berlaku_sampai).format("DD/MM/YYYY") }}
+                <br />
+                Kode OTP dapat dipakai berulang selama masa berlaku.
+                Jika form pembayaran belum selesai, isi OTP yang sama.
               </v-card-subtitle>
               <v-card-text>
                 <v-alert
@@ -119,6 +122,15 @@
                   <v-card-title>BIAYA + KODE TRANSFER:</v-card-title>
                   <v-card-subtitle>{{ totalTransfer | formatUang }}</v-card-subtitle>
                 </v-card>
+                <v-alert
+                  outlined
+                  dense
+                  type="info"
+                  :value="true"
+                  class="mt-2 mb-0"
+                >
+                  Nominal ini tetap sama jika OTP diisi ulang. Silahkan transfer sesuai jumlah tersebut.
+                </v-alert>
               </v-card-text>
             </v-card>
             <v-card>
@@ -330,8 +342,6 @@
               this.pageError = "Link undangan belum berlaku.";
             } else if (status === "kadaluarsa") {
               this.pageError = "Link undangan sudah kadaluarsa.";
-            } else if (status === "sudah_dipakai") {
-              this.pageError = "Kode OTP sudah dipakai. Silahkan login dengan username dan password.";
             } else {
               this.step = "otp";
             }
@@ -355,10 +365,6 @@
           })
           .then(({ data }) => {
             this.btnLoading = false;
-            if (data.waiting) {
-              this.step = "waiting";
-              return;
-            }
             if (data.need_payment) {
               this.data_pd = data.user;
               this.formdata.id = data.user.id;
@@ -366,7 +372,16 @@
               this.step = "payment";
               return;
             }
-            this.afterLoginSuccess(data);
+            if (data.waiting) {
+              this.step = "waiting";
+              return;
+            }
+            if (data.access_token) {
+              this.afterLoginSuccess(data);
+              return;
+            }
+            this.form_error = true;
+            this.otpError = data.message || "Kode OTP tidak valid.";
           })
           .catch(({ response }) => {
             this.btnLoading = false;
@@ -395,6 +410,9 @@
         var data = new FormData();
         data.append("user_id", this.formdata.id);
         data.append("transaksi_id", this.data_pd.code);
+        data.append("formulir_id", this.data_pd.formulir_id || "");
+        data.append("ta", this.data_pd.ta || "");
+        data.append("kode_jenjang", this.data_pd.kode_jenjang || "");
         data.append("id_channel", this.formdata.id_channel);
         data.append("total_bayar", this.formdata.total_bayar);
         data.append("nomor_rekening_pengirim", this.formdata.nomor_rekening_pengirim);
@@ -410,9 +428,17 @@
               "Content-Type": "multipart/form-data",
             },
           })
-          .then(() => {
+          .then(({ data }) => {
             this.btnLoading = false;
-            this.step = "waiting";
+            if (data.konfirmasi && data.konfirmasi.transaksi_id) {
+              this.step = "waiting";
+              return;
+            }
+            this.form_error = true;
+            this.otpError =
+              (data && data.message) ||
+              "Bukti pembayaran belum tersimpan. Silahkan unggah ulang.";
+            this.step = "payment";
           })
           .catch(() => {
             this.btnLoading = false;

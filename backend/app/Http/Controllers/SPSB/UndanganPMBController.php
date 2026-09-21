@@ -56,7 +56,10 @@ class UndanganPMBController extends Controller
     '))
     ->join('users', 'undangan_pmb.user_id', 'users.id')
     ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'undangan_pmb.formulir_id')
-    ->leftJoin('konfirmasi_pembayaran', 'konfirmasi_pembayaran.user_id', 'users.id')
+    ->leftJoin('konfirmasi_pembayaran', function ($join) {
+      $join->on('konfirmasi_pembayaran.user_id', '=', 'users.id')
+        ->on('konfirmasi_pembayaran.formulir_id', '=', 'undangan_pmb.formulir_id');
+    })
     ->where('undangan_pmb.ta', $ta)
     ->where('undangan_pmb.kode_jenjang', $kode_jenjang);
 
@@ -116,7 +119,9 @@ class UndanganPMBController extends Controller
   }
 
   /**
-   * Buat atau generate ulang undangan.
+   * Buat atau perbarui undangan. OTP yang sudah ada dipakai ulang
+   * selama tahun pendaftaran tidak berubah; masa berlaku mengikuti
+   * berlaku_mulai s.d. berlaku_sampai.
    */
   public function store(Request $request)
   {
@@ -155,7 +160,6 @@ class UndanganPMBController extends Controller
           $formulir = $source;
         }
 
-        $otp = $this->generateOtp($ta);
         $now = \Carbon\Carbon::now()->toDateTimeString();
         $createdBy = $this->guard()->user() ? $this->guard()->user()->id : null;
 
@@ -165,7 +169,7 @@ class UndanganPMBController extends Controller
             'id' => Uuid::uuid4()->toString(),
             'user_id' => $user->id,
             'formulir_id' => $formulir->id,
-            'otp' => $otp,
+            'otp' => $this->generateOtp($ta),
             'berlaku_mulai' => $request->input('berlaku_mulai'),
             'berlaku_sampai' => $request->input('berlaku_sampai'),
             'ta' => $ta,
@@ -176,12 +180,15 @@ class UndanganPMBController extends Controller
             'updated_at' => $now,
           ]);
         } else {
-          $undangan->otp = $otp;
+          $keepOtp = (int) $undangan->ta === (int) $ta && !empty($undangan->otp);
+          $undangan->otp = $keepOtp ? $undangan->otp : $this->generateOtp($ta, $undangan->id);
           $undangan->berlaku_mulai = $request->input('berlaku_mulai');
           $undangan->berlaku_sampai = $request->input('berlaku_sampai');
           $undangan->ta = $ta;
           $undangan->kode_jenjang = $kode_jenjang;
-          $undangan->used = 0;
+          if (!$keepOtp) {
+            $undangan->used = 0;
+          }
           $undangan->created_by = $createdBy;
           $undangan->updated_at = $now;
           $undangan->save();
@@ -224,6 +231,58 @@ class UndanganPMBController extends Controller
   }
 
   /**
+   * Hapus undangan beserta paket formulir A-F yang formulir_id, ta, dan kode_jenjang-nya sama.
+   */
+  public function destroy(Request $request, $id)
+  {
+    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE', 'SPSB-PSB_STORE', 'SPSB-PSB_DESTROY']);
+
+    $undangan = UndanganPMBModel::find($id);
+    if (is_null($undangan)) {
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'destroy',
+        'message' => "Undangan PMB dengan ID ($id) gagal dihapus.",
+      ], 422);
+    }
+
+    try {
+      $nama = optional(User::find($undangan->user_id))->name;
+      \DB::transaction(function () use ($undangan) {
+        $formulir = FormulirPendaftaranAModel::where('id', $undangan->formulir_id)
+          ->where('ta', $undangan->ta)
+          ->where('kode_jenjang', $undangan->kode_jenjang)
+          ->first();
+
+        $undangan->delete();
+
+        if ($formulir) {
+          HelperFormulir::deletePaket($formulir->id);
+        }
+      });
+
+      \App\Models\System\ActivityLog::log($request, [
+        'object' => $this->guard()->user(),
+        'object_id' => $this->getUserid(),
+        'user_id' => $this->getUserid(),
+        'message' => 'Menghapus undangan PMB'.($nama ? ' untuk '.$nama : ''),
+      ]);
+
+      return Response()->json([
+        'status' => 1,
+        'pid' => 'destroy',
+        'message' => 'Undangan PMB'.($nama ? ' untuk '.$nama : '').' berhasil dihapus.',
+      ], 200);
+    } catch (Exception $e) {
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'destroy',
+        'message' => $e->getMessage(),
+      ], 422);
+    }
+  }
+
+  /**
    * Preview publik link undangan (tanpa mengembalikan OTP).
    */
   public function preview(Request $request, $otp)
@@ -238,7 +297,7 @@ class UndanganPMBController extends Controller
     }
 
     $user = User::find($undangan->user_id);
-    $konfirmasi = $this->getKonfirmasi($undangan->user_id);
+    $konfirmasi = $this->getKonfirmasi($undangan);
     $status = $this->statusUndangan($undangan, $konfirmasi);
     $jenjang = $this->namaJenjangUndangan($undangan);
 
@@ -260,6 +319,8 @@ class UndanganPMBController extends Controller
 
   /**
    * Verifikasi OTP publik.
+   * OTP yang sama boleh diisi berulang selama masa berlaku.
+   * Jika bukti bayar belum ada, selalu tampilkan pembayaran yang sama.
    */
   public function verify(Request $request, $otp)
   {
@@ -285,14 +346,29 @@ class UndanganPMBController extends Controller
       ], 422);
     }
 
-    $konfirmasi = $this->getKonfirmasi($undangan->user_id);
-    $status = $this->statusUndangan($undangan, $konfirmasi);
-
-    if ($status === 'sudah_diverifikasi') {
-      return $this->loginFromUndangan($request, $user, $undangan);
+    if ($undangan->isBelumMulai()) {
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'update',
+        'message' => 'Link undangan belum berlaku.',
+      ], 422);
+    }
+    if (!$undangan->isBerlaku()) {
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'update',
+        'message' => 'Link undangan sudah kadaluarsa.',
+      ], 422);
     }
 
-    if ($status === 'menunggu_verifikasi') {
+    $this->markUsed($undangan);
+    $konfirmasi = $this->getKonfirmasi($undangan);
+
+    if (is_null($konfirmasi)) {
+      return $this->paymentFromUndangan($user, $undangan);
+    }
+
+    if ((int) $konfirmasi->verified !== 1) {
       return Response()->json([
         'status' => 1,
         'pid' => 'update',
@@ -302,69 +378,7 @@ class UndanganPMBController extends Controller
       ], 200);
     }
 
-    if ($status === 'belum_mulai') {
-      return Response()->json([
-        'status' => 0,
-        'pid' => 'update',
-        'message' => 'Link undangan belum berlaku.',
-      ], 422);
-    }
-    if ($status === 'kadaluarsa') {
-      return Response()->json([
-        'status' => 0,
-        'pid' => 'update',
-        'message' => 'Link undangan sudah kadaluarsa.',
-      ], 422);
-    }
-
-    if (!$undangan->used) {
-      $undangan->used = 1;
-      $undangan->save();
-    }
-
-    if (is_null($konfirmasi)) {
-      try {
-        $this->ensureKodeTransfer($user);
-        $kombi = $this->requireBiayaPendaftaran($undangan);
-      } catch (Exception $e) {
-        return Response()->json([
-          'status' => 0,
-          'pid' => 'update',
-          'message' => $e->getMessage(),
-        ], 422);
-      }
-
-      $biaya = (int) $kombi->biaya;
-      $code = (int) $user->code;
-
-      return Response()->json([
-        'status' => 1,
-        'pid' => 'update',
-        'need_payment' => true,
-        'user' => [
-          'id' => $user->id,
-          'name' => $user->name,
-          'nomor_hp' => $user->nomor_hp,
-          'email' => $user->email,
-          'username' => $user->username,
-          'code' => $code,
-          'biaya' => $biaya,
-          'total_transfer' => $biaya + $code,
-          'ta' => $undangan->ta,
-          'kode_jenjang' => $undangan->kode_jenjang,
-          'nama_jenjang' => $this->namaJenjangUndangan($undangan),
-        ],
-        'message' => 'OTP benar. Silahkan mengisi konfirmasi pembayaran.',
-      ], 200);
-    }
-
-    return Response()->json([
-      'status' => 1,
-      'pid' => 'update',
-      'need_payment' => false,
-      'waiting' => true,
-      'message' => 'Bukti pembayaran sudah diterima. Silahkan menunggu verifikasi panitia sekolah.',
-    ], 200);
+    return $this->loginFromUndangan($request, $user, $undangan);
   }
 
   /**
@@ -386,9 +400,20 @@ class UndanganPMBController extends Controller
     }
 
     $user = User::find($undangan->user_id);
-    $konfirmasi = $this->getKonfirmasi($undangan->user_id);
+    if (!$undangan->isBerlaku()) {
+      $message = $undangan->isBelumMulai()
+        ? 'Link undangan belum berlaku.'
+        : 'Link undangan sudah kadaluarsa.';
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'update',
+        'message' => $message,
+      ], 422);
+    }
 
-    if (!$undangan->used || is_null($konfirmasi)) {
+    $konfirmasi = $this->getKonfirmasi($undangan);
+
+    if (is_null($konfirmasi)) {
       return Response()->json([
         'status' => 0,
         'pid' => 'update',
@@ -421,9 +446,25 @@ class UndanganPMBController extends Controller
     return UndanganPMBModel::where('otp', (int) $otp)->first();
   }
 
-  private function getKonfirmasi($userId)
+  private function markUsed(UndanganPMBModel $undangan)
   {
-    return KonfirmasiPembayaranModel::where('user_id', $userId)->first();
+    if ($undangan->used) {
+      return;
+    }
+    $undangan->used = 1;
+    $undangan->save();
+  }
+
+  private function getKonfirmasi(UndanganPMBModel $undangan)
+  {
+    if (empty($undangan->formulir_id)) {
+      return null;
+    }
+
+    return KonfirmasiPembayaranModel::where('user_id', $undangan->user_id)
+      ->where('formulir_id', $undangan->formulir_id)
+      ->whereNotNull('transaksi_id')
+      ->first();
   }
 
   private function namaJenjangUndangan($undangan)
@@ -434,23 +475,22 @@ class UndanganPMBController extends Controller
 
   private function statusUndangan($undangan, $konfirmasi)
   {
-    if ($konfirmasi && (int) $konfirmasi->verified === 1) {
-      return 'sudah_diverifikasi';
-    }
-    if ($konfirmasi) {
-      return 'menunggu_verifikasi';
-    }
-    $today = \Carbon\Carbon::today()->toDateString();
-    if ($today < $undangan->berlaku_mulai) {
+    if ($undangan->isBelumMulai()) {
       return 'belum_mulai';
     }
-    if ($today > $undangan->berlaku_sampai) {
+    if (!$undangan->isBerlaku()) {
       return 'kadaluarsa';
+    }
+    if ($konfirmasi && $konfirmasi->transaksi_id && (int) $konfirmasi->verified === 1) {
+      return 'sudah_diverifikasi';
+    }
+    if ($konfirmasi && $konfirmasi->transaksi_id) {
+      return 'menunggu_verifikasi';
     }
     return 'berlaku';
   }
 
-  private function generateOtp($ta)
+  private function generateOtp($ta, $exceptId = null)
   {
     $ta = (int) $ta;
     if ($ta <= 0) {
@@ -460,7 +500,11 @@ class UndanganPMBController extends Controller
     $attempts = 0;
     do {
       $otp = ($prefix * 10000) + mt_rand(0, 9999);
-      $exists = UndanganPMBModel::where('otp', $otp)->exists();
+      $query = UndanganPMBModel::where('otp', $otp);
+      if ($exceptId) {
+        $query->where('id', '!=', $exceptId);
+      }
+      $exists = $query->exists();
       $attempts++;
     } while ($exists && $attempts < 50);
 
@@ -484,7 +528,7 @@ class UndanganPMBController extends Controller
   private function ensureKodeTransfer(User $user)
   {
     $code = (int) $user->code;
-    if ($code >= 1000 && $code <= 9999) {
+    if ($code > 0) {
       return $user;
     }
 
@@ -499,6 +543,49 @@ class UndanganPMBController extends Controller
     $user->save();
 
     return $user;
+  }
+
+  /**
+   * Tampilkan data pembayaran yang sama setiap OTP diisi ulang.
+   * Kode transfer yang sudah ada tidak diganti.
+   */
+  private function paymentFromUndangan(User $user, UndanganPMBModel $undangan)
+  {
+    try {
+      $this->ensureKodeTransfer($user);
+      $user->refresh();
+      $kombi = $this->requireBiayaPendaftaran($undangan);
+    } catch (Exception $e) {
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'update',
+        'message' => $e->getMessage(),
+      ], 422);
+    }
+
+    $biaya = (int) $kombi->biaya;
+    $code = (int) $user->code;
+
+    return Response()->json([
+      'status' => 1,
+      'pid' => 'update',
+      'need_payment' => true,
+      'user' => [
+        'id' => $user->id,
+        'name' => $user->name,
+        'nomor_hp' => $user->nomor_hp,
+        'email' => $user->email,
+        'username' => $user->username,
+        'code' => $code,
+        'biaya' => $biaya,
+        'total_transfer' => $biaya + $code,
+        'ta' => $undangan->ta,
+        'kode_jenjang' => $undangan->kode_jenjang,
+        'formulir_id' => $undangan->formulir_id,
+        'nama_jenjang' => $this->namaJenjangUndangan($undangan),
+      ],
+      'message' => 'OTP benar. Silahkan mengisi konfirmasi pembayaran.',
+    ], 200);
   }
 
   private function loginFromUndangan(Request $request, User $user, UndanganPMBModel $undangan)

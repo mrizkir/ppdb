@@ -14,30 +14,7 @@ class KonfirmasiPembayaranController extends Controller
     
     public function show(Request $request,$id)
     {
-        $konfirmasi=KonfirmasiPembayaranModel::select(\DB::raw('
-                                                transaksi_id,
-                                                no_transaksi,
-                                                CASE
-                                                    WHEN id_channel=1 THEN "TELLER BANK"
-                                                    WHEN id_channel=2 THEN "TRANSFER ATM"
-                                                    WHEN id_channel=3 THEN "INTERNET BANKING"
-                                                    WHEN id_channel=4 THEN "MOBILE BANKING"
-                                                END AS nama_channel,                                                
-                                                tanggal_bayar,
-                                                nomor_rekening_pengirim,
-                                                nama_rekening_pengirim,
-                                                nama_bank_pengirim,
-                                                total_bayar,
-                                                CASE 
-                                                    WHEN verified IS NULL THEN "N.A"
-                                                    WHEN verified=0 THEN "UNVERIFIED"
-                                                    WHEN verified=1 THEN "VERIFIED"
-                                                END AS nama_status,
-                                                bukti_bayar,
-                                                konfirmasi_pembayaran.created_at,
-                                                konfirmasi_pembayaran.updated_at
-                                            '))                                            
-                                            ->find($id);
+        $konfirmasi=$this->findKonfirmasi($request,$id, true);
 
         if (is_null($konfirmasi))
         {
@@ -64,7 +41,7 @@ class KonfirmasiPembayaranController extends Controller
     {
         $this->hasPermissionTo('KEUANGAN-KONFIRMASI-PEMBAYARAN_UPDATE');
 
-        $konfirmasi=KonfirmasiPembayaranModel::find($id);
+        $konfirmasi=$this->findKonfirmasi($request,$id, false);
         if (is_null($konfirmasi))
         {
             return Response()->json([
@@ -92,5 +69,52 @@ class KonfirmasiPembayaranController extends Controller
                                     ], 200);   
         }
         
+    }
+
+    private function findKonfirmasi(Request $request, $id, $withSelect = false)
+    {
+        $query = $withSelect
+            ? KonfirmasiPembayaranModel::select(\DB::raw('
+                                                transaksi_id,
+                                                no_transaksi,
+                                                CASE
+                                                    WHEN id_channel=1 THEN "TELLER BANK"
+                                                    WHEN id_channel=2 THEN "TRANSFER ATM"
+                                                    WHEN id_channel=3 THEN "INTERNET BANKING"
+                                                    WHEN id_channel=4 THEN "MOBILE BANKING"
+                                                END AS nama_channel,                                                
+                                                tanggal_bayar,
+                                                nomor_rekening_pengirim,
+                                                nama_rekening_pengirim,
+                                                nama_bank_pengirim,
+                                                total_bayar,
+                                                CASE 
+                                                    WHEN verified IS NULL THEN "N.A"
+                                                    WHEN verified=0 THEN "UNVERIFIED"
+                                                    WHEN verified=1 THEN "VERIFIED"
+                                                END AS nama_status,
+                                                bukti_bayar,
+                                                konfirmasi_pembayaran.created_at,
+                                                konfirmasi_pembayaran.updated_at
+                                            '))
+            : KonfirmasiPembayaranModel::query();
+
+        $row = (clone $query)->find($id);
+        if ($row) {
+            return $row;
+        }
+
+        $query->where('user_id', $id);
+        if ($request->filled('formulir_id')) {
+            $query->where('formulir_id', $request->input('formulir_id'));
+        }
+        if ($request->filled('ta')) {
+            $query->where('ta', $request->input('ta'));
+        }
+        if ($request->filled('kode_jenjang')) {
+            $query->where('kode_jenjang', $request->input('kode_jenjang'));
+        }
+
+        return $query->orderBy('created_at', 'desc')->first();
     }
 }
