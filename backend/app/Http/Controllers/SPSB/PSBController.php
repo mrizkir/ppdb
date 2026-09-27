@@ -95,13 +95,51 @@ class PSBController extends Controller
       formulir_pendaftaran_a.kode_jenjang,
       formulir_pendaftaran_a.ta,
       formulir_pendaftaran_a.tanggal_lahir,
+      (
+        SELECT kp.transaksi_id
+        FROM konfirmasi_pembayaran kp
+        WHERE kp.user_id = users.id
+          AND (
+            kp.formulir_id = formulir_pendaftaran_a.id
+            OR (kp.ta = formulir_pendaftaran_a.ta AND kp.kode_jenjang = formulir_pendaftaran_a.kode_jenjang)
+            OR (kp.formulir_id IS NULL AND kp.ta IS NULL)
+          )
+        ORDER BY
+          CASE
+            WHEN kp.formulir_id = formulir_pendaftaran_a.id THEN 0
+            WHEN kp.ta = formulir_pendaftaran_a.ta AND kp.kode_jenjang = formulir_pendaftaran_a.kode_jenjang THEN 1
+            WHEN kp.verified = 0 THEN 2
+            ELSE 3
+          END,
+          kp.created_at DESC
+        LIMIT 1
+      ) AS konfirmasi_id,
+      (
+        SELECT kp.verified
+        FROM konfirmasi_pembayaran kp
+        WHERE kp.user_id = users.id
+          AND (
+            kp.formulir_id = formulir_pendaftaran_a.id
+            OR (kp.ta = formulir_pendaftaran_a.ta AND kp.kode_jenjang = formulir_pendaftaran_a.kode_jenjang)
+            OR (kp.formulir_id IS NULL AND kp.ta IS NULL)
+          )
+        ORDER BY
+          CASE
+            WHEN kp.formulir_id = formulir_pendaftaran_a.id THEN 0
+            WHEN kp.ta = formulir_pendaftaran_a.ta AND kp.kode_jenjang = formulir_pendaftaran_a.kode_jenjang THEN 1
+            WHEN kp.verified = 0 THEN 2
+            ELSE 3
+          END,
+          kp.created_at DESC
+        LIMIT 1
+      ) AS verified,
       users.created_at,
       users.updated_at'
     ))
     ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.user_id', 'users.id')
     ->where('formulir_pendaftaran_a.ta', $ta)
-    ->where('kode_jenjang', $kode_jenjang)
-    ->orderBy('created_at', 'desc')
+    ->where('formulir_pendaftaran_a.kode_jenjang', $kode_jenjang)
+    ->orderBy('users.created_at', 'desc')
     ->get();
     
     return Response()->json([

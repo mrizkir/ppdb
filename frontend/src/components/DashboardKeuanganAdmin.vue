@@ -5,7 +5,7 @@
         <v-card                         
           class="clickable green darken-1"
           color="#385F73" 
-          @click.native="$router.push('/spsb/pendaftaranbaru')"
+          @click.native="$router.push('/keuangan/konfirmasipembayaran')"
           dark>
           <v-card-title class="headline">
             TOTAL TRANSAKSI
@@ -23,7 +23,7 @@
         <v-card                         
           class="clickable green darken-1"
           color="#385F73" 
-          @click.native="$router.push('/spsb/pendaftaranbaru')"
+          @click.native="$router.push('/keuangan/konfirmasipembayaran')"
           dark>
           <v-card-title class="headline">
             TRANSAKSI PAID
@@ -41,7 +41,7 @@
         <v-card                         
           class="clickable green darken-1"
           color="#385F73" 
-          @click.native="$router.push('/spsb/pendaftaranbaru')"
+          @click.native="$router.push('/keuangan/konfirmasipembayaran')"
           dark>
           <v-card-title class="headline">
             TRANSAKSI UNPAID
@@ -59,7 +59,7 @@
         <v-card                         
           class="clickable green darken-1"
           color="#385F73" 
-          @click.native="$router.push('/spsb/pendaftaranbaru')"
+          @click.native="$router.push('/keuangan/konfirmasipembayaran')"
           dark>
           <v-card-title class="headline">
             TRANSAKSI CANCELLED

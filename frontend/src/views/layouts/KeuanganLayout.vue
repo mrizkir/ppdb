@@ -96,6 +96,17 @@
               BIAYA KOMPONEN PERIODE
             </v-list-item-title>
           </v-list-item-content>
+        </v-list-item>
+        <v-subheader>TRANSAKSI</v-subheader>
+        <v-list-item link v-if="CAN_ACCESS('KEUANGAN-KONFIRMASI-PEMBAYARAN_BROWSE') || CAN_ACCESS('SPSB-PSB_BROWSE')" to="/keuangan/konfirmasipembayaran">
+          <v-list-item-icon class="mr-2">
+            <v-icon>mdi-cash-check</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              KONFIRMASI PEMBAYARAN
+            </v-list-item-title>
+          </v-list-item-content>
         </v-list-item>        
       </v-list>
     </v-navigation-drawer>

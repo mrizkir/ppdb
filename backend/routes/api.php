@@ -143,8 +143,9 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
   $router->post('/keuangan/biayakomponenperiode/updatebiaya',['middleware'=>['role:superadmin|keuangan'],'uses'=>'Keuangan\BiayaKomponenPeriodeController@updatebiaya','as'=>'biayakomponenperiode.updatebiaya']);
 	
 	//keuangan - konfirmasi pembayaran	
-	$router->get('/keuangan/konfirmasipembayaran/{id}',['middleware'=>['role:superadmin|keuangan|siswa|siswabaru'],'uses'=>'Keuangan\KonfirmasiPembayaranController@show','as'=>'konfirmasipembayaran.show']);
-	$router->put('/keuangan/konfirmasipembayaran/{id}',['middleware'=>['role:superadmin|keuangan|siswa|siswabaru'],'uses'=>'Keuangan\KonfirmasiPembayaranController@update','as'=>'konfirmasipembayaran.update']);
+	$router->post('/keuangan/konfirmasipembayaran',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'Keuangan\KonfirmasiPembayaranController@index','as'=>'konfirmasipembayaran.index']);
+	$router->get('/keuangan/konfirmasipembayaran/{id}',['middleware'=>['role:superadmin|psb|keuangan|siswa|siswabaru'],'uses'=>'Keuangan\KonfirmasiPembayaranController@show','as'=>'konfirmasipembayaran.show']);
+	$router->put('/keuangan/konfirmasipembayaran/{id}',['middleware'=>['role:superadmin|psb|keuangan|siswa|siswabaru'],'uses'=>'Keuangan\KonfirmasiPembayaranController@update','as'=>'konfirmasipembayaran.update']);
 
 	// akademik kesiswaan
 	$router->post('/akademik/kemahasiswaan/updatestatus/{id}',['middleware'=>['role:superadmin|pmb'],'uses'=>'Akademik\KemahasiswaanController@updatestatus','as'=>'kemahasiswaan.updatestatus']);

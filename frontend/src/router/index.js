@@ -175,6 +175,10 @@ const routes = [
     component: () => import("../views/pages/admin/spsb/PendaftaranBaru.vue"),
   },
   {
+    path: "/spsb/konfirmasipembayaran",
+    redirect: "/keuangan/konfirmasipembayaran",
+  },
+  {
     path: "/spsb/formulirpendaftaran",
     name: "SPSBFormulirPendaftaran",
     meta: {
@@ -303,6 +307,16 @@ const routes = [
     },
     component: () =>
       import("../views/pages/admin/keuangan/BiayaKomponenPeriode.vue"),
+  },
+  {
+    path: "/keuangan/konfirmasipembayaran",
+    name: "KeuanganKonfirmasiPembayaran",
+    meta: {
+      title: "KEUANGAN - KONFIRMASI PEMBAYARAN",
+      requiresAuth: true,
+    },
+    component: () =>
+      import("../views/pages/admin/keuangan/KonfirmasiPembayaran.vue"),
   },
   //system
   {
