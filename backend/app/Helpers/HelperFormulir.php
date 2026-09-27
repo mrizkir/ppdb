@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\DMaster\JenjangStudiModel;
 use App\Models\SPSB\FormulirPendaftaranAModel;
 use App\Models\SPSB\FormulirPendaftaranBModel;
 use App\Models\SPSB\FormulirPendaftaranCModel;
@@ -68,13 +69,55 @@ class HelperFormulir
     return $id;
   }
 
+  public static function namaJenjang($kode)
+  {
+    $jenjang = JenjangStudiModel::find($kode);
+    return $jenjang ? $jenjang->nama_jenjang.' DE GREEN CAMP' : null;
+  }
+
+  /**
+   * Jalur undangan yang pindah jenjang: asal sekolah = nama jenjang formulir sebelumnya.
+   * Null bila bukan undangan atau tidak ada jenjang di bawahnya.
+   */
+  public static function asalSekolahDariUndangan($formulir)
+  {
+    if (!$formulir || empty($formulir->id) || empty($formulir->user_id)) {
+      return null;
+    }
+
+    $undangan = UndanganPMBModel::where('formulir_id', $formulir->id)->first();
+    if (!$undangan) {
+      return null;
+    }
+
+    $source = FormulirPendaftaranAModel::where('user_id', $formulir->user_id)
+      ->where('id', '!=', $formulir->id)
+      ->where('kode_jenjang', '<', $formulir->kode_jenjang)
+      ->orderBy('kode_jenjang', 'desc')
+      ->first();
+    if (!$source) {
+      return null;
+    }
+
+    return self::namaJenjang($source->kode_jenjang);
+  }
+
   public static function cloneToJenjang(FormulirPendaftaranAModel $source, $ta, $kode_jenjang)
   {
+    $asalSebelumnya = null;
+    if ((int) $source->kode_jenjang !== (int) $kode_jenjang) {
+      $asalSebelumnya = self::namaJenjang($source->kode_jenjang);
+    }
+
     $existing = FormulirPendaftaranAModel::where('user_id', $source->user_id)
       ->where('ta', $ta)
       ->where('kode_jenjang', $kode_jenjang)
       ->first();
     if ($existing) {
+      if ($asalSebelumnya) {
+        $existing->asal_sekolah = $asalSebelumnya;
+        $existing->save();
+      }
       return $existing;
     }
 
@@ -84,6 +127,9 @@ class HelperFormulir
     $copyA->user_id = $source->user_id;
     $copyA->ta = $ta;
     $copyA->kode_jenjang = $kode_jenjang;
+    if ($asalSebelumnya) {
+      $copyA->asal_sekolah = $asalSebelumnya;
+    }
     $copyA->save();
 
     self::cloneChild(FormulirPendaftaranBModel::class, $source->id, $newId);

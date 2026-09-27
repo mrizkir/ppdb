@@ -105,7 +105,7 @@ export default {
                 }
             }).then(({ data }) => { 
                 let setting = data.setting;
-                this.formdata.email_mhs_isvalid=parseInt(setting.EMAIL_SISWA_ISVALID);
+                this.formdata.email_mhs_isvalid=parseInt(setting.EMAIL_MURID_ISVALID);
             });
             
         },

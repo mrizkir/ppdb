@@ -1,13 +1,10 @@
 <template>
     <div>
-        <v-system-bar app dark class="green lighten-2 white--text">
-            
-		</v-system-bar>	
-        <v-app-bar app>
+        <v-app-bar app class="white" elevation="0">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="grey--text"></v-app-bar-nav-icon>
             <v-toolbar-title class="headline clickable" @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken']).catch(err => {})">
 				<span class="hidden-sm-and-down">
-                    FORMULIR PENDAFTARAN PPDB SEKOLAH ISLAM DE GREEN CAMP
+                    FORMULIR PENDAFTARAN PMB SEKOLAH ISLAM DE GREEN CAMP
                 </span>
 			</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -62,7 +59,7 @@
                 <v-icon>mdi-menu-open</v-icon>
 			</v-app-bar-nav-icon>
         </v-app-bar> 
-        <v-navigation-drawer v-model="drawer" width="300" dark class="green darken-1" :temporary="hideleftnav" app>
+        <v-navigation-drawer v-model="drawer" width="300" dark class="green darken-4" :temporary="hideleftnav" app>
 			<v-list-item>
 				<v-list-item-avatar>
 					<v-img :src="photoUser" @click.stop="toProfile"></v-img>
@@ -78,16 +75,16 @@
 			</v-list-item>
 			<v-divider></v-divider>
             <v-list expand v-if="dashboard !='siswabaru'">
-                <v-list-item :to="{path: '/spsb'}" link  class="yellow" color="green" v-if="CAN_ACCESS('SPSB-GROUP') && dashboard!='siswabaru' && dashboard!='mahasiswa'">
+                <v-list-item :to="{path: '/spsb'}" link  class="light-green accent-3 green--text text--darken-4" color="green" v-if="CAN_ACCESS('SPMB-GROUP') && dashboard!='siswabaru' && dashboard!='mahasiswa'">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-monitor-dashboard</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>BOARD SPSB</v-list-item-title>
+                        <v-list-item-title>BOARD SPMB</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-subheader>DATA SISWA BARU</v-subheader> 
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB_BROWSE')" to="/spsb/pendaftaranbaru">
+                <v-subheader>DATA MURID BARU</v-subheader> 
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB_BROWSE')" to="/spsb/pendaftaranbaru">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-account-plus</v-icon>
                     </v-list-item-icon>
@@ -97,7 +94,7 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/formulirpendaftaran">
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/formulirpendaftaran">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-document-edit-outline</v-icon>
                     </v-list-item-icon>
@@ -107,7 +104,7 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/undangan">
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/undangan">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-email-newsletter</v-icon>
                     </v-list-item-icon>
@@ -117,7 +114,7 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/situasikeluarga">
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/situasikeluarga">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-document-edit-outline</v-icon>
                     </v-list-item-icon>
@@ -127,7 +124,7 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/biodataayah">
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/biodataayah">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-document-edit-outline</v-icon>
                     </v-list-item-icon>
@@ -137,7 +134,7 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/biodataibu">
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB-FORMULIR-PENDAFTARAN_BROWSE')" to="/spsb/biodataibu">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-document-edit-outline</v-icon>
                     </v-list-item-icon>
@@ -147,7 +144,7 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-PERSYARATAN_BROWSE')" to="/spsb/persyaratan">
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB-PERSYARATAN_BROWSE')" to="/spsb/persyaratan">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-document-edit-outline</v-icon>
                     </v-list-item-icon>
@@ -157,8 +154,8 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-subheader v-if="CAN_ACCESS('SPSB-GROUP') && dashboard!='siswabaru' && dashboard!='mahasiswa'">LAPORAN</v-subheader>
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-LAPORAN-JENJANG_BROWSE')" to="/spsb/laporanpeserta">
+                <v-subheader v-if="CAN_ACCESS('SPMB-GROUP') && dashboard!='siswabaru' && dashboard!='mahasiswa'">LAPORAN</v-subheader>
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB-LAPORAN-JENJANG_BROWSE')" to="/spsb/laporanpeserta">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-document-edit-outline</v-icon>
                     </v-list-item-icon>
@@ -168,7 +165,7 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-LAPORAN-JENJANG_BROWSE')" to="/spsb/laporanjenjang">
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB-LAPORAN-JENJANG_BROWSE')" to="/spsb/laporanjenjang">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-document-edit-outline</v-icon>
                     </v-list-item-icon>
@@ -178,7 +175,7 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="CAN_ACCESS('SPSB-PSB-LAPORAN-KELULUSAN_BROWSE')" to="/spsb/laporankelulusan">
+                <v-list-item link v-if="CAN_ACCESS('SPMB-PSB-LAPORAN-KELULUSAN_BROWSE')" to="/spsb/laporankelulusan">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-document-edit-outline</v-icon>
                     </v-list-item-icon>

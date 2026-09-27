@@ -6,7 +6,7 @@
 <script>
 import SPSBLayout from '@/views/layouts/SPSBLayout';
 export default {
-    name: 'SPSB',
+    name: 'SPMB',
     created()
 	{
 		

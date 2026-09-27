@@ -70,13 +70,13 @@
                         />
                         <v-text-field
                           v-model="formdata.kuota_l"
-                          label="KUOTA SISWA LAKI-LAKI"
+                          label="KUOTA MURID LAKI-LAKI"
                           outlined
                           :rules="rule_kuota_l"
                         />
                         <v-text-field
                           v-model="formdata.kuota_p"
-                          label="KUOTA SISWA PEREMPUAN"
+                          label="KUOTA MURID PEREMPUAN"
                           outlined
                           :rules="rule_kuota_p"
                         />

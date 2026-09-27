@@ -16,5 +16,14 @@ Vue.use(VCurrencyField, {
 });
 
 export default new Vuetify({
-
+	theme: {
+		themes: {
+			light: {
+				primary: '#2E7D32',
+			},
+			dark: {
+				primary: '#2E7D32',
+			},
+		},
+	},
 });

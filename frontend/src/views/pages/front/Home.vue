@@ -130,7 +130,7 @@
                     <div>
                       Klik menu PRA-PENDAFTARAN maka muncul halaman pra-pendaftaran, yang terdiri dari beberapa bagian yang wajib untuk diisi, yaitu : 
                       <ol type="a">
-                        <li>Nama Calon Peserta Didik</li>
+                        <li>Nama Calon Murid</li>
                         <li>Jenis Kelamin</li>
                         <li>Nomor Kontak WA Wali</li>
                         <li>Surat Elektronik</li>
@@ -216,7 +216,7 @@
                     JADWAL INTERVIEW
                     </h2>
                     <div>
-                      Setelah pengisian formulir selesai, Panitia akan menghubungi nomor kontak WA pendaftar. Pada tahap ini, Panitia akan memberikan jadwal interview bagi orang tua/wali calon Peserta Didik Baru (PDB) dan observasi bagi calon PDB.
+                      Setelah pengisian formulir selesai, Panitia akan menghubungi nomor kontak WA pendaftar. Pada tahap ini, Panitia akan memberikan jadwal interview bagi orang tua/wali calon Murid Baru (PDB) dan observasi bagi calon PDB.
                     </div>
                     <v-alert type="warning">
                       <div class="title">

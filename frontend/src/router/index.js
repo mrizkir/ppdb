@@ -158,18 +158,18 @@ const routes = [
   //spsb
   {
     path: "/spsb",
-    name: "SPSB",
+    name: "SPMB",
     meta: {
-      title: "SPSB",
+      title: "SPMB",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/SPSB.vue"),
   },
   {
     path: "/spsb/pendaftaranbaru",
-    name: "SPSBPendaftaranBaru",
+    name: "SPMBPendaftaranBaru",
     meta: {
-      title: "SPSB - PENDAFTARAN BARU",
+      title: "SPMB - PENDAFTARAN BARU",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/PendaftaranBaru.vue"),
@@ -180,9 +180,9 @@ const routes = [
   },
   {
     path: "/spsb/formulirpendaftaran",
-    name: "SPSBFormulirPendaftaran",
+    name: "SPMBFormulirPendaftaran",
     meta: {
-      title: "SPSB - BIODATA ANANDA",
+      title: "SPMB - BIODATA ANANDA",
       requiresAuth: true,
     },
     component: () =>
@@ -190,72 +190,72 @@ const routes = [
   },
   {
     path: "/spsb/undangan",
-    name: "SPSBDaftarUndangan",
+    name: "SPMBDaftarUndangan",
     meta: {
-      title: "SPSB - UNDANGAN PMB",
+      title: "SPMB - UNDANGAN PMB",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/DaftarUndangan.vue"),
   },
   {
     path: "/spsb/situasikeluarga",
-    name: "SPSBFormSituasiKeluarga",
+    name: "SPMBFormSituasiKeluarga",
     meta: {
-      title: "SPSB - SITUASI KELUARGA",
+      title: "SPMB - SITUASI KELUARGA",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/SituasiKeluarga.vue"),
   },
   {
     path: "/spsb/biodataayah",
-    name: "SPSBFormulirBiodataAyah",
+    name: "SPMBFormulirBiodataAyah",
     meta: {
-      title: "SPSB - BIOADATA AYAH",
+      title: "SPMB - BIOADATA AYAH",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/BiodataAyah.vue"),
   },
   {
     path: "/spsb/biodataibu",
-    name: "SPSBFormulirBiodataIbu",
+    name: "SPMBFormulirBiodataIbu",
     meta: {
-      title: "SPSB - BIOADATA IBU",
+      title: "SPMB - BIOADATA IBU",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/BiodataIbu.vue"),
   },
   {
     path: "/spsb/biodatawali",
-    name: "SPSBFormulirBiodataWali",
+    name: "SPMBFormulirBiodataWali",
     meta: {
-      title: "SPSB - BIOADATA WALI",
+      title: "SPMB - BIOADATA WALI",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/BiodataWali.vue"),
   },
   {
     path: "/spsb/persyaratan",
-    name: "SPSBPersyaratan",
+    name: "SPMBPersyaratan",
     meta: {
-      title: "SPSB - PERSYARATAN",
+      title: "SPMB - PERSYARATAN",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/PersyaratanPSB.vue"),
   },
   {
     path: "/spsb/kontakdarurat",
-    name: "SPSBKontakDarurat",
+    name: "SPMBKontakDarurat",
     meta: {
-      title: "SPSB - KONTAK DARURAT",
+      title: "SPMB - KONTAK DARURAT",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/KontakDarurat.vue"),
   },
   {
     path: "/spsb/persyaratantambah",
-    name: "SPSBPersyaratanTambah",
+    name: "SPMBPersyaratanTambah",
     meta: {
-      title: "SPSB - PERSYARATAN",
+      title: "SPMB - PERSYARATAN",
       requiresAuth: true,
     },
     component: () =>
@@ -263,27 +263,27 @@ const routes = [
   },
   {
     path: "/spsb/laporanpeserta",
-    name: "SPSBReportPeserta",
+    name: "SPMBReportPeserta",
     meta: {
-      title: "SPSB - LAPORAN CALON PESERTA DIDIK",
+      title: "SPMB - LAPORAN CALON PESERTA DIDIK",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/ReportPeserta.vue"),
   },
   {
     path: "/spsb/laporanjenjang",
-    name: "SPSBReportJenjang",
+    name: "SPMBReportJenjang",
     meta: {
-      title: "SPSB - LAPORAN JENJANG STUDI",
+      title: "SPMB - LAPORAN JENJANG STUDI",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/ReportJenjang.vue"),
   },
   {
     path: "/spsb/laporankelulusan",
-    name: "SPSBReportKelulusan",
+    name: "SPMBReportKelulusan",
     meta: {
-      title: "SPSB - LAPORAN KELULUSAN",
+      title: "SPMB - LAPORAN KELULUSAN",
       requiresAuth: true,
     },
     component: () => import("../views/pages/admin/spsb/ReportKelulusan.vue"),

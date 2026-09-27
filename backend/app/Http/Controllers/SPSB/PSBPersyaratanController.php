@@ -431,7 +431,7 @@ class PSBPersyaratanController extends Controller {
       tinggal_bersama,
       status_pernikahan,                                                                                                                               
       
-      `desc`                                                               
+      formulir_pendaftaran_b.desc                                                               
     '))
     ->join('formulir_pendaftaran_a','formulir_pendaftaran_a.id','formulir_pendaftaran_b.formulir_id')
     ->join('users','users.id','formulir_pendaftaran_a.user_id')                                            
@@ -469,20 +469,20 @@ class PSBPersyaratanController extends Controller {
                                 formulir_id AS user_id,
                                 nama_ayah,
                                 hubungan,                                                                
-                                tempat_lahir,
-                                tanggal_lahir,
-                                idagama,
+                                formulir_pendaftaran_c.tempat_lahir,
+                                formulir_pendaftaran_c.tanggal_lahir,
+                                formulir_pendaftaran_c.idagama,
                                 
-                                address1_desa_id,
-                                address1_kelurahan,
-                                address1_kecamatan_id,
-                                address1_kecamatan,
-                                address1_kabupaten_id,
-                                address1_kabupaten,
-                                address1_provinsi_id,
-                                address1_provinsi,
-                                alamat_tempat_tinggal,                                                                
-                                kewarganegaraan,
+                                formulir_pendaftaran_c.address1_desa_id,
+                                formulir_pendaftaran_c.address1_kelurahan,
+                                formulir_pendaftaran_c.address1_kecamatan_id,
+                                formulir_pendaftaran_c.address1_kecamatan,
+                                formulir_pendaftaran_c.address1_kabupaten_id,
+                                formulir_pendaftaran_c.address1_kabupaten,
+                                formulir_pendaftaran_c.address1_provinsi_id,
+                                formulir_pendaftaran_c.address1_provinsi,
+                                formulir_pendaftaran_c.alamat_tempat_tinggal,                                                                
+                                formulir_pendaftaran_c.kewarganegaraan,
 
                                 users.nomor_hp,
                                 users.email,
@@ -490,7 +490,7 @@ class PSBPersyaratanController extends Controller {
                                 pekerjaan_instansi,
                                 penghasilan_bulanan,
                                 
-                                `desc`                                                               
+                                formulir_pendaftaran_c.desc                                                               
                               '))
                       ->join('formulir_pendaftaran_a','formulir_pendaftaran_a.id','formulir_pendaftaran_c.formulir_id')
     ->join('users','users.id','formulir_pendaftaran_a.user_id')                                            
@@ -527,20 +527,20 @@ class PSBPersyaratanController extends Controller {
                                 formulir_id AS user_id,
                                 nama_ibu,
                                 hubungan,                                                                
-                                tempat_lahir,
-                                tanggal_lahir,
-                                idagama,
+                                formulir_pendaftaran_d.tempat_lahir,
+                                formulir_pendaftaran_d.tanggal_lahir,
+                                formulir_pendaftaran_d.idagama,
                                 
-                                address1_desa_id,
-                                address1_kelurahan,
-                                address1_kecamatan_id,
-                                address1_kecamatan,
-                                address1_kabupaten_id,
-                                address1_kabupaten,
-                                address1_provinsi_id,
-                                address1_provinsi,
-                                alamat_tempat_tinggal,                                                                
-                                kewarganegaraan,
+                                formulir_pendaftaran_d.address1_desa_id,
+                                formulir_pendaftaran_d.address1_kelurahan,
+                                formulir_pendaftaran_d.address1_kecamatan_id,
+                                formulir_pendaftaran_d.address1_kecamatan,
+                                formulir_pendaftaran_d.address1_kabupaten_id,
+                                formulir_pendaftaran_d.address1_kabupaten,
+                                formulir_pendaftaran_d.address1_provinsi_id,
+                                formulir_pendaftaran_d.address1_provinsi,
+                                formulir_pendaftaran_d.alamat_tempat_tinggal,                                                                
+                                formulir_pendaftaran_d.kewarganegaraan,
 
                                 formulir_pendaftaran_d.nomor_hp,
                                 formulir_pendaftaran_d.email,
@@ -548,7 +548,7 @@ class PSBPersyaratanController extends Controller {
                                 pekerjaan_instansi,
                                 penghasilan_bulanan,
                                 
-                                `desc`                                                               
+                                formulir_pendaftaran_d.desc                                                               
                               '))
                       ->join('formulir_pendaftaran_a','formulir_pendaftaran_a.id','formulir_pendaftaran_d.formulir_id')
     ->join('users','users.id','formulir_pendaftaran_a.user_id')                                            
@@ -949,10 +949,12 @@ class PSBPersyaratanController extends Controller {
         
         $formulir->save();
 
-        $user=$formulir->User;
-        $user->nomor_hp = $request->input('nomor_hp');    
-        $user->email = $request->input('email');    
-        $user->save();    
+        $user = User::find(optional($formulir->formulir)->user_id);
+        if ($user) {
+          $user->nomor_hp = $request->input('nomor_hp');
+          $user->email = $request->input('email');
+          $user->save();
+        }
 
         return $formulir;
       });

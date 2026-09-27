@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-app-bar app>
+		<v-app-bar app class="white" elevation="0">
 			<v-toolbar-title>
 				<span class="hidden-sm-and-down">
 					&nbsp;
@@ -8,13 +8,13 @@
 			</v-toolbar-title>
 			<v-spacer />
 			<v-toolbar-items class="hidden-sm-and-down">
-				<v-btn to="/" class="mr-2" color="primary" text large>
+				<v-btn to="/" class="mr-2" color="green darken-3" text large>
 					BERANDA
 				</v-btn>
-				<v-btn to="/konfirmasipembayaran" class="mr-2" color="primary" text large v-if="bukaPPDB">
+				<v-btn to="/konfirmasipembayaran" class="mr-2" color="green darken-3" text large v-if="bukaPPDB">
 					KONFIRMASI PEMBAYARAN
 				</v-btn>
-				<v-btn to="/login" color="primary" text large>
+				<v-btn to="/login" color="green darken-3" text large>
 					LOGIN FORMULIR
 				</v-btn>
 			</v-toolbar-items>
@@ -52,6 +52,33 @@
 		<v-main>
 			<slot/>
 		</v-main>
+		<v-footer app absolute padless class="mt-0" v-if="!hideFooter">
+			<v-card flat tile class="flex">
+				<v-card-text class="green darken-2 white--text text-center pa-5 hidden-sm-and-down">
+					<v-btn
+						v-for="icon in icons"
+						:key="icon"
+						class="mx-8 white--text"
+						icon
+					>
+						<v-icon size="45px">{{ icon }}</v-icon>
+					</v-btn>
+				</v-card-text>
+				<v-card-text class="green darken-2 white--text text-center pa-2 hidden-lg-and-up">
+					<v-btn
+						v-for="icon in icons"
+						:key="icon"
+						class="mx-4 white--text"
+						icon
+					>
+						<v-icon size="30px">{{ icon }}</v-icon>
+					</v-btn>
+				</v-card-text>
+				<v-card-text class="green darken-4 py-2 white--text text-center">
+					<strong>{{ namaSekolahAlias }}</strong>
+				</v-card-text>
+			</v-card>
+		</v-footer>
 	</div>
 </template>
 <script>
@@ -67,7 +94,27 @@ export default {
 		...mapGetters("uifront", {
 			namaSekolahAlias: 'getNamaSekolahAlias',
 			bukaPPDB: "getBukaPPDB",
-		})
-	}
+		}),
+		hideFooter() {
+			return [
+				"FrontPSBtk",
+				"FrontPSBtkGTK",
+				"FrontPSBsd",
+				"FrontPSBsdGTK",
+				"FrontPSBsmp",
+				"FrontPSBsmpGTK",
+				"FrontPSBsma",
+				"FrontPSBsmaGTK",
+			].includes(this.$route.name);
+		},
+	},
+	data: () => ({
+		icons: [
+			"mdi-github",
+			"mdi-twitter",
+			"mdi-linkedin",
+			"mdi-instagram",
+		],
+	}),
 }
 </script>

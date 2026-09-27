@@ -64,7 +64,7 @@
             loading-text="Loading... Please wait">
             <template v-slot:top>
               <v-toolbar flat color="white">
-                <v-toolbar-title>DAFTAR SISWA BARU</v-toolbar-title>
+                <v-toolbar-title>DAFTAR MURID BARU</v-toolbar-title>
                 <v-divider
                   class="mx-4"
                   inset
@@ -130,7 +130,7 @@
           href: '/dashboard/' + this.$store.getters['auth/AccessToken']
         },
         {
-          text: 'SPSB',
+          text: 'SPMB',
           disabled: false,
           href: '/spsb'
         },
@@ -164,7 +164,7 @@
       datatable: [],
       headers: [                        
         { text: "", value: "foto", width:70 },
-        { text: 'NAMA SISWA', value: 'name', width: 350, sortable: true },
+        { text: 'NAMA MURID', value: 'name', width: 350, sortable: true },
         { text: 'NAMA IBU', value: 'nama_ibu'}, 
         { text: 'NOMOR HP', value: 'nomor_hp', width: 100}, 
         { text: 'AKSI', value: 'actions', sortable: false, width:50 },

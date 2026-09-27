@@ -109,7 +109,7 @@
                   dense
                 />
                 <span class="font-weight-medium">
-                  Apakah Peserta Didik Penyandang Disabilitas (PDPD) ?
+                  Apakah Murid Penyandang Disabilitas (PDPD) ?
                 </span>
                 <v-switch
                   v-model="formdata.penyandang_disabilitas"
@@ -121,7 +121,7 @@
                   text
                   v-if="isPenyandangDisabilitas && formdata.jk == 'L'"
                 >
-                  Pada periode ini belum menerima Peserta Didik Penyandang Disabilitas (PDPD).
+                  Pada periode ini belum menerima Murid Penyandang Disabilitas (PDPD).
                 </v-alert>
                 <v-alert
                   color="warning"
@@ -257,10 +257,10 @@
         code: "",
       },
       rule_name: [
-        value => !!value || "Nama Calon Peserta Didik mohon untuk diisi !!!",
+        value => !!value || "Nama Calon Murid mohon untuk diisi !!!",
         value =>
           /^[A-Za-z\s\\,\\.]*$/.test(value) ||
-          "Nama Calon Peserta Didik hanya boleh string dan spasi",
+          "Nama Calon Murid hanya boleh string dan spasi",
       ],
       rule_tanggal_lahir: [
         value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"

@@ -1,13 +1,10 @@
 <template>
   <div>
-    <v-system-bar app dark class="green lighten-2 white--text">
-      
-    </v-system-bar>	
-    <v-app-bar app>
+    <v-app-bar app class="white" elevation="0">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="grey--text"></v-app-bar-nav-icon>
       <v-toolbar-title class="headline clickable" @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken']).catch(err => {})">
         <span class="hidden-sm-and-down">
-          FORMULIR PENDAFTARAN PPDB SEKOLAH ISLAM DE GREEN CAMP
+          FORMULIR PENDAFTARAN PMB SEKOLAH ISLAM DE GREEN CAMP
         </span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -62,7 +59,7 @@
         <v-icon>mdi-menu-open</v-icon>
       </v-app-bar-nav-icon>
     </v-app-bar> 
-    <v-navigation-drawer v-model="drawer" width="300" dark class="green darken-1" :temporary="hideleftnav" app>
+    <v-navigation-drawer v-model="drawer" width="300" dark class="green darken-4" :temporary="hideleftnav" app>
       <v-list-item>
         <v-list-item-avatar>
           <v-img :src="photoUser" @click.stop="toProfile"></v-img>
@@ -78,7 +75,7 @@
       </v-list-item>
       <v-divider></v-divider>
       <v-list expand>
-        <v-list-item :to="{path: '/keuangan'}" link class="yellow" color="green" v-if="CAN_ACCESS('KEUANGAN-GROUP') && dashboard!='siswabaru' && dashboard!='mahasiswa'">
+        <v-list-item :to="{path: '/keuangan'}" link class="light-green accent-3 green--text text--darken-4" color="green" v-if="CAN_ACCESS('KEUANGAN-GROUP') && dashboard!='siswabaru' && dashboard!='mahasiswa'">
           <v-list-item-icon class="mr-2">
             <v-icon>mdi-monitor-dashboard</v-icon>
           </v-list-item-icon>
@@ -98,7 +95,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-subheader>TRANSAKSI</v-subheader>
-        <v-list-item link v-if="CAN_ACCESS('KEUANGAN-KONFIRMASI-PEMBAYARAN_BROWSE') || CAN_ACCESS('SPSB-PSB_BROWSE')" to="/keuangan/konfirmasipembayaran">
+        <v-list-item link v-if="CAN_ACCESS('KEUANGAN-KONFIRMASI-PEMBAYARAN_BROWSE') || CAN_ACCESS('SPMB-PSB_BROWSE')" to="/keuangan/konfirmasipembayaran">
           <v-list-item-icon class="mr-2">
             <v-icon>mdi-cash-check</v-icon>
           </v-list-item-icon>

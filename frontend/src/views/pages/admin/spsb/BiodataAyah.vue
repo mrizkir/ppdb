@@ -65,7 +65,7 @@
           >
             <template v-slot:top>
               <v-toolbar flat color="white">
-                <v-toolbar-title>DAFTAR SISWA BARU</v-toolbar-title>
+                <v-toolbar-title>DAFTAR MURID BARU</v-toolbar-title>
                 <v-divider
                   class="mx-4"
                   inset
@@ -131,7 +131,7 @@ export default {
         href: '/dashboard/' + this.$store.getters['auth/AccessToken']
       },
       {
-        text: 'SPSB',
+        text: 'SPMB',
         disabled: false,
         href: '/spsb'
       },
@@ -165,7 +165,7 @@ export default {
     datatable: [],
     headers: [                        
       { text: "", value: "foto", width:70 },
-      { text: 'NAMA SISWA', value: 'name', width: 350, sortable: true },
+      { text: 'NAMA MURID', value: 'name', width: 350, sortable: true },
       { text: 'NAMA AYAH', value: 'nama_ayah'}, 
       { text: 'NOMOR HP', value: 'nomor_hp', width: 100}, 
       { text: 'AKSI', value: 'actions', sortable: false, width:50 },

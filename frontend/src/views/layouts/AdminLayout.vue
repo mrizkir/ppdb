@@ -1,12 +1,9 @@
 <template>
   <div>
-    <v-system-bar app dark class="green lighten-2 white--text">
-      
-    </v-system-bar>	
-    <v-app-bar app>
+    <v-app-bar app class="white" elevation="0">
       <v-toolbar-title class="headline clickable" @click.stop="$router.push('/dashboard/' + $store.getters['auth/AccessToken']).catch(err => {})">
         <span class="hidden-sm-and-down">
-          FORMULIR PENDAFTARAN PPDB SEKOLAH ISLAM DE GREEN CAMP
+          FORMULIR PENDAFTARAN PMB SEKOLAH ISLAM DE GREEN CAMP
         </span>
       </v-toolbar-title>
       <v-spacer></v-spacer>

@@ -738,6 +738,16 @@ class PSBController extends Controller
     ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
     ->find(HelperFormulir::resolveId($id));
 
+    if ($formulir) {
+      $asalSebelumnya = HelperFormulir::asalSekolahDariUndangan($formulir);
+      if ($asalSebelumnya) {
+        $formulir->asal_sekolah = $asalSebelumnya;
+        FormulirPendaftaranAModel::where('id', $formulir->id)->update([
+          'asal_sekolah' => $asalSebelumnya,
+        ]);
+      }
+    }
+
     if (is_null($formulir))
     {
       return Response()->json([
@@ -770,7 +780,7 @@ class PSBController extends Controller
       formulir_id AS user_id,
       tinggal_bersama,
       status_pernikahan,                                
-      `desc`                                                               
+      formulir_pendaftaran_b.desc                                                               
     '))
     ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'formulir_pendaftaran_b.formulir_id')
     ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
@@ -808,20 +818,20 @@ class PSBController extends Controller
       formulir_id AS user_id,
       nama_ayah,
       hubungan,
-      tempat_lahir,
-      tanggal_lahir,
-      idagama,
+      formulir_pendaftaran_c.tempat_lahir,
+      formulir_pendaftaran_c.tanggal_lahir,
+      formulir_pendaftaran_c.idagama,
       
-      address1_desa_id,
-      address1_kelurahan,
-      address1_kecamatan_id,
-      address1_kecamatan,
-      address1_kabupaten_id,
-      address1_kabupaten,
-      address1_provinsi_id,
-      address1_provinsi,
-      alamat_tempat_tinggal,
-      kewarganegaraan,
+      formulir_pendaftaran_c.address1_desa_id,
+      formulir_pendaftaran_c.address1_kelurahan,
+      formulir_pendaftaran_c.address1_kecamatan_id,
+      formulir_pendaftaran_c.address1_kecamatan,
+      formulir_pendaftaran_c.address1_kabupaten_id,
+      formulir_pendaftaran_c.address1_kabupaten,
+      formulir_pendaftaran_c.address1_provinsi_id,
+      formulir_pendaftaran_c.address1_provinsi,
+      formulir_pendaftaran_c.alamat_tempat_tinggal,
+      formulir_pendaftaran_c.kewarganegaraan,
 
       users.nomor_hp,
       users.email,
@@ -831,7 +841,7 @@ class PSBController extends Controller
       fb_account,
       ig_account,
       tiktok_account,
-      `desc`                                                               
+      formulir_pendaftaran_c.desc                                                               
     '))
     ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'formulir_pendaftaran_c.formulir_id')
     ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
@@ -868,20 +878,20 @@ class PSBController extends Controller
       formulir_id AS user_id,
       nama_ibu,
       hubungan,
-      tempat_lahir,
-      tanggal_lahir,
-      idagama,
+      formulir_pendaftaran_d.tempat_lahir,
+      formulir_pendaftaran_d.tanggal_lahir,
+      formulir_pendaftaran_d.idagama,
       
-      address1_desa_id,
-      address1_kelurahan,
-      address1_kecamatan_id,
-      address1_kecamatan,
-      address1_kabupaten_id,
-      address1_kabupaten,
-      address1_provinsi_id,
-      address1_provinsi,
-      alamat_tempat_tinggal,
-      kewarganegaraan,
+      formulir_pendaftaran_d.address1_desa_id,
+      formulir_pendaftaran_d.address1_kelurahan,
+      formulir_pendaftaran_d.address1_kecamatan_id,
+      formulir_pendaftaran_d.address1_kecamatan,
+      formulir_pendaftaran_d.address1_kabupaten_id,
+      formulir_pendaftaran_d.address1_kabupaten,
+      formulir_pendaftaran_d.address1_provinsi_id,
+      formulir_pendaftaran_d.address1_provinsi,
+      formulir_pendaftaran_d.alamat_tempat_tinggal,
+      formulir_pendaftaran_d.kewarganegaraan,
 
       formulir_pendaftaran_d.nomor_hp,
       formulir_pendaftaran_d.email,
@@ -891,7 +901,7 @@ class PSBController extends Controller
       fb_account,
       ig_account,
       tiktok_account,
-      `desc`                                                               
+      formulir_pendaftaran_d.desc                                                               
     '))
     ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'formulir_pendaftaran_d.formulir_id')
     ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
@@ -929,20 +939,20 @@ class PSBController extends Controller
       formulir_id AS user_id,
       nama_wali,
       hubungan,
-      tempat_lahir,
-      tanggal_lahir,
-      idagama,
+      formulir_pendaftaran_f.tempat_lahir,
+      formulir_pendaftaran_f.tanggal_lahir,
+      formulir_pendaftaran_f.idagama,
       
-      address1_desa_id,
-      address1_kelurahan,
-      address1_kecamatan_id,
-      address1_kecamatan,
-      address1_kabupaten_id,
-      address1_kabupaten,
-      address1_provinsi_id,
-      address1_provinsi,
-      alamat_tempat_tinggal,
-      kewarganegaraan,
+      formulir_pendaftaran_f.address1_desa_id,
+      formulir_pendaftaran_f.address1_kelurahan,
+      formulir_pendaftaran_f.address1_kecamatan_id,
+      formulir_pendaftaran_f.address1_kecamatan,
+      formulir_pendaftaran_f.address1_kabupaten_id,
+      formulir_pendaftaran_f.address1_kabupaten,
+      formulir_pendaftaran_f.address1_provinsi_id,
+      formulir_pendaftaran_f.address1_provinsi,
+      formulir_pendaftaran_f.alamat_tempat_tinggal,
+      formulir_pendaftaran_f.kewarganegaraan,
 
       formulir_pendaftaran_f.nomor_hp,
       formulir_pendaftaran_f.email,
@@ -952,7 +962,7 @@ class PSBController extends Controller
       fb_account,
       ig_account,
       tiktok_account,
-      `desc`                                                               
+      formulir_pendaftaran_f.desc                                                               
     '))
     ->join('formulir_pendaftaran_a', 'formulir_pendaftaran_a.id', 'formulir_pendaftaran_f.formulir_id')
     ->join('users', 'users.id', 'formulir_pendaftaran_a.user_id')                                            
@@ -1261,7 +1271,10 @@ class PSBController extends Controller
         $formulir->kode_pos=$request->input('kode_pos');
         $formulir->kewarganegaraan=$request->input('kewarganegaraan');
         
-        $formulir->asal_sekolah=strtoupper($request->input('asal_sekolah'));
+        $asalSebelumnya = HelperFormulir::asalSekolahDariUndangan($formulir);
+        $formulir->asal_sekolah = $asalSebelumnya
+          ? strtoupper($asalSebelumnya)
+          : strtoupper($request->input('asal_sekolah'));
         $formulir->anak_ke=$request->input('anak_ke');
         $formulir->jumlah_saudara=$request->input('jumlah_saudara');
         $formulir->golongan_darah=$request->input('golongan_darah');
@@ -1447,10 +1460,12 @@ class PSBController extends Controller
         
         $formulir->save();
 
-        $user=$formulir->User;
-        $user->nomor_hp = $request->input('nomor_hp');    
-        $user->email = $request->input('email');    
-        $user->save();    
+        $user = User::find(optional($formulir->formulir)->user_id);
+        if ($user) {
+          $user->nomor_hp = $request->input('nomor_hp');
+          $user->email = $request->input('email');
+          $user->save();
+        }
 
         return $formulir;
       });

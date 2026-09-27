@@ -60,7 +60,7 @@
                     <td>
                       <v-text-field
                         v-model="formdata.sibling_tk"
-                        label="NAMA SISWA"
+                        label="NAMA MURID"
                         :disabled="saudara_mendaftar_tidak"
                       />
                     </td>
@@ -77,7 +77,7 @@
                     <td>
                       <v-text-field
                         v-model="formdata.sibling_sd"
-                        label="NAMA SISWA"
+                        label="NAMA MURID"
                         :disabled="saudara_mendaftar_tidak"
                       />
                     </td>
@@ -94,7 +94,7 @@
                     <td>
                       <v-text-field
                         v-model="formdata.sibling_smp"
-                        label="NAMA SISWA"
+                        label="NAMA MURID"
                         :disabled="saudara_mendaftar_tidak"
                       />
                     </td>
@@ -111,7 +111,7 @@
                     <td>
                       <v-text-field
                         v-model="formdata.sibling_sma"
-                        label="NAMA SISWA"
+                        label="NAMA MURID"
                         :disabled="saudara_mendaftar_tidak"
                       />
                     </td>
@@ -504,16 +504,16 @@
         kode_jenjang: "",
       },
       rule_nama_siswa: [
-        value => !!value || "Nama Peserta Didik mohon untuk diisi !!!",
-        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Peserta Didik hanya boleh string dan spasi",
+        value => !!value || "Nama Murid mohon untuk diisi !!!",
+        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Murid hanya boleh string dan spasi",
       ],
       rule_nama_panggilan: [
         value => !!value || "Nama Panggilan Panggilan Peserta mohon untuk diisi !!!",
-        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Panggilan Peserta Didik hanya boleh string dan spasi",
+        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || "Nama Panggilan Murid hanya boleh string dan spasi",
       ],
       rule_nik: [
-        value => !!value || "Mohon NIK Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",
-        value => /^[0-9]+$/.test(value) || "NIk Peserta Didik hanya boleh angka",
+        value => !!value || "Mohon NIK Murid untuk di isi sesuai dengan Kartu Keluarga !!!",
+        value => /^[0-9]+$/.test(value) || "NIk Murid hanya boleh angka",
       ],
       rule_tempat_lahir: [
         value => !!value || "Tempat Lahir mohon untuk diisi !!!"
@@ -522,15 +522,15 @@
         value => !!value || "Tanggal Lahir mohon untuk dipilih !!!"
       ],
       rule_agama: [
-        value => !!value || "Mohon agama Peserta Didik mohon untuk diisi !!!"
+        value => !!value || "Mohon agama Murid mohon untuk diisi !!!"
       ],
       rule_tinggi: [
-        value => !!value || "Tinggi badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",
-        value => /^[0-9]+$/.test(value) || "Tinggi badan Peserta Didik hanya boleh angka",
+        value => !!value || "Tinggi badan Murid untuk di isi sesuai dengan Kartu Keluarga !!!",
+        value => /^[0-9]+$/.test(value) || "Tinggi badan Murid hanya boleh angka",
       ],
       rule_berat_badan: [
-        value => !!value || "Berat badan Peserta Didik untuk di isi sesuai dengan Kartu Keluarga !!!",
-        value => /^[0-9]+$/.test(value) || "Berat badan Peserta Didik hanya boleh angka",
+        value => !!value || "Berat badan Murid untuk di isi sesuai dengan Kartu Keluarga !!!",
+        value => /^[0-9]+$/.test(value) || "Berat badan Murid hanya boleh angka",
       ],
       rule_desa: [
         value => !!value || "Mohon Desa untuk dipilih !!!",

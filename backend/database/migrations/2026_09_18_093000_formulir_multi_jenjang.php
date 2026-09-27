@@ -43,22 +43,41 @@ class FormulirMultiJenjang extends Migration
       'persyaratan_ppdb',
     ];
     foreach ($childTables as $tableName) {
-      if (!Schema::hasTable($tableName) || Schema::hasColumn($tableName, 'formulir_id') || !Schema::hasColumn($tableName, 'user_id')) {
+      if (!Schema::hasTable($tableName)) {
         continue;
       }
-      Schema::table($tableName, function (Blueprint $table) {
-        $table->dropForeign(['user_id']);
-      });
-      \DB::statement("ALTER TABLE {$tableName} DROP PRIMARY KEY");
-      \DB::statement("ALTER TABLE {$tableName} CHANGE user_id formulir_id CHAR(36) NOT NULL");
-      Schema::table($tableName, function (Blueprint $table) {
-        $table->primary('formulir_id');
-        $table->foreign('formulir_id')
-          ->references('id')
-          ->on('formulir_pendaftaran_a')
-          ->onDelete('cascade')
-          ->onUpdate('cascade');
-      });
+
+      if (Schema::hasColumn($tableName, 'user_id') && !Schema::hasColumn($tableName, 'formulir_id')) {
+        Schema::table($tableName, function (Blueprint $table) {
+          $table->dropForeign(['user_id']);
+        });
+        \DB::statement("ALTER TABLE {$tableName} DROP PRIMARY KEY");
+        \DB::statement("ALTER TABLE {$tableName} CHANGE user_id formulir_id CHAR(36) NOT NULL");
+      }
+
+      if (!Schema::hasColumn($tableName, 'formulir_id')) {
+        continue;
+      }
+
+      \DB::statement("DELETE child FROM {$tableName} child
+        LEFT JOIN formulir_pendaftaran_a parent ON parent.id = child.formulir_id
+        WHERE parent.id IS NULL");
+
+      if (!$this->hasPrimaryKey($tableName)) {
+        Schema::table($tableName, function (Blueprint $table) {
+          $table->primary('formulir_id');
+        });
+      }
+
+      if (!$this->hasForeignKey($tableName, $tableName.'_formulir_id_foreign')) {
+        Schema::table($tableName, function (Blueprint $table) {
+          $table->foreign('formulir_id')
+            ->references('id')
+            ->on('formulir_pendaftaran_a')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+        });
+      }
     }
 
     if (Schema::hasTable('undangan_pmb')) {
@@ -72,7 +91,13 @@ class FormulirMultiJenjang extends Migration
         JOIN formulir_pendaftaran_a a ON a.user_id = u.user_id AND a.ta = u.ta AND a.kode_jenjang = u.kode_jenjang
         SET u.formulir_id = a.id
         WHERE u.formulir_id IS NULL');
-      \DB::statement('UPDATE undangan_pmb SET formulir_id = user_id WHERE formulir_id IS NULL');
+      \DB::statement('UPDATE undangan_pmb u
+        JOIN formulir_pendaftaran_a a ON a.id = u.user_id
+        SET u.formulir_id = a.id
+        WHERE u.formulir_id IS NULL');
+      \DB::statement('DELETE u FROM undangan_pmb u
+        LEFT JOIN formulir_pendaftaran_a a ON a.id = u.formulir_id
+        WHERE a.id IS NULL');
 
       $indexes = collect(\DB::select('SHOW INDEX FROM undangan_pmb'))->pluck('Key_name')->unique();
       if ($indexes->contains('undangan_pmb_user_id_unique')) {
@@ -93,16 +118,20 @@ class FormulirMultiJenjang extends Migration
       \DB::statement('ALTER TABLE undangan_pmb MODIFY formulir_id CHAR(36) NOT NULL');
 
       $indexes = collect(\DB::select('SHOW INDEX FROM undangan_pmb'))->pluck('Key_name')->unique();
-      Schema::table('undangan_pmb', function (Blueprint $table) use ($indexes) {
-        if (!$indexes->contains('undangan_pmb_formulir_id_unique')) {
+      if (!$indexes->contains('undangan_pmb_formulir_id_unique')) {
+        Schema::table('undangan_pmb', function (Blueprint $table) {
           $table->unique('formulir_id');
-        }
-        $table->foreign('formulir_id')
-          ->references('id')
-          ->on('formulir_pendaftaran_a')
-          ->onDelete('cascade')
-          ->onUpdate('cascade');
-      });
+        });
+      }
+      if (!$this->hasForeignKey('undangan_pmb', 'undangan_pmb_formulir_id_foreign')) {
+        Schema::table('undangan_pmb', function (Blueprint $table) {
+          $table->foreign('formulir_id')
+            ->references('id')
+            ->on('formulir_pendaftaran_a')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+        });
+      }
 
       $undangans = \DB::table('undangan_pmb')->get();
       foreach ($undangans as $undangan) {
@@ -119,6 +148,26 @@ class FormulirMultiJenjang extends Migration
         ]);
       }
     }
+  }
+
+  private function hasPrimaryKey($tableName)
+  {
+    $rows = \DB::select(
+      'SELECT INDEX_NAME FROM information_schema.STATISTICS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND INDEX_NAME = ?',
+      [$tableName, 'PRIMARY']
+    );
+
+    return count($rows) > 0;
+  }
+
+  private function hasForeignKey($tableName, $constraintName)
+  {
+    $rows = \DB::select(
+      'SELECT CONSTRAINT_NAME FROM information_schema.TABLE_CONSTRAINTS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND CONSTRAINT_TYPE = ? AND CONSTRAINT_NAME = ?',
+      [$tableName, 'FOREIGN KEY', $constraintName]
+    );
+
+    return count($rows) > 0;
   }
 
   public function down()

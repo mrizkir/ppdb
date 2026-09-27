@@ -154,7 +154,7 @@
           href: "/dashboard/" + this.$store.getters["auth/AccessToken"]
         },
         {
-          text: "SPSB",
+          text: "SPMB",
           disabled: false,
           href: "/spsb"
         },

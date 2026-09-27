@@ -79,11 +79,11 @@
         nomor_hp: "",
       },
       rule_hubungan: [
-        value => !!value || "Mohon hubungan dengan Peserta Didik untuk dipilih !!!"
+        value => !!value || "Mohon hubungan dengan Murid untuk dipilih !!!"
       ],
       rule_nama_kontak: [
-        value => !!value || "Nama Peserta Didik mohon untuk diisi !!!",
-        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Peserta Didik hanya boleh string dan spasi',
+        value => !!value || "Nama Murid mohon untuk diisi !!!",
+        value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Murid hanya boleh string dan spasi',
       ],
       rule_alamat_rumah: [
         value => !!value || "Alamat Rumah mohon untuk diisi !!!"

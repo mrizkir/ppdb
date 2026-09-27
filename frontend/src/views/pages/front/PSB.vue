@@ -162,8 +162,8 @@ export default {
             code: ""
         },
         rule_name: [
-            value => !!value || "Nama Calon Peserta Didik mohon untuk diisi !!!",
-            value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Calon Peserta Didik hanya boleh string dan spasi',
+            value => !!value || "Nama Calon Murid mohon untuk diisi !!!",
+            value => /^[A-Za-z\s\\,\\.]*$/.test(value) || 'Nama Calon Murid hanya boleh string dan spasi',
         ],
         rule_nomorhp: [
             value => !!value || "Nomor Kontak WA mohon untuk diisi !!!",

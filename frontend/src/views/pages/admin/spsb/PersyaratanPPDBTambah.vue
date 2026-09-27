@@ -17,7 +17,7 @@
                 FOTO WEFIE / KELUARGA (<span class="red--text text--lighten-1">WAJIB</span>)
               </v-card-title>
               <v-card-text>
-                Foto "Wefie" Keluarga yang terdiri dari (Kedua Orangtua/wali dan Calon Peserta Didik)
+                Foto "Wefie" Keluarga yang terdiri dari (Kedua Orangtua/wali dan Calon Murid)
                 <v-file-input 
                   accept="application/pdf,image/jpeg,image/png" 
                   label="(.pdf, .png, atau .jpg) MAX 2MB"
@@ -174,7 +174,7 @@
                 SCAN AKTA KELAHIRAN (<span class="red--text text--lighten-1">WAJIB</span>)
               </v-card-title>
               <v-card-text>
-                Scan Akta Kelahiran Calon Peserta Didik.
+                Scan Akta Kelahiran Calon Murid.
                 <v-file-input 
                   accept="application/pdf,image/jpeg,image/png" 
                   label="(.pdf, .png, atau .jpg) MAX 2MB"
