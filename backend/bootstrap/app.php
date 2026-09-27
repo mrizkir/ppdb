@@ -48,6 +48,7 @@ $app->configure('cors');
 $app->configure('permission');
 $app->configure('jwt');
 $app->configure('mail');
+$app->configure('queue');
 $app->configure('logging');
 $app->configure('service');
 
@@ -80,6 +81,9 @@ $app->register(Spatie\Permission\PermissionServiceProvider::class);
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(Fruitcake\Cors\CorsServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
+$app->register(Illuminate\Bus\BusServiceProvider::class);
+$app->register(Illuminate\Queue\QueueServiceProvider::class);
+$app->alias('queue.worker', Illuminate\Queue\Worker::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class);
 $app->register(Illuminate\Notifications\NotificationServiceProvider::class);

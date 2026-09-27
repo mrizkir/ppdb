@@ -280,6 +280,15 @@ const routes = [
     component: () => import("../views/pages/admin/spsb/ReportJenjang.vue"),
   },
   {
+    path: "/spsb/kelulusan",
+    name: "SPMBKelulusan",
+    meta: {
+      title: "SPMB - KELULUSAN",
+      requiresAuth: true,
+    },
+    component: () => import("../views/pages/admin/spsb/Kelulusan.vue"),
+  },
+  {
     path: "/spsb/laporankelulusan",
     name: "SPMBReportKelulusan",
     meta: {

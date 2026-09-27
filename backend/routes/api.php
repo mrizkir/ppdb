@@ -126,6 +126,10 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 	//spsb - report jenjang
 	$router->post('/spsb/reportspsbprodi/printtoexcel',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'SPSB\ReportSPSBProdiController@printtoexcel','as'=>'reportspsbprodi.printtoexcel']);
 
+	//spsb - pernyataan kelulusan
+	$router->post('/spsb/kelulusan',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\KelulusanController@index','as'=>'kelulusan.index']);
+	$router->post('/spsb/kelulusan/nyatakan',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\KelulusanController@nyatakan','as'=>'kelulusan.nyatakan']);
+
 	//spsb - report report kelulusan
 	$router->post('/spsb/reportspsbkelulusan',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'SPSB\ReportKelulusanController@index','as'=>'reportspsbkelulusan.index']);
 	$router->post('/spsb/reportspsbkelulusan/printtoexcel',['middleware'=>['role:superadmin|psb|keuangan'],'uses'=>'SPSB\ReportKelulusanController@printtoexcel','as'=>'reportspsbkelulusan.printtoexcel']);

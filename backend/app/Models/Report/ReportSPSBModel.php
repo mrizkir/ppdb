@@ -6,7 +6,7 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use \PhpOffice\PhpSpreadsheet\Cell\DataType;
-use App\Models\SPSB\FormulirPendaftaranAModel;
+use App\Models\SPSB\KelulusanPMBModel;
 use App\Helpers\Helper;
 
 class ReportSPSBModel extends ReportModel
@@ -300,11 +300,11 @@ class ReportSPSBModel extends ReportModel
 
         $row=2;
         $sheet->mergeCells("A$row:M$row");				                
-        $sheet->setCellValue("A$row","LAPORAN KELULUSAN CALON MAHASISWA BARU");
+        $sheet->setCellValue("A$row","LAPORAN KELULUSAN CALON MURID BARU");
 
         $row+=1;
         $sheet->mergeCells("A$row:M$row");				                
-        $sheet->setCellValue("A$row"," PROGRAM STUDI $nama_prodi");
+        $sheet->setCellValue("A$row","JENJANG $nama_prodi");
 
         $row+=1;
         $sheet->mergeCells("A$row:M$row");		
@@ -336,14 +336,14 @@ class ReportSPSBModel extends ReportModel
         $row+=2;        
         $sheet->setCellValue("A$row",'NO');
         $sheet->setCellValue("B$row",'NO. FORMULIR');
-        $sheet->setCellValue("C$row",'NAMA MAHASISWA');
+        $sheet->setCellValue("C$row",'NAMA MURID');
         $sheet->setCellValue("D$row",'TEMPAT LAHIR');
         $sheet->setCellValue("E$row",'TANGGAL LAHIR');
         $sheet->setCellValue("F$row",'JK');
         $sheet->setCellValue("G$row",'ALAMAT');
         $sheet->setCellValue("H$row",'TELEPON HP');
         $sheet->setCellValue("I$row",'TELEPON RUMAH');
-        $sheet->setCellValue("J$row",'KELAS');
+        $sheet->setCellValue("J$row",'JENJANG');
         $sheet->setCellValue("K$row",'NILAI');
         $sheet->setCellValue("L$row",'KET.');
         $sheet->setCellValue("M$row",'TGL. DAFTAR');
@@ -357,40 +357,7 @@ class ReportSPSBModel extends ReportModel
         $sheet->getStyle("A$row:M$row")->applyFromArray($styleArray);
         $sheet->getStyle("A$row:M$row")->getAlignment()->setWrapText(true);    
 
-        $data = FormulirPendaftaranAModel::select(\DB::raw('
-                    users.id,
-                    formulir_pendaftaran.no_formulir,
-                    formulir_pendaftaran.nama_siswa,
-                    formulir_pendaftaran.tempat_lahir,
-                    formulir_pendaftaran.tanggal_lahir,
-                    formulir_pendaftaran.jk,
-                    CONCAT(alamat_rumah,\' \',address1_kelurahan,\' \',address1_kecamatan,\' \',address1_kabupaten,\' \',address1_provinsi) AS alamat,
-                    formulir_pendaftaran.telp_hp,
-                    formulir_pendaftaran.telp_rumah,
-                    COALESCE(nilai_ujian_psb.nilai,\'N.A\') AS nilai,
-                    nilai_ujian_psb.ket_lulus,
-                    CASE
-                        WHEN nilai_ujian_psb.ket_lulus IS NULL THEN \'N.A\'
-                        WHEN nilai_ujian_psb.ket_lulus=0 THEN \'TIDAK LULUS\'
-                        WHEN nilai_ujian_psb.ket_lulus=1 THEN \'LULUS\'
-                    END AS status,
-                    kelas.nkelas,
-                    users.active,
-                    users.foto,
-                    users.created_at,
-                    users.updated_at
-                '))
-                ->join('users','formulir_pendaftaran.user_id','users.id')                    
-                ->join('kelas','formulir_pendaftaran.idkelas','kelas.idkelas')                    
-                ->leftJoin('nilai_ujian_psb','formulir_pendaftaran.user_id','nilai_ujian_psb.user_id')                    
-                ->where('users.ta',$ta)
-                ->where('kode_jenjang',$kode_jenjang)            
-                ->whereNotNull('formulir_pendaftaran.idkelas')   
-                ->where('users.active',1)    
-                ->where('nilai_ujian_psb.ket_lulus',$filter_status)
-                ->orderBy('formulir_pendaftaran.idkelas','ASC')               
-                ->orderBy('formulir_pendaftaran.nama_siswa','ASC') 
-                ->get();
+        $data = KelulusanPMBModel::queryDaftar($ta, $kode_jenjang, $filter_status)->get();
 
         $row+=1;
         $row_awal=$row; 
@@ -414,6 +381,7 @@ class ReportSPSBModel extends ReportModel
             $row+=1;
             $no+=1;
         }
+        if ($no > 1) {
         $row-=1;
         $styleArray=array(								
             'alignment' => array('horizontal'=>Alignment::HORIZONTAL_CENTER,
@@ -428,6 +396,7 @@ class ReportSPSBModel extends ReportModel
         );																					 
         $sheet->getStyle("C$row_awal:D$row")->applyFromArray($styleArray);
         $sheet->getStyle("G$row_awal:G$row")->applyFromArray($styleArray);
+        }
 
         $generate_date=date('Y-m-d_H_m_s');
         return $this->download("laporan_kelulusan_$generate_date.xlsx");

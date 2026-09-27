@@ -39,7 +39,14 @@
                                 label="Search"
                                 single-line
                                 hide-details
+                                class="mb-3"
                             ></v-text-field>
+                            <v-chip-group v-model="filter_status" mandatory>
+                                <v-chip value="1" filter outlined>Lulus</v-chip>
+                                <v-chip value="0" filter outlined>Tidak lulus</v-chip>
+                                <v-chip value="belum" filter outlined>Belum dinyatakan</v-chip>
+                                <v-chip value="all" filter outlined>Semua</v-chip>
+                            </v-chip-group>
                         </v-card-text>
                     </v-card>
                 </v-col>
@@ -145,7 +152,7 @@ export default {
                 href: '/spsb'
             },
             {
-                text: 'NILAI UJIAN',
+                text: 'LAPORAN KELULUSAN',
                 disabled: true,
                 href: '#'
             }
@@ -178,9 +185,8 @@ export default {
             { text: 'NO.FORMULIR', value: 'no_formulir', width: 120, sortable: true },
             { text: 'NAMA MURID', value: 'name', width: 350, sortable: true },
             { text: 'NOMOR HP', value: 'nomor_hp', width: 100},
-            { text: 'KELAS', value: 'nkelas', width: 100, sortable: true },
-            { text: 'NILAI', value: 'nilai', width: 100, sortable: true },
-            { text: 'STATUS', value: 'status', width: 100, sortable: true },
+            { text: 'JENJANG', value: 'nkelas', width: 100, sortable: true },
+            { text: 'STATUS', value: 'status', width: 160, sortable: true },
             { text: 'AKSI', value: 'actions', sortable: false, width:50 },
         ],
         search: "",
@@ -188,7 +194,7 @@ export default {
         datamhsbaru: {},
 
         //form data 
-        filter_status: 1,
+        filter_status: "1",
         form_valid: true,
 
         data_mhs: {},
@@ -276,7 +282,7 @@ export default {
                 const url = window.URL.createObjectURL(new Blob([data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'laporan_jenjang_'+Date.now()+'.xlsx');
+                link.setAttribute('download', 'laporan_kelulusan_'+Date.now()+'.xlsx');
                 link.setAttribute('id', 'download_laporan');
                 document.body.appendChild(link);
                 link.click();
@@ -304,6 +310,13 @@ export default {
             if (!this.firstloading)
             {
                 this.nama_jenjang = this.$store.getters['uiadmin/getNamaJenjang'](val);
+                this.initialize();
+            }
+        },
+        filter_status()
+        {
+            if (!this.firstloading)
+            {
                 this.initialize();
             }
         }

@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
    * @var array
    */
   protected $commands = [
-    //
+    \Illuminate\Queue\Console\WorkCommand::class,
   ];
 
   /**

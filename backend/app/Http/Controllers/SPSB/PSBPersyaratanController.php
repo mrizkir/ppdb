@@ -19,7 +19,6 @@ use App\Models\Keuangan\KonfirmasiPembayaranModel;
 use App\Helpers\Helper;
 use App\Helpers\HelperFormulir;
 use App\Mail\SiswaBaruRegistered;
-use App\Mail\VerifyEmailAddress;
 
 use Ramsey\Uuid\Uuid;
 
@@ -182,7 +181,7 @@ class PSBPersyaratanController extends Controller {
     if (!is_null($user) && $config_kirim_email==1)
     {
       $code='';
-      app()->mailer->to($request->input('email'))->send(new VerifyEmailAddress($user->code));
+      \App\Jobs\SendVerifyEmailJob::dispatch($request->input('email'), $user->code);
     }
     else
     {
@@ -259,7 +258,7 @@ class PSBPersyaratanController extends Controller {
     if (!is_null($user) && $config_kirim_email==1)
     {
       $code='';
-      app()->mailer->to($request->input('email'))->send(new VerifyEmailAddress($user->code));
+      \App\Jobs\SendVerifyEmailJob::dispatch($request->input('email'), $user->code);
     }       
     else
     {
