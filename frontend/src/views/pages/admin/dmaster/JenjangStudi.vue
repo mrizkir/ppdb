@@ -39,7 +39,7 @@
             loading-text="Loading... Please wait"
           >
             <template v-slot:top>
-              <v-dialog v-model="dialogfrm" max-width="500px" persistent>
+                <v-dialog v-model="dialogfrm" max-width="720px" persistent>
                 <v-form ref="frmdata" v-model="form_valid" lazy-validation>
                   <v-card>
                     <v-card-title>
@@ -54,6 +54,15 @@
                       <v-switch
                         v-model="formdata.status_pendaftaran"
                         label="Aktif"
+                      />
+                      <v-text-field
+                        v-model="formdata.link_kuesioner"
+                        label="LINK KUESIONER"
+                        hint="Kosongkan bila jenjang ini tidak punya kuesioner"
+                        persistent-hint
+                        :rules="rule_link"
+                        outlined
+                        dense
                       />
                     </v-card-text>
                     <v-card-actions>
@@ -154,12 +163,20 @@
         kode_jenjang: "",
         nama_jenjang: "",
         status_pendaftaran: false,
+        link_kuesioner: "",
       },
       formdefault: {
         kode_jenjang: "",
         nama_jenjang: "",
         status_pendaftaran: false,
+        link_kuesioner: "",
       },
+      rule_link: [
+        value =>
+          !value ||
+          /^https?:\/\/.+/i.test(value) ||
+          "Link kuesioner harus berupa URL",
+      ],
 
       editedIndex: -1,
     }),
@@ -200,6 +217,7 @@
                   _method: "PUT",
                   status_pendaftaran:
                     this.formdata.status_pendaftaran == true ? 1 : 0,
+                  link_kuesioner: this.formdata.link_kuesioner || "",
                 },
                 {
                   headers: {

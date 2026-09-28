@@ -37,11 +37,14 @@ class JenjangStudiController extends Controller {
     }
     else
     {
-      $this->validate($request, [        
-        'status_pendaftaran'=>'required|in:0,1'            
+      $this->validate($request, [
+        'status_pendaftaran' => 'required|in:0,1',
+        'link_kuesioner' => 'nullable|url|max:2000',
       ]);
-      
+
+      $link = trim((string) $request->input('link_kuesioner', ''));
       $jenjang_studi->status_pendaftaran = $request->input('status_pendaftaran');
+      $jenjang_studi->link_kuesioner = $link === '' ? null : $link;
       $jenjang_studi->save();
 
       return Response()->json([

@@ -128,59 +128,29 @@
             </v-card-text> 
           </v-card>
         </v-timeline-item>
-        <v-timeline-item color="teal lighten-1" icon="mdi-roman-numeral-8" fill-dot>
+        <v-timeline-item
+          v-if="kuesioner"
+          color="teal lighten-1"
+          icon="mdi-roman-numeral-8"
+          fill-dot
+        >
           <v-card color="teal lighten-1" dark>
             <v-card-title class="title">KUESIONER</v-card-title>
             <v-card-text class="white text--primary">
               <p>
-                Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>TK</strong>
-              </p> 
+                Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang
+                <strong>{{ kuesioner.nama_jenjang }}</strong>
+              </p>
               <v-btn
                 color="purple darken-1"
                 class="mx-0"
                 outlined
-                href="https://docs.google.com/forms/d/e/1FAIpQLSd-8KQpZ_9RYRsNqSGCS4BuYVSSWZrILVGkpjZgm8Af8st70w/viewform?usp=sharing&ouid=116590670459241609195"
+                :href="kuesioner.link_kuesioner"
                 target="_blank"
               >
                 Isi Kuesioner
               </v-btn>
-              <p>
-                Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>SD</strong>
-              </p> 
-              <v-btn
-                color="purple darken-1"
-                class="mx-0"
-                outlined
-                href="https://docs.google.com/forms/d/e/1FAIpQLSd-8KQpZ_9RYRsNqSGCS4BuYVSSWZrILVGkpjZgm8Af8st70w/viewform?usp=sharing&ouid=116590670459241609195"
-                target="_blank"
-              >
-                Isi Kuesioner
-              </v-btn>
-              <p>
-                Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>SMP</strong>
-              </p> 
-              <v-btn
-                color="purple darken-1"
-                class="mx-0"
-                outlined
-                href="hhttps://docs.google.com/forms/d/e/1FAIpQLSd-8KQpZ_9RYRsNqSGCS4BuYVSSWZrILVGkpjZgm8Af8st70w/viewform?usp=sharing&ouid=116590670459241609195"
-                target="_blank"
-              >
-                Isi Kuesioner
-              </v-btn>
-              <p>
-                Isilah kuesioner berikut (WAJIB) melalui Google Form bagi Ananda Jenjang <strong>SMA</strong>
-              </p> 
-              <v-btn
-                color="purple darken-1"
-                class="mx-0"
-                outlined
-                href="https://docs.google.com/forms/d/e/1FAIpQLSd-8KQpZ_9RYRsNqSGCS4BuYVSSWZrILVGkpjZgm8Af8st70w/viewform?usp=sharing&ouid=116590670459241609195"
-                target="_blank"
-              >
-                Isi Kuesioner
-              </v-btn>
-            </v-card-text> 
+            </v-card-text>
           </v-card>
         </v-timeline-item>				
       </v-timeline>
@@ -195,12 +165,23 @@ export default {
     this.initialize(); 
   },
   data:()=>({
-    btnLoading: false, 
+    btnLoading: false,
+    kuesioner: null,
   }),
   methods: {
     initialize: async function()
     {
-      
+      const kode = parseInt(this.$store.getters["auth/AttributeUser"]("kode_jenjang"), 10);
+      if (!kode) {
+        return;
+      }
+      await this.$ajax.get("/datamaster/jenjangstudi").then(({ data }) => {
+        const daftar = data.jenjang_studi || [];
+        const jenjang = daftar.find(item => parseInt(item.kode_jenjang, 10) === kode);
+        if (jenjang && jenjang.link_kuesioner) {
+          this.kuesioner = jenjang;
+        }
+      });
     },
   }
 }
