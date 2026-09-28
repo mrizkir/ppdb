@@ -53,7 +53,11 @@ class PSBPersyaratanController extends Controller {
         persyaratan_ppdb.file_ktp_ayah,
         persyaratan_ppdb.file_ktp_ibu,
         persyaratan_ppdb.file_kk,
-        persyaratan_ppdb.file_aktalahir,                                    
+        persyaratan_ppdb.file_aktalahir,
+        persyaratan_ppdb.file_screenshoot_medsos,
+        persyaratan_ppdb.file_sertifikat,
+        persyaratan_ppdb.file_nisn,
+        persyaratan_ppdb.file_kia,
         persyaratan_ppdb.created_at,
         persyaratan_ppdb.updated_at'
       ))
@@ -69,7 +73,55 @@ class PSBPersyaratanController extends Controller {
       'psb'=>$data,
       'message'=>'Fetch data calon calon peserta didik baru berhasil diperoleh'
     ], 200)->setEncodingOptions(JSON_NUMERIC_CHECK);  
-  }    
+  }
+
+  /**
+   * Satu halaman review berkas persyaratan milik satu formulir.
+   */
+  public function review(Request $request, $id)
+  {
+    $this->hasPermissionTo('SPSB-PSB_BROWSE');
+
+    $formulirId = HelperFormulir::resolveId($id);
+    $calon = \DB::table('formulir_pendaftaran_a')
+      ->join('users', 'users.id', '=', 'formulir_pendaftaran_a.user_id')
+      ->leftJoin('persyaratan_ppdb', 'persyaratan_ppdb.formulir_id', '=', 'formulir_pendaftaran_a.id')
+      ->where('formulir_pendaftaran_a.id', $formulirId)
+      ->select(\DB::raw('
+        formulir_pendaftaran_a.id AS formulir_id,
+        users.username,
+        users.name,
+        users.nomor_hp,
+        formulir_pendaftaran_a.ta,
+        formulir_pendaftaran_a.kode_jenjang,
+        persyaratan_ppdb.file_fotoselfi,
+        persyaratan_ppdb.file_ktp_ayah,
+        persyaratan_ppdb.file_ktp_ibu,
+        persyaratan_ppdb.file_kk,
+        persyaratan_ppdb.file_aktalahir,
+        persyaratan_ppdb.file_screenshoot_medsos,
+        persyaratan_ppdb.file_sertifikat,
+        persyaratan_ppdb.file_nisn,
+        persyaratan_ppdb.file_kia
+      '))
+      ->first();
+
+    if (is_null($calon)) {
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'fetchdata',
+        'message' => ["Persyaratan dengan ID ($id) gagal diperoleh"],
+      ], 422);
+    }
+
+    return Response()->json([
+      'status' => 1,
+      'pid' => 'fetchdata',
+      'calon' => $calon,
+      'message' => 'Berkas persyaratan berhasil diperoleh.',
+    ], 200);
+  }
+
   /**
    * digunakan untuk mendapatkan calon calon peserta didik baru yang telah mengisi formulir pendaftaran
    *

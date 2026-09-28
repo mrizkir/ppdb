@@ -53,7 +53,7 @@
           <v-form v-model="form_valid_ktp_ayah" ref="frmuploadktpayah" lazy-validation>
             <v-card class="mb-3">
               <v-card-title>
-                SCAN KTP AYAH (<span class="red--text text--lighten-1">WAJIB</span>)
+                PINDAIAN KTP AYAH (<span class="red--text text--lighten-1">WAJIB</span>)
               </v-card-title>
               <v-card-text>
                 Scan sisi depan KTP ayah.
@@ -92,7 +92,7 @@
           <v-form v-model="form_valid_ktp_ibu" ref="frmuploadktpibu" lazy-validation>
             <v-card class="mb-3">
               <v-card-title>
-                SCAN KTP IBU (<span class="red--text text--lighten-1">WAJIB</span>)
+                PINDAIAN KTP IBU (<span class="red--text text--lighten-1">WAJIB</span>)
               </v-card-title>
               <v-card-text>
                 Scan sisi depan KTP Ibu.
@@ -131,7 +131,7 @@
           <v-form v-model="form_valid_kk" ref="frmuploadkk" lazy-validation>
             <v-card class="mb-3">
               <v-card-title>
-                SCAN KARTU KELUARGA (<span class="red--text text--lighten-1">WAJIB</span>)
+                PINDAIAN KARTU KELUARGA (<span class="red--text text--lighten-1">WAJIB</span>)
               </v-card-title>
               <v-card-text>
                 Scan Kartu Keluarga.
@@ -171,7 +171,7 @@
           <v-form v-model="form_valid_aktalahir" ref="frmuploadaktalahir" lazy-validation>
             <v-card class="mb-3">
               <v-card-title>
-                SCAN AKTA KELAHIRAN (<span class="red--text text--lighten-1">WAJIB</span>)
+                PINDAIAN AKTA KELAHIRAN (<span class="red--text text--lighten-1">WAJIB</span>)
               </v-card-title>
               <v-card-text>
                 Scan Akta Kelahiran Calon Murid.

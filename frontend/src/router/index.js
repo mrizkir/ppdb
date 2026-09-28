@@ -243,6 +243,15 @@ const routes = [
     component: () => import("../views/pages/admin/spsb/PersyaratanPSB.vue"),
   },
   {
+    path: "/spsb/persyaratan/:id",
+    name: "SPMBPersyaratanReview",
+    meta: {
+      title: "SPMB - REVIEW PERSYARATAN",
+      requiresAuth: true,
+    },
+    component: () => import("../views/pages/admin/spsb/ReviewPersyaratan.vue"),
+  },
+  {
     path: "/spsb/kontakdarurat",
     name: "SPMBKontakDarurat",
     meta: {

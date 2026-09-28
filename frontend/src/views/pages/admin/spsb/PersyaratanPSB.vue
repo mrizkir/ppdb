@@ -59,162 +59,11 @@
             class="elevation-1"
             :loading="datatableLoading"
             loading-text="Loading... Please wait">
-            <template v-slot:top>
-              <v-toolbar flat color="white">
-                <v-spacer></v-spacer>
-                <v-dialog v-model="dialogdetailitem" max-width="750px" persistent>
-                  <v-card>
-                    <v-card-title>
-                      <span class="headline">DETAIL DATA</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-row no-gutters>
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>ID :</v-card-title>
-                            <v-card-subtitle>
-                              {{formdata.id}}
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>USERNAME :</v-card-title>
-                            <v-card-subtitle>
-                              {{formdata.username}}
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                      </v-row>
-                      <v-row no-gutters>
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>NAMA PESERTA DIDIK :</v-card-title>
-                            <v-card-subtitle>
-                              {{formdata.name}}
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>NOMOR HP :</v-card-title>
-                            <v-card-subtitle>
-                              {{formdata.nomor_hp}}
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                      </v-row>
-                      <v-row no-gutters>
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>FOTO WEFIE :</v-card-title>
-                            <v-card-subtitle>
-                              <v-btn
-                                color="green"
-                                text
-                                :href="$api.storageURL + '/' + formdata.file_fotoselfi"
-                                v-if="formdata.file_fotoselfi">
-                                LIHAT
-                              </v-btn>
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>FILE KTP AYAH/IBU/WALI :</v-card-title>
-                            <v-card-subtitle>
-                              <v-btn
-                                color="green"
-                                text
-                                :href="$api.storageURL + '/' + formdata.file_ktp_ayah"
-                                v-if="formdata.file_ktp_ayah">
-                                LIHAT KTP AYAH/WALI
-                              </v-btn>
-                              <v-btn
-                                color="green"
-                                text
-                                :href="$api.storageURL + '/' + formdata.file_ktp_ibu"
-                                v-if="formdata.file_ktp_ibu">
-                                LIHAT KTP IBU/WALI
-                              </v-btn>
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                      </v-row> 
-                      <v-row no-gutters>
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>FILE KK :</v-card-title>
-                            <v-card-subtitle>
-                              <v-btn
-                                color="green"
-                                text
-                                :href="$api.storageURL + '/' + formdata.file_kk"
-                                v-if="formdata.file_kk">
-                                LIHAT
-                              </v-btn>
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>FILE AKTA LAHIR :</v-card-title>
-                            <v-card-subtitle>
-                              <v-btn
-                                color="green"
-                                text
-                                :href="$api.storageURL + '/' + formdata.file_aktalahir"
-                                v-if="formdata.file_aktalahir">
-                                LIHAT
-                              </v-btn>
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                      </v-row> 
-                      <v-row no-gutters>
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>CREATED :</v-card-title>
-                            <v-card-subtitle>
-                              {{$date(formdata.created_at).format('DD/MM/YYYY HH:mm')}} /
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                        <v-col xs="12" sm="6" md="6">
-                          <v-card flat>
-                            <v-card-title>UPDATED :</v-card-title>
-                            <v-card-subtitle>
-                              {{$date(formdata.updated_at).format('DD/MM/YYYY HH:mm')}}
-                            </v-card-subtitle>
-                          </v-card>
-                        </v-col>
-                        <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
-                      </v-row> 
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer> 
-                      <v-btn color="blue darken-1" text @click.stop="closedialogdetailitem">KELUAR</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-toolbar>
-            </template>
             <template v-slot:item.actions="{ item }">
               <v-icon
                 small
                 class="mr-2"
-                :loading="btnLoading"
-                :disabled="btnLoading"
-                @click.stop="viewItem(item)"
+                @click.stop="reviewItem(item)"
               >
                 mdi-eye
               </v-icon>
@@ -586,7 +435,6 @@ export default {
           }
         }
       ).then(() => {
-        this.closedialogdetailitem();
         this.btnLoading = false;
       }).catch(() => {
         this.btnLoading = false;
@@ -604,21 +452,9 @@ export default {
       }
       return hp;
     },
-    async viewItem(item) {
-      await this.$ajax.get('/keuangan/konfirmasipembayaran/'+item.id, 
-      {
-        params: {
-          ta: item.ta || this.tahun_pendaftaran,
-          kode_jenjang: item.kode_jenjang || this.kode_jenjang,
-        },
-        headers: {
-          Authorization: this.$store.getters["auth/Token"]
-        }
-      }).then(({ data }) => {
-        this.formdata=item;
-        this.data_konfirmasi = data.konfirmasi;
-        this.dialogdetailitem = true;
-      });
+    reviewItem(item) {
+      const id = item.formulir_id || item.id;
+      this.$router.push("/spsb/persyaratan/" + id);
     },
     async editItem(item) {
       this.editedIndex = this.datatable.indexOf(item);
@@ -653,14 +489,6 @@ export default {
           });
         }
       });
-    },
-    closedialogdetailItem() {
-      this.dialogdetailitem = false;
-      setTimeout(() => {
-        this.formdata = Object.assign({}, this.formdefault)
-        this.editedIndex = -1;
-        }, 300
-      );
     },
     closedialogfrm() {
       this.dialogfrm = false;

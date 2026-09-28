@@ -136,6 +136,7 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 
 	//spsb - persyaratan
 	$router->post('/spsb/psbpersyaratan',['middleware'=>['role:superadmin|psb|siswabaru|keuangan'],'uses'=>'SPSB\PSBPersyaratanController@index','as'=>'psbpersyaratan.index']);
+	$router->get('/spsb/psbpersyaratan/review/{id}',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\PSBPersyaratanController@review','as'=>'psbpersyaratan.review']);
 	$router->get('/spsb/psbpersyaratan/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBPersyaratanController@show','as'=>'psbpersyaratan.show']);
 	$router->post('/spsb/psbpersyaratan/upload/{id}',['middleware'=>['role:superadmin|psb|siswabaru'],'uses'=>'SPSB\PSBPersyaratanController@upload','as'=>'psbpersyaratan.upload']);
 	$router->post('/spsb/psbpersyaratan/verifikasipersyaratan/{id}',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\PSBPersyaratanController@verifikasipersyaratan','as'=>'psbpersyaratan.verifikasipersyaratan']);
