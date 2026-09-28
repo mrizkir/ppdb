@@ -28,7 +28,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     'name', 
     'nomor_hp', 
     'email', 
-    'ta', 
+    'ta',
+    // Bukan nominal transfer. Nominal ada di formulir_pendaftaran_a.nominal_transfer.
     'code', 
     'theme', 
     'foto', 

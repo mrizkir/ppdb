@@ -46,7 +46,7 @@ class UndanganPMBController extends Controller
       undangan_pmb.updated_at,
       users.name,
       users.nomor_hp,
-      users.code,
+      COALESCE(formulir_pendaftaran_a.nominal_transfer, users.code) AS code,
       users.email,
       users.active,
       formulir_pendaftaran_a.jk,
@@ -101,6 +101,10 @@ class UndanganPMBController extends Controller
       $query->where('kode_jenjang', $request->input('kode_jenjang'));
     }
     $undangan = $query->orderBy('ta', 'desc')->orderBy('created_at', 'desc')->first();
+    $nominal = null;
+    if ($undangan && $undangan->formulir_id) {
+      $nominal = FormulirPendaftaranAModel::where('id', $undangan->formulir_id)->value('nominal_transfer');
+    }
 
     return Response()->json([
       'status' => 1,
@@ -109,7 +113,7 @@ class UndanganPMBController extends Controller
         'id' => $user->id,
         'name' => $user->name,
         'nomor_hp' => $user->nomor_hp,
-        'code' => $user->code,
+        'code' => $nominal,
       ],
       'undangan' => $undangan,
       'message' => is_null($undangan)
@@ -181,11 +185,17 @@ class UndanganPMBController extends Controller
           ]);
         } else {
           $keepOtp = (int) $undangan->ta === (int) $ta && !empty($undangan->otp);
+          $gantiPaket = (int) $undangan->ta !== (int) $ta || (int) $undangan->kode_jenjang !== (int) $kode_jenjang;
           $undangan->otp = $keepOtp ? $undangan->otp : $this->generateOtp($ta, $undangan->id);
           $undangan->berlaku_mulai = $request->input('berlaku_mulai');
           $undangan->berlaku_sampai = $request->input('berlaku_sampai');
           $undangan->ta = $ta;
           $undangan->kode_jenjang = $kode_jenjang;
+          if ($gantiPaket) {
+            $undangan->nominal_transfer = null;
+            $formulir->nominal_transfer = null;
+            $formulir->save();
+          }
           if (!$keepOtp) {
             $undangan->used = 0;
           }
@@ -194,8 +204,12 @@ class UndanganPMBController extends Controller
           $undangan->save();
         }
 
-        $this->ensureKodeTransfer($user);
-        $this->requireBiayaPendaftaran($undangan);
+        $kombi = $this->requireBiayaPendaftaran($undangan);
+        $nominal = HelperFormulir::ensureNominal($formulir, (int) $kombi->biaya);
+        if ((int) $undangan->nominal_transfer !== $nominal) {
+          $undangan->nominal_transfer = $nominal;
+          $undangan->save();
+        }
 
         return $undangan;
       });
@@ -217,7 +231,7 @@ class UndanganPMBController extends Controller
           'id' => $user->id,
           'name' => $user->name,
           'nomor_hp' => $user->nomor_hp,
-          'code' => $user->code,
+          'code' => $undangan->nominal_transfer,
         ],
         'message' => 'Link undangan PMB berhasil dibuat.',
       ], 200);
@@ -525,35 +539,13 @@ class UndanganPMBController extends Controller
     return $kombi;
   }
 
-  private function ensureKodeTransfer(User $user)
-  {
-    $code = (int) $user->code;
-    if ($code > 0) {
-      return $user;
-    }
-
-    $attempts = 0;
-    do {
-      $code = mt_rand(1000, 9999);
-      $exists = User::where('code', $code)->where('id', '!=', $user->id)->exists();
-      $attempts++;
-    } while ($exists && $attempts < 50);
-
-    $user->code = $code;
-    $user->save();
-
-    return $user;
-  }
-
   /**
    * Tampilkan data pembayaran yang sama setiap OTP diisi ulang.
-   * Kode transfer yang sudah ada tidak diganti.
+   * Nominal dibaca dari formulir tahun dan jenjang undangan ini.
    */
   private function paymentFromUndangan(User $user, UndanganPMBModel $undangan)
   {
     try {
-      $this->ensureKodeTransfer($user);
-      $user->refresh();
       $kombi = $this->requireBiayaPendaftaran($undangan);
     } catch (Exception $e) {
       return Response()->json([
@@ -563,8 +555,21 @@ class UndanganPMBController extends Controller
       ], 422);
     }
 
+    $formulir = FormulirPendaftaranAModel::find($undangan->formulir_id);
+    if (is_null($formulir)) {
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'update',
+        'message' => 'Formulir pendaftaran undangan tidak ditemukan.',
+      ], 422);
+    }
+
     $biaya = (int) $kombi->biaya;
-    $code = (int) $user->code;
+    $nominal = HelperFormulir::ensureNominal($formulir, $biaya);
+    if ((int) $undangan->nominal_transfer !== $nominal) {
+      $undangan->nominal_transfer = $nominal;
+      $undangan->save();
+    }
 
     return Response()->json([
       'status' => 1,
@@ -576,9 +581,9 @@ class UndanganPMBController extends Controller
         'nomor_hp' => $user->nomor_hp,
         'email' => $user->email,
         'username' => $user->username,
-        'code' => $code,
+        'code' => $nominal - $biaya,
         'biaya' => $biaya,
-        'total_transfer' => $biaya + $code,
+        'total_transfer' => $nominal,
         'ta' => $undangan->ta,
         'kode_jenjang' => $undangan->kode_jenjang,
         'formulir_id' => $undangan->formulir_id,

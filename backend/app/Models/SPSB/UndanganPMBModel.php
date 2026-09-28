@@ -32,6 +32,7 @@ class UndanganPMBModel extends Model {
     'berlaku_sampai',
     'ta',
     'kode_jenjang',
+    'nominal_transfer',
     'used',
     'created_by',
   ];
@@ -39,6 +40,7 @@ class UndanganPMBModel extends Model {
     'otp' => 'integer',
     'ta' => 'integer',
     'kode_jenjang' => 'integer',
+    'nominal_transfer' => 'integer',
     'used' => 'boolean',
   ];
   /**

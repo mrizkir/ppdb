@@ -409,7 +409,7 @@
         this.btnLoading = true;
         var data = new FormData();
         data.append("user_id", this.formdata.id);
-        data.append("transaksi_id", this.data_pd.code);
+        data.append("transaksi_id", this.data_pd.total_transfer || this.totalTransfer);
         data.append("formulir_id", this.data_pd.formulir_id || "");
         data.append("ta", this.data_pd.ta || "");
         data.append("kode_jenjang", this.data_pd.kode_jenjang || "");

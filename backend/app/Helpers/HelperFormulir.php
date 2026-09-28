@@ -127,6 +127,7 @@ class HelperFormulir
     $copyA->user_id = $source->user_id;
     $copyA->ta = $ta;
     $copyA->kode_jenjang = $kode_jenjang;
+    $copyA->nominal_transfer = null;
     if ($asalSebelumnya) {
       $copyA->asal_sekolah = $asalSebelumnya;
     }
@@ -167,5 +168,68 @@ class HelperFormulir
     $copy = $row->replicate();
     $copy->formulir_id = $toId;
     $copy->save();
+  }
+
+  /**
+   * Biaya pendaftaran (kombi 101) untuk satu tahun dan jenjang.
+   */
+  public static function biayaPendaftaran($ta, $kodeJenjang)
+  {
+    $row = \DB::table('pe3_kombi_periode')
+      ->where('kombi_id', 101)
+      ->where('kode_jenjang', $kodeJenjang)
+      ->where('tahun', $ta)
+      ->where('biaya', '>', 0)
+      ->first();
+
+    return $row ? (int) $row->biaya : null;
+  }
+
+  /**
+   * Nominal transfer = biaya tahun+jenjang formulir ini + kode unik 1-999.
+   * Disimpan sekali di formulir. Angka lama di users.code atau undangan
+   * hanya disalin bila masih masuk rentang biaya tahun itu.
+   */
+  public static function ensureNominal(FormulirPendaftaranAModel $formulir, $biaya)
+  {
+    $biaya = (int) $biaya;
+    if (self::nominalMasihBerlaku($formulir->nominal_transfer, $biaya)) {
+      return (int) $formulir->nominal_transfer;
+    }
+
+    $dariUndangan = (int) UndanganPMBModel::where('formulir_id', $formulir->id)->value('nominal_transfer');
+    if (self::nominalMasihBerlaku($dariUndangan, $biaya)) {
+      $formulir->nominal_transfer = $dariUndangan;
+      $formulir->save();
+      return $dariUndangan;
+    }
+
+    $userCode = (int) \DB::table('users')->where('id', $formulir->user_id)->value('code');
+    if (self::nominalMasihBerlaku($userCode, $biaya)) {
+      $formulir->nominal_transfer = $userCode;
+      $formulir->save();
+      return $userCode;
+    }
+
+    $nominal = $biaya + mt_rand(1, 999);
+    $formulir->nominal_transfer = $nominal;
+    $formulir->save();
+
+    return $nominal;
+  }
+
+  public static function nominalTerbaru($userId)
+  {
+    return (int) FormulirPendaftaranAModel::where('user_id', $userId)
+      ->orderBy('created_at', 'desc')
+      ->value('nominal_transfer');
+  }
+
+  public static function nominalMasihBerlaku($nominal, $biaya)
+  {
+    $nominal = (int) $nominal;
+    $biaya = (int) $biaya;
+
+    return $biaya > 0 && $nominal >= $biaya && $nominal <= $biaya + 999;
   }
 }

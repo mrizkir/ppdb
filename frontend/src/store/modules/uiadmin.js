@@ -17,6 +17,8 @@ const getDefaultState = () => {
     daftar_jenjang: [],
     kode_jenjang: null,
 
+    filter_halaman: {},
+
     theme: null,
   };
 };
@@ -71,6 +73,15 @@ const mutations = {
   },
   setKodeJenjang(state, id) {
     state.kode_jenjang = id;
+  },
+  setFilterHalaman(state, { name, tahun_pendaftaran, kode_jenjang }) {
+    state.filter_halaman = {
+      ...(state.filter_halaman || {}),
+      [name]: {
+        tahun_pendaftaran,
+        kode_jenjang,
+      },
+    };
   },
 
   setTheme(state, theme) {
@@ -139,6 +150,16 @@ const getters = {
   getKodeJenjang: state => {
     return parseInt(state.kode_jenjang);
   },
+  getFilterHalaman: state => name => {
+    const filter = state.filter_halaman && state.filter_halaman[name];
+    if (!filter || filter.tahun_pendaftaran == null || filter.kode_jenjang == null) {
+      return null;
+    }
+    return {
+      tahun_pendaftaran: parseInt(filter.tahun_pendaftaran),
+      kode_jenjang: parseInt(filter.kode_jenjang),
+    };
+  },
   getNamaJenjang: state => key => {
     var jenjang = state.daftar_jenjang.find(record => record.id == key);
     return jenjang.text;
@@ -204,6 +225,23 @@ const actions = {
 
   updateJenjang({ commit }, id) {
     commit("setKodeJenjang", id);
+  },
+
+  ensureFilterHalaman({ commit, getters }, name) {
+    const existing = getters.getFilterHalaman(name);
+    if (existing) {
+      return existing;
+    }
+    const tahun_pendaftaran = getters.getTahunPendaftaran;
+    const kode_jenjang = getters.getKodeJenjang;
+    if (!tahun_pendaftaran || !kode_jenjang) {
+      return null;
+    }
+    commit("setFilterHalaman", { name, tahun_pendaftaran, kode_jenjang });
+    return { tahun_pendaftaran, kode_jenjang };
+  },
+  updateFilterHalaman({ commit }, payload) {
+    commit("setFilterHalaman", payload);
   },
 
   updateTahunPendaftaran({ commit }, tahun) {

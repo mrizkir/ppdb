@@ -7,23 +7,23 @@
         </tr>
         <tr>
             <td style="padding:0;font-family:'Segoe UI Light','Segoe UI','Helvetica Neue Medium',Arial,sans-serif;font-size:41px;color:#2672ec">
-                Verifikasi Alamat Email
+                Informasi Biaya Pendaftaran
             </td>
         </tr>
         <tr>
             <td style="padding:0;padding-top:25px;font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;font-size:14px;color:#2a2a2a">
-                Untuk menyelesaikan proses yang telah dilalui, Kami ingin memastikan bahwa email ini adalah milik Anda.
+                Pendaftaran Anda sudah tercatat. Silakan transfer nominal berikut ke rekening sekolah.
             </td>
         </tr>
         <tr>
-            <td style="padding:0;padding-top:25px;font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;font-size:14px;color:#2a2a2a">                
-                untuk memverifikasi email gunakan kode keamanan : 
+            <td style="padding:0;padding-top:25px;font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;font-size:14px;color:#2a2a2a">
+                Nominal yang harus ditransfer:
                 <span style="font-family:'Segoe UI Bold','Segoe UI Semibold','Segoe UI','Helvetica Neue Medium',Arial,sans-serif;font-size:14px;font-weight:bold;color:#2a2a2a">{{$code}}</span>
             </td>
         </tr>
         <tr>
             <td style="padding:0;padding-top:25px;font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;font-size:14px;color:#2a2a2a">
-                Mohon maaf jika Anda tidak meminta kode ini, dengan aman silahkan abaikan email ini. Mungkin seseorang telah salah memasukan alamat email.
+                Abaikan email ini jika Anda tidak melakukan pendaftaran.
             </td>
         </tr>
         <tr>

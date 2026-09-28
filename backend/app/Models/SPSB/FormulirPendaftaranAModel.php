@@ -69,6 +69,7 @@ class FormulirPendaftaranAModel extends Model {
     'kode_jenjang',
 
     'ta',
+    'nominal_transfer',
     'desc'
   ];
   /**
@@ -77,6 +78,10 @@ class FormulirPendaftaranAModel extends Model {
    * @var string
    */
   public $incrementing = false;
+
+  protected $casts = [
+    'nominal_transfer' => 'integer',
+  ];
   /**
    * activated timestamps.
    *

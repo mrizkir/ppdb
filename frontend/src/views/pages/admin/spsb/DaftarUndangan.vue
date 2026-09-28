@@ -250,7 +250,7 @@
       </v-row>
     </v-container>
     <template v-slot:filtersidebar>
-      <Filter7 v-on:changeTahunPendaftaran="changeTahunPendaftaran" v-on:changeJenjang="changeJenjang" ref="filter7" />
+      <Filter7 halaman="DaftarUndangan" v-on:changeTahunPendaftaran="changeTahunPendaftaran" v-on:changeJenjang="changeJenjang" ref="filter7" />
     </template>
   </SPSBLayout>
 </template>
@@ -278,11 +278,19 @@
           href: "#",
         },
       ];
-      let kode_jenjang = this.$store.getters["uiadmin/getKodeJenjang"];
-      this.kode_jenjang = kode_jenjang;
-      this.nama_jenjang = this.$store.getters["uiadmin/getNamaJenjang"](kode_jenjang);
-      this.tahun_pendaftaran = this.$store.getters["uiadmin/getTahunPendaftaran"];
-      this.initialize();
+      const filter = this.$store.dispatch("uiadmin/ensureFilterHalaman", "DaftarUndangan");
+      Promise.resolve(filter).then(saved => {
+        const kode_jenjang = saved
+          ? saved.kode_jenjang
+          : this.$store.getters["uiadmin/getKodeJenjang"];
+        const tahun = saved
+          ? saved.tahun_pendaftaran
+          : this.$store.getters["uiadmin/getTahunPendaftaran"];
+        this.kode_jenjang = kode_jenjang;
+        this.nama_jenjang = this.$store.getters["uiadmin/getNamaJenjang"](kode_jenjang);
+        this.tahun_pendaftaran = tahun;
+        this.initialize();
+      });
     },
     data: () => ({
       firstloading: true,

@@ -89,7 +89,7 @@ class PSBController extends Controller
       users.email,
       users.nomor_hp,
       users.active,
-      users.code,
+      COALESCE(formulir_pendaftaran_a.nominal_transfer, users.code) AS code,
       users.foto,
       formulir_pendaftaran_a.kode_jenjang,
       formulir_pendaftaran_a.ta,
@@ -423,21 +423,6 @@ class PSBController extends Controller
       $user = \DB::transaction(function () use ($request, $kombi){
         $now = \Carbon\Carbon::now()->toDateTimeString();   
         $kode_jenjang=$request->input('kode_jenjang');
-        switch($kode_jenjang)
-        {
-          case 1:
-            $code = $kombi->biaya + mt_rand(1,999);
-          break;
-          case 2:
-          case 3:                
-            $code = $kombi->biaya + mt_rand(1,999);
-          break;
-          case 4:                
-            $code = $kombi->biaya + mt_rand(1,999);
-          break;
-          default:
-            $code=0;
-        }            
         $ta = ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN');
         $user = User::create([
           'id' => Uuid::uuid4()->toString(),
@@ -450,7 +435,7 @@ class PSBController extends Controller
           'email_verified_at' => '',
           'theme' => 'default',  
           'foto' =>  'images/users/no_photo.png',
-          'code' => $code,          
+          'code' => 0,
           'active' => 0,          
           'default_role' => 'siswabaru',          
           'created_at' => $now, 
@@ -461,7 +446,7 @@ class PSBController extends Controller
         $permission=Role::findByName('siswabaru')->permissions;
         $user->givePermissionTo($permission->pluck('name')); 
         
-        HelperFormulir::createPaket($user->id, [
+        $formulirId = HelperFormulir::createPaket($user->id, [
           'nama_siswa' => strtoupper($request->input('name')),    
           'tanggal_lahir' => $request->input('tanggal_lahir'),                            
           'jk' => strtoupper($request->input('jk')),                                
@@ -472,24 +457,28 @@ class PSBController extends Controller
         ], [
           'nomor_hp' => $request->input('nomor_hp'),
         ]);
+        $formulir = FormulirPendaftaranAModel::find($formulirId);
+        HelperFormulir::ensureNominal($formulir, (int) $kombi->biaya);
         return $user;
       });
+      $nominal = HelperFormulir::nominalTerbaru($user->id);
+      $tampil = HelperPendaftaran::formatUang($nominal);
       $config_kirim_email = ConfigurationModel::getCache('EMAIL_SISWA_ISVALID');
       if (!is_null($user) && $config_kirim_email==1)
       {
         $code = '';
-        \App\Jobs\SendVerifyEmailJob::dispatch($request->input('email'), $user->code);
+        \App\Jobs\SendVerifyEmailJob::dispatch($request->input('email'), $tampil);
       }
       else
       {
-        $code = $user->code;
+        $code = $tampil;
       }       
 
       return Response()->json([
         'status' => 1,
         'pid' => 'store',
         'email' => $user->email,                              
-        'code' => HelperPendaftaran::formatUang($code),    
+        'code' => $code,    
         'message' => 'Data Peserta Didik baru berhasil disimpan.'
       ], 200);
     }
@@ -529,10 +518,19 @@ class PSBController extends Controller
         $this->checkUsia($request);
       }
 
-      $user = \DB::transaction(function () use ($request) {
-        $now = \Carbon\Carbon::now()->toDateTimeString();       
-        $code=mt_rand(1000,9999);
-        $ta=$request->input('tahun_pendaftaran');
+      $ta = $request->input('tahun_pendaftaran');
+      $kodeJenjang = $request->input('kode_jenjang');
+      $biaya = HelperFormulir::biayaPendaftaran($ta, $kodeJenjang);
+      if (is_null($biaya)) {
+        return Response()->json([
+          'status' => 0,
+          'pid' => 'store',
+          'message' => "Biaya pendaftaran jenjang pendidikan ($kodeJenjang) tahun $ta belum ditentukan oleh Admin.",
+        ], 422);
+      }
+
+      $user = \DB::transaction(function () use ($request, $ta, $kodeJenjang, $biaya) {
+        $now = \Carbon\Carbon::now()->toDateTimeString();
         $user=User::create([
           'id' => Uuid::uuid4()->toString(),
           'name' => strtoupper($request->input('name')),
@@ -542,48 +540,52 @@ class PSBController extends Controller
           'nomor_hp' => $request->input('nomor_hp'),
           'ta' => $ta,
           'email_verified_at' => '',
-          'theme' => 'default',  
-          'code' => $code,          
-          'active' => 1,         
+          'theme' => 'default',
+          'code' => 0,
+          'active' => 1,
           'default_role' => 'siswabaru',
-          'foto' => 'images/users/no_photo.png', 
-          'created_at' => $now, 
+          'foto' => 'images/users/no_photo.png',
+          'created_at' => $now,
           'updated_at' => $now
         ]);
-        $role='siswabaru';   
+        $role='siswabaru';
         $user->assignRole($role);
         $permission=Role::findByName('siswabaru')->permissions;
-        $user->givePermissionTo($permission->pluck('name')); 
-        
-        HelperFormulir::createPaket($user->id, [
-          'nama_siswa' => strtoupper($request->input('name')),                                
+        $user->givePermissionTo($permission->pluck('name'));
+
+        $formulirId = HelperFormulir::createPaket($user->id, [
+          'nama_siswa' => strtoupper($request->input('name')),
           'tanggal_lahir' => $request->input('tanggal_lahir'),
-          'kode_jenjang' => $request->input('kode_jenjang'),
+          'kode_jenjang' => $kodeJenjang,
           'ta' => $ta,
         ], [
           'nomor_hp' => $request->input('nomor_hp'),
         ], [
           'nomor_hp' => $request->input('nomor_hp'),
-        ]);    
+        ]);
+        $formulir = FormulirPendaftaranAModel::find($formulirId);
+        HelperFormulir::ensureNominal($formulir, $biaya);
 
         return $user;
       });
+      $nominal = HelperFormulir::nominalTerbaru($user->id);
+      $tampil = HelperPendaftaran::formatUang($nominal);
       $config_kirim_email = ConfigurationModel::getCache('EMAIL_SISWA_ISVALID');
       if (!is_null($user) && $config_kirim_email==1)
       {
         $code='';
-        \App\Jobs\SendVerifyEmailJob::dispatch($request->input('email'), $user->code);
-      }       
+        \App\Jobs\SendVerifyEmailJob::dispatch($request->input('email'), $tampil);
+      }
       else
       {
-        $code=$user->code;
+        $code=$tampil;
       }
 
       return Response()->json([
         'status' => 1,
         'pid' => 'store',
         'pendaftar' => $user,
-        'code' => $code,                                    
+        'code' => $code,
         'message' => 'Data Peserta Didik baru berhasil disimpan.'
       ], 200);
     }
@@ -1069,7 +1071,15 @@ class PSBController extends Controller
 
     if ($user->count()>0)
     {
-      $user=User::find($user[0]->id);      
+      $user=User::find($user[0]->id);
+      $formulir = HelperFormulir::currentForUser($user->id);
+      if ($formulir) {
+        $biaya = HelperFormulir::biayaPendaftaran($formulir->ta, $formulir->kode_jenjang);
+        if ($biaya) {
+          $user->code = HelperFormulir::ensureNominal($formulir, $biaya);
+          $user->syncOriginal();
+        }
+      }
       $konfirmasi = KonfirmasiPembayaranModel::find($user->id);
       if (is_null($konfirmasi))
       {  

@@ -30,8 +30,8 @@ class VerifyEmailAddress extends Mailable
      */
     public function build()
     {
-        $config = ConfigurationModel::find(101);        
-        return $this->view('emails.VerifyEmailPassword')->with([
+        $config = ConfigurationModel::find(101);
+        return $this->subject('Informasi Biaya Pendaftaran')->view('emails.VerifyEmailPassword')->with([
                                                             'NAMA_SEKOLAH'=>$config->config_value,
                                                             'code'=>$this->code
                                                         ]);

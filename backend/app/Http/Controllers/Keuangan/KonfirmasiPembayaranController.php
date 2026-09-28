@@ -33,7 +33,7 @@ class KonfirmasiPembayaranController extends Controller
                 users.email,
                 users.nomor_hp,
                 users.foto,
-                users.code,
+                COALESCE(f_by_id.nominal_transfer, f_by_user.nominal_transfer, users.code) AS code,
                 COALESCE(konfirmasi_pembayaran.ta, f_by_id.ta, f_by_user.ta) AS ta,
                 COALESCE(konfirmasi_pembayaran.kode_jenjang, f_by_id.kode_jenjang, f_by_user.kode_jenjang) AS kode_jenjang,
                 konfirmasi_pembayaran.no_transaksi,

@@ -19,6 +19,12 @@
 <script>
 export default {
     name: 'FilterMode7',
+    props: {
+        halaman: {
+            type: String,
+            default: "",
+        },
+    },
     created()
     {
         this.syncFromStore();
@@ -35,9 +41,28 @@ export default {
         },
         syncFromStore()
         {
+            if (this.halaman) {
+                const filter = this.$store.getters['uiadmin/getFilterHalaman'](this.halaman);
+                if (filter) {
+                    this.kode_jenjang = filter.kode_jenjang;
+                    this.tahun_pendaftaran = filter.tahun_pendaftaran;
+                    return;
+                }
+            }
             this.kode_jenjang=this.$store.getters['uiadmin/getKodeJenjang'];
             this.tahun_pendaftaran=this.$store.getters['uiadmin/getTahunPendaftaran'];
-        }
+        },
+        simpanFilterHalaman()
+        {
+            if (!this.halaman) {
+                return;
+            }
+            this.$store.dispatch('uiadmin/updateFilterHalaman', {
+                name: this.halaman,
+                tahun_pendaftaran: this.tahun_pendaftaran,
+                kode_jenjang: this.kode_jenjang,
+            });
+        },
     },
     computed: {
         daftar_jenjang() {
@@ -58,7 +83,11 @@ export default {
         {
             if (!this.firstloading)
             {
-                this.$store.dispatch('uiadmin/updateTahunPendaftaran',val);
+                if (this.halaman) {
+                    this.simpanFilterHalaman();
+                } else {
+                    this.$store.dispatch('uiadmin/updateTahunPendaftaran',val);
+                }
                 this.$emit('changeTahunPendaftaran',val);
             }
         },
@@ -66,7 +95,11 @@ export default {
         {
             if (!this.firstloading)
             {
-                this.$store.dispatch('uiadmin/updateJenjang',val);
+                if (this.halaman) {
+                    this.simpanFilterHalaman();
+                } else {
+                    this.$store.dispatch('uiadmin/updateJenjang',val);
+                }
                 this.$emit('changeJenjang',val);
             }
         },

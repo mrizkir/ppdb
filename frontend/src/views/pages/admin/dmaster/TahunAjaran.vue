@@ -342,7 +342,7 @@ export default {
         }
       });
     },
-    closedialogdetailItem() {
+    closedialogdetailitem() {
       this.dialogdetailitem = false;
       setTimeout(() => {
         this.formdata = Object.assign({}, this.formdefault)
