@@ -71,7 +71,10 @@
             <v-card outlined class="mb-2">
               <v-card-title class="subtitle-1">{{ berkas.judul }}</v-card-title>
               <v-card-text>
-                <div v-if="!calon[berkas.key]" class="grey--text py-8 text-center">
+                <div
+                  v-if="!calon[berkas.key]"
+                  class="grey--text py-8 text-center"
+                >
                   Belum diunggah
                 </div>
                 <iframe
@@ -96,95 +99,100 @@
   </SPSBLayout>
 </template>
 <script>
-import SPSBLayout from "@/views/layouts/SPSBLayout";
-import ModuleHeader from "@/components/ModuleHeader";
+  import SPSBLayout from "@/views/layouts/SPSBLayout";
+  import ModuleHeader from "@/components/ModuleHeader";
 
-export default {
-  name: "ReviewPersyaratan",
-  components: {
-    SPSBLayout,
-    ModuleHeader,
-  },
-  created() {
-    this.breadcrumbs = [
-      {
-        text: "HOME",
-        disabled: false,
-        href: "/dashboard/" + this.$store.getters["auth/AccessToken"],
-      },
-      {
-        text: "SPMB",
-        disabled: false,
-        href: "/spsb",
-      },
-      {
-        text: "PERSYARATAN PPDB",
-        disabled: false,
-        href: "/spsb/persyaratan",
-      },
-      {
-        text: "REVIEW",
-        disabled: true,
-        href: "#",
-      },
-    ];
-    this.load();
-  },
-  data: () => ({
-    loading: false,
-    pageError: "",
-    calon: null,
-    breadcrumbs: [],
-    daftarBerkas: [
-      { key: "file_fotoselfi", judul: "FOTO WEFIE / KELUARGA" },
-      { key: "file_ktp_ayah", judul: "PINDAIAN KTP AYAH" },
-      { key: "file_ktp_ibu", judul: "PINDAIAN KTP IBU" },
-      { key: "file_kk", judul: "PINDAIAN KARTU KELUARGA" },
-      { key: "file_aktalahir", judul: "PINDAIAN AKTA KELAHIRAN" },
-      { key: "file_screenshoot_medsos", judul: "TANGKAPAN LAYAR MEDIA SOSIAL" },
-      { key: "file_sertifikat", judul: "SERTIFIKAT PENGHARGAAN" },
-      { key: "file_nisn", judul: "KARTU NISN" },
-      { key: "file_kia", judul: "KARTU KIA" },
-    ],
-  }),
-  methods: {
-    fileUrl(path) {
-      return this.$api.storageURL + "/" + path;
+  export default {
+    name: "ReviewPersyaratan",
+    components: {
+      SPSBLayout,
+      ModuleHeader,
     },
-    isPdf(path) {
-      return String(path || "").toLowerCase().endsWith(".pdf");
+    created() {
+      this.breadcrumbs = [
+        {
+          text: "HOME",
+          disabled: false,
+          href: "/dashboard/" + this.$store.getters["auth/AccessToken"],
+        },
+        {
+          text: "SPMB",
+          disabled: false,
+          href: "/spsb",
+        },
+        {
+          text: "PERSYARATAN PPDB",
+          disabled: false,
+          href: "/spsb/persyaratan",
+        },
+        {
+          text: "REVIEW",
+          disabled: true,
+          href: "#",
+        },
+      ];
+      this.load();
     },
-    kembali() {
-      this.$router.push("/spsb/persyaratan");
+    data: () => ({
+      loading: false,
+      pageError: "",
+      calon: null,
+      breadcrumbs: [],
+      daftarBerkas: [
+        { key: "file_fotoselfi", judul: "FOTO WEFIE / KELUARGA" },
+        { key: "file_ktp_ayah", judul: "PINDAIAN KTP AYAH" },
+        { key: "file_ktp_ibu", judul: "PINDAIAN KTP IBU" },
+        { key: "file_kk", judul: "PINDAIAN KARTU KELUARGA" },
+        { key: "file_aktalahir", judul: "PINDAIAN AKTA KELAHIRAN" },
+        {
+          key: "file_screenshoot_medsos",
+          judul: "TANGKAPAN LAYAR MEDIA SOSIAL",
+        },
+        { key: "file_sertifikat", judul: "SERTIFIKAT PENGHARGAAN" },
+        { key: "file_nisn", judul: "KARTU NISN" },
+        { key: "file_kia", judul: "KARTU KIA" },
+      ],
+    }),
+    methods: {
+      fileUrl(path) {
+        return this.$api.storageURL + "/" + path;
+      },
+      isPdf(path) {
+        return String(path || "")
+          .toLowerCase()
+          .endsWith(".pdf");
+      },
+      kembali() {
+        this.$router.push("/spsb/persyaratan");
+      },
+      async load() {
+        this.loading = true;
+        this.pageError = "";
+        await this.$ajax
+          .get("/spsb/psbpersyaratan/review/" + this.$route.params.id, {
+            headers: {
+              Authorization: this.$store.getters["auth/Token"],
+            },
+          })
+          .then(({ data }) => {
+            this.calon = data.calon;
+            this.loading = false;
+          })
+          .catch(({ response }) => {
+            this.loading = false;
+            const message = response && response.data && response.data.message;
+            this.pageError = Array.isArray(message)
+              ? message[0]
+              : message || "Berkas persyaratan gagal dimuat.";
+          });
+      },
     },
-    async load() {
-      this.loading = true;
-      this.pageError = "";
-      await this.$ajax
-        .get("/spsb/psbpersyaratan/review/" + this.$route.params.id, {
-          headers: {
-            Authorization: this.$store.getters["auth/Token"],
-          },
-        })
-        .then(({ data }) => {
-          this.calon = data.calon;
-          this.loading = false;
-        })
-        .catch(({ response }) => {
-          this.loading = false;
-          const message = response && response.data && response.data.message;
-          this.pageError = Array.isArray(message)
-            ? message[0]
-            : message || "Berkas persyaratan gagal dimuat.";
-        });
-    },
-  },
-};
+  };
 </script>
 <style scoped>
-.review-berkas {
-  width: 100%;
-  height: 480px;
-  border: 0;
-}
+  .review-berkas {
+    width: 100%;
+    height: 480px;
+    border: 0;
+  }
 </style>

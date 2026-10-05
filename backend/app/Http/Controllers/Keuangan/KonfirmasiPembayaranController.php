@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Keuangan\TransaksiModel;
 use App\Models\Keuangan\TransaksiDetailModel;
 use App\Models\Keuangan\KonfirmasiPembayaranModel;
+use App\Models\User;
 use App\Helpers\Helper;
 
 class KonfirmasiPembayaranController extends Controller 
@@ -137,7 +138,10 @@ class KonfirmasiPembayaranController extends Controller
             ]);
             $konfirmasi = \DB::transaction(function () use ($request,$konfirmasi){  
                 $konfirmasi->verified=$request->input('verified');
-                $konfirmasi->save();  
+                $konfirmasi->save();
+                if ((int) $konfirmasi->verified === 1) {
+                    User::where('id', $konfirmasi->user_id)->update(['active' => 1]);
+                }
                 return $konfirmasi;
             });
             

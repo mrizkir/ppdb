@@ -165,6 +165,7 @@
             />
           </v-card-text>
         </v-card>
+        <!--
         <v-card class="mb-4">
           <v-card-title>
             MEDIA SOSIAL
@@ -190,6 +191,7 @@
             />
           </v-card-text>
         </v-card>
+        -->
         <v-card class="mb-4">
           <v-card-actions> 
             <v-spacer></v-spacer> 
@@ -210,6 +212,20 @@
       </v-form>
     </v-col>
     <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
+    <v-dialog v-model="dialogSukses" max-width="520" persistent>
+      <v-card>
+        <v-card-title>Biodata Ibu</v-card-title>
+        <v-card-text>
+          <v-alert type="success" text>
+            Biodata ibu berhasil disimpan. Silakan lanjutkan pengisian Biodata Wali. Apabila tidak ada wali, bagian tersebut boleh dilewati.
+          </v-alert>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="tutupSukses">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-row>
 </template>
 <script>
@@ -227,6 +243,7 @@ export default {
   },
   data:()=>({
     btnLoading: false,
+    dialogSukses: false,
     btnLoadingProv: false,
     btnLoadingKab: false,
     btnLoadingKec: false,
@@ -282,9 +299,9 @@ export default {
       pekerjaan_instansi: "",
       penghasilan_bulanan: "",
       desc: "",
-      fb_account: "-",
-      ig_account: "-",
-      tiktok_account: "-",
+      // fb_account: "-",
+      // ig_account: "-",
+      // tiktok_account: "-",
     },
     rule_hubungan: [
       value => !!value || "Mohon hubungan dengan Ibu untuk dipilih !!!"
@@ -329,15 +346,15 @@ export default {
       value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
       value => /^[0-9]+$/.test(value) || 'Penghasilan hanya boleh angka',
     ],
-    rule_fb: [
-      value => !!value || "Nama akun FB mohon untuk di isi bila tidak ada isi dengan '-'!!!", 
-    ],
-    rule_ig: [
-      value => !!value || "Nama akun IG mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
-    ],
-    rule_tiktok: [
-      value => !!value || "Nama akun TIKTOK mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
-    ],
+    // rule_fb: [
+    //   value => !!value || "Nama akun FB mohon untuk di isi bila tidak ada isi dengan '-'!!!", 
+    // ],
+    // rule_ig: [
+    //   value => !!value || "Nama akun IG mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
+    // ],
+    // rule_tiktok: [
+    //   value => !!value || "Nama akun TIKTOK mohon untuk di isi bila tidak ada isi dengan '-' !!!", 
+    // ],
   }),
   methods: {
     initialize: async function()
@@ -392,11 +409,15 @@ export default {
         this.formdata.pendidikan = data.formulir.pendidikan;
         this.formdata.pekerjaan_instansi = data.formulir.pekerjaan_instansi;
         this.formdata.penghasilan_bulanan = data.formulir.penghasilan_bulanan;
-        this.formdata.fb_account = data.formulir.fb_account;
-        this.formdata.ig_account = data.formulir.ig_account;
-        this.formdata.tiktok_account = data.formulir.tiktok_account;
+        // this.formdata.fb_account = data.formulir.fb_account;
+        // this.formdata.ig_account = data.formulir.ig_account;
+        // this.formdata.tiktok_account = data.formulir.tiktok_account;
         this.$refs.frmdata.resetValidation();
       });
+    },
+    tutupSukses () {
+      this.dialogSukses = false;
+      this.$router.go();
     },
     save: async function()
     {
@@ -427,9 +448,9 @@ export default {
           pendidikan: this.formdata.pendidikan,
           pekerjaan_instansi: this.formdata.pekerjaan_instansi,
           penghasilan_bulanan: this.formdata.penghasilan_bulanan,
-          fb_account: this.formdata.fb_account,
-          ig_account: this.formdata.ig_account,
-          tiktok_account: this.formdata.tiktok_account,
+          // fb_account: this.formdata.fb_account,
+          // ig_account: this.formdata.ig_account,
+          // tiktok_account: this.formdata.tiktok_account,
         },
         {
           headers: {
@@ -438,7 +459,7 @@ export default {
         }
         ).then(() => {
           this.btnLoading = false;
-          this.$router.go();
+          this.dialogSukses = true;
         }).catch(() => {
           this.btnLoading = false;
         }); 

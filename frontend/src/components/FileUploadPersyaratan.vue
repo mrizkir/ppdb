@@ -60,6 +60,20 @@
 				</v-btn>
 			</v-card-actions>
 		</v-card>
+		<v-dialog v-model="dialogSukses" max-width="520" persistent>
+			<v-card>
+				<v-card-title>Persyaratan</v-card-title>
+				<v-card-text>
+					<v-alert type="success" text>
+						Berkas persyaratan berhasil diunggah. Pastikan seluruh persyaratan sudah terunggah sebelum melanjutkan ke isian Kontak Darurat.
+					</v-alert>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn color="primary" text @click="tutupSukses">OK</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</v-form> 
 </template>
 <script>
@@ -100,6 +114,7 @@
 			btnHapus: true,
 			btnVerifikasi: true,
 			btnLoading: false,
+			dialogSukses: false,
 			image_prev:null,
 
 			//form
@@ -130,6 +145,9 @@
 					this.btnSimpan = false;
 				}
 			},
+			tutupSukses () {
+				this.dialogSukses = false;
+			},
 			upload: async function (index,item)
 			{
 				let data = item;
@@ -154,6 +172,7 @@
 							this.btnHapus = false;
 							this.btnSimpan = true;
 							this.btnLoading = false;
+							this.dialogSukses = true;
 						}).catch(() => {
 							this.btnLoading = false;
 						});

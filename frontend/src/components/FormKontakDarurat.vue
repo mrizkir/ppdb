@@ -53,6 +53,20 @@
       </v-form>
     </v-col>
     <v-responsive width="100%" v-if="$vuetify.breakpoint.xsOnly" />
+    <v-dialog v-model="dialogSukses" max-width="520" persistent>
+      <v-card>
+        <v-card-title>Kontak Darurat</v-card-title>
+        <v-card-text>
+          <v-alert type="success" text>
+            Kontak darurat berhasil disimpan. Terima kasih telah melengkapi data pendaftaran. Apabila jenjang studi ananda memiliki kuesioner, silakan isi melalui tautan di dashboard.
+          </v-alert>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="tutupSukses">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-row>
 </template>
 <script>
@@ -69,6 +83,7 @@
     },
     data:()=>({
       btnLoading: false,
+      dialogSukses: false,
       
       //form
       form_valid: true,
@@ -113,6 +128,10 @@
           this.$refs.frmdata.resetValidation();
         });
       },
+      tutupSukses () {
+        this.dialogSukses = false;
+        this.$router.go();
+      },
       save: async function()
       {
         if (this.$refs.frmdata.validate())
@@ -132,7 +151,7 @@
           }
           ).then(() => {
             this.btnLoading = false;
-            this.$router.go();
+            this.dialogSukses = true;
           }).catch(() => {
             this.btnLoading = false;
           }); 

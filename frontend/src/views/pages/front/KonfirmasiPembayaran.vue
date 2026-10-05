@@ -154,6 +154,20 @@
           </v-form>
         </v-col>
       </v-row>
+      <v-dialog v-model="dialogSukses" max-width="520" persistent>
+        <v-card>
+          <v-card-title>Konfirmasi Pembayaran</v-card-title>
+          <v-card-text>
+            <v-alert type="success" text>
+              Terima kasih telah mengunggah bukti biaya pendaftaran, selanjutnya panitia akan memverifikasi dengan rentang waktu 1x24 jam pada hari efektif (Senin-Jum'at). Jam operasional kami adalah Senin - Jumat, pukul 08:00 -- 16:00 WIB. Jazzakumullah Khair
+            </v-alert>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" text @click="tutupSukses">OK</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-container>
   </FrontLayout>
 </template>
@@ -164,6 +178,7 @@ export default {
   name: 'KonfirmasiPembayaran',
   data: () => ({
     btnLoading: false,
+    dialogSukses: false,
     //form
     form_valid: true,
     data_pd: null,
@@ -262,6 +277,10 @@ export default {
         } 
       }
     },
+    tutupSukses () {
+      this.dialogSukses = false;
+      this.$router.go();
+    },
     save () {
       if (this.$refs.frmkonfirmasi.validate())
       {
@@ -286,7 +305,7 @@ export default {
           }
         ).then(() => {
           this.btnLoading = false;
-          this.$router.go();
+          this.dialogSukses = true;
         }).catch(() => {
           this.btnLoading = false;
         });

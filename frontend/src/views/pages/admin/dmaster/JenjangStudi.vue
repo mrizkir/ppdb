@@ -98,6 +98,15 @@
                 </v-col>
               </td>
             </template>
+            <template v-slot:item.status_pendaftaran="{ item }">
+              <v-chip
+                x-small
+                dark
+                :color="item.status_pendaftaran == 1 ? 'success' : 'grey'"
+              >
+                {{ item.status_pendaftaran == 1 ? "Aktif" : "Tidak aktif" }}
+              </v-chip>
+            </template>
             <template v-slot:item.actions="{ item }">
               <v-icon
                 small
@@ -156,6 +165,11 @@
       headers: [
         { text: "ID", value: "kode_jenjang", width: 10, sortable: false },
         { text: "NAMA JENJANG", value: "nama_jenjang", sortable: false },
+        {
+          text: "STATUS PENDAFTARAN",
+          value: "status_pendaftaran",
+          sortable: false,
+        },
         { text: "AKSI", value: "actions", sortable: false, width: 100 },
       ],
       form_valid: true,

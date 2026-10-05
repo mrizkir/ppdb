@@ -618,9 +618,6 @@ export default {
       value => !!value || "Email mohon untuk diisi !!!",
       v => /.+@.+\..+/.test(v) || 'Format E-mail mohon di isi dengan benar',
     ],
-    rule_fakultas: [
-      value => !!value || "Fakultas mohon untuk dipilih !!!"
-    ],
     rule_jenjang: [
       value => !!value || "Jenjang studi mohon untuk dipilih !!!"
     ],

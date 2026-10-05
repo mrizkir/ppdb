@@ -31,7 +31,7 @@ class PSBController extends Controller
   private function checkUsia($request)
   {
     $tanggal_lahir = $request->input('tanggal_lahir');
-    $batas_tanggal = date('2026-07-31');
+    $batas_tanggal = date('2027-07-31');
     $usia = \App\Helpers\Helper::getUsia($tanggal_lahir, $batas_tanggal);
     $kode_jenjang = $request->input('kode_jenjang');
     
@@ -1435,9 +1435,9 @@ class PSBController extends Controller
         'pendidikan' => 'required',
         'pekerjaan_instansi' => 'required',        
         'penghasilan_bulanan' => 'required|numeric', 
-        'fb_account' => 'required', 
-        'ig_account' => 'required', 
-        'tiktok_account' => 'required', 
+        // 'fb_account' => 'required', 
+        // 'ig_account' => 'required', 
+        // 'tiktok_account' => 'required', 
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1463,9 +1463,9 @@ class PSBController extends Controller
         $formulir->pendidikan=strtoupper($request->input('pendidikan'));
         $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
         $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
-        $formulir->fb_account=$request->input('fb_account');
-        $formulir->ig_account=$request->input('ig_account');
-        $formulir->tiktok_account=$request->input('tiktok_account');
+        // $formulir->fb_account=$request->input('fb_account');
+        // $formulir->ig_account=$request->input('ig_account');
+        // $formulir->tiktok_account=$request->input('tiktok_account');
         
         $formulir->save();
 
@@ -1529,9 +1529,9 @@ class PSBController extends Controller
         'pendidikan' => 'required',
         'pekerjaan_instansi' => 'required',        
         'penghasilan_bulanan' => 'required|numeric', 
-        'fb_account' => 'required', 
-        'ig_account' => 'required', 
-        'tiktok_account' => 'required', 
+        // 'fb_account' => 'required', 
+        // 'ig_account' => 'required', 
+        // 'tiktok_account' => 'required', 
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1557,9 +1557,9 @@ class PSBController extends Controller
         $formulir->pendidikan=strtoupper($request->input('pendidikan'));
         $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
         $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
-        $formulir->fb_account=$request->input('fb_account');
-        $formulir->ig_account=$request->input('ig_account');
-        $formulir->tiktok_account=$request->input('tiktok_account');
+        // $formulir->fb_account=$request->input('fb_account');
+        // $formulir->ig_account=$request->input('ig_account');
+        // $formulir->tiktok_account=$request->input('tiktok_account');
         
         $formulir->save(); 
 
@@ -1615,9 +1615,9 @@ class PSBController extends Controller
         'pendidikan' => 'required',
         'pekerjaan_instansi' => 'required',        
         'penghasilan_bulanan' => 'required|numeric', 
-        'fb_account' => 'required', 
-        'ig_account' => 'required', 
-        'tiktok_account' => 'required', 
+        // 'fb_account' => 'required', 
+        // 'ig_account' => 'required', 
+        // 'tiktok_account' => 'required', 
       ]);
 
       $data_siswa = \DB::transaction(function () use ($request,$formulir){                            
@@ -1642,9 +1642,9 @@ class PSBController extends Controller
         $formulir->pendidikan=strtoupper($request->input('pendidikan'));
         $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
         $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
-        $formulir->fb_account=$request->input('fb_account');
-        $formulir->ig_account=$request->input('ig_account');
-        $formulir->tiktok_account=$request->input('tiktok_account');
+        // $formulir->fb_account=$request->input('fb_account');
+        // $formulir->ig_account=$request->input('ig_account');
+        // $formulir->tiktok_account=$request->input('tiktok_account');
 
         $formulir->save(); 
 

@@ -104,15 +104,15 @@
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                    PPDB Sekolah Islam De Green Camp
+                    Penerimaan Murid Baru (PMB) Sekolah Islam De Green Camp
                     </h2>
                     <div>
-                      Seleksi PPDB terdiri dari 9 (Sembilan) tahapan. Sebelum melanjutkan pastikan terlebih dahulu :
+                      Seleksi PMB terdiri dari 9 (Sembilan) tahapan. Sebelum melanjutkan pastikan terlebih dahulu :
                       <ol type="a">
-                        <li>Ananda sudah berusia min. <strong>4.4 tahun</strong> maks. <strong>7 Tahun</strong> pada Juli {{ 2026 }}. <strong>untuk Jenjang Studi TK</strong></li>
-                        <li>Ananda sudah berusia min. <strong>6 tahun</strong> maks. <strong>8 Tahun</strong> pada Juli {{ 2026 }}.<strong>untuk Jenjang Studi SD</strong></li>
-                        <li>Ananda sudah berusia maks. <strong>14 tahun</strong> pada Juli {{ 2026 }}.<strong>untuk Jenjang Studi SMP</strong></li>
-                        <li>Ananda sudah berusia maks. <strong>17 tahun</strong> pada Juli {{ 2026 }}.<strong>untuk Jenjang Studi SMA</strong></li>
+                        <li>Ananda sudah berusia min. <strong>4.4 tahun</strong> maks. <strong>7 Tahun</strong> pada Juli {{ 2027 }}. <strong>untuk Jenjang Studi TK</strong></li>
+                        <li>Ananda sudah berusia min. <strong>6 tahun</strong> maks. <strong>8 Tahun</strong> pada Juli {{ 2027 }}.<strong>untuk Jenjang Studi SD</strong></li>
+                        <li>Ananda sudah berusia maks. <strong>14 tahun</strong> pada Juli {{ 2027 }}.<strong>untuk Jenjang Studi SMP</strong></li>
+                        <li>Ananda sudah berusia maks. <strong>17 tahun</strong> pada Juli {{ 2027 }}.<strong>untuk Jenjang Studi SMA</strong></li>
                       </ol>
                     </div>
                   </div>
@@ -199,7 +199,7 @@
                       LOGIN FORMULIR
                     </h2>
                     <div>
-                      Setelah mendapatkan pesan teks verifikasi dari Panitia PPDB, maka pendaftar dapat melakukan LOGIN untuk pengisian formulir pendaftaran. Pastikanlah data yang diisikan ke formulir dapat dipertanggungjawabkan. Berkas cetak formulir akan ditandatangani di atas materai Rp 10.000,- oleh pendaftar pada saat menghadiri jadwal interview dan observasi. Hasil pindai (scan) Akta Kelahiran, KK dan KTP kedua orang tua/wali juga akan dicocokkan dengan dokumen asli yang dibawa oleh pendaftar pada saat menghadiri jadwal interview dan observasi.
+                      Setelah mendapatkan pesan teks verifikasi dari Panitia PMB, maka pendaftar dapat melakukan LOGIN untuk pengisian formulir pendaftaran. Pastikanlah data yang diisikan ke formulir dapat dipertanggungjawabkan. Berkas cetak formulir akan ditandatangani di atas materai Rp 10.000,- oleh pendaftar pada saat menghadiri jadwal interview dan observasi. Hasil pindai (scan) Akta Kelahiran, KK dan KTP kedua orang tua/wali juga akan dicocokkan dengan dokumen asli yang dibawa oleh pendaftar pada saat menghadiri jadwal interview dan observasi.
                     </div>
                   </div>
                 </v-timeline-item>
@@ -290,7 +290,7 @@
                       PENGUMUMAN HASIL SELEKSI
                     </h2>
                     <div>
-                      Pengumuman hasil seleksi PPDB Sekolah Islam De Green Camp
+                      Pengumuman hasil seleksi PMB Sekolah Islam De Green Camp
                       akan disampaikan melalui kontak WA Pendaftar; selanjutnya
                       Keputusan Panitia tidak dapat diganggu gugat.
                     </div>

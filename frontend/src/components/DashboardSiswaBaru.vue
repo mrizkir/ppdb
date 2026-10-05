@@ -43,7 +43,7 @@
             <v-card-title class="title">DATA AYAH</v-card-title>
             <v-card-text class="white text--primary">
               <p>
-                Isi biodata ayah/wali, apabila tidak ada boleh dilewati.                               
+                Isi biodata ayah, apabila tidak ada boleh dilewati.                               
               </p>
               <v-btn
                 color="purple darken-1"
@@ -61,7 +61,7 @@
             <v-card-title class="title">DATA IBU</v-card-title>
             <v-card-text class="white text--primary">
               <p>
-                Isilah biodata ibu/wali, apabila tidak ada boleh dilewati.                                 
+                Isilah biodata ibu.                                 
               </p>
               <v-btn
                 color="purple darken-1"
