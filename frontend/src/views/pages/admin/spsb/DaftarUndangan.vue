@@ -82,6 +82,16 @@
               </v-chip>
             </template>
             <template v-slot:item.actions="{ item }">
+              <v-btn
+                x-small
+                color="green"
+                class="mr-2"
+                depressed
+                @click.stop="bukaCetak(item)"
+              >
+                <v-icon left x-small>mdi-printer</v-icon>
+                CETAK
+              </v-btn>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
@@ -246,6 +256,51 @@
               </v-card>
             </v-form>
           </v-dialog>
+          <v-dialog v-model="dialogCetak" max-width="520px" persistent>
+            <v-form ref="frmcetak" v-model="formCetakValid" lazy-validation>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">CETAK SURAT PEMBERITAHUAN</span>
+                </v-card-title>
+                <v-card-text v-if="cetakSelected">
+                  <div class="mb-3">
+                    <strong>Calon:</strong> {{ cetakSelected.name }}
+                  </div>
+                  <v-text-field
+                    v-if="dialogCetakMode === 'form'"
+                    v-model="formCetak.nomor_surat"
+                    label="NOMOR SURAT"
+                    placeholder="001/SPb/PMB/X/2026"
+                    outlined
+                    :rules="rule_nomor_surat"
+                  />
+                  <v-btn
+                    v-else
+                    color="green"
+                    text
+                    :href="$api.storageURL + '/' + file_pdf"
+                    target="_blank"
+                  >
+                    Download
+                  </v-btn>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click.stop="tutupCetak">TUTUP</v-btn>
+                  <v-btn
+                    v-if="dialogCetakMode === 'form'"
+                    color="blue darken-1"
+                    text
+                    @click.stop="cetakSurat"
+                    :loading="btnLoading"
+                    :disabled="!formCetakValid || btnLoading"
+                  >
+                    CETAK
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-form>
+          </v-dialog>
         </v-col>
       </v-row>
     </v-container>
@@ -309,12 +364,24 @@
         { text: "BERLAKU SAMPAI", value: "berlaku_sampai", width: 140, sortable: true },
         { text: "STATUS OTP", value: "used", width: 150, sortable: true },
         { text: "PEMBAYARAN", value: "bayar", width: 140, sortable: false },
-        { text: "AKSI", value: "actions", sortable: false, width: 130 },
+        { text: "AKSI", value: "actions", sortable: false, width: 280 },
       ],
       search: "",
       filterUsed: "all",
       dialogUndangan: false,
       dialogUndanganMode: "form",
+      dialogCetak: false,
+      dialogCetakMode: "form",
+      cetakSelected: null,
+      formCetakValid: true,
+      formCetak: {
+        nomor_surat: "",
+      },
+      file_pdf: null,
+      rule_nomor_surat: [
+        value => !!value || "Nomor surat mohon untuk diisi !!!",
+        value => !value || String(value).length <= 50 || "Nomor surat maksimal 50 karakter",
+      ],
       formUndanganValid: true,
       menuBerlakuMulai: false,
       menuBerlakuSampai: false,
@@ -470,6 +537,53 @@
         el.select();
         document.execCommand("copy");
         document.body.removeChild(el);
+      },
+      bukaCetak(item) {
+        this.cetakSelected = item;
+        this.formCetak.nomor_surat = item.nomor_surat || "";
+        this.dialogCetakMode = "form";
+        this.file_pdf = null;
+        this.dialogCetak = true;
+        this.$nextTick(() => {
+          if (this.$refs.frmcetak) {
+            this.$refs.frmcetak.resetValidation();
+          }
+        });
+      },
+      async cetakSurat() {
+        if (!this.$refs.frmcetak.validate()) {
+          return;
+        }
+        this.btnLoading = true;
+        await this.$ajax
+          .post(
+            "/spsb/undangan/cetak",
+            {
+              id: this.cetakSelected.id,
+              nomor_surat: this.formCetak.nomor_surat,
+              link: this.undanganUrlOf(this.cetakSelected),
+            },
+            {
+              headers: {
+                Authorization: this.$store.getters["auth/Token"],
+              },
+            }
+          )
+          .then(({ data }) => {
+            this.cetakSelected.nomor_surat = data.nomor_surat;
+            this.file_pdf = data.pdf_file;
+            this.dialogCetakMode = "hasil";
+            this.btnLoading = false;
+          })
+          .catch(() => {
+            this.btnLoading = false;
+          });
+      },
+      tutupCetak() {
+        this.dialogCetak = false;
+        this.cetakSelected = null;
+        this.dialogCetakMode = "form";
+        this.file_pdf = null;
       },
       closeDialogUndangan() {
         this.dialogUndangan = false;

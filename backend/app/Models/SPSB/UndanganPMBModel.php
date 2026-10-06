@@ -32,6 +32,7 @@ class UndanganPMBModel extends Model {
     'berlaku_sampai',
     'ta',
     'kode_jenjang',
+    'nomor_surat',
     'nominal_transfer',
     'used',
     'created_by',

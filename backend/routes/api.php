@@ -88,6 +88,7 @@ $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($rout
 	//spsb - formulir pendaftaran
 	$router->post('/spsb/undangan',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\UndanganPMBController@index','as'=>'undanganpmb.index']);
 	$router->post('/spsb/undangan/store',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\UndanganPMBController@store','as'=>'undanganpmb.store']);
+	$router->post('/spsb/undangan/cetak',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\UndanganPMBController@cetak','as'=>'undanganpmb.cetak']);
 	$router->delete('/spsb/undangan/{id}',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\UndanganPMBController@destroy','as'=>'undanganpmb.destroy']);
 	$router->get('/spsb/undangan/{id}',['middleware'=>['role:superadmin|psb'],'uses'=>'SPSB\UndanganPMBController@show','as'=>'undanganpmb.show']);
 

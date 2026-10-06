@@ -11,9 +11,12 @@ use App\Models\DMaster\JenjangStudiModel;
 use App\Models\Keuangan\KonfirmasiPembayaranModel;
 use App\Models\System\ConfigurationModel;
 
+use App\Helpers\Helper;
 use App\Helpers\HelperFormulir;
 use Ramsey\Uuid\Uuid;
 use Exception;
+use Mpdf\QrCode\QrCode;
+use Mpdf\QrCode\Output\Png;
 
 class UndanganPMBController extends Controller
 {
@@ -41,6 +44,7 @@ class UndanganPMBController extends Controller
       undangan_pmb.berlaku_sampai,
       undangan_pmb.ta,
       undangan_pmb.kode_jenjang,
+      undangan_pmb.nomor_surat,
       undangan_pmb.used,
       undangan_pmb.created_at,
       undangan_pmb.updated_at,
@@ -297,6 +301,90 @@ class UndanganPMBController extends Controller
   }
 
   /**
+   * Simpan nomor surat lalu buat PDF surat pemberitahuan.
+   */
+  public function cetak(Request $request)
+  {
+    $this->hasAnyPermission(['SPSB-PSB-FORMULIR-PENDAFTARAN_BROWSE', 'SPSB-PSB_STORE']);
+
+    $this->validate($request, [
+      'id' => 'required|string|exists:undangan_pmb,id',
+      'nomor_surat' => 'required|string|max:50',
+      'link' => 'required|url|max:255',
+    ]);
+
+    $undangan = UndanganPMBModel::find($request->input('id'));
+    $user = User::find($undangan->user_id);
+    if (is_null($user)) {
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'fetchdata',
+        'message' => 'Calon peserta didik undangan tidak ditemukan.',
+      ], 422);
+    }
+
+    $nomorSurat = trim($request->input('nomor_surat'));
+    $undangan->nomor_surat = $nomorSurat;
+    $undangan->save();
+
+    $link = $request->input('link');
+    $qr = new QrCode($link);
+    $qrPng = (new Png())->output($qr, 180);
+
+    $ta = (int) $undangan->ta;
+    $sekarang = \Carbon\Carbon::now('Asia/Jakarta');
+    $hijri = $this->tanggalHijriah($sekarang);
+    $jenjang = $this->labelJenjangSingkat($undangan->kode_jenjang);
+
+    try {
+      $pdf = \Mccarlosen\LaravelMpdf\Facades\LaravelMpdf::loadView(
+        'report.SuratPemberitahuan',
+        [
+          'nomor_surat' => $nomorSurat,
+          'nama' => $user->name,
+          'jenjang' => $jenjang,
+          'ta' => $ta,
+          'ta_berikut' => $ta + 1,
+          'tanggal_masehi' => $sekarang->format('d').' '.$this->namaBulanMasehi((int) $sekarang->format('n')).' '.$sekarang->format('Y').' M',
+          'tanggal_hijriah' => $hijri['tanggal'].' '.$hijri['bulan'].' '.$hijri['tahun'].' H',
+          'link' => $link,
+          'qr_base64' => base64_encode($qrPng),
+        ],
+        [],
+        [
+          'title' => 'Surat Pemberitahuan PMB',
+          'format' => 'A4',
+          'margin_left' => 15,
+          'margin_right' => 15,
+          'margin_top' => 12,
+          'margin_bottom' => 12,
+        ]
+      );
+
+      $folder = Helper::public_path('exported/pdf');
+      if (!is_dir($folder)) {
+        mkdir($folder, 0755, true);
+      }
+      $filename = 'surat-pmb-'.$undangan->id.'.pdf';
+      $pdf->save($folder.'/'.$filename);
+    } catch (Exception $e) {
+      return Response()->json([
+        'status' => 0,
+        'pid' => 'fetchdata',
+        'message' => 'Surat pemberitahuan gagal dibuat.',
+      ], 422);
+    }
+
+    return Response()->json([
+      'status' => 1,
+      'pid' => 'fetchdata',
+      'nomor_surat' => $nomorSurat,
+      'pdf_file' => 'exported/pdf/'.$filename,
+      'message' => 'Surat pemberitahuan berhasil dibuat.',
+    ], 200);
+  }
+
+  /**
    * Preview publik link undangan (tanpa mengembalikan OTP).
    */
   public function preview(Request $request, $otp)
@@ -479,6 +567,80 @@ class UndanganPMBController extends Controller
       ->where('formulir_id', $undangan->formulir_id)
       ->whereNotNull('transaksi_id')
       ->first();
+  }
+
+  private function labelJenjangSingkat($kode)
+  {
+    $map = [
+      1 => 'TK',
+      2 => 'SD',
+      3 => 'SMP',
+      4 => 'SMA',
+    ];
+
+    return isset($map[(int) $kode]) ? $map[(int) $kode] : '';
+  }
+
+  private function namaBulanMasehi($bulan)
+  {
+    $nama = [
+      1 => 'Januari',
+      2 => 'Februari',
+      3 => 'Maret',
+      4 => 'April',
+      5 => 'Mei',
+      6 => 'Juni',
+      7 => 'Juli',
+      8 => 'Agustus',
+      9 => 'September',
+      10 => 'Oktober',
+      11 => 'November',
+      12 => 'Desember',
+    ];
+
+    return isset($nama[$bulan]) ? $nama[$bulan] : '';
+  }
+
+  private function tanggalHijriah(\Carbon\Carbon $tanggal)
+  {
+    $bulan = [
+      1 => 'Muharram',
+      2 => 'Safar',
+      3 => 'Rabiul Awal',
+      4 => 'Rabiul Akhir',
+      5 => 'Jumadil Awal',
+      6 => 'Jumadil Akhir',
+      7 => 'Rajab',
+      8 => 'Syaban',
+      9 => 'Ramadan',
+      10 => 'Syawal',
+      11 => 'Zulkaidah',
+      12 => 'Zulhijah',
+    ];
+    $jd = $this->julianDay((int) $tanggal->format('n'), (int) $tanggal->format('j'), (int) $tanggal->format('Y'));
+    $l = $jd - 1948440 + 10632;
+    $n = intdiv($l - 1, 10631);
+    $l = $l - 10631 * $n + 354;
+    $j = intdiv(10985 - $l, 5316) * intdiv(50 * $l, 17719) + intdiv($l, 5670) * intdiv(43 * $l, 15238);
+    $l = $l - intdiv(30 - $j, 15) * intdiv(17719 * $j, 50) - intdiv($j, 16) * intdiv(15238 * $j, 43) + 29;
+    $bulanHijriah = intdiv(24 * $l, 709);
+    $hari = $l - intdiv(709 * $bulanHijriah, 24);
+    $tahun = 30 * $n + $j - 30;
+
+    return [
+      'tanggal' => $hari,
+      'bulan' => isset($bulan[$bulanHijriah]) ? $bulan[$bulanHijriah] : '',
+      'tahun' => $tahun,
+    ];
+  }
+
+  private function julianDay($month, $day, $year)
+  {
+    $a = intdiv(14 - $month, 12);
+    $y = $year + 4800 - $a;
+    $m = $month + 12 * $a - 3;
+
+    return $day + intdiv(153 * $m + 2, 5) + 365 * $y + intdiv($y, 4) - intdiv($y, 100) + intdiv($y, 400) - 32045;
   }
 
   private function namaJenjangUndangan($undangan)
