@@ -102,7 +102,8 @@ class PSBPersyaratanController extends Controller {
         persyaratan_ppdb.file_screenshoot_medsos,
         persyaratan_ppdb.file_sertifikat,
         persyaratan_ppdb.file_nisn,
-        persyaratan_ppdb.file_kia
+        persyaratan_ppdb.file_kia,
+        persyaratan_ppdb.file_pemeriksaan_ahli
       '))
       ->first();
 

@@ -34,6 +34,7 @@ class PersyaratanPPDBModel extends Model {
 		'file_sertifikat',
 		'file_nisn',
 		'file_kia',
+		'file_pemeriksaan_ahli',
 	];
 	/**
 	 * enable auto_increment.

@@ -155,6 +155,7 @@ class HelperFormulir
     FormulirPendaftaranEModel::where('formulir_id', $formulirId)->delete();
     FormulirPendaftaranFModel::where('formulir_id', $formulirId)->delete();
     PersyaratanPPDBModel::where('formulir_id', $formulirId)->delete();
+    \DB::table('formulir_kategori_disabilitas')->where('formulir_id', $formulirId)->delete();
     FormulirPendaftaranAModel::where('id', $formulirId)->delete();
   }
 

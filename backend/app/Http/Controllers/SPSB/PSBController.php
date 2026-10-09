@@ -381,14 +381,21 @@ class PSBController extends Controller
 
     try
     {
-      $penyandang_disabilitas = $request->input('penyandang_disabilitas');
-      if ($penyandang_disabilitas == 1)
+      $penyandang_disabilitas = (int) $request->input('penyandang_disabilitas');
+      $kode_jenjang = (int) $request->input('kode_jenjang');
+      $berkasDisabilitas = null;
+      $kategoriDisabilitas = [];
+      if ($penyandang_disabilitas === 1 && $kode_jenjang !== 2)
       {
         throw new Exception ("Pendaftaran gagal dilakukan karena menyandang Disabilitas. Silahkan hubungi Admin Sekolah Islam De Green Camp.");
-      }  
+      }
+      if ($penyandang_disabilitas === 1)
+      {
+        $berkasDisabilitas = $this->berkasPemeriksaanAhli($request);
+        $kategoriDisabilitas = $this->kategoriDisabilitasSd($request);
+      }
 
       $tahun_pendaftaran = ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN');
-      $kode_jenjang = $request->input('kode_jenjang');
     
       //cek usia
       $this->checkUsia($request);
@@ -420,7 +427,7 @@ class PSBController extends Controller
           'kombi' => $kombi,
         ], 422);
       }
-      $user = \DB::transaction(function () use ($request, $kombi){
+      $user = \DB::transaction(function () use ($request, $kombi, $berkasDisabilitas, $kategoriDisabilitas){
         $now = \Carbon\Carbon::now()->toDateTimeString();   
         $kode_jenjang=$request->input('kode_jenjang');
         $ta = ConfigurationModel::getCache('DEFAULT_TAHUN_PENDAFTARAN');
@@ -459,6 +466,9 @@ class PSBController extends Controller
         ]);
         $formulir = FormulirPendaftaranAModel::find($formulirId);
         HelperFormulir::ensureNominal($formulir, (int) $kombi->biaya);
+        if ($berkasDisabilitas) {
+          $this->simpanDisabilitasSd($formulirId, $berkasDisabilitas, $kategoriDisabilitas);
+        }
         return $user;
       });
       $nominal = HelperFormulir::nominalTerbaru($user->id);
@@ -2174,5 +2184,81 @@ class PSBController extends Controller
       ], 200);
     }
           
-  }      
+  }
+
+  private function berkasPemeriksaanAhli(Request $request)
+  {
+    if (!$request->hasFile('file_pemeriksaan_ahli')) {
+      throw new Exception('Hasil pemeriksaan ahli mohon diunggah.');
+    }
+    $file = $request->file('file_pemeriksaan_ahli');
+    if ($file->getSize() > 2 * 1024 * 1024) {
+      throw new Exception('Ukuran hasil pemeriksaan ahli maksimal 2MB.');
+    }
+    $mime = $file->getMimeType();
+    if (!in_array($mime, ['application/pdf', 'image/png', 'image/jpeg'], true)) {
+      throw new Exception('Hasil pemeriksaan ahli harus berupa pdf, jpg, atau png.');
+    }
+    return $file;
+  }
+
+  private function kategoriDisabilitasSd(Request $request)
+  {
+    $ids = $request->input('kategori_disabilitas', []);
+    if (!is_array($ids)) {
+      throw new Exception('Pilih minimal satu kategori penyandang disabilitas.');
+    }
+    $ids = array_values(array_unique(array_filter(array_map('intval', $ids), function ($id) {
+      return $id > 1;
+    })));
+    if (count($ids) < 1) {
+      throw new Exception('Pilih minimal satu kategori penyandang disabilitas.');
+    }
+    $valid = \DB::table('kebutuhan_khusus')
+      ->whereIn('id_kebutuhan', $ids)
+      ->pluck('id_kebutuhan')
+      ->map(function ($id) {
+        return (int) $id;
+      })
+      ->all();
+    sort($ids);
+    sort($valid);
+    if ($ids !== $valid) {
+      throw new Exception('Kategori penyandang disabilitas tidak dikenal.');
+    }
+    return $ids;
+  }
+
+  private function simpanDisabilitasSd($formulirId, $file, array $ids)
+  {
+    $folder = \App\Helpers\Helper::public_path('persyaratanppdb');
+    if (!is_dir($folder)) {
+      mkdir($folder, 0755, true);
+    }
+    $ext = strtolower($file->getClientOriginalExtension());
+    if (!in_array($ext, ['pdf', 'jpg', 'jpeg', 'png'], true)) {
+      $ext = $file->getMimeType() === 'application/pdf' ? 'pdf' : 'jpg';
+    }
+    $fileName = uniqid('pemeriksaan_').'.'.$ext;
+    $file->move($folder, $fileName);
+
+    $persyaratan = PersyaratanPPDBModel::find($formulirId);
+    if ($persyaratan) {
+      $persyaratan->file_pemeriksaan_ahli = "persyaratanppdb/$fileName";
+      $persyaratan->save();
+    }
+
+    $formulir = FormulirPendaftaranAModel::find($formulirId);
+    if ($formulir) {
+      $formulir->id_kebutuhan_khusus = $ids[0];
+      $formulir->save();
+    }
+
+    foreach ($ids as $idKebutuhan) {
+      \DB::table('formulir_kategori_disabilitas')->insert([
+        'formulir_id' => $formulirId,
+        'id_kebutuhan' => $idKebutuhan,
+      ]);
+    }
+  }
 }

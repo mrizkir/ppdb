@@ -38,6 +38,12 @@ class ReportCalonPesertaDidikController extends Controller
     ->leftJoin('negara','formulir_pendaftaran_d.kewarganegaraan','negara.id')
     ->find($formulir_id);
     $persyaratan=PersyaratanPPDBModel::find($formulir_id);
+    $kategori_disabilitas=\DB::table('formulir_kategori_disabilitas as kategori')
+      ->join('kebutuhan_khusus', 'kebutuhan_khusus.id_kebutuhan', 'kategori.id_kebutuhan')
+      ->where('kategori.formulir_id', $formulir_id)
+      ->orderBy('kebutuhan_khusus.id_kebutuhan')
+      ->pluck('kebutuhan_khusus.nama_kebutuhan')
+      ->implode(', ');
     $gambar=$this->gambarPersyaratan($persyaratan);
 
     $pdf = \Mccarlosen\LaravelMpdf\Facades\LaravelMpdf::loadView('report.ReportCalonPesertaDidik', 
@@ -47,6 +53,7 @@ class ReportCalonPesertaDidikController extends Controller
         'pesertadidik_c'=>$pesertadidik_c,
         'pesertadidik_d'=>$pesertadidik_d,
         'persyaratan'=>$persyaratan,
+        'kategori_disabilitas'=>$kategori_disabilitas,
         'gambar'=>$gambar,
       ],
       [],
@@ -117,6 +124,7 @@ class ReportCalonPesertaDidikController extends Controller
       'file_sertifikat',
       'file_nisn',
       'file_kia',
+      'file_pemeriksaan_ahli',
     ];
     $gambar = [];
     foreach ($kolom as $nama) {

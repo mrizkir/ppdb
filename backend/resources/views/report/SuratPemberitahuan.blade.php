@@ -15,9 +15,12 @@
     .akses th, .akses td { border: 1px solid #2f2f2f; padding: 8px; vertical-align: middle; }
     .akses th { text-align: center; font-weight: bold; }
     .link { word-wrap: break-word; font-size: 10pt; }
+    .otp { text-align: center; font-weight: bold; font-size: 12pt; letter-spacing: 1px; }
     .penutup { margin-top: 8px; }
     .ttd { text-align: center; margin-top: 10px; }
     .nama-ttd { font-weight: bold; margin-top: 36px; }
+    .ttd-gambar { display: block; margin: 4px auto 0; }
+    .nama-ttd-dekat { margin-top: 2px; }
     .lampiran-judul { text-align: center; font-weight: bold; margin: 14px 0 12px; line-height: 1.35; }
     .biaya { width: 100%; border-collapse: collapse; }
     .biaya th { background: #3d9b40; color: #fff; font-weight: bold; text-align: center; padding: 4px 6px; border: 1px solid #2f2f2f; }
@@ -34,6 +37,13 @@
   </style>
 </head>
 <body>
+  <htmlpageheader name="kop">
+    <div style="text-align: center;">
+      <img src="{{ base_path('storage/app/public/images/ttd_panitia_pmb.png') }}" style="width: 180mm;" alt="Kop Panitia PMB">
+    </div>
+  </htmlpageheader>
+  <sethtmlpageheader name="kop" value="on" show-this-page="1" />
+
   <div class="tanggal">
     <div class="garis">
       Tanjungpinang, {{ $tanggal_masehi }}<br>
@@ -66,7 +76,7 @@
   <div>
     Kepada Yth.<br>
     Ayah dan Bunda dari Ananda <strong>{{ $nama }}</strong><br>
-    Murid {{ $jenjang }} Islam De Green Camp<br>
+    Calon Murid {{ $jenjang }} Islam De Green Camp<br>
     <strong><em>Rahimakumullah</em></strong>
   </div>
 
@@ -112,15 +122,17 @@
     </tbody>
   </table>
 
-  <div>Selanjutnya Ayah Bunda dapat melakukan pendaftaran dengan mengakses tautan atau memindai kode QR berikut</div>
+  <div>Selanjutnya Ayah Bunda dapat melakukan pendaftaran dengan mengakses tautan, memasukkan kode OTP, atau memindai kode QR berikut</div>
 
   <table class="akses">
     <tr>
-      <th style="width: 62%;">Link pendaftaran</th>
-      <th>Kode QR Pendaftaran</th>
+      <th>Link pendaftaran</th>
+      <th style="width: 90px;">Kode OTP</th>
+      <th style="width: 120px;">Kode QR Pendaftaran</th>
     </tr>
     <tr>
       <td class="link">{{ $link }}</td>
+      <td class="otp">{{ $otp }}</td>
       <td style="text-align: center;">
         <img src="data:image/png;base64,{{ $qr_base64 }}" width="90" height="90" alt="QR pendaftaran">
       </td>
@@ -133,7 +145,8 @@
 
   <div class="ttd">
     Mengetahui,<br>
-    <div class="nama-ttd">Totok Riyanto, M. Pd., Gr</div>
+    <img class="ttd-gambar" src="{{ base_path('storage/app/public/images/ttd_panitia_pmb.png') }}" width="200" alt="Tanda tangan panitia">
+    <div class="nama-ttd nama-ttd-dekat">Totok Riyanto, M. Pd., Gr</div>
   </div>
 
   <pagebreak />
@@ -263,19 +276,6 @@
         <td class="uang">15.300.000,00-</td>
         <td></td>
       </tr>
-    </tbody>
-  </table>
-
-  <pagebreak />
-
-  <table class="biaya">
-    <colgroup>
-      <col style="width: 36px;">
-      <col>
-      <col style="width: 130px;">
-      <col style="width: 170px;">
-    </colgroup>
-    <tbody>
       <tr class="bagian">
         <td colspan="4">PMB SMP Kelas VII (Tujuh)</td>
       </tr>
@@ -366,7 +366,8 @@
 
   <div class="ttd">
     Mengetahui,<br>
-    <div class="nama-ttd">Totok Riyanto, M.Pd., Gr</div>
+    <img class="ttd-gambar" src="{{ base_path('storage/app/public/images/ttd_panitia_pmb.png') }}" width="200" alt="Tanda tangan panitia">
+    <div class="nama-ttd nama-ttd-dekat">Totok Riyanto, M.Pd., Gr</div>
     <div class="jabatan">Ketua Panitia PMB SI DGC {{ substr($ta, -2) }}{{ substr($ta_berikut, -2) }}</div>
   </div>
 </body>

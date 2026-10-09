@@ -151,6 +151,7 @@
         { key: "file_sertifikat", judul: "SERTIFIKAT PENGHARGAAN" },
         { key: "file_nisn", judul: "KARTU NISN" },
         { key: "file_kia", judul: "KARTU KIA" },
+        { key: "file_pemeriksaan_ahli", judul: "HASIL PEMERIKSAAN AHLI" },
       ],
     }),
     methods: {

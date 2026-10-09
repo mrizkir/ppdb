@@ -91,7 +91,7 @@
         <td class="no">{{ $no++ }}.</td>
         <td class="label">Kebutuhan Khusus</td>
         <td class="colon">:</td>
-        <td class="nilai">{{ $pesertadidik_a->nama_kebutuhan }}</td>
+        <td class="nilai">{{ !empty($kategori_disabilitas) ? $kategori_disabilitas : $pesertadidik_a->nama_kebutuhan }}</td>
       </tr>
       <tr>
         <td class="no">{{ $no++ }}.</td>
@@ -425,7 +425,7 @@
         [['KTP Ibu', 'file_ktp_ibu'], ['Kartu Keluarga', 'file_kk']],
         [['Akta Kelahiran', 'file_aktalahir'], ['Tangkapan Media Sosial', 'file_screenshoot_medsos']],
         [['Sertifikat', 'file_sertifikat'], ['Kartu NISN', 'file_nisn']],
-        [['Kartu KIA', 'file_kia']],
+        [['Kartu KIA', 'file_kia'], ['Hasil Pemeriksaan Ahli', 'file_pemeriksaan_ahli']],
       ] as $baris)
       <tr>
         @foreach ($baris as $item)

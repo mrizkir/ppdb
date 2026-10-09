@@ -171,7 +171,7 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>
-              LAPORAN CALON P.D
+              LAPORAN CALON MURID
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

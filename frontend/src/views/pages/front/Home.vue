@@ -145,6 +145,9 @@
                         NOMOR REKENING : 821-21-28255 <br />
                         A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br />												
                       </v-alert>
+                      <v-alert type="warning">
+                        Uang formulir pendaftaran yang sudah dibayar tidak dapat dikembalikan.
+                      </v-alert>
                     </div>
                   </div>
                 </v-timeline-item>
@@ -184,7 +187,7 @@
                       PANITIA VERIFIKASI PEMBAYARAN
                     </h2>
                     <div>
-                      Panitia akan melakukan verifikasi bukti bayar/transfer dan mengirimkan pesan teks kepada pendaftar melalui kontak WA.  Apabila belum mendapatkan  pesan verifikasi dari panitia (1x24 jam), pendaftar dapat menghubungi  <strong>nomor kontak WA +62 813-7430-0986 (narahubung Evi Sulistyawati)</strong>.
+                      Panitia akan melakukan verifikasi bukti bayar/transfer dan mengirimkan pesan teks kepada pendaftar melalui kontak WA.  Apabila belum mendapatkan  pesan verifikasi dari panitia (1x24 jam), pendaftar dapat menghubungi  <strong>nomor kontak WA +62 823-6427-9495 (narahubung Siti Fatimah)</strong>.
                     </div>
                   </div>
                 </v-timeline-item>

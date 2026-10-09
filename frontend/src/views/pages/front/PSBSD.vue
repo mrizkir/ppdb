@@ -98,22 +98,37 @@
                   v-model="formdata.penyandang_disabilitas"
                   label="YA"
                 />
-                <v-alert
-                  color="warning"
-                  class="mb-1"
-                  text
-                  v-if="isPenyandangDisabilitas && formdata.jk == 'L'"
-                >
-                  Pada periode ini belum menerima Murid Penyandang Disabilitas (PDPD).
-                </v-alert>
-                <v-alert
-                  color="warning"
-                  class="mb-1"
-                  text
-                  v-if="isPenyandangDisabilitas && formdata.jk == 'P'"
-                >
-                  Silakan mendaftar secara manual kepada Admin di setiap jenjang terkait.
-                </v-alert>
+                <div v-if="isPenyandangDisabilitas">
+                  <div class="font-weight-medium mb-2">KATEGORI PENYANDANG DISABILITAS</div>
+                  <v-checkbox
+                    v-for="item in daftar_kategori"
+                    :key="item.id_kebutuhan"
+                    v-model="formdata.kategori_disabilitas"
+                    :label="item.nama_kebutuhan"
+                    :value="item.id_kebutuhan"
+                    hide-details
+                    dense
+                    class="mt-0"
+                  />
+                  <v-file-input
+                    v-model="formdata.file_pemeriksaan_ahli"
+                    accept="application/pdf,image/jpeg,image/png"
+                    label="HASIL PEMERIKSAAN AHLI (.pdf, .png, atau .jpg) MAX 2MB"
+                    show-size
+                    outlined
+                    dense
+                    class="mt-4"
+                    :rules="rule_file_pemeriksaan"
+                  />
+                  <v-alert
+                    color="warning"
+                    class="mb-1"
+                    text
+                    v-if="!siapDisabilitas"
+                  >
+                    Unggah hasil pemeriksaan ahli dan pilih minimal satu kategori.
+                  </v-alert>
+                </div>
                 <v-alert color="error" class="mb-0" text v-if="formdata.captcha_response.length <= 0">
                   Mohon dicentang Google Captcha (ANTI SPAMMERS)
                 </v-alert>
@@ -133,7 +148,7 @@
                   color="primary"
                   @click="save"
                   :loading="btnLoading"
-                  :disabled="btnLoading || isPenyandangDisabilitas"
+                  :disabled="btnLoading || !siapDisabilitas"
                   block
                 >
                   DAFTAR
@@ -216,7 +231,10 @@
         password: "",
         captcha_response: "",
         penyandang_disabilitas: false,
+        kategori_disabilitas: [],
+        file_pemeriksaan_ahli: null,
       },
+      daftar_kategori: [],
       formdefault: {
         name: "",
         tanggal_lahir: "",
@@ -256,6 +274,10 @@
       rule_password: [
         value => !!value || "Password mohon untuk diisi !!!",
       ],
+      rule_file_pemeriksaan: [
+        value => !!value || "Hasil pemeriksaan ahli mohon diunggah !!!",
+        value => !value || value.size <= 2097152 || "Ukuran berkas maksimal 2MB",
+      ],
     }),
     methods: {
       initialize: async function() {
@@ -267,22 +289,38 @@
             }
           });
         });
+        await this.$ajax.get("/datamaster/kebutuhankhusus").then(({ data }) => {
+          this.daftar_kategori = data.kebutuhan_khusus.filter(item => item.id_kebutuhan != 1);
+        });
       },
       save: async function() {
+        if (this.isPenyandangDisabilitas && !this.siapDisabilitas) {
+          return;
+        }
         if (this.$refs.frmpendaftaran.validate()) {
           this.btnLoading = true;
+          const data = new FormData();
+          data.append("name", this.formdata.name);
+          data.append("tanggal_lahir", this.formdata.tanggal_lahir);
+          data.append("jk", this.formdata.jk);
+          data.append("email", this.formdata.email);
+          data.append("nomor_hp", this.formdata.nomor_hp);
+          data.append("username", this.formdata.username);
+          data.append("kode_jenjang", 2);
+          data.append("password", this.formdata.password);
+          data.append("captcha_response", this.formdata.captcha_response);
+          data.append("penyandang_disabilitas", this.formdata.penyandang_disabilitas == true ? 1 : 0);
+          if (this.isPenyandangDisabilitas) {
+            this.formdata.kategori_disabilitas.forEach(id => {
+              data.append("kategori_disabilitas[]", id);
+            });
+            data.append("file_pemeriksaan_ahli", this.formdata.file_pemeriksaan_ahli);
+          }
           await this.$ajax
-            .post("/spsb/psb/store", {
-              name: this.formdata.name,
-              tanggal_lahir: this.formdata.tanggal_lahir,
-              jk: this.formdata.jk,
-              email: this.formdata.email,
-              nomor_hp: this.formdata.nomor_hp,
-              username: this.formdata.username,
-              kode_jenjang: 2,
-              password: this.formdata.password,
-              captcha_response: this.formdata.captcha_response,
-              penyandang_disabilitas: this.formdata.penyandang_disabilitas == true ? 1 : 0,
+            .post("/spsb/psb/store", data, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
             })
             .then(({ data }) => {
               this.formkonfirmasi.email = data.email;
@@ -292,6 +330,8 @@
               this.form_valid = true;
               this.$refs.frmpendaftaran.reset();
               this.formdata = Object.assign({}, this.formdefault);
+              this.formdata.kategori_disabilitas = [];
+              this.formdata.file_pemeriksaan_ahli = null;
             })
             .catch(() => {
               this.btnLoading = false;
@@ -326,6 +366,23 @@
       }),
       isPenyandangDisabilitas() {
         return this.formdata.penyandang_disabilitas;
+      },
+      siapDisabilitas() {
+        if (!this.formdata.penyandang_disabilitas) {
+          return true;
+        }
+        const berkas = this.formdata.file_pemeriksaan_ahli;
+        return this.formdata.kategori_disabilitas.length > 0
+          && !!berkas
+          && berkas.size <= 2097152;
+      },
+    },
+    watch: {
+      "formdata.penyandang_disabilitas"(val) {
+        if (!val) {
+          this.formdata.kategori_disabilitas = [];
+          this.formdata.file_pemeriksaan_ahli = null;
+        }
       },
     },
     components: {

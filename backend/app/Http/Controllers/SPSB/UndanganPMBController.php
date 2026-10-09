@@ -348,6 +348,7 @@ class UndanganPMBController extends Controller
           'tanggal_masehi' => $sekarang->format('d').' '.$this->namaBulanMasehi((int) $sekarang->format('n')).' '.$sekarang->format('Y').' M',
           'tanggal_hijriah' => $hijri['tanggal'].' '.$hijri['bulan'].' '.$hijri['tahun'].' H',
           'link' => $link,
+          'otp' => str_pad((string) $undangan->otp, 6, '0', STR_PAD_LEFT),
           'qr_base64' => base64_encode($qrPng),
         ],
         [],
@@ -356,7 +357,8 @@ class UndanganPMBController extends Controller
           'format' => 'A4',
           'margin_left' => 15,
           'margin_right' => 15,
-          'margin_top' => 12,
+          'margin_top' => 105,
+          'margin_header' => 6,
           'margin_bottom' => 12,
         ]
       );
