@@ -4,7 +4,7 @@
             <v-row align="center" justify="center" no-gutters>
                 <v-col cols="12">
                     <h1 class="text-center display-1 font-weight-black primary--text">
-                        PRA-PENDAFTARAN CALON PESERTA DIDIK
+                        PRA-PENDAFTARAN CALON MURID
                     </h1>
                     <h4 class="text-center title font-weight-black primary--text">
                         TAHUN PELAJARAN {{ tahunPendaftaran | formatTA }}
@@ -20,7 +20,7 @@
                             <v-card-text>
                                 <v-text-field 
                                     v-model="formdata.name"
-                                    label="NAMA CALON PESERTA DIDIK" 
+                                    label="NAMA CALON MURID" 
                                     :rules="rule_name"
                                     outlined 
                                     dense />

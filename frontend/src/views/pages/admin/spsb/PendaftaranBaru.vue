@@ -222,7 +222,7 @@
                       <v-row no-gutters>
                         <v-col xs="12" sm="6" md="6">
                           <v-card flat>
-                            <v-card-title>NAMA PESERTA DIDIK :</v-card-title>
+                            <v-card-title>NAMA MURID :</v-card-title>
                             <v-card-subtitle>
                               {{formdata.name}}
                             </v-card-subtitle>
@@ -534,7 +534,7 @@ export default {
     //tables
     headers: [                        
       { text: "", value: "foto", width:70 }, 
-      { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
+      { text: 'NAMA MURID', value: 'name', width: 350, sortable: true },
       { text: 'USERNAME', value: 'username', sortable: true },
       { text: 'EMAIL', value: 'email', sortable: true },
       { text: 'NOMOR HP', value: 'nomor_hp', sortable: false },
@@ -866,7 +866,7 @@ export default {
       });
     },
     deleteItem (item) {
-      this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus PESERTA DIDIK BARU '+item.name+' ?', { color: 'red' }).then((confirm) => {
+      this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus MURID BARU '+item.name+' ?', { color: 'red' }).then((confirm) => {
         if (confirm)
         {
           this.btnLoading = true;

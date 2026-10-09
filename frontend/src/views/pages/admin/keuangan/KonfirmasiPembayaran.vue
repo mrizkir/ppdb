@@ -70,7 +70,7 @@
                       <v-row no-gutters>
                         <v-col xs="12" sm="6" md="6">
                           <v-card flat>
-                            <v-card-title>NAMA PESERTA DIDIK :</v-card-title>
+                            <v-card-title>NAMA MURID :</v-card-title>
                             <v-card-subtitle>{{ formdata.name }}</v-card-subtitle>
                           </v-card>
                         </v-col>
@@ -257,7 +257,7 @@ export default {
     btnLoading: false,
     headers: [
       { text: "", value: "foto", width: 70, sortable: false },
-      { text: "NAMA PESERTA DIDIK", value: "name", width: 280, sortable: true },
+      { text: "NAMA MURID", value: "name", width: 280, sortable: true },
       { text: "KODE BILLING", value: "no_transaksi", sortable: true },
       { text: "CHANNEL", value: "nama_channel", sortable: false },
       { text: "TGL. BAYAR", value: "tanggal_bayar", sortable: true },

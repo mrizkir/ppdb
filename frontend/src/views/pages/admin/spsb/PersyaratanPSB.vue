@@ -180,7 +180,7 @@ export default {
     //tables
     headers: [                        
       { text: "", value: "foto", width:70 }, 
-      { text: 'NAMA PESERTA DIDIK', value: 'name', width: 350, sortable: true },
+      { text: 'NAMA MURID', value: 'name', width: 350, sortable: true },
       { text: 'NOMOR HP', value: 'nomor_hp', sortable: true },
       { text: 'FOTO WEFIE', value: 'file_fotoselfi', sortable: false }, 
       { text: 'KTP', value: 'file_ktp_ayah', sortable: false },
@@ -464,7 +464,7 @@ export default {
       this.dialogfrm = true;
     },
     deleteItem(item) {
-      this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus PESERTA DIDIK BARU '+item.name+' ?', { color: 'red' }).then((confirm) => {
+      this.$root.$confirm.open('Delete', 'Apakah Anda ingin menghapus MURID BARU '+item.name+' ?', { color: 'red' }).then((confirm) => {
         if (confirm)
         {
           this.btnLoading = true;

@@ -5,7 +5,7 @@
         mdi-file-document-edit-outline
       </template>
       <template v-slot:name>
-        BIODATA PESERTA DIDIK
+        BIODATA MURID
       </template>
       <template v-slot:subtitle v-if="dashboard!='siswabaru'">
         TAHUN PENDAFTARAN {{ tahun_pendaftaran }} - {{ nama_jenjang }}
@@ -64,7 +64,7 @@
             loading-text="Loading... Please wait">
             <template v-slot:top>
               <v-toolbar flat color="white">
-                <v-toolbar-title>DAFTAR CALON PESERTA DIDIK</v-toolbar-title>
+                <v-toolbar-title>DAFTAR CALON MURID</v-toolbar-title>
                 <v-divider
                   class="mx-4"
                   inset
@@ -173,7 +173,7 @@
       datatable: [],
       headers: [                        
         { text: "", value: "foto", width:70 },
-        { text: "NAMA PESERTA DIDIK", value: "name", width: 350, sortable: true },
+        { text: "NAMA MURID", value: "name", width: 350, sortable: true },
         { text: "JK", value: "jk", sortable: false, width:50 },
         { text: "NOMOR HP", value: "nomor_hp", sortable: false, width: 100},
         { text: "ASAL SEKOLAH", value: "asal_sekolah", width: 100, sortable: true },

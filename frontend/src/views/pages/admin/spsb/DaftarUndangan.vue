@@ -357,7 +357,7 @@
       datatableLoading: false,
       datatable: [],
       headers: [
-        { text: "NAMA PESERTA DIDIK", value: "name", width: 280, sortable: true },
+        { text: "NAMA MURID", value: "name", width: 280, sortable: true },
         { text: "NOMOR HP", value: "nomor_hp", width: 120, sortable: false },
         { text: "KODE OTP", value: "otp", width: 110, sortable: false },
         { text: "BERLAKU MULAI", value: "berlaku_mulai", width: 130, sortable: true },

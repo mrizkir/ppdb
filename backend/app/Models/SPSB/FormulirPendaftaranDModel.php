@@ -46,6 +46,8 @@ class FormulirPendaftaranDModel extends Model {
     'email',
     'pendidikan',
     'pekerjaan_instansi',
+    'pekerjaan',
+    'instansi',
     'penghasilan_bulanan',
     'fb_account',
 		'ig_account',

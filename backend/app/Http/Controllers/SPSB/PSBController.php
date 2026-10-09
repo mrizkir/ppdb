@@ -838,6 +838,8 @@ class PSBController extends Controller
       users.email,
       pendidikan,
       pekerjaan_instansi,
+      pekerjaan,
+      instansi,
       penghasilan_bulanan,
       fb_account,
       ig_account,
@@ -898,6 +900,8 @@ class PSBController extends Controller
       formulir_pendaftaran_d.email,
       pendidikan,
       pekerjaan_instansi,
+      pekerjaan,
+      instansi,
       penghasilan_bulanan,
       fb_account,
       ig_account,
@@ -959,6 +963,8 @@ class PSBController extends Controller
       formulir_pendaftaran_f.email,
       pendidikan,
       pekerjaan_instansi,
+      pekerjaan,
+      instansi,
       penghasilan_bulanan,
       fb_account,
       ig_account,
@@ -1433,7 +1439,8 @@ class PSBController extends Controller
         'nomor_hp' => 'required',
         'email' => 'required',
         'pendidikan' => 'required',
-        'pekerjaan_instansi' => 'required',        
+        'pekerjaan' => 'required',
+        'instansi' => 'required',
         'penghasilan_bulanan' => 'required|numeric', 
         // 'fb_account' => 'required', 
         // 'ig_account' => 'required', 
@@ -1461,7 +1468,8 @@ class PSBController extends Controller
         $formulir->nomor_hp=$request->input('nomor_hp');
         $formulir->email=$request->input('email');
         $formulir->pendidikan=strtoupper($request->input('pendidikan'));
-        $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
+        $formulir->pekerjaan=strtoupper($request->input('pekerjaan'));
+        $formulir->instansi=strtoupper($request->input('instansi'));
         $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
         // $formulir->fb_account=$request->input('fb_account');
         // $formulir->ig_account=$request->input('ig_account');
@@ -1527,7 +1535,8 @@ class PSBController extends Controller
         'nomor_hp' => 'required',
         'email' => 'required',
         'pendidikan' => 'required',
-        'pekerjaan_instansi' => 'required',        
+        'pekerjaan' => 'required',
+        'instansi' => 'required',
         'penghasilan_bulanan' => 'required|numeric', 
         // 'fb_account' => 'required', 
         // 'ig_account' => 'required', 
@@ -1555,7 +1564,8 @@ class PSBController extends Controller
         $formulir->nomor_hp=$request->input('nomor_hp');
         $formulir->email=$request->input('email');
         $formulir->pendidikan=strtoupper($request->input('pendidikan'));
-        $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
+        $formulir->pekerjaan=strtoupper($request->input('pekerjaan'));
+        $formulir->instansi=strtoupper($request->input('instansi'));
         $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
         // $formulir->fb_account=$request->input('fb_account');
         // $formulir->ig_account=$request->input('ig_account');
@@ -1613,7 +1623,8 @@ class PSBController extends Controller
         'nomor_hp' => 'required',
         'email' => 'required',
         'pendidikan' => 'required',
-        'pekerjaan_instansi' => 'required',        
+        'pekerjaan' => 'required',
+        'instansi' => 'required',
         'penghasilan_bulanan' => 'required|numeric', 
         // 'fb_account' => 'required', 
         // 'ig_account' => 'required', 
@@ -1640,7 +1651,8 @@ class PSBController extends Controller
         $formulir->nomor_hp=$request->input('nomor_hp');
         $formulir->email=$request->input('email');
         $formulir->pendidikan=strtoupper($request->input('pendidikan'));
-        $formulir->pekerjaan_instansi=strtoupper($request->input('pekerjaan_instansi'));
+        $formulir->pekerjaan=strtoupper($request->input('pekerjaan'));
+        $formulir->instansi=strtoupper($request->input('instansi'));
         $formulir->penghasilan_bulanan=$request->input('penghasilan_bulanan');
         // $formulir->fb_account=$request->input('fb_account');
         // $formulir->ig_account=$request->input('ig_account');

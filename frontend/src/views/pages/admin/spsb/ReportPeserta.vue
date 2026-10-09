@@ -5,7 +5,7 @@
         mdi-account-plus
       </template>
       <template v-slot:name>
-        LAPORAN CALON PESERTA DIDIK
+        LAPORAN CALON MURID
       </template>
       <template v-slot:subtitle>
         TAHUN PENDAFTARAN {{ tahun_pendaftaran }} - {{ nama_jenjang }}
@@ -159,7 +159,7 @@
           href: "/spsb"
         },
         {
-          text: "LAPORAN CALON PESERTA DIDIK",
+          text: "LAPORAN CALON MURID",
           disabled: true,
           href: "#"
         }
@@ -186,7 +186,7 @@
       //tables
       headers: [                        
         { text: "", value: "foto", width:70 }, 
-        { text: "NAMA PESERTA DIDIK", value: "name", width: 350, sortable: true },
+        { text: "NAMA MURID", value: "name", width: 350, sortable: true },
         { text: "NOMOR HP", value: "nomor_hp", sortable: true },
         { text: "FOTO WEFIE", value: "file_fotoselfi", sortable: false }, 
         { text: "KTP", value: "file_ktp_ayah", sortable: false },

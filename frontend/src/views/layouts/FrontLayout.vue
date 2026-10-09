@@ -120,24 +120,9 @@ export default {
         href: "https://instagram.com/degreencamp",
       },
       {
-        label: "Twitter",
-        icon: "mdi-twitter",
-        href: "https://twitter.com/degreencamp",
-      },
-      {
-        label: "Telegram",
-        icon: "mdi-send",
-        href: "https://t.me/degreencamp",
-      },
-      {
-        label: "Kanal SD",
+        label: "Kanal Youtube",
         icon: "mdi-youtube",
-        href: "https://youtube.com/channel/UCyoe1gF72c24zgPufv6Tt0Q",
-      },
-      {
-        label: "Kanal TK",
-        icon: "mdi-youtube",
-        href: "https://youtube.com/channel/UCF9CQeGhEuPWidA1YHWP_CA",
+        href: "https://www.youtube.com/@sekolahislamdegreencamp",
       },
     ],
   }),

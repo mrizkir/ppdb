@@ -84,7 +84,7 @@
             <v-card-title>
               BAGAN ALUR PROSES PENDAFTARAN
             </v-card-title>
-            <v-img :src="$api.storageURL + '/images/informasi/alur_pendaftaran.jpeg'"></v-img>
+            <v-img :src="$api.storageURL + '/images/informasi/alur_pendaftaran.png'"></v-img>
           </v-card>
         </v-col>
         <v-col xs="12" md="12" sm="12">
@@ -257,7 +257,7 @@
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                      OBSERVASI CALON PESERTA DIDIK
+                      OBSERVASI CALON MURID
                     </h2>
                     <div>
                       Pengamatan calon peserta didik oleh Observer.
@@ -272,7 +272,7 @@
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                      INTERVIEW ORANG TUA CALON PESERTA DIDIK
+                      INTERVIEW ORANG TUA CALON MURID
                     </h2>
                     <div>
                       Proses ini wajib diikuti oleh kedua orang tua calon peserta didik.

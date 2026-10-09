@@ -99,7 +99,7 @@
             <v-card outlined class="mb-2">
               <v-card-text>
                 <v-card flat>
-                  <v-card-title>NAMA PESERTA DIDIK:</v-card-title>
+                  <v-card-title>NAMA MURID:</v-card-title>
                   <v-card-subtitle>{{ data_pd.name }}</v-card-subtitle>
                 </v-card>
                 <v-card flat>

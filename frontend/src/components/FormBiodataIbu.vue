@@ -152,9 +152,15 @@
               filled
             />
             <v-text-field
-              v-model="formdata.pekerjaan_instansi"
-              label="PEKERJAAN DAN INSTANSI"
-              :rules="rule_pekerjaan_instansi"
+              v-model="formdata.pekerjaan"
+              label="PEKERJAAN"
+              :rules="rule_pekerjaan"
+              filled
+            />
+            <v-text-field
+              v-model="formdata.instansi"
+              label="INSTANSI"
+              :rules="rule_instansi"
               filled
             />
             <v-text-field
@@ -296,7 +302,8 @@ export default {
       nomor_hp: "",
       email: "",
       pendidikan: "",
-      pekerjaan_instansi: "",
+      pekerjaan: "",
+      instansi: "",
       penghasilan_bulanan: "",
       desc: "",
       // fb_account: "-",
@@ -339,8 +346,11 @@ export default {
     rule_pendidikan: [
       value => !!value || "Jenjang pendidikan mohon untuk diisi !!!", 
     ],
-    rule_pekerjaan_instansi: [
-      value => !!value || "Pekerjaan beserta Instansi mohon untuk di isi !!!", 
+    rule_pekerjaan: [
+      value => !!value || "Pekerjaan mohon untuk diisi !!!",
+    ],
+    rule_instansi: [
+      value => !!value || "Instansi mohon untuk diisi !!!",
     ],
     rule_penghasilan: [
       value => !!value || "Penghasilan mohon untuk untuk di isi !!!",
@@ -407,7 +417,8 @@ export default {
         this.formdata.nomor_hp = "+" + data.formulir.nomor_hp;
         this.formdata.email = data.formulir.email;
         this.formdata.pendidikan = data.formulir.pendidikan;
-        this.formdata.pekerjaan_instansi = data.formulir.pekerjaan_instansi;
+        this.formdata.pekerjaan = data.formulir.pekerjaan;
+        this.formdata.instansi = data.formulir.instansi;
         this.formdata.penghasilan_bulanan = data.formulir.penghasilan_bulanan;
         // this.formdata.fb_account = data.formulir.fb_account;
         // this.formdata.ig_account = data.formulir.ig_account;
@@ -446,7 +457,8 @@ export default {
           nomor_hp: this.formdata.nomor_hp, 
           email: this.formdata.email,
           pendidikan: this.formdata.pendidikan,
-          pekerjaan_instansi: this.formdata.pekerjaan_instansi,
+          pekerjaan: this.formdata.pekerjaan,
+          instansi: this.formdata.instansi,
           penghasilan_bulanan: this.formdata.penghasilan_bulanan,
           // fb_account: this.formdata.fb_account,
           // ig_account: this.formdata.ig_account,
