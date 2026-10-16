@@ -216,10 +216,11 @@
                   </template>
                   <div class="py-4">
                     <h2 :class="`headline font-weight-light mb-4`">
-                    JADWAL INTERVIEW
+                    JADWAL INTERVIEW DAN OBSERVASI
                     </h2>
                     <div>
-                      Setelah pengisian formulir selesai, Panitia akan menghubungi nomor kontak WA pendaftar. Pada tahap ini, Panitia akan memberikan jadwal interview bagi orang tua/wali calon Murid Baru (PDB) dan observasi bagi calon PDB.
+                      Setelah pengisian formulir selesai, Panitia akan menghubungi nomor kontak WA pendaftar. Pada tahap ini, Panitia akan memberikan jadwal interview bagi orang tua/wali calon Murid Baru dan observasi bagi calon calon Murid Baru.<br />
+                      Jadwal interview dan observasi akan diumumkan melalui kontak WA pendaftar.
                     </div>
                     <v-alert type="warning">
                       <div class="title">
@@ -242,7 +243,7 @@
                       PEMAPARAN PROGRAM SEKOLAH
                     </h2>
                     <div>
-                      Pada waktu yang bersamaan, setelah jadwal interview dan observasi selesai dikomunikasikan, Panitia akan melanjutkan dengan memberikan informasi jadwal Zoom Meeting.  Kegiatan ini <strong>wajib</strong> diikuti oleh setiap orangtua/wali calon PDB.
+                      Pada waktu yang bersamaan, setelah jadwal interview dan observasi selesai dikomunikasikan, Panitia akan melanjutkan dengan memberikan informasi jadwal Zoom Meeting.  Kegiatan ini <strong>wajib</strong> diikuti oleh setiap orangtua/wali calon Murid Baru.
                     </div>
                     <v-alert type="warning">
                       <div class="title">

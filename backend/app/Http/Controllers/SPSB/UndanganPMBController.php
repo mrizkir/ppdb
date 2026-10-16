@@ -350,6 +350,7 @@ class UndanganPMBController extends Controller
           'link' => $link,
           'otp' => str_pad((string) $undangan->otp, 6, '0', STR_PAD_LEFT),
           'qr_base64' => base64_encode($qrPng),
+          'berlaku_sampai' => $this->formatTanggalMasehi(\Carbon\Carbon::parse($undangan->berlaku_sampai)),
         ],
         [],
         [
@@ -357,8 +358,8 @@ class UndanganPMBController extends Controller
           'format' => 'A4',
           'margin_left' => 15,
           'margin_right' => 15,
-          'margin_top' => 105,
-          'margin_header' => 6,
+          'margin_top' => 39,
+          'margin_header' => 2,
           'margin_bottom' => 12,
         ]
       );
@@ -581,6 +582,11 @@ class UndanganPMBController extends Controller
     ];
 
     return isset($map[(int) $kode]) ? $map[(int) $kode] : '';
+  }
+
+  private function formatTanggalMasehi($tanggal)
+  {
+    return $tanggal->format('d').' '.$this->namaBulanMasehi((int) $tanggal->format('n')).' '.$tanggal->format('Y');
   }
 
   private function namaBulanMasehi($bulan)

@@ -364,7 +364,7 @@
         { text: "BERLAKU SAMPAI", value: "berlaku_sampai", width: 140, sortable: true },
         { text: "STATUS OTP", value: "used", width: 150, sortable: true },
         { text: "PEMBAYARAN", value: "bayar", width: 140, sortable: false },
-        { text: "AKSI", value: "actions", sortable: false, width: 280 },
+        { text: "AKSI", value: "actions", sortable: false, width: 150 },
       ],
       search: "",
       filterUsed: "all",
