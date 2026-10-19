@@ -102,6 +102,22 @@ const routes = [
     component: () => import("../views/pages/front/Login.vue"),
   },
   {
+    path: "/lupa-password",
+    name: "FrontLupaPassword",
+    meta: {
+      title: "LUPA PASSWORD",
+    },
+    component: () => import("../views/pages/front/LupaPassword.vue"),
+  },
+  {
+    path: "/reset-password/:token",
+    name: "FrontResetPassword",
+    meta: {
+      title: "PASSWORD BARU",
+    },
+    component: () => import("../views/pages/front/ResetPassword.vue"),
+  },
+  {
     path: "/undangan/:otp",
     name: "FrontUndanganPMB",
     meta: {

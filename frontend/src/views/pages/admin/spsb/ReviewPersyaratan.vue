@@ -19,7 +19,7 @@
       </template>
       <template v-slot:desc>
         <v-alert color="cyan" border="left" colored-border type="info">
-          Semua berkas calon ini ditampilkan dalam satu halaman.
+          Klik Lihat untuk membuka berkas. PDF ditampilkan di halaman ini bila browser mendukung.
         </v-alert>
       </template>
     </ModuleHeader>
@@ -73,27 +73,75 @@
               <v-card-text>
                 <div
                   v-if="!calon[berkas.key]"
-                  class="grey--text py-8 text-center"
+                  class="grey--text py-6 text-center"
                 >
                   Belum diunggah
                 </div>
-                <iframe
-                  v-else-if="isPdf(calon[berkas.key])"
-                  :src="fileUrl(calon[berkas.key])"
-                  :title="berkas.judul"
-                  class="review-berkas"
-                />
-                <v-img
-                  v-else
-                  :src="fileUrl(calon[berkas.key])"
-                  contain
-                  max-height="480"
-                  class="review-berkas grey lighten-4"
-                />
+                <div v-else class="text-center">
+                  <v-img
+                    v-if="!isPdf(calon[berkas.key])"
+                    :src="fileUrl(calon[berkas.key])"
+                    contain
+                    max-height="180"
+                    class="grey lighten-4 mb-3 review-thumb"
+                    @click.native="bukaPreview(berkas)"
+                  />
+                  <v-icon v-else size="64" color="red darken-1" class="my-4">
+                    mdi-file-pdf-box
+                  </v-icon>
+                  <div>
+                    <v-btn color="primary" text @click="bukaPreview(berkas)">
+                      <v-icon left>mdi-eye</v-icon>
+                      Lihat
+                    </v-btn>
+                  </div>
+                </div>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
+        <v-dialog v-model="dialogPreview" max-width="960" scrollable>
+          <v-card v-if="preview">
+            <v-toolbar flat dense>
+              <v-toolbar-title class="subtitle-1">
+                {{ preview.judul }}
+              </v-toolbar-title>
+              <v-spacer />
+              <v-btn icon @click="dialogPreview = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-toolbar>
+            <v-card-text class="pa-4">
+              <iframe
+                v-if="isPdf(preview.path) && pdfDidukung"
+                :src="fileUrl(preview.path)"
+                :title="preview.judul"
+                class="preview-berkas"
+              />
+              <div v-else-if="isPdf(preview.path)" class="text-center py-8">
+                <v-icon size="64" color="red darken-1">mdi-file-pdf-box</v-icon>
+                <p class="mt-4 mb-4">
+                  Browser ini tidak menampilkan PDF di dalam halaman.
+                </p>
+                <v-btn
+                  color="primary"
+                  :href="fileUrl(preview.path)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Buka PDF
+                </v-btn>
+              </div>
+              <v-img
+                v-else
+                :src="fileUrl(preview.path)"
+                contain
+                max-height="70vh"
+                class="grey lighten-4"
+              />
+            </v-card-text>
+          </v-card>
+        </v-dialog>
       </template>
     </v-container>
   </SPSBLayout>
@@ -133,10 +181,22 @@
       ];
       this.load();
     },
+    computed: {
+      pdfDidukung() {
+        if (typeof navigator.pdfViewerEnabled === "boolean") {
+          return navigator.pdfViewerEnabled;
+        }
+        const mime =
+          navigator.mimeTypes && navigator.mimeTypes["application/pdf"];
+        return !!(mime && mime.enabledPlugin);
+      },
+    },
     data: () => ({
       loading: false,
       pageError: "",
       calon: null,
+      dialogPreview: false,
+      preview: null,
       breadcrumbs: [],
       daftarBerkas: [
         { key: "file_fotoselfi", judul: "FOTO WEFIE / KELUARGA" },
@@ -162,6 +222,17 @@
         return String(path || "")
           .toLowerCase()
           .endsWith(".pdf");
+      },
+      bukaPreview(berkas) {
+        const path = this.calon && this.calon[berkas.key];
+        if (!path) {
+          return;
+        }
+        this.preview = {
+          judul: berkas.judul,
+          path: path,
+        };
+        this.dialogPreview = true;
       },
       kembali() {
         this.$router.push("/spsb/persyaratan");
@@ -191,9 +262,12 @@
   };
 </script>
 <style scoped>
-  .review-berkas {
+  .review-thumb {
+    cursor: pointer;
+  }
+  .preview-berkas {
     width: 100%;
-    height: 480px;
+    height: 70vh;
     border: 0;
   }
 </style>

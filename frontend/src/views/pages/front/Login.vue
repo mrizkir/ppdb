@@ -5,6 +5,15 @@
         <v-col xs="12" sm="6" md="4">
           <h1 class="text-center display-1 font-weight-black primary--text">LOGIN</h1>
           <v-alert
+            v-if="resetBerhasil"
+            outlined
+            dense
+            type="success"
+            :value="true"
+          >
+            Password berhasil diubah. Silakan login dengan password baru.
+          </v-alert>
+          <v-alert
             outlined
             dense
             type="error"
@@ -42,6 +51,11 @@
               </v-card-actions>
             </v-card>
           </v-form>
+          <div class="text-center mt-3">
+            <v-btn text small color="primary" to="/lupa-password">
+              Lupa password?
+            </v-btn>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -57,6 +71,11 @@
       {
         this.$router.push("/dashboard/" + this.$store.getters["auth/AccessToken"]);
       }
+    },
+    computed: {
+      resetBerhasil() {
+        return this.$route.query.reset === "1";
+      },
     },
     data: () => ({
       btnLoading: false,

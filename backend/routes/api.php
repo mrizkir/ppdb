@@ -51,6 +51,9 @@ $router->group(['prefix'=>'v3'], function () use ($router)
 
 	//auth login
 	$router->post('/auth/login',['uses'=>'AuthController@login','as'=>'auth.login']);
+	$router->post('/auth/forgot-password',['uses'=>'PasswordResetController@forgot','as'=>'auth.forgot']);
+	$router->get('/auth/reset-password/{token}',['uses'=>'PasswordResetController@check','as'=>'auth.reset.check']);
+	$router->post('/auth/reset-password',['uses'=>'PasswordResetController@reset','as'=>'auth.reset']);
 });
 
 $router->group(['prefix'=>'v3','middleware'=>'auth:api'], function () use ($router)
