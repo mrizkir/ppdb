@@ -55,7 +55,7 @@
                         v-model="formdata.status_pendaftaran"
                         label="Aktif"
                       />
-                      <v-text-field
+                      <v-textarea
                         v-model="formdata.link_kuesioner"
                         label="LINK KUESIONER"
                         hint="Kosongkan bila jenjang ini tidak punya kuesioner"
@@ -63,6 +63,8 @@
                         :rules="rule_link"
                         outlined
                         dense
+                        auto-grow
+                        rows="2"
                       />
                     </v-card-text>
                     <v-card-actions>
@@ -186,10 +188,14 @@
         link_kuesioner: "",
       },
       rule_link: [
-        value =>
-          !value ||
-          /^https?:\/\/.+/i.test(value) ||
-          "Link kuesioner harus berupa URL",
+        value => {
+          const link = (value || "").trim();
+          return (
+            !link ||
+            /^https?:\/\/\S+$/i.test(link) ||
+            "Link kuesioner harus berupa URL"
+          );
+        },
       ],
 
       editedIndex: -1,
@@ -231,7 +237,7 @@
                   _method: "PUT",
                   status_pendaftaran:
                     this.formdata.status_pendaftaran == true ? 1 : 0,
-                  link_kuesioner: this.formdata.link_kuesioner || "",
+                  link_kuesioner: (this.formdata.link_kuesioner || "").trim(),
                 },
                 {
                   headers: {

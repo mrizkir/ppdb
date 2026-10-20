@@ -8,6 +8,14 @@
           </h1>
         </v-col>
         <v-col xs="12" md="6" sm="12">
+          <v-alert type="tkinfo" class="mt-4">
+            BANK RIAU KEPRI SYARIAH <br />
+            NOMOR REKENING : 821-21-28255 <br />
+            A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br />
+          </v-alert>
+          <v-alert type="warning">
+            Uang formulir pendaftaran yang sudah dibayar tidak dapat dikembalikan.
+          </v-alert>
           <v-form ref="frmkonfirmasi" @keyup.native.enter="checkUsername" lazy-validation v-if="data_pd==null">
             <v-card outlined>
               <v-card-title>

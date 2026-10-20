@@ -133,6 +133,14 @@
                 </v-alert>
               </v-card-text>
             </v-card>
+            <v-alert type="tkinfo">
+              BANK RIAU KEPRI SYARIAH <br />
+              NOMOR REKENING : 821-21-28255 <br />
+              A.N : PPDB SEKOLAH ISLAM DE GREEN CAMP<br />
+            </v-alert>
+            <v-alert type="warning">
+              Uang formulir pendaftaran yang sudah dibayar tidak dapat dikembalikan.
+            </v-alert>
             <v-card>
               <v-card-text>
                 <v-select
