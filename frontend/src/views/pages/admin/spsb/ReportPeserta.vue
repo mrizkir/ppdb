@@ -254,7 +254,8 @@
         this.datatableLoading = true;
         await this.$ajax.post("/report/calonpesertadidik/printpdf",
         {
-          user_id:item.id,
+          user_id: item.id,
+          formulir_id: item.formulir_id,
         },
         {
           headers: {

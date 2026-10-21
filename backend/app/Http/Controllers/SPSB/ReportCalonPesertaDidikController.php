@@ -19,9 +19,24 @@ class ReportCalonPesertaDidikController extends Controller
   {
     $this->validate($request, [
       'user_id'=>'required',
+      'formulir_id'=>'nullable|string',
     ]);
     $user_id=$request->input('user_id');
-    $formulir_id=\App\Helpers\HelperFormulir::resolveId($user_id);
+    if ($request->filled('formulir_id')) {
+      $formulir = FormulirPendaftaranAModel::where('id', $request->input('formulir_id'))
+        ->where('user_id', $user_id)
+        ->first();
+      if (is_null($formulir)) {
+        return Response()->json([
+          'status'=>0,
+          'pid'=>'fetchdata',
+          'message'=>'Formulir pendaftaran calon peserta didik tidak ditemukan.',
+        ], 422);
+      }
+      $formulir_id = $formulir->id;
+    } else {
+      $formulir_id=\App\Helpers\HelperFormulir::resolveId($user_id);
+    }
     
     $pesertadidik_a=FormulirPendaftaranAModel::leftJoin('agama','formulir_pendaftaran_a.idagama','agama.idagama')
       ->leftJoin('kebutuhan_khusus','formulir_pendaftaran_a.id_kebutuhan_khusus','kebutuhan_khusus.id_kebutuhan')
@@ -64,10 +79,12 @@ class ReportCalonPesertaDidikController extends Controller
         $this->fontArialNarrow()
       )
     );
-    $file_pdf=\App\Helpers\Helper::public_path('exported/pdf/')."/$user_id.pdf";
+    
+    $nama = $formulir_id.'-'.date('YmdHis').'.pdf';
+    $file_pdf=\App\Helpers\Helper::public_path('exported/pdf/').'/'.$nama;
     $pdf->save($file_pdf);
 
-    $pdf_file = "exported/pdf/$user_id.pdf";
+    $pdf_file = "exported/pdf/$nama";
 
     return Response()->json([
       'status'=>1,
